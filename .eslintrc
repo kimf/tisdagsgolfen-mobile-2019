@@ -1,0 +1,14 @@
+{
+  "parser": "babel-eslint",
+  "plugins": [
+    "react-native",
+    "graphql"
+  ],
+  "extends": [
+    "eslint:recommended",
+    "plugin:react-native/recommended"
+  ],
+  "rules": {
+    // overrides
+  }
+}
