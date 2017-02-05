@@ -3371,6 +3371,10 @@ react-deep-force-update@^1.0.0:
     loose-envify "^1.1.0"
     object-assign "^4.1.0"
 
+react-native-navbar@^1.6.0:
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/react-native-navbar/-/react-native-navbar-1.6.0.tgz#27f42a933107d12f5ef86e7056f7c3f5dd4fe3b0"
+
 react-native@0.41.1:
   version "0.41.1"
   resolved "https://registry.yarnpkg.com/react-native/-/react-native-0.41.1.tgz#478edc36f5d41676264e98e9b1179e10a0a3b803"
@@ -3544,7 +3548,7 @@ redeyed@~1.0.0:
   dependencies:
     esprima "~3.0.0"
 
-redux@^3.4.0:
+redux@^3.4.0, redux@^3.6.0:
   version "3.6.0"
   resolved "https://registry.yarnpkg.com/redux/-/redux-3.6.0.tgz#887c2b3d0b9bd86eca2be70571c27654c19e188d"
   dependencies:
