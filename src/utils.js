@@ -1,4 +1,8 @@
 import { AsyncStorage } from 'react-native'
+import { sortBy, reverse } from 'lodash'
+
+export const average = arr => arr.reduce( ( p, c ) => p + c, 0 ) / arr.length;
+// avg.toLocaleString('sv', {maximumFractionDigits: 1, useGrouping:false});
 
 export const setCache = async (key, val) => {
   try {

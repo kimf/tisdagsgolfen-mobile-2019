@@ -18,11 +18,11 @@ const textStyle = {
   color: '#fff'
 }
 
-const Loading = () => {
+const Loading = ({text}) => {
   return (
     <View style={containerStyle}>
       <Image style={imageStyle} source={require('../images/logo.png')} />
-      <Text style={textStyle}>Startar upp...</Text>
+      <Text style={textStyle}>{ text ? text : 'Startar upp...'}</Text>
     </View>
   )
 }

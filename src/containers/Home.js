@@ -1,22 +1,32 @@
-import React, {Component} from "react";
+import React, { Component, PropTypes } from "react";
 import {StatusBar, Text, TouchableOpacity, View, RefreshControl, ListView} from "react-native";
-
 import NavigationBar from 'react-native-navbar';
+import { graphql } from 'react-apollo'
+import gql from 'graphql-tag'
 
 import styles from '../styles';
+import Loading from '../components/Loading';
 import LeaderboardCard from '../components/LeaderboardCard';
 
 const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 
-// const Home = ({ user, loading, logout }) => {
 class Home extends Component {
+  static propTypes = {
+    data: PropTypes.shape({
+      loading: PropTypes.bool,
+      error: PropTypes.object,
+      Season: PropTypes.object,
+    }).isRequired,
+  }
+
   constructor(props) {
     super(props);
-    let players = [];
-    if(props.data && props.data.players) {
-      players = props.data.players
+    console.log(props);
+    if(props.data && props.data.allSeasonLeaderboards) {
+      this.state = { dataSource: ds.cloneWithRows(props.data.allSeasonLeaderboards) }
+    } else {
+      this.state = { dataSource: ds }
     }
-    this.state = { dataSource: ds.cloneWithRows(players) }
   }
 
   reloadLeaderboard = () => {
@@ -24,16 +34,17 @@ class Home extends Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    if (nextProps.data && nextProps.data.players !== this.props.data.players) {
+    console.log(this.state);
+    if(nextProps.data && nextProps.data.allSeasonLeaderboards) {
       this.setState({
-        dataSource: this.state.dataSource.cloneWithRows(nextProps.data.players)
-      })
+        dataSource: this.state.dataSource.cloneWithRows(nextProps.data.allSeasonLeaderboards)
+      });
     }
   }
 
   render() {
     if (this.props.loading)
-      return <Text>Loading</Text>
+      return <Loading text="Laddar ledartavlan..." />
 
     const { user, loading, logout, scoringEvent } = this.props;
 
@@ -86,4 +97,31 @@ class Home extends Component {
   }
 }
 
-export default Home
+
+const seasonId = "ciyrzowr1ilua01703ox5507l";
+
+
+// filter: { season: { id: "ciyrzowr1ilua01703ox5507l" }, eventCount_not: 0 }
+const leaderboardQuery = gql`
+{
+  allSeasonLeaderboards (
+    orderBy: position_DESC,
+    filter: { season: { id: "${seasonId}" } }
+  ) {
+    id
+    averagePoints
+    position
+    previousPosition
+    totalPoints
+    top5Points
+    eventCount
+    user {
+      id
+      firstName
+      lastName
+    }
+  }
+}
+`
+
+export default graphql(leaderboardQuery)(Home)

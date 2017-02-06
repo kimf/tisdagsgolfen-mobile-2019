@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from "react";
 import {Linking, StyleSheet, Text, TextInput, TouchableOpacity, View, Image} from "react-native";
-import { graphql } from 'react-apollo'
+import { graphql, compose } from 'react-apollo'
 import gql from 'graphql-tag'
 
 import { setCache } from '../utils'
@@ -141,6 +141,7 @@ const userQuery = gql`
   }
 `
 
-export default graphql(signinUser, { name: 'signinUser' })(
-  graphql(userQuery)(Login)
-)
+export default compose(
+  graphql(signinUser, { name: 'signinUser' }),
+  graphql(userQuery)
+)(Login)
