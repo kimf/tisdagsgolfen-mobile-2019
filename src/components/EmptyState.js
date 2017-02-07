@@ -2,9 +2,9 @@ import React from 'react'
 import { Text, View, Image } from 'react-native'
 
 const containerStyle = {
-  backgroundColor: '#eee',
+  backgroundColor: '#fff',
   alignItems: 'center',
-  justifyContent: 'center',
+  justifyContent: 'flex-start',
   flex: 1,
 }
 
@@ -18,12 +18,13 @@ const textStyle = {
   color: '#ccc'
 }
 
-const Loading = ({text}) => {
+const EmptyState = ({text}) => {
   return (
     <View style={containerStyle}>
-      <Text style={textStyle}>{ text ? text : 'Startar upp...'}</Text>
+      <Image style={imageStyle} source={require('../images/emptystate.png')} />
+      <Text style={textStyle}>{ text ? text : 'Inget att visa... ännu :('}</Text>
     </View>
   )
 }
 
-export default Loading
+export default EmptyState

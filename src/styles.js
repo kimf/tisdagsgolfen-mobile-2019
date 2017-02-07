@@ -102,8 +102,8 @@ export default StyleSheet.create({
 
   points: {
     fontFamily: 'Avenir',
-    fontSize: 16,
-    fontWeight: 'bold',
+    fontSize: 20,
+    fontWeight: '800',
     textAlign: 'right',
     flex: 1
   },
@@ -127,11 +127,19 @@ export default StyleSheet.create({
     marginTop: 3,
   },
 
-  name: {
+  metaLarger: {
     fontFamily: 'Avenir',
-    fontWeight: 'bold',
+    color: '#777',
     flex: 1,
     fontSize: 14,
+    marginTop: 3,
+  },
+
+  name: {
+    fontFamily: 'Avenir',
+    fontWeight: '800',
+    flex: 1,
+    fontSize: 18,
   },
 
   label: {

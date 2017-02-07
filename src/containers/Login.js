@@ -9,19 +9,24 @@ import Loading from '../components/Loading'
 class Login extends Component {
   state = {
     email: '',
-    password: ''
+    password: '',
+    loggingIn: false,
+    error: null
   }
 
   onSubmit = () => {
+    this.setState({ loggingIn: true });
     const { email, password } = this.state;
     this.props.signinUser({ variables: { email, password } })
       .then(response => {
         setCache('graphcoolToken', response.data.signinUser.token)
+        this.setState({ loggingIn: false, error: null });
         this.props.afterLogin()
       })
       .catch(e => {
         // eslint-disable-next-line no-console
-        console.error(e)
+        this.setState({ error: e, loggingIn: false });
+        console.log(e)
       })
   }
 
@@ -32,12 +37,16 @@ class Login extends Component {
 
   render() {
     const { data } = this.props;
+    const { loggingIn, error } = this.state;
 
     if (data.loading)
       return <Loading />
 
+    if (loggingIn)
+      return <Loading text="Loggar in..." />
+
     let showError;
-    if(false) {
+    if(error) {
       showError = <Text style={{color: '#c00', fontSize: 20}}>Något gick fel, se över infon</Text>;
     }
 
@@ -46,7 +55,7 @@ class Login extends Component {
         flex: 1,
         flexDirection: 'column',
         paddingTop: 60,
-        backgroundColor: '#022436',
+        backgroundColor: '#ccc',
         alignItems: 'center'
       }}>
         <Image source={require('../images/logo.png')} style={styles.logo} />
@@ -89,14 +98,14 @@ class Login extends Component {
 const styles = StyleSheet.create({
   label: {
     marginTop: 10,
-    color: 'white',
+    color: '#444',
     fontSize: 20,
   },
   inputField: {
     padding: 5,
     margin: 10,
     height: 40,
-    backgroundColor: 'white',
+    backgroundColor: '#eee',
     borderRadius: 5,
     fontSize: 20,
     textAlign: 'center'
@@ -115,7 +124,7 @@ const styles = StyleSheet.create({
   },
   forgotten: {
     marginTop: 40,
-    color: 'white',
+    color: '#444',
     fontSize: 14,
     textDecorationLine: 'underline'
   },
