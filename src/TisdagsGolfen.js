@@ -64,8 +64,9 @@ class TisdagsGolfen extends Component {
       tintColor: '#cecece'
     };
 
+    const caret = showSeasonPicker ? `↑` : `↓`;
     const rightButtonConfig = {
-      title: `${season ? season.name : '...'}`,
+      title: `${season ? `${season.name} ${caret}` : '...'}`,
       handler: () => this._toggleSeasonpicker(),
       tintColor: '#cecece'
     }
@@ -79,7 +80,6 @@ class TisdagsGolfen extends Component {
           leftButton={leftButtonConfig}
           rightButton={rightButtonConfig}
         />
-
         { showSeasonPicker
           ? <SeasonPicker seasons={data.seasons} currentSeason={season} onChangeSeason={(season) => this._changeSeason(season)} />
           : null
