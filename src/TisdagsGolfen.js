@@ -67,7 +67,7 @@ class TisdagsGolfen extends Component {
 
     const titleConfig = { title: 'TISDAGSGOLFEN', tintColor: 'white' };
     const leftButtonConfig = {
-      title: '⏏',
+      title: '🏌',
       handler: () => this._logout(),
       tintColor: '#cecece'
     };
@@ -78,6 +78,9 @@ class TisdagsGolfen extends Component {
       handler: () => this._toggleSeasonpicker(),
       tintColor: '#cecece'
     }
+
+    const showLeaderboardTabs = parseInt(season.name, 10) > 2015;
+
 
     return (
       <View style={styles.container}>
@@ -95,7 +98,7 @@ class TisdagsGolfen extends Component {
         }
 
         <View style={{ flex: 1, backgroundColor: '#fff', alignItems: 'stretch' }}>
-          <Home user={data.user} currentSeasonId={season.id} logout={() => this._logout()} />
+          <Home user={data.user} showLeaderboardTabs={showLeaderboardTabs} currentSeasonId={season.id} logout={() => this._logout()} />
         </View>
       </View>
     )

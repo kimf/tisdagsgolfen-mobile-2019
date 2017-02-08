@@ -7,14 +7,13 @@ import styles from '../styles';
 
 const LeaderboardCard = ({data, currentUserId, sorting}) => {
   let pointText;
-  let pointValue;
+  let pointValue = '';
   let up_or_down;
   let position;
 
   if(sorting === 'beers') {
     pointValue = data.totalBeers;
-    pointText = 'st'
-    console.log(data);
+    pointText = '🍺';
     position = data.beerPos;
   } else if(sorting === 'kr') {
     pointValue = data.totalKr;
@@ -48,11 +47,14 @@ const LeaderboardCard = ({data, currentUserId, sorting}) => {
           </View>
           <View style={styles.cardTitle}>
             <Text style={styles.name}>{player.firstName} {player.lastName}</Text>
-            <Text style={styles.metaLarger}>
-              {data.eventCount} Rundor.
-              { sorting === 'totalPoints' ? ` Snitt: ${averagePoints}p` : null }
-            </Text>
-            { sorting === 'totalPoints' ? <Text style={styles.meta}>Top 5: {data.top5Points.join(' | ')}</Text> : null }
+            { sorting === 'totalPoints'
+              ?
+              <Text style={styles.metaLarger}>
+                {data.eventCount} Rundor.
+                Snitt: {averagePoints}p
+              </Text>
+              : null
+            }
           </View>
           <Text style={styles.points}>{`${pointValue} ${pointText}`}</Text>
         </View>

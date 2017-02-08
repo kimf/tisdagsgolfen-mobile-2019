@@ -22,14 +22,14 @@ import { ranked } from '../utils'
 const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
 
 const viewTabs = [
-  { value: 'leaderboard', title: 'Ledartavla' },
-  { value: 'events', title: 'Rundor' }
+  { value: 'leaderboard', icon: '🏆', title: 'Ledartavla' },
+  { value: 'events', icon: '🗓', title: 'Rundor' }
 ];
 
 const leaderboardTabs = [
-  { value: 'totalPoints', title: '🏆 Poäng' },
-  { value: 'beers', title: '🍻 Öl' },
-  { value: 'kr', title: '💸 Skuld' }
+  { value: 'totalPoints', icon: '💯', title: 'Poäng' },
+  { value: 'beers', icon: '🍻', title: 'Öl' },
+  { value: 'kr', icon: '💸', title: 'Skuld' }
 ];
 
 class Home extends Component {
@@ -51,13 +51,11 @@ class Home extends Component {
     if (this.props.data.loading)
       return <Loading text="Laddar ledartavlan..." />
 
-    const { user, data } = this.props;
+    const { user, data, showLeaderboardTabs } = this.props;
     const { loading, leaderboard, events } = data;
     const { currentRoute, sorting } = this.state;
 
     const nonEmptyLeaderboard = leaderboard.filter(sl => sl.eventCount !== 0).length === 0;
-
-
 
     let sortedLeaderboard;
     if(sorting === 'beers') {
@@ -79,11 +77,15 @@ class Home extends Component {
               { currentRoute === 'leaderboard'
                 ?
                   <View style={styles.container}>
-                    <Tabs
-                      currentRoute={sorting}
-                      onChange={(sort) => this.changeSort(sort)}
-                      tabs={leaderboardTabs}
-                    />
+                    { showLeaderboardTabs
+                      ?
+                        <Tabs
+                          currentRoute={sorting}
+                          onChange={(sort) => this.changeSort(sort)}
+                          tabs={leaderboardTabs}
+                        />
+                      : null
+                    }
                     <ListView
                       enableEmptySections={true}
                       initialListSize={30}
@@ -100,14 +102,14 @@ class Home extends Component {
                     renderRow={(rowData) => <EventCard event={rowData} />}
                   />
               }
-              <Tabs
-                currentRoute={currentRoute}
-                onChange={(route) => this.changeRoute(route)}
-                tabs={viewTabs}
-                bottom
-              />
             </View>
         }
+        <Tabs
+          currentRoute={currentRoute}
+          onChange={(route) => this.changeRoute(route)}
+          tabs={viewTabs}
+          bottom
+        />
       </View>
     )
   }

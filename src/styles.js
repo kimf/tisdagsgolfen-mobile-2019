@@ -20,6 +20,13 @@ export default StyleSheet.create({
     flex: 1
   },
 
+  innerContainer: {
+    backgroundColor: '#fff',
+    alignItems: 'stretch',
+    flex: 1,
+    padding: 10
+  },
+
   header: {
     height: 60,
     backgroundColor: colors.blue,
@@ -105,7 +112,7 @@ export default StyleSheet.create({
     fontSize: 22,
     fontWeight: '900',
     textAlign: 'right',
-    flex: 2
+    flex: 3
   },
 
   position: {

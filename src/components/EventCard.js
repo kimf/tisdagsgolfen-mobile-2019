@@ -86,14 +86,17 @@ const s = StyleSheet.create({
   eventCard: {
     flexDirection: 'column',
     margin: 10,
-    marginTop: 0,
     padding: 20,
     paddingTop: 10,
     paddingBottom: 10,
-    borderRadius: 5,
+    borderRadius: 2,
     borderColor: colors.cellBorder,
     borderWidth: StyleSheet.hairlineWidth,
     backgroundColor: '#fff',
+    shadowColor: '#000',
+    shadowOffset: { width: 2, height: 2},
+    shadowRadius: 5,
+    shadowOpacity: 0.2
   },
 
   row: {

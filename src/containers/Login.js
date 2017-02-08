@@ -3,7 +3,7 @@ import {Linking, StyleSheet, Text, TextInput, TouchableOpacity, View, Image} fro
 import { graphql, compose } from 'react-apollo'
 import gql from 'graphql-tag'
 
-import { setCache } from '../utils'
+import { setCache, removeCache } from '../utils'
 import Loading from '../components/Loading'
 
 class Login extends Component {
@@ -16,6 +16,7 @@ class Login extends Component {
 
   onSubmit = () => {
     this.setState({ loggingIn: true });
+    removeCache('graphcoolToken');
     const { email, password } = this.state;
     this.props.signinUser({ variables: { email, password } })
       .then(response => {
