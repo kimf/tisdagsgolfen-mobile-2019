@@ -60,7 +60,7 @@ class Home extends Component {
       <View style={styles.container}>
         <NavigationBar
           style={styles.header}
-          statusBar={{style: 'light-content', tintColor: '#0091e5'}}
+          statusBar={{style: 'light-content', tintColor: '#000'}}
           title={titleConfig}
           leftButton={leftButtonConfig}
           rightButton={rightButtonConfig}

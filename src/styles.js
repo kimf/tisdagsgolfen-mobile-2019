@@ -29,7 +29,7 @@ export default StyleSheet.create({
 
   header: {
     height: 60,
-    backgroundColor: colors.blue,
+    backgroundColor: '#11111F',
   },
 
   inlineHeader: {

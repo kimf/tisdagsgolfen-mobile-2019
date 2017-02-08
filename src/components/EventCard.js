@@ -30,7 +30,8 @@ class EventCard extends Component {
       resultsBtn = (
         <TouchableOpacity
           onPress={() => this._seeLeaderboard(event.oldId)}
-            style={s.followBtn}>
+          style={s.followBtn}
+        >
           <Text style={[s.eventCardBtn, {color: '#777'}]}>SE RESULTAT</Text>
         </TouchableOpacity>
       )
@@ -38,7 +39,8 @@ class EventCard extends Component {
       resultsBtn = (
         <TouchableOpacity
           onPress={() => followEvent(event)}
-            style={s.followBtn}>
+          style={s.followBtn}
+        >
           <Text style={[s.eventCardBtn, {color: '#777'}]}>FÖLJ LIVE</Text>
         </TouchableOpacity>
       )
@@ -55,26 +57,25 @@ class EventCard extends Component {
 
     return (
       <View style={[s.eventCard]}>
-        <Text style={[s.row, s.date]}>
-          {moment(event.startsAt).format('llll')}
-        </Text>
+        <View style={s.row}>
+          <Text style={[s.date]}>
+            {moment(event.startsAt).format('ddd D MMM HH:mm').toUpperCase()}
+          </Text>
+
+          <Text style={s.gametype}>
+            {event.teamEvent ? 'Lag' : 'Individuellt'}
+            {` ↝ `}
+            {gametypeName}
+          </Text>
+        </View>
 
         <View style={s.row}>
-          <View style={{flex: 3}}>
-            <Text style={s.gametype}>
-              {event.teamEvent ? 'Lag' : 'Individuellt'}
-              {` | `}
-              {gametypeName}
-            </Text>
-            <Text style={{fontSize: 16, lineHeight: 25}}>{event.club}</Text>
-            <Text style={{fontSize: 16, lineHeight: 25}}>{event.course}</Text>
-          </View>
+          <Text style={{fontSize: 16, lineHeight: 25}}>{event.club}</Text>
+          <Text style={{fontSize: 16, lineHeight: 25}}>{event.course}</Text>
         </View>
 
-        <View style={[s.row, s.buttonRow]}>
-          {scoringBtn}
-          {resultsBtn}
-        </View>
+        {scoringBtn}
+        {resultsBtn}
       </View>
     );
   }
@@ -92,9 +93,9 @@ const s = StyleSheet.create({
     borderColor: colors.cellBorder,
     borderWidth: StyleSheet.hairlineWidth,
     backgroundColor: '#fff',
-    shadowColor: '#000',
-    shadowOffset: { width: 2, height: 2},
-    shadowRadius: 5,
+    shadowColor: '#333',
+    shadowOffset: { width: 4, height: 4},
+    shadowRadius: 4,
     shadowOpacity: 0.2
   },
 
@@ -109,41 +110,37 @@ const s = StyleSheet.create({
   },
 
   date: {
-    color: '#444',
+    color: '#000',
     flex: 1,
-    fontSize: 14,
+    fontSize: 16,
+    fontWeight: '800',
     marginTop: 5,
     marginBottom: 5,
     borderBottomWidth: 1,
     borderBottomColor: '#ccc',
-    flex: 1
   },
 
   gametype: {
     fontSize: 10,
+    padding: 5,
+    paddingTop: 10,
     color: '#777',
   },
 
   eventCardBtn: {
     textAlign: 'center',
-    padding: 10,
+    padding: 5,
   },
 
   scoreBtn: {
-    flex: 1,
-    marginRight: 7,
-    backgroundColor: colors.actionText,
+    backgroundColor: '#ccc',
   },
 
   scoringBtn: {
-    flex: 1,
-    marginRight: 7,
     backgroundColor: 'green',
   },
 
   followBtn: {
-    flex: 1,
-    marginLeft: 7,
     backgroundColor: '#feb',
   }
 })

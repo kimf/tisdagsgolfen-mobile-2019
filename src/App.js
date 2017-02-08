@@ -71,6 +71,31 @@ const userQuery = gql`
     seasons: allSeasons(orderBy: name_DESC) {
       id
       name
+      seasonLeaderboards(orderBy: position_ASC) {
+        id
+        averagePoints
+        position
+        previousPosition
+        totalPoints
+        top5Points
+        eventCount
+        totalKr
+        totalBeers
+        user {
+          id
+          firstName
+          lastName
+        }
+      }
+      events(orderBy: startsAt_DESC) {
+        id
+        status
+        startsAt
+        course
+        scoringType
+        teamEvent
+        oldId
+      }
     }
   }
 `

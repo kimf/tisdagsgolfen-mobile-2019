@@ -6,10 +6,9 @@ const tabStyle = (padding, isCurrent) => {
     flex: 1,
     paddingTop: padding,
     paddingBottom: padding,
-    backgroundColor: isCurrent ? '#D9DADE' : '#eee',
+    backgroundColor: isCurrent ? '#D9EEFF' : '#eee',
     flexDirection: 'row',
-    justifyContent: 'center',
-    opacity: isCurrent ? 1 : 0.5
+    justifyContent: 'center'
   }
 }
 
@@ -17,7 +16,11 @@ const Tab = ({tab, isCurrent, onChange, fontSize, padding}) => {
   const opacity = isCurrent ? 1 : 0.5;
   const text = `${tab.icon} ${tab.title}`;
   return(
-    <TouchableHighlight style={tabStyle(padding, isCurrent)} onPress={() => onChange(tab.value)}>
+    <TouchableHighlight
+      underlayColor='#feb'
+      style={tabStyle(padding, isCurrent)}
+      onPress={() => onChange(tab.value)}
+    >
       <Text style={{fontSize, color: isCurrent ? '#222' : '#999'}}>
         {text}
       </Text>
@@ -27,16 +30,14 @@ const Tab = ({tab, isCurrent, onChange, fontSize, padding}) => {
 
 
 const Tabs = ({currentRoute, onChange, tabs, bottom}) => {
-  const fontSize = bottom ? 14 : 12;
-  const padding = bottom ? 16 : 10;
+  const fontSize = bottom ? 16 : 12;
 
   return (
     <View style={{
       backgroundColor: '#fff',
       flexDirection: 'row',
       justifyContent: 'center',
-      alignItems: 'stretch',
-      padding: bottom ? 0 : 5
+      alignItems: 'stretch'
     }}>
       { tabs.map(tab =>
         <Tab
@@ -45,7 +46,7 @@ const Tabs = ({currentRoute, onChange, tabs, bottom}) => {
           isCurrent={currentRoute === tab.value}
           onChange={onChange}
           fontSize={fontSize}
-          padding={padding}
+          padding={12}
         />
       )}
     </View>
