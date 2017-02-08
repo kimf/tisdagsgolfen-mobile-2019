@@ -13,6 +13,8 @@
 		00C302E91ABCBA2D00DB3ED1 /* libRCTNetwork.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302DC1ABCB9D200DB3ED1 /* libRCTNetwork.a */; };
 		00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302E41ABCB9EE00DB3ED1 /* libRCTVibration.a */; };
 		00E356F31AD99517003FC87E /* TisdagsgolfenTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* TisdagsgolfenTests.m */; };
+		082B8DB06FCE97DA7014B9FF /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 122B8EC64B88BC510561B2B4 /* CoreText.framework */; };
+		0BE8D9E16E359CD5D2A61F9F /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20D46EFAF52B365F2003FAAB /* CoreMedia.framework */; };
 		133E29F31AD74F7200F7D852 /* libRCTLinking.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 78C398B91ACF4ADC00677621 /* libRCTLinking.a */; };
 		139105C61AF99C1200B5F7CC /* libRCTSettings.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 139105C11AF99BAD00B5F7CC /* libRCTSettings.a */; };
 		139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 139FDEF41B06529B00C62182 /* libRCTWebSocket.a */; };
@@ -33,8 +35,15 @@
 		2D02E4C81E0B4AEC006451C7 /* libRCTWebSocket-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3E991DF850E9000B6D8A /* libRCTWebSocket-tvOS.a */; };
 		2D02E4C91E0B4AEC006451C7 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3EA31DF850E9000B6D8A /* libReact.a */; };
 		2DCD954D1E0B4F2C00145EB5 /* TisdagsgolfenTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* TisdagsgolfenTests.m */; };
+		304C96318F8DE29F1F2E9712 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BB61CB80F1D106369A2078C /* AVFoundation.framework */; };
+		4CB373B45A774C4019C4E5B2 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A439B7A8C8476EA981B27E10 /* SystemConfiguration.framework */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
+		66B2CD4D2BA3E2DED2A2275E /* BuddyBuildSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8188073461C52F9B7CA2B13 /* BuddyBuildSDK.framework */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
+		85B33C4D55D8D91D8C6BD12E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 423DE5284B7A7FDA8B48DC4E /* QuartzCore.framework */; };
+		ABDFE9BE2FC9363FAF959008 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0295EE51E5F6CBE18798D187 /* CoreVideo.framework */; };
+		B058432CF273BC3E6B04D6CD /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AD4344566BB979FDA697BAC /* AssetsLibrary.framework */; };
+		D79323A04774CE4B21F4C600 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B8D1A03A6FDE0E24B1F1555 /* CoreTelephony.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -239,6 +248,8 @@
 		00E356EE1AD99517003FC87E /* TisdagsgolfenTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TisdagsgolfenTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* TisdagsgolfenTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TisdagsgolfenTests.m; sourceTree = "<group>"; };
+		0295EE51E5F6CBE18798D187 /* CoreVideo.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreVideo.framework; path = System/Library/Frameworks/CoreVideo.framework; sourceTree = SDKROOT; };
+		122B8EC64B88BC510561B2B4 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		139105B61AF99BAD00B5F7CC /* RCTSettings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTSettings.xcodeproj; path = "../node_modules/react-native/Libraries/Settings/RCTSettings.xcodeproj"; sourceTree = "<group>"; };
 		139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTWebSocket.xcodeproj; path = "../node_modules/react-native/Libraries/WebSocket/RCTWebSocket.xcodeproj"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* Tisdagsgolfen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tisdagsgolfen.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -248,11 +259,18 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Tisdagsgolfen/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Tisdagsgolfen/main.m; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
+		20D46EFAF52B365F2003FAAB /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		2D02E47B1E0B4A5D006451C7 /* Tisdagsgolfen-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Tisdagsgolfen-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* Tisdagsgolfen-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tisdagsgolfen-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3B8D1A03A6FDE0E24B1F1555 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		423DE5284B7A7FDA8B48DC4E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		4BB61CB80F1D106369A2078C /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
+		9AD4344566BB979FDA697BAC /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
+		A439B7A8C8476EA981B27E10 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		C8188073461C52F9B7CA2B13 /* BuddyBuildSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BuddyBuildSDK.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -279,6 +297,15 @@
 				832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */,
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
+				66B2CD4D2BA3E2DED2A2275E /* BuddyBuildSDK.framework in Frameworks */,
+				B058432CF273BC3E6B04D6CD /* AssetsLibrary.framework in Frameworks */,
+				082B8DB06FCE97DA7014B9FF /* CoreText.framework in Frameworks */,
+				D79323A04774CE4B21F4C600 /* CoreTelephony.framework in Frameworks */,
+				4CB373B45A774C4019C4E5B2 /* SystemConfiguration.framework in Frameworks */,
+				85B33C4D55D8D91D8C6BD12E /* QuartzCore.framework in Frameworks */,
+				304C96318F8DE29F1F2E9712 /* AVFoundation.framework in Frameworks */,
+				0BE8D9E16E359CD5D2A61F9F /* CoreMedia.framework in Frameworks */,
+				ABDFE9BE2FC9363FAF959008 /* CoreVideo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -464,6 +491,7 @@
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* TisdagsgolfenTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
+				9CE772B617503A183BF158C5 /* Frameworks */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -478,6 +506,22 @@
 				2D02E4901E0B4A5D006451C7 /* Tisdagsgolfen-tvOSTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		9CE772B617503A183BF158C5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C8188073461C52F9B7CA2B13 /* BuddyBuildSDK.framework */,
+				9AD4344566BB979FDA697BAC /* AssetsLibrary.framework */,
+				122B8EC64B88BC510561B2B4 /* CoreText.framework */,
+				3B8D1A03A6FDE0E24B1F1555 /* CoreTelephony.framework */,
+				A439B7A8C8476EA981B27E10 /* SystemConfiguration.framework */,
+				423DE5284B7A7FDA8B48DC4E /* QuartzCore.framework */,
+				4BB61CB80F1D106369A2078C /* AVFoundation.framework */,
+				20D46EFAF52B365F2003FAAB /* CoreMedia.framework */,
+				0295EE51E5F6CBE18798D187 /* CoreVideo.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -987,6 +1031,10 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = 3ZCFLELL43;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = Tisdagsgolfen/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -1007,6 +1055,10 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 3ZCFLELL43;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = Tisdagsgolfen/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
