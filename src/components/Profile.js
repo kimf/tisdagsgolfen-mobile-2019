@@ -1,27 +1,26 @@
 import React from 'react'
-import { View, TouchableHighlight, Modal, Text } from 'react-native'
+import { View, TouchableHighlight, Text, Modal } from 'react-native'
+import { Link } from 'react-router-native'
 import styles from '../styles';
 
-const Profile = ({visible, player, onLogout, onClose}) => {
+const Profile = ({user, onLogout, onClose}) => {
   return (
     <Modal
       animationType={"slide"}
       transparent={false}
-      visible={visible}
+      visible
       hardwareAccelerated
     >
-     <View style={[{marginTop: 22}, styles.innerContainer]}>
-      <View style={{flex: 1}}>
-        <Text>Hej {player.firstName}</Text>
-        <TouchableHighlight onPress={() => {onClose()}}>
-          <Text style={styles.btn}>TILLBAKA</Text>
-        </TouchableHighlight>
+      <View style={[{marginTop: 22}, styles.innerContainer]}>
+        <View style={{flex: 1}}>
+          <Text>Hej {user.firstName}</Text>
+          <Link pop to='/' style={styles.btn}><Text>Tillbaka</Text></Link>
 
-        <TouchableHighlight onPress={() => {onLogout()}}>
-          <Text style={styles.btn}>LOGGA UT</Text>
-        </TouchableHighlight>
+          <TouchableHighlight onPress={() => {onLogout()}}>
+            <Text style={styles.btn}>LOGGA UT</Text>
+          </TouchableHighlight>
+        </View>
       </View>
-     </View>
     </Modal>
   )
 }

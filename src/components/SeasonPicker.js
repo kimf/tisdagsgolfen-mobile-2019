@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, Button } from 'react-native'
 
-const SeasonPicker = ({seasons, currentSeason, onChangeSeason}) => {
+const SeasonPicker = ({seasons, currentSeasonId, onChangeSeason}) => {
   return (
     <View style={{
       padding: 5,
@@ -10,13 +10,13 @@ const SeasonPicker = ({seasons, currentSeason, onChangeSeason}) => {
       justifyContent: 'space-around'
     }}>
       { seasons.map(season => {
-        const color = currentSeason && season.id === currentSeason.id ? '#000' : '#ccc'
+        const color = currentSeasonId && season.id === currentSeasonId ? '#000' : '#ccc'
         return <Button
           style={{flex: 1}}
           key={`SeasonPicker_${season.id}`}
           color={color}
           title={season.name}
-          onPress={() => onChangeSeason(season)}
+          onPress={() => onChangeSeason(season.id)}
         />
       })}
     </View>

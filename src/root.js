@@ -1,11 +1,14 @@
 import React from 'react'
 import { ApolloProvider } from 'react-apollo'
+import { NativeRouter } from 'react-router-native'
 
 import client from './client'
-import TisdagsGolfen from './TisdagsGolfen'
+import App from './App'
 
 export default (
   <ApolloProvider client={ client }>
-    <TisdagsGolfen />
+    <NativeRouter>
+      <App />
+    </NativeRouter>
   </ApolloProvider>
 )

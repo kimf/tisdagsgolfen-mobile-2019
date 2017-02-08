@@ -1,5 +1,7 @@
 import React, {Component, PropTypes} from "react";
 import {Linking, StyleSheet, Text, TextInput, TouchableOpacity, View, Image} from "react-native";
+import { Switch, Route, Redirect } from 'react-router-native'
+
 import { graphql, compose } from 'react-apollo'
 import gql from 'graphql-tag'
 
@@ -8,8 +10,8 @@ import Loading from '../components/Loading'
 
 class Login extends Component {
   state = {
-    email: '',
-    password: '',
+    email: 'kim.fransman@gmail.com',
+    password: 'password',
     loggingIn: false,
     error: null
   }
@@ -20,9 +22,9 @@ class Login extends Component {
     const { email, password } = this.state;
     this.props.signinUser({ variables: { email, password } })
       .then(response => {
-        setCache('graphcoolToken', response.data.signinUser.token)
-        this.setState({ loggingIn: false, error: null });
-        this.props.afterLogin()
+        setCache('graphcoolToken', response.data.signinUser.token).then(() => {
+          this.props.onLogin();
+        })
       })
       .catch(e => {
         // eslint-disable-next-line no-console
@@ -37,14 +39,20 @@ class Login extends Component {
 
 
   render() {
-    const { data } = this.props;
-    const { loggingIn, error } = this.state;
+    const { user } = this.props;
+    if(user) {
+      return <Redirect to={{pathname: '/'}}/>
+    }
 
-    if (data.loading)
-      return <Loading />
+    const { loggedIn, loggingIn, error } = this.state;
+
+    if (loggedIn) {
+      console.log('here i am');
+      return <Redirect replace to={{pathname: '/', from: 'login'}}/>
+    }
 
     if (loggingIn)
-      return <Loading text="Loggar in..." />
+      return <Loading text="Loggar in..." transparent/>
 
     let showError;
     if(error) {
@@ -143,15 +151,4 @@ const signinUser = gql`
   }
 `
 
-const userQuery = gql`
-  query {
-    user {
-      id
-    }
-  }
-`
-
-export default compose(
-  graphql(signinUser, { name: 'signinUser' }),
-  graphql(userQuery)
-)(Login)
+export default graphql(signinUser, { name: 'signinUser' })(Login)
