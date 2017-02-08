@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Alert, View, Text, LayoutAnimation } from 'react-native'
+import { Alert, View, Text, LayoutAnimation} from 'react-native'
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 import NavigationBar from 'react-native-navbar';
@@ -11,7 +11,7 @@ import Login from './containers/Login';
 import Home from './containers/Home';
 import Loading from './components/Loading';
 import SeasonPicker from './components/SeasonPicker';
-
+import Profile from './components/Profile';
 
 // Android-Support for LayoutAnimation ?
 // UIManager.setLayoutAnimationEnabledExperimental && UIManager.setLayoutAnimationEnabledExperimental(true);
@@ -20,7 +20,8 @@ class TisdagsGolfen extends Component {
   state = {
     loggedIn: false,
     currentSeason: null,
-    showSeasonPicker: false
+    showSeasonPicker: false,
+    showProfileModal: false
   }
 
   componentDidMount() {
@@ -35,7 +36,7 @@ class TisdagsGolfen extends Component {
 
   _logout = () => {
     removeCache('graphcoolToken')
-    this.setState({ loggedIn: false })
+    this.setState({ loggedIn: false, showProfileModal: false, showSeasonPicker: false })
   }
 
   _toggleSeasonpicker = () => {
@@ -51,9 +52,14 @@ class TisdagsGolfen extends Component {
     });
   }
 
+  _toggleProfileModal = () => {
+    const showProfileModal = !this.state.showProfileModal;
+    this.setState({showProfileModal})
+  }
+
   render () {
     const { data } = this.props;
-    const { loggedIn, currentSeason, showSeasonPicker } = this.state;
+    const { loggedIn, currentSeason, showSeasonPicker, showProfileModal } = this.state;
 
     if (data.loading)
       return <Loading />
@@ -68,7 +74,7 @@ class TisdagsGolfen extends Component {
     const titleConfig = { title: 'TISDAGSGOLFEN', tintColor: 'white' };
     const leftButtonConfig = {
       title: '🏌',
-      handler: () => this._logout(),
+      handler: () => this._toggleProfileModal(),
       tintColor: '#cecece'
     };
 
@@ -81,9 +87,9 @@ class TisdagsGolfen extends Component {
 
     const showLeaderboardTabs = parseInt(season.name, 10) > 2015;
 
-
     return (
       <View style={styles.container}>
+        <Profile player={data.user} visible={showProfileModal} onClose={this._toggleProfileModal} onLogout={this._logout}/>
         <NavigationBar
           style={styles.header}
           statusBar={{style: 'light-content', tintColor: '#0091e5'}}

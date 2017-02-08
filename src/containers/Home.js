@@ -36,8 +36,6 @@ class Home extends Component {
   state = { currentRoute: 'leaderboard', sorting: 'totalPoints' }
 
   changeRoute = (currentRoute) => {
-    const config = animations.layout.easeInEaseOut
-    LayoutAnimation.configureNext(config)
     this.setState({currentRoute})
   }
 

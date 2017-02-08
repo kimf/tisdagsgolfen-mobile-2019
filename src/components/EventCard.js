@@ -12,7 +12,6 @@ class EventCard extends Component {
 
   render() {
     const { event } = this.props;
-    console.log(event.status);
 
     let scoringBtn;
 
