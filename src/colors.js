@@ -10,7 +10,7 @@ module.exports = {
   inactiveText: '#9B9B9B',
   darkText: '#032250',
   lightText: '#7F91A7',
-  cellBorder: '#EEEEEE',
+  cellBorder: '#CECECE',
   darkBackground: '#183E63',
   colorForScore
 };

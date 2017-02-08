@@ -3,7 +3,12 @@ import { View, Button } from 'react-native'
 
 const SeasonPicker = ({seasons, currentSeason, onChangeSeason}) => {
   return (
-    <View style={{padding: 5, backgroundColor: '#eee', flexDirection: 'row', justifyContent: 'center'}}>
+    <View style={{
+      padding: 5,
+      backgroundColor: '#eee',
+      flexDirection: 'row',
+      justifyContent: 'space-around'
+    }}>
       { seasons.map(season => {
         const color = currentSeason && season.id === currentSeason.id ? '#000' : '#ccc'
         return <Button

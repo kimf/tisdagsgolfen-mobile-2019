@@ -102,10 +102,10 @@ export default StyleSheet.create({
 
   points: {
     fontFamily: 'Avenir',
-    fontSize: 20,
-    fontWeight: '800',
+    fontSize: 22,
+    fontWeight: '900',
     textAlign: 'right',
-    flex: 1
+    flex: 2
   },
 
   position: {

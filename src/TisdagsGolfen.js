@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text,   LayoutAnimation } from 'react-native'
+import { Alert, View, Text, LayoutAnimation } from 'react-native'
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 import NavigationBar from 'react-native-navbar';
@@ -12,10 +12,16 @@ import Home from './containers/Home';
 import Loading from './components/Loading';
 import SeasonPicker from './components/SeasonPicker';
 
-const backgroundColor = '#fff'
+
+// Android-Support for LayoutAnimation ?
+// UIManager.setLayoutAnimationEnabledExperimental && UIManager.setLayoutAnimationEnabledExperimental(true);
 
 class TisdagsGolfen extends Component {
-  state = { loggedIn: false, currentSeason: null, showSeasonPicker: false }
+  state = {
+    loggedIn: false,
+    currentSeason: null,
+    showSeasonPicker: false
+  }
 
   componentDidMount() {
     getCache('graphcoolToken').then(value => {
@@ -39,9 +45,11 @@ class TisdagsGolfen extends Component {
   }
 
   _changeSeason = (currentSeason) => {
-    this.setState({currentSeason})
-    this._toggleSeasonpicker(false);
-  };
+    this.setState({
+      currentSeason,
+      showSeasonPicker: false
+    });
+  }
 
   render () {
     const { data } = this.props;
@@ -57,16 +65,16 @@ class TisdagsGolfen extends Component {
                    ? data.seasons.find(s => s.id === currentSeason.id)
                    : data.seasons[0];
 
-    const titleConfig = { title: 'Tisdagsgolfen', tintColor: 'white' };
+    const titleConfig = { title: 'TISDAGSGOLFEN', tintColor: 'white' };
     const leftButtonConfig = {
-      title: 'Logga ut',
+      title: '⏏',
       handler: () => this._logout(),
       tintColor: '#cecece'
     };
 
     const caret = showSeasonPicker ? `↑` : `↓`;
     const rightButtonConfig = {
-      title: `${season ? `${season.name} ${caret}` : '...'}`,
+      title: `${season.name} ${caret}`,
       handler: () => this._toggleSeasonpicker(),
       tintColor: '#cecece'
     }
@@ -80,12 +88,13 @@ class TisdagsGolfen extends Component {
           leftButton={leftButtonConfig}
           rightButton={rightButtonConfig}
         />
+
         { showSeasonPicker
           ? <SeasonPicker seasons={data.seasons} currentSeason={season} onChangeSeason={(season) => this._changeSeason(season)} />
           : null
         }
 
-        <View style={{ flex: 1, backgroundColor, alignItems: 'stretch' }}>
+        <View style={{ flex: 1, backgroundColor: '#fff', alignItems: 'stretch' }}>
           <Home user={data.user} currentSeasonId={season.id} logout={() => this._logout()} />
         </View>
       </View>
