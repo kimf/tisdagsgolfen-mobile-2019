@@ -1,35 +1,66 @@
 import React, {Component, PropTypes} from "react";
-import {Linking, StyleSheet, Text, TextInput, TouchableOpacity, View, Image} from "react-native";
+import {
+  Image,
+  Linking,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  Keyboard,
+  View,
+  LayoutAnimation
+} from "react-native";
 import { Switch, Route, Redirect } from 'react-router-native'
 
 import { graphql, compose } from 'react-apollo'
 import gql from 'graphql-tag'
 
-import { setCache, removeCache } from '../utils'
 import Loading from '../components/Loading'
 
 class Login extends Component {
-  state = {
-    email: 'kim.fransman@gmail.com',
-    password: 'password',
-    loggingIn: false,
-    error: null
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      email: props.email || '',
+      password: '',
+      loggingIn: false,
+      error: null
+    }
+  }
+
+  componentWillMount () {
+    this.keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', this._keyboardDidShow);
+    this.keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', this._keyboardDidHide);
+  }
+
+  componentWillUnmount () {
+    this.keyboardDidShowListener.remove();
+    this.keyboardDidHideListener.remove();
+  }
+
+  _keyboardDidShow = () => {
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.spring)
+    this.setState({ showingKeyboard: true });
+  }
+
+  _keyboardDidHide = () => {
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.spring)
+    this.setState({ showingKeyboard: false });
   }
 
   onSubmit = () => {
     this.setState({ loggingIn: true });
-    removeCache('graphcoolToken');
     const { email, password } = this.state;
     this.props.signinUser({ variables: { email, password } })
       .then(response => {
-        setCache('graphcoolToken', response.data.signinUser.token).then(() => {
-          this.props.onLogin();
-        })
+        this.props.onLogin(email, response.data.signinUser.token);
+        this.setState({ loggingIn: false });
       })
       .catch(e => {
         // eslint-disable-next-line no-console
+        console.warn(e)
         this.setState({ error: e, loggingIn: false });
-        console.log(e)
       })
   }
 
@@ -39,20 +70,7 @@ class Login extends Component {
 
 
   render() {
-    const { user } = this.props;
-    if(user) {
-      return <Redirect to={{pathname: '/'}}/>
-    }
-
-    const { loggedIn, loggingIn, error } = this.state;
-
-    if (loggedIn) {
-      console.log('here i am');
-      return <Redirect replace to={{pathname: '/', from: 'login'}}/>
-    }
-
-    if (loggingIn)
-      return <Loading text="Loggar in..." transparent/>
+    const { loggingIn, error, showingKeyboard } = this.state;
 
     let showError;
     if(error) {
@@ -62,12 +80,12 @@ class Login extends Component {
     return(
       <View style={{
         flex: 1,
-        flexDirection: 'column',
         paddingTop: 60,
         backgroundColor: '#ccc',
         alignItems: 'center'
       }}>
-        <Image source={require('../images/logo.png')} style={styles.logo} />
+
+        { !showingKeyboard ? <Image source={require('../images/logo.png')} style={styles.logo} /> : null }
 
         {showError}
 
@@ -77,8 +95,12 @@ class Login extends Component {
           autoCapitalize="none"
           autoCorrect={false}
           keyboardType="email-address"
-          ref= "email"
+          ref="email"
+          returnKeyType="next"
           onChangeText={(email) => this.setState({email})}
+          onSubmitEditing={(event) => {
+            this.refs.password.focus();
+          }}
           value={this.state.email}
         />
 
@@ -87,13 +109,16 @@ class Login extends Component {
           style={styles.inputField}
           autoCapitalize="none"
           secureTextEntry={true}
-          ref= "password"
+          returnKeyType={'go'}
+          autoCorrect={false}
+          ref="password"
           onChangeText={(password) => this.setState({password})}
+          onSubmitEditing={this.onSubmit}
           value={this.state.password}
         />
 
-        <TouchableOpacity style={styles.btn} onPress={this.onSubmit}>
-          <Text style={styles.btnLabel}>LOGGA IN</Text>
+        <TouchableOpacity style={styles.btn} activeOpacity={loggingIn ? 0.5 : 1} onPress={loggingIn ? () => {} : this.onSubmit}>
+          <Text style={styles.btnLabel}>{loggingIn ? '⎋ -------' : 'LOGGA IN'}</Text>
         </TouchableOpacity>
 
         <TouchableOpacity onPress={this.openPassword}>

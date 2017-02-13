@@ -10,6 +10,7 @@ import styles from '../styles';
 
 import SeasonPicker from '../components/SeasonPicker';
 import Season from '../components/Season';
+import Loading from '../components/Loading';
 // Android-Support for LayoutAnimation ?
 // UIManager.setLayoutAnimationEnabledExperimental && UIManager.setLayoutAnimationEnabledExperimental(true);
 
@@ -32,7 +33,11 @@ class Home extends Component {
   }
 
   render () {
-    const { data, user, seasons } = this.props;
+    const { loading, user, seasons } = this.props.data;
+    if(loading) {
+      return <Loading text="Laddar data..." />
+    }
+
     const { currentSeasonId, showSeasonPicker } = this.state;
 
     const season = currentSeasonId
@@ -53,8 +58,6 @@ class Home extends Component {
       handler: () => this.props.push('/profile'),
       tintColor: '#fff'
     }
-
-    console.log(this.props.location.pathname);
 
     return (
       <View style={styles.container}>
@@ -84,4 +87,45 @@ class Home extends Component {
   }
 }
 
-export default Home
+
+const userQuery = gql`
+  query {
+    user {
+      id
+      email
+      firstName
+      lastName
+    }
+    seasons: allSeasons(orderBy: name_DESC) {
+      id
+      name
+      seasonLeaderboards(orderBy: position_ASC) {
+        id
+        averagePoints
+        position
+        previousPosition
+        totalPoints
+        top5Points
+        eventCount
+        totalKr
+        totalBeers
+        user {
+          id
+          firstName
+          lastName
+        }
+      }
+      events(orderBy: startsAt_DESC) {
+        id
+        status
+        startsAt
+        course
+        scoringType
+        teamEvent
+        oldId
+      }
+    }
+  }
+`
+
+export default graphql(userQuery)(Home)

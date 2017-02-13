@@ -62,7 +62,9 @@ export const rankedUsers = (realUsers) => {
 
 export const setCache = async (key, val) => {
   try {
-    const value = await AsyncStorage.setItem(key, val)
+    const item = JSON.stringify(val);
+    console.log(key, item)
+    const value = await AsyncStorage.setItem(key, item)
     if (value === null)
       return false
     return value
@@ -75,7 +77,8 @@ export const setCache = async (key, val) => {
 export const getCache = async key => {
   try {
     const value = await AsyncStorage.getItem(key)
-    return value
+    console.log(value);
+    return JSON.parse(value)
   } catch (e) {
     // eslint-disable-next-line no-console
     console.warn('caught error in getCache', e)

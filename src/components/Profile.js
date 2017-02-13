@@ -1,9 +1,13 @@
 import React from 'react'
 import { View, TouchableHighlight, Text, Modal } from 'react-native'
 import { Link } from 'react-router-native'
+import { graphql } from 'react-apollo'
+import gql from 'graphql-tag'
+
 import styles from '../styles';
 
-const Profile = ({user, onLogout, onClose}) => {
+const Profile = ({data: {loading, user}, onLogout, onClose}) => {
+  if(loading) { return null; }
   return (
     <Modal
       animationType={"slide"}
@@ -16,7 +20,7 @@ const Profile = ({user, onLogout, onClose}) => {
           <Text>Hej {user.firstName}</Text>
           <Link pop to='/' style={styles.btn}><Text>Tillbaka</Text></Link>
 
-          <TouchableHighlight onPress={() => {onLogout()}}>
+          <TouchableHighlight onPress={() => {onLogout(user.email)}}>
             <Text style={styles.btn}>LOGGA UT</Text>
           </TouchableHighlight>
         </View>
@@ -25,4 +29,15 @@ const Profile = ({user, onLogout, onClose}) => {
   )
 }
 
-export default Profile
+const userQuery = gql`
+  query {
+    user {
+      id
+      email
+      firstName
+      lastName
+    }
+  }
+`
+
+export default graphql(userQuery)(Profile)

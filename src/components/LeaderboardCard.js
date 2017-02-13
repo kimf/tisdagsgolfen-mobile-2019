@@ -24,9 +24,9 @@ const LeaderboardCard = ({data, currentUserId, sorting}) => {
     pointText = 'p';
     position = data.position;
     if(data.position < data.previousPosition) {
-      up_or_down = <Text style={{color: 'green'}}>⇡{data.position - data.previousPosition}</Text>;
+      up_or_down = <Text style={{flex: 1, color: 'green'}}>↥{data.previousPosition - data.position}</Text>;
     } else if(data.position > data.previousPosition) {
-      up_or_down = <Text style={{color: 'red'}}>⇣ {data.previousPosition - data.position}</Text>;
+      up_or_down = <Text style={{flex: 1, color: 'red'}}>↧{data.position - data.previousPosition}</Text>;
     }
   }
 
@@ -42,7 +42,7 @@ const LeaderboardCard = ({data, currentUserId, sorting}) => {
       <TouchableOpacity activeOpacity={0.5}>
         <View key={data.id} style={[styles.listrow, currentUserStyle]}>
           <View style={styles.position}>
-            <Text style={{flex: 1, fontWeight: 'bold', color: '#777'}}>{position}</Text>
+            <Text style={{flex: 1, fontWeight: '800', color: '#000', fontSize: 16}}>{position}</Text>
              {up_or_down}
           </View>
           <View style={styles.cardTitle}>
