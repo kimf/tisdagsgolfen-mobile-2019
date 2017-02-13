@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
 import { View, LayoutAnimation } from 'react-native'
 import NavigationBar from 'react-native-navbar'
 
@@ -93,16 +93,18 @@ class Home extends Component {
   }
 }
 
+const { bool, object, array, func, shape, string } = React.PropTypes
+
 Home.propTypes = {
-  data: PropTypes.shape({
-    loading: PropTypes.bool.isRequired,
-    user: PropTypes.shape,
-    seasons: PropTypes.array
+  data: shape({
+    loading: bool.isRequired,
+    user: object,
+    seasons: array
   }).isRequired,
-  push: PropTypes.func.isRequired,
-  replace: PropTypes.func.isRequired,
-  location: PropTypes.shape({
-    pathname: PropTypes.string
+  push: func.isRequired,
+  replace: func.isRequired,
+  location: shape({
+    pathname: string
   }).isRequired
 }
 

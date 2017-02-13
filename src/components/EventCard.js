@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
 import { Text, TouchableOpacity, View, StyleSheet } from 'react-native'
 import moment from 'moment'
 
@@ -86,16 +86,18 @@ const EventCard = ({ event, gotoEvent }) => {
   )
 }
 
+const { shape, string, bool, func } = React.PropTypes
+
 EventCard.propTypes = {
-  event: PropTypes.shapeOf({
-    id: PropTypes.number.isRequired,
-    scoringType: PropTypes.string.isRequired,
-    status: PropTypes.string.isRequired,
-    teamEvent: PropTypes.bool.isRequired,
-    club: PropTypes.string.isRequired,
-    course: PropTypes.string.isRequired
+  event: shape({
+    id: string.isRequired,
+    scoringType: string.isRequired,
+    status: string.isRequired,
+    teamEvent: bool.isRequired,
+    club: string,
+    course: string
   }).isRequired,
-  gotoEvent: PropTypes.func.isRequired
+  gotoEvent: func.isRequired
 }
 
 export default EventCard

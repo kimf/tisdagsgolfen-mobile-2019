@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
 import { View } from 'react-native'
 
 import Tab from './Tab'
@@ -31,11 +31,13 @@ const Tabs = ({ currentRoute, onChange, tabs, bottom }) => {
   )
 }
 
+const { arrayOf, string, func, shape, bool } = React.PropTypes
+
 Tabs.propTypes = {
-  currentRoute: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
-  tabs: PropTypes.arrayOf(PropTypes.shape).isRequired,
-  bottom: PropTypes.bool
+  currentRoute: string.isRequired,
+  onChange: func.isRequired,
+  tabs: arrayOf(shape()).isRequired,
+  bottom: bool
 }
 
 Tabs.defaultProps = {

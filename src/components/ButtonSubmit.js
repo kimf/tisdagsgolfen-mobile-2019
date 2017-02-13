@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
 import {
   StyleSheet,
   TouchableOpacity,
@@ -106,7 +106,7 @@ class ButtonSubmit extends Component {
 }
 
 ButtonSubmit.propTypes = {
-  onPress: PropTypes.func.isRequired
+  onPress: React.PropTypes.func.isRequired
 }
 
 

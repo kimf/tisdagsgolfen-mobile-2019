@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
 import { Text, View } from 'react-native'
 
 const containerStyle = {
@@ -19,8 +19,9 @@ const Loading = ({ text }) =>
     <Text style={textStyle}>{ text }</Text>
   </View>
 
+
 Loading.propTypes = {
-  text: PropTypes.string
+  text: React.PropTypes.string
 }
 
 Loading.defaultProps = {

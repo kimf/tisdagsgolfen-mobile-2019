@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
 import { Switch, Route, withRouter } from 'react-router-native'
 import { View } from 'react-native'
 
@@ -49,13 +49,14 @@ class Season extends Component {
   }
 }
 
+const { func, shape, string } = React.PropTypes
 
 Season.propTypes = {
-  user: PropTypes.shape.isRequired,
-  season: PropTypes.shape.isRequired,
-  replace: PropTypes.func.isRequired,
-  currentPath: PropTypes.string.isRequired,
-  replaceRoute: PropTypes.func.isRequired
+  user: shape().isRequired,
+  season: shape().isRequired,
+  replace: func.isRequired,
+  currentPath: string.isRequired,
+  replaceRoute: func.isRequired
 }
 
 export default withRouter(Season)

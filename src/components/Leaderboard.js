@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
 import { View, ListView } from 'react-native'
 
 import LeaderboardCard from './LeaderboardCard'
@@ -71,11 +71,13 @@ class Leaderboard extends Component {
   }
 }
 
+const { arrayOf, shape, string } = React.PropTypes
+
 Leaderboard.propTypes = {
-  items: PropTypes.arrayOf(PropTypes.shape).isRequired,
-  seasonName: PropTypes.string.isRequired,
-  user: PropTypes.shapeOf({
-    id: PropTypes.number.isRequired
+  items: arrayOf(shape()).isRequired,
+  seasonName: string.isRequired,
+  user: shape({
+    id: string.isRequired
   }).isRequired
 }
 

@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
 import { View, Button } from 'react-native'
 
 const SeasonPicker = ({ seasons, currentSeasonId, onChangeSeason }) => (
@@ -27,10 +27,13 @@ const SeasonPicker = ({ seasons, currentSeasonId, onChangeSeason }) => (
   </View>
 )
 
+
+const { arrayOf, shape, string, func } = React.PropTypes
+
 SeasonPicker.propTypes = {
-  seasons: PropTypes.arrayOf(PropTypes.shape.isRequired).isRequired,
-  currentSeasonId: PropTypes.number.isRequired,
-  onChangeSeason: PropTypes.func.isRequired
+  seasons: arrayOf(shape().isRequired).isRequired,
+  currentSeasonId: string.isRequired,
+  onChangeSeason: func.isRequired
 }
 
 export default SeasonPicker

@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
 import { View, TouchableHighlight, Text, Modal } from 'react-native'
 import { Link } from 'react-router-native'
 import { graphql } from 'react-apollo'
@@ -30,15 +30,17 @@ const Profile = ({ data: { loading, user }, onLogout }) => {
   )
 }
 
+const { shape, bool, string, func } = React.PropTypes
+
 Profile.propTypes = {
-  data: PropTypes.shapeOf({
-    loading: PropTypes.bool.isRequired,
-    user: PropTypes.shapeOf({
-      firstName: PropTypes.string.isRequired,
-      email: PropTypes.string.isRequired
+  data: shape({
+    loading: bool.isRequired,
+    user: shape({
+      firstName: string.isRequired,
+      email: string.isRequired
     }).isRequired
   }).isRequired,
-  onLogout: PropTypes.func.isRequired
+  onLogout: func.isRequired
 }
 
 const userQuery = gql`

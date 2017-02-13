@@ -19,7 +19,7 @@ const Wallpaper = ({ children }) =>
 
 
 Wallpaper.propTypes = {
-  children: React.PropTypes.children
+  children: React.PropTypes.arrayOf(React.PropTypes.element)
 }
 
 Wallpaper.defaultProps = {

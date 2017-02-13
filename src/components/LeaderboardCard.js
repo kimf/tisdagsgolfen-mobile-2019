@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
 import { Text, View, TouchableOpacity } from 'react-native'
 
 import styles from '../styles'
@@ -63,11 +63,12 @@ const LeaderboardCard = ({ data, currentUserId, sorting }) => {
   )
 }
 
+const { shape, string } = React.PropTypes
 
 LeaderboardCard.propTypes = {
-  data: PropTypes.shape.isRequired,
-  currentUserId: PropTypes.number.isRequired,
-  sorting: PropTypes.string.isRequired
+  data: shape().isRequired,
+  currentUserId: string.isRequired,
+  sorting: string.isRequired
 }
 
 export default LeaderboardCard

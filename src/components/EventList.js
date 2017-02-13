@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
 import { ListView } from 'react-native'
 
 import EventCard from './EventCard'
@@ -22,18 +22,11 @@ const EventList = ({ events, gotoEvent }) => {
   )
 }
 
+const { arrayOf, shape, func } = React.PropTypes
+
 EventList.propTypes = {
-  events: PropTypes.arrayOf(
-    PropTypes.shapeOf({
-      id: PropTypes.number.isRequired,
-      scoringType: PropTypes.string.isRequired,
-      status: PropTypes.string.isRequired,
-      teamEvent: PropTypes.bool.isRequired,
-      club: PropTypes.string.isRequired,
-      course: PropTypes.string.isRequired
-    }).isRequired
-  ).isRequired,
-  gotoEvent: PropTypes.func.isRequired
+  events: arrayOf(shape().isRequired).isRequired,
+  gotoEvent: func.isRequired
 }
 
 export default EventList

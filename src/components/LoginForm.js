@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
 import {
   StyleSheet,
   KeyboardAvoidingView,
@@ -54,11 +54,14 @@ const LoginForm = ({ email, password, changeValue, onSubmit }) =>
     />
   </KeyboardAvoidingView>
 
+
+const { string, func } = React.PropTypes
+
 LoginForm.propTypes = {
-  email: PropTypes.string,
-  password: PropTypes.string,
-  changeValue: PropTypes.func.isRequired,
-  onSubmit: PropTypes.func.isRequired
+  email: string,
+  password: string,
+  changeValue: func.isRequired,
+  onSubmit: func.isRequired
 }
 
 LoginForm.defaultProps = {

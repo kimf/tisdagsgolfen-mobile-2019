@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
 import { TouchableHighlight, Text } from 'react-native'
 
 const tabStyle = (padding, isCurrent) => ({
@@ -25,16 +25,18 @@ const Tab = ({ tab, isCurrent, onChange, fontSize, padding }) => {
   )
 }
 
+const { shape, string, bool, func, number } = React.PropTypes
+
 Tab.propTypes = {
-  tab: PropTypes.shapeOf({
-    value: PropTypes.string.isRequired,
-    icon: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired
+  tab: shape({
+    value: string.isRequired,
+    icon: string.isRequired,
+    title: string.isRequired
   }).isRequired,
-  isCurrent: PropTypes.bool.isRequired,
-  onChange: PropTypes.func.isRequired,
-  fontSize: PropTypes.number.isRequired,
-  padding: PropTypes.number.isRequired
+  isCurrent: bool.isRequired,
+  onChange: func.isRequired,
+  fontSize: number.isRequired,
+  padding: number.isRequired
 }
 
 

@@ -7,8 +7,14 @@ const PlayerProfile = ({ player }) =>
     <Text>{player.firstName} {player.lastName}</Text>
   </View>
 
+
+const { shape, string } = React.PropTypes
+
 PlayerProfile.propTypes = {
-  player: React.PropTypes.shape.isRequired
+  player: shape({
+    firstName: string.isRequired,
+    lastName: string.isRequired
+  }).isRequired
 }
 
 export default PlayerProfile
