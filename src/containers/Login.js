@@ -3,11 +3,11 @@ import { Linking } from 'react-native'
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 
-import Logo from '../components/Logo'
-import LoginError from '../components/LoginError'
-import Form from '../components/LoginForm'
-import Wallpaper from '../components/Wallpaper'
-import ButtonSubmit from '../components/ButtonSubmit'
+import Logo from '../components/Login/Logo'
+import LoginError from '../components/Login/LoginError'
+import Form from '../components/Login/LoginForm'
+import Wallpaper from '../components/Login/Wallpaper'
+import ButtonSubmit from '../components/Login/ButtonSubmit'
 
 class Login extends Component {
   constructor(props) {

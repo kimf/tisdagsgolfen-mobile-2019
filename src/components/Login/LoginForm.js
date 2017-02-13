@@ -8,8 +8,8 @@ import {
   View
 } from 'react-native'
 
-import usernameImg from '../images/username.png'
-import passwordImg from '../images/password.png'
+import usernameImg from '../../images/username.png'
+import passwordImg from '../../images/password.png'
 
 const DEVICE_WIDTH = Dimensions.get('window').width
 

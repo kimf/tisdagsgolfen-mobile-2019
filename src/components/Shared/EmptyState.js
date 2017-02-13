@@ -18,7 +18,7 @@ const textStyle = {
   color: '#ccc'
 }
 
-const emptyImage = require('../images/emptystate.png')
+const emptyImage = require('../../images/emptystate.png')
 
 const EmptyState = ({ text }) =>
   <View style={containerStyle}>

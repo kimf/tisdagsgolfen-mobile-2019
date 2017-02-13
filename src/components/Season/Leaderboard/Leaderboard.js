@@ -2,11 +2,11 @@ import React, { Component } from 'react'
 import { View, ListView } from 'react-native'
 
 import LeaderboardCard from './LeaderboardCard'
-import Tabs from './Tabs'
-import EmptyState from './EmptyState'
+import Tabs from '../Tabs'
+import EmptyState from '../../Shared/EmptyState'
 
-import { ranked } from '../utils'
-import styles from '../styles'
+import { ranked } from '../../../utils'
+import styles from '../../../styles'
 
 const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 })
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Text, View, TouchableOpacity } from 'react-native'
 
-import styles from '../styles'
+import styles from '../../../styles'
 
 const LeaderboardCard = ({ data, currentUserId, sorting }) => {
   let pointText

@@ -5,7 +5,7 @@ import {
   Image
 } from 'react-native'
 
-import logoImg from '../images/logo.png'
+import logoImg from '../../images/logo.png'
 
 const styles = StyleSheet.create({
   container: {

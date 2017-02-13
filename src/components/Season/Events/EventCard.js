@@ -2,7 +2,7 @@ import React from 'react'
 import { Text, TouchableOpacity, View, StyleSheet } from 'react-native'
 import moment from 'moment'
 
-import colors from '../colors'
+import colors from '../../../colors'
 
 const s = StyleSheet.create({
   /* EVENT CARDS */

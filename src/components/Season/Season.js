@@ -2,10 +2,11 @@ import React, { Component } from 'react'
 import { Switch, Route, withRouter } from 'react-router-native'
 import { View } from 'react-native'
 
-import Leaderboard from './Leaderboard'
-import EventList from './EventList'
+import Leaderboard from './Leaderboard/Leaderboard'
+import EventList from './Events/EventList'
+import NewEventForm from './Events/NewEventForm'
 import Tabs from './Tabs'
-import styles from '../styles'
+import styles from '../../styles'
 
 const viewTabs = [
   { value: '/', icon: '🏆', title: 'Ledartavla' },
@@ -14,6 +15,7 @@ const viewTabs = [
 
 class Season extends Component {
   gotoEvent = eventId => this.props.replace(`/events/${eventId}`)
+  openNewRoundModal = () => this.props.push('/events/new')
 
   render() {
     const { user, season, currentPath, replaceRoute } = this.props
@@ -35,15 +37,29 @@ class Season extends Component {
             user={user}
             events={season.events}
             gotoEvent={this.gotoEvent}
+            openNewRoundModal={this.openNewRoundModal}
             component={EventList}
           />
+          <Route
+            exact
+            path="/events/new"
+            goBack={this.goBack}
+            component={NewEventForm}
+          />
         </Switch>
-        <Tabs
-          currentRoute={currentPath}
-          onChange={path => replaceRoute(path)}
-          tabs={viewTabs}
-          bottom
-        />
+        <View
+          style={{
+            borderTopWidth: 1,
+            borderTopColor: '#11111F'
+          }}
+        >
+          <Tabs
+            currentRoute={currentPath}
+            onChange={path => replaceRoute(path)}
+            tabs={viewTabs}
+            bottom
+          />
+        </View>
       </View>
     )
   }
@@ -56,7 +72,8 @@ Season.propTypes = {
   season: shape().isRequired,
   replace: func.isRequired,
   currentPath: string.isRequired,
-  replaceRoute: func.isRequired
+  replaceRoute: func.isRequired,
+  push: func.isRequired
 }
 
 export default withRouter(Season)

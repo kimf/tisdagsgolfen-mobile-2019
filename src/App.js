@@ -6,7 +6,7 @@ import styles from './styles'
 import { getCache, setCache } from './utils'
 
 import Profile from './components/Profile'
-import Loading from './components/Loading'
+import Loading from './components/Shared/Loading'
 import Login from './containers/Login'
 import Home from './containers/Home'
 

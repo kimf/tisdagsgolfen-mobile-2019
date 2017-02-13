@@ -7,9 +7,9 @@ import gql from 'graphql-tag'
 
 import styles from '../styles'
 
-import SeasonPicker from '../components/SeasonPicker'
-import Season from '../components/Season'
-import Loading from '../components/Loading'
+import SeasonPicker from '../components/Season/SeasonPicker'
+import Season from '../components/Season/Season'
+import Loading from '../components/Shared/Loading'
 
 // Android-Support for LayoutAnimation ?
 // UIManager.setLayoutAnimationEnabledExperimental

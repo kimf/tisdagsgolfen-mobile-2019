@@ -10,7 +10,7 @@ import {
   View
 } from 'react-native'
 
-import spinner from '../images/loading.gif'
+import spinner from '../../images/loading.gif'
 
 const DEVICE_WIDTH = Dimensions.get('window').width
 const MARGIN = 40
