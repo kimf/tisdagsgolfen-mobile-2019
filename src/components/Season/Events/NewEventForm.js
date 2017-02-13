@@ -1,13 +1,9 @@
 import React from 'react'
-import {
-  View,
-  Text,
-  Modal
-} from 'react-native'
+import { Modal } from 'react-native'
 import NavigationBar from 'react-native-navbar'
 
+import CoursePicker from './CoursePicker'
 import styles from '../../../styles'
-import Button from '../../Shared/Button'
 
 const NewEventForm = ({ goBack }) =>
   <Modal
@@ -26,10 +22,7 @@ const NewEventForm = ({ goBack }) =>
         tintColor: '#fff'
       }}
     />
-    <View style={styles.container}>
-      <Text>Skapa ny runda</Text>
-      <Button text="Tillbaka" onPress={goBack} />
-    </View>
+    <CoursePicker selectCourse={this.selectCourse} />
   </Modal>
 
 

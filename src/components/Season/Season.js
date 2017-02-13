@@ -43,7 +43,7 @@ class Season extends Component {
           <Route
             exact
             path="/events/new"
-            goBack={this.goBack}
+            selectCourse={this.selectCourse}
             component={NewEventForm}
           />
         </Switch>

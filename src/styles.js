@@ -28,9 +28,9 @@ export default StyleSheet.create({
   },
 
   inlineHeader: {
-    paddingTop: 20,
-    paddingBottom: 20,
-    backgroundColor: colors.inactiveText
+    paddingVertical: 5,
+    paddingHorizontal: 5,
+    backgroundColor: '#D9EEFF'
   },
 
   listrow: {
@@ -158,7 +158,8 @@ export default StyleSheet.create({
     margin: 10,
     height: 40,
     backgroundColor: 'white',
-    fontSize: 16
+    fontSize: 16,
+    paddingLeft: 10
   },
 
   datePickerContainer: {
