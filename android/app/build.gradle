@@ -67,7 +67,7 @@ import com.android.build.OutputFile
 */
 
 project.ext.react = [
-  bundleInDebug: $System.env.CI == "true",
+  bundleInDebug: true,
   jsBundleDirDebug: "$buildDir/intermediates/assets/debug"
 ]
 
