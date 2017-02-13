@@ -9,7 +9,7 @@ import Form from '../components/LoginForm'
 import Wallpaper from '../components/Wallpaper'
 import ButtonSubmit from '../components/ButtonSubmit'
 
-class LoginScreen extends Component {
+class Login extends Component {
   constructor(props) {
     super(props)
 
@@ -50,7 +50,7 @@ class LoginScreen extends Component {
     return (
       <Wallpaper>
         <Logo />
-        {error && <LoginError />}
+        {error ? <LoginError /> : null}
         <Form
           email={email}
           password={password}
@@ -63,13 +63,13 @@ class LoginScreen extends Component {
   }
 }
 
-LoginScreen.propTypes = {
+Login.propTypes = {
   email: PropTypes.string,
   signinUser: PropTypes.func.isRequired,
   onLogin: PropTypes.func.isRequired
 }
 
-LoginScreen.defaultProps = {
+Login.defaultProps = {
   email: ''
 }
 
@@ -81,4 +81,4 @@ const signinUser = gql`
   }
 `
 
-export default graphql(signinUser, { name: 'signinUser' })(LoginScreen)
+export default graphql(signinUser, { name: 'signinUser' })(Login)
