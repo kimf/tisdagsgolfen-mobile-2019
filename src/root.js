@@ -6,7 +6,7 @@ import client from './client'
 import App from './App'
 
 export default (
-  <ApolloProvider client={ client }>
+  <ApolloProvider client={client}>
     <NativeRouter>
       <App />
     </NativeRouter>

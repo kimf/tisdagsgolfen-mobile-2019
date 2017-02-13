@@ -1,83 +1,79 @@
 import { AsyncStorage } from 'react-native'
-import { sortBy, reverse } from 'lodash'
 
-export const average = arr => arr.reduce( ( p, c ) => p + c, 0 ) / arr.length;
-// avg.toLocaleString('sv', {maximumFractionDigits: 1, useGrouping:false});
+export const average = arr => arr.reduce((p, c) => p + c, 0) / arr.length
+// avg.toLocaleString('sv', {maximumFractionDigits: 1, useGrouping:false})
 
-export const sorted = (array, attribute) => array.sort((a, b) => b[attribute] - a[attribute]);
+export const sorted = (array, attribute) => array.sort((a, b) => b[attribute] - a[attribute])
 
-export const sortedByParsedDate = (array, attribute) => {
-  return sorted(
-    array.map(item => {
-      const date = new Date(item[attribute]);
-      item[attribute] = date;
-      return item;
-    }),
-    attribute
-  );
-}
-
+export const sortedByParsedDate = (array, attribute) => sorted(
+  array.map((item) => {
+    const date = new Date(item[attribute])
+    const newItem = Object.assign({}, item)
+    newItem[attribute] = date
+    return newItem
+  }),
+  attribute
+)
 
 // ranked :: Array -> String -> Array
 export const ranked = (array, attribute, rankingAttribute, reversed) => {
-  const scores = array.map(x => x[rankingAttribute]);
-  const rankedArr = array.map(item => {
-    const newItem = Object.assign({}, item);
+  const scores = array.map(x => x[rankingAttribute])
+  const rankedArr = array.map((item) => {
+    const newItem = Object.assign({}, item)
     newItem[attribute] = scores.indexOf(newItem[rankingAttribute]) + 1
-    return newItem;
-  });
+    return newItem
+  })
 
-  return reversed  ? rankedArr.reverse() : rankedArr;
-};
+  return reversed ? rankedArr.reverse() : rankedArr
+}
 
 const cmp = (a, b) => {
-  if (a > b) return +1;
-  if (a < b) return -1;
-  return 0;
+  if (a > b) return +1
+  if (a < b) return -1
+  return 0
 }
 
 export const rankedUsers = (realUsers) => {
-  const rankings = [];
-  const users = realUsers.slice();
-  users.sort((a,b) => cmp(a.totalPoints, b.totalPoints) || cmp(a.average, b.average));
+  const rankings = []
+  const users = realUsers.slice()
+  users.sort((a, b) => cmp(a.totalPoints, b.totalPoints) || cmp(a.average, b.average))
 
   users.reverse().forEach((user, i) => {
-    if (i == 0) {
-      user.position = 1
-    } else if (user.totalPoints == users[i-1].totalPoints) {
-      if (user.average == users[i-1].average) {
-        user.position = rankings[i-1].position
+    const rankedUser = Object.assign({}, user)
+    if (i === 0) {
+      rankedUser.position = 1
+    } else if (rankedUser.totalPoints === users[i - 1].totalPoints) {
+      if (rankedUser.average === users[i - 1].average) {
+        rankedUser.position = rankings[i - 1].position
       } else {
-        user.position = i + 1
-        rankings[i] = user
+        rankedUser.position = i + 1
+        rankings[i] = rankedUser
       }
     } else {
-      user.position = i + 1
+      rankedUser.position = i + 1
     }
-    rankings[i] = user
-  });
-  return rankings;
+    rankings[i] = rankedUser
+  })
+  return rankings
 }
 
 
 export const setCache = async (key, val) => {
   try {
-    const item = JSON.stringify(val);
-    console.log(key, item)
+    const item = JSON.stringify(val)
     const value = await AsyncStorage.setItem(key, item)
-    if (value === null)
-      return false
+    if (value === null) { return false }
     return value
   } catch (e) {
     // eslint-disable-next-line no-console
     console.warn('caught error in setCache', e)
+    return false
   }
 }
 
-export const getCache = async key => {
+export const getCache = async (key) => {
   try {
     const value = await AsyncStorage.getItem(key)
-    console.log(value);
     return JSON.parse(value)
   } catch (e) {
     // eslint-disable-next-line no-console
@@ -86,7 +82,7 @@ export const getCache = async key => {
   }
 }
 
-export const removeCache = async key => {
+export const removeCache = async (key) => {
   try {
     await AsyncStorage.removeItem(key)
     return null

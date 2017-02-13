@@ -1,51 +1,50 @@
-import React, { Component } from 'react'
-import { View, ListView, LayoutAnimation } from 'react-native'
-import { graphql } from 'react-apollo'
-import gql from 'graphql-tag'
+import React, { Component, PropTypes } from 'react'
+import { View, ListView } from 'react-native'
 
-import LeaderboardCard from './LeaderboardCard';
-import Tabs from './Tabs';
-import Loading from './Loading';
-import EmptyState from './EmptyState';
+import LeaderboardCard from './LeaderboardCard'
+import Tabs from './Tabs'
+import EmptyState from './EmptyState'
 
 import { ranked } from '../utils'
 import styles from '../styles'
 
-const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 })
 
 const leaderboardTabs = [
   { value: 'totalPoints', icon: '🤷', title: 'Poäng' },
   { value: 'beers', icon: '🍻', title: 'Öl' },
   { value: 'kr', icon: '💸', title: 'Skuld' }
-];
+]
+
 
 class Leaderboard extends Component {
   state = { sorting: 'totalPoints' }
 
   changeSort = (sorting) => {
-    this.setState({sorting})
+    this.setState({ sorting })
   }
 
-  render () {
-    const { items, seasonName, user} = this.props;
-    const { sorting } = this.state;
+  render() {
+    const { items, seasonName, user } = this.props
+    const { sorting } = this.state
 
-    const emptyLeaderboard = items.filter(sl => sl.eventCount !== 0).length === 0;
-    if (emptyLeaderboard)
+    const emptyLeaderboard = items.filter(sl => sl.eventCount !== 0).length === 0
+    if (emptyLeaderboard) {
       return <EmptyState text="Inga rundor spelade ännu" />
+    }
 
 
-    const showLeaderboardTabs = parseInt(seasonName, 10) > 2015;
+    const showLeaderboardTabs = parseInt(seasonName, 10) > 2015
 
-    let sortedLeaderboard;
-    if(sorting === 'beers') {
-      sortedLeaderboard = items.slice().sort((a, b) => b.totalBeers - a.totalBeers);
+    let sortedLeaderboard
+    if (sorting === 'beers') {
+      sortedLeaderboard = items.slice().sort((a, b) => b.totalBeers - a.totalBeers)
       sortedLeaderboard = ranked(sortedLeaderboard, 'beerPos', 'totalBeers')
-    } else if(sorting === 'kr') {
-      sortedLeaderboard = items.slice().sort((a, b) => a.totalKr - b.totalKr);
+    } else if (sorting === 'kr') {
+      sortedLeaderboard = items.slice().sort((a, b) => a.totalKr - b.totalKr)
       sortedLeaderboard = ranked(sortedLeaderboard, 'krPos', 'totalKr')
     } else {
-      sortedLeaderboard = items.slice().sort((a, b) => a.position - b.position);
+      sortedLeaderboard = items.slice().sort((a, b) => a.position - b.position)
     }
 
     return (
@@ -54,23 +53,30 @@ class Leaderboard extends Component {
           ?
             <Tabs
               currentRoute={sorting}
-              onChange={(sort) => this.changeSort(sort)}
+              onChange={sort => this.changeSort(sort)}
               tabs={leaderboardTabs}
             />
           : null
         }
         <ListView
-          enableEmptySections={true}
           initialListSize={30}
           dataSource={ds.cloneWithRows(sortedLeaderboard)}
-          renderRow={(rowData) =>
+          renderRow={rowData =>
             <LeaderboardCard key={`l_${user.id}`} currentUserId={user.id} data={rowData} sorting={sorting} />
           }
+          enableEmptySections
         />
       </View>
     )
   }
 }
 
+Leaderboard.propTypes = {
+  items: PropTypes.arrayOf(PropTypes.shape).isRequired,
+  seasonName: PropTypes.string.isRequired,
+  user: PropTypes.shapeOf({
+    id: PropTypes.number.isRequired
+  }).isRequired
+}
 
-export default Leaderboard;
+export default Leaderboard

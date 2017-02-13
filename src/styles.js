@@ -1,14 +1,9 @@
-'use strict';
+import { StyleSheet } from 'react-native'
 
-import {
-  Platform,
-  StyleSheet
-} from 'react-native';
+import colors from './colors'
 
-import colors from './colors';
-
-// const { NavBarHeight, TotalNavHeight } = Navigator.NavigationBar.Styles.General;
-// const iOS = (Platform.OS == 'ios');
+// const { NavBarHeight, TotalNavHeight } = Navigator.NavigationBar.Styles.General
+// const iOS = (Platform.OS == 'ios')
 // fontSize: iOS ? 12 : 11,
 
 
@@ -29,13 +24,13 @@ export default StyleSheet.create({
 
   header: {
     height: 60,
-    backgroundColor: '#11111F',
+    backgroundColor: '#11111F'
   },
 
   inlineHeader: {
     paddingTop: 20,
     paddingBottom: 20,
-    backgroundColor: colors.inactiveText,
+    backgroundColor: colors.inactiveText
   },
 
   listrow: {
@@ -53,7 +48,7 @@ export default StyleSheet.create({
     position: 'absolute',
     bottom: 0,
     left: 0,
-    right: 0,
+    right: 0
   },
 
   bottomBarBtn: {
@@ -61,7 +56,7 @@ export default StyleSheet.create({
     height: 40,
     margin: 5,
     padding: 10,
-    backgroundColor: colors.actionText,
+    backgroundColor: colors.actionText
   },
 
   formRow: {
@@ -69,12 +64,12 @@ export default StyleSheet.create({
     borderColor: colors.cellBorder,
     flexDirection: 'column',
     padding: 10,
-    marginTop: 10,
+    marginTop: 10
   },
 
   formColumn: {
     flex: 1,
-    padding: 10,
+    padding: 10
   },
 
   formColumnContent: {
@@ -90,13 +85,13 @@ export default StyleSheet.create({
     marginBottom: 10,
     backgroundColor: '#000',
     color: '#fff',
-    textAlign: 'center',
+    textAlign: 'center'
   },
 
   btn: {
     margin: 10,
     padding: 20,
-    backgroundColor: 'green',
+    backgroundColor: 'green'
   },
 
   btnLabel: {
@@ -104,7 +99,7 @@ export default StyleSheet.create({
     flex: 1,
     color: 'white',
     fontFamily: 'Avenir',
-    fontWeight: 'bold',
+    fontWeight: 'bold'
   },
 
   points: {
@@ -118,12 +113,12 @@ export default StyleSheet.create({
   position: {
     marginRight: 5,
     width: 40,
-    flexDirection: 'column',
+    flexDirection: 'column'
   },
 
   cardTitle: {
     flex: 5,
-    flexDirection: 'column',
+    flexDirection: 'column'
   },
 
   meta: {
@@ -131,7 +126,7 @@ export default StyleSheet.create({
     color: '#777',
     flex: 1,
     fontSize: 12,
-    marginTop: 3,
+    marginTop: 3
   },
 
   metaLarger: {
@@ -139,14 +134,14 @@ export default StyleSheet.create({
     color: '#777',
     flex: 1,
     fontSize: 14,
-    marginTop: 3,
+    marginTop: 3
   },
 
   name: {
     fontFamily: 'Avenir',
     fontWeight: '800',
     flex: 1,
-    fontSize: 18,
+    fontSize: 18
   },
 
   label: {
@@ -154,7 +149,7 @@ export default StyleSheet.create({
     marginTop: 10,
     marginLeft: 10,
     color: '#444',
-    fontSize: 16,
+    fontSize: 16
   },
 
   inputField: {
@@ -163,7 +158,7 @@ export default StyleSheet.create({
     margin: 10,
     height: 40,
     backgroundColor: 'white',
-    fontSize: 16,
+    fontSize: 16
   },
 
   datePickerContainer: {
@@ -181,7 +176,7 @@ export default StyleSheet.create({
   },
 
   scoring: {
-    backgroundColor: colors.cellBorder,
+    backgroundColor: colors.cellBorder
   },
 
   playerRow: {
@@ -217,7 +212,7 @@ export default StyleSheet.create({
 
   scorecardRowPoints: {
     color: '#000',
-    fontFamily: 'Avenir',
+    fontFamily: 'Avenir'
   },
 
   centerText: {
@@ -245,25 +240,25 @@ export default StyleSheet.create({
     borderWidth: StyleSheet.hairlineWidth,
     fontSize: 14,
     flex: 1,
-    fontFamily: 'Avenir',
+    fontFamily: 'Avenir'
   },
 
   checkmark: {
     fontSize: 20,
     fontWeight: 'bold',
     marginRight: 10,
-    fontFamily: 'Avenir',
+    fontFamily: 'Avenir'
   },
 
   strokeInfo: {
     flex: 1,
     textAlign: 'right',
-    fontFamily: 'Avenir',
+    fontFamily: 'Avenir'
   },
 
   smallLabel: {
     fontSize: 10,
-    fontFamily: 'Avenir',
+    fontFamily: 'Avenir'
   },
 
   scoredEventBtn: {
@@ -272,7 +267,7 @@ export default StyleSheet.create({
     padding: 5,
     color: '#fff',
     textAlign: 'center',
-    fontFamily: 'Avenir',
+    fontFamily: 'Avenir'
   },
 
   todayBtn: {
@@ -282,19 +277,19 @@ export default StyleSheet.create({
     marginBottom: 10,
     color: '#fff',
     textAlign: 'center',
-    fontFamily: 'Avenir',
+    fontFamily: 'Avenir'
   },
 
   holeHeaderText: {
     color: 'black',
     textAlign: 'center',
-    fontFamily: 'Avenir',
+    fontFamily: 'Avenir'
   },
 
   inlineButton: {
     padding: 10,
     backgroundColor: '#feb',
-    fontFamily: 'Avenir',
+    fontFamily: 'Avenir'
   },
 
   holeSwitchButton: {
@@ -302,13 +297,13 @@ export default StyleSheet.create({
     height: 40,
     margin: 5,
     padding: 10,
-    backgroundColor: '#ccc',
+    backgroundColor: '#ccc'
   },
 
   holeSwitchButtonLabel: {
     textAlign: 'center',
     color: '#444',
-    fontFamily: 'Avenir',
+    fontFamily: 'Avenir'
   },
 
   cellStyle: {
@@ -322,7 +317,7 @@ export default StyleSheet.create({
     height: 30,
     width: 60,
     textAlign: 'center',
-    fontFamily: 'Avenir',
+    fontFamily: 'Avenir'
   },
 
   cellStyleScore: {
@@ -335,7 +330,7 @@ export default StyleSheet.create({
     color: '#444',
     backgroundColor: '#eee',
     fontSize: 12,
-    fontFamily: 'Avenir',
+    fontFamily: 'Avenir'
   },
 
   playerHeaderCellStyle: {
@@ -343,7 +338,7 @@ export default StyleSheet.create({
     textAlign: 'center',
     backgroundColor: '#eee',
     marginTop: 5,
-    fontFamily: 'Avenir',
+    fontFamily: 'Avenir'
   },
 
   emptyCellStyle: {
@@ -355,7 +350,7 @@ export default StyleSheet.create({
 
   playerNameCell: {
     fontSize: 10,
-    fontFamily: 'Avenir',
+    fontFamily: 'Avenir'
   },
 
   scoreHeaderRow: {
@@ -369,14 +364,14 @@ export default StyleSheet.create({
     textAlign: 'right',
     padding: 5,
     color: '#787878',
-    fontFamily: 'Avenir',
+    fontFamily: 'Avenir'
   },
 
   scoreHeaderPlayer: {
     flex: 3,
     padding: 5,
     color: '#787878',
-    fontFamily: 'Avenir',
+    fontFamily: 'Avenir'
   },
 
   largeText: {
@@ -395,38 +390,36 @@ export default StyleSheet.create({
     padding: 20,
     height: 40,
     marginBottom: 5,
-    backgroundColor: colors.actionText,
+    backgroundColor: colors.actionText
   },
 
   holePickerText: {
     textAlign: 'center',
     color: '#fff',
-    fontFamily: 'Avenir',
+    fontFamily: 'Avenir'
   },
 
   addPlayerButton: {
     marginTop: 10,
     padding: 10,
     marginBottom: 10,
-    backgroundColor: colors.actionText,
+    backgroundColor: colors.actionText
   },
 
   sectionHeader: {
     backgroundColor: '#eee',
-    padding: 10,
+    padding: 10
   },
 
   sectionHeaderText: {
     color: '#777',
     fontSize: 12,
-    fontFamily: 'Avenir',
+    fontFamily: 'Avenir'
   },
   courserow: {
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderColor: colors.cellBorder,
     flexDirection: 'row',
-    padding: 20,
+    padding: 20
   }
-});
-
-
+})

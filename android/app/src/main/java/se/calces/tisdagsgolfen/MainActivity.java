@@ -1,4 +1,4 @@
-package com.tisdagsgolfen;
+package se.calces.tisdagsgolfen;
 
 import com.facebook.react.ReactActivity;
 

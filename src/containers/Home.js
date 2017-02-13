@@ -1,18 +1,19 @@
-import React, { Component } from 'react'
-import { Alert, View, Text, Link, LayoutAnimation} from 'react-native'
-import { Router, Redirect } from 'react-router-native'
-import NavigationBar from 'react-native-navbar';
+import React, { Component, PropTypes } from 'react'
+import { View, LayoutAnimation } from 'react-native'
+import NavigationBar from 'react-native-navbar'
 
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 
-import styles from '../styles';
+import styles from '../styles'
 
-import SeasonPicker from '../components/SeasonPicker';
-import Season from '../components/Season';
-import Loading from '../components/Loading';
+import SeasonPicker from '../components/SeasonPicker'
+import Season from '../components/Season'
+import Loading from '../components/Loading'
+
 // Android-Support for LayoutAnimation ?
-// UIManager.setLayoutAnimationEnabledExperimental && UIManager.setLayoutAnimationEnabledExperimental(true);
+// UIManager.setLayoutAnimationEnabledExperimental
+// && UIManager.setLayoutAnimationEnabledExperimental(true)
 
 class Home extends Component {
   state = {
@@ -20,36 +21,36 @@ class Home extends Component {
     showSeasonPicker: false
   }
 
-  _changeSeason = (currentSeasonId) => {
+  changeSeason = (currentSeasonId) => {
     this.setState({
       currentSeasonId,
       showSeasonPicker: false
-    });
+    })
   }
 
-  _toggleSeasonpicker = () => {
+  toggleSeasonpicker = () => {
     LayoutAnimation.configureNext(LayoutAnimation.Presets.spring)
-    this.setState({ showSeasonPicker: !this.state.showSeasonPicker });
+    this.setState({ showSeasonPicker: !this.state.showSeasonPicker })
   }
 
-  render () {
-    const { loading, user, seasons } = this.props.data;
-    if(loading) {
+  render() {
+    const { loading, user, seasons } = this.props.data
+    if (loading) {
       return <Loading text="Laddar data..." />
     }
 
-    const { currentSeasonId, showSeasonPicker } = this.state;
+    const { currentSeasonId, showSeasonPicker } = this.state
 
     const season = currentSeasonId
                    ? seasons.find(s => s.id === currentSeasonId)
-                   : seasons[0];
+                   : seasons[0]
 
-    const titleConfig = { title: 'TISDAGSGOLFEN', tintColor: 'white' };
+    const titleConfig = { title: 'TISDAGSGOLFEN', tintColor: 'white' }
 
-    const caret = showSeasonPicker ? `↑` : `↓`;
+    const caret = showSeasonPicker ? '↑' : '↓'
     const rightButtonConfig = {
       title: `${season.name} ${caret}`,
-      handler: () => this._toggleSeasonpicker(),
+      handler: () => this.toggleSeasonpicker(),
       tintColor: '#cecece'
     }
 
@@ -63,14 +64,19 @@ class Home extends Component {
       <View style={styles.container}>
         <NavigationBar
           style={styles.header}
-          statusBar={{style: 'light-content', tintColor: '#000'}}
+          statusBar={{ style: 'light-content', tintColor: '#000' }}
           title={titleConfig}
           leftButton={leftButtonConfig}
           rightButton={rightButtonConfig}
         />
 
         { showSeasonPicker
-          ? <SeasonPicker seasons={seasons} currentSeasonId={season.id} onChangeSeason={(season) => this._changeSeason(season)} />
+          ?
+            <SeasonPicker
+              seasons={seasons}
+              currentSeasonId={season.id}
+              onChangeSeason={s => this.changeSeason(s)}
+            />
           : null
         }
 
@@ -85,6 +91,19 @@ class Home extends Component {
       </View>
     )
   }
+}
+
+Home.propTypes = {
+  data: PropTypes.shape({
+    loading: PropTypes.bool.isRequired,
+    user: PropTypes.shape,
+    seasons: PropTypes.array
+  }).isRequired,
+  push: PropTypes.func.isRequired,
+  replace: PropTypes.func.isRequired,
+  location: PropTypes.shape({
+    pathname: PropTypes.string
+  }).isRequired
 }
 
 

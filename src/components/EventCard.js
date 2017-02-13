@@ -1,112 +1,33 @@
-import React, {Component} from "react";
-import {Text, TouchableOpacity, View, StyleSheet, Linking} from "react-native";
+import React, { PropTypes } from 'react'
+import { Text, TouchableOpacity, View, StyleSheet } from 'react-native'
+import moment from 'moment'
 
-import moment from 'moment';
-import sv from 'moment/locale/sv';
-import colors from '../colors';
-
-class EventCard extends Component {
-  _seeLeaderboard = (eventId) => {
-    Linking.openURL(`https://www.simplegolftour.com/tours/1/events/${eventId}`);
-  }
-
-  render() {
-    const { event } = this.props;
-
-    let scoringBtn;
-
-    if (event.status !== 'finished') {
-      scoringBtn = (
-        <TouchableOpacity
-          onPress={() => setupEvent(event)}
-          style={s.scoreBtn}>
-          <Text style={[s.eventCardBtn, {color: '#fff'}]}>SCORA</Text>
-        </TouchableOpacity>
-      )
-    }
-
-    let resultsBtn;
-    if(event.status === 'finished') {
-      resultsBtn = (
-        <TouchableOpacity
-          onPress={() => this._seeLeaderboard(event.oldId)}
-          style={s.followBtn}
-        >
-          <Text style={[s.eventCardBtn, {color: '#777'}]}>SE RESULTAT</Text>
-        </TouchableOpacity>
-      )
-    } else if(event.is_scoring) {
-      resultsBtn = (
-        <TouchableOpacity
-          onPress={() => followEvent(event)}
-          style={s.followBtn}
-        >
-          <Text style={[s.eventCardBtn, {color: '#777'}]}>FÖLJ LIVE</Text>
-        </TouchableOpacity>
-      )
-    }
-
-    let gametypeName = '';
-    if(event.scoringType === 'modified_points') {
-      gametypeName = 'Modifierad Poäng';
-    } else if(event.scoringType === 'points') {
-      gametypeName = 'Poäng';
-    } else {
-      gametypeName = 'Slag';
-    }
-
-    return (
-      <View style={[s.eventCard]}>
-        <View style={s.row}>
-          <Text style={[s.date]}>
-            {moment(event.startsAt).format('ddd D MMM HH:mm').toUpperCase()}
-          </Text>
-
-          <Text style={s.gametype}>
-            {event.teamEvent ? 'Lag' : 'Individuellt'}
-            {` ↝ `}
-            {gametypeName}
-          </Text>
-        </View>
-
-        <View style={s.row}>
-          <Text style={{fontSize: 16, lineHeight: 25}}>{event.club}</Text>
-          <Text style={{fontSize: 16, lineHeight: 25}}>{event.course}</Text>
-        </View>
-
-        {scoringBtn}
-        {resultsBtn}
-      </View>
-    );
-  }
-}
+import colors from '../colors'
 
 const s = StyleSheet.create({
   /* EVENT CARDS */
   eventCard: {
+    top: 10,
     flexDirection: 'column',
-    margin: 10,
-    padding: 20,
-    paddingTop: 10,
-    paddingBottom: 10,
+    marginHorizontal: 10,
+    marginVertical: 5,
+    paddingHorizontal: 20,
+    paddingVertical: 10,
     borderRadius: 2,
     borderColor: colors.cellBorder,
     borderWidth: StyleSheet.hairlineWidth,
     backgroundColor: '#fff',
-    shadowColor: '#333',
-    shadowOffset: { width: 4, height: 4},
-    shadowRadius: 4,
-    shadowOpacity: 0.2
+    shadowColor: '#999',
+    shadowOffset: { width: 2, height: 8 },
+    shadowRadius: 10,
+    shadowOpacity: 0.1,
+    borderLeftWidth: StyleSheet.hairlineWidth * 5
   },
 
   row: {
     flex: 1,
     flexDirection: 'row',
-    marginBottom: 10
-  },
-
-  buttonRow: {
-    marginTop: 10,
+    marginBottom: 5
   },
 
   date: {
@@ -117,33 +38,64 @@ const s = StyleSheet.create({
     marginTop: 5,
     marginBottom: 5,
     borderBottomWidth: 1,
-    borderBottomColor: '#ccc',
+    borderBottomColor: '#ccc'
   },
 
   gametype: {
-    fontSize: 10,
-    padding: 5,
-    paddingTop: 10,
-    color: '#777',
+    fontSize: 12,
+    paddingVertical: 7,
+    color: '#777'
   },
 
-  eventCardBtn: {
-    textAlign: 'center',
-    padding: 5,
-  },
-
-  scoreBtn: {
-    backgroundColor: '#ccc',
-  },
-
-  scoringBtn: {
-    backgroundColor: 'green',
-  },
-
-  followBtn: {
-    backgroundColor: '#feb',
+  finished: {
+    borderLeftColor: 'green'
   }
 })
 
+const EventCard = ({ event, gotoEvent }) => {
+  let gametypeName = ''
+  if (event.scoringType === 'modified_points') {
+    gametypeName = 'Modifierad Poäng'
+  } else if (event.scoringType === 'points') {
+    gametypeName = 'Poäng'
+  } else {
+    gametypeName = 'Slag'
+  }
 
-export default EventCard;
+  return (
+    <TouchableOpacity onPress={() => gotoEvent(event.id)}>
+      <View style={[s.eventCard, s[event.status]]}>
+        <View style={s.row}>
+          <Text style={[s.date]}>
+            {moment(event.startsAt).format('ddd D MMM HH:mm').toUpperCase()}
+          </Text>
+
+          <Text style={s.gametype}>
+            {event.teamEvent ? 'Lag' : 'Individuellt'}
+            {' ↝ '}
+            {gametypeName}
+          </Text>
+        </View>
+
+        <View style={s.row}>
+          <Text style={{ fontSize: 16, lineHeight: 25 }}>{event.club}</Text>
+          <Text style={{ fontSize: 16, lineHeight: 25 }}>{event.course}</Text>
+        </View>
+      </View>
+    </TouchableOpacity>
+  )
+}
+
+EventCard.propTypes = {
+  event: PropTypes.shapeOf({
+    id: PropTypes.number.isRequired,
+    scoringType: PropTypes.string.isRequired,
+    status: PropTypes.string.isRequired,
+    teamEvent: PropTypes.bool.isRequired,
+    club: PropTypes.string.isRequired,
+    course: PropTypes.string.isRequired
+  }).isRequired,
+  gotoEvent: PropTypes.func.isRequired
+}
+
+export default EventCard

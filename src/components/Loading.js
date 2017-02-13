@@ -1,15 +1,11 @@
-import React from 'react'
-import { Text, View, Image } from 'react-native'
+import React, { PropTypes } from 'react'
+import { Text, View } from 'react-native'
 
 const containerStyle = {
   backgroundColor: '#eee',
   alignItems: 'center',
   justifyContent: 'center',
-  flex: 1,
-}
-
-const imageStyle = {
-  marginBottom: 40
+  flex: 1
 }
 
 const textStyle = {
@@ -18,12 +14,17 @@ const textStyle = {
   color: '#ccc'
 }
 
-const Loading = ({text}) => {
-  return (
-    <View style={containerStyle}>
-      <Text style={textStyle}>{ text ? text : 'Startar upp...'}</Text>
-    </View>
-  )
+const Loading = ({ text }) =>
+  <View style={containerStyle}>
+    <Text style={textStyle}>{ text }</Text>
+  </View>
+
+Loading.propTypes = {
+  text: PropTypes.string
+}
+
+Loading.defaultProps = {
+  text: 'Startar upp...'
 }
 
 export default Loading

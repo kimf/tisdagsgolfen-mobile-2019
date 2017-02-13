@@ -5,7 +5,7 @@ const containerStyle = {
   backgroundColor: '#fff',
   alignItems: 'center',
   justifyContent: 'flex-start',
-  flex: 1,
+  flex: 1
 }
 
 const imageStyle = {
@@ -18,13 +18,20 @@ const textStyle = {
   color: '#ccc'
 }
 
-const EmptyState = ({text}) => {
-  return (
-    <View style={containerStyle}>
-      <Image style={imageStyle} source={require('../images/emptystate.png')} />
-      <Text style={textStyle}>{ text ? text : 'Inget att visa... ännu :('}</Text>
-    </View>
-  )
+const emptyImage = require('../images/emptystate.png')
+
+const EmptyState = ({ text }) =>
+  <View style={containerStyle}>
+    <Image style={imageStyle} source={emptyImage} />
+    <Text style={textStyle}>{ text }</Text>
+  </View>
+
+EmptyState.propTypes = {
+  text: React.PropTypes.string
+}
+
+EmptyState.defaultProps = {
+  text: 'Inget att visa... ännu :('
 }
 
 export default EmptyState

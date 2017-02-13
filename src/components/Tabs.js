@@ -1,44 +1,22 @@
-import React from 'react'
-import { View, TouchableHighlight, Text } from 'react-native'
+import React, { PropTypes } from 'react'
+import { View } from 'react-native'
 
-const tabStyle = (padding, isCurrent) => {
-  return {
-    flex: 1,
-    paddingTop: padding,
-    paddingBottom: padding,
-    backgroundColor: isCurrent ? '#D9EEFF' : '#eee',
-    flexDirection: 'row',
-    justifyContent: 'center'
-  }
-}
+import Tab from './Tab'
 
-const Tab = ({tab, isCurrent, onChange, fontSize, padding}) => {
-  const opacity = isCurrent ? 1 : 0.5;
-  const text = `${tab.icon} ${tab.title}`;
-  return(
-    <TouchableHighlight
-      underlayColor='#feb'
-      style={tabStyle(padding, isCurrent)}
-      onPress={() => onChange(tab.value)}
-    >
-      <Text style={{fontSize, color: isCurrent ? '#222' : '#999'}}>
-        {text}
-      </Text>
-    </TouchableHighlight>
-  );
-}
-
-
-const Tabs = ({currentRoute, onChange, tabs, bottom}) => {
-  const fontSize = bottom ? 16 : 12;
+const Tabs = ({ currentRoute, onChange, tabs, bottom }) => {
+  const fontSize = bottom ? 16 : 12
 
   return (
-    <View style={{
-      backgroundColor: '#fff',
-      flexDirection: 'row',
-      justifyContent: 'center',
-      alignItems: 'stretch'
-    }}>
+    <View
+      style={{
+        backgroundColor: '#fff',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'stretch',
+        marginHorizontal: bottom ? 0 : 10,
+        marginVertical: bottom ? 0 : 5
+      }}
+    >
       { tabs.map(tab =>
         <Tab
           key={tab.value}
@@ -46,11 +24,22 @@ const Tabs = ({currentRoute, onChange, tabs, bottom}) => {
           isCurrent={currentRoute === tab.value}
           onChange={onChange}
           fontSize={fontSize}
-          padding={12}
+          padding={bottom ? 12 : 8}
         />
       )}
     </View>
   )
+}
+
+Tabs.propTypes = {
+  currentRoute: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+  tabs: PropTypes.arrayOf(PropTypes.shape).isRequired,
+  bottom: PropTypes.bool
+}
+
+Tabs.defaultProps = {
+  bottom: false
 }
 
 export default Tabs
