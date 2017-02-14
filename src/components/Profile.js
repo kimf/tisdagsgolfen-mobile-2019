@@ -1,12 +1,13 @@
 import React from 'react'
 import { View, TouchableHighlight, Text, Modal } from 'react-native'
-import { Link } from 'react-router-native'
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
+import { withRouter } from 'react-router-native'
+import NavigationBar from 'react-native-navbar'
 
 import styles from '../styles'
 
-const Profile = ({ data: { loading, user }, onLogout }) => {
+const Profile = ({ data: { loading, user }, onLogout, goBack }) => {
   if (loading) { return null }
 
   return (
@@ -16,12 +17,21 @@ const Profile = ({ data: { loading, user }, onLogout }) => {
       visible
       hardwareAccelerated
     >
+      <NavigationBar
+        style={styles.header}
+        statusBar={{ style: 'light-content', tintColor: '#000' }}
+        title={{ title: `${user.firstName} ${user.lastName}`, tintColor: 'white' }}
+        leftButton={{
+          title: 'Avbryt',
+          handler: goBack,
+          tintColor: '#fff'
+        }}
+      />
       <View style={[{ marginTop: 22 }, styles.innerContainer]}>
         <View style={{ flex: 1 }}>
           <Text>Hej {user.firstName}</Text>
-          <Link pop to="/" style={styles.btn}><Text>Tillbaka</Text></Link>
 
-          <TouchableHighlight onPress={() => { onLogout(user.email) }}>
+          <TouchableHighlight onPress={() => { onLogout(user.email, goBack) }}>
             <Text style={styles.btn}>LOGGA UT</Text>
           </TouchableHighlight>
         </View>
@@ -40,7 +50,8 @@ Profile.propTypes = {
       email: string.isRequired
     }).isRequired
   }).isRequired,
-  onLogout: func.isRequired
+  onLogout: func.isRequired,
+  goBack: func.isRequired
 }
 
 const userQuery = gql`
@@ -54,4 +65,4 @@ const userQuery = gql`
   }
 `
 
-export default graphql(userQuery)(Profile)
+export default graphql(userQuery)(withRouter(Profile))

@@ -24,9 +24,10 @@ class App extends Component {
     })
   }
 
-  logout = (email) => {
+  logout = (email, callback) => {
     setCache('currentUser', { email }).then(() => {
       this.setState({ loggedOut: true })
+      callback()
     })
   }
 
@@ -44,7 +45,7 @@ class App extends Component {
       <View style={styles.container}>
         <Route path="/" component={Home} />
         <Switch>
-          <Route exact path="/profile" component={Profile} onLogout={this.logout} />
+          <Route exact path="/profile" render={() => <Profile onLogout={this.logout} />} />
         </Switch>
       </View>
     )
