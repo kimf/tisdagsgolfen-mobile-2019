@@ -7,11 +7,11 @@
 		"test": "jest"
 	},
 	"dependencies": {
-		"apollo-client": "^0.8.3",
+		"apollo-client": "^0.8.5",
 		"graphql-tag": "^1.2.4",
 		"moment": "^2.17.1",
 		"react": "~15.4.0-rc.4",
-		"react-apollo": "^0.10.0",
+		"react-apollo": "^0.10.1",
 		"react-native": "0.41.2",
 		"react-native-navbar": "^1.6.0",
 		"react-router-native": "next",
@@ -19,7 +19,7 @@
 	},
 	"devDependencies": {
 		"babel-jest": "18.0.0",
-		"babel-plugin-transform-react-constant-elements": "^6.22.0",
+		"babel-plugin-transform-react-constant-elements": "^6.23.0",
 		"babel-preset-react-native": "1.9.1",
 		"eslint": "^3.15.0",
 		"eslint-config-airbnb": "^14.1.0",
