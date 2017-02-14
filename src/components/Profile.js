@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, TouchableHighlight, Text, Modal } from 'react-native'
+import { View, Button, Text, Modal } from 'react-native'
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 import { withRouter } from 'react-router-native'
@@ -31,9 +31,7 @@ const Profile = ({ data: { loading, user }, onLogout, goBack }) => {
         <View style={{ flex: 1 }}>
           <Text>Hej {user.firstName}</Text>
 
-          <TouchableHighlight onPress={() => { onLogout(user.email, goBack) }}>
-            <Text style={styles.btn}>LOGGA UT</Text>
-          </TouchableHighlight>
+          <Button onPress={() => { onLogout(user.email, goBack) }} title="LOGGA UT" />
         </View>
       </View>
     </Modal>

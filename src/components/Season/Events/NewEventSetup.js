@@ -5,7 +5,7 @@ import moment from 'moment'
 import 'moment/locale/sv'
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
-// import update from 'immutability-helper'
+import update from 'immutability-helper'
 
 import styles from '../../../styles'
 
@@ -125,7 +125,7 @@ NewEventSetup.propTypes = {
 }
 
 const createEventMutation = gql`
-  mutation(
+  mutation createEvent(
     $seasonId:ID!,
     $course: String!,
     $courseId:Int!,
@@ -156,48 +156,22 @@ const createEventMutation = gql`
   }
 `
 
-// const NewEventSetupWithMutation = graphql(createEventMutation, {
-//   props({ mutate }) {
-//     return {
-//       createEvent({ seasonId, courseId, course, teamEvent, scoringType, startsAt }) {
-//         return mutate({
-//           variables: { seasonId, courseId, course, teamEvent, scoringType, startsAt },
-//           optimisticResponse: {
-//             __typename: 'Mutation',
-//             createEvent: {
-//               __typename: 'Event',
-//               status: 'planned',
-//               courseId,
-//               course,
-//               teamEvent,
-//               scoringType,
-//               startsAt
-//             }
-//           },
-//           updateQueries: {
-//             allEvents: (prev, { mutationResult }) => {
-//               const newEvent = mutationResult.data.createEvent
-//               console.log(prev)
-//               console.log(mutationResult)
-//               return update(prev, {
-//                 events: {
-//                   $unshift: [newEvent]
-//                 }
-//               })
-//             }
-//           }
-//         })
-//       }
-//     }
-//   }
-// })(NewEventSetup)
-
 const NewEventSetupWithMutation = graphql(createEventMutation, {
   props({ mutate }) {
     return {
       createEvent({ seasonId, courseId, course, teamEvent, scoringType, startsAt }) {
         return mutate({
-          variables: { seasonId, courseId, course, teamEvent, scoringType, startsAt }
+          variables: { seasonId, courseId, course, teamEvent, scoringType, startsAt },
+          updateQueries: {
+            eventsForSeasonQuery: (prev, { mutationResult }) => {
+              const newEvent = mutationResult.data.createEvent
+              return update(prev, {
+                events: {
+                  $unshift: [newEvent]
+                }
+              })
+            }
+          }
         })
       }
     }

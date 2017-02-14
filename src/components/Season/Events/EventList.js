@@ -16,7 +16,12 @@ const EventList = ({ data, gotoEvent, openNewRoundModal }) => {
   }
 
   if (data.events.length === 0) {
-    return <EmptyState text="Inga rundor :(" />
+    return (
+      <View style={{ flex: 1, backgroundColor: '#eee' }}>
+        <EmptyState text="Inga rundor :(" />
+        <Button text="+ Lägg till ny runda" onPress={openNewRoundModal} />
+      </View>
+    )
   }
 
   return (
@@ -51,8 +56,8 @@ EventList.defaultProps = {
 }
 
 
-const leaderboardQuery = gql`
-  query($seasonId: ID!) {
+const eventsForSeasonQuery = gql`
+  query eventsForSeasonQuery($seasonId: ID!) {
     events: allEvents (
       orderBy: startsAt_DESC,
       filter: { season: { id: $seasonId } }
@@ -69,8 +74,8 @@ const leaderboardQuery = gql`
   }
 `
 
-const EventListWithData = graphql(leaderboardQuery, {
-  options: ({ seasonId }) => ({ variables: { seasonId }, forceFetch: true })
+const EventListWithData = graphql(eventsForSeasonQuery, {
+  options: ({ seasonId }) => ({ variables: { seasonId } })
 })(EventList)
 
 EventListWithData.propTypes = {
