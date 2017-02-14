@@ -1,16 +1,26 @@
-/* createBatchingNetworkInterface */
-import ApolloClient, { createNetworkInterface } from 'apollo-client'
+import ApolloClient, { createBatchingNetworkInterface } from 'apollo-client'
 import { getCache } from './utils'
 
-// const networkInterface = createBatchingNetworkInterface({
-//   uri: 'https://api.graph.cool/simple/v1/ciyqax2o04t37012092ntrd7e',
-//   batchInterval: 10,
-//   queryDeduplication: true
-// })
+const dataIdFromObject = (result) => {
+  // eslint-disable-next-line no-underscore-dangle
+  if (result.id && result.__typename) {
+    // eslint-disable-next-line no-underscore-dangle
+    return result.__typename + result.id
+  } else if (result.id) {
+    return result.id
+  }
+  return null
+}
 
-const networkInterface = createNetworkInterface(
-  { uri: 'https://api.graph.cool/simple/v1/ciyqax2o04t37012092ntrd7e' }
-)
+const networkInterface = createBatchingNetworkInterface({
+  uri: 'https://api.graph.cool/simple/v1/ciyqax2o04t37012092ntrd7e',
+  batchInterval: 10,
+  queryDeduplication: true
+})
+
+// const networkInterface = createNetworkInterface(
+//   { uri: 'https://api.graph.cool/simple/v1/ciyqax2o04t37012092ntrd7e' }
+// )
 
 /* eslint-disable no-param-reassign */
 networkInterface.use([{
@@ -31,4 +41,4 @@ networkInterface.use([{
 }])
 /* eslint-enable no-param-reassign */
 
-export default new ApolloClient({ networkInterface })
+export default new ApolloClient({ networkInterface, dataIdFromObject })
