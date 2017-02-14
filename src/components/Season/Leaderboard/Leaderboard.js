@@ -20,7 +20,17 @@ const leaderboardTabs = [
 class Leaderboard extends Component {
   state = { sorting: 'totalPoints' }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.seasonName !== this.props.seasonName) {
+      if (this.listView) {
+        this.listView.scrollTo({ x: 0, y: 0, animated: true })
+      }
+      this.setState({ sorting: 'totalPoints' })
+    }
+  }
+
   changeSort = (sorting) => {
+    this.listView.scrollTo({ x: 0, y: 0, animated: true })
     this.setState({ sorting })
   }
 
@@ -61,6 +71,7 @@ class Leaderboard extends Component {
         <ListView
           initialListSize={30}
           dataSource={ds.cloneWithRows(sortedLeaderboard)}
+          ref={(ref) => { this.listView = ref }}
           renderRow={rowData =>
             <LeaderboardCard key={`l_${user.id}`} currentUserId={user.id} data={rowData} sorting={sorting} />
           }

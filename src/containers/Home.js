@@ -81,19 +81,14 @@ class Home extends Component {
         }
 
         <View style={{ flex: 1, backgroundColor: '#fff', alignItems: 'stretch' }}>
-          <Season
-            season={season}
-            user={user}
-            currentPath={this.props.location.pathname}
-            replaceRoute={this.props.replace}
-          />
+          <Season season={season} user={user} />
         </View>
       </View>
     )
   }
 }
 
-const { bool, object, array, func, shape, string } = React.PropTypes
+const { bool, object, array, func, shape } = React.PropTypes
 
 Home.propTypes = {
   data: shape({
@@ -101,11 +96,7 @@ Home.propTypes = {
     user: object,
     seasons: array
   }).isRequired,
-  push: func.isRequired,
-  replace: func.isRequired,
-  location: shape({
-    pathname: string
-  }).isRequired
+  push: func.isRequired
 }
 
 

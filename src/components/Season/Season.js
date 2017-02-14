@@ -14,11 +14,8 @@ const viewTabs = [
 ]
 
 class Season extends Component {
-  gotoEvent = eventId => this.props.replace(`/events/${eventId}`)
-  openNewRoundModal = () => this.props.push('/events/new')
-
   render() {
-    const { user, season, currentPath, replaceRoute } = this.props
+    const { user, season, push, replace, goBack, location } = this.props
 
     return (
       <View style={styles.container}>
@@ -26,25 +23,35 @@ class Season extends Component {
           <Route
             exact
             path="/"
-            user={user}
-            items={season.seasonLeaderboards}
-            seasonName={season.name}
-            component={Leaderboard}
+            render={() =>
+              <Leaderboard
+                user={user}
+                items={season.seasonLeaderboards}
+                seasonName={season.name}
+              />
+            }
           />
           <Route
             exact
             path="/events"
-            user={user}
-            events={season.events}
-            gotoEvent={this.gotoEvent}
-            openNewRoundModal={this.openNewRoundModal}
-            component={EventList}
+            render={() =>
+              <EventList
+                user={user}
+                events={season.events}
+                gotoEvent={eventId => push(`/events/${eventId}`)}
+                openNewRoundModal={() => push('/events/new')}
+              />
+            }
           />
           <Route
             exact
             path="/events/new"
-            selectCourse={this.selectCourse}
-            component={NewEventForm}
+            render={() =>
+              <NewEventForm
+                goBack={goBack}
+                selectCourse={course => push('/events/new/finalize', { course })}
+              />
+            }
           />
         </Switch>
         <View
@@ -54,8 +61,8 @@ class Season extends Component {
           }}
         >
           <Tabs
-            currentRoute={currentPath}
-            onChange={path => replaceRoute(path)}
+            currentRoute={location.pathname}
+            onChange={path => replace(path)}
             tabs={viewTabs}
             bottom
           />
@@ -70,11 +77,12 @@ const { func, shape, string } = React.PropTypes
 Season.propTypes = {
   user: shape().isRequired,
   season: shape().isRequired,
-  replace: func.isRequired,
-  currentPath: string.isRequired,
-  replaceRoute: func.isRequired,
-  push: func.isRequired
+  location: shape({
+    pathname: string
+  }).isRequired,
+  push: func.isRequired,
+  goBack: func.isRequired,
+  replace: func.isRequired
 }
 
 export default withRouter(Season)
-
