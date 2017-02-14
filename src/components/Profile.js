@@ -44,14 +44,24 @@ const { shape, bool, string, func } = React.PropTypes
 
 Profile.propTypes = {
   data: shape({
-    loading: bool.isRequired,
+    loading: bool,
     user: shape({
-      firstName: string.isRequired,
-      email: string.isRequired
-    }).isRequired
+      firstName: string,
+      email: string
+    })
   }).isRequired,
   onLogout: func.isRequired,
   goBack: func.isRequired
+}
+
+Profile.defaultProps = {
+  data: {
+    loading: true,
+    user: {
+      firstName: '',
+      lastName: ''
+    }
+  }
 }
 
 const userQuery = gql`

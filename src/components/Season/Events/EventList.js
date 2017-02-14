@@ -1,14 +1,21 @@
 import React from 'react'
 import { View, ListView } from 'react-native'
+import { graphql } from 'react-apollo'
+import gql from 'graphql-tag'
 
 import EventCard from './EventCard'
 import EmptyState from '../../Shared/EmptyState'
+import Loading from '../../Shared/Loading'
 import Button from '../../Shared/Button'
 
 const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 })
 
-const EventList = ({ events, gotoEvent, openNewRoundModal }) => {
-  if (events.length === 0) {
+const EventList = ({ data, gotoEvent, openNewRoundModal }) => {
+  if (data.loading) {
+    return <Loading text="Laddar rundor..." />
+  }
+
+  if (data.events.length === 0) {
     return <EmptyState text="Inga rundor :(" />
   }
 
@@ -16,7 +23,7 @@ const EventList = ({ events, gotoEvent, openNewRoundModal }) => {
     <View style={{ flex: 1, backgroundColor: '#eee' }}>
       <ListView
         initialListSize={100}
-        dataSource={ds.cloneWithRows(events)}
+        dataSource={ds.cloneWithRows(data.events)}
         renderRow={rowData => <EventCard event={rowData} gotoEvent={gotoEvent} />}
         enableEmptySections
       />
@@ -25,12 +32,49 @@ const EventList = ({ events, gotoEvent, openNewRoundModal }) => {
   )
 }
 
-const { arrayOf, shape, func } = React.PropTypes
+const { arrayOf, bool, string, shape, func } = React.PropTypes
 
 EventList.propTypes = {
-  events: arrayOf(shape().isRequired).isRequired,
+  data: shape({
+    loading: bool,
+    events: arrayOf(shape())
+  }),
   gotoEvent: func.isRequired,
   openNewRoundModal: func.isRequired
 }
 
-export default EventList
+EventList.defaultProps = {
+  data: {
+    loading: true,
+    events: []
+  }
+}
+
+
+const leaderboardQuery = gql`
+  query($seasonId: ID!) {
+    events: allEvents (
+      orderBy: startsAt_DESC,
+      filter: { season: { id: $seasonId } }
+    ) {
+      id
+      status
+      startsAt
+      course
+      courseId
+      scoringType
+      teamEvent
+      oldId
+    }
+  }
+`
+
+const EventListWithData = graphql(leaderboardQuery, {
+  options: ({ seasonId }) => ({ variables: { seasonId }, forceFetch: true })
+})(EventList)
+
+EventListWithData.propTypes = {
+  seasonId: string.isRequired
+}
+
+export default EventListWithData

@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Switch, Route, withRouter } from 'react-router-native'
 import { View } from 'react-native'
 
@@ -13,70 +13,65 @@ const viewTabs = [
   { value: '/events', icon: '🗓', title: 'Rundor' }
 ]
 
-class Season extends Component {
-  render() {
-    const { user, season, push, replace, goBack, location } = this.props
-
-    return (
-      <View style={styles.container}>
-        <Switch>
-          <Route
-            exact
-            path="/"
-            render={() =>
-              <Leaderboard
-                user={user}
-                items={season.seasonLeaderboards}
-                seasonName={season.name}
-              />
-            }
+const Season = ({ userId, seasonName, seasonId, push, replace, goBack, location }) => (
+  <View style={styles.container}>
+    <Switch>
+      <Route
+        exact
+        path="/"
+        render={() =>
+          <Leaderboard
+            userId={userId}
+            seasonId={seasonId}
+            seasonName={seasonName}
           />
-          <Route
-            exact
-            path="/events"
-            render={() =>
-              <EventList
-                user={user}
-                events={season.events}
-                gotoEvent={eventId => push(`/events/${eventId}`)}
-                openNewRoundModal={() => push('/events/new')}
-              />
-            }
+        }
+      />
+      <Route
+        exact
+        path="/events"
+        render={() =>
+          <EventList
+            userId={userId}
+            seasonId={seasonId}
+            gotoEvent={eventId => push(`/events/${eventId}`)}
+            openNewRoundModal={() => push('/events/new')}
           />
-          <Route
-            exact
-            path="/events/new"
-            render={() =>
-              <NewEventForm
-                goBack={goBack}
-                selectCourse={course => push('/events/new/finalize', { course })}
-              />
-            }
+        }
+      />
+      <Route
+        exact
+        path="/events/new"
+        render={() =>
+          <NewEventForm
+            seasonId={seasonId}
+            goBack={goBack}
           />
-        </Switch>
-        <View
-          style={{
-            borderTopWidth: 1,
-            borderTopColor: '#11111F'
-          }}
-        >
-          <Tabs
-            currentRoute={location.pathname}
-            onChange={path => replace(path)}
-            tabs={viewTabs}
-            bottom
-          />
-        </View>
-      </View>
-    )
-  }
-}
+        }
+      />
+    </Switch>
+    <View
+      style={{
+        borderTopWidth: 1,
+        borderTopColor: '#11111F'
+      }}
+    >
+      <Tabs
+        currentRoute={location.pathname}
+        onChange={path => replace(path)}
+        tabs={viewTabs}
+        bottom
+      />
+    </View>
+  </View>
+)
 
 const { func, shape, string } = React.PropTypes
 
 Season.propTypes = {
-  user: shape().isRequired,
-  season: shape().isRequired,
+  userId: string.isRequired,
+  seasonName: string.isRequired,
+  seasonId: string.isRequired,
   location: shape({
     pathname: string
   }).isRequired,

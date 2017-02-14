@@ -1,7 +1,7 @@
 import React from 'react'
 import { Text, TouchableOpacity, View, StyleSheet } from 'react-native'
 import moment from 'moment'
-
+import 'moment/locale/sv'
 import colors from '../../../colors'
 
 const s = StyleSheet.create({
@@ -49,6 +49,10 @@ const s = StyleSheet.create({
 
   finished: {
     borderLeftColor: 'green'
+  },
+
+  planned: {
+    borderLeftColor: 'orange'
   }
 })
 
@@ -67,7 +71,7 @@ const EventCard = ({ event, gotoEvent }) => {
       <View style={[s.eventCard, s[event.status]]}>
         <View style={s.row}>
           <Text style={[s.date]}>
-            {moment(event.startsAt).format('ddd D MMM HH:mm').toUpperCase()}
+            {moment(event.startsAt).format('ddd DD MMM').toUpperCase()}
           </Text>
 
           <Text style={s.gametype}>

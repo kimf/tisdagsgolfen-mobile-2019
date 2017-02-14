@@ -6,7 +6,6 @@ import styles from './styles'
 import { getCache, setCache } from './utils'
 
 import Profile from './components/Profile'
-import Loading from './components/Shared/Loading'
 import Login from './containers/Login'
 import Home from './containers/Home'
 
@@ -38,7 +37,7 @@ class App extends Component {
   }
 
   render() {
-    if (this.state.checkingLoggin) { return <Loading text="Lägger pengar i rangemaskinen.." /> }
+    if (this.state.checkingLoggin) { return null }
     if (this.state.loggedOut) { return <Login email={this.state.email} onLogin={this.login} /> }
 
     return (

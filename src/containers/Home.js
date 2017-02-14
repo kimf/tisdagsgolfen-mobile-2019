@@ -15,6 +15,8 @@ import Loading from '../components/Shared/Loading'
 // UIManager.setLayoutAnimationEnabledExperimental
 // && UIManager.setLayoutAnimationEnabledExperimental(true)
 
+const titleConfig = { title: 'TISDAGSGOLFEN', tintColor: 'white' }
+
 class Home extends Component {
   state = {
     currentSeasonId: null,
@@ -36,7 +38,16 @@ class Home extends Component {
   render() {
     const { loading, user, seasons } = this.props.data
     if (loading) {
-      return <Loading text="Laddar data..." />
+      return (
+        <View style={styles.container}>
+          <NavigationBar
+            style={styles.header}
+            statusBar={{ style: 'light-content', tintColor: '#000' }}
+            title={titleConfig}
+          />
+          <Loading text="Startar golfbilarna..." />
+        </View>
+      )
     }
 
     const { currentSeasonId, showSeasonPicker } = this.state
@@ -44,8 +55,6 @@ class Home extends Component {
     const season = currentSeasonId
                    ? seasons.find(s => s.id === currentSeasonId)
                    : seasons[0]
-
-    const titleConfig = { title: 'TISDAGSGOLFEN', tintColor: 'white' }
 
     const caret = showSeasonPicker ? '↑' : '↓'
     const rightButtonConfig = {
@@ -81,19 +90,21 @@ class Home extends Component {
         }
 
         <View style={{ flex: 1, backgroundColor: '#fff', alignItems: 'stretch' }}>
-          <Season season={season} user={user} />
+          <Season seasonName={season.name} seasonId={season.id} userId={user.id} />
         </View>
       </View>
     )
   }
 }
 
-const { bool, object, array, func, shape } = React.PropTypes
+const { bool, string, array, func, shape } = React.PropTypes
 
 Home.propTypes = {
   data: shape({
     loading: bool.isRequired,
-    user: object,
+    user: shape({
+      id: string
+    }),
     seasons: array
   }).isRequired,
   push: func.isRequired
@@ -104,38 +115,10 @@ const userQuery = gql`
   query {
     user {
       id
-      email
-      firstName
-      lastName
     }
     seasons: allSeasons(orderBy: name_DESC) {
       id
       name
-      seasonLeaderboards(orderBy: position_ASC) {
-        id
-        averagePoints
-        position
-        previousPosition
-        totalPoints
-        top5Points
-        eventCount
-        totalKr
-        totalBeers
-        user {
-          id
-          firstName
-          lastName
-        }
-      }
-      events(orderBy: startsAt_DESC) {
-        id
-        status
-        startsAt
-        course
-        scoringType
-        teamEvent
-        oldId
-      }
     }
   }
 `
