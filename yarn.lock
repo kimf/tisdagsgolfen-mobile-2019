@@ -3530,9 +3530,9 @@ raw-body@~2.1.2:
     iconv-lite "0.4.13"
     unpipe "1.0.0"
 
-react-apollo@^0.10.1:
+react-apollo@kimf/react-apollo:
   version "0.10.1"
-  resolved "https://registry.yarnpkg.com/react-apollo/-/react-apollo-0.10.1.tgz#97fd50855f8575672aa68330b9c64a201cd13343"
+  resolved "https://codeload.github.com/kimf/react-apollo/tar.gz/c5f496c4cc6aab8a787836acfe72a04d71cb797a"
   dependencies:
     graphql-anywhere "^2.0.0"
     hoist-non-react-statics "^1.2.0"
