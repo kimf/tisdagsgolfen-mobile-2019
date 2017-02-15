@@ -13,7 +13,7 @@ const viewTabs = [
   { value: '/events', icon: '🗓', title: 'Rundor' }
 ]
 
-const Season = ({ userId, seasonName, seasonId, push, replace, goBack, location }) => (
+const Season = ({ userId, season, push, replace, goBack, location }) => (
   <View style={styles.container}>
     <Switch>
       <Route
@@ -22,8 +22,9 @@ const Season = ({ userId, seasonName, seasonId, push, replace, goBack, location 
         render={() =>
           <Leaderboard
             userId={userId}
-            seasonId={seasonId}
-            seasonName={seasonName}
+            seasonId={season.id}
+            players={season.players}
+            seasonName={season.name}
           />
         }
       />
@@ -33,7 +34,8 @@ const Season = ({ userId, seasonName, seasonId, push, replace, goBack, location 
         render={() =>
           <EventList
             userId={userId}
-            seasonId={seasonId}
+            seasonId={season.id}
+            events={season.events}
             gotoEvent={eventId => push(`/events/${eventId}`)}
             openNewRoundModal={() => push('/events/new')}
           />
@@ -44,7 +46,7 @@ const Season = ({ userId, seasonName, seasonId, push, replace, goBack, location 
         path="/events/new"
         render={() =>
           <NewEventForm
-            seasonId={seasonId}
+            seasonId={season.id}
             goBack={goBack}
           />
         }
@@ -66,12 +68,16 @@ const Season = ({ userId, seasonName, seasonId, push, replace, goBack, location 
   </View>
 )
 
-const { func, shape, string } = React.PropTypes
+const { arrayOf, func, shape, string } = React.PropTypes
 
 Season.propTypes = {
+  season: shape({
+    id: string.isRequired,
+    name: string.isRequired,
+    players: arrayOf(shape()).isRequired,
+    events: arrayOf(shape()).isRequired
+  }).isRequired,
   userId: string.isRequired,
-  seasonName: string.isRequired,
-  seasonId: string.isRequired,
   location: shape({
     pathname: string
   }).isRequired,

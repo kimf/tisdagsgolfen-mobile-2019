@@ -90,14 +90,14 @@ class Home extends Component {
         }
 
         <View style={{ flex: 1, backgroundColor: '#fff', alignItems: 'stretch' }}>
-          <Season seasonName={season.name} seasonId={season.id} userId={user.id} />
+          <Season season={season} userId={user.id} />
         </View>
       </View>
     )
   }
 }
 
-const { bool, string, array, func, shape } = React.PropTypes
+const { bool, string, arrayOf, func, float, shape } = React.PropTypes
 
 Home.propTypes = {
   data: shape({
@@ -105,20 +105,51 @@ Home.propTypes = {
     user: shape({
       id: string
     }),
-    seasons: array
+    seasons: arrayOf(shape({
+      id: string,
+      averagePoints: float,
+      players: arrayOf(shape()),
+      events: arrayOf(shape())
+    }))
   }).isRequired,
   push: func.isRequired
 }
 
 
 const userQuery = gql`
-  query {
+  query superMegaBigQuery {
     user {
       id
     }
     seasons: allSeasons(orderBy: name_DESC) {
       id
       name
+      players: seasonLeaderboards ( orderBy: position_DESC ) {
+        id
+        averagePoints
+        position
+        previousPosition
+        totalPoints
+        totalBeers
+        totalKr
+        top5Points
+        eventCount
+        user {
+          id
+          firstName
+          lastName
+        }
+      }
+      events ( orderBy: startsAt_DESC) {
+        id
+        status
+        startsAt
+        course
+        courseId
+        scoringType
+        teamEvent
+        oldId
+      }
     }
   }
 `

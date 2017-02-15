@@ -1,12 +1,9 @@
 import React, { Component } from 'react'
 import { View, ListView } from 'react-native'
-import { graphql } from 'react-apollo'
-import gql from 'graphql-tag'
 
 import LeaderboardCard from './LeaderboardCard'
 import Tabs from '../Tabs'
 import EmptyState from '../../Shared/EmptyState'
-import Loading from '../../Shared/Loading'
 
 import { ranked } from '../../../utils'
 import styles from '../../../styles'
@@ -38,14 +35,10 @@ class Leaderboard extends Component {
   }
 
   render() {
-    const { data, seasonName, userId } = this.props
+    const { players, seasonName, userId } = this.props
     const { sorting } = this.state
 
-    if (data.loading) {
-      return <Loading text="Laddar ledartavla..." />
-    }
-
-    const emptyLeaderboard = data.items.filter(sl => sl.eventCount !== 0).length === 0
+    const emptyLeaderboard = players.filter(sl => sl.eventCount !== 0).length === 0
     if (emptyLeaderboard) {
       return <EmptyState text="Inga rundor spelade ännu" />
     }
@@ -55,13 +48,13 @@ class Leaderboard extends Component {
 
     let sortedLeaderboard
     if (sorting === 'beers') {
-      sortedLeaderboard = data.items.slice().sort((a, b) => b.totalBeers - a.totalBeers)
+      sortedLeaderboard = players.slice().sort((a, b) => b.totalBeers - a.totalBeers)
       sortedLeaderboard = ranked(sortedLeaderboard, 'beerPos', 'totalBeers')
     } else if (sorting === 'kr') {
-      sortedLeaderboard = data.items.slice().sort((a, b) => a.totalKr - b.totalKr)
+      sortedLeaderboard = players.slice().sort((a, b) => a.totalKr - b.totalKr)
       sortedLeaderboard = ranked(sortedLeaderboard, 'krPos', 'totalKr')
     } else {
-      sortedLeaderboard = data.items.slice().sort((a, b) => a.position - b.position)
+      sortedLeaderboard = players.slice().sort((a, b) => a.position - b.position)
     }
 
     return (
@@ -89,54 +82,13 @@ class Leaderboard extends Component {
   }
 }
 
-const { arrayOf, bool, shape, string } = React.PropTypes
+const { arrayOf, shape, string } = React.PropTypes
 
 Leaderboard.propTypes = {
-  data: shape({
-    loading: bool,
-    items: arrayOf(shape())
-  }),
   seasonName: string.isRequired,
-  userId: string.isRequired
+  userId: string.isRequired,
+  players: arrayOf(shape()).isRequired
 }
 
-Leaderboard.defaultProps = {
-  data: {
-    loading: true,
-    items: []
-  }
-}
 
-const leaderboardQuery = gql`
-  query($seasonId: ID!) {
-    items: allSeasonLeaderboards (
-      orderBy: position_DESC,
-      filter: { season: { id: $seasonId } }
-    ) {
-      id
-      averagePoints
-      position
-      previousPosition
-      totalPoints
-      totalBeers
-      totalKr
-      top5Points
-      eventCount
-      user {
-        id
-        firstName
-        lastName
-      }
-    }
-  }
-`
-
-const LeaderboardWithData = graphql(leaderboardQuery, {
-  options: ({ seasonId }) => ({ variables: { seasonId } })
-})(Leaderboard)
-
-LeaderboardWithData.propTypes = {
-  seasonId: string.isRequired
-}
-
-export default LeaderboardWithData
+export default Leaderboard

@@ -163,11 +163,17 @@ const NewEventSetupWithMutation = graphql(createEventMutation, {
         return mutate({
           variables: { seasonId, courseId, course, teamEvent, scoringType, startsAt },
           updateQueries: {
-            eventsForSeasonQuery: (prev, { mutationResult }) => {
+            superMegaBigQuery: (prev, { mutationResult }) => {
               const newEvent = mutationResult.data.createEvent
+              const seasonIndex = prev.seasons.findIndex(s => s.id === seasonId)
+
               return update(prev, {
-                events: {
-                  $unshift: [newEvent]
+                seasons: {
+                  [seasonIndex]: {
+                    events: {
+                      $unshift: [newEvent]
+                    }
+                  }
                 }
               })
             }
