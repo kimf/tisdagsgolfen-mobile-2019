@@ -66,10 +66,10 @@ import com.android.build.OutputFile
  * ]
 */
 
-/*project.ext.react = [
+project.ext.react = [
   bundleInDebug: true,
   jsBundleDirDebug: "$buildDir/intermediates/assets/debug"
-]*/
+]
 
 apply from: "../../node_modules/react-native/react.gradle"
 /**
