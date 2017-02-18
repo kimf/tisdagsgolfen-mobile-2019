@@ -24,7 +24,7 @@ const Tabs = ({ currentRoute, onChange, tabs, bottom }) => {
           isCurrent={currentRoute === tab.value}
           onChange={onChange}
           fontSize={fontSize}
-          padding={bottom ? 12 : 8}
+          padding={bottom ? 16 : 8}
         />
       )}
     </View>

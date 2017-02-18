@@ -5,6 +5,8 @@ import EventCard from './EventCard'
 import EmptyState from '../../Shared/EmptyState'
 import Button from '../../Shared/Button'
 
+import { sortedByParsedDate } from '../../../utils'
+
 const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 })
 
 const EventList = ({ events, gotoEvent, openNewRoundModal }) => {
@@ -17,11 +19,13 @@ const EventList = ({ events, gotoEvent, openNewRoundModal }) => {
     )
   }
 
+  const sortedEvents = sortedByParsedDate(events, 'startsAt')
+
   return (
     <View style={{ flex: 1, backgroundColor: '#eee' }}>
       <ListView
         initialListSize={100}
-        dataSource={ds.cloneWithRows(events)}
+        dataSource={ds.cloneWithRows(sortedEvents)}
         renderRow={rowData => <EventCard event={rowData} gotoEvent={gotoEvent} />}
         enableEmptySections
       />

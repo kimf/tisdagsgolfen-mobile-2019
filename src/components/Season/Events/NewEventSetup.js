@@ -171,7 +171,7 @@ const NewEventSetupWithMutation = graphql(createEventMutation, {
                 seasons: {
                   [seasonIndex]: {
                     events: {
-                      $unshift: [newEvent]
+                      $push: [newEvent]
                     }
                   }
                 }
