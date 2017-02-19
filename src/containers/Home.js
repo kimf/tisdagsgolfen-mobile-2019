@@ -97,7 +97,7 @@ class Home extends Component {
   }
 }
 
-const { bool, string, arrayOf, func, float, shape } = React.PropTypes
+const { bool, string, arrayOf, func, shape } = React.PropTypes
 
 Home.propTypes = {
   data: shape({
@@ -107,18 +107,15 @@ Home.propTypes = {
     }),
     seasons: arrayOf(shape({
       id: string,
-      averagePoints: float,
-      closed: bool,
-      players: arrayOf(shape()),
-      events: arrayOf(shape())
+      name: string,
+      closed: bool
     }))
   }).isRequired,
   push: func.isRequired
 }
 
-// filter: { id: "ciyw9y5pycs8q01260w6xd12l" }
 const userQuery = gql`
-  query superMegaBigQuery {
+  query {
     user {
       id
     }
@@ -128,32 +125,6 @@ const userQuery = gql`
       id
       name
       closed
-      players: seasonLeaderboards ( orderBy: position_DESC ) {
-        id
-        averagePoints
-        position
-        previousPosition
-        totalPoints
-        totalBeers
-        totalKr
-        top5Points
-        eventCount
-        user {
-          id
-          firstName
-          lastName
-        }
-      }
-      events ( orderBy: startsAt_DESC) {
-        id
-        status
-        startsAt
-        course
-        courseId
-        scoringType
-        teamEvent
-        oldId
-      }
     }
   }
 `

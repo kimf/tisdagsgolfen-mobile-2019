@@ -5,7 +5,6 @@ import moment from 'moment'
 import 'moment/locale/sv'
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
-import update from 'immutability-helper'
 
 import styles from '../../../styles'
 
@@ -161,23 +160,7 @@ const NewEventSetupWithMutation = graphql(createEventMutation, {
     return {
       createEvent({ seasonId, courseId, course, teamEvent, scoringType, startsAt }) {
         return mutate({
-          variables: { seasonId, courseId, course, teamEvent, scoringType, startsAt },
-          updateQueries: {
-            superMegaBigQuery: (prev, { mutationResult }) => {
-              const newEvent = mutationResult.data.createEvent
-              const seasonIndex = prev.seasons.findIndex(s => s.id === seasonId)
-
-              return update(prev, {
-                seasons: {
-                  [seasonIndex]: {
-                    events: {
-                      $push: [newEvent]
-                    }
-                  }
-                }
-              })
-            }
-          }
+          variables: { seasonId, courseId, course, teamEvent, scoringType, startsAt }
         })
       }
     }

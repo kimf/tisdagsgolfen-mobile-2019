@@ -43,9 +43,7 @@ class App extends Component {
     return (
       <View style={styles.container}>
         <Route path="/" component={Home} />
-        <Switch>
-          <Route exact path="/profile" render={() => <Profile onLogout={this.logout} />} />
-        </Switch>
+        <Route exact path="/profile" render={() => <Profile onLogout={this.logout} />} />
       </View>
     )
   }

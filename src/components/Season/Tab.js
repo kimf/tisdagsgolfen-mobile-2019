@@ -1,5 +1,5 @@
 import React from 'react'
-import { TouchableHighlight, Text } from 'react-native'
+import { TouchableOpacity, Text } from 'react-native'
 
 const tabStyle = (padding, isCurrent) => ({
   flex: 1,
@@ -13,15 +13,14 @@ const tabStyle = (padding, isCurrent) => ({
 const Tab = ({ tab, isCurrent, onChange, fontSize, padding }) => {
   const text = `${tab.icon} ${tab.title}`
   return (
-    <TouchableHighlight
-      underlayColor="#feb"
+    <TouchableOpacity
       style={tabStyle(padding, isCurrent)}
       onPress={() => onChange(tab.value)}
     >
       <Text style={{ fontSize, color: isCurrent ? '#222' : '#999' }}>
         {text}
       </Text>
-    </TouchableHighlight>
+    </TouchableOpacity>
   )
 }
 

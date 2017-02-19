@@ -14,7 +14,7 @@ const Profile = ({ data: { loading, user }, onLogout, goBack }) => {
     <Modal
       animationType={'slide'}
       transparent={false}
-      onRequestClose={() => {}}
+      onRequestClose={goBack}
       visible
       hardwareAccelerated
     >

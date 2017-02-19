@@ -22,6 +22,7 @@ class NewEventForm extends Component {
         transparent={false}
         visible
         hardwareAccelerated
+        onRequestClose={goBack}
       >
         <NavigationBar
           style={styles.header}
