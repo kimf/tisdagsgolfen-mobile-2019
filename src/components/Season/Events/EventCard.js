@@ -2,26 +2,22 @@ import React from 'react'
 import { Text, TouchableOpacity, View, StyleSheet } from 'react-native'
 import moment from 'moment'
 import 'moment/locale/sv'
-import colors from '../../../colors'
 
 const s = StyleSheet.create({
   /* EVENT CARDS */
   eventCard: {
-    top: 10,
     flexDirection: 'column',
     marginHorizontal: 10,
-    marginVertical: 5,
+    marginTop: 10,
     paddingHorizontal: 20,
     paddingVertical: 10,
-    borderRadius: 2,
-    borderColor: colors.cellBorder,
-    borderWidth: StyleSheet.hairlineWidth,
     backgroundColor: '#fff',
-    shadowColor: '#999',
+    shadowColor: '#000',
     shadowOffset: { width: 2, height: 8 },
     shadowRadius: 10,
     shadowOpacity: 0.1,
-    borderLeftWidth: StyleSheet.hairlineWidth * 5
+    borderLeftWidth: 2,
+    elevation: 5
   },
 
   row: {
@@ -36,9 +32,7 @@ const s = StyleSheet.create({
     fontSize: 16,
     fontWeight: '800',
     marginTop: 5,
-    marginBottom: 5,
-    borderBottomWidth: 1,
-    borderBottomColor: '#ccc'
+    marginBottom: 5
   },
 
   gametype: {
@@ -48,11 +42,11 @@ const s = StyleSheet.create({
   },
 
   finished: {
-    borderLeftColor: 'green'
+    borderLeftColor: '#008000'
   },
 
   planned: {
-    borderLeftColor: 'orange'
+    borderLeftColor: '#FFA500'
   }
 })
 
@@ -67,7 +61,7 @@ const EventCard = ({ event, gotoEvent }) => {
   }
 
   return (
-    <TouchableOpacity onPress={() => gotoEvent(event.id)}>
+    <TouchableOpacity onPress={() => gotoEvent(event)}>
       <View style={[s.eventCard, s[event.status]]}>
         <View style={s.row}>
           <Text style={[s.date]}>

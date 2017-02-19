@@ -29,9 +29,7 @@ const LeaderboardCard = ({ data, currentUserId, sorting }) => {
   }
 
   const player = data.user
-  const averagePoints = data.averagePoints.toLocaleString(
-    'sv', { maximumFractionDigits: 1, useGrouping: false }
-  )
+  const averagePoints = (data.averagePoints * 2).toFixed() / 2
 
   const currentUserStyle = player.id === currentUserId ? { backgroundColor: '#feb' } : null
 

@@ -5,6 +5,7 @@ import { View } from 'react-native'
 import Leaderboard from './Leaderboard/Leaderboard'
 import EventList from './Events/EventList'
 import NewEventForm from './Events/NewEventForm'
+import Event from './Event'
 import Tabs from './Tabs'
 import styles from '../../styles'
 
@@ -36,7 +37,8 @@ const Season = ({ userId, season, push, replace, goBack, location }) => (
             userId={userId}
             seasonId={season.id}
             events={season.events}
-            gotoEvent={eventId => push(`/events/${eventId}`)}
+            seasonClosed={season.closed}
+            gotoEvent={event => push(`/events/${event.id}`, event)}
             openNewRoundModal={() => push('/events/new')}
           />
         }
@@ -46,6 +48,18 @@ const Season = ({ userId, season, push, replace, goBack, location }) => (
         path="/events/new"
         render={() =>
           <NewEventForm
+            seasonId={season.id}
+            goBack={goBack}
+          />
+        }
+      />
+      <Route
+        exact
+        path="/events/:eventId"
+        render={() =>
+          <Event
+            event={location.state}
+            userId={userId}
             seasonId={season.id}
             goBack={goBack}
           />
@@ -68,12 +82,13 @@ const Season = ({ userId, season, push, replace, goBack, location }) => (
   </View>
 )
 
-const { arrayOf, func, shape, string } = React.PropTypes
+const { arrayOf, bool, func, shape, string } = React.PropTypes
 
 Season.propTypes = {
   season: shape({
     id: string.isRequired,
     name: string.isRequired,
+    closed: bool.isRequired,
     players: arrayOf(shape()).isRequired,
     events: arrayOf(shape()).isRequired
   }).isRequired,

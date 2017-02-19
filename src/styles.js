@@ -103,6 +103,7 @@ export default StyleSheet.create({
   },
 
   points: {
+    color: '#000',
     fontFamily: 'Avenir',
     fontSize: 22,
     fontWeight: '900',
@@ -138,6 +139,7 @@ export default StyleSheet.create({
   },
 
   name: {
+    color: '#000',
     fontFamily: 'Avenir',
     fontWeight: '800',
     flex: 1,

@@ -108,6 +108,7 @@ Home.propTypes = {
     seasons: arrayOf(shape({
       id: string,
       averagePoints: float,
+      closed: bool,
       players: arrayOf(shape()),
       events: arrayOf(shape())
     }))
@@ -115,15 +116,18 @@ Home.propTypes = {
   push: func.isRequired
 }
 
-
+// filter: { id: "ciyw9y5pycs8q01260w6xd12l" }
 const userQuery = gql`
   query superMegaBigQuery {
     user {
       id
     }
-    seasons: allSeasons(orderBy: name_DESC) {
+    seasons: allSeasons(
+      orderBy: name_DESC
+    ) {
       id
       name
+      closed
       players: seasonLeaderboards ( orderBy: position_DESC ) {
         id
         averagePoints

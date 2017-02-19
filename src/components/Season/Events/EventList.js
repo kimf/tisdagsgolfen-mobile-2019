@@ -9,12 +9,19 @@ import { sortedByParsedDate } from '../../../utils'
 
 const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 })
 
-const EventList = ({ events, gotoEvent, openNewRoundModal }) => {
+const addNewButton = (seasonClosed, onPress) => {
+  if (seasonClosed) {
+    return null
+  }
+  return <Button text="+ Lägg till ny runda" onPress={onPress} />
+}
+
+const EventList = ({ events, gotoEvent, openNewRoundModal, seasonClosed }) => {
   if (events.length === 0) {
     return (
       <View style={{ flex: 1, backgroundColor: '#eee' }}>
         <EmptyState text="Inga rundor :(" />
-        <Button text="+ Lägg till ny runda" onPress={openNewRoundModal} />
+        {addNewButton(seasonClosed, openNewRoundModal)}
       </View>
     )
   }
@@ -29,17 +36,18 @@ const EventList = ({ events, gotoEvent, openNewRoundModal }) => {
         renderRow={rowData => <EventCard event={rowData} gotoEvent={gotoEvent} />}
         enableEmptySections
       />
-      <Button text="+ Lägg till ny runda" onPress={openNewRoundModal} />
+      {addNewButton(seasonClosed, openNewRoundModal)}
     </View>
   )
 }
 
-const { arrayOf, shape, func } = React.PropTypes
+const { arrayOf, bool, shape, func } = React.PropTypes
 
 EventList.propTypes = {
   events: arrayOf(shape()).isRequired,
   gotoEvent: func.isRequired,
-  openNewRoundModal: func.isRequired
+  openNewRoundModal: func.isRequired,
+  seasonClosed: bool.isRequired
 }
 
 
