@@ -3,15 +3,15 @@ import { Text, View } from 'react-native'
 
 import styles from '../../../styles'
 
-const EventLeaderboardCard = ({ data, currentUserId, gameType }) => {
+const EventLeaderboardCard = ({ data, currentUserId }) => {
   let upOrDown
 
   if (data.totalPosition < data.previousTotalPosition) {
-    upOrDown = <Text style={{ flex: 1, color: 'green' }}>{data.previousTotalPosition}↥{data.totalPosition}</Text>
+    upOrDown = <Text style={{ color: 'green' }}>{data.previousTotalPosition}↥{data.totalPosition}</Text>
   } else if (data.totalPosition > data.previousTotalPosition) {
-    upOrDown = <Text style={{ flex: 1, color: 'red' }}>{data.totalPosition}↧{data.previousTotalPosition}</Text>
+    upOrDown = <Text style={{ color: 'red' }}>{data.totalPosition}↧{data.previousTotalPosition}</Text>
   } else {
-    upOrDown = <Text style={{ flex: 1, color: '#ccc' }}>↝{data.totalPosition}</Text>
+    upOrDown = <Text style={{ color: '#ccc' }}>↝{data.totalPosition}</Text>
   }
 
   const score = data.score
@@ -29,28 +29,21 @@ const EventLeaderboardCard = ({ data, currentUserId, gameType }) => {
 
   return (
     <View key={data.id} style={[styles.listrow, currentUserStyle]}>
-      <Text style={{ flex: 1, fontWeight: '800', color: '#000', fontSize: 16 }}>{data.position}</Text>
-      <View style={[styles.cardTitle, { flex: 2 }]}>
-        <Text style={styles.name}>{player.firstName} {player.lastName[0]}</Text>
-        {upOrDown}
-      </View>
+      <Text style={styles.position}>{data.position}</Text>
+      {upOrDown}
 
-      <View style={[styles.cardTitle, { flex: 1 }]}>
-        <Text style={[styles.metaLarger, { flex: 1 }]}>{score.value} {gameType}</Text>
-      </View>
+      <Text>{player.firstName} {player.lastName[0]}</Text>
 
-      <View style={[styles.cardTitle, { flex: 1 }]}>
-        <Text style={[styles.metaLarger, { flex: 1 }]}>{data.totalEventCount} rundor</Text>
-        <Text style={[styles.metaLarger, { flex: 1 }]}>{totalAveragePoints} snitt</Text>
-        <Text style={[styles.metaLarger, { flex: 1 }]}>{data.totalEventPoints} total</Text>
-      </View>
+      <Text>{score.value}</Text>
 
-      <View style={[styles.cardTitle, { flex: 1 }]}>
-        <Text style={[styles.metaLarger, { flex: 1 }]}>{score.beers} öl</Text>
-        <Text style={[styles.metaLarger, { flex: 1 }]}>{score.kr} kr</Text>
-      </View>
+      <Text>{data.totalEventCount}</Text>
+      <Text>{totalAveragePoints}</Text>
+      <Text>{data.totalEventPoints}</Text>
 
-      <Text style={[styles.points, { flex: 1 }]}>{`${score.eventPoints} p`}</Text>
+      <Text>{score.beers}</Text>
+      <Text>{score.kr}</Text>
+
+      <Text>{score.eventPoints}</Text>
     </View>
   )
 }
@@ -79,8 +72,7 @@ EventLeaderboardCard.propTypes = {
       }.isRequired
     }.isRequired
   }).isRequired,
-  currentUserId: string.isRequired,
-  gameType: string.isRequired
+  currentUserId: string.isRequired
 }
 
 export default EventLeaderboardCard

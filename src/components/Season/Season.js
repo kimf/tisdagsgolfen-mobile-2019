@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { Switch, Route, withRouter } from 'react-router-native'
-import { View } from 'react-native'
+import { View, LayoutAnimation } from 'react-native'
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 import update from 'immutability-helper'
@@ -80,6 +80,7 @@ class Season extends Component {
         updateQuery: (prev, { subscriptionData }) => {
           const newEvent = subscriptionData.data.createEvent
 
+          LayoutAnimation.configureNext(LayoutAnimation.Presets.spring)
           // eslint-disable-next-line no-console
           console.log('GOT NEW EVENT', newEvent)
           return update(prev, {
