@@ -11,10 +11,6 @@ import SeasonPicker from '../components/Season/SeasonPicker'
 import Season from '../components/Season/Season'
 import Loading from '../components/Shared/Loading'
 
-// Android-Support for LayoutAnimation ?
-// UIManager.setLayoutAnimationEnabledExperimental
-// && UIManager.setLayoutAnimationEnabledExperimental(true)
-
 const titleConfig = { title: 'TISDAGSGOLFEN', tintColor: 'white' }
 
 class Home extends Component {

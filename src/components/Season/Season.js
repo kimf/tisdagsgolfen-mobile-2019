@@ -79,7 +79,6 @@ class Season extends Component {
 
           // eslint-disable-next-line no-console
           console.log('GOT NEW EVENT', newEvent)
-
           return update(prev, {
             events: {
               $push: [newEvent]

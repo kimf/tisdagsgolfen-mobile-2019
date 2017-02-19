@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { View } from 'react-native'
-import { Switch, Route } from 'react-router-native'
+import { View, Platform, UIManager } from 'react-native'
+import { Route } from 'react-router-native'
 
 import styles from './styles'
 import { getCache, setCache } from './utils'
@@ -10,6 +10,16 @@ import Login from './containers/Login'
 import Home from './containers/Home'
 
 class App extends Component {
+  constructor() {
+    super()
+
+    if (Platform.OS === 'android') {
+      // eslint-disable-next-line no-unused-expressions
+      UIManager.setLayoutAnimationEnabledExperimental
+      && UIManager.setLayoutAnimationEnabledExperimental(true)
+    }
+  }
+
   state = { checkingLoggin: true, loggedOut: true, email: '' }
 
   componentDidMount() {
