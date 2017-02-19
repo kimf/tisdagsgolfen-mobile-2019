@@ -24,7 +24,10 @@ class Season extends Component {
     season: shape({
       id: string.isRequired,
       name: string.isRequired,
-      closed: bool.isRequired
+      closed: bool.isRequired,
+      photo: shape({
+        url: string
+      })
     }).isRequired,
     data: shape({
       loading: bool.isRequired,
@@ -105,6 +108,8 @@ class Season extends Component {
               <Leaderboard
                 userId={userId}
                 seasonId={season.id}
+                closed={season.closed}
+                photoUrl={season.photo ? season.photo.url : ''}
                 players={data.players}
                 seasonName={season.name}
               />

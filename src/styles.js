@@ -1,8 +1,6 @@
 import { StyleSheet } from 'react-native'
 
 import colors from './colors'
-
-// const { NavBarHeight, TotalNavHeight } = Navigator.NavigationBar.Styles.General
 // const iOS = (Platform.OS == 'ios')
 // fontSize: iOS ? 12 : 11,
 

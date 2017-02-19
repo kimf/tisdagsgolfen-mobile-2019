@@ -121,6 +121,9 @@ const userQuery = gql`
       id
       name
       closed
+      photo {
+        url
+      }
     }
   }
 `

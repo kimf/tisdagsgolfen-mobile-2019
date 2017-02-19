@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, ListView } from 'react-native'
+import { Dimensions, View, ListView, Image } from 'react-native'
 
 import LeaderboardCard from './LeaderboardCard'
 import Tabs from '../Tabs'
@@ -10,12 +10,13 @@ import styles from '../../../styles'
 
 const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 })
 
+const DEVICE_WIDTH = Dimensions.get('window').width
+
 const leaderboardTabs = [
   { value: 'totalPoints', icon: '🤷', title: 'Poäng' },
   { value: 'beers', icon: '🍻', title: 'Öl' },
   { value: 'kr', icon: '💸', title: 'Skuld' }
 ]
-
 
 class Leaderboard extends Component {
   state = { sorting: 'totalPoints' }
@@ -35,7 +36,7 @@ class Leaderboard extends Component {
   }
 
   render() {
-    const { players, seasonName, userId } = this.props
+    const { players, seasonName, userId, closed, photoUrl } = this.props
     const { sorting } = this.state
 
     const emptyLeaderboard = players.filter(sl => sl.eventCount !== 0).length === 0
@@ -59,6 +60,13 @@ class Leaderboard extends Component {
 
     return (
       <View style={styles.container}>
+        { closed && photoUrl
+          ? <Image
+            style={{ width: DEVICE_WIDTH, height: 120 }}
+            source={{ uri: photoUrl }}
+          /> : null
+        }
+
         { showLeaderboardTabs
           ?
             <Tabs
@@ -68,6 +76,7 @@ class Leaderboard extends Component {
             />
           : null
         }
+
         <ListView
           initialListSize={30}
           dataSource={ds.cloneWithRows(sortedLeaderboard)}
@@ -82,12 +91,19 @@ class Leaderboard extends Component {
   }
 }
 
-const { arrayOf, shape, string } = React.PropTypes
+const { arrayOf, bool, shape, string } = React.PropTypes
 
 Leaderboard.propTypes = {
   seasonName: string.isRequired,
+  closed: bool,
+  photoUrl: string,
   userId: string.isRequired,
   players: arrayOf(shape()).isRequired
+}
+
+Leaderboard.defaultProps = {
+  closed: false,
+  photoUrl: ''
 }
 
 
