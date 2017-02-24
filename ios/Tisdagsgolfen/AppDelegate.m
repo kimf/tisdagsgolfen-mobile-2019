@@ -21,7 +21,8 @@
   [BuddyBuildSDK setup];
 
   self.oneSignal = [[RCTOneSignal alloc] initWithLaunchOptions:launchOptions
-                                                       appId:@"92ef9314-1d1d-4c51-99c7-f265769161da"];
+                      appId:@"92ef9314-1d1d-4c51-99c7-f265769161da"
+                      settings:@{kOSSettingsKeyInFocusDisplayOption : @(OSNotificationDisplayTypeNone), kOSSettingsKeyAutoPrompt : @YES}];
 
   NSURL *jsCodeLocation;
 
@@ -41,10 +42,12 @@
   return YES;
 }
 
-// application:didReceiveRemoteNotification:fetchCompletionHandler
-
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)notification {
-    [RCTOneSignal didReceiveRemoteNotification:notification];
+// fetch notifications in the background and foreground
+-(void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)notification
+fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
+  [RCTOneSignal didReceiveRemoteNotification:notification];
+  completionHandler(UIBackgroundFetchResultNewData);
+  NSLog(@"Notification Body %@", notification);
 }
 
 @end

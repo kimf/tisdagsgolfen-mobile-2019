@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Platform, UIManager } from 'react-native'
+import { AppState, View, Platform, UIManager } from 'react-native'
 import { Route } from 'react-router-native'
 import OneSignal from 'react-native-onesignal'
 
@@ -29,6 +29,10 @@ const onRegistered = (notifData) => {
 const onIds = (device) => {
   console.log('Device info: ', device)
 }
+
+const handleAppStateChange = (currentAppState) => {
+  console.log('currentAppState', currentAppState)
+}
 /* eslint-enable no-console */
 
 
@@ -53,6 +57,7 @@ class App extends Component {
   }
 
   componentDidMount() {
+    AppState.addEventListener('change', handleAppStateChange)
     OneSignal.configure({
       onNotificationOpened: (message, data, isActive) => {
         // eslint-disable-next-line no-console
