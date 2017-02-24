@@ -7,10 +7,11 @@
  * of patent rights can be found in the PATENTS file in the same directory.
  */
 
+#import <RCTOneSignal.h>
 #import <UIKit/UIKit.h>
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
-
+@property (strong, nonatomic) RCTOneSignal* oneSignal;
 @property (nonatomic, strong) UIWindow *window;
 
 @end

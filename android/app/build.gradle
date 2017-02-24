@@ -89,7 +89,7 @@ def enableProguardInReleaseBuilds = false
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "23.0.1"
+    buildToolsVersion "23.0.2"
 
     defaultConfig {
         applicationId "se.calces.tisdagsgolfen"
@@ -100,6 +100,8 @@ android {
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
+        manifestPlaceholders = [onesignal_app_id: "92ef9314-1d1d-4c51-99c7-f265769161da",
+                                onesignal_google_project_number: "392488326530"]
     }
     splits {
         abi {
@@ -131,6 +133,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-onesignal')
     compile fileTree(dir: "libs", include: ["*.jar"])
     compile "com.android.support:appcompat-v7:23.0.1"
     compile "com.facebook.react:react-native:+"  // From node_modules

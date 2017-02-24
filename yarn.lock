@@ -3604,6 +3604,12 @@ react-native-navbar@^1.6.0:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/react-native-navbar/-/react-native-navbar-1.6.0.tgz#27f42a933107d12f5ef86e7056f7c3f5dd4fe3b0"
 
+react-native-onesignal@^3.0.3:
+  version "3.0.3"
+  resolved "https://registry.yarnpkg.com/react-native-onesignal/-/react-native-onesignal-3.0.3.tgz#6e9fd8588c40b07b22fae38202e662643e070ae2"
+  dependencies:
+    invariant "^2.2.2"
+
 react-native@0.41.2:
   version "0.41.2"
   resolved "https://registry.yarnpkg.com/react-native/-/react-native-0.41.2.tgz#c6f486b8450a9909e6fed2dfd2c2af946563bf4f"

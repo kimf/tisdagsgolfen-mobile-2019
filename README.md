@@ -1,3 +1,23 @@
+#p12 vqgxruyqgk
+#onesignal app-id: 92ef9314-1d1d-4c51-99c7-f265769161da
+
+Server key
+AAAAW2IglYI:APA91bG_sByB8wyg7ruZVmxAQ-eMT1o5iXsx0JUX8AHnDadLK78JFRgd-RRm39UqSmCY3Jgaj7iZck6Aig2salP5po6ai8aJVDf9zQqD3FI4WjdNL78KXDWA2yQKXXOgVvOK7fEa_4Pf
+
+Sender ID
+392488326530
+
+
+Notification object received example:
+
+{
+    shown: true, // BOOLEAN: If the notification was displayed to the user or not
+    payload: {notificationID : "", contentAvailable : false, badge : 1, sound : "default", title : "Hello!", body : "World", launchURL : "", }, // OBJECT; the push data
+    displayType: 1, //The display method of a received notification
+    silentNotification: false // BOOLEAN : Wether the received notification was a silent one
+}
+
+
 # destructuring
 const PostList = ({ data: { loading, posts } }) => ()
 
