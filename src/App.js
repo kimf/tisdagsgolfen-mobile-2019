@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import { AppState, View, Platform, UIManager } from 'react-native'
-import { Route } from 'react-router-native'
+import { AppState, AsyncStorage, View, Platform, UIManager } from 'react-native'
+import { Route, Redirect } from 'react-router-native'
 import OneSignal from 'react-native-onesignal'
+import deviceLog, { LogView } from 'react-native-device-log'
 
 import styles from './styles'
 import { getCache, setCache } from './utils'
@@ -10,30 +11,30 @@ import Profile from './components/Profile'
 import Login from './containers/Login'
 import Home from './containers/Home'
 
-/* eslint-disable no-console */
-const onReceived = (notification) => {
-  console.log('Notification received: ', notification)
-}
+deviceLog.init(AsyncStorage, {
+  logToConsole: true,
+  logRNErrors: true,
+  maxNumberToRender: 0,
+  maxNumberToPersist: 0
+}).then(() => {
+  deviceLog.success('logger initialized')
+})
 
-const onOpened = (openResult) => {
-  console.log('Message: ', openResult.notification.payload.body)
-  console.log('Data: ', openResult.notification.payload.additionalData)
-  console.log('isActive: ', openResult.notification.isAppInFocus)
-  console.log('openResult: ', openResult)
+const onReceived = (notification) => {
+  deviceLog.debug('Notification received:', notification)
 }
 
 const onRegistered = (notifData) => {
-  console.log('Device has been registered for push notifications!', notifData)
+  deviceLog.debug('Device has been registered for push notifications!', notifData)
 }
 
 const onIds = (device) => {
-  console.log('Device info: ', device)
+  deviceLog.debug('Device info: ', device)
 }
 
-const handleAppStateChange = (currentAppState) => {
-  console.log('currentAppState', currentAppState)
+const handleAppStateChange = (/* currentAppState */) => {
+  // deviceLog.debug('currentAppState', currentAppState)
 }
-/* eslint-enable no-console */
 
 
 class App extends Component {
@@ -47,27 +48,30 @@ class App extends Component {
     }
   }
 
-  state = { checkingLoggin: true, loggedOut: true, email: '' }
+  state = {
+    checkingLoggin: true,
+    loggedOut: true,
+    email: '',
+    openedFromNotification: false,
+    showLog: false
+  }
 
   componentWillMount() {
+    deviceLog.debug('componentWillMount')
     OneSignal.addEventListener('received', onReceived)
-    OneSignal.addEventListener('opened', onOpened)
+    OneSignal.addEventListener('opened', this.onOpened)
     OneSignal.addEventListener('registered', onRegistered)
     OneSignal.addEventListener('ids', onIds)
   }
 
   componentDidMount() {
+    deviceLog.debug('componentDidMount')
     AppState.addEventListener('change', handleAppStateChange)
-    OneSignal.configure({
-      onNotificationOpened: (message, data, isActive) => {
-        // eslint-disable-next-line no-console
-        console.log('Notification', message, data, isActive)
-      }
-    })
 
     getCache('currentUser').then((value) => {
       if (value && value.token) {
         this.setState({ checkingLoggin: false, loggedOut: false, email: value.email })
+        OneSignal.syncHashedEmail(value.email)
       } else {
         const email = value ? value.email : ''
         this.setState({ checkingLoggin: false, loggedOut: true, email })
@@ -76,11 +80,22 @@ class App extends Component {
   }
 
   componentWillUnmount() {
+    deviceLog.debug('componentWillUnmount')
     OneSignal.removeEventListener('received', onReceived)
-    OneSignal.removeEventListener('opened', onOpened)
+    OneSignal.removeEventListener('opened', this.onOpened)
     OneSignal.removeEventListener('registered', onRegistered)
     OneSignal.removeEventListener('ids', onIds)
   }
+
+  onOpened = (openResult) => {
+    deviceLog.debug('Message: ', openResult.notification.payload.body)
+    deviceLog.debug('Data: ', openResult.notification.payload.additionalData)
+    deviceLog.debug('isActive: ', openResult.notification.isAppInFocus)
+    // deviceLog.debug('openResult: ', openResult)
+    const data = openResult.notification.payload.additionalData
+    this.setState({ openedFromNotification: true, route: data.route, eventId: data.eventId })
+  }
+
 
   logout = (email, callback) => {
     setCache('currentUser', { email }).then(() => {
@@ -99,8 +114,13 @@ class App extends Component {
     if (this.state.checkingLoggin) { return null }
     if (this.state.loggedOut) { return <Login email={this.state.email} onLogin={this.login} /> }
 
+    if (this.state.openedFromNotification) {
+      return <Redirect to={`/${this.state.route}`} />
+    }
+
     return (
       <View style={styles.container}>
+        { this.state.showLog ? <LogView inverted={false} timeStampFormat="HH:mm:ss" multiExpanded /> : null }
         <Route path="/" component={Home} />
         <Route exact path="/profile" render={() => <Profile onLogout={this.logout} />} />
       </View>

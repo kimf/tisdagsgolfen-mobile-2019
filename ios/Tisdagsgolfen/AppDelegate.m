@@ -47,7 +47,7 @@
 fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
   [RCTOneSignal didReceiveRemoteNotification:notification];
   completionHandler(UIBackgroundFetchResultNewData);
-  NSLog(@"Notification Body %@", notification);
+  // NSLog(@"Notification Body %@", notification);
 }
 
 @end

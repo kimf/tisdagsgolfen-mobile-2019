@@ -30,6 +30,8 @@
 		66B2CD4D2BA3E2DED2A2275E /* BuddyBuildSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C8188073461C52F9B7CA2B13 /* BuddyBuildSDK.framework */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		85B33C4D55D8D91D8C6BD12E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 423DE5284B7A7FDA8B48DC4E /* QuartzCore.framework */; };
+		976885871E61B98E007FCF99 /* glf_swng.caf in Resources */ = {isa = PBXBuildFile; fileRef = 976885851E61B98E007FCF99 /* glf_swng.caf */; };
+		976885881E61B98E007FCF99 /* golfball.caf in Resources */ = {isa = PBXBuildFile; fileRef = 976885861E61B98E007FCF99 /* golfball.caf */; };
 		ABDFE9BE2FC9363FAF959008 /* CoreVideo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0295EE51E5F6CBE18798D187 /* CoreVideo.framework */; };
 		B058432CF273BC3E6B04D6CD /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AD4344566BB979FDA697BAC /* AssetsLibrary.framework */; };
 		D79323A04774CE4B21F4C600 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B8D1A03A6FDE0E24B1F1555 /* CoreTelephony.framework */; };
@@ -257,6 +259,8 @@
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		96DEE0B0E82E4948B20B7DF9 /* RCTOneSignal.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTOneSignal.xcodeproj; path = "../node_modules/react-native-onesignal/ios/RCTOneSignal.xcodeproj"; sourceTree = "<group>"; };
 		9715AA101E5FA23F003CFE40 /* Tisdagsgolfen.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = Tisdagsgolfen.entitlements; path = Tisdagsgolfen/Tisdagsgolfen.entitlements; sourceTree = "<group>"; };
+		976885851E61B98E007FCF99 /* glf_swng.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = glf_swng.caf; sourceTree = "<group>"; };
+		976885861E61B98E007FCF99 /* golfball.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = golfball.caf; sourceTree = "<group>"; };
 		9AD4344566BB979FDA697BAC /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
 		A439B7A8C8476EA981B27E10 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		BDB82B1D08FE4660A5618E9F /* libRCTOneSignal.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTOneSignal.a; sourceTree = "<group>"; };
@@ -383,6 +387,8 @@
 		13B07FAE1A68108700A75B9A /* Tisdagsgolfen */ = {
 			isa = PBXGroup;
 			children = (
+				976885851E61B98E007FCF99 /* glf_swng.caf */,
+				976885861E61B98E007FCF99 /* golfball.caf */,
 				9715AA101E5FA23F003CFE40 /* Tisdagsgolfen.entitlements */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
@@ -833,6 +839,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				976885871E61B98E007FCF99 /* glf_swng.caf in Resources */,
+				976885881E61B98E007FCF99 /* golfball.caf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
