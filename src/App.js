@@ -1,13 +1,11 @@
 import React, { Component } from 'react'
 import { AppState, AsyncStorage, View, Platform, UIManager } from 'react-native'
-import { Route, Redirect } from 'react-router-native'
+import { Redirect } from 'react-router-native'
 import OneSignal from 'react-native-onesignal'
 import deviceLog, { LogView } from 'react-native-device-log'
 
 import styles from './styles'
 import { getCache, setCache } from './utils'
-
-import Profile from './components/Profile'
 import Login from './containers/Login'
 import Home from './containers/Home'
 
@@ -70,8 +68,8 @@ class App extends Component {
 
     getCache('currentUser').then((value) => {
       if (value && value.token) {
-        this.setState({ checkingLoggin: false, loggedOut: false, email: value.email })
         OneSignal.syncHashedEmail(value.email)
+        this.setState({ checkingLoggin: false, loggedOut: false, email: value.email })
       } else {
         const email = value ? value.email : ''
         this.setState({ checkingLoggin: false, loggedOut: true, email })
@@ -97,10 +95,9 @@ class App extends Component {
   }
 
 
-  logout = (email, callback) => {
+  logout = (email) => {
     setCache('currentUser', { email }).then(() => {
       this.setState({ loggedOut: true })
-      callback()
     })
   }
 
@@ -121,12 +118,10 @@ class App extends Component {
     return (
       <View style={styles.container}>
         { this.state.showLog ? <LogView inverted={false} timeStampFormat="HH:mm:ss" multiExpanded /> : null }
-        <Route path="/" component={Home} />
-        <Route exact path="/profile" render={() => <Profile onLogout={this.logout} />} />
+        <Home onLogout={this.logout} />
       </View>
     )
   }
 }
-
 
 export default App

@@ -1,8 +1,5 @@
-import React from 'react'
-import { Modal, View, Text, ListView } from 'react-native'
-import NavigationBar from 'react-native-navbar'
-import moment from 'moment'
-import 'moment/locale/sv'
+import React, { Component, PropTypes } from 'react'
+import { View, Text, ListView } from 'react-native'
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 
@@ -13,83 +10,59 @@ import styles from '../../styles'
 
 const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 })
 
-const Event = ({ event, data, userId, goBack }) => {
-  let gametypeName = ''
-  if (event.scoringType === 'modified_points') {
-    gametypeName = 'Modifierad Poäng'
-  } else if (event.scoringType === 'points') {
-    gametypeName = 'Poäng'
-  } else {
-    gametypeName = 'Slag'
-  }
+class Event extends Component {
+  render() {
+    const { event, data, userId } = this.props
+    let gametypeName = ''
+    if (event.scoringType === 'modified_points') {
+      gametypeName = 'Modifierad Poäng'
+    } else if (event.scoringType === 'points') {
+      gametypeName = 'Poäng'
+    } else {
+      gametypeName = 'Slag'
+    }
 
-  const startsAt = moment(event.startsAt).format('ddd DD MMM').toUpperCase()
-
-  const titleConfig = { title: startsAt, tintColor: 'white' }
-  const leftButtonConfig = {
-    title: 'Stäng',
-    handler: () => goBack(),
-    tintColor: '#fff'
-  }
-
-  // {event.club} -
-
-  return (
-    <Modal
-      animationType={'slide'}
-      transparent={false}
-      onRequestClose={() => {}}
-      visible
-      hardwareAccelerated
-    >
+    return (
       <View style={styles.container}>
-        <NavigationBar
-          style={styles.header}
-          statusBar={{ style: 'light-content', tintColor: '#000' }}
-          title={titleConfig}
-          leftButton={leftButtonConfig}
-        />
-        <View style={styles.innerContainer}>
-          <Text style={[styles.inlineHeader, { backgroundColor: '#ccc', textAlign: 'center' }]}>
-            {event.course}
-            {' / '}
-            {event.teamEvent ? 'Lag' : 'Individuellt'}
-            {' / '}
-            {gametypeName}
-          </Text>
+        <Text style={[styles.inlineHeader, { backgroundColor: '#ccc', textAlign: 'center' }]}>
+          {event.course}
+          {' / '}
+          {event.teamEvent ? 'Lag' : 'Individuellt'}
+          {' / '}
+          {gametypeName}
+        </Text>
 
-          { data.loading
-            ? <Loading text="Laddar resultat..." />
-            : <View>
-              <View style={[styles.listrow]}>
-                <Text style={{ fontSize: 10, flex: 1 }} />
-                <Text style={{ fontSize: 10, flex: 2 }}>Spelare</Text>
-                <Text style={{ fontSize: 10, flex: 1 }}>{event.scoringType === 'points' ? 'Poäng' : 'Slag'}</Text>
-                <Text style={{ fontSize: 10, flex: 1 }}>Rundor</Text>
-                <Text style={{ fontSize: 10, flex: 1 }}>Snitt</Text>
-                <Text style={{ fontSize: 10, flex: 1 }}>Total</Text>
-                <Text style={{ fontSize: 10, flex: 1 }}>Öl</Text>
-                <Text style={{ fontSize: 10, flex: 1 }}>Kr</Text>
-                <Text style={{ fontSize: 10, flex: 1 }}>Tour Poäng</Text>
-              </View>
-              <ListView
-                initialListSize={30}
-                dataSource={ds.cloneWithRows(data.players)}
-                ref={(ref) => { this.listView = ref }}
-                renderRow={rowData =>
-                  <EventLeaderboardCard key={`l_${event.id}`} currentUserId={userId} data={rowData} />
-                }
-                enableEmptySections
-              />
+        { data.loading
+          ? <Loading text="Laddar resultat..." />
+          : <View>
+            <View style={[styles.listrow]}>
+              <Text style={{ fontSize: 10, flex: 1 }} />
+              <Text style={{ fontSize: 10, flex: 2 }}>Spelare</Text>
+              <Text style={{ fontSize: 10, flex: 1 }}>{event.scoringType === 'points' ? 'Poäng' : 'Slag'}</Text>
+              <Text style={{ fontSize: 10, flex: 1 }}>Rundor</Text>
+              <Text style={{ fontSize: 10, flex: 1 }}>Snitt</Text>
+              <Text style={{ fontSize: 10, flex: 1 }}>Total</Text>
+              <Text style={{ fontSize: 10, flex: 1 }}>Öl</Text>
+              <Text style={{ fontSize: 10, flex: 1 }}>Kr</Text>
+              <Text style={{ fontSize: 10, flex: 1 }}>Tour Poäng</Text>
             </View>
-          }
-        </View>
+            <ListView
+              initialListSize={30}
+              dataSource={ds.cloneWithRows(data.players)}
+              ref={(ref) => { this.listView = ref }}
+              renderRow={rowData =>
+                <EventLeaderboardCard key={`l_${event.id}`} currentUserId={userId} data={rowData} />
+              }
+              enableEmptySections
+            />
+          </View>
+        }
       </View>
-    </Modal>
-  )
+    )
+  }
 }
 
-const { arrayOf, shape, string, bool, func } = React.PropTypes
+const { arrayOf, shape, string, bool } = PropTypes
 
 Event.propTypes = {
   event: shape({
@@ -104,8 +77,7 @@ Event.propTypes = {
     loading: bool,
     players: arrayOf(shape())
   }),
-  userId: string.isRequired,
-  goBack: func.isRequired
+  userId: string.isRequired
 }
 
 Event.defaultProps = {

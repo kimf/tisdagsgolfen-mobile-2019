@@ -13,8 +13,8 @@ const Tabs = ({ currentRoute, onChange, tabs, bottom }) => {
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'stretch',
-        marginHorizontal: bottom ? 0 : 10,
-        marginVertical: bottom ? 0 : 5
+        paddingHorizontal: bottom ? 0 : 10,
+        paddingVertical: bottom ? 0 : 5
       }}
     >
       { tabs.map(tab =>

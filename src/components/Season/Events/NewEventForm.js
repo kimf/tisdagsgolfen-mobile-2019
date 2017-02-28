@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { Modal } from 'react-native'
-import NavigationBar from 'react-native-navbar'
+import { View } from 'react-native'
 
 import CoursePicker from './CoursePicker'
 import NewEventSetup from './NewEventSetup'
@@ -14,43 +13,25 @@ class NewEventForm extends Component {
   }
 
   render() {
-    const { goBack, seasonId } = this.props
+    const { seasonId } = this.props
     const { course } = this.state
     return (
-      <Modal
-        animationType={'slide'}
-        transparent={false}
-        visible
-        hardwareAccelerated
-        onRequestClose={goBack}
-      >
-        <NavigationBar
-          style={styles.header}
-          statusBar={{ style: 'light-content', tintColor: '#000' }}
-          title={{ title: 'SKAPA NY RUNDA', tintColor: 'white' }}
-          leftButton={{
-            title: 'Avbryt',
-            handler: goBack,
-            tintColor: '#fff'
-          }}
-        />
+      <View style={styles.container}>
         { course
           ?
             <NewEventSetup
               seasonId={seasonId}
               changeCourse={this.setCourse}
               course={course}
-              goBack={goBack}
             />
           : <CoursePicker selectCourse={this.setCourse} />
         }
-      </Modal>
+      </View>
     )
   }
 }
 
 NewEventForm.propTypes = {
-  goBack: PropTypes.func.isRequired,
   seasonId: PropTypes.string.isRequired
 }
 

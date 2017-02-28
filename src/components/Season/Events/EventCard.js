@@ -1,5 +1,6 @@
 import React from 'react'
-import { Text, TouchableOpacity, View, StyleSheet } from 'react-native'
+import { Text, View, StyleSheet } from 'react-native'
+import { Link } from 'react-router-native'
 import moment from 'moment'
 import 'moment/locale/sv'
 
@@ -50,7 +51,7 @@ const s = StyleSheet.create({
   }
 })
 
-const EventCard = ({ event, gotoEvent }) => {
+const EventCard = ({ event }) => {
   let gametypeName = ''
   if (event.scoringType === 'modified_points') {
     gametypeName = 'Modifierad Poäng'
@@ -61,7 +62,7 @@ const EventCard = ({ event, gotoEvent }) => {
   }
 
   return (
-    <TouchableOpacity onPress={() => gotoEvent(event)}>
+    <Link to={`/events/${event.id}`}>
       <View style={[s.eventCard, s[event.status]]}>
         <View style={s.row}>
           <Text style={[s.date]}>
@@ -80,11 +81,11 @@ const EventCard = ({ event, gotoEvent }) => {
           <Text style={{ fontSize: 16, lineHeight: 25 }}>{event.course}</Text>
         </View>
       </View>
-    </TouchableOpacity>
+    </Link>
   )
 }
 
-const { shape, string, bool, func } = React.PropTypes
+const { shape, string, bool } = React.PropTypes
 
 EventCard.propTypes = {
   event: shape({
@@ -94,8 +95,7 @@ EventCard.propTypes = {
     teamEvent: bool.isRequired,
     club: string,
     course: string
-  }).isRequired,
-  gotoEvent: func.isRequired
+  }).isRequired
 }
 
 export default EventCard
