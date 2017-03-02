@@ -1,8 +1,8 @@
 import React from 'react'
 import { View, Text, ListView } from 'react-native'
+import { Link } from 'react-router-native'
 import { Navigation, Card } from 'react-router-navigation'
 
-import { Link } from '../../../Link'
 import EventCard from './EventCard'
 import EmptyState from '../../Shared/EmptyState'
 import NewEventForm from './NewEventForm'
@@ -21,7 +21,7 @@ const addNewButton = (seasonClosed) => {
       <Link
         replace
         to="/events/new"
-        underlayColor="#f0f0f0"
+        underlayColor="#feb"
         style={{
           flex: 1,
           width: 200,
@@ -36,7 +36,6 @@ const addNewButton = (seasonClosed) => {
   )
 }
 
-// {addNewButton(seasonClosed)}
 
 const EventList = ({ events, seasonClosed, seasonId, userId }) => {
   const sortedEvents = sortedByParsedDate(events, 'startsAt')
@@ -49,17 +48,25 @@ const EventList = ({ events, seasonClosed, seasonId, userId }) => {
           path="/events"
           render={() => {
             if (events.length === 0) {
-              return <EmptyState text="Inga rundor :(" />
+              return (
+                <View style={{ flex: 1 }}>
+                  {addNewButton(seasonClosed)}
+                  <EmptyState text="Inga rundor :(" />
+                </View>
+              )
             }
 
             return (
-              <ListView
-                ref={(c) => { this.listView = c }}
-                initialListSize={100}
-                dataSource={ds.cloneWithRows(sortedEvents)}
-                renderRow={rowData => <EventCard event={rowData} />}
-                enableEmptySections
-              />
+              <View style={{ flex: 1 }}>
+                {addNewButton(seasonClosed)}
+                <ListView
+                  ref={(c) => { this.listView = c }}
+                  initialListSize={100}
+                  dataSource={ds.cloneWithRows(sortedEvents)}
+                  renderRow={rowData => <EventCard event={rowData} />}
+                  enableEmptySections
+                />
+              </View>
             )
           }}
           title="Rundor"

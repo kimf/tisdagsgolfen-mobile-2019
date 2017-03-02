@@ -2886,7 +2886,7 @@ load-json-file@^1.0.0:
     pinkie-promise "^2.0.0"
     strip-bom "^2.0.0"
 
-lodash-es@^4.2.0, lodash-es@^4.2.1:
+lodash-es@^4.17.4, lodash-es@^4.2.0, lodash-es@^4.2.1:
   version "4.17.4"
   resolved "https://registry.yarnpkg.com/lodash-es/-/lodash-es-4.17.4.tgz#dcc1d7552e150a0640073ba9cb31d70f032950e7"
 
@@ -3062,7 +3062,7 @@ lodash@^3.5.0:
   version "3.10.1"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-3.10.1.tgz#5bf45e8e49ba4189e17d482789dfd15bd140b7b6"
 
-lodash@^4.0.0, lodash@^4.11.1, lodash@^4.14.0, lodash@^4.15.0, lodash@^4.16.6, lodash@^4.2.0, lodash@^4.2.1, lodash@^4.3.0, lodash@^4.6.1:
+lodash@^4.0.0, lodash@^4.11.1, lodash@^4.14.0, lodash@^4.15.0, lodash@^4.16.6, lodash@^4.17.4, lodash@^4.2.0, lodash@^4.2.1, lodash@^4.3.0, lodash@^4.6.1:
   version "4.17.4"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.4.tgz#78203a4d1c328ae1d86dca6460e369b57f4055ae"
 
@@ -3782,14 +3782,14 @@ react-router-native@next:
   dependencies:
     react-router "^4.0.0-beta.6"
 
-react-router-navigation@LeoLeBras/react-router-navigation#dev:
+react-router-navigation@^1.0.0-beta.1:
   version "1.0.0-beta.1"
-  resolved "https://codeload.github.com/LeoLeBras/react-router-navigation/tar.gz/c1a4b91cb56d55e79e954ffb5ffa8295155949ed"
+  resolved "https://registry.yarnpkg.com/react-router-navigation/-/react-router-navigation-1.0.0-beta.1.tgz#f0169566d8b4a482ecd42d9d9c900b16d8f0ba8c"
   dependencies:
     react-native-tab-view "0.0.56"
     react-navigation "1.0.0-beta.5"
 
-react-router@^4.0.0-beta.6, react-router@next:
+react-router@^4.0.0-beta.6:
   version "4.0.0-beta.6"
   resolved "https://registry.yarnpkg.com/react-router/-/react-router-4.0.0-beta.6.tgz#561ac0bf1929960813bf201319ff85d821d5547b"
   dependencies:
@@ -3883,6 +3883,14 @@ redeyed@~1.0.0:
   resolved "https://registry.yarnpkg.com/redeyed/-/redeyed-1.0.1.tgz#e96c193b40c0816b00aec842698e61185e55498a"
   dependencies:
     esprima "~3.0.0"
+
+redux-persist@^4.4.2:
+  version "4.4.2"
+  resolved "https://registry.yarnpkg.com/redux-persist/-/redux-persist-4.4.2.tgz#0e874284f3d155215d1f33f48fadfc850526618e"
+  dependencies:
+    json-stringify-safe "^5.0.1"
+    lodash "^4.17.4"
+    lodash-es "^4.17.4"
 
 redux@^3.4.0, redux@^3.6.0:
   version "3.6.0"
@@ -3995,6 +4003,10 @@ require-uncached@^1.0.2:
   dependencies:
     caller-path "^0.1.0"
     resolve-from "^1.0.0"
+
+reselect@^2.5.4:
+  version "2.5.4"
+  resolved "https://registry.yarnpkg.com/reselect/-/reselect-2.5.4.tgz#b7d23fdf00b83fa7ad0279546f8dbbbd765c7047"
 
 resolve-from@^1.0.0:
   version "1.0.1"

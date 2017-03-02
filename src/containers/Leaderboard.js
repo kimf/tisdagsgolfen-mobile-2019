@@ -1,14 +1,17 @@
 import React, { Component } from 'react'
 import { Dimensions, View, ListView, Image, ScrollView, LayoutAnimation } from 'react-native'
 import NavigationBar from 'react-native-navbar'
+import { connect } from 'react-redux'
 
-import LeaderboardCard from './LeaderboardCard'
-import Tabs from '../Tabs'
-import EmptyState from '../../Shared/EmptyState'
-import SeasonPicker from '../SeasonPicker'
+import { changeSeason, changeSort } from '../reducers/season'
+import { getSortedPlayers } from '../selectors'
 
-import { ranked } from '../../../utils'
-import styles from '../../../styles'
+import LeaderboardCard from '../components/Season/LeaderboardCard'
+import Tabs from '../components/Season/Tabs'
+import EmptyState from '../components/Shared/EmptyState'
+import SeasonPicker from '../components/Season/SeasonPicker'
+
+import styles from '../styles'
 
 const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 })
 
@@ -21,20 +24,19 @@ const leaderboardTabs = [
 ]
 
 class Leaderboard extends Component {
-  state = { sorting: 'totalPoints', showSeasonPicker: false }
+  state = { showSeasonPicker: false }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.seasonName !== this.props.seasonName) {
+    if (nextProps.season.name !== this.props.season.name) {
       if (this.listView) {
         this.listView.scrollTo({ x: 0, y: 0, animated: true })
       }
-      this.setState({ sorting: 'totalPoints' })
     }
   }
 
   changeSort = (sorting) => {
     this.listView.scrollTo({ x: 0, y: 0, animated: true })
-    this.setState({ sorting })
+    this.props.onChangeSort(sorting)
   }
 
   toggleSeasonpicker = () => {
@@ -48,36 +50,23 @@ class Leaderboard extends Component {
   }
 
   render() {
-    const {
-      players, seasonName, seasonId, seasons, userId, closed, photoUrl
-    } = this.props
-    const { sorting, showSeasonPicker } = this.state
+    const { season, sortedPlayers, sorting, seasonNavigationItems, userId } = this.props
+    const { showSeasonPicker } = this.state
 
-    const emptyLeaderboard = players.filter(sl => sl.eventCount !== 0).length === 0
-    const showLeaderboardTabs = !emptyLeaderboard && parseInt(seasonName, 10) > 2015
-
-    let sortedLeaderboard
-    if (sorting === 'beers') {
-      sortedLeaderboard = players.slice().sort((a, b) => b.totalBeers - a.totalBeers)
-      sortedLeaderboard = ranked(sortedLeaderboard, 'beerPos', 'totalBeers')
-    } else if (sorting === 'kr') {
-      sortedLeaderboard = players.slice().sort((a, b) => a.totalKr - b.totalKr)
-      sortedLeaderboard = ranked(sortedLeaderboard, 'krPos', 'totalKr')
-    } else {
-      sortedLeaderboard = players.slice().sort((a, b) => a.position - b.position)
-    }
+    const emptyLeaderboard = sortedPlayers.filter(sl => sl.eventCount !== 0).length === 0
+    const showLeaderboardTabs = !emptyLeaderboard && parseInt(season.name, 10) > 2015
 
     const caret = showSeasonPicker ? '↑' : '↓'
     const rightButtonConfig = {
-      title: `${seasonName} ${caret}`,
+      title: `${season.name} ${caret}`,
       handler: () => this.toggleSeasonpicker(),
-      tintColor: '#cecece'
+      tintColor: '#efefef'
     }
 
     let stickyHeaderIndices = null
-    if (showLeaderboardTabs && closed && photoUrl) {
+    if (showLeaderboardTabs && season.closed && season.photo.url) {
       stickyHeaderIndices = [1]
-    } else if (showLeaderboardTabs && !closed) {
+    } else if (showLeaderboardTabs && !season.closed) {
       stickyHeaderIndices = [0]
     }
 
@@ -85,26 +74,26 @@ class Leaderboard extends Component {
       <View style={styles.container}>
         <NavigationBar
           style={styles.header}
-          statusBar={{ style: 'light-content', tintColor: '#000' }}
-          title={{ title: 'TISDAGSGOLFEN', tintColor: 'white' }}
+          statusBar={{ style: 'light-content', tintColor: '#11111F' }}
+          title={{ title: 'Tisdagsgolfen', tintColor: 'white' }}
           rightButton={rightButtonConfig}
         />
 
         { showSeasonPicker
           ?
             <SeasonPicker
-              seasons={seasons}
-              currentSeasonId={seasonId}
+              seasons={seasonNavigationItems}
+              currentSeasonId={season.id}
               onChangeSeason={s => this.changeSeason(s)}
             />
           : null
         }
 
         <ScrollView stickyHeaderIndices={stickyHeaderIndices}>
-          { closed && photoUrl
+          { season.closed && season.photo.url
             ? <Image
               style={{ width: DEVICE_WIDTH, height: 220 }}
-              source={{ uri: photoUrl }}
+              source={{ uri: season.photo.url }}
               resizeMode="cover"
             /> : null
           }
@@ -123,7 +112,7 @@ class Leaderboard extends Component {
             ? <EmptyState text="Inga rundor spelade ännu" />
             : <ListView
               initialListSize={30}
-              dataSource={ds.cloneWithRows(sortedLeaderboard)}
+              dataSource={ds.cloneWithRows(sortedPlayers)}
               ref={(ref) => { this.listView = ref }}
               renderRow={rowData =>
                 <LeaderboardCard key={`l_${userId}`} currentUserId={userId} data={rowData} sorting={sorting} />
@@ -140,23 +129,42 @@ class Leaderboard extends Component {
 const { arrayOf, bool, func, shape, string } = React.PropTypes
 
 Leaderboard.propTypes = {
-  seasonName: string.isRequired,
-  seasonId: string.isRequired,
-  closed: bool,
-  photoUrl: string,
+  season: shape({
+    name: string.isRequired,
+    id: string.isRequired,
+    closed: bool.isRequired,
+    photo: shape({
+      url: string
+    }).isRequired,
+    players: arrayOf(shape()).isRequired
+  }).isRequired,
+  sortedPlayers: arrayOf(shape()).isRequired,
   userId: string.isRequired,
-  players: arrayOf(shape()).isRequired,
-  seasons: arrayOf(shape({
+  seasonNavigationItems: arrayOf(shape({
     id: string.isRequired,
     name: string.isRequired
   })).isRequired,
+  sorting: string.isRequired,
+  onChangeSort: func.isRequired,
   onChangeSeason: func.isRequired
 }
 
-Leaderboard.defaultProps = {
-  closed: false,
-  photoUrl: ''
-}
+const mapStateToProps = (state, props) => (
+  {
+    sorting: state.season.sorting,
+    sortedPlayers: getSortedPlayers(state, props),
+    seasonNavigationItems: state.season.seasonNavigationItems
+  }
+)
 
+const mapDispatchToProps = dispatch => (
+  {
+    onChangeSeason: seasonId => dispatch(changeSeason(seasonId)),
+    onChangeSort: sorting => dispatch(changeSort(sorting))
+  }
+)
 
-export default Leaderboard
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Leaderboard)

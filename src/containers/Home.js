@@ -1,20 +1,17 @@
 import React, { Component, PropTypes } from 'react'
-import { View, LayoutAnimation } from 'react-native'
-import { withRouter, Switch, Route, Redirect } from 'react-router-native'
-import { BottomNavigation, Tab } from 'react-router-navigation'
+import { View } from 'react-native'
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
-import update from 'immutability-helper'
+import { connect } from 'react-redux'
 
+// import update from 'immutability-helper'
+
+import TabStack from '../TabStack'
 import Loading from '../components/Shared/Loading'
-import Leaderboard from '../components/Season/Leaderboard/Leaderboard'
-import Profile from '../components/Profile'
-import EventList from '../components/Season/Events/EventList'
 
 import styles from '../styles'
 
 const { arrayOf, bool, func, shape, string } = PropTypes
-const blue = 'hsl(200, 50%, 50%)'
 
 class Home extends Component {
   static propTypes = {
@@ -32,94 +29,81 @@ class Home extends Component {
         events: arrayOf(shape())
       }))
     }).isRequired,
-    onLogout: func.isRequired,
-    match: shape().isRequired
+    currentSeasonId: string,
+    onLogout: func.isRequired
   }
 
   static defaultProps = {
+    currentSeasonId: null,
     match: { url: '' }
   }
 
-  state = { currentSeasonId: null }
+  // componentWillReceiveProps(newProps) {
+  //   const { loading } = this.props.data
+  //   const { currentSeasonId } = this.props
+  //   if (loading || !currentSeasonId) {
+  //     return
+  //   }
+  //   const events = this.getCurrentSeason().events
+  //   const newEvents = newProps.data.seasons.find(s => s.id === currentSeasonId).events
 
-  componentWillReceiveProps(newProps) {
-    const { seasons, loading } = this.props.data
-    const { currentSeasonId } = this.state
-    if (loading || !currentSeasonId) {
-      return
-    }
-    const events = seasons.find(s => s.id === currentSeasonId).events
-    const newEvents = newProps.data.seasons.find(s => s.id === currentSeasonId).events
+  //   if (!newProps.data.loading) {
+  //     if (this.subscription) {
+  //       if (newEvents !== events) {
+  //         // if the feed has changed, we need to unsubscribe before resubscribing
+  //         this.subscription()
+  //       } else {
+  //         // we already have an active subscription with the right params
+  //         return
+  //       }
+  //     }
 
-    if (!newProps.data.loading) {
-      if (this.subscription) {
-        if (newEvents !== events) {
-          // if the feed has changed, we need to unsubscribe before resubscribing
-          this.subscription()
-        } else {
-          // we already have an active subscription with the right params
-          return
-        }
-      }
+  //     this.subscription = newProps.data.subscribeToMore({
+  //       document: gql`
+  //         subscription($seasonId: ID!) {
+  //           createEvent(
+  //             filter: { season: { id: $seasonId } }
+  //           ) {
+  //             id
+  //             status
+  //             startsAt
+  //             course
+  //             courseId
+  //             scoringType
+  //             teamEvent
+  //             oldId
+  //           }
+  //         }
+  //       `,
+  //       variables: { seasonId: currentSeasonId },
 
-      this.subscription = newProps.data.subscribeToMore({
-        document: gql`
-          subscription($seasonId: ID!) {
-            createEvent(
-              filter: { season: { id: $seasonId } }
-            ) {
-              id
-              status
-              startsAt
-              course
-              courseId
-              scoringType
-              teamEvent
-              oldId
-            }
-          }
-        `,
-        variables: { seasonId: currentSeasonId },
-
-        // this is where the magic happens.
-        updateQuery: (prev, { subscriptionData }) => {
-          const newEvent = subscriptionData.data.createEvent
-          const seasonIndex = prev.seasons.findIndex(s => s.id === currentSeasonId)
-          LayoutAnimation.configureNext(LayoutAnimation.Presets.spring)
-          // eslint-disable-next-line no-console
-          console.log('GOT NEW EVENT', newEvent)
-          return update(prev, {
-            seasons: {
-              [seasonIndex]: {
-                events: {
-                  $push: [newEvent]
-                }
-              }
-            }
-          })
-        },
-        // eslint-disable-next-line no-console
-        onError: err => console.error(err)
-      })
-    }
-  }
-
-  getCurrentSeason = () => {
-    const { currentSeasonId } = this.state
-    const { seasons } = this.props.data
-
-    return currentSeasonId
-           ? seasons.find(s => s.id === currentSeasonId)
-           : seasons[0]
-  }
-
-  changeSeason = (currentSeasonId) => {
-    this.setState({ currentSeasonId })
-  }
+  //       // this is where the magic happens.
+  //       updateQuery: (prev, { subscriptionData }) => {
+  //         const newEvent = subscriptionData.data.createEvent
+  //         const seasonIndex = prev.seasons.findIndex(s => s.id === currentSeasonId)
+  //         LayoutAnimation.configureNext(LayoutAnimation.Presets.spring)
+  //         // eslint-disable-next-line no-console
+  //         console.log('GOT NEW EVENT', newEvent)
+  //         return update(prev, {
+  //           seasons: {
+  //             [seasonIndex]: {
+  //               events: {
+  //                 $push: [newEvent]
+  //               }
+  //             }
+  //           }
+  //         })
+  //       },
+  //       // eslint-disable-next-line no-console
+  //       onError: err => console.error(err)
+  //     })
+  //   }
+  // }
 
   render() {
-    const { onLogout, match } = this.props
+    const { onLogout, currentSeasonId } = this.props
     const { loading, user, seasons } = this.props.data
+
     if (loading) {
       return (
         <View style={styles.container}>
@@ -128,70 +112,28 @@ class Home extends Component {
       )
     }
 
+    if (!currentSeasonId) {
+      return (
+        <View style={styles.container}>
+          <Loading text="Brum brum..." />
+        </View>
+      )
+    }
+
+    const currentSeason = seasons.find(s => s.id === currentSeasonId)
+
+    const props = { currentSeason, user, onLogout }
+
     return (
       <View style={{ flex: 1, alignItems: 'stretch', backgroundColor: '#eee' }}>
-        <Switch>
-          <Route
-            exact
-            path="/"
-            render={() => <Redirect to={`${match.url}/leaderboard`} />}
-          />
-          <Route
-            path="/"
-            render={() => (
-              <View style={{ flex: 1 }}>
-                <BottomNavigation labelStyle={({ isActive }) => isActive && { color: blue }}>
-                  <Tab
-                    path="/leaderboard"
-                    label="🏆 Ledartavla"
-                    render={() => {
-                      const currentSeason = this.getCurrentSeason()
-                      return (
-                        <Leaderboard
-                          userId={user.id}
-                          seasonId={currentSeason.id}
-                          closed={currentSeason.closed}
-                          photoUrl={currentSeason.photo ? currentSeason.photo.url : ''}
-                          players={currentSeason.players}
-                          seasonName={currentSeason.name}
-                          seasons={seasons.map(s => Object.assign({ id: s.id, name: s.name }))}
-                          onChangeSeason={this.changeSeason}
-                        />
-                      )
-                    }}
-                  />
-                  <Tab
-                    path="/events"
-                    render={() => {
-                      const currentSeason = this.getCurrentSeason()
-                      return (
-                        <EventList
-                          events={currentSeason.events}
-                          seasonClosed={currentSeason.closed}
-                          seasonId={currentSeason.id}
-                          userId={user.id}
-                        />
-                      )
-                    }}
-                    label="🗓 Rundor"
-                  />
-                  <Tab
-                    path="/profile"
-                    render={() => <Profile onLogout={onLogout} user={user} />}
-                    label="🏌 Profil"
-                  />
-                </BottomNavigation>
-              </View>
-            )}
-          />
-        </Switch>
+        <TabStack {...props} key={currentSeasonId} />
       </View>
     )
   }
 }
 
 const seasonQuery = gql`
-  query {
+  query getAllSeasons {
     user {
       id
       email
@@ -236,8 +178,17 @@ const seasonQuery = gql`
   }
 `
 
-const HomeWithData = graphql(seasonQuery, {
-  options: () => ({ forceFetch: false })
-})(Home)
 
-export default withRouter(HomeWithData)
+const mapStateToProps = state => (
+  {
+    currentSeasonId: state.season.seasonId
+  }
+)
+
+const withRedux = connect(
+  mapStateToProps,
+)(Home)
+
+export default graphql(seasonQuery, {
+  options: () => ({ forceFetch: false })
+})(withRedux)

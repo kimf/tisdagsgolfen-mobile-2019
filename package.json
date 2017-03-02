@@ -21,8 +21,10 @@
 		"react-native-onesignal": "^3.0.3",
 		"react-redux": "^5.0.3",
 		"react-router-native": "next",
-		"react-router-navigation": "LeoLeBras/react-router-navigation#dev",
+		"react-router-navigation": "^1.0.0-beta.1",
 		"redux": "^3.6.0",
+		"redux-persist": "^4.4.2",
+		"reselect": "^2.5.4",
 		"subscriptions-transport-ws": "^0.5.1"
 	},
 	"devDependencies": {

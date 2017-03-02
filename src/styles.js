@@ -1,9 +1,8 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet, Platform } from 'react-native'
 
 import colors from './colors'
-// const iOS = (Platform.OS == 'ios')
-// fontSize: iOS ? 12 : 11,
 
+const APPBAR_HEIGHT = Platform.OS === 'ios' ? 44 : 56
 
 export default StyleSheet.create({
   /* MAIN LAYOUT PARTS */
@@ -21,7 +20,7 @@ export default StyleSheet.create({
   },
 
   header: {
-    height: 60,
+    height: APPBAR_HEIGHT,
     backgroundColor: '#11111F'
   },
 
