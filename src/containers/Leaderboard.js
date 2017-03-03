@@ -8,7 +8,7 @@ import { changeSeason, changeSort } from '../reducers/season'
 import { getSortedPlayers } from '../selectors'
 
 import LeaderboardCard from '../components/Season/LeaderboardCard'
-import Tabs from '../components/Season/Tabs'
+import Tabs from '../components/Shared/Tabs'
 import EmptyState from '../components/Shared/EmptyState'
 import SeasonPicker from '../components/Season/SeasonPicker'
 
@@ -17,12 +17,6 @@ import styles from '../styles'
 const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 })
 
 const DEVICE_WIDTH = Dimensions.get('window').width
-
-const leaderboardTabs = [
-  { value: 'totalPoints', icon: '🤷', title: 'Poäng' },
-  { value: 'beers', icon: '🍻', title: 'Öl' },
-  { value: 'kr', icon: '💸', title: 'Skuld' }
-]
 
 class Leaderboard extends Component {
   state = { showSeasonPicker: false, showLog: false }
@@ -111,7 +105,6 @@ class Leaderboard extends Component {
               <Tabs
                 currentRoute={sorting}
                 onChange={sort => this.changeSort(sort)}
-                tabs={leaderboardTabs}
               />
             : null
           }

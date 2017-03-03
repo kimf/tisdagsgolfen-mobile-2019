@@ -105,7 +105,17 @@ export default StyleSheet.create({
     fontSize: 22,
     fontWeight: '900',
     textAlign: 'right',
-    flex: 3
+    flex: 2
+  },
+
+  dimmerPoints: {
+    color: '#444',
+    fontFamily: 'Avenir',
+    fontSize: 14,
+    fontWeight: '700',
+    textAlign: 'center',
+    flex: 2,
+    paddingTop: 5
   },
 
   position: {
@@ -115,7 +125,7 @@ export default StyleSheet.create({
   },
 
   cardTitle: {
-    flex: 5,
+    flex: 6,
     flexDirection: 'column'
   },
 

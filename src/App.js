@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 import { AppState, AsyncStorage, View, Platform, UIManager } from 'react-native'
-import { Redirect } from 'react-router-native'
+import { withRouter, Redirect } from 'react-router-native'
 import OneSignal from 'react-native-onesignal'
 import deviceLog from 'react-native-device-log'
 
@@ -35,6 +35,13 @@ const handleAppStateChange = (/* currentAppState */) => {
 }
 
 class App extends Component {
+  static propTypes = {
+    index: PropTypes.number.isRequired,
+    location: PropTypes.shape({
+      pathname: PropTypes.string
+    }).isRequired
+  }
+
   constructor() {
     super()
 
@@ -49,7 +56,8 @@ class App extends Component {
     checkingLoggin: true,
     loggedOut: true,
     email: '',
-    openedFromNotification: false
+    openedFromNotification: false,
+    showLog: false
   }
 
   componentWillMount() {
@@ -109,8 +117,13 @@ class App extends Component {
     if (this.state.loggedOut) { return <Login email={this.state.email} onLogin={this.login} /> }
 
     if (this.state.openedFromNotification) {
-      return <Redirect to={`/${this.state.route}`} />
+      return <Redirect to={`${this.state.route}`} />
     }
+
+    if (this.props.index === 0 && this.props.location.pathname === '/') {
+      return <Redirect replace to="/leaderboard" />
+    }
+
 
     return (
       <View style={styles.container}>
@@ -120,4 +133,4 @@ class App extends Component {
   }
 }
 
-export default App
+export default withRouter(App)

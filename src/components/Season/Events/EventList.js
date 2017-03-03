@@ -36,8 +36,7 @@ const addNewButton = (seasonClosed) => {
   )
 }
 
-
-const EventList = ({ events, seasonClosed, seasonId, userId }) => {
+const EventList = ({ events, seasonClosed, seasonId, seasonHasBeerAndKr, userId }) => {
   const sortedEvents = sortedByParsedDate(events, 'startsAt')
 
   return (
@@ -91,7 +90,14 @@ const EventList = ({ events, seasonClosed, seasonId, userId }) => {
             const { match: { params } } = props
             const eventId = params.id
             const event = events.find(e => e.id === eventId)
-            return <Event event={event} userId={userId} seasonId={seasonId} />
+            return (
+              <Event
+                event={event}
+                userId={userId}
+                seasonId={seasonId}
+                hasBeerAndKr={seasonHasBeerAndKr}
+              />
+            )
           }}
           title="Runda"
           navBarStyle={{ backgroundColor: '#11111F' }}
@@ -109,7 +115,8 @@ EventList.propTypes = {
   events: arrayOf(shape()).isRequired,
   userId: string.isRequired,
   seasonId: string.isRequired,
-  seasonClosed: bool.isRequired
+  seasonClosed: bool.isRequired,
+  seasonHasBeerAndKr: bool.isRequired
 }
 
 

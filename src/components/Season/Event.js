@@ -1,62 +1,80 @@
 import React, { Component, PropTypes } from 'react'
-import { View, Text, ListView } from 'react-native'
+import { View, ListView } from 'react-native'
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 
+import EventHeader from './EventHeader'
 import EventLeaderboardCard from './Events/EventLeaderboardCard'
+import Tabs from '../Shared/Tabs'
 import Loading from '../Shared/Loading'
 
+import { ranked } from '../../utils'
 import styles from '../../styles'
 
 const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 })
 
+
 class Event extends Component {
+  state = { sorting: 'totalPoints' }
+
+  changeSort = (sorting) => {
+    this.listView.scrollTo({ x: 0, y: 0, animated: true })
+    this.setState({ sorting })
+  }
+
   render() {
-    const { event, data, userId } = this.props
-    let gametypeName = ''
-    if (event.scoringType === 'modified_points') {
-      gametypeName = 'Modifierad Poäng'
-    } else if (event.scoringType === 'points') {
-      gametypeName = 'Poäng'
+    const { event, data, userId, hasBeerAndKr } = this.props
+    const { sorting } = this.state
+
+    const eventHeader = <EventHeader {...event} />
+
+    if (data.loading) {
+      return (
+        <View style={styles.container}>
+          {eventHeader}
+          <Loading text="Laddar resultat..." />
+        </View>
+      )
+    }
+
+    let sortedPlayers = null
+    let sorted = null
+    if (sorting === 'beers') {
+      sorted = data.players.slice().sort((a, b) => b.score.beers - a.score.beers)
+      sortedPlayers = ranked(sorted, 'beerPos', 'totalBeers')
+    } else if (sorting === 'kr') {
+      sorted = data.players.slice().sort((a, b) => a.score.kr - b.score.kr)
+      sortedPlayers = ranked(sorted, 'krPos', 'totalKr')
     } else {
-      gametypeName = 'Slag'
+      sortedPlayers = data.players.slice().sort((a, b) => a.position - b.position)
     }
 
     return (
       <View style={styles.container}>
-        <Text style={[styles.inlineHeader, { backgroundColor: '#ccc', textAlign: 'center' }]}>
-          {event.course}
-          {' / '}
-          {event.teamEvent ? 'Lag' : 'Individuellt'}
-          {' / '}
-          {gametypeName}
-        </Text>
-
-        { data.loading
-          ? <Loading text="Laddar resultat..." />
-          : <View>
-            <View style={[styles.listrow]}>
-              <Text style={{ fontSize: 10, flex: 1 }} />
-              <Text style={{ fontSize: 10, flex: 2 }}>Spelare</Text>
-              <Text style={{ fontSize: 10, flex: 1 }}>{event.scoringType === 'points' ? 'Poäng' : 'Slag'}</Text>
-              <Text style={{ fontSize: 10, flex: 1 }}>Rundor</Text>
-              <Text style={{ fontSize: 10, flex: 1 }}>Snitt</Text>
-              <Text style={{ fontSize: 10, flex: 1 }}>Total</Text>
-              <Text style={{ fontSize: 10, flex: 1 }}>Öl</Text>
-              <Text style={{ fontSize: 10, flex: 1 }}>Kr</Text>
-              <Text style={{ fontSize: 10, flex: 1 }}>Tour Poäng</Text>
-            </View>
-            <ListView
-              initialListSize={30}
-              dataSource={ds.cloneWithRows(data.players)}
-              ref={(ref) => { this.listView = ref }}
-              renderRow={rowData =>
-                <EventLeaderboardCard key={`l_${event.id}`} currentUserId={userId} data={rowData} />
-              }
-              enableEmptySections
-            />
-          </View>
+        { eventHeader }
+        { hasBeerAndKr
+          ? <Tabs
+            currentRoute={sorting}
+            onChange={sort => this.changeSort(sort)}
+          />
+          : null
         }
+
+        <ListView
+          initialListSize={20}
+          dataSource={ds.cloneWithRows(sortedPlayers)}
+          ref={(ref) => { this.listView = ref }}
+          renderRow={rowData =>
+            <EventLeaderboardCard
+              key={`l_${userId}`}
+              scoringType={event.scoringType}
+              currentUserId={userId}
+              data={rowData}
+              sorting={sorting}
+            />
+          }
+          enableEmptySections
+        />
       </View>
     )
   }
@@ -73,6 +91,7 @@ Event.propTypes = {
     club: string,
     course: string
   }).isRequired,
+  hasBeerAndKr: bool.isRequired,
   data: shape({
     loading: bool,
     players: arrayOf(shape())
@@ -115,6 +134,7 @@ const eventQuery = gql`
     }
   }
 `
+
 
 export default graphql(eventQuery, {
   options: ({ event }) => ({ variables: { eventId: event.id } })

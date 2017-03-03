@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'
 import { BottomNavigation, Tab } from 'react-router-navigation'
-import { View } from 'react-native'
+import { View, Text } from 'react-native'
 
 import Leaderboard from './containers/Leaderboard'
 import Profile from './components/Profile'
@@ -15,8 +15,9 @@ const TabStack = ({ currentSeason, user, onLogout }) => (
       currentSeason={currentSeason}
     >
       <Tab
-        path="/"
-        label="🏆 Ledartavla"
+        path="/leaderboard"
+        label="Ledartavla"
+        renderTabIcon={() => <Text>🏆</Text>}
         render={() => <Leaderboard season={currentSeason} userId={user.id} />}
       />
       <Tab
@@ -26,15 +27,18 @@ const TabStack = ({ currentSeason, user, onLogout }) => (
             events={currentSeason.events}
             seasonId={currentSeason.id}
             seasonClosed={currentSeason.closed}
+            seasonHasBeerAndKr={parseInt(currentSeason.name, 10) > 2015}
             userId={user.id}
           />
         )}
-        label="🗓 Rundor"
+        renderTabIcon={() => <Text>🗓</Text>}
+        label="Rundor"
       />
       <Tab
         path="/profile"
         render={() => <Profile onLogout={onLogout} user={user} />}
-        label="🏌 Profil"
+        renderTabIcon={() => <Text>🏌</Text>}
+        label="Profil"
       />
     </BottomNavigation>
   </View>
