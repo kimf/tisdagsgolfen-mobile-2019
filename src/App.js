@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { AppState, AsyncStorage, View, Platform, UIManager } from 'react-native'
 import { Redirect } from 'react-router-native'
 import OneSignal from 'react-native-onesignal'
-import deviceLog, { LogView } from 'react-native-device-log'
+import deviceLog from 'react-native-device-log'
 
 import styles from './styles'
 import { getCache, setCache } from './utils'
@@ -34,7 +34,6 @@ const handleAppStateChange = (/* currentAppState */) => {
   // deviceLog.debug('currentAppState', currentAppState)
 }
 
-
 class App extends Component {
   constructor() {
     super()
@@ -50,8 +49,7 @@ class App extends Component {
     checkingLoggin: true,
     loggedOut: true,
     email: '',
-    openedFromNotification: false,
-    showLog: false
+    openedFromNotification: false
   }
 
   componentWillMount() {
@@ -94,7 +92,6 @@ class App extends Component {
     this.setState({ openedFromNotification: true, route: data.route, eventId: data.eventId })
   }
 
-
   logout = (email) => {
     setCache('currentUser', { email }).then(() => {
       this.setState({ loggedOut: true })
@@ -117,8 +114,7 @@ class App extends Component {
 
     return (
       <View style={styles.container}>
-        { this.state.showLog ? <LogView inverted={false} timeStampFormat="HH:mm:ss" multiExpanded /> : null }
-        <Home onLogout={this.logout} />
+        <Home onLogout={this.logout} toggleLog={this.toggleLog} />
       </View>
     )
   }

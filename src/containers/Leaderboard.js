@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Dimensions, View, ListView, Image, ScrollView, LayoutAnimation } from 'react-native'
 import NavigationBar from 'react-native-navbar'
 import { connect } from 'react-redux'
+import { LogView } from 'react-native-device-log'
 
 import { changeSeason, changeSort } from '../reducers/season'
 import { getSortedPlayers } from '../selectors'
@@ -24,7 +25,7 @@ const leaderboardTabs = [
 ]
 
 class Leaderboard extends Component {
-  state = { showSeasonPicker: false }
+  state = { showSeasonPicker: false, showLog: false }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.season.name !== this.props.season.name) {
@@ -47,6 +48,10 @@ class Leaderboard extends Component {
   changeSeason = (currentSeasonId) => {
     this.props.onChangeSeason(currentSeasonId)
     this.setState({ showSeasonPicker: false })
+  }
+
+  toggleLog = () => {
+    this.setState({ showLog: !this.state.showLog })
   }
 
   render() {
@@ -77,7 +82,10 @@ class Leaderboard extends Component {
           statusBar={{ style: 'light-content', tintColor: '#11111F' }}
           title={{ title: 'Tisdagsgolfen', tintColor: 'white' }}
           rightButton={rightButtonConfig}
+          leftButton={{ title: 'Log', handler: () => this.toggleLog(), tintColor: '#000' }}
         />
+
+        { this.state.showLog ? <LogView inverted={false} timeStampFormat="HH:mm:ss" multiExpanded /> : null }
 
         { showSeasonPicker
           ?
@@ -135,7 +143,7 @@ Leaderboard.propTypes = {
     closed: bool.isRequired,
     photo: shape({
       url: string
-    }).isRequired,
+    }),
     players: arrayOf(shape()).isRequired
   }).isRequired,
   sortedPlayers: arrayOf(shape()).isRequired,

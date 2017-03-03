@@ -14,6 +14,7 @@ const Tab = ({ tab, isCurrent, onChange, fontSize, padding }) => {
   const text = `${tab.icon} ${tab.title}`
   return (
     <TouchableOpacity
+      key={tab.title}
       style={tabStyle(padding, isCurrent)}
       onPress={() => onChange(tab.value)}
     >
