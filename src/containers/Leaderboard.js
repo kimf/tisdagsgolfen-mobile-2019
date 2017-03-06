@@ -18,7 +18,7 @@ const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 })
 
 const DEVICE_WIDTH = Dimensions.get('window').width
 
-export class Leaderboard extends Component {
+class Leaderboard extends Component {
   state = { showSeasonPicker: false, showLog: false }
 
   componentWillReceiveProps(nextProps) {

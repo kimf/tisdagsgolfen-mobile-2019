@@ -43,7 +43,9 @@ const handleAppStateChange = (/* currentAppState */) => {
 
 class App extends Component {
   static propTypes = {
-    index: PropTypes.number.isRequired,
+    history: PropTypes.shape({
+      index: PropTypes.number.isRequired
+    }).isRequired,
     location: PropTypes.shape({
       pathname: PropTypes.string
     }).isRequired
@@ -128,7 +130,7 @@ class App extends Component {
       return <Redirect to={`${this.state.route}`} />
     }
 
-    if (this.props.index === 0 && this.props.location.pathname === '/') {
+    if (this.props.history.index === 0 && this.props.location.pathname === '/') {
       return <Redirect replace to="/leaderboard" />
     }
 

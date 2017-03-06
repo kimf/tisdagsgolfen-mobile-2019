@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react'
-import { BottomNavigation, Tab } from 'react-router-navigation'
 import { View, Text } from 'react-native'
+import { BottomNavigation, Tab } from 'react-router-navigation'
 
-import ConnectedLeaderboard, { Leaderboard } from './containers/Leaderboard'
+import Leaderboard from './containers/Leaderboard'
 import Profile from './components/Profile'
 import EventList from './components/Season/Events/EventList'
 
@@ -17,13 +17,15 @@ const labelStyle = isActive => (
 
 const TabStack = ({ currentSeason, user, onLogout }) => (
   <View style={{ flex: 1 }}>
-    <BottomNavigation currentSeason={currentSeason}>
+    <BottomNavigation
+      currentSeason={currentSeason}
+      labelStyle={({ isActive }) => labelStyle(isActive)}
+    >
       <Tab
         path="/leaderboard"
         label="Ledartavla"
-        labelStyle={({ isActive }) => labelStyle(isActive)}
         renderTabIcon={() => <Text>🏆</Text>}
-        render={() => <ConnectedLeaderboard season={currentSeason} userId={user.id} />}
+        render={() => <Leaderboard season={currentSeason} userId={user.id} />}
       />
       <Tab
         path="/events"
@@ -38,14 +40,12 @@ const TabStack = ({ currentSeason, user, onLogout }) => (
         )}
         renderTabIcon={() => <Text>🗓</Text>}
         label="Rundor"
-        labelStyle={({ isActive }) => labelStyle(isActive)}
       />
       <Tab
         path="/profile"
         render={() => <Profile onLogout={onLogout} user={user} />}
         renderTabIcon={() => <Text>🏌</Text>}
         label="Profil"
-        labelStyle={({ isActive }) => labelStyle(isActive)}
       />
     </BottomNavigation>
   </View>
@@ -62,8 +62,8 @@ TabStack.propTypes = {
     name: string,
     closed: bool,
     photo: shape({ url: string }),
-    players: arrayOf(Leaderboard.propTypes.season.players),
-    events: arrayOf(EventList.propTypes.events)
+    players: arrayOf(shape()),
+    events: arrayOf(shape())
   }).isRequired,
   onLogout: func.isRequired
 }

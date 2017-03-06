@@ -29,7 +29,10 @@ const EventList = ({ events, seasonClosed, seasonId, seasonHasBeerAndKr, userId 
 
   return (
     <View style={{ flex: 1, backgroundColor: '#eee' }}>
-      <Navigation navBarStyle={{ backgroundColor: '#2ecc71' }} titleStyle={{ color: '#fff' }}>
+      <Navigation
+        navBarStyle={{ backgroundColor: '#2ecc71' }}
+        titleStyle={{ color: '#fff' }}
+      >
         <Card
           exact
           path="/events"
@@ -64,8 +67,8 @@ const EventList = ({ events, seasonClosed, seasonId, seasonHasBeerAndKr, userId 
         <Card
           exact
           path="/events/:id"
-          render={(props) => {
-            const { match: { params } } = props
+          render={(routeProps) => {
+            const { match: { params } } = routeProps.history
             const eventId = params.id
             const event = events.find(e => e.id === eventId)
             const componentProps = { event, userId, seasonId, hasBeerAndKr: seasonHasBeerAndKr }
@@ -78,8 +81,8 @@ const EventList = ({ events, seasonClosed, seasonId, seasonHasBeerAndKr, userId 
         <Card
           exact
           path="/events/:id/score"
-          render={(props) => {
-            const { match: { params } } = props
+          render={(routeProps) => {
+            const { match: { params } } = routeProps.history
             const eventId = params.id
             const event = events.find(e => e.id === eventId)
             const componentProps = { event, userId, seasonId, hasBeerAndKr: seasonHasBeerAndKr }
@@ -91,7 +94,7 @@ const EventList = ({ events, seasonClosed, seasonId, seasonHasBeerAndKr, userId 
         <Card
           exact
           path="/events/:id/follow"
-          render={props => <View {...props} />}
+          render={routeProps => <View {...routeProps} />}
           title="Följ live"
         />
       </Navigation>

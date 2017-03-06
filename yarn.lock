@@ -3764,11 +3764,11 @@ react-redux@^5.0.3:
     lodash-es "^4.2.0"
     loose-envify "^1.1.0"
 
-react-router-native@4.0.0-beta.5:
-  version "4.0.0-beta.5"
-  resolved "https://registry.yarnpkg.com/react-router-native/-/react-router-native-4.0.0-beta.5.tgz#ddefb34c0a292a6f2213b167c47afbc6eba1bc1d"
+react-router-native@4.0.0-beta.7:
+  version "4.0.0-beta.7"
+  resolved "https://registry.yarnpkg.com/react-router-native/-/react-router-native-4.0.0-beta.7.tgz#b044430dc375ea0feb1f933c2e855fab2a7c1d80"
   dependencies:
-    react-router "^4.0.0-beta.5"
+    react-router "^4.0.0-beta.7"
 
 react-router-navigation@LeoLeBras/react-router-navigation:
   version "1.0.0-beta.1"
@@ -3777,7 +3777,7 @@ react-router-navigation@LeoLeBras/react-router-navigation:
     react-native-tab-view "0.0.56"
     react-navigation "1.0.0-beta.5"
 
-react-router@^4.0.0-beta.5:
+react-router@^4.0.0-beta.7:
   version "4.0.0-beta.7"
   resolved "https://registry.yarnpkg.com/react-router/-/react-router-4.0.0-beta.7.tgz#e82931139ed26a99cd5251e2cf2a7b47daceb483"
   dependencies:
