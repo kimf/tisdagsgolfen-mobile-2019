@@ -33,7 +33,12 @@ const SeasonPicker = ({ seasons, currentSeasonId, onChangeSeason }) => (
 const { arrayOf, shape, string, func } = React.PropTypes
 
 SeasonPicker.propTypes = {
-  seasons: arrayOf(shape().isRequired).isRequired,
+  seasons: arrayOf(
+    shape({
+      id: string.isRequired,
+      name: string.isRequired
+    }).isRequired
+  ).isRequired,
   currentSeasonId: string.isRequired,
   onChangeSeason: func.isRequired
 }

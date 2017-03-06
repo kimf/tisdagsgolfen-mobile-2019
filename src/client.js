@@ -19,7 +19,7 @@ const networkInterface = createBatchingNetworkInterface({
 
 /* eslint-disable no-param-reassign */
 networkInterface.use([{
-  applyMiddleware(req, next) {
+  applyBatchMiddleware(req, next) {
     if (!req.options.headers) {
       req.options.headers = {}
     }

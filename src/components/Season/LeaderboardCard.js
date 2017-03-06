@@ -61,10 +61,26 @@ const LeaderboardCard = ({ data, currentUserId, sorting }) => {
   )
 }
 
-const { shape, string } = React.PropTypes
+const { shape, string, number } = React.PropTypes
 
 LeaderboardCard.propTypes = {
-  data: shape().isRequired,
+  data: shape({
+    averagePoints: number.isRequired,
+    beerPos: number.isRequired,
+    eventCount: number.isRequired,
+    id: string.isRequired,
+    krPos: number.isRequired,
+    position: number.isRequired,
+    previousPosition: number.isRequired,
+    totalBeers: number.isRequired,
+    totalKr: number.isRequired,
+    totalPoints: number.isRequired,
+    user: shape({
+      id: string.isRequired,
+      firstName: string.isRequired,
+      lastName: string.isRequired
+    }).isRequired
+  }).isRequired,
   currentUserId: string.isRequired,
   sorting: string.isRequired
 }

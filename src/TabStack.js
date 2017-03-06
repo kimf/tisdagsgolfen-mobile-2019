@@ -2,23 +2,28 @@ import React, { PropTypes } from 'react'
 import { BottomNavigation, Tab } from 'react-router-navigation'
 import { View, Text } from 'react-native'
 
-import Leaderboard from './containers/Leaderboard'
+import ConnectedLeaderboard, { Leaderboard } from './containers/Leaderboard'
 import Profile from './components/Profile'
 import EventList from './components/Season/Events/EventList'
 
-const blue = 'hsl(200, 50%, 50%)'
+const labelStyle = isActive => (
+  {
+    color: (isActive ? '#27ae60' : '#7f8c8d'),
+    fontSize: 12,
+    marginVertical: 3,
+    fontWeight: (isActive ? 'bold' : 'normal')
+  }
+)
 
 const TabStack = ({ currentSeason, user, onLogout }) => (
   <View style={{ flex: 1 }}>
-    <BottomNavigation
-      labelStyle={({ isActive }) => isActive && { color: blue }}
-      currentSeason={currentSeason}
-    >
+    <BottomNavigation currentSeason={currentSeason}>
       <Tab
         path="/leaderboard"
         label="Ledartavla"
+        labelStyle={({ isActive }) => labelStyle(isActive)}
         renderTabIcon={() => <Text>🏆</Text>}
-        render={() => <Leaderboard season={currentSeason} userId={user.id} />}
+        render={() => <ConnectedLeaderboard season={currentSeason} userId={user.id} />}
       />
       <Tab
         path="/events"
@@ -33,12 +38,14 @@ const TabStack = ({ currentSeason, user, onLogout }) => (
         )}
         renderTabIcon={() => <Text>🗓</Text>}
         label="Rundor"
+        labelStyle={({ isActive }) => labelStyle(isActive)}
       />
       <Tab
         path="/profile"
         render={() => <Profile onLogout={onLogout} user={user} />}
         renderTabIcon={() => <Text>🏌</Text>}
         label="Profil"
+        labelStyle={({ isActive }) => labelStyle(isActive)}
       />
     </BottomNavigation>
   </View>
@@ -55,8 +62,8 @@ TabStack.propTypes = {
     name: string,
     closed: bool,
     photo: shape({ url: string }),
-    players: arrayOf(shape()),
-    events: arrayOf(shape())
+    players: arrayOf(Leaderboard.propTypes.season.players),
+    events: arrayOf(EventList.propTypes.events)
   }).isRequired,
   onLogout: func.isRequired
 }

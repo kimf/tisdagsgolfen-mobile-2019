@@ -94,7 +94,7 @@ Event.propTypes = {
   hasBeerAndKr: bool.isRequired,
   data: shape({
     loading: bool,
-    players: arrayOf(shape())
+    players: arrayOf(EventLeaderboardCard.propTypes.data)
   }),
   userId: string.isRequired
 }

@@ -69,10 +69,32 @@ const EventLeaderboardCard = ({ data, currentUserId, sorting, scoringType }) => 
   )
 }
 
-const { shape, string } = React.PropTypes
+const { shape, string, number } = React.PropTypes
 
 EventLeaderboardCard.propTypes = {
-  data: shape().isRequired,
+  data: shape({
+    beerPos: number.isRequired,
+    eventCount: number.isRequired,
+    id: string.isRequired,
+    krPos: number.isRequired,
+    position: number.isRequired,
+    previousTotalPosition: number.isRequired,
+    score: shape({
+      beers: number.isRequired,
+      kr: number.isRequired,
+      eventPoints: number.isRequired,
+      user: shape({
+        id: string.isRequired,
+        firstName: string.isRequired,
+        lastName: string.isRequired
+      }),
+      value: number.isRequired
+    }),
+    totalAveragePoints: number.isRequired,
+    totalEventCount: number.isRequired,
+    totalEventPoints: number.isRequired,
+    totalPosition: number.isRequired
+  }).isRequired,
   currentUserId: string.isRequired,
   sorting: string.isRequired,
   scoringType: string.isRequired

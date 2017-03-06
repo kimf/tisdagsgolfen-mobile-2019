@@ -1,4 +1,4 @@
-import { AppRegistry } from 'react-native';
-import root from './src/root'
+import { AppRegistry } from 'react-native'
+import Root from './src/Root'
 
-AppRegistry.registerComponent('Tisdagsgolfen', () => () => root)
+AppRegistry.registerComponent('Tisdagsgolfen', () => Root)

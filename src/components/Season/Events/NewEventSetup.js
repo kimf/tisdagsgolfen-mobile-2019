@@ -5,6 +5,7 @@ import moment from 'moment'
 import 'moment/locale/sv'
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
+import { withRouter } from 'react-router-native'
 
 import styles from '../../../styles'
 
@@ -51,10 +52,10 @@ class NewEventSetup extends Component {
 
     return (
       <View style={[styles.container, { alignItems: 'stretch', flexDirection: 'column' }]}>
-        <View style={styles.inlineHeader}>
-          <Text>{course.name}</Text>
-          <TouchableOpacity onPress={() => changeCourse(null)}>
-            <Text>Byt bana</Text>
+        <View style={[styles.inlineHeader, { flexDirection: 'row' }]}>
+          <Text style={{ flex: 2, fontWeight: 'bold', padding: 10 }}>{course.name}</Text>
+          <TouchableOpacity style={{ flex: 1, padding: 10 }} onPress={() => changeCourse(null)}>
+            <Text style={{ textAlign: 'right' }}>Byt bana</Text>
           </TouchableOpacity>
         </View>
 
@@ -168,4 +169,4 @@ const NewEventSetupWithMutation = graphql(createEventMutation, {
 })(NewEventSetup)
 
 
-export default NewEventSetupWithMutation
+export default withRouter(NewEventSetupWithMutation)

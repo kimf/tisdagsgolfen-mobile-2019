@@ -21,7 +21,7 @@ export default StyleSheet.create({
 
   header: {
     height: APPBAR_HEIGHT,
-    backgroundColor: '#11111F'
+    backgroundColor: '#2ecc71'
   },
 
   inlineHeader: {

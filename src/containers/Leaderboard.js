@@ -18,7 +18,7 @@ const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 })
 
 const DEVICE_WIDTH = Dimensions.get('window').width
 
-class Leaderboard extends Component {
+export class Leaderboard extends Component {
   state = { showSeasonPicker: false, showLog: false }
 
   componentWillReceiveProps(nextProps) {
@@ -73,7 +73,7 @@ class Leaderboard extends Component {
       <View style={styles.container}>
         <NavigationBar
           style={styles.header}
-          statusBar={{ style: 'light-content', tintColor: '#11111F' }}
+          statusBar={{ style: 'light-content', tintColor: '#2ecc71' }}
           title={{ title: 'Tisdagsgolfen', tintColor: 'white' }}
           rightButton={rightButtonConfig}
           leftButton={{ title: 'Log', handler: () => this.toggleLog(), tintColor: '#000' }}
@@ -91,27 +91,27 @@ class Leaderboard extends Component {
           : null
         }
 
-        <ScrollView stickyHeaderIndices={stickyHeaderIndices}>
-          { season.closed && season.photo.url
-            ? <Image
-              style={{ width: DEVICE_WIDTH, height: 220 }}
-              source={{ uri: season.photo.url }}
-              resizeMode="cover"
-            /> : null
-          }
+        { emptyLeaderboard
+          ? <EmptyState text="Inga rundor spelade ännu" />
+          : <ScrollView stickyHeaderIndices={stickyHeaderIndices}>
+            { season.closed && season.photo.url
+              ? <Image
+                style={{ width: DEVICE_WIDTH, height: 220 }}
+                source={{ uri: season.photo.url, cache: 'force-cache' }}
+                resizeMode="cover"
+              /> : null
+            }
 
-          { showLeaderboardTabs
-            ?
-              <Tabs
-                currentRoute={sorting}
-                onChange={sort => this.changeSort(sort)}
-              />
-            : null
-          }
+            { showLeaderboardTabs
+              ?
+                <Tabs
+                  currentRoute={sorting}
+                  onChange={sort => this.changeSort(sort)}
+                />
+              : null
+            }
 
-          { emptyLeaderboard
-            ? <EmptyState text="Inga rundor spelade ännu" />
-            : <ListView
+            <ListView
               initialListSize={30}
               dataSource={ds.cloneWithRows(sortedPlayers)}
               ref={(ref) => { this.listView = ref }}
@@ -120,8 +120,8 @@ class Leaderboard extends Component {
               }
               enableEmptySections
             />
-          }
-        </ScrollView>
+          </ScrollView>
+        }
       </View>
     )
   }
@@ -137,9 +137,9 @@ Leaderboard.propTypes = {
     photo: shape({
       url: string
     }),
-    players: arrayOf(shape()).isRequired
+    players: arrayOf(LeaderboardCard.propTypes.data).isRequired
   }).isRequired,
-  sortedPlayers: arrayOf(shape()).isRequired,
+  sortedPlayers: arrayOf(LeaderboardCard.propTypes.data).isRequired,
   userId: string.isRequired,
   seasonNavigationItems: arrayOf(shape({
     id: string.isRequired,

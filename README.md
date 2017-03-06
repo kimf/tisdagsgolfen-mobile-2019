@@ -1,3 +1,5 @@
+propTypes = { ...ChildThing.propTypes }
+
 #p12 vqgxruyqgk
 #onesignal app-id: 92ef9314-1d1d-4c51-99c7-f265769161da
 

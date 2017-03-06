@@ -3,17 +3,24 @@ import { AppState, AsyncStorage, View, Platform, UIManager } from 'react-native'
 import { withRouter, Redirect } from 'react-router-native'
 import OneSignal from 'react-native-onesignal'
 import deviceLog from 'react-native-device-log'
+import slowlog from 'react-native-slowlog'
 
 import styles from './styles'
 import { getCache, setCache } from './utils'
 import Login from './containers/Login'
 import Home from './containers/Home'
 
+// if (__DEV__) {
+//   // eslint-disable-next-line
+//   const { whyDidYouUpdate } = require('why-did-you-update')
+//   whyDidYouUpdate(React, { exclude: /^Connect/ })
+// }
+
 deviceLog.init(AsyncStorage, {
-  logToConsole: true,
+  logToConsole: false,
   logRNErrors: true,
   maxNumberToRender: 0,
-  maxNumberToPersist: 0
+  maxNumberToPersist: 100
 }).then(() => {
   deviceLog.success('logger initialized')
 })
@@ -44,6 +51,7 @@ class App extends Component {
 
   constructor() {
     super()
+    slowlog(this, /.*/)
 
     if (Platform.OS === 'android') {
       // eslint-disable-next-line no-unused-expressions

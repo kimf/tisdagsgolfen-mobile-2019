@@ -8,7 +8,7 @@ const Profile = ({ user, onLogout }) => (
   <View style={styles.container}>
     <NavigationBar
       style={styles.header}
-      statusBar={{ style: 'light-content', tintColor: '#11111F' }}
+      statusBar={{ style: 'light-content', tintColor: '#2ecc71' }}
       title={{ title: 'Profil', tintColor: 'white' }}
     />
     <View style={{ flex: 1 }}>
