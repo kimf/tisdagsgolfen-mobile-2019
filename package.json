@@ -22,7 +22,7 @@
 		"react-native-slowlog": "^1.0.2",
 		"react-redux": "^5.0.3",
 		"react-router-native": "4.0.0-beta.7",
-		"react-router-navigation": "LeoLeBras/react-router-navigation",
+		"react-router-navigation": "LeoLeBras/react-router-navigation#next",
 		"redux": "^3.6.0",
 		"redux-immutable-state-invariant": "^1.2.4",
 		"redux-persist": "^4.4.2",

@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 
 // import update from 'immutability-helper'
 
-import TabStack from '../TabStack'
+import Tabbar from '../components/Tabbar'
 import Loading from '../components/Shared/Loading'
 
 import styles from '../styles'
@@ -126,7 +126,7 @@ class Home extends Component {
 
     return (
       <View style={{ flex: 1, alignItems: 'stretch', backgroundColor: '#eee' }}>
-        <TabStack {...props} key={currentSeasonId} />
+        <Tabbar {...props} key={currentSeasonId} />
       </View>
     )
   }

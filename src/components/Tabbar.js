@@ -2,9 +2,9 @@ import React, { PropTypes } from 'react'
 import { View, Text } from 'react-native'
 import { BottomNavigation, Tab } from 'react-router-navigation'
 
-import Leaderboard from './containers/Leaderboard'
-import Profile from './components/Profile'
-import EventList from './components/Season/Events/EventList'
+import Leaderboard from '../containers/Leaderboard'
+import Profile from './Profile'
+import EventList from './Season/Events/EventList'
 
 const labelStyle = isActive => (
   {
@@ -15,7 +15,7 @@ const labelStyle = isActive => (
   }
 )
 
-const TabStack = ({ currentSeason, user, onLogout }) => (
+const Tabbar = ({ currentSeason, user, onLogout }) => (
   <View style={{ flex: 1 }}>
     <BottomNavigation
       currentSeason={currentSeason}
@@ -24,7 +24,7 @@ const TabStack = ({ currentSeason, user, onLogout }) => (
       <Tab
         path="/leaderboard"
         label="Ledartavla"
-        renderTabIcon={() => <Text>🏆</Text>}
+        renderIcon={() => <Text>🏆</Text>}
         render={() => <Leaderboard season={currentSeason} userId={user.id} />}
       />
       <Tab
@@ -38,13 +38,13 @@ const TabStack = ({ currentSeason, user, onLogout }) => (
             userId={user.id}
           />
         )}
-        renderTabIcon={() => <Text>🗓</Text>}
+        renderIcon={() => <Text>🗓</Text>}
         label="Rundor"
       />
       <Tab
         path="/profile"
         render={() => <Profile onLogout={onLogout} user={user} />}
-        renderTabIcon={() => <Text>🏌</Text>}
+        renderIcon={() => <Text>🏌</Text>}
         label="Profil"
       />
     </BottomNavigation>
@@ -53,7 +53,7 @@ const TabStack = ({ currentSeason, user, onLogout }) => (
 
 const { shape, string, bool, arrayOf, func } = PropTypes
 
-TabStack.propTypes = {
+Tabbar.propTypes = {
   user: shape({
     id: string.isRequired
   }).isRequired,
@@ -68,4 +68,4 @@ TabStack.propTypes = {
   onLogout: func.isRequired
 }
 
-export default TabStack
+export default Tabbar

@@ -3630,6 +3630,10 @@ react-native-invertible-scroll-view@^1.0.0:
     react-clone-referenced-element "^1.0.1"
     react-native-scrollable-mixin "^1.0.1"
 
+react-native-material-bottom-navigation@^0.4.0:
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/react-native-material-bottom-navigation/-/react-native-material-bottom-navigation-0.4.0.tgz#42a8cff37e0b25bbe5e99fd7c726d7eb0450c23c"
+
 react-native-navbar@^1.6.2:
   version "1.6.2"
   resolved "https://registry.yarnpkg.com/react-native-navbar/-/react-native-navbar-1.6.2.tgz#f324f654100423e96df37dedcbeda819f04c03ff"
@@ -3648,13 +3652,9 @@ react-native-slowlog@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/react-native-slowlog/-/react-native-slowlog-1.0.2.tgz#5520979e3ef9d5273495d431ff3be34f02e35c89"
 
-react-native-tab-view@0.0.56:
+react-native-tab-view@0.0.56, react-native-tab-view@^0.0.56:
   version "0.0.56"
   resolved "https://registry.yarnpkg.com/react-native-tab-view/-/react-native-tab-view-0.0.56.tgz#7417a1f6502deef49abf58ba76a1cde213abbbf1"
-
-react-native-tab-view@^0.0.55:
-  version "0.0.55"
-  resolved "https://registry.yarnpkg.com/react-native-tab-view/-/react-native-tab-view-0.0.55.tgz#6e82c50f916b46e0a5af2f9748e6aca36d58f7ad"
 
 react-native@0.42.0:
   version "0.42.0"
@@ -3736,16 +3736,16 @@ react-native@0.42.0:
     xmldoc "^0.4.0"
     yargs "^6.4.0"
 
-react-navigation@1.0.0-beta.5:
-  version "1.0.0-beta.5"
-  resolved "https://registry.yarnpkg.com/react-navigation/-/react-navigation-1.0.0-beta.5.tgz#28f0cf6e9ab12e25f927dbc63efa51cf7d5ab8a5"
+react-navigation@1.0.0-beta.6:
+  version "1.0.0-beta.6"
+  resolved "https://registry.yarnpkg.com/react-navigation/-/react-navigation-1.0.0-beta.6.tgz#56172ef7493a461b05d362674290eae4bdcaef6a"
   dependencies:
     clamp "^1.0.1"
     fbjs "^0.8.5"
     hoist-non-react-statics "^1.2.0"
     path-to-regexp "^1.7.0"
     react-native-drawer-layout "^1.1.0"
-    react-native-tab-view "^0.0.55"
+    react-native-tab-view "^0.0.56"
 
 react-proxy@^1.1.7:
   version "1.1.8"
@@ -3770,12 +3770,13 @@ react-router-native@4.0.0-beta.7:
   dependencies:
     react-router "^4.0.0-beta.7"
 
-react-router-navigation@LeoLeBras/react-router-navigation:
+react-router-navigation@LeoLeBras/react-router-navigation#next:
   version "1.0.0-beta.1"
-  resolved "https://codeload.github.com/LeoLeBras/react-router-navigation/tar.gz/878362f155aebb5463c662dc3f88a65efacc5ed7"
+  resolved "https://codeload.github.com/LeoLeBras/react-router-navigation/tar.gz/5e40f1cdb275c05b1e7910070528030376cab801"
   dependencies:
+    react-native-material-bottom-navigation "^0.4.0"
     react-native-tab-view "0.0.56"
-    react-navigation "1.0.0-beta.5"
+    react-navigation "1.0.0-beta.6"
 
 react-router@^4.0.0-beta.7:
   version "4.0.0-beta.7"

@@ -137,7 +137,7 @@ class App extends Component {
 
     return (
       <View style={styles.container}>
-        <Home onLogout={this.logout} toggleLog={this.toggleLog} />
+        <Home location={this.props.location} onLogout={this.logout} toggleLog={this.toggleLog} />
       </View>
     )
   }
