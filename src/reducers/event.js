@@ -5,6 +5,10 @@ export const addPlayer = (playerId, name) => ({
   payload: { playerId, name }
 })
 
+export const cancelEvent = () => ({
+  type: 'CANCEL_EVENT'
+})
+
 export default (state = initialState, action) => {
   switch (action.type) {
     case 'ADD_PLAYER': {
@@ -25,17 +29,27 @@ export default (state = initialState, action) => {
         }
       }
 
-      if (action.operationName === 'getAllSeasons') {
-        const currentPlayer = action.result.data.user
-        currentPlayer.strokes = 0
-        return {
-          ...state,
-          currentPlayer
-        }
-      }
-
       return state
     }
+
+    case 'LOGGED_IN': {
+      const { json } = action.payload
+      const currentPlayer = json.user
+      currentPlayer.strokes = 0
+
+      return {
+        ...state,
+        currentPlayer
+      }
+    }
+
+    case 'CANCEL_EVENT':
+      return {
+        ...state,
+        event: null,
+        currentHole: 1,
+        playing: [state.currentPlayer]
+      }
 
     default:
       return state

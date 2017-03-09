@@ -5,9 +5,8 @@ import moment from 'moment'
 import 'moment/locale/sv'
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
-import { withRouter } from 'react-router-native'
 
-import styles from '../../../styles'
+import styles from '../../styles'
 
 class NewEventSetup extends Component {
   state = {
@@ -21,7 +20,7 @@ class NewEventSetup extends Component {
   onSubmit = () => {
     this.setState({ isSaving: true })
     const { isStrokes, teamEvent, startsAt } = this.state
-    const { seasonId, createEvent, goBack } = this.props
+    const { seasonId, createEvent, done } = this.props
     const scoringType = isStrokes ? 'strokes' : 'points'
     const courseId = this.props.course.id
     const course = this.props.course.name
@@ -29,7 +28,7 @@ class NewEventSetup extends Component {
     createEvent({ seasonId, course, courseId, teamEvent, scoringType, startsAt })
       .then(() => {
         this.setState({ isSaving: false, error: false })
-        goBack()
+        done()
       })
       .catch((e) => {
         // eslint-disable-next-line no-console
@@ -119,9 +118,9 @@ NewEventSetup.propTypes = {
     name: string.isRequired
   }).isRequired,
   changeCourse: func.isRequired,
-  goBack: func.isRequired,
   createEvent: func.isRequired,
-  seasonId: string.isRequired
+  seasonId: string.isRequired,
+  done: func.isRequired
 }
 
 const createEventMutation = gql`
@@ -156,7 +155,7 @@ const createEventMutation = gql`
   }
 `
 
-const NewEventSetupWithMutation = graphql(createEventMutation, {
+export default graphql(createEventMutation, {
   props({ mutate }) {
     return {
       createEvent({ seasonId, courseId, course, teamEvent, scoringType, startsAt }) {
@@ -167,6 +166,3 @@ const NewEventSetupWithMutation = graphql(createEventMutation, {
     }
   }
 })(NewEventSetup)
-
-
-export default withRouter(NewEventSetupWithMutation)

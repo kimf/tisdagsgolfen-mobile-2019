@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react'
 import { Text, TextInput, TouchableOpacity, View, ListView } from 'react-native'
 
-import styles from '../../../styles'
-import clubsJson from '../../../data/clubs.json'
+import styles from '../../styles'
+import clubsJson from '../../data/clubs.json'
 
 const filter = (data, query) => Object.keys(data)
   .filter(key => key.toLowerCase().indexOf(query) !== -1)

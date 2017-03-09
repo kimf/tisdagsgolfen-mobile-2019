@@ -4,6 +4,17 @@ import colors from './colors'
 
 const APPBAR_HEIGHT = Platform.OS === 'ios' ? 44 : 56
 
+export const navigatorStyle = {
+  navBarTranslucent: true,
+  drawUnderNavBar: false,
+  navBarTextColor: 'white',
+  navBarButtonColor: 'white',
+  navBarSubtitleColor: 'white',
+  statusBarTextColorScheme: 'light',
+  navBarBackgroundColor: '#2ecc71',
+  navBarHideOnScroll: false
+}
+
 export default StyleSheet.create({
   /* MAIN LAYOUT PARTS */
   container: {

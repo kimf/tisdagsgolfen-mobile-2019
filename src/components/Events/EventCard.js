@@ -3,7 +3,9 @@ import { Text, View, StyleSheet } from 'react-native'
 import moment from 'moment'
 import 'moment/locale/sv'
 
-import LinkButton from '../../Shared/LinkButton'
+import LinkButton from '../Shared/LinkButton'
+
+import { navigatorStyle } from '../../styles'
 
 const s = StyleSheet.create({
   /* EVENT CARDS */
@@ -50,7 +52,7 @@ const s = StyleSheet.create({
   }
 })
 
-const EventCard = ({ event, userId, push }) => {
+const EventCard = ({ event, userId, navigator }) => {
   let gametypeName = ''
   if (event.scoringType === 'modified_points') {
     gametypeName = 'Modifierad Poäng'
@@ -59,12 +61,31 @@ const EventCard = ({ event, userId, push }) => {
   } else {
     gametypeName = 'Slag'
   }
+  const startsAt = moment(event.startsAt).format('DD MMM')
+
+  let titleText = 'Resultat'
+  if (event.status === 'live') {
+    titleText = 'Live'
+  } else if (event.status === 'planned') {
+    titleText = 'Scora'
+  }
+  const title = `${titleText} ${startsAt}`
+
+  const navigatorProps = {
+    title,
+    passProps: { event, userId },
+    animated: true,
+    navigatorStyle: {
+      ...navigatorStyle,
+      tabBarHidden: true
+    }
+  }
 
   return (
     <View style={[s.eventCard, s[event.status]]}>
       <View style={s.row}>
         <Text style={[s.date]}>
-          {moment(event.startsAt).format('ddd DD MMM').toUpperCase()}
+          {startsAt}
         </Text>
 
         <Text style={s.gametype}>
@@ -82,12 +103,9 @@ const EventCard = ({ event, userId, push }) => {
         { event.status === 'finished'
           ? <LinkButton
             onPress={() => {
-              push({
-                screen: 'tisdagsgolfen.EventResult',
-                title: 'Resultat', // title of the screen as appears in the nav bar (optional)
-                passProps: { event, userId },
-                animated: true,
-                backButtonHidden: false
+              navigator.push({
+                ...navigatorProps,
+                screen: 'tisdagsgolfen.EventResult'
               })
             }}
             title="Se Resultat"
@@ -98,7 +116,12 @@ const EventCard = ({ event, userId, push }) => {
         }
         { event.status === 'live'
           ? <LinkButton
-            to={`/events/${event.id}/follow`}
+            onPress={() => {
+              navigator.push({
+                ...navigatorProps,
+                screen: 'tisdagsgolfen.LiveEvent'
+              })
+            }}
             title="FÖLJ LIVE"
             backgroundColor="#f39c12"
             color="white"
@@ -107,7 +130,12 @@ const EventCard = ({ event, userId, push }) => {
         }
         { event.status !== 'finished'
           ? <LinkButton
-            to={`/events/${event.id}/score`}
+            onPress={() => {
+              navigator.showModal({
+                ...navigatorProps,
+                screen: 'tisdagsgolfen.ScoreEvent'
+              })
+            }}
             title="SCORA"
             backgroundColor="#16a085"
             color="white"
@@ -119,7 +147,7 @@ const EventCard = ({ event, userId, push }) => {
   )
 }
 
-const { shape, string, bool, func } = React.PropTypes
+const { shape, string, bool } = React.PropTypes
 
 EventCard.propTypes = {
   event: shape({
@@ -130,7 +158,7 @@ EventCard.propTypes = {
     club: string,
     course: string
   }).isRequired,
-  push: func.isRequired,
+  navigator: shape().isRequired,
   userId: string.isRequired
 }
 

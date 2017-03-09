@@ -109,7 +109,8 @@ class Root extends Component {
           screen: 'tisdagsgolfen.Login',
           navigatorStyle: {
             navBarHidden: true
-          }
+          },
+          animationType: 'fade'
         }
       })
     }

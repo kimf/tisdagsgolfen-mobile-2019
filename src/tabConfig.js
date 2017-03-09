@@ -1,13 +1,5 @@
-const navigatorStyle = {
-  navBarTranslucent: true,
-  drawUnderNavBar: false,
-  navBarTextColor: 'white',
-  navBarButtonColor: 'white',
-  navBarSubtitleColor: 'white',
-  statusBarTextColorScheme: 'light',
-  navBarBackgroundColor: '#2ecc71',
-  navBarHideOnScroll: false
-}
+import { navigatorStyle } from './styles'
+
 /* eslint-disable import/no-unresolved */
 export default {
   tabs: [
@@ -21,7 +13,7 @@ export default {
     },
     {
       label: 'Rundor',
-      screen: 'tisdagsgolfen.EventList',
+      screen: 'tisdagsgolfen.Events',
       icon: require('./images/events.png'),
       selectedIcon: require('./images/events-selected.png'), // iOS only
       title: 'Rundor',
@@ -40,6 +32,8 @@ export default {
     tabBarButtonColor: '#55676e',
     tabBarSelectedButtonColor: '#2ecc71',
     tabBarBackgroundColor: 'white'
-  }
+  },
+  appStyle: navigatorStyle,
+  animationType: 'fade'
 }
 /* eslint-enable import/no-unresolved */
