@@ -3,18 +3,22 @@ import { View, ListView } from 'react-native'
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 
-import EventHeader from './EventHeader'
-import EventLeaderboardCard from './Events/EventLeaderboardCard'
-import Tabs from '../Shared/Tabs'
-import Loading from '../Shared/Loading'
+import EventHeader from '../components/Season/EventHeader'
+import EventLeaderboardCard from '../components/Season/Events/EventLeaderboardCard'
+import Tabs from '../components/Shared/Tabs'
+import Loading from '../components/Shared/Loading'
 
-import { ranked } from '../../utils'
-import styles from '../../styles'
+import { ranked } from '../utils'
+import styles from '../styles'
 
 const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 })
 
-
 class Event extends Component {
+  static navigatorStyle = {
+    navBarTextColor: 'white',
+    navBarBackgroundColor: '#1E98DF'
+  }
+
   state = { sorting: 'totalPoints' }
 
   changeSort = (sorting) => {
@@ -23,7 +27,7 @@ class Event extends Component {
   }
 
   render() {
-    const { event, data, userId, hasBeerAndKr } = this.props
+    const { event, data, userId } = this.props
     const { sorting } = this.state
 
     const eventHeader = <EventHeader {...event} />
@@ -52,13 +56,10 @@ class Event extends Component {
     return (
       <View style={styles.container}>
         { eventHeader }
-        { hasBeerAndKr
-          ? <Tabs
-            currentRoute={sorting}
-            onChange={sort => this.changeSort(sort)}
-          />
-          : null
-        }
+        <Tabs
+          currentRoute={sorting}
+          onChange={sort => this.changeSort(sort)}
+        />
 
         <ListView
           initialListSize={20}
@@ -91,7 +92,6 @@ Event.propTypes = {
     club: string,
     course: string
   }).isRequired,
-  hasBeerAndKr: bool.isRequired,
   data: shape({
     loading: bool,
     players: arrayOf(EventLeaderboardCard.propTypes.data)

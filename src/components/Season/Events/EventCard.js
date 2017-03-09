@@ -50,7 +50,7 @@ const s = StyleSheet.create({
   }
 })
 
-const EventCard = ({ event }) => {
+const EventCard = ({ event, userId, push }) => {
   let gametypeName = ''
   if (event.scoringType === 'modified_points') {
     gametypeName = 'Modifierad Poäng'
@@ -81,7 +81,15 @@ const EventCard = ({ event }) => {
       <View style={[s.row, s.rightRow]}>
         { event.status === 'finished'
           ? <LinkButton
-            to={`/events/${event.id}`}
+            onPress={() => {
+              push({
+                screen: 'tisdagsgolfen.EventResult',
+                title: 'Resultat', // title of the screen as appears in the nav bar (optional)
+                passProps: { event, userId },
+                animated: true,
+                backButtonHidden: false
+              })
+            }}
             title="Se Resultat"
             backgroundColor="#7f8c8d"
             color="white"
@@ -111,7 +119,7 @@ const EventCard = ({ event }) => {
   )
 }
 
-const { shape, string, bool } = React.PropTypes
+const { shape, string, bool, func } = React.PropTypes
 
 EventCard.propTypes = {
   event: shape({
@@ -121,7 +129,9 @@ EventCard.propTypes = {
     teamEvent: bool.isRequired,
     club: string,
     course: string
-  }).isRequired
+  }).isRequired,
+  push: func.isRequired,
+  userId: string.isRequired
 }
 
 export default EventCard

@@ -33,9 +33,6 @@ const EventLeaderboardCard = ({ data, currentUserId, sorting, scoringType }) => 
 
   const currentUserStyle = player.id === currentUserId ? { backgroundColor: '#feb' } : null
 
-  if (data.eventCount < 1) {
-    return null
-  }
 
   return (
     <TouchableOpacity activeOpacity={0.5}>
@@ -73,15 +70,14 @@ const { shape, string, number } = React.PropTypes
 
 EventLeaderboardCard.propTypes = {
   data: shape({
-    beerPos: number.isRequired,
-    eventCount: number.isRequired,
+    beerPos: number,
     id: string.isRequired,
-    krPos: number.isRequired,
+    krPos: number,
     position: number.isRequired,
     previousTotalPosition: number.isRequired,
     score: shape({
-      beers: number.isRequired,
-      kr: number.isRequired,
+      beers: number,
+      kr: number,
       eventPoints: number.isRequired,
       user: shape({
         id: string.isRequired,

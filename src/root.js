@@ -1,55 +1,120 @@
-import React, { Component } from 'react'
-import { AsyncStorage } from 'react-native'
-import { ApolloProvider } from 'react-apollo'
-import { NativeRouter } from 'react-router-native'
-import { applyMiddleware, createStore, combineReducers, compose } from 'redux'
-import { persistStore, autoRehydrate } from 'redux-persist'
-import invariant from 'redux-immutable-state-invariant'
+import { Component } from 'react'
+import { AppState, AsyncStorage, Platform, UIManager } from 'react-native'
+import { Navigation } from 'react-native-navigation'
+import OneSignal from 'react-native-onesignal'
+import deviceLog from 'react-native-device-log'
+import slowlog from 'react-native-slowlog'
 
-import client from './client'
-import season from './reducers/season'
-import event from './reducers/event'
-import App from './App'
+import registerScreens from './screens'
+import apolloClient from './apolloClient'
+import configureStore from './configureStore'
+import tabConfig from './tabConfig'
+import { getLoggedInState } from './reducers/app'
 
 
-const configureStore = (onComplete) => {
-  // eslint-disable-next-line no-underscore-dangle
-  const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
-  const middleware = __DEV__ ? [invariant(), client.middleware()] : [client.middleware()] // thunk
-  const reducers = combineReducers({
-    season,
-    event,
-    apollo: client.reducer()
-  })
-  const store = createStore(
-    reducers,
-    composeEnhancers(
-      applyMiddleware(...middleware),
-      autoRehydrate()
-    )
-  )
-
-  persistStore(store, { blacklist: ['apollo'], storage: AsyncStorage }, onComplete)
-  return store
+const onReceived = (notification) => {
+  deviceLog.debug('Notification received:', notification)
 }
 
+const onRegistered = (notifData) => {
+  deviceLog.debug('Device has been registered for push notifications!', notifData)
+}
+
+const onIds = (device) => {
+  deviceLog.debug('Device info: ', device)
+}
+
+const handleAppStateChange = (/* currentAppState */) => {
+  // deviceLog.debug('currentAppState', currentAppState)
+}
+
+deviceLog.init(AsyncStorage, {
+  logToConsole: false,
+  logRNErrors: true,
+  maxNumberToRender: 0,
+  maxNumberToPersist: 100
+}).then(() => {
+  deviceLog.success('logger initialized')
+})
 
 class Root extends Component {
-  state = {
-    isSetup: false,
-    store: configureStore(() => this.setState({ isSetup: true }))
+  constructor(props) {
+    super(props)
+
+    slowlog(this, /.*/)
+
+    if (Platform.OS === 'android') {
+      // eslint-disable-next-line no-unused-expressions
+      UIManager.setLayoutAnimationEnabledExperimental
+      && UIManager.setLayoutAnimationEnabledExperimental(true)
+    }
+    this.store = configureStore(apolloClient, () => this.startApp(apolloClient))
   }
 
-  render() {
-    if (!this.state.isSetup) { return null }
-    return (
-      <ApolloProvider store={this.state.store} client={client}>
-        <NativeRouter initialEntries={['/']}>
-          <App />
-        </NativeRouter>
-      </ApolloProvider>
-    )
+  componentWillMount() {
+    deviceLog.debug('componentWillMount')
+    OneSignal.addEventListener('received', onReceived)
+    OneSignal.addEventListener('opened', this.onOpened)
+    OneSignal.addEventListener('registered', onRegistered)
+    OneSignal.addEventListener('ids', onIds)
+  }
+
+  componentDidMount() {
+    deviceLog.debug('componentDidMount')
+    AppState.addEventListener('change', handleAppStateChange)
+  }
+
+  componentWillUnmount() {
+    deviceLog.debug('componentWillUnmount')
+    OneSignal.removeEventListener('received', onReceived)
+    OneSignal.removeEventListener('opened', this.onOpened)
+    OneSignal.removeEventListener('registered', onRegistered)
+    OneSignal.removeEventListener('ids', onIds)
+  }
+
+  onOpened = (openResult) => {
+    deviceLog.debug('Message: ', openResult.notification.payload.body)
+    deviceLog.debug('Data: ', openResult.notification.payload.additionalData)
+    deviceLog.debug('isActive: ', openResult.notification.isAppInFocus)
+    // deviceLog.debug('openResult: ', openResult)
+    const data = openResult.notification.payload.additionalData
+    this.setState({ openedFromNotification: true, route: data.route, eventId: data.eventId })
+  }
+
+  onStoreUpdate = () => {
+    const { loggedIn } = this.store.getState().app
+
+    if (this.loggedIn !== loggedIn) {
+      this.loggedIn = loggedIn
+      this.needsToCheckLogin = false
+      this.startApp(apolloClient)
+    }
+  }
+
+  store = null
+  needsToCheckLogin = true
+  loggedIn = null
+
+  startApp = (client) => {
+    registerScreens(this.store, client)
+    this.store.subscribe(this.onStoreUpdate)
+
+    if (this.needsToCheckLogin) {
+      this.store.dispatch(getLoggedInState())
+    } else if (this.loggedIn) {
+      Navigation.startTabBasedApp(tabConfig)
+    } else {
+      Navigation.startSingleScreenApp({
+        screen: {
+          screen: 'tisdagsgolfen.Login',
+          navigatorStyle: {
+            navBarHidden: true
+          }
+        }
+      })
+    }
   }
 }
+
 
 export default Root

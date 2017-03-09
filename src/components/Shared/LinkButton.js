@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { StyleSheet, Text, TouchableHighlight } from 'react-native'
 
 const styles = StyleSheet.create({
@@ -14,58 +14,29 @@ const styles = StyleSheet.create({
   }
 })
 
-class LinkButton extends Component {
-  handlePress = () => {
-    const { history } = this.context
-    const { to, replace, preDispatch } = this.props
+const LinkButton = ({ title, backgroundColor, color, onPress, ...rest }) => (
+  <TouchableHighlight
+    {...rest}
+    style={[styles.button, { backgroundColor }]}
+    onPress={onPress}
+    activeOpacity={1}
+  >
+    <Text style={[styles.text, { color }]}>{title}</Text>
+  </TouchableHighlight>
+)
 
-    if (preDispatch) {
-      preDispatch()
-    }
-
-    if (replace) {
-      history.replace(to)
-    } else {
-      history.push(to)
-    }
-  }
-
-  render() {
-    const { title, backgroundColor, color, ...rest } = this.props
-    return (
-      <TouchableHighlight
-        {...rest}
-        style={[styles.button, { backgroundColor }]}
-        onPress={this.handlePress}
-        activeOpacity={1}
-      >
-        <Text style={[styles.text, { color }]}>{title}</Text>
-      </TouchableHighlight>
-    )
-  }
-}
-
-
-LinkButton.contextTypes = {
-  history: React.PropTypes.object
-}
-
-const { oneOfType, string, shape, bool, func } = React.PropTypes
+const { string, func } = React.PropTypes
 
 LinkButton.propTypes = {
   title: string.isRequired,
-  to: oneOfType([string, shape()]).isRequired,
-  preDispatch: func,
-  replace: bool,
   backgroundColor: string,
-  color: string
+  color: string,
+  onPress: func.isRequired
 }
 
 LinkButton.defaultProps = {
   backgroundColor: '#ccc',
-  color: '#444',
-  preDispatch: null,
-  replace: false
+  color: '#444'
 }
 
 export default LinkButton

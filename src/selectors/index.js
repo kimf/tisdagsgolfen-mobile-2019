@@ -1,27 +1,10 @@
 import { createSelector } from 'reselect'
 
-import { ranked } from '../utils'
+const currentSeasonId = state => state.app.seasonId
+const getSeasons = state => state.app.seasons
 
-const sortedPlayers = (sorting, players) => {
-  switch (sorting) {
-    case 'beers': {
-      const sorted = players.slice().sort((a, b) => b.totalBeers - a.totalBeers)
-      return ranked(sorted, 'beerPos', 'totalBeers')
-    }
-    case 'kr': {
-      const sorted = players.slice().sort((a, b) => a.totalKr - b.totalKr)
-      return ranked(sorted, 'krPos', 'totalKr')
-    }
-    default:
-      return players.slice().sort((a, b) => a.position - b.position)
-  }
-}
-
-
-const getSorting = state => state.season.sorting
-const getPlayers = (state, props) => props.season.players
-
-export const getSortedPlayers = createSelector(
-  [getSorting, getPlayers],
-  (sorting, players) => sortedPlayers(sorting, players)
+// eslint-disable-next-line import/prefer-default-export
+export const getCurrentSeason = createSelector(
+  [currentSeasonId, getSeasons],
+  (seasonId, seasons) => seasons.find(s => s.id === seasonId)
 )

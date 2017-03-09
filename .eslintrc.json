@@ -3,7 +3,8 @@
   "extends": "airbnb",
   "globals": {
     "__DEV__": true,
-    "window": true
+    "window": true,
+    "fetch": true
   },
   "rules": {
     "valid-jsdoc": 2,
@@ -16,7 +17,8 @@
     "comma-dangle": [2, "never"],
     "semi": [2, "never"],
     "no-undef": 2,
-    "no-unused-vars": 2
+    "no-unused-vars": 2,
+    "global-require": 0
   },
   "plugins": [
     "react",

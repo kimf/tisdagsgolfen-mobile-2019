@@ -2,12 +2,15 @@ import React, { Component, PropTypes } from 'react'
 import { Linking } from 'react-native'
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
+import { connect } from 'react-redux'
 
 import Logo from '../components/Login/Logo'
 import LoginError from '../components/Login/LoginError'
 import Form from '../components/Login/LoginForm'
 import Wallpaper from '../components/Login/Wallpaper'
 import ButtonSubmit from '../components/Login/ButtonSubmit'
+
+import { login } from '../reducers/app'
 
 class Login extends Component {
   constructor(props) {
@@ -81,4 +84,19 @@ const signinUser = gql`
   }
 `
 
-export default graphql(signinUser, { name: 'signinUser' })(Login)
+const mapStateToProps = state => ({
+  email: state.app.email
+})
+
+const mapDispatchToProps = dispatch => (
+  {
+    onLogin: (email, token) => dispatch(login(email, token))
+  }
+)
+
+const withData = graphql(signinUser, { name: 'signinUser' })(Login)
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withData)
