@@ -92,16 +92,17 @@ export default (state = initialState, action) => {
         seasonId
       }
     }
-    case 'LOGGED_OUT':
+
+    case 'LOGGED_OUT': {
+      const email = state.user ? state.user.email : null
       return {
         ...state,
         loggedIn: false,
         seasons: null,
         seasonId: null,
-        user: {
-          email: state.user.email
-        }
+        user: { email }
       }
+    }
 
     case 'CHANGE_SEASON': {
       const { seasonId } = action.payload
