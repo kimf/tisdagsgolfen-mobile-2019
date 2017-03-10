@@ -12,6 +12,9 @@ import EventResult from './EventScreens/EventResult'
 import ScoreEvent from './EventScreens/ScoreEvent'
 import LiveEvent from './EventScreens/LiveEvent'
 
+import PlayerStrokes from './EventScreens/Score/PlayerStrokes'
+import NewPlayer from './NewPlayer'
+
 const withApollo = (WrappedComponent, store, client) => (
   // eslint-disable-next-line react/prefer-stateless-function
   class PP extends React.Component {
@@ -47,6 +50,12 @@ const registerScreens = (store, client) => {
   registerScreenWithApollo('tisdagsgolfen.ScoreEvent', ScoreEvent, store, client)
   registerScreenWithApollo('tisdagsgolfen.LiveEvent', LiveEvent, store, client)
   registerScreenWithApollo('tisdagsgolfen.EventResult', EventResult, store, client)
+
+  // scoring event screens
+  registerScreenWithApollo('tisdagsgolfen.PlayerStrokes', PlayerStrokes, store, client)
+
+  // misc
+  registerScreenWithApollo('tisdagsgolfen.NewPlayer', NewPlayer, store, client)
 }
 
 export default registerScreens

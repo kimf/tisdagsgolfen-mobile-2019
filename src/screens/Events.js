@@ -72,7 +72,7 @@ const { arrayOf, shape, bool, string } = React.PropTypes
 Events.propTypes = {
   data: shape({
     loading: bool,
-    events: arrayOf(EventCard.propTypes.event)
+    events: arrayOf(shape())
   }),
   navigator: shape().isRequired,
   userId: string.isRequired,

@@ -1,10 +1,12 @@
 import React from 'react'
 import { Text, View, StyleSheet } from 'react-native'
+import { connect } from 'react-redux'
 import moment from 'moment'
 import 'moment/locale/sv'
 
 import LinkButton from '../Shared/LinkButton'
 
+import { startSettingUpEvent } from '../../reducers/event'
 import { navigatorStyle } from '../../styles'
 
 const s = StyleSheet.create({
@@ -52,7 +54,7 @@ const s = StyleSheet.create({
   }
 })
 
-const EventCard = ({ event, userId, navigator }) => {
+const EventCard = ({ event, userId, navigator, onStartSettingUpEvent }) => {
   let gametypeName = ''
   if (event.scoringType === 'modified_points') {
     gametypeName = 'Modifierad Poäng'
@@ -67,7 +69,7 @@ const EventCard = ({ event, userId, navigator }) => {
   if (event.status === 'live') {
     titleText = 'Live'
   } else if (event.status === 'planned') {
-    titleText = 'Scora'
+    titleText = 'För score'
   }
   const title = `${titleText} ${startsAt}`
 
@@ -131,6 +133,7 @@ const EventCard = ({ event, userId, navigator }) => {
         { event.status !== 'finished'
           ? <LinkButton
             onPress={() => {
+              onStartSettingUpEvent(event)
               navigator.showModal({
                 ...navigatorProps,
                 screen: 'tisdagsgolfen.ScoreEvent'
@@ -147,7 +150,7 @@ const EventCard = ({ event, userId, navigator }) => {
   )
 }
 
-const { shape, string, bool } = React.PropTypes
+const { shape, string, bool, func } = React.PropTypes
 
 EventCard.propTypes = {
   event: shape({
@@ -159,7 +162,16 @@ EventCard.propTypes = {
     course: string
   }).isRequired,
   navigator: shape().isRequired,
-  userId: string.isRequired
+  userId: string.isRequired,
+  onStartSettingUpEvent: func.isRequired
 }
 
-export default EventCard
+const mapDispatchToProps = dispatch => (
+  {
+    onStartSettingUpEvent: (event) => {
+      dispatch(startSettingUpEvent(event))
+    }
+  }
+)
+
+export default connect(null, mapDispatchToProps)(EventCard)

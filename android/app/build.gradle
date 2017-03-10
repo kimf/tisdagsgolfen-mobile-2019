@@ -66,11 +66,6 @@ import com.android.build.OutputFile
  * ]
 */
 
-project.ext.react = [
-  bundleInDebug: true,
-  jsBundleDirDebug: "$buildDir/intermediates/assets/debug"
-]
-
 apply from: "../../node_modules/react-native/react.gradle"
 /**
  * Set this to true to create two separate APKs instead of one:
@@ -88,8 +83,8 @@ def enableSeparateBuildPerCPUArchitecture = false
 def enableProguardInReleaseBuilds = false
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.2"
+    compileSdkVersion 25
+    buildToolsVersion "25.0.1"
 
     defaultConfig {
         applicationId "se.calces.tisdagsgolfen"

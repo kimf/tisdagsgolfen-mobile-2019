@@ -3,8 +3,8 @@ import { StyleSheet, Text, TouchableHighlight } from 'react-native'
 
 const styles = StyleSheet.create({
   button: {
-    paddingVertical: 8,
-    paddingHorizontal: 15
+    paddingVertical: 15,
+    paddingHorizontal: 10
   },
   text: {
     textAlign: 'center',

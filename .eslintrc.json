@@ -4,7 +4,8 @@
   "globals": {
     "__DEV__": true,
     "window": true,
-    "fetch": true
+    "fetch": true,
+    "requestAnimationFrame": true
   },
   "rules": {
     "valid-jsdoc": 2,

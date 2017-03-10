@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { View, Text, TouchableOpacity, ListView } from 'react-native'
+import { Button, View, Text, TouchableOpacity, ListView } from 'react-native'
 import { graphql, compose } from 'react-apollo'
 import gql from 'graphql-tag'
 import { connect } from 'react-redux'
@@ -7,7 +7,7 @@ import { connect } from 'react-redux'
 import styles from '../../styles'
 import LinkButton from '../../components/Shared/LinkButton'
 
-import { cancelEvent } from '../../reducers/event'
+import { cancelEvent, removePlayerFromEvent } from '../../reducers/event'
 
 const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 })
 // userId, seasonId
@@ -17,6 +17,12 @@ class ScoreEvent extends Component {
       {
         title: 'Avbryt',
         id: 'cancel'
+      }
+    ],
+    rightButtons: [
+      {
+        title: 'Ny spelare',
+        id: 'addPlayer'
       }
     ]
   }
@@ -35,34 +41,73 @@ class ScoreEvent extends Component {
         onCancelEvent()
         navigator.dismissModal()
       }
+      if (event.id === 'addPlayer') {
+        navigator.push({
+          screen: 'tisdagsgolfen.NewPlayer',
+          title: 'Lägg till spelare'
+        })
+      }
     }
   }
 
+  askForStrokes = (player) => {
+    this.props.navigator.push({
+      screen: 'tisdagsgolfen.PlayerStrokes',
+      passProps: { player },
+      title: `Ange slag för ${player.firstName}`
+    })
+  }
+
   render() {
-    const { playing } = this.props
+    const { playing, event, data, onRemovePlayer } = this.props
+    if (data.loading || !event) {
+      return null
+    }
 
     return (
       <View style={styles.container}>
-        <View style={styles.inlineHeader}>
-          <Text style={styles.centerText}>Vilka spelare för du score för?</Text>
+        <View
+          style={{
+            padding: 20,
+            backgroundColor: '#eee'
+          }}
+        >
+          { playing.map(player => (
+            <View key={`setup_player_row_${player.id}`} style={styles.listrow}>
+              <Text style={styles.flexOne}>
+                {player.firstName} {player.lastName}
+              </Text>
+              <TouchableOpacity
+                key={`setup_player_row_${player.id}`}
+                onPress={() => this.askForStrokes(player)}
+              >
+                <Text style={styles.strokeInfo}>Extraslag: {player.strokes}</Text>
+              </TouchableOpacity>
+              <Button title="Ta bort" onPress={() => onRemovePlayer(player)} />
+            </View>
+          ))}
         </View>
-        <LinkButton onPress={() => {}} title="Lägg till spelare" />
+        <View style={[styles.inlineHeader, { paddingVertical: 10 }]}>
+          <Text style={[styles.centerText, { fontWeight: 'bold' }]}>Välj spelare</Text>
+        </View>
         <ListView
           ref={(c) => { this.listView = c }}
           initialListSize={100}
-          dataSource={ds.cloneWithRows(playing)}
-          renderRow={player => (
-            <TouchableOpacity
-              key={`setup_player_row_${player.id}`}
-              style={styles.listrow}
-              onPress={() => {}}
-            >
-              <Text style={[styles.flexOne]}>
-                {player.firstName} {player.lastName}
-              </Text>
-              <Text style={styles.strokeInfo}>Extraslag: {player.strokes}</Text>
-            </TouchableOpacity>
-          )}
+          dataSource={ds.cloneWithRows(data.players)}
+          renderRow={(player) => {
+            const isPlaying = playing.find(p => p.id === player.id)
+            return !isPlaying ? (
+              <TouchableOpacity
+                key={`setup_player_row_${player.id}`}
+                style={styles.listrow}
+                onPress={() => this.askForStrokes(player)}
+              >
+                <Text style={styles.flexOne}>
+                  {player.firstName} {player.lastName}
+                </Text>
+              </TouchableOpacity>
+            ) : null
+          }}
           enableEmptySections
         />
 
@@ -72,26 +117,37 @@ class ScoreEvent extends Component {
   }
 }
 
-const { arrayOf, shape, func } = PropTypes
+const { arrayOf, bool, shape, string, func } = PropTypes
 
 ScoreEvent.propTypes = {
-  // event: shape({
-  //   id: string.isRequired,
-  //   scoringType: string.isRequired,
-  //   status: string.isRequired,
-  //   teamEvent: bool.isRequired,
-  //   club: string,
-  //   course: string
-  // }).isRequired,
+  event: shape({
+    id: string.isRequired,
+    scoringType: string.isRequired,
+    status: string.isRequired,
+    teamEvent: bool.isRequired,
+    club: string,
+    course: string
+  }),
   playing: arrayOf(shape()).isRequired,
   navigator: shape().isRequired,
-  onCancelEvent: func.isRequired
+  onCancelEvent: func.isRequired,
+  onRemovePlayer: func.isRequired,
+  data: shape({
+    loading: bool.isRequired,
+    players: arrayOf(shape())
+  }).isRequired
+}
+
+ScoreEvent.defaultProps = {
+  event: null
 }
 
 
 const userQuery = gql`
   query getAllUsers {
-    allUsers {
+    players: allUsers (
+      orderBy: firstName_ASC
+    ) {
       id
       email
       firstName
@@ -102,7 +158,8 @@ const userQuery = gql`
 
 const mapStateToProps = state => (
   {
-    playing: state.event.playing
+    playing: state.event.playing,
+    event: state.event.event
   }
 )
 
@@ -110,6 +167,9 @@ const mapDispatchToProps = dispatch => (
   {
     onCancelEvent: () => {
       dispatch(cancelEvent())
+    },
+    onRemovePlayer: (player) => {
+      dispatch(removePlayerFromEvent(player))
     }
   }
 )
