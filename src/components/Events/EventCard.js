@@ -1,13 +1,14 @@
 import React from 'react'
-import { Text, View, StyleSheet } from 'react-native'
+import { View, StyleSheet } from 'react-native'
 import { connect } from 'react-redux'
 import moment from 'moment'
 import 'moment/locale/sv'
 
-import LinkButton from '../Shared/LinkButton'
+import LinkButton from 'shared/LinkButton'
+import TGText from 'shared/TGText'
 
-import { startSettingUpEvent } from '../../reducers/event'
-import { navigatorStyle } from '../../styles'
+import { startSettingUpEvent } from 'reducers/event'
+import { navigatorStyle } from 'styles'
 
 const s = StyleSheet.create({
   /* EVENT CARDS */
@@ -86,20 +87,20 @@ const EventCard = ({ event, userId, navigator, onStartSettingUpEvent }) => {
   return (
     <View style={[s.eventCard, s[event.status]]}>
       <View style={s.row}>
-        <Text style={[s.date]}>
+        <TGText style={[s.date]}>
           {startsAt}
-        </Text>
+        </TGText>
 
-        <Text style={s.gametype}>
+        <TGText style={s.gametype}>
           {event.teamEvent ? 'Lag' : 'Individuellt'}
           {' ↝ '}
           {gametypeName}
-        </Text>
+        </TGText>
       </View>
 
       <View style={s.row}>
-        <Text style={s.course}>{event.club}</Text>
-        <Text style={s.course}>{event.course}</Text>
+        <TGText style={s.course}>{event.club}</TGText>
+        <TGText style={s.course}>{event.course}</TGText>
       </View>
       <View style={[s.row, s.rightRow]}>
         { event.status === 'finished'

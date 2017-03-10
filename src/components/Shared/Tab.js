@@ -1,6 +1,8 @@
 import React from 'react'
 import { TouchableOpacity, Text } from 'react-native'
 
+// TODO: Rewrite with TGText
+
 const tabStyle = (padding, isCurrent) => ({
   flex: 1,
   paddingTop: padding,

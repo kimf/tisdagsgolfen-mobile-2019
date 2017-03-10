@@ -1,7 +1,10 @@
 import React from 'react'
-import { Text, View, TouchableOpacity } from 'react-native'
+import { View, TouchableOpacity } from 'react-native'
 
-import styles from '../../styles'
+import TGText from 'shared/TGText'
+// TODO: Rewrite with TGText for realz
+
+import styles from 'styles'
 
 const LeaderboardCard = ({ data, currentUserId, sorting }) => {
   let pointText
@@ -22,9 +25,9 @@ const LeaderboardCard = ({ data, currentUserId, sorting }) => {
     pointText = 'p'
     position = data.position
     if (data.position < data.previousPosition) {
-      upOrDown = <Text style={{ flex: 1, color: 'green' }}>↥{data.previousPosition - data.position}</Text>
+      upOrDown = <TGText style={{ flex: 1, color: 'green' }}>↥{data.previousPosition - data.position}</TGText>
     } else if (data.position > data.previousPosition) {
-      upOrDown = <Text style={{ flex: 1, color: 'red' }}>↧{data.position - data.previousPosition}</Text>
+      upOrDown = <TGText style={{ flex: 1, color: 'red' }}>↧{data.position - data.previousPosition}</TGText>
     }
   }
 
@@ -41,21 +44,21 @@ const LeaderboardCard = ({ data, currentUserId, sorting }) => {
     <TouchableOpacity activeOpacity={0.5}>
       <View key={data.id} style={[styles.listrow, currentUserStyle]}>
         <View style={styles.position}>
-          <Text style={{ flex: 1, fontWeight: '800', color: '#000', fontSize: 16 }}>{position}</Text>
+          <TGText style={{ flex: 1, fontWeight: '800', color: '#000', fontSize: 16 }}>{position}</TGText>
           { upOrDown }
         </View>
         <View style={styles.cardTitle}>
-          <Text style={styles.name}>{player.firstName} {player.lastName}</Text>
+          <TGText style={styles.name}>{player.firstName} {player.lastName}</TGText>
           { sorting === 'totalPoints'
             ?
-              <Text style={styles.metaLarger}>
+              <TGText style={styles.metaLarger}>
                 {data.eventCount} Rundor.
                 Snitt: {averagePoints}p
-              </Text>
+              </TGText>
             : null
           }
         </View>
-        <Text style={styles.points}>{`${pointValue} ${pointText}`}</Text>
+        <TGText style={styles.points}>{`${pointValue} ${pointText}`}</TGText>
       </View>
     </TouchableOpacity>
   )

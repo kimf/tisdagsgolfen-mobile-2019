@@ -1,11 +1,12 @@
 import React, { Component, PropTypes } from 'react'
-import { Button, View, Text, TouchableOpacity, ListView } from 'react-native'
+import { View, Text, TouchableOpacity, ListView } from 'react-native'
 import { graphql, compose } from 'react-apollo'
 import gql from 'graphql-tag'
 import { connect } from 'react-redux'
 
-import styles from '../../styles'
-import LinkButton from '../../components/Shared/LinkButton'
+import styles from 'styles'
+import LinkButton from 'shared/LinkButton'
+import TGText from 'shared/TGText'
 
 import { cancelEvent, removePlayerFromEvent } from '../../reducers/event'
 
@@ -83,7 +84,7 @@ class ScoreEvent extends Component {
               >
                 <Text style={styles.strokeInfo}>Extraslag: {player.strokes}</Text>
               </TouchableOpacity>
-              <Button title="Ta bort" onPress={() => onRemovePlayer(player)} />
+              <TGText onPress={() => onRemovePlayer(player)}>Ta bort</TGText>
             </View>
           ))}
         </View>

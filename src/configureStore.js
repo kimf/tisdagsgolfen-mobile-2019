@@ -4,8 +4,8 @@ import { persistStore, autoRehydrate } from 'redux-persist'
 import thunk from 'redux-thunk'
 import invariant from 'redux-immutable-state-invariant'
 
-import event from './reducers/event'
-import app from './reducers/app'
+import event from 'reducers/event'
+import app from 'reducers/app'
 
 const configureStore = (client, onComplete) => {
   // eslint-disable-next-line no-underscore-dangle

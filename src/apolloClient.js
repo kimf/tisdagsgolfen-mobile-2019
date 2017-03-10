@@ -1,6 +1,6 @@
 import ApolloClient, { createBatchingNetworkInterface } from 'apollo-client'
 import { SubscriptionClient, addGraphQLSubscriptions } from 'subscriptions-transport-ws'
-import { getCache } from './utils'
+import { getCache } from 'utils'
 
 const dataIdFromObject = result => result.id
 

@@ -1,15 +1,16 @@
 import React, { PropTypes } from 'react'
-import { View, Button, Text } from 'react-native'
+import { View, Text } from 'react-native'
 import { connect } from 'react-redux'
 
-import styles from '../styles'
-import { logout } from '../reducers/app'
+import styles from 'styles'
+import LinkButton from 'shared/LinkButton'
+import { logout } from 'reducers/app'
 
 const Profile = ({ user, onLogout }) => (
   <View style={styles.container}>
     <View style={{ flex: 1 }}>
       <Text>Hej {user.firstName} {user.lastName}</Text>
-      <Button onPress={() => { onLogout(user.email) }} title="LOGGA UT" />
+      <LinkButton onPress={() => { onLogout(user.email) }} title="LOGGA UT" />
     </View>
   </View>
 )

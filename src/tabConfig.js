@@ -1,4 +1,4 @@
-import { navigatorStyle } from './styles'
+import { navigatorStyle } from 'styles'
 
 /* eslint-disable import/no-unresolved */
 export default {

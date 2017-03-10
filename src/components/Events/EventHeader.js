@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react'
-import { Text } from 'react-native'
 
-import styles from '../../styles'
+import TGText from 'shared/TGText'
+import styles from 'styles'
 
 const gametypeName = (scoringType) => {
   switch (scoringType) {
@@ -15,13 +15,13 @@ const gametypeName = (scoringType) => {
 }
 
 const EventHeader = ({ course, teamEvent, scoringType }) => (
-  <Text style={[styles.inlineHeader, { backgroundColor: '#ccc', textAlign: 'center' }]}>
+  <TGText style={[styles.inlineHeader, { backgroundColor: '#ccc', textAlign: 'center' }]}>
     {course}
     {' | '}
     {teamEvent ? 'Lag' : 'Individuellt'}
     {' | '}
     {gametypeName(scoringType)}
-  </Text>
+  </TGText>
 )
 
 EventHeader.propTypes = {

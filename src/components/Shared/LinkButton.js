@@ -1,6 +1,8 @@
 import React from 'react'
 import { StyleSheet, Text, TouchableHighlight } from 'react-native'
 
+// TODO: Rewrite with TGText or completely remove?
+
 const styles = StyleSheet.create({
   button: {
     paddingVertical: 15,

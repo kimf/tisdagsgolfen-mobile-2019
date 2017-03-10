@@ -2,10 +2,10 @@ import React, { Component, PropTypes } from 'react'
 import { View, TextInput, Text } from 'react-native'
 import { connect } from 'react-redux'
 
-import { addPlayerToEvent, changePlayerStrokes } from '../../../reducers/event'
-import LinkButton from '../../../components/Shared/LinkButton'
+import { addPlayerToEvent, changePlayerStrokes } from 'reducers/event'
+import LinkButton from 'shared/LinkButton'
 
-import styles from '../../../styles'
+import styles from 'styles'
 
 class PlayerStrokes extends Component {
   constructor(props) {

@@ -1,4 +1,4 @@
-import { getCache, setCache } from '../utils'
+import { getCache, setCache } from 'utils'
 
 const initialState = {
   loggedIn: false,

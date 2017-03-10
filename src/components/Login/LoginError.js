@@ -1,5 +1,7 @@
 import React from 'react'
-import { View, Text, StyleSheet, Dimensions } from 'react-native'
+import { View, StyleSheet, Dimensions } from 'react-native'
+
+import TGText from 'shared/TGText'
 
 const DEVICE_WIDTH = Dimensions.get('window').width
 
@@ -22,9 +24,9 @@ const styles = StyleSheet.create({
 
 const LoginError = () => (
   <View style={styles.container}>
-    <Text style={styles.errorText}>
+    <TGText style={styles.errorText}>
       Något gick fel, se över infon
-    </Text>
+    </TGText>
   </View>
 )
 

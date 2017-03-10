@@ -1,7 +1,8 @@
 import React from 'react'
-import { Text, View, TouchableOpacity } from 'react-native'
+import { View, TouchableOpacity } from 'react-native'
 
-import styles from '../../styles'
+import TGText from 'shared/TGText'
+import styles from 'styles'
 
 const EventLeaderboardCard = ({ data, currentUserId, sorting, scoringType }) => {
   let pointText
@@ -22,9 +23,9 @@ const EventLeaderboardCard = ({ data, currentUserId, sorting, scoringType }) => 
     pointText = 'p'
     position = data.position
     if (data.totalPosition < data.previousTotalPosition) {
-      upOrDown = <Text style={{ flex: 1, color: 'green' }}>↥{data.previousTotalPosition - data.totalPosition}</Text>
+      upOrDown = <TGText style={{ flex: 1, color: 'green' }}>↥{data.previousTotalPosition - data.totalPosition}</TGText>
     } else if (data.totalPosition > data.previousTotalPosition) {
-      upOrDown = <Text style={{ flex: 1, color: 'red' }}>↧{data.totalPosition - data.previousTotalPosition}</Text>
+      upOrDown = <TGText style={{ flex: 1, color: 'red' }}>↧{data.totalPosition - data.previousTotalPosition}</TGText>
     }
   }
 
@@ -38,29 +39,29 @@ const EventLeaderboardCard = ({ data, currentUserId, sorting, scoringType }) => 
     <TouchableOpacity activeOpacity={0.5}>
       <View key={data.id} style={[styles.listrow, currentUserStyle]}>
         <View style={styles.position}>
-          <Text style={{ flex: 1, fontWeight: '800', color: '#000', fontSize: 16 }}>{position}</Text>
+          <TGText style={{ flex: 1, fontWeight: '800', color: '#000', fontSize: 16 }}>{position}</TGText>
           { upOrDown }
         </View>
         <View style={styles.cardTitle}>
-          <Text style={styles.name}>{player.firstName} {player.lastName}</Text>
+          <TGText style={styles.name}>{player.firstName} {player.lastName}</TGText>
           { sorting === 'totalPoints'
             ?
-              <Text style={styles.meta}>
+              <TGText style={styles.meta}>
                 {data.totalEventCount} Rundor.
                 Totalt: {data.totalEventPoints}p
                 Snitt: {averagePoints}p
-              </Text>
+              </TGText>
             : null
           }
         </View>
         { sorting === 'totalPoints'
-          ? <Text style={styles.dimmerPoints}>
+          ? <TGText style={styles.dimmerPoints}>
             {data.score.value} {scoringType === 'points' ? 'p' : 'slag'}
-          </Text>
+          </TGText>
           : null
         }
 
-        <Text style={styles.points}>{`${pointValue} ${pointText}`}</Text>
+        <TGText style={styles.points}>{`${pointValue} ${pointText}`}</TGText>
       </View>
     </TouchableOpacity>
   )

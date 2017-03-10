@@ -4,8 +4,8 @@ import { connect } from 'react-redux'
 import { graphql, compose } from 'react-apollo'
 import gql from 'graphql-tag'
 
-import EmptyState from '../components/Shared/EmptyState'
-import EventCard from '../components/Events/EventCard'
+import EmptyState from 'shared/EmptyState'
+import EventCard from 'Events/EventCard'
 
 // import { sortedByParsedDate } from '../utils'
 

@@ -5,16 +5,14 @@ import { LogView } from 'react-native-device-log'
 import { graphql, compose } from 'react-apollo'
 import gql from 'graphql-tag'
 
-import { ranked } from '../utils'
-import { changeSeason, changeSort } from '../reducers/app'
-import { getCurrentSeason } from '../selectors'
+import styles from 'styles'
+import { ranked } from 'utils'
+import { changeSeason, changeSort } from 'reducers/app'
 
-import LeaderboardCard from '../components/Season/LeaderboardCard'
-import Tabs from '../components/Shared/Tabs'
-import EmptyState from '../components/Shared/EmptyState'
-import SeasonPicker from '../components/Season/SeasonPicker'
-
-import styles from '../styles'
+import LeaderboardCard from 'Season/LeaderboardCard'
+import SeasonPicker from 'Season/SeasonPicker'
+import Tabs from 'shared/Tabs'
+import EmptyState from 'shared/EmptyState'
 
 const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 })
 
@@ -37,8 +35,8 @@ class Leaderboard extends Component {
   state = { showSeasonPicker: false, showLog: false }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.season && (nextProps.season.name !== this.props.season.name)) {
-      this.setButtons(nextProps.season.name)
+    if (nextProps.seasonId && (nextProps.seasonId !== this.props.seasonId)) {
+      this.setButtons(nextProps.seasonId)
       if (this.listView) {
         this.listView.scrollTo({ x: 0, y: 0, animated: true })
       }
@@ -56,9 +54,11 @@ class Leaderboard extends Component {
     }
   }
 
-  setButtons = (newSeasonName = null) => {
+  setButtons = (newSeasonId = null) => {
     const caret = this.state.showSeasonPicker ? '↑' : '↓'
-    const seasonName = newSeasonName || this.props.season.name
+    const { seasons, seasonId } = this.props
+    const findId = newSeasonId || seasonId
+    const seasonName = seasons.find(s => s.id === findId).name
     this.props.navigator.setButtons({
       rightButtons: [{
         title: `${seasonName} ${caret}`,
@@ -92,7 +92,7 @@ class Leaderboard extends Component {
       return null
     }
 
-    const { season, data, sorting, seasons, userId } = this.props
+    const { data, sorting, seasonId, seasons, userId } = this.props
     const { showSeasonPicker } = this.state
 
     let sortedPlayers = null
@@ -107,7 +107,7 @@ class Leaderboard extends Component {
       sortedPlayers = data.players.slice().sort((a, b) => a.position - b.position)
     }
 
-
+    const season = seasons.find(s => s.id === seasonId)
     const emptyLeaderboard = sortedPlayers.filter(sl => sl.eventCount !== 0).length === 0
     const showLeaderboardTabs = !emptyLeaderboard && parseInt(season.name, 10) > 2015
 
@@ -171,19 +171,16 @@ class Leaderboard extends Component {
 const { arrayOf, bool, func, shape, string } = React.PropTypes
 
 Leaderboard.propTypes = {
-  season: shape({
+  userId: string.isRequired,
+  seasons: arrayOf(shape({
     name: string,
     id: string,
     closed: bool,
     photo: shape({
       url: string
     })
-  }).isRequired,
-  userId: string.isRequired,
-  seasons: arrayOf(shape({
-    id: string.isRequired,
-    name: string.isRequired
   })).isRequired,
+  seasonId: string.isRequired,
   sorting: string.isRequired,
   onChangeSort: func.isRequired,
   onChangeSeason: func.isRequired,
@@ -220,9 +217,8 @@ const leaderboardQuery = gql`
   }
 `
 
-const mapStateToProps = (state, props) => (
+const mapStateToProps = state => (
   {
-    season: getCurrentSeason(state, props),
     seasonId: state.app.seasonId,
     userId: state.app.user.id,
     sorting: state.app.sorting,

@@ -1,8 +1,6 @@
-import { StyleSheet, Platform } from 'react-native'
+import { StyleSheet } from 'react-native'
 
-import colors from './colors'
-
-const APPBAR_HEIGHT = Platform.OS === 'ios' ? 44 : 56
+import colors from 'colors'
 
 export const navigatorStyle = {
   navBarTranslucent: true,
@@ -23,18 +21,6 @@ export default StyleSheet.create({
     flex: 1
   },
 
-  innerContainer: {
-    backgroundColor: '#fff',
-    alignItems: 'stretch',
-    flex: 1,
-    padding: 10
-  },
-
-  header: {
-    height: APPBAR_HEIGHT,
-    backgroundColor: '#2ecc71'
-  },
-
   inlineHeader: {
     paddingVertical: 5,
     paddingHorizontal: 5,
@@ -48,33 +34,6 @@ export default StyleSheet.create({
     padding: 10
   },
 
-  bottomBar: {
-    height: 50,
-    flexDirection: 'row',
-    alignItems: 'stretch',
-    backgroundColor: '#eee',
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    right: 0
-  },
-
-  bottomBarBtn: {
-    flex: 2,
-    height: 40,
-    margin: 5,
-    padding: 10,
-    backgroundColor: colors.actionText
-  },
-
-  formRow: {
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    borderColor: colors.cellBorder,
-    flexDirection: 'column',
-    padding: 10,
-    marginTop: 10
-  },
-
   formColumn: {
     flex: 1,
     padding: 10
@@ -85,29 +44,6 @@ export default StyleSheet.create({
     paddingBottom: 5,
     marginTop: 5,
     marginLeft: 10
-  },
-
-  inlineBtn: {
-    marginTop: 10,
-    padding: 10,
-    marginBottom: 10,
-    backgroundColor: '#000',
-    color: '#fff',
-    textAlign: 'center'
-  },
-
-  btn: {
-    margin: 10,
-    padding: 20,
-    backgroundColor: 'green'
-  },
-
-  btnLabel: {
-    textAlign: 'center',
-    flex: 1,
-    color: 'white',
-    fontFamily: 'Avenir',
-    fontWeight: 'bold'
   },
 
   points: {
@@ -182,93 +118,8 @@ export default StyleSheet.create({
     paddingLeft: 10
   },
 
-  datePickerContainer: {
-    backgroundColor: '#fff',
-    borderTopColor: '#ccc',
-    borderTopWidth: StyleSheet.hairlineWidth
-  },
-
-  danger: {
-    backgroundColor: 'red'
-  },
-
-  success: {
-    backgroundColor: 'green'
-  },
-
-  scoring: {
-    backgroundColor: colors.cellBorder
-  },
-
-  playerRow: {
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'flex-start'
-  },
-
-  playerName: {
-    flex: 2,
-    paddingTop: 10
-  },
-
-  playerHoleData: {
-    fontFamily: 'Avenir',
-    flex: 1,
-    flexDirection: 'row',
-    color: '#ccc',
-    fontSize: 28,
-    fontWeight: 'bold'
-  },
-
-  scorebox: {
-    paddingRight: 10,
-    paddingLeft: 10,
-    paddingBottom: 20,
-    paddingTop: 20
-  },
-
-  picker: {
-    flex: 1
-  },
-
-  scorecardRowPoints: {
-    color: '#000',
-    fontFamily: 'Avenir'
-  },
-
-  centerText: {
-    textAlign: 'center'
-  },
-
-  boldText: {
-    fontWeight: 'bold'
-  },
-
   flexOne: {
     flex: 1
-  },
-
-  flexTwo: {
-    flex: 2
-  },
-
-  inlineInput: {
-    padding: 2,
-    margin: 5,
-    height: 30,
-    backgroundColor: 'white',
-    borderColor: '#ccc',
-    borderWidth: StyleSheet.hairlineWidth,
-    fontSize: 14,
-    flex: 1,
-    fontFamily: 'Avenir'
-  },
-
-  checkmark: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    marginRight: 10,
-    fontFamily: 'Avenir'
   },
 
   strokeInfo: {
@@ -282,151 +133,6 @@ export default StyleSheet.create({
     fontFamily: 'Avenir'
   },
 
-  scoredEventBtn: {
-    backgroundColor: 'red',
-    marginTop: 10,
-    padding: 5,
-    color: '#fff',
-    textAlign: 'center',
-    fontFamily: 'Avenir'
-  },
-
-  todayBtn: {
-    backgroundColor: 'green',
-    marginTop: 10,
-    padding: 10,
-    marginBottom: 10,
-    color: '#fff',
-    textAlign: 'center',
-    fontFamily: 'Avenir'
-  },
-
-  holeHeaderText: {
-    color: 'black',
-    textAlign: 'center',
-    fontFamily: 'Avenir'
-  },
-
-  inlineButton: {
-    padding: 10,
-    backgroundColor: '#feb',
-    fontFamily: 'Avenir'
-  },
-
-  holeSwitchButton: {
-    flex: 1,
-    height: 40,
-    margin: 5,
-    padding: 10,
-    backgroundColor: '#ccc'
-  },
-
-  holeSwitchButtonLabel: {
-    textAlign: 'center',
-    color: '#444',
-    fontFamily: 'Avenir'
-  },
-
-  cellStyle: {
-    padding: 5,
-    flex: 1,
-    fontWeight: 'bold',
-    color: '#444',
-    backgroundColor: '#ccc',
-    fontSize: 10,
-    margin: 1,
-    height: 30,
-    width: 60,
-    textAlign: 'center',
-    fontFamily: 'Avenir'
-  },
-
-  cellStyleScore: {
-    height: 30,
-    width: 30,
-    textAlign: 'center',
-    padding: 5,
-    flex: 1,
-    margin: 1,
-    color: '#444',
-    backgroundColor: '#eee',
-    fontSize: 12,
-    fontFamily: 'Avenir'
-  },
-
-  playerHeaderCellStyle: {
-    height: 30,
-    textAlign: 'center',
-    backgroundColor: '#eee',
-    marginTop: 5,
-    fontFamily: 'Avenir'
-  },
-
-  emptyCellStyle: {
-    backgroundColor: 'transparent',
-    height: 30,
-    width: 0,
-    marginTop: 5
-  },
-
-  playerNameCell: {
-    fontSize: 10,
-    fontFamily: 'Avenir'
-  },
-
-  scoreHeaderRow: {
-    backgroundColor: '#eee',
-    flexDirection: 'row',
-    padding: 5
-  },
-
-  scoreHeader: {
-    width: 70,
-    textAlign: 'right',
-    padding: 5,
-    color: '#787878',
-    fontFamily: 'Avenir'
-  },
-
-  scoreHeaderPlayer: {
-    flex: 3,
-    padding: 5,
-    color: '#787878',
-    fontFamily: 'Avenir'
-  },
-
-  largeText: {
-    fontFamily: 'Avenir',
-    fontSize: 28
-  },
-
-  drawer: {
-    shadowColor: '#000000',
-    shadowOpacity: 0.8,
-    shadowRadius: 3
-  },
-
-  holePicker: {
-    flex: 1,
-    padding: 20,
-    height: 40,
-    marginBottom: 5,
-    backgroundColor: colors.actionText
-  },
-
-  holePickerText: {
-    textAlign: 'center',
-    color: '#fff',
-    fontFamily: 'Avenir'
-  },
-
-  addPlayerButton: {
-    marginTop: 10,
-    padding: 10,
-    marginBottom: 10,
-    backgroundColor: colors.actionText
-  },
-
   sectionHeader: {
     backgroundColor: '#eee',
     padding: 10
@@ -437,6 +143,7 @@ export default StyleSheet.create({
     fontSize: 12,
     fontFamily: 'Avenir'
   },
+
   courserow: {
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderColor: colors.cellBorder,

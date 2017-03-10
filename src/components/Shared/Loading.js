@@ -1,5 +1,7 @@
 import React from 'react'
-import { Text, View } from 'react-native'
+import { View } from 'react-native'
+
+import TGText from 'shared/TGText'
 
 const containerStyle = {
   backgroundColor: '#eee',
@@ -16,7 +18,7 @@ const textStyle = {
 
 const Loading = ({ text }) =>
   <View style={containerStyle}>
-    <Text style={textStyle}>{ text }</Text>
+    <TGText style={textStyle}>{ text }</TGText>
   </View>
 
 

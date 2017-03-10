@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
-import { Switch, Text, View, StyleSheet, TouchableOpacity } from 'react-native'
+import { Switch, View, StyleSheet } from 'react-native'
 import Calendar from 'react-native-calendar-datepicker'
 import moment from 'moment'
 import 'moment/locale/sv'
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 
-import styles from '../../styles'
+import TGText from 'shared/TGText'
+import LinkButton from 'shared/LinkButton'
+import styles from 'styles'
 
 class NewEventSetup extends Component {
   state = {
@@ -46,23 +48,26 @@ class NewEventSetup extends Component {
     const { teamEvent, isStrokes, startsAt, isSaving, error } = this.state
     let showError
     if (error) {
-      showError = <Text style={{ color: '#c00', fontSize: 20 }}>Något gick fel med att spara, se över infon</Text>
+      showError = <TGText style={{ color: '#c00', fontSize: 20 }}>Något gick fel med att spara, se över infon</TGText>
     }
 
     return (
       <View style={[styles.container, { alignItems: 'stretch', flexDirection: 'column' }]}>
         <View style={[styles.inlineHeader, { flexDirection: 'row' }]}>
-          <Text style={{ flex: 2, fontWeight: 'bold', padding: 10 }}>{course.name}</Text>
-          <TouchableOpacity style={{ flex: 1, padding: 10 }} onPress={() => changeCourse(null)}>
-            <Text style={{ textAlign: 'right' }}>Byt bana</Text>
-          </TouchableOpacity>
+          <TGText style={{ flex: 2, fontWeight: 'bold', padding: 10 }}>{course.name}</TGText>
+          <TGText
+            style={{ flex: 1, padding: 10, textAlign: 'right' }}
+            onPress={() => changeCourse(null)}
+          >
+            Byt bana
+          </TGText>
         </View>
 
         {showError}
 
         <View style={[styles.formRow, { flexDirection: 'row' }]}>
           <View style={[styles.formColumn, { borderRightWidth: StyleSheet.hairlineWidth, borderColor: '#cecece' }]}>
-            <Text style={styles.label}>Lagtävling?</Text>
+            <TGText style={styles.label}>Lagtävling?</TGText>
             <Switch
               onValueChange={te => this.setState({ teamEvent: te })}
               style={styles.formColumnContent}
@@ -70,7 +75,7 @@ class NewEventSetup extends Component {
             />
           </View>
           <View style={styles.formColumn}>
-            <Text style={styles.label}>Slaggolf?</Text>
+            <TGText style={styles.label}>Slaggolf?</TGText>
             <Switch
               onValueChange={isS => this.setState({ isStrokes: isS })}
               style={styles.formColumnContent}
@@ -92,18 +97,7 @@ class NewEventSetup extends Component {
         { isSaving || !startsAt
           ? null
           :
-          <TouchableOpacity style={styles.btn} onPress={this.onSubmit}>
-            <Text
-              style={{
-                textAlign: 'center',
-                color: 'white',
-                fontFamily: 'Avenir',
-                fontWeight: 'bold'
-              }}
-            >
-              SKAPA RUNDA
-            </Text>
-          </TouchableOpacity>
+          <LinkButton title="SKAPA RUNDA" style={styles.btn} onPress={this.onSubmit} />
         }
       </View>
     )

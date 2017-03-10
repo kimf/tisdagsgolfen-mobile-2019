@@ -5,11 +5,11 @@ import OneSignal from 'react-native-onesignal'
 import deviceLog from 'react-native-device-log'
 import slowlog from 'react-native-slowlog'
 
-import registerScreens from './screens'
-import apolloClient from './apolloClient'
-import configureStore from './configureStore'
-import tabConfig from './tabConfig'
-import { getLoggedInState } from './reducers/app'
+import registerScreens from 'screens'
+import apolloClient from 'apolloClient'
+import configureStore from 'configureStore'
+import tabConfig from 'tabConfig'
+import { getLoggedInState } from 'reducers/app'
 
 
 const onReceived = (notification) => {

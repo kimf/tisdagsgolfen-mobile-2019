@@ -1,7 +1,7 @@
 import React from 'react'
 import { View } from 'react-native'
 
-import Tab from './Tab'
+import Tab from 'shared/Tab'
 
 const Tabs = ({ currentRoute, onChange, tabs }) => (
   <View

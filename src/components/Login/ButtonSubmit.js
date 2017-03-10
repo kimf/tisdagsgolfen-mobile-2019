@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import {
   StyleSheet,
   TouchableOpacity,
-  Text,
   Animated,
   Easing,
   Image,
@@ -10,7 +9,8 @@ import {
   View
 } from 'react-native'
 
-import spinner from '../../images/loading.gif'
+import TGText from 'shared/TGText'
+import spinner from 'images/loading.gif'
 
 const DEVICE_WIDTH = Dimensions.get('window').width
 const MARGIN = 40
@@ -96,7 +96,7 @@ class ButtonSubmit extends Component {
           >
             { this.state.isLoading
               ? <Image source={spinner} style={styles.image} />
-              : <Text style={styles.text}>LOGGA IN</Text>
+              : <TGText style={styles.text}>LOGGA IN</TGText>
             }
           </TouchableOpacity>
         </Animated.View>

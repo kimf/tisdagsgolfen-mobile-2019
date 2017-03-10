@@ -4,13 +4,13 @@ import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 import { connect } from 'react-redux'
 
-import Logo from '../components/Login/Logo'
-import LoginError from '../components/Login/LoginError'
-import Form from '../components/Login/LoginForm'
-import Wallpaper from '../components/Login/Wallpaper'
-import ButtonSubmit from '../components/Login/ButtonSubmit'
+import Logo from 'Login/Logo'
+import LoginError from 'Login/LoginError'
+import Form from 'Login/LoginForm'
+import Wallpaper from 'Login/Wallpaper'
+import ButtonSubmit from 'Login/ButtonSubmit'
 
-import { login } from '../reducers/app'
+import { login } from 'reducers/app'
 
 class Login extends Component {
   constructor(props) {

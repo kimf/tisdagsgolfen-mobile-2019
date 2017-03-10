@@ -3,13 +3,13 @@ import { View, ListView } from 'react-native'
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 
-import EventHeader from '../../components/Events/EventHeader'
-import EventLeaderboardCard from '../../components/Events/EventLeaderboardCard'
-import Tabs from '../../components/Shared/Tabs'
-import Loading from '../../components/Shared/Loading'
+import EventHeader from 'Events/EventHeader'
+import EventLeaderboardCard from 'Events/EventLeaderboardCard'
+import Tabs from 'shared/Tabs'
+import Loading from 'shared/Loading'
 
-import { ranked } from '../../utils'
-import styles from '../../styles'
+import { ranked } from 'utils'
+import styles from 'styles'
 
 const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 })
 

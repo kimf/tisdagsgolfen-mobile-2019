@@ -1,6 +1,8 @@
 {
   "parser": "babel-eslint",
-  "extends": "airbnb",
+  "extends": [
+    "airbnb"
+  ],
   "globals": {
     "__DEV__": true,
     "window": true,
@@ -20,6 +22,11 @@
     "no-undef": 2,
     "no-unused-vars": 2,
     "global-require": 0
+  },
+  "settings": {
+    "import/resolver": {
+      "babel-module": {}
+    }
   },
   "plugins": [
     "react",

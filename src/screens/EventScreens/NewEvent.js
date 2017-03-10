@@ -1,9 +1,9 @@
 import React, { Component, PropTypes } from 'react'
 import { View } from 'react-native'
 
-import CoursePicker from '../../components/Events/CoursePicker'
-import NewEventSetup from '../../components/Events/NewEventSetup'
-import styles from '../../styles'
+import CoursePicker from 'Events/CoursePicker'
+import NewEventSetup from 'Events/NewEventSetup'
+import styles from 'styles'
 
 class NewEvent extends Component {
   static navigatorButtons = {
