@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react'
-import { View, TouchableNativeFeedback, TouchableOpacity } from 'react-native'
+import { View, TouchableNativeFeedback, TouchableOpacity, Platform } from 'react-native'
 
 const TouchableView = ({ isRippleDisabled, rippleColor, children, style, ...rest }) => {
-  if (!isRippleDisabled) {
+  if (Platform.OS === 'android') {
     const background = TouchableNativeFeedback.Ripple(rippleColor, false)
     return (
       <TouchableNativeFeedback {...rest} background={background}>

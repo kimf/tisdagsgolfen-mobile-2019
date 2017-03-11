@@ -3,14 +3,15 @@ import { View } from 'react-native'
 
 import Tab from 'shared/Tab'
 
-const Tabs = ({ currentRoute, onChange, tabs }) => (
+const Tabs = ({ currentRoute, onChange, tabs, style }) => (
   <View
     style={{
-      backgroundColor: '#fff',
+      ...style,
+      backgroundColor: '#ececec',
       flexDirection: 'row',
       justifyContent: 'center',
       alignItems: 'stretch',
-      paddingHorizontal: 10,
+      paddingHorizontal: 5,
       paddingVertical: 5
     }}
   >
@@ -32,11 +33,13 @@ const { arrayOf, string, func, shape } = React.PropTypes
 Tabs.propTypes = {
   currentRoute: string.isRequired,
   onChange: func.isRequired,
-  tabs: arrayOf(shape())
+  tabs: arrayOf(shape()),
+  style: shape()
 }
 
 Tabs.defaultProps = {
   bottom: false,
+  style: {},
   tabs: [
     { value: 'totalPoints', icon: '🤷', title: 'Poäng' },
     { value: 'beers', icon: '🍻', title: 'Öl' },

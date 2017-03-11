@@ -72,6 +72,7 @@ export default StyleSheet.create({
   },
 
   cardTitle: {
+    minHeight: 40,
     flex: 6,
     flexDirection: 'column'
   },

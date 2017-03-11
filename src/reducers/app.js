@@ -5,6 +5,7 @@ const initialState = {
   user: null,
   seasons: null,
   seasonId: null,
+  seasonClosed: null,
   sorting: 'totalPoints'
 }
 
@@ -84,12 +85,14 @@ export default (state = initialState, action) => {
       const { token, json } = action.payload
       const { seasons, user } = json
       const seasonId = state.seasonId || seasons[0].id
+      const seasonClosed = state.seasons.find(s => s.id === seasonId).closed
       return {
         ...state,
         loggedIn: true,
         seasons,
         user: { ...user, token },
-        seasonId
+        seasonId,
+        seasonClosed
       }
     }
 
@@ -100,6 +103,7 @@ export default (state = initialState, action) => {
         loggedIn: false,
         seasons: null,
         seasonId: null,
+        seasonClosed: null,
         user: { email }
       }
     }
@@ -107,10 +111,12 @@ export default (state = initialState, action) => {
     case 'CHANGE_SEASON': {
       const { seasonId } = action.payload
       const sorting = initialState.sorting
+      const seasonClosed = state.seasons.find(s => s.id === seasonId).closed
       return {
         ...state,
         sorting,
-        seasonId
+        seasonId,
+        seasonClosed
       }
     }
 

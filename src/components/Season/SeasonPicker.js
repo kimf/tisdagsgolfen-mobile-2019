@@ -1,8 +1,7 @@
 import React from 'react'
-import { View, TouchableOpacity } from 'react-native'
+import { View } from 'react-native'
 
 import TGText from 'shared/TGText'
-// TODO: Rewrite with TGText for realz (remove TouchableOpacity)
 
 const SeasonPicker = ({ seasons, currentSeasonId, onChangeSeason }) => (
   <View
@@ -18,15 +17,14 @@ const SeasonPicker = ({ seasons, currentSeasonId, onChangeSeason }) => (
     { seasons.map((season) => {
       const color = currentSeasonId && season.id === currentSeasonId ? '#3FB4CF' : '#ccc'
       return (
-        <TouchableOpacity
+        <TGText
           onPress={() => onChangeSeason(season.id)}
-          style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', paddingVertical: 5 }}
           key={`SeasonPicker_${season.id}`}
+          viewStyle={{ flex: 1, flexDirection: 'row', justifyContent: 'center', paddingVertical: 5 }}
+          style={{ color }}
         >
-          <TGText style={{ color }}>
-            {season.name}
-          </TGText>
-        </TouchableOpacity>
+          {season.name}
+        </TGText>
       )
     })}
   </View>

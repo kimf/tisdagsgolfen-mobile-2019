@@ -7,7 +7,7 @@ const tabStyle = (padding, isCurrent) => ({
   flex: 1,
   paddingTop: padding,
   paddingBottom: padding,
-  backgroundColor: isCurrent ? '#D9EEFF' : '#eee',
+  backgroundColor: isCurrent ? '#2ecc71' : '#eee',
   flexDirection: 'row',
   justifyContent: 'center'
 })
@@ -20,7 +20,7 @@ const Tab = ({ tab, isCurrent, onChange, fontSize, padding }) => {
       style={tabStyle(padding, isCurrent)}
       onPress={() => onChange(tab.value)}
     >
-      <Text style={{ fontSize, color: isCurrent ? '#222' : '#999' }}>
+      <Text style={{ fontSize, color: isCurrent ? '#fff' : '#444' }}>
         {text}
       </Text>
     </TouchableOpacity>

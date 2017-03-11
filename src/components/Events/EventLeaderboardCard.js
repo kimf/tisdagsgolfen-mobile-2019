@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, TouchableOpacity } from 'react-native'
+import { View } from 'react-native'
 
 import TGText from 'shared/TGText'
 import styles from 'styles'
@@ -36,34 +36,32 @@ const EventLeaderboardCard = ({ data, currentUserId, sorting, scoringType }) => 
 
 
   return (
-    <TouchableOpacity activeOpacity={0.5}>
-      <View key={data.id} style={[styles.listrow, currentUserStyle]}>
-        <View style={styles.position}>
-          <TGText style={{ flex: 1, fontWeight: '800', color: '#000', fontSize: 16 }}>{position}</TGText>
-          { upOrDown }
-        </View>
-        <View style={styles.cardTitle}>
-          <TGText style={styles.name}>{player.firstName} {player.lastName}</TGText>
-          { sorting === 'totalPoints'
-            ?
-              <TGText style={styles.meta}>
-                {data.totalEventCount} Rundor.
-                Totalt: {data.totalEventPoints}p
-                Snitt: {averagePoints}p
-              </TGText>
-            : null
-          }
-        </View>
+    <View key={data.id} style={[styles.listrow, currentUserStyle]}>
+      <View style={styles.position}>
+        <TGText style={{ flex: 1, fontWeight: '800', color: '#000', fontSize: 16 }}>{position}</TGText>
+        { upOrDown }
+      </View>
+      <View style={styles.cardTitle}>
+        <TGText style={styles.name}>{player.firstName} {player.lastName}</TGText>
         { sorting === 'totalPoints'
-          ? <TGText style={styles.dimmerPoints}>
-            {data.score.value} {scoringType === 'points' ? 'p' : 'slag'}
-          </TGText>
+          ?
+            <TGText style={styles.meta}>
+              {data.totalEventCount} Rundor.
+              Totalt: {data.totalEventPoints}p
+              Snitt: {averagePoints}p
+            </TGText>
           : null
         }
-
-        <TGText style={styles.points}>{`${pointValue} ${pointText}`}</TGText>
       </View>
-    </TouchableOpacity>
+      { sorting === 'totalPoints'
+        ? <TGText style={styles.dimmerPoints}>
+          {data.score.value} {scoringType === 'points' ? 'p' : 'slag'}
+        </TGText>
+        : null
+      }
+
+      <TGText style={styles.points}>{`${pointValue} ${pointText}`}</TGText>
+    </View>
   )
 }
 

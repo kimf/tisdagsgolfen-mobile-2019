@@ -11,13 +11,15 @@ const containerStyle = {
 }
 
 const imageStyle = {
-  marginBottom: 40
+  marginBottom: 40,
+  width: '90%',
+  height: '60%'
 }
 
 const textStyle = {
   fontWeight: 'bold',
-  fontSize: 24,
-  color: '#ccc'
+  fontSize: 20,
+  color: '#5CCD7A'
 }
 
 const emptyImage = require('images/emptystate.png')
@@ -33,7 +35,7 @@ EmptyState.propTypes = {
 }
 
 EmptyState.defaultProps = {
-  text: 'Inget att visa... ännu :('
+  text: '😞 Inget att visa'
 }
 
 export default EmptyState

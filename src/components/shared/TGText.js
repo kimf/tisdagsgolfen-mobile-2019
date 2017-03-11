@@ -8,11 +8,12 @@ const DEVICE_WIDTH = Dimensions.get('window').width
 const FONT_SIZE = 14
 const styles = StyleSheet.create({
   text: {
-    fontSize: FONT_SIZE
+    fontSize: FONT_SIZE,
+    fontFamily: 'Avenir'
   }
 })
 
-const TGText = ({ onPress, style, children, ...rest }) => {
+const TGText = ({ onPress, style, viewStyle, children, ...rest }) => {
   const fontSize = style
                    ? (StyleSheet.flatten(style).fontSize || FONT_SIZE)
                    : FONT_SIZE
@@ -23,7 +24,9 @@ const TGText = ({ onPress, style, children, ...rest }) => {
       {children}
     </Text>
   )
-  return onPress ? <TouchableView onPress={onPress}>{text}</TouchableView> : text
+  return onPress
+    ? <TouchableView style={viewStyle} onPress={onPress}>{text}</TouchableView>
+    : text
 }
 
 export default TGText

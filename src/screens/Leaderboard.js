@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
-import { View, ListView, Image, ScrollView, LayoutAnimation } from 'react-native'
+import { View, Image, LayoutAnimation } from 'react-native'
 import { connect } from 'react-redux'
 import { LogView } from 'react-native-device-log'
 import { graphql, compose } from 'react-apollo'
 import gql from 'graphql-tag'
 
-import styles from 'styles'
 import { ranked } from 'utils'
+import withOneSignal from 'withOneSignal'
 import { changeSeason, changeSort } from 'reducers/app'
 
 import LeaderboardCard from 'Season/LeaderboardCard'
@@ -14,11 +14,21 @@ import SeasonPicker from 'Season/SeasonPicker'
 import Tabs from 'shared/Tabs'
 import EmptyState from 'shared/EmptyState'
 
-const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 })
+import ImageHeaderScrollView from 'shared/ImageHeaderScrollView'
+import TriggeringView from 'shared/TriggeringView'
+
+import { navigatorStyle } from 'styles'
+
+// eslint-disable-next-line import/no-unresolved
+import userImg from '../images/user.png'
 
 class Leaderboard extends Component {
   static navigatorButtons = {
     leftButtons: [
+      {
+        icon: userImg,
+        id: 'profile'
+      },
       {
         title: 'Log',
         id: 'log'
@@ -37,9 +47,6 @@ class Leaderboard extends Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.seasonId && (nextProps.seasonId !== this.props.seasonId)) {
       this.setButtons(nextProps.seasonId)
-      if (this.listView) {
-        this.listView.scrollTo({ x: 0, y: 0, animated: true })
-      }
     }
   }
 
@@ -50,6 +57,16 @@ class Leaderboard extends Component {
         this.setButtons()
       } else if (event.id === 'log') {
         this.toggleLog()
+      } else if (event.id === 'profile') {
+        this.props.navigator.showModal({
+          animated: true,
+          navigatorStyle: {
+            ...navigatorStyle,
+            tabBarHidden: true
+          },
+          screen: 'tisdagsgolfen.Profile',
+          title: 'Profil'
+        })
       }
     }
   }
@@ -110,18 +127,21 @@ class Leaderboard extends Component {
     const season = seasons.find(s => s.id === seasonId)
     const emptyLeaderboard = sortedPlayers.filter(sl => sl.eventCount !== 0).length === 0
     const showLeaderboardTabs = !emptyLeaderboard && parseInt(season.name, 10) > 2015
+    const showPhoto = sorting === 'totalPoints' && season.closed && season.photo.url
 
-    let stickyHeaderIndices = null
-    if (showLeaderboardTabs && season.closed && season.photo.url) {
-      stickyHeaderIndices = [1]
-    } else if (showLeaderboardTabs && !season.closed) {
-      stickyHeaderIndices = [0]
+    if (this.state.showLog) {
+      return (
+        <LogView
+          style={{ flex: 1 }}
+          inverted={false}
+          timeStampFormat="HH:mm:ss"
+          multiExpanded
+        />
+      )
     }
 
     return (
-      <View style={styles.container}>
-        { this.state.showLog ? <LogView inverted={false} timeStampFormat="HH:mm:ss" multiExpanded /> : null }
-
+      <View style={{ flex: 1, backgroundColor: 'transparent' }}>
         { showSeasonPicker
           ?
             <SeasonPicker
@@ -132,36 +152,41 @@ class Leaderboard extends Component {
           : null
         }
 
+        { showLeaderboardTabs
+          ?
+            <Tabs
+              currentRoute={sorting}
+              onChange={sort => this.changeSort(sort)}
+            />
+          : null
+        }
+
         { emptyLeaderboard
           ? <EmptyState text="Inga rundor spelade ännu" />
-          : <ScrollView stickyHeaderIndices={stickyHeaderIndices}>
-            { season.closed && season.photo.url
-              ? <Image
-                style={{ width: '100%', height: 220 }}
-                source={{ uri: season.photo.url, cache: 'force-cache' }}
-                resizeMode="cover"
-              /> : null
-            }
-
-            { showLeaderboardTabs
-              ?
-                <Tabs
-                  currentRoute={sorting}
-                  onChange={sort => this.changeSort(sort)}
+          : <ImageHeaderScrollView
+            maxHeight={showPhoto ? 220 : 0}
+            minHeight={0}
+            ref={(c) => { this.listView = c }}
+            renderHeader={() => (
+              showPhoto ? (
+                <Image
+                  style={{ width: '100%', height: 220 }}
+                  source={{ uri: season.photo.url, cache: 'force-cache' }}
+                  resizeMode="cover"
                 />
-              : null
-            }
-
-            <ListView
-              initialListSize={30}
-              dataSource={ds.cloneWithRows(sortedPlayers)}
-              ref={(ref) => { this.listView = ref }}
-              renderRow={rowData =>
-                <LeaderboardCard key={`l_${userId}`} currentUserId={userId} data={rowData} sorting={sorting} />
-              }
-              enableEmptySections
-            />
-          </ScrollView>
+              ) : null
+            )}
+          >
+            <View style={{ height: 1000 }}>
+              <TriggeringView
+                onHide={() => {}}
+              >
+                {sortedPlayers.map(player => (
+                  <LeaderboardCard key={`l_${player.id}`} currentUserId={userId} data={player} sorting={sorting} />
+                ))}
+              </TriggeringView>
+            </View>
+          </ImageHeaderScrollView>
         }
       </View>
     )
@@ -237,5 +262,6 @@ export default compose(
   connect(mapStateToProps, mapDispatchToProps),
   graphql(leaderboardQuery, {
     options: ({ seasonId }) => ({ forceFetch: false, variables: { seasonId } })
-  })
+  }),
+  withOneSignal
 )(Leaderboard)

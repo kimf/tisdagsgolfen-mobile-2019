@@ -12,18 +12,16 @@ import EventCard from 'Events/EventCard'
 const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 })
 
 class Events extends Component {
-  static navigatorButtons = {
-    rightButtons: [
-      {
-        title: '+',
-        id: 'add'
-      }
-    ]
-  }
-
   constructor(props) {
     super(props)
+    this.setButtons(props.seasonClosed)
     props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this))
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.seasonClosed && (nextProps.seasonClosed !== this.props.seasonClosed)) {
+      this.setButtons(nextProps.seasonClosed)
+    }
   }
 
   onNavigatorEvent = (event) => {
@@ -38,6 +36,16 @@ class Events extends Component {
           }
         })
       }
+    }
+  }
+
+  setButtons = (seasonClosed) => {
+    if (!seasonClosed) {
+      this.props.navigator.setButtons({
+        // eslint-disable-next-line import/no-unresolved
+        rightButtons: [{ icon: require('../images/plus.png'), id: 'add' }],
+        animated: false
+      })
     }
   }
 
@@ -76,7 +84,8 @@ Events.propTypes = {
   }),
   navigator: shape().isRequired,
   userId: string.isRequired,
-  seasonId: string.isRequired
+  seasonId: string.isRequired,
+  seasonClosed: bool.isRequired
 }
 
 Events.defaultProps = {
@@ -107,6 +116,7 @@ const eventsQuery = gql`
 const mapStateToProps = state => (
   {
     seasonId: state.app.seasonId,
+    seasonClosed: state.app.seasonClosed,
     userId: state.app.user.id
   }
 )

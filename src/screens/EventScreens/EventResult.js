@@ -14,12 +14,30 @@ import styles from 'styles'
 const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 })
 
 class Event extends Component {
-  static navigatorStyle = {
-    navBarTextColor: 'white',
-    navBarBackgroundColor: '#1E98DF'
+  static navigatorButtons = {
+    leftButtons: [
+      {
+        title: 'Stäng',
+        id: 'cancel'
+      }
+    ]
+  }
+
+  constructor(props) {
+    super(props)
+    props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this))
   }
 
   state = { sorting: 'totalPoints' }
+
+  onNavigatorEvent = (event) => {
+    const { navigator } = this.props
+    if (event.type === 'NavBarButtonPress') {
+      if (event.id === 'cancel') {
+        navigator.dismissModal()
+      }
+    }
+  }
 
   changeSort = (sorting) => {
     this.listView.scrollTo({ x: 0, y: 0, animated: true })
@@ -96,7 +114,8 @@ Event.propTypes = {
     loading: bool,
     players: arrayOf(EventLeaderboardCard.propTypes.data)
   }),
-  userId: string.isRequired
+  userId: string.isRequired,
+  navigator: shape().isRequired
 }
 
 Event.defaultProps = {

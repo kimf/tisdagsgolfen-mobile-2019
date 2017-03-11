@@ -1,16 +1,16 @@
 import React, { Component, PropTypes } from 'react'
-import { View, Text, TouchableOpacity, ListView } from 'react-native'
-import { graphql, compose } from 'react-apollo'
-import gql from 'graphql-tag'
+import { View, Slider } from 'react-native'
 import { connect } from 'react-redux'
 
-import styles from 'styles'
-import LinkButton from 'shared/LinkButton'
 import TGText from 'shared/TGText'
 
-import { cancelEvent, removePlayerFromEvent } from '../../reducers/event'
+import {
+  cancelEvent,
+  removePlayerFromEvent,
+  changePlayerStrokes
+} from 'reducers/event'
 
-const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 })
+
 // userId, seasonId
 class ScoreEvent extends Component {
   static navigatorButtons = {
@@ -22,7 +22,9 @@ class ScoreEvent extends Component {
     ],
     rightButtons: [
       {
-        title: 'Ny spelare',
+        // eslint-disable-next-line import/no-unresolved
+        icon: require('../../images/plus.png'),
+        title: 'Spelare',
         id: 'addPlayer'
       }
     ]
@@ -43,7 +45,7 @@ class ScoreEvent extends Component {
         navigator.dismissModal()
       }
       if (event.id === 'addPlayer') {
-        navigator.push({
+        navigator.showModal({
           screen: 'tisdagsgolfen.NewPlayer',
           title: 'Lägg till spelare'
         })
@@ -51,68 +53,51 @@ class ScoreEvent extends Component {
     }
   }
 
-  askForStrokes = (player) => {
-    this.props.navigator.push({
-      screen: 'tisdagsgolfen.PlayerStrokes',
-      passProps: { player },
-      title: `Ange slag för ${player.firstName}`
-    })
-  }
-
   render() {
-    const { playing, event, data, onRemovePlayer } = this.props
-    if (data.loading || !event) {
+    const { playing, event, onRemovePlayer, onChangePlayerStrokes } = this.props
+    if (!event) {
       return null
     }
 
     return (
-      <View style={styles.container}>
-        <View
-          style={{
-            padding: 20,
-            backgroundColor: '#eee'
-          }}
-        >
-          { playing.map(player => (
-            <View key={`setup_player_row_${player.id}`} style={styles.listrow}>
-              <Text style={styles.flexOne}>
-                {player.firstName} {player.lastName}
-              </Text>
-              <TouchableOpacity
-                key={`setup_player_row_${player.id}`}
-                onPress={() => this.askForStrokes(player)}
-              >
-                <Text style={styles.strokeInfo}>Extraslag: {player.strokes}</Text>
-              </TouchableOpacity>
-              <TGText onPress={() => onRemovePlayer(player)}>Ta bort</TGText>
+      <View style={{ flex: 1, alignItems: 'stretch' }}>
+        { playing.map(player => (
+          <View
+            key={`setup_player_row_${player.id}`}
+            style={{
+              minHeight: 100,
+              flexDirection: 'column',
+              margin: 10,
+              padding: 10,
+              backgroundColor: '#fff',
+              borderBottomWidth: 2,
+              borderBottomColor: '#ccc'
+            }}
+          >
+            <View style={{ flex: 1, flexDirection: 'row' }}>
+              <TGText style={{ flex: 1, fontWeight: 'bold', fontSize: 18 }}>{player.firstName} {player.lastName}</TGText>
+              <TGText style={{ flex: 1, color: 'red' }} onPress={() => onRemovePlayer(player)}>Ta bort</TGText>
             </View>
-          ))}
-        </View>
-        <View style={[styles.inlineHeader, { paddingVertical: 10 }]}>
-          <Text style={[styles.centerText, { fontWeight: 'bold' }]}>Välj spelare</Text>
-        </View>
-        <ListView
-          ref={(c) => { this.listView = c }}
-          initialListSize={100}
-          dataSource={ds.cloneWithRows(data.players)}
-          renderRow={(player) => {
-            const isPlaying = playing.find(p => p.id === player.id)
-            return !isPlaying ? (
-              <TouchableOpacity
-                key={`setup_player_row_${player.id}`}
-                style={styles.listrow}
-                onPress={() => this.askForStrokes(player)}
-              >
-                <Text style={styles.flexOne}>
-                  {player.firstName} {player.lastName}
-                </Text>
-              </TouchableOpacity>
-            ) : null
-          }}
-          enableEmptySections
-        />
-
-        <LinkButton onPress={() => {}} title="Starta runda" />
+            <View style={{ alignItems: 'center', flex: 1, flexDirection: 'row', paddingBottom: 10 }}>
+              <TGText style={{ flex: 0, textAlign: 'left' }}>Extraslag</TGText>
+              <Slider
+                style={{ flex: 1, marginHorizontal: 20 }}
+                maximumValue={36}
+                step={1}
+                value={player.strokes}
+                onValueChange={val => onChangePlayerStrokes(player, val)}
+              />
+              <TGText style={{ flex: 0, textAlign: 'right', fontSize: 20, fontWeight: 'bold', color: 'green' }}>{player.strokes}</TGText>
+            </View>
+          </View>
+        ))}
+        <TGText
+          viewStyle={{ alignSelf: 'center', position: 'absolute', bottom: 20, width: '90%', paddingVertical: 10, backgroundColor: 'green' }}
+          style={{ fontWeight: 'bold', color: 'white', textAlign: 'center' }}
+          onPress={() => {}}
+        >
+          STARTA RUNDA
+        </TGText>
       </View>
     )
   }
@@ -133,29 +118,13 @@ ScoreEvent.propTypes = {
   navigator: shape().isRequired,
   onCancelEvent: func.isRequired,
   onRemovePlayer: func.isRequired,
-  data: shape({
-    loading: bool.isRequired,
-    players: arrayOf(shape())
-  }).isRequired
+  onChangePlayerStrokes: func.isRequired
 }
 
 ScoreEvent.defaultProps = {
   event: null
 }
 
-
-const userQuery = gql`
-  query getAllUsers {
-    players: allUsers (
-      orderBy: firstName_ASC
-    ) {
-      id
-      email
-      firstName
-      lastName
-    }
-  }
-`
 
 const mapStateToProps = state => (
   {
@@ -171,11 +140,11 @@ const mapDispatchToProps = dispatch => (
     },
     onRemovePlayer: (player) => {
       dispatch(removePlayerFromEvent(player))
+    },
+    onChangePlayerStrokes: (player, strokes) => {
+      dispatch(changePlayerStrokes(player, strokes))
     }
   }
 )
 
-export default compose(
-  connect(mapStateToProps, mapDispatchToProps),
-  graphql(userQuery)
-)(ScoreEvent)
+export default connect(mapStateToProps, mapDispatchToProps)(ScoreEvent)

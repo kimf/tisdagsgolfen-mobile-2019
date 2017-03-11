@@ -8,7 +8,6 @@ import Logo from 'Login/Logo'
 import LoginError from 'Login/LoginError'
 import Form from 'Login/LoginForm'
 import Wallpaper from 'Login/Wallpaper'
-import ButtonSubmit from 'Login/ButtonSubmit'
 
 import { login } from 'reducers/app'
 
@@ -48,19 +47,17 @@ class Login extends Component {
   }
 
   render() {
-    const { loggingIn, error, email, password } = this.state
+    const { error } = this.state
 
     return (
       <Wallpaper>
         <Logo />
         {error ? <LoginError /> : null}
         <Form
-          email={email}
-          password={password}
+          {...this.state}
           changeValue={this.changeValue}
           onSubmit={this.onSubmit}
         />
-        <ButtonSubmit onPress={loggingIn ? () => {} : this.onSubmit} />
       </Wallpaper>
     )
   }

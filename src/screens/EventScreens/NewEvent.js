@@ -6,6 +6,11 @@ import NewEventSetup from 'Events/NewEventSetup'
 import styles from 'styles'
 
 class NewEvent extends Component {
+  static navigatorStyle = {
+    navBarTextColor: 'white',
+    navBarBackgroundColor: '#1E98DF'
+  }
+
   static navigatorButtons = {
     leftButtons: [
       {

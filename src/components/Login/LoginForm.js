@@ -8,6 +8,8 @@ import {
   View
 } from 'react-native'
 
+import TGText from 'shared/TGText'
+
 import usernameImg from 'images/username.png'
 import passwordImg from 'images/password.png'
 
@@ -27,7 +29,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     color: '#fff',
     fontFamily: 'Avenir',
-    marginBottom: 10,
     paddingLeft: 50
   },
   inputWrapper: {
@@ -40,10 +41,18 @@ const styles = StyleSheet.create({
     height: 22,
     left: 35,
     top: 9
+  },
+  button: {
+    padding: 10,
+    width: DEVICE_WIDTH - 40,
+    marginHorizontal: 20,
+    textAlign: 'center',
+    backgroundColor: 'rgba(30,152,223, 0.95)',
+    fontWeight: 'bold'
   }
 })
 
-const LoginForm = ({ email, password, changeValue, onSubmit }) =>
+const LoginForm = ({ email, password, changeValue, onSubmit, loggingIn }) =>
   <KeyboardAvoidingView behavior="padding" style={styles.container}>
     <View style={styles.inputWrapper}>
       <Image source={usernameImg} style={styles.inlineImg} />
@@ -72,16 +81,23 @@ const LoginForm = ({ email, password, changeValue, onSubmit }) =>
         secureTextEntry
       />
     </View>
+    <TGText
+      style={styles.button}
+      onPress={loggingIn ? () => {} : this.onSubmit}
+    >
+      LOGGA IN
+    </TGText>
   </KeyboardAvoidingView>
 
 
-const { string, func } = React.PropTypes
+const { bool, string, func } = React.PropTypes
 
 LoginForm.propTypes = {
   email: string,
   password: string,
   changeValue: func.isRequired,
-  onSubmit: func.isRequired
+  onSubmit: func.isRequired,
+  loggingIn: bool.isRequired
 }
 
 LoginForm.defaultProps = {

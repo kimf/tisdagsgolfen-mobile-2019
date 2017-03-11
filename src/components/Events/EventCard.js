@@ -4,7 +4,6 @@ import { connect } from 'react-redux'
 import moment from 'moment'
 import 'moment/locale/sv'
 
-import LinkButton from 'shared/LinkButton'
 import TGText from 'shared/TGText'
 
 import { startSettingUpEvent } from 'reducers/event'
@@ -66,16 +65,9 @@ const EventCard = ({ event, userId, navigator, onStartSettingUpEvent }) => {
   }
   const startsAt = moment(event.startsAt).format('DD MMM')
 
-  let titleText = 'Resultat'
-  if (event.status === 'live') {
-    titleText = 'Live'
-  } else if (event.status === 'planned') {
-    titleText = 'För score'
-  }
-  const title = `${titleText} ${startsAt}`
 
   const navigatorProps = {
-    title,
+    title: startsAt,
     passProps: { event, userId },
     animated: true,
     navigatorStyle: {
@@ -103,36 +95,35 @@ const EventCard = ({ event, userId, navigator, onStartSettingUpEvent }) => {
         <TGText style={s.course}>{event.course}</TGText>
       </View>
       <View style={[s.row, s.rightRow]}>
-        { event.status === 'finished'
-          ? <LinkButton
-            onPress={() => {
-              navigator.push({
-                ...navigatorProps,
-                screen: 'tisdagsgolfen.EventResult'
-              })
-            }}
-            title="Se Resultat"
-            backgroundColor="#7f8c8d"
-            color="white"
-          />
-          : null
-        }
         { event.status === 'live'
-          ? <LinkButton
+          ? <TGText
             onPress={() => {
-              navigator.push({
+              navigator.showModal({
                 ...navigatorProps,
                 screen: 'tisdagsgolfen.LiveEvent'
               })
             }}
-            title="FÖLJ LIVE"
-            backgroundColor="#f39c12"
-            color="white"
-          />
+            viewStyle={{ marginRight: 16 }}
+            style={{ color: '#f39c12', fontWeight: 'bold' }}
+          >
+            FÖLJ LIVE
+          </TGText>
           : null
         }
-        { event.status !== 'finished'
-          ? <LinkButton
+        { event.status === 'finished'
+          ? <TGText
+            onPress={() => {
+              navigator.showModal({
+                ...navigatorProps,
+                screen: 'tisdagsgolfen.EventResult'
+              })
+            }}
+            backgroundColor="#7f8c8d"
+            color="white"
+          >
+            SE RESULTAT
+          </TGText>
+          : <TGText
             onPress={() => {
               onStartSettingUpEvent(event)
               navigator.showModal({
@@ -140,11 +131,11 @@ const EventCard = ({ event, userId, navigator, onStartSettingUpEvent }) => {
                 screen: 'tisdagsgolfen.ScoreEvent'
               })
             }}
-            title="SCORA"
             backgroundColor="#16a085"
             color="white"
-          />
-          : null
+          >
+            SCORA
+          </TGText>
         }
       </View>
     </View>

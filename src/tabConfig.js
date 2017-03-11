@@ -18,14 +18,6 @@ export default {
       selectedIcon: require('./images/events-selected.png'), // iOS only
       title: 'Rundor',
       navigatorStyle
-    },
-    {
-      label: 'Profil',
-      screen: 'tisdagsgolfen.Profile',
-      icon: require('./images/user.png'),
-      selectedIcon: require('./images/user-selected.png'), // iOS only
-      title: 'Profil',
-      navigatorStyle
     }
   ],
   tabsStyle: {

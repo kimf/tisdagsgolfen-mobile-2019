@@ -1,8 +1,7 @@
 import React from 'react'
-import { View, TouchableOpacity } from 'react-native'
+import { View } from 'react-native'
 
 import TGText from 'shared/TGText'
-// TODO: Rewrite with TGText for realz
 
 import styles from 'styles'
 
@@ -41,26 +40,24 @@ const LeaderboardCard = ({ data, currentUserId, sorting }) => {
   }
 
   return (
-    <TouchableOpacity activeOpacity={0.5}>
-      <View key={data.id} style={[styles.listrow, currentUserStyle]}>
-        <View style={styles.position}>
-          <TGText style={{ flex: 1, fontWeight: '800', color: '#000', fontSize: 16 }}>{position}</TGText>
-          { upOrDown }
-        </View>
-        <View style={styles.cardTitle}>
-          <TGText style={styles.name}>{player.firstName} {player.lastName}</TGText>
-          { sorting === 'totalPoints'
-            ?
-              <TGText style={styles.metaLarger}>
-                {data.eventCount} Rundor.
-                Snitt: {averagePoints}p
-              </TGText>
-            : null
-          }
-        </View>
-        <TGText style={styles.points}>{`${pointValue} ${pointText}`}</TGText>
+    <View key={data.id} style={[styles.listrow, currentUserStyle]}>
+      <View style={styles.position}>
+        <TGText style={{ flex: 1, fontWeight: '800', color: '#000', fontSize: 16 }}>{position}</TGText>
+        { upOrDown }
       </View>
-    </TouchableOpacity>
+      <View style={styles.cardTitle}>
+        <TGText style={styles.name}>{player.firstName} {player.lastName}</TGText>
+        { sorting === 'totalPoints'
+          ?
+            <TGText style={styles.metaLarger}>
+              {data.eventCount} Rundor.
+              Snitt: {averagePoints}p
+            </TGText>
+          : null
+        }
+      </View>
+      <TGText style={styles.points}>{`${pointValue} ${pointText}`}</TGText>
+    </View>
   )
 }
 

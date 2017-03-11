@@ -7,7 +7,6 @@ import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 
 import TGText from 'shared/TGText'
-import LinkButton from 'shared/LinkButton'
 import styles from 'styles'
 
 class NewEventSetup extends Component {
@@ -96,8 +95,9 @@ class NewEventSetup extends Component {
 
         { isSaving || !startsAt
           ? null
-          :
-          <LinkButton title="SKAPA RUNDA" style={styles.btn} onPress={this.onSubmit} />
+          : <TGText style={styles.btn} onPress={this.onSubmit}>
+            SKAPA RUNDA
+          </TGText>
         }
       </View>
     )
