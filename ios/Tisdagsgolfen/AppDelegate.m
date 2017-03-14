@@ -12,15 +12,12 @@
 #import "RCCManager.h"
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
-#import <BuddyBuildSDK/BuddyBuildSDK.h>
-
 
 @implementation AppDelegate
 @synthesize oneSignal = _oneSignal;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-  [BuddyBuildSDK setup];
 
   self.oneSignal = [[RCTOneSignal alloc] initWithLaunchOptions:launchOptions
                       appId:@"92ef9314-1d1d-4c51-99c7-f265769161da"
