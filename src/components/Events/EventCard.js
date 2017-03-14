@@ -76,6 +76,10 @@ const EventCard = ({ event, userId, navigator, onStartSettingUpEvent }) => {
     }
   }
 
+  const setupEventScreen = event.teamEvent
+    ? 'tisdagsgolfen.SetupTeamEvent'
+    : 'tisdagsgolfen.SetupIndividualEvent'
+
   return (
     <View style={[s.eventCard, s[event.status]]}>
       <View style={s.row}>
@@ -128,7 +132,7 @@ const EventCard = ({ event, userId, navigator, onStartSettingUpEvent }) => {
               onStartSettingUpEvent(event)
               navigator.showModal({
                 ...navigatorProps,
-                screen: 'tisdagsgolfen.ScoreEvent'
+                screen: setupEventScreen
               })
             }}
             backgroundColor="#16a085"

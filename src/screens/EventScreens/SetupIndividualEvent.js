@@ -1,7 +1,8 @@
 import React, { Component, PropTypes } from 'react'
-import { View, Slider } from 'react-native'
+import { View, ScrollView } from 'react-native'
 import { connect } from 'react-redux'
 
+import EventSetupPlayingCard from 'Events/EventSetupPlayingCard'
 import TGText from 'shared/TGText'
 
 import {
@@ -12,7 +13,7 @@ import {
 
 
 // userId, seasonId
-class ScoreEvent extends Component {
+class SetupIndividualEvent extends Component {
   static navigatorButtons = {
     leftButtons: [
       {
@@ -24,7 +25,6 @@ class ScoreEvent extends Component {
       {
         // eslint-disable-next-line import/no-unresolved
         icon: require('../../images/plus.png'),
-        title: 'Spelare',
         id: 'addPlayer'
       }
     ]
@@ -54,43 +54,19 @@ class ScoreEvent extends Component {
   }
 
   render() {
-    const { playing, event, onRemovePlayer, onChangePlayerStrokes } = this.props
+    const { playing, event, onRemove, onChangeStrokes } = this.props
     if (!event) {
       return null
     }
 
     return (
-      <View style={{ flex: 1, alignItems: 'stretch' }}>
-        { playing.map(player => (
-          <View
-            key={`setup_player_row_${player.id}`}
-            style={{
-              minHeight: 100,
-              flexDirection: 'column',
-              margin: 10,
-              padding: 10,
-              backgroundColor: '#fff',
-              borderBottomWidth: 2,
-              borderBottomColor: '#ccc'
-            }}
-          >
-            <View style={{ flex: 1, flexDirection: 'row' }}>
-              <TGText style={{ flex: 1, fontWeight: 'bold', fontSize: 18 }}>{player.firstName} {player.lastName}</TGText>
-              <TGText style={{ flex: 1, color: 'red' }} onPress={() => onRemovePlayer(player)}>Ta bort</TGText>
-            </View>
-            <View style={{ alignItems: 'center', flex: 1, flexDirection: 'row', paddingBottom: 10 }}>
-              <TGText style={{ flex: 0, textAlign: 'left' }}>Extraslag</TGText>
-              <Slider
-                style={{ flex: 1, marginHorizontal: 20 }}
-                maximumValue={36}
-                step={1}
-                value={player.strokes}
-                onValueChange={val => onChangePlayerStrokes(player, val)}
-              />
-              <TGText style={{ flex: 0, textAlign: 'right', fontSize: 20, fontWeight: 'bold', color: 'green' }}>{player.strokes}</TGText>
-            </View>
-          </View>
-        ))}
+      <View style={{ flex: 1 }}>
+        <ScrollView style={{ flex: 1 }}>
+          { playing.map((pl) => {
+            const props = { onRemove, onChangeStrokes, teamEvent: false }
+            return <EventSetupPlayingCard key={`setup_pl_${pl.id}`} item={pl} {...props} />
+          })}
+        </ScrollView>
         <TGText
           viewStyle={{ alignSelf: 'center', position: 'absolute', bottom: 20, width: '90%', paddingVertical: 10, backgroundColor: 'green' }}
           style={{ fontWeight: 'bold', color: 'white', textAlign: 'center' }}
@@ -105,7 +81,7 @@ class ScoreEvent extends Component {
 
 const { arrayOf, bool, shape, string, func } = PropTypes
 
-ScoreEvent.propTypes = {
+SetupIndividualEvent.propTypes = {
   event: shape({
     id: string.isRequired,
     scoringType: string.isRequired,
@@ -117,11 +93,11 @@ ScoreEvent.propTypes = {
   playing: arrayOf(shape()).isRequired,
   navigator: shape().isRequired,
   onCancelEvent: func.isRequired,
-  onRemovePlayer: func.isRequired,
-  onChangePlayerStrokes: func.isRequired
+  onRemove: func.isRequired,
+  onChangeStrokes: func.isRequired
 }
 
-ScoreEvent.defaultProps = {
+SetupIndividualEvent.defaultProps = {
   event: null
 }
 
@@ -138,13 +114,13 @@ const mapDispatchToProps = dispatch => (
     onCancelEvent: () => {
       dispatch(cancelEvent())
     },
-    onRemovePlayer: (player) => {
+    onRemove: (player) => {
       dispatch(removePlayerFromEvent(player))
     },
-    onChangePlayerStrokes: (player, strokes) => {
+    onChangeStrokes: (player, strokes) => {
       dispatch(changePlayerStrokes(player, strokes))
     }
   }
 )
 
-export default connect(mapStateToProps, mapDispatchToProps)(ScoreEvent)
+export default connect(mapStateToProps, mapDispatchToProps)(SetupIndividualEvent)

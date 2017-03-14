@@ -27,7 +27,7 @@ const configureStore = (client, onComplete) => {
     )
   )
 
-  persistStore(store, { blacklist: ['apollo'], storage: AsyncStorage }, onComplete) // .purge()
+  persistStore(store, { blacklist: ['apollo'], storage: AsyncStorage }, onComplete).purge()
   return store
 }
 

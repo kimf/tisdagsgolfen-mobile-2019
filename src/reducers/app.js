@@ -85,7 +85,7 @@ export default (state = initialState, action) => {
       const { token, json } = action.payload
       const { seasons, user } = json
       const seasonId = state.seasonId || seasons[0].id
-      const seasonClosed = state.seasons.find(s => s.id === seasonId).closed
+      const seasonClosed = seasons.find(s => s.id === seasonId).closed
       return {
         ...state,
         loggedIn: true,

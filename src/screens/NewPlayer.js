@@ -6,7 +6,7 @@ import gql from 'graphql-tag'
 
 import TGText from 'shared/TGText'
 import styles from 'styles'
-import { addPlayerToEvent } from 'reducers/event'
+import { addPlayerToEvent, addPlayerToTeam } from 'reducers/event'
 
 const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 })
 
@@ -38,15 +38,24 @@ class NewPlayer extends Component {
     }
   }
 
-  addPlayer = (player) => {
-    this.props.onAddPlayerToEvent(player, 0)
+  addPlayer = (player, team = null) => {
+    if (team) {
+      this.props.onAddPlayerToTeam(team, player)
+    } else {
+      this.props.onAddPlayerToEvent(player)
+    }
     this.props.navigator.dismissModal()
   }
 
 
   render() {
-    const { data, playing } = this.props
+    const { data, playing, team } = this.props
     if (data.loading) { return null }
+
+    const players = team
+      ? [].concat(...playing.map(p => p.players))
+      : playing
+
     return (
       <View style={styles.container}>
         <ListView
@@ -54,12 +63,19 @@ class NewPlayer extends Component {
           initialListSize={100}
           dataSource={ds.cloneWithRows(data.players)}
           renderRow={(player) => {
-            const isPlaying = playing.find(p => p.id === player.id)
+            const isPlaying = players.find(p => p.id === player.id)
             return !isPlaying ? (
               <TGText
                 key={`setup_player_row_${player.id}`}
-                onPress={() => this.addPlayer(player)}
-                viewStyle={styles.listrow}
+                onPress={() => this.addPlayer(player, team)}
+                viewStyle={{
+                  borderBottomWidth: 1,
+                  borderColor: '#eee',
+                  flexDirection: 'row',
+                  paddingHorizontal: 20,
+                  paddingVertical: 15
+                }}
+                style={{ fontSize: 18, fontWeight: 'bold' }}
               >
                 {player.firstName} {player.lastName}
               </TGText>
@@ -72,19 +88,21 @@ class NewPlayer extends Component {
   }
 }
 
-const { shape, string, bool, arrayOf, func } = PropTypes
+const { shape, bool, arrayOf, func } = PropTypes
 NewPlayer.propTypes = {
   data: shape({
     loading: bool.isRequired,
     players: arrayOf(shape())
   }).isRequired,
-  playing: arrayOf(
-    shape({
-      id: string.isRequired
-    }).isRequired
-  ).isRequired,
+  playing: arrayOf(shape()).isRequired,
+  team: shape(),
   onAddPlayerToEvent: func.isRequired,
+  onAddPlayerToTeam: func.isRequired,
   navigator: shape().isRequired
+}
+
+NewPlayer.defaultProps = {
+  team: null
 }
 
 const userQuery = gql`
@@ -111,6 +129,9 @@ const mapDispatchToProps = dispatch => (
   {
     onAddPlayerToEvent: (player, strokes) => {
       dispatch(addPlayerToEvent(player, strokes))
+    },
+    onAddPlayerToTeam: (team, player) => {
+      dispatch(addPlayerToTeam(team, player))
     }
   }
 )

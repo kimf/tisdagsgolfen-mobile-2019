@@ -8,7 +8,8 @@ import Login from './Login'
 
 import NewEvent from './EventScreens/NewEvent'
 import EventResult from './EventScreens/EventResult'
-import ScoreEvent from './EventScreens/ScoreEvent'
+import SetupIndividualEvent from './EventScreens/SetupIndividualEvent'
+import SetupTeamEvent from './EventScreens/SetupTeamEvent'
 import LiveEvent from './EventScreens/LiveEvent'
 
 import NewPlayer from './NewPlayer'
@@ -48,11 +49,12 @@ const registerScreens = (store, client) => {
 
   // event sub-screens
   registerScreenWithApollo('tisdagsgolfen.NewEvent', NewEvent, store, client)
-  registerScreenWithApollo('tisdagsgolfen.ScoreEvent', ScoreEvent, store, client)
   registerScreenWithApollo('tisdagsgolfen.LiveEvent', LiveEvent, store, client)
   registerScreenWithApollo('tisdagsgolfen.EventResult', EventResult, store, client)
 
   // scoring event screens
+  registerScreenWithApollo('tisdagsgolfen.SetupIndividualEvent', SetupIndividualEvent, store, client)
+  registerScreenWithApollo('tisdagsgolfen.SetupTeamEvent', SetupTeamEvent, store, client)
 
   // misc
   registerScreenWithApollo('tisdagsgolfen.NewPlayer', NewPlayer, store, client)

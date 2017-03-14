@@ -29,11 +29,27 @@ export const changePlayerStrokes = (player, strokes) => ({
   type: 'CHANGED_PLAYER_STROKES', player, strokes
 })
 
+export const addPlayerToTeam = (team, player) => ({
+  type: 'ADDED_PLAYER_TO_TEAM', team, player
+})
+export const removePlayerFromTeam = (team, player) => ({
+  type: 'REMOVED_PLAYER_FROM_TEAM', team, player
+})
+export const removeTeam = team => ({
+  type: 'REMOVED_TEAM_FROM_EVENT', team
+})
+export const addTeam = () => ({
+  type: 'ADDED_TEAM_TO_EVENT'
+})
+export const changeTeamStrokes = (team, strokes) => ({
+  type: 'CHANGED_TEAM_STROKES', team, strokes
+})
+
+
 export default (state = initialState, action) => {
   switch (action.type) {
     case 'BEGIN_SCORING_SETUP': {
       let firstItem
-      console.log(action.event.teamEvent)
       if (action.event.teamEvent) {
         firstItem = {
           id: 0,
@@ -69,8 +85,8 @@ export default (state = initialState, action) => {
       }
 
     case 'REMOVED_PLAYER_FROM_EVENT': {
-      const playerIndex = state.playing.findIndex(p => p.id === action.player.id)
-      const playing = update(state.playing, { $splice: [[playerIndex, 1]] })
+      const playingIndex = state.playing.findIndex(p => p.id === action.player.id)
+      const playing = update(state.playing, { $splice: [[playingIndex, 1]] })
       return {
         ...state,
         playing
@@ -78,11 +94,75 @@ export default (state = initialState, action) => {
     }
 
     case 'CHANGED_PLAYER_STROKES': {
-      const playerIndex = state.playing.findIndex(p => p.id === action.player.id)
+      const playingIndex = state.playing.findIndex(p => p.id === action.player.id)
       const playing = update(
         state.playing,
-        { [playerIndex]: { strokes: { $set: action.strokes } } }
+        { [playingIndex]: { strokes: { $set: action.strokes } } }
       )
+      return {
+        ...state,
+        playing
+      }
+    }
+
+    case 'ADDED_TEAM_TO_EVENT': {
+      const newItem = {
+        id: state.playing.length,
+        players: [],
+        strokes: 0,
+        eventScores: []
+      }
+      return {
+        ...state,
+        playing: state.playing.concat(newItem)
+      }
+    }
+
+    case 'ADDED_PLAYER_TO_TEAM': {
+      const teamIndex = state.playing.findIndex(p => p.id === action.team.id)
+      const playing = update(
+        state.playing,
+        { [teamIndex]: { players: { $push: [action.player] } } }
+      )
+
+      return {
+        ...state,
+        playing
+      }
+    }
+
+    case 'REMOVED_PLAYER_FROM_TEAM': {
+      const teamIndex = state.playing.findIndex(p => p.id === action.team.id)
+      const playerIndex = state.playing[teamIndex].players.findIndex(p => p.id === action.player.id)
+      const playing = update(
+        state.playing, {
+          [teamIndex]: {
+            players: { $splice: [[playerIndex: 1]] }
+          }
+        }
+      )
+      return {
+        ...state,
+        playing
+      }
+    }
+
+    case 'REMOVED_TEAM_FROM_EVENT': {
+      const playingIndex = state.playing.findIndex(p => p.id === action.team.id)
+      const playing = update(state.playing, { $splice: [[playingIndex, 1]] })
+      return {
+        ...state,
+        playing
+      }
+    }
+
+    case 'CHANGED_TEAM_STROKES': {
+      const playingIndex = state.playing.findIndex(p => p.id === action.team.id)
+      const playing = update(
+        state.playing,
+        { [playingIndex]: { strokes: { $set: action.strokes } } }
+      )
+
       return {
         ...state,
         playing
@@ -107,99 +187,6 @@ export default (state = initialState, action) => {
 
 // export default function reducer(state = initialState, action = {}) {
 //   switch (action.type) {
-//     case "BEGIN_SCORING_SETUP":
-//       let firstItem;
-//       if(action.event.teamEvent) {
-//         firstItem = Immutable({
-//           id: 0,
-//           players: [{id: action.player.id, name: action.player.name}],
-//           strokes: 0,
-//           eventScores: []
-//         })
-//       } else {
-//         firstItem = Immutable({
-//           id: action.player.id,
-//           name: action.player.name,
-//           strokes: 0,
-//           eventScores: []
-//         });
-//       }
-
-//       return Immutable({
-//         event: action.event,
-//         playing: Immutable([firstItem]),
-//         currentHole: state.currentHole
-//       })
-
-//     case "ADDED_EVENT_TEAM":
-//       const newItem = Immutable({
-//         id: state.playing.length,
-//         players: [],
-//         strokes: 0,
-//         eventScores: []
-//       })
-//       return Immutable({
-//         event: state.event,
-//         playing: Immutable(state.playing).concat(newItem),
-//         currentHole: state.currentHole
-//       })
-
-//     case "ADDED_PLAYER_TO_TEAM":
-//       const newPlayer = Immutable({
-//         id: action.player.id,
-//         name: action.player.name
-//       })
-
-//       const enhancedTeams = state.playing.map((t, index) => {
-//         if(index !== action.teamIndex) {
-//           return t;
-//         }
-//         let players = t.players.concat(newPlayer)
-//         return Immutable(t).merge({players: players});
-//       });
-
-//       return Immutable({
-//         event: state.event,
-//         playing: Immutable(enhancedTeams),
-//         currentHole: state.currentHole
-//       })
-
-//     case "CHANGED_TEAM_STROKES":
-//       const strokedTeams = state.playing.map((t, index) => {
-//         if(index !== action.teamIndex) {
-//           return t;
-//         }
-//         return Immutable(t).merge({strokes: action.strokes});
-//       });
-
-//       return Immutable({
-//         event: state.event,
-//         playing: Immutable(strokedTeams),
-//         currentHole: state.currentHole
-//       })
-
-//     case "ADDED_PLAYER_TO_EVENT":
-//       const addedPlayer = Immutable({
-//         id: action.player.id,
-//         name: action.player.name,
-//         strokes: action.strokes,
-//         eventScores: []
-//       });
-
-//       return Immutable({ event: state.event, playing: state.playing.concat(addedPlayer) })
-
-//     case "CHANGED_PLAYER_STROKES":
-//       const playing = state.playing.map((player) => {
-//         if (player.id === action.player.id) {
-//           return Immutable(player).merge({ strokes: action.strokes})
-//         }
-//         return Immutable(player)
-//       })
-
-//       return Immutable({
-//         event: state.event,
-//         playing: playing,
-//       })
 
 //     case "CHANGED_HOLE":
 //       return Immutable({
@@ -310,12 +297,6 @@ export default (state = initialState, action) => {
 //       return initialState;
 
 //     case "FINISHED_SCORING":
-//       return initialState;
-
-//     case "CANCELED_SCORING":
-//       return initialState;
-
-//     case "ABORT_EVENT_SETUP":
 //       return initialState;
 
 //     default:
