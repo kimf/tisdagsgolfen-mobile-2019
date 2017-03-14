@@ -22,13 +22,6 @@ class SetupIndividualEvent extends Component {
         title: 'Avbryt',
         id: 'cancel'
       }
-    ],
-    rightButtons: [
-      {
-        // eslint-disable-next-line import/no-unresolved
-        icon: require('../../images/plus.png'),
-        id: 'addTeam'
-      }
     ]
   }
 
@@ -46,41 +39,41 @@ class SetupIndividualEvent extends Component {
         onCancelEvent()
         navigator.dismissModal()
       }
-      if (event.id === 'addPlayer') {
-        navigator.showModal({
-          screen: 'tisdagsgolfen.NewPlayer',
-          title: 'Lägg till spelare'
-        })
-      }
-      if (event.id === 'addTeam') {
-        onAddTeam()
-      }
-    } else if (event.id === 'addPlayer') {
-      navigator.showModal({
-        screen: 'tisdagsgolfen.NewPlayer',
-        title: `Lägg till i Lag ${event.team.id + 1}`,
-        passProps: {
-          team: event.team
-        }
-      })
     }
   }
 
+  openAddPlayer = (team) => {
+    this.props.navigator.showModal({
+      screen: 'tisdagsgolfen.NewPlayer',
+      title: `Lägg till i Lag ${team.id + 1}`,
+      passProps: {
+        team: team
+      }
+    })
+  }
+
   render() {
-    const { playing, event, onRemove, onChangeStrokes, onRemovePlayerFromTeam } = this.props
+    const { playing, event, onRemove, onAddTeam, onChangeStrokes, onRemovePlayerFromTeam } = this.props
     if (!event) {
       return null
     }
 
     return (
       <View style={{ flex: 1 }}>
-        <ScrollView style={{ flex: 1 }}>
+        <TGText
+          viewStyle={{ width: '100%', padding: 10, backgroundColor: '#ccc' }}
+          style={{ fontSize: 12, fontWeight: 'bold', color: '#888', textAlign: 'center' }}
+          onPress={onAddTeam}
+        >
+          + LÄGG TILL LAG
+        </TGText>
+        <ScrollView>
           { playing.map((pl) => {
             const props = {
               onRemove,
               onChangeStrokes,
               onRemovePlayerFromTeam,
-              onAddPlayerToTeam: () => this.onNavigatorEvent({ id: 'addPlayer', team: pl }),
+              onAddPlayerToTeam: () => this.openAddPlayer(pl),
               teamEvent: true
             }
             return <EventSetupPlayingCard key={`setup_pl_${pl.id}`} item={pl} {...props} />

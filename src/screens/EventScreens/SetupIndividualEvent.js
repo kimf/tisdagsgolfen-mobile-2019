@@ -20,13 +20,6 @@ class SetupIndividualEvent extends Component {
         title: 'Avbryt',
         id: 'cancel'
       }
-    ],
-    rightButtons: [
-      {
-        // eslint-disable-next-line import/no-unresolved
-        icon: require('../../images/plus.png'),
-        id: 'addPlayer'
-      }
     ]
   }
 
@@ -44,13 +37,14 @@ class SetupIndividualEvent extends Component {
         onCancelEvent()
         navigator.dismissModal()
       }
-      if (event.id === 'addPlayer') {
-        navigator.showModal({
-          screen: 'tisdagsgolfen.NewPlayer',
-          title: 'Lägg till spelare'
-        })
-      }
     }
+  }
+
+  openAddPlayer = () => {
+    this.props.navigator.showModal({
+      screen: 'tisdagsgolfen.NewPlayer',
+      title: 'Lägg till spelare'
+    })
   }
 
   render() {
@@ -61,14 +55,21 @@ class SetupIndividualEvent extends Component {
 
     return (
       <View style={{ flex: 1 }}>
-        <ScrollView style={{ flex: 1 }}>
+        <TGText
+          viewStyle={{ width: '100%', padding: 10, backgroundColor: '#ccc' }}
+          style={{ fontSize: 12, fontWeight: 'bold', color: '#888', textAlign: 'center' }}
+          onPress={this.openAddPlayer}
+        >
+          + LÄGG TILL SPELARE
+        </TGText>
+        <ScrollView>
           { playing.map((pl) => {
             const props = { onRemove, onChangeStrokes, teamEvent: false }
             return <EventSetupPlayingCard key={`setup_pl_${pl.id}`} item={pl} {...props} />
           })}
         </ScrollView>
         <TGText
-          viewStyle={{ alignSelf: 'center', position: 'absolute', bottom: 20, width: '90%', paddingVertical: 10, backgroundColor: 'green' }}
+          viewStyle={{ width: '100%', paddingVertical: 10, backgroundColor: 'green' }}
           style={{ fontWeight: 'bold', color: 'white', textAlign: 'center' }}
           onPress={() => {}}
         >

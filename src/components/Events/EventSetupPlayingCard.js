@@ -33,7 +33,7 @@ class EventSetupPlayingCard extends Component {
             Ta bort {teamEvent ? 'lag' : 'spelare'}
           </TGText>
         </View>
-        <View style={{ alignItems: 'center', flex: 1, flexDirection: 'row', paddingVertical: 20 }}>
+        <View style={{ alignItems: 'center', flex: 1, flexDirection: 'row', paddingVertical: 10 }}>
           <TGText style={{ flex: 0, textAlign: 'left' }}>Extraslag</TGText>
           <Slider
             style={{ flex: 1, marginHorizontal: 20 }}
@@ -66,8 +66,17 @@ class EventSetupPlayingCard extends Component {
                 </TGText>
               </View>
             ))}
-            <TGText viewStyle={{ flex: 1, marginTop: 20 }} style={{ textAlign: 'right' }} onPress={() => onAddPlayerToTeam(item)}>
-              Lägg till spelare
+            <TGText
+              viewStyle={{
+                marginTop: 10,
+                maxWidth: '60%',
+                paddingVertical: 5,
+                paddingHorizontal: 10,
+                backgroundColor: '#ccc'
+              }}
+              style={{ textAlign: 'left' }}
+              onPress={() => onAddPlayerToTeam(item)}>
+              + Lägg till spelare i {name}
             </TGText>
           </View>
           : null
