@@ -22,7 +22,7 @@ TouchableView.propTypes = {
   isRippleDisabled: PropTypes.bool,
   rippleColor: PropTypes.string,
   children: PropTypes.element.isRequired,
-  style: PropTypes.shape()
+  style: View.propTypes.style
 }
 
 TouchableView.defaultProps = {

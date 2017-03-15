@@ -1,46 +1,60 @@
 import React, { Component, PropTypes } from 'react'
 import { TextInput, View, ListView } from 'react-native'
+import { graphql } from 'react-apollo'
+import gql from 'graphql-tag'
+import Fuse from 'fuse.js'
 
-import TGText from 'shared/TGText'
 import CourseRow from 'Events/CourseRow'
+import Loading from 'shared/Loading'
+import EmptyState from 'shared/EmptyState'
 
 import styles from 'styles'
-import clubsJson from 'data/clubs.json'
-
-const filter = (data, query) => Object.keys(data)
-  .filter(key => key.toLowerCase().indexOf(query) !== -1)
-  .reduce((obj, key) => {
-    const newObj = Object.assign({}, obj)
-    newObj[key] = clubsJson[key]
-    return newObj
-  }, {})
 
 const ds = new ListView.DataSource({
-  rowHasChanged: (row1, row2) => row1 !== row2,
-  sectionHeaderHasChanged: (s1, s2) => s1 !== s2
+  rowHasChanged: (row1, row2) => row1 !== row2
 })
 
 class CoursePicker extends Component {
-  state = {
-    dataSource: ds.cloneWithRowsAndSections(clubsJson),
-    query: ''
+  static fuse = null
+  state = { query: '' }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.data.courses && nextProps.data.courses.length > 0) {
+      this.fuse = new Fuse(
+        nextProps.data.courses,
+        {
+          shouldSort: true,
+          minMatchCharLength: 2,
+          maxPatternLength: 10,
+          keys: ['name', 'club']
+        }
+      )
+    }
   }
 
   setSearchQuery = (query) => {
-    const { dataSource } = this.state
-    let newDataSource = null
-    if (query !== null && query.length > 1) {
-      const filtered = filter(clubsJson, query.toLowerCase())
-      newDataSource = dataSource.cloneWithRowsAndSections(filtered)
-    } else {
-      newDataSource = dataSource.cloneWithRowsAndSections(clubsJson)
-    }
-    this.setState({ dataSource: newDataSource, query })
+    this.setState({ query })
   }
 
   render() {
-    const { query, dataSource } = this.state
+    const { data } = this.props
+    const { query } = this.state
 
+    if (data.loading) {
+      return <Loading text="Laddar banor..." />
+    }
+
+    if (data.courses.length === 0) {
+      return <EmptyState text="Inga banor :(" />
+    }
+
+    let courses = []
+    if (this.fuse && query !== null && query.length > 2) {
+      const filtered = this.fuse.search(query)
+      courses = ds.cloneWithRows(filtered)
+    } else {
+      courses = ds.cloneWithRows(data.courses)
+    }
 
     return (
       <View style={[styles.container]}>
@@ -56,15 +70,10 @@ class CoursePicker extends Component {
           />
         </View>
         <ListView
-          dataSource={dataSource}
+          dataSource={courses}
           renderRow={rowData =>
             <CourseRow course={rowData} selectCourse={this.props.selectCourse} />
           }
-          renderSectionHeader={(sectionData, sectionID) => (
-            <View style={styles.sectionHeader}>
-              <TGText style={styles.sectionHeaderText}>{sectionID}</TGText>
-            </View>
-          )}
           keyboardShouldPersistTaps="always"
         />
       </View>
@@ -73,7 +82,27 @@ class CoursePicker extends Component {
 }
 
 CoursePicker.propTypes = {
-  selectCourse: PropTypes.func.isRequired
+  selectCourse: PropTypes.func.isRequired,
+  data: PropTypes.shape({
+    loading: PropTypes.bool.isRequired,
+    courses: PropTypes.arrayOf(PropTypes.shape())
+  }).isRequired
 }
 
-export default CoursePicker
+const coursesQuery = gql`
+   query {
+    courses: allCourses ( 
+      orderBy: club_ASC
+    ) {
+      id
+      club
+      name
+      par
+      holes: _holesMeta {
+        count
+      } 
+    }
+   }
+`
+
+export default graphql(coursesQuery)(CoursePicker)

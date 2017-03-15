@@ -15,7 +15,7 @@ const Tabs = ({ currentRoute, onChange, tabs, style }) => (
       paddingVertical: 5
     }}
   >
-    { tabs.map(tab =>
+    {tabs.map(tab =>
       <Tab
         key={tab.value}
         tab={tab}
@@ -34,7 +34,7 @@ Tabs.propTypes = {
   currentRoute: string.isRequired,
   onChange: func.isRequired,
   tabs: arrayOf(shape()),
-  style: shape()
+  style: View.propTypes.style
 }
 
 Tabs.defaultProps = {

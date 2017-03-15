@@ -80,6 +80,22 @@ const EventCard = ({ event, userId, navigator, onStartSettingUpEvent }) => {
     ? 'tisdagsgolfen.SetupTeamEvent'
     : 'tisdagsgolfen.SetupIndividualEvent'
 
+  let courseRow = null
+  if (event.course) {
+    courseRow = (
+      <View style={s.row}>
+        <TGText style={s.course}>{event.course.club}</TGText>
+        <TGText style={s.course}>{event.course.name}</TGText>
+      </View>
+    )
+  } else if (event.oldCourseName) {
+    courseRow = (
+      <View style={s.row}>
+        <TGText style={s.course}>{event.oldCourseName}</TGText>
+      </View>
+    )
+  }
+
   return (
     <View style={[s.eventCard, s[event.status]]}>
       <View style={s.row}>
@@ -94,12 +110,10 @@ const EventCard = ({ event, userId, navigator, onStartSettingUpEvent }) => {
         </TGText>
       </View>
 
-      <View style={s.row}>
-        <TGText style={s.course}>{event.club}</TGText>
-        <TGText style={s.course}>{event.course}</TGText>
-      </View>
+      {courseRow}
+
       <View style={[s.row, s.rightRow]}>
-        { event.status === 'live'
+        {event.status === 'live'
           ? <TGText
             onPress={() => {
               navigator.showModal({
@@ -114,7 +128,7 @@ const EventCard = ({ event, userId, navigator, onStartSettingUpEvent }) => {
           </TGText>
           : null
         }
-        { event.status === 'finished'
+        {event.status === 'finished'
           ? <TGText
             onPress={() => {
               navigator.showModal({
@@ -154,8 +168,11 @@ EventCard.propTypes = {
     scoringType: string.isRequired,
     status: string.isRequired,
     teamEvent: bool.isRequired,
-    club: string,
-    course: string
+    oldCourseName: string,
+    course: shape({
+      club: string,
+      course: string
+    })
   }).isRequired,
   navigator: shape().isRequired,
   userId: string.isRequired,

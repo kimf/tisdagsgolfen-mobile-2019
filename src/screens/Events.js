@@ -105,8 +105,12 @@ const eventsQuery = gql`
       id
       status
       startsAt
-      course
-      courseId
+      oldCourseName
+      course {
+        id
+        club
+        name
+      }
       scoringType
       teamEvent
     }

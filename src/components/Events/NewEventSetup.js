@@ -24,9 +24,8 @@ class NewEventSetup extends Component {
     const { seasonId, createEvent, done } = this.props
     const scoringType = isStrokes ? 'strokes' : 'points'
     const courseId = this.props.course.id
-    const course = this.props.course.name
 
-    createEvent({ seasonId, course, courseId, teamEvent, scoringType, startsAt })
+    createEvent({ seasonId, courseId, teamEvent, scoringType, startsAt })
       .then(() => {
         this.setState({ isSaving: false, error: false })
         done()
@@ -47,18 +46,24 @@ class NewEventSetup extends Component {
     const { teamEvent, isStrokes, startsAt, isSaving, error } = this.state
     let showError
     if (error) {
-      showError = <TGText style={{ color: '#c00', fontSize: 20 }}>Något gick fel med att spara, se över infon</TGText>
+      showError = (
+        <TGText
+          style={{ backgroundColor: 'red', width: '100%', padding: 10, color: 'white', fontWeight: 'bold', textAlign: 'center' }}
+        >
+          Något gick fel med att spara, se över infon
+        </TGText>
+      )
     }
 
     return (
       <View style={[styles.container, { alignItems: 'stretch', flexDirection: 'column' }]}>
         <View style={[styles.inlineHeader, { flexDirection: 'row' }]}>
-          <TGText style={{ flex: 2, fontWeight: 'bold', padding: 10 }}>{course.name}</TGText>
+          <TGText style={{ flex: 1, padding: 10 }}>{course.club}: {course.name}</TGText>
           <TGText
             style={{ flex: 1, padding: 10, textAlign: 'right' }}
             onPress={() => changeCourse(null)}
           >
-            Byt bana
+            Byt
           </TGText>
         </View>
 
@@ -93,9 +98,13 @@ class NewEventSetup extends Component {
         </View>
 
 
-        { isSaving || !startsAt
+        {isSaving || !startsAt
           ? null
-          : <TGText style={styles.btn} onPress={this.onSubmit}>
+          : <TGText
+            viewStyle={{ backgroundColor: 'green', padding: 10, width: '100%' }}
+            style={{ color: 'white', textAlign: 'center', fontWeight: 'bold' }}
+            onPress={this.onSubmit}
+          >
             SKAPA RUNDA
           </TGText>
         }
@@ -108,7 +117,8 @@ const { string, number, shape, func } = React.PropTypes
 
 NewEventSetup.propTypes = {
   course: shape({
-    id: number.isRequired,
+    id: string.isRequired,
+    club: string.isRequired,
     name: string.isRequired
   }).isRequired,
   changeCourse: func.isRequired,
@@ -120,8 +130,7 @@ NewEventSetup.propTypes = {
 const createEventMutation = gql`
   mutation createEvent(
     $seasonId:ID!,
-    $course: String!,
-    $courseId:Int!,
+    $courseId:ID!,
     $teamEvent:Boolean!,
     $scoringType:String!,
     $startsAt:DateTime!
@@ -130,7 +139,6 @@ const createEventMutation = gql`
     createEvent(
       seasonId: $seasonId,
       courseId: $courseId,
-      course: $course,
       teamEvent: $teamEvent,
       scoringType: $scoringType,
       startsAt: $startsAt,
@@ -138,13 +146,6 @@ const createEventMutation = gql`
       oldId: 0
     ) {
       id
-      status
-      startsAt
-      course
-      courseId
-      scoringType
-      teamEvent
-      oldId
     }
   }
 `
@@ -152,9 +153,9 @@ const createEventMutation = gql`
 export default graphql(createEventMutation, {
   props({ mutate }) {
     return {
-      createEvent({ seasonId, courseId, course, teamEvent, scoringType, startsAt }) {
+      createEvent({ seasonId, courseId, teamEvent, scoringType, startsAt }) {
         return mutate({
-          variables: { seasonId, courseId, course, teamEvent, scoringType, startsAt }
+          variables: { seasonId, courseId, teamEvent, scoringType, startsAt }
         })
       }
     }

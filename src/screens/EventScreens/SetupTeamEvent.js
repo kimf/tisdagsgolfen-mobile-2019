@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { View, ScrollView } from 'react-native'
 import { connect } from 'react-redux'
 
-import EventSetupPlayingCard from 'Events/EventSetupPlayingCard'
+import EventSetupPlayingCard from 'Scoring/EventSetupPlayingCard'
 import TGText from 'shared/TGText'
 
 import {
@@ -10,9 +10,12 @@ import {
   removePlayerFromTeam,
   changeTeamStrokes,
   removeTeam,
-  addTeam
+  addTeam,
+  startPlay
 } from 'reducers/event'
 
+
+// TODO: Dry this up with SetupIndividualEvent
 
 // userId, seasonId
 class SetupIndividualEvent extends Component {
@@ -33,7 +36,7 @@ class SetupIndividualEvent extends Component {
   state = { course: null }
 
   onNavigatorEvent = (event) => {
-    const { navigator, onCancelEvent, onAddTeam } = this.props
+    const { navigator, onCancelEvent } = this.props
     if (event.type === 'NavBarButtonPress') {
       if (event.id === 'cancel') {
         onCancelEvent()
@@ -46,14 +49,26 @@ class SetupIndividualEvent extends Component {
     this.props.navigator.showModal({
       screen: 'tisdagsgolfen.NewPlayer',
       title: `Lägg till i Lag ${team.id + 1}`,
-      passProps: {
-        team: team
-      }
+      passProps: { team }
+    })
+  }
+
+  startPlay = () => {
+    this.props.onStartPlay()
+    this.props.navigator.resetTo({
+      screen: 'tisdagsgolfen.ScoreEvent',
+      title: 'Scoring...',
+      passProps: {},
+      animated: true,
+      navigatorStyle: {}, // override the navigator style for the pushed screen (optional)
+      navigatorButtons: {} // override the nav buttons for the pushed screen (optional)
     })
   }
 
   render() {
-    const { playing, event, onRemove, onAddTeam, onChangeStrokes, onRemovePlayerFromTeam } = this.props
+    const {
+      playing, event, onRemove, onAddTeam, onChangeStrokes, onRemovePlayerFromTeam
+    } = this.props
     if (!event) {
       return null
     }
@@ -68,7 +83,7 @@ class SetupIndividualEvent extends Component {
           + LÄGG TILL LAG
         </TGText>
         <ScrollView>
-          { playing.map((pl) => {
+          {playing.map((pl) => {
             const props = {
               onRemove,
               onChangeStrokes,
@@ -82,7 +97,7 @@ class SetupIndividualEvent extends Component {
         <TGText
           viewStyle={{ alignSelf: 'center', width: '100%', paddingVertical: 10, backgroundColor: 'green' }}
           style={{ fontWeight: 'bold', color: 'white', textAlign: 'center' }}
-          onPress={() => {}}
+          onPress={this.startPlay}
         >
           STARTA RUNDA
         </TGText>
@@ -99,8 +114,10 @@ SetupIndividualEvent.propTypes = {
     scoringType: string.isRequired,
     status: string.isRequired,
     teamEvent: bool.isRequired,
-    club: string,
-    course: string
+    course: shape({
+      club: string,
+      name: string
+    })
   }),
   playing: arrayOf(shape()).isRequired,
   navigator: shape().isRequired,
@@ -108,7 +125,8 @@ SetupIndividualEvent.propTypes = {
   onRemove: func.isRequired,
   onChangeStrokes: func.isRequired,
   onAddTeam: func.isRequired,
-  onRemovePlayerFromTeam: func.isRequired
+  onRemovePlayerFromTeam: func.isRequired,
+  onStartPlay: func.isRequired
 }
 
 SetupIndividualEvent.defaultProps = {
@@ -137,7 +155,8 @@ const mapDispatchToProps = dispatch => (
     onRemovePlayerFromTeam: (team, player) => {
       dispatch(removePlayerFromTeam(team, player))
     },
-    onAddTeam: () => dispatch(addTeam())
+    onAddTeam: () => dispatch(addTeam()),
+    onStartPlay: () => dispatch(startPlay())
   }
 )
 

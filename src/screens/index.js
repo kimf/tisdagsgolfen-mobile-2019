@@ -5,6 +5,7 @@ import { ApolloProvider } from 'react-apollo'
 import Leaderboard from './Leaderboard'
 import Events from './Events'
 import Login from './Login'
+import Profile from './Profile'
 
 import NewEvent from './EventScreens/NewEvent'
 import EventResult from './EventScreens/EventResult'
@@ -14,7 +15,8 @@ import LiveEvent from './EventScreens/LiveEvent'
 
 import NewPlayer from './NewPlayer'
 
-import Profile from './Profile'
+import ScoreEvent from './EventScreens/ScoreEvent'
+
 
 const withApollo = (WrappedComponent, store, client) => (
   // eslint-disable-next-line react/prefer-stateless-function
@@ -55,6 +57,7 @@ const registerScreens = (store, client) => {
   // scoring event screens
   registerScreenWithApollo('tisdagsgolfen.SetupIndividualEvent', SetupIndividualEvent, store, client)
   registerScreenWithApollo('tisdagsgolfen.SetupTeamEvent', SetupTeamEvent, store, client)
+  registerScreenWithApollo('tisdagsgolfen.ScoreEvent', ScoreEvent, store, client)
 
   // misc
   registerScreenWithApollo('tisdagsgolfen.NewPlayer', NewPlayer, store, client)

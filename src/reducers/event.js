@@ -1,6 +1,6 @@
 import update from 'immutability-helper'
 
-const initialState = { event: null, playing: [], currentHole: 1 }
+const initialState = { event: null, playing: [], currentHole: 1, isStarted: false }
 
 const settingUpEvent = (event, player) => ({
   type: 'BEGIN_SCORING_SETUP', event, player
@@ -45,6 +45,15 @@ export const changeTeamStrokes = (team, strokes) => ({
   type: 'CHANGED_TEAM_STROKES', team, strokes
 })
 
+
+export const startPlay = () => ({
+  type: 'START_PLAY'
+})
+
+
+export const saveEventScore = () => ({
+  type: 'SAVE_EVENT_SCORE'
+})
 
 export default (state = initialState, action) => {
   switch (action.type) {
@@ -170,12 +179,14 @@ export default (state = initialState, action) => {
     }
 
     case 'CANCEL_EVENT':
+      return initialState
+
+    case 'START_PLAY': {
       return {
         ...state,
-        event: null,
-        currentHole: 1,
-        playing: [state.currentPlayer]
+        isStarted: true
       }
+    }
 
     default:
       return state

@@ -2,13 +2,14 @@ import React, { Component, PropTypes } from 'react'
 import { View, ScrollView } from 'react-native'
 import { connect } from 'react-redux'
 
-import EventSetupPlayingCard from 'Events/EventSetupPlayingCard'
+import EventSetupPlayingCard from 'Scoring/EventSetupPlayingCard'
 import TGText from 'shared/TGText'
 
 import {
   cancelEvent,
   removePlayerFromEvent,
-  changePlayerStrokes
+  changePlayerStrokes,
+  startPlay
 } from 'reducers/event'
 
 
@@ -28,8 +29,6 @@ class SetupIndividualEvent extends Component {
     props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this))
   }
 
-  state = { course: null }
-
   onNavigatorEvent = (event) => {
     const { navigator, onCancelEvent } = this.props
     if (event.type === 'NavBarButtonPress') {
@@ -44,6 +43,18 @@ class SetupIndividualEvent extends Component {
     this.props.navigator.showModal({
       screen: 'tisdagsgolfen.NewPlayer',
       title: 'Lägg till spelare'
+    })
+  }
+
+  startPlay = () => {
+    this.props.onStartPlay()
+    this.props.navigator.resetTo({
+      screen: 'tisdagsgolfen.ScoreEvent',
+      title: 'Scoring...',
+      passProps: {},
+      animated: true,
+      navigatorStyle: {}, // override the navigator style for the pushed screen (optional)
+      navigatorButtons: {} // override the nav buttons for the pushed screen (optional)
     })
   }
 
@@ -63,7 +74,7 @@ class SetupIndividualEvent extends Component {
           + LÄGG TILL SPELARE
         </TGText>
         <ScrollView>
-          { playing.map((pl) => {
+          {playing.map((pl) => {
             const props = { onRemove, onChangeStrokes, teamEvent: false }
             return <EventSetupPlayingCard key={`setup_pl_${pl.id}`} item={pl} {...props} />
           })}
@@ -71,7 +82,7 @@ class SetupIndividualEvent extends Component {
         <TGText
           viewStyle={{ width: '100%', paddingVertical: 10, backgroundColor: 'green' }}
           style={{ fontWeight: 'bold', color: 'white', textAlign: 'center' }}
-          onPress={() => {}}
+          onPress={this.startPlay}
         >
           STARTA RUNDA
         </TGText>
@@ -89,13 +100,17 @@ SetupIndividualEvent.propTypes = {
     status: string.isRequired,
     teamEvent: bool.isRequired,
     club: string,
-    course: string
+    course: shape({
+      club: string,
+      name: string
+    })
   }),
   playing: arrayOf(shape()).isRequired,
   navigator: shape().isRequired,
   onCancelEvent: func.isRequired,
   onRemove: func.isRequired,
-  onChangeStrokes: func.isRequired
+  onChangeStrokes: func.isRequired,
+  onStartPlay: func.isRequired
 }
 
 SetupIndividualEvent.defaultProps = {
@@ -120,7 +135,8 @@ const mapDispatchToProps = dispatch => (
     },
     onChangeStrokes: (player, strokes) => {
       dispatch(changePlayerStrokes(player, strokes))
-    }
+    },
+    onStartPlay: () => dispatch(startPlay())
   }
 )
 
