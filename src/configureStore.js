@@ -11,8 +11,8 @@ const configureStore = (client, onComplete) => {
   // eslint-disable-next-line no-underscore-dangle
   const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
   const middleware = __DEV__
-                     ? [invariant(), thunk, client.middleware()]
-                     : [thunk, client.middleware()]
+    ? [invariant(), thunk, client.middleware()]
+    : [thunk, client.middleware()]
 
   const reducers = combineReducers({
     app,

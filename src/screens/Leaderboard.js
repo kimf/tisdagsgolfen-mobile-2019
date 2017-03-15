@@ -13,6 +13,7 @@ import LeaderboardCard from 'Season/LeaderboardCard'
 import SeasonPicker from 'Season/SeasonPicker'
 import Tabs from 'shared/Tabs'
 import EmptyState from 'shared/EmptyState'
+import TGText from 'shared/TGText'
 
 import ImageHeaderScrollView from 'shared/ImageHeaderScrollView'
 import TriggeringView from 'shared/TriggeringView'
@@ -109,7 +110,7 @@ class Leaderboard extends Component {
       return null
     }
 
-    const { data, sorting, seasonId, seasons, userId } = this.props
+    const { data, sorting, seasonId, seasons, userId, activeEvent } = this.props
     const { showSeasonPicker } = this.state
 
     let sortedPlayers = null
@@ -142,26 +143,26 @@ class Leaderboard extends Component {
 
     return (
       <View style={{ flex: 1, backgroundColor: 'transparent' }}>
-        { showSeasonPicker
-          ?
-            <SeasonPicker
-              seasons={seasons}
-              currentSeasonId={season.id}
-              onChangeSeason={s => this.changeSeason(s)}
-            />
+        {showSeasonPicker
+          ? <SeasonPicker
+            seasons={seasons}
+            currentSeasonId={season.id}
+            onChangeSeason={s => this.changeSeason(s)}
+          />
           : null
         }
 
-        { showLeaderboardTabs
-          ?
-            <Tabs
-              currentRoute={sorting}
-              onChange={sort => this.changeSort(sort)}
-            />
+        {showLeaderboardTabs
+          ? <Tabs
+            currentRoute={sorting}
+            onChange={sort => this.changeSort(sort)}
+          />
           : null
         }
 
-        { emptyLeaderboard
+        {activeEvent ? <TGText>AKTIV RUNDA</TGText> : null}
+
+        {emptyLeaderboard
           ? <EmptyState text="Inga rundor spelade ännu" />
           : <ImageHeaderScrollView
             maxHeight={showPhoto ? 220 : 0}
@@ -179,7 +180,7 @@ class Leaderboard extends Component {
           >
             <View style={{ height: 1000 }}>
               <TriggeringView
-                onHide={() => {}}
+                onHide={() => { }}
               >
                 {sortedPlayers.map(player => (
                   <LeaderboardCard key={`l_${player.id}`} currentUserId={userId} data={player} sorting={sorting} />
@@ -215,7 +216,12 @@ Leaderboard.propTypes = {
   }).isRequired,
   navigator: shape({
     setOnNavigatorEvent: func.isRequired
-  }).isRequired
+  }).isRequired,
+  activeEvent: shape()
+}
+
+Leaderboard.defaultProps = {
+  activeEvent: null
 }
 
 const leaderboardQuery = gql`
@@ -247,7 +253,8 @@ const mapStateToProps = state => (
     seasonId: state.app.seasonId,
     userId: state.app.user.id,
     sorting: state.app.sorting,
-    seasons: state.app.seasons
+    seasons: state.app.seasons,
+    activeEvent: state.event.isStarted ? state.event.event : null
   }
 )
 

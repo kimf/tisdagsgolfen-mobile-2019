@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
-import { Alert, View, TouchableOpacity, Text, PickerIOS } from 'react-native'
+import React, { Component, PropTypes } from 'react'
+import { Alert, View, PickerIOS } from 'react-native'
 
-import styles from 'styles'
+import TGText from 'shared/TGText'
 
 const STROKE_VALUES = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 const PUTT_VALUES = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
@@ -27,64 +27,62 @@ pointsArray[8] = 0
 pointsArray[9] = 0
 pointsArray[10] = 0
 
-const modifiedPointsArray = []
-modifiedPointsArray[-8] = 35
-modifiedPointsArray[-7] = 30
-modifiedPointsArray[-6] = 25
-modifiedPointsArray[-5] = 20
-modifiedPointsArray[-4] = 15
-modifiedPointsArray[-3] = 8
-modifiedPointsArray[-2] = 5
-modifiedPointsArray[-1] = 2
-modifiedPointsArray[0] = 0
-modifiedPointsArray[1] = -1
-modifiedPointsArray[2] = -3
-modifiedPointsArray[3] = -3
-modifiedPointsArray[4] = -3
-modifiedPointsArray[5] = -3
-modifiedPointsArray[6] = -3
-modifiedPointsArray[7] = -3
-modifiedPointsArray[8] = -3
-modifiedPointsArray[9] = -3
-modifiedPointsArray[10] = -3
-
 
 export default class ScoringScreen extends Component {
+  static propTypes = {
+    eventScore: PropTypes.shape({
+      strokes: PropTypes.number,
+      putts: PropTypes.number
+    }),
+    teamEvent: PropTypes.bool.isRequired,
+    closeScoreForm: PropTypes.func.isRequired,
+    player: PropTypes.shape().isRequired,
+    par: PropTypes.number.isRequired,
+    extraStrokes: PropTypes.number.isRequired
+  }
+
+  static defaultProps = {
+    eventScore: null
+  }
+
   constructor(props) {
     super(props)
     this.state = {
-      strokes: props.eventScore.strokes || props.par,
-      putts: props.eventScore.putts || (props.teamEvent ? 0 : 2)
+      strokes: props.par,
+      putts: (props.teamEvent ? 0 : 2)
     }
-    this.onCloseScoreForm = this._onCloseScoreForm.bind(this)
   }
 
-  _onCloseScoreForm() {
-    const { eventScore, closeScoreForm, modifiedPoints } = this.props
-    const { strokes, putts } = this.state
+  componentWillReceiveProps(nextProps) {
+    this.state = {
+      strokes: nextProps.eventScore.strokes || this.props.par,
+      putts: nextProps.eventScore.putts || (this.props.teamEvent ? 0 : 2)
+    }
+  }
 
-    console.log(modifiedPoints)
+  onCloseScoreForm = () => {
+    const { par, closeScoreForm, extraStrokes } = this.props
+    const { strokes, putts } = this.state
 
     if (strokes - putts <= 0) {
       Alert.alert('Du verkar ha angett fler puttar än slag!')
     } else {
-      const strokeSum = strokes - eventScore.extraStrokes
-      const testSum = strokeSum - eventScore.par
+      const strokeSum = strokes - extraStrokes
+      const testSum = strokeSum - par
 
-      const points = modifiedPoints
-                     ? parseInt(modifiedPointsArray[testSum], 10)
-                     : parseInt(pointsArray[testSum], 10)
+      const points = parseInt(pointsArray[testSum], 10)
       closeScoreForm(strokes, putts, points)
     }
   }
 
 
   render() {
-    const { player, eventScore, teamEvent } = this.props
+    const { player, teamEvent } = this.props
+    const playerName = `${player.firstName} ${player.lastName}`
 
     const putsPicker = teamEvent ? null : (
       <PickerIOS
-        style={styles.picker}
+        style={{ flex: 1 }}
         selectedValue={this.state.putts}
         onValueChange={putts => this.setState({ putts })}
       >
@@ -99,30 +97,31 @@ export default class ScoringScreen extends Component {
     )
 
     return (
-      <View style={styles.scoring}>
-        <View style={styles.scorebox}>
-          <Text style={styles.flexOne}>{player.name}</Text>
-          <View style={{ flexDirection: 'row' }}>
-            <PickerIOS
-              style={styles.picker}
-              selectedValue={this.state.strokes}
-              onValueChange={strokes => this.setState({ strokes })}
-            >
-              {STROKE_VALUES.map(val => (
-                <PickerIOS.Item
-                  key={val}
-                  value={val}
-                  label={`${val} slag`}
-                />
-              ))}
-            </PickerIOS>
-
-            {putsPicker}
-          </View>
-          <TouchableOpacity onPress={() => this.onCloseScoreForm()}>
-            <Text style={[styles.inlineBtn, { backgroundColor: 'green' }]}>SPARA SCORE</Text>
-          </TouchableOpacity>
+      <View>
+        <TGText style={{ width: '100%', padding: 10, textAlign: 'center', fontWeight: 'bold', backgroundColor: '#eee' }}>{playerName}</TGText>
+        <View style={{ flexDirection: 'row' }}>
+          <PickerIOS
+            style={{ flex: 1 }}
+            selectedValue={this.state.strokes}
+            onValueChange={strokes => this.setState({ strokes })}
+          >
+            {STROKE_VALUES.map(val => (
+              <PickerIOS.Item
+                key={val}
+                value={val}
+                label={`${val} slag`}
+              />
+            ))}
+          </PickerIOS>
+          {putsPicker}
         </View>
+        <TGText
+          viewStyle={{ padding: 10, width: '100%', backgroundColor: 'green' }}
+          style={{ color: '#fff', fontWeight: 'bold', textAlign: 'center' }}
+          onPress={() => this.onCloseScoreForm()}
+        >
+          SPARA SCORE
+      </TGText>
       </View>
     )
   }

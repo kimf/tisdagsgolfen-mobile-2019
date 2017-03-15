@@ -45,14 +45,14 @@ export const changeTeamStrokes = (team, strokes) => ({
   type: 'CHANGED_TEAM_STROKES', team, strokes
 })
 
-
 export const startPlay = () => ({
   type: 'START_PLAY'
 })
 
-
-export const saveEventScore = () => ({
-  type: 'SAVE_EVENT_SCORE'
+export const saveEventScore = (
+  eventId, itemId, holeId, strokes, putts, points, par, extraStrokes
+) => ({
+  type: 'SAVE_EVENT_SCORE', eventId, itemId, holeId, strokes, putts, points, par, extraStrokes
 })
 
 export default (state = initialState, action) => {
@@ -81,18 +81,19 @@ export default (state = initialState, action) => {
       }
     }
 
-    case 'ADDED_PLAYER_TO_EVENT':
+    case 'ADDED_PLAYER_TO_EVENT': {
       return {
         ...state,
         playing: [
           ...state.playing,
           {
             ...action.player,
-            strokes: action.strokes
+            strokes: action.strokes,
+            eventScores: []
           }
         ]
       }
-
+    }
     case 'REMOVED_PLAYER_FROM_EVENT': {
       const playingIndex = state.playing.findIndex(p => p.id === action.player.id)
       const playing = update(state.playing, { $splice: [[playingIndex, 1]] })
@@ -146,7 +147,7 @@ export default (state = initialState, action) => {
       const playing = update(
         state.playing, {
           [teamIndex]: {
-            players: { $splice: [[playerIndex: 1]] }
+            players: { $splice: [[playerIndex, 1]] }
           }
         }
       )
@@ -185,6 +186,53 @@ export default (state = initialState, action) => {
       return {
         ...state,
         isStarted: true
+      }
+    }
+
+    case 'SAVE_EVENT_SCORE': {
+      const playingIndex = state.playing.findIndex(p => p.id === action.itemId)
+      const tmpPlaying = state.playing[playingIndex]
+      const scoreIndex = tmpPlaying.eventScores.findIndex(es => es.holeId === action.holeId)
+      let playing = null
+      if (scoreIndex === -1) {
+        playing = update(
+          state.playing,
+          {
+            [playingIndex]: {
+              eventScores: {
+                $push: [
+                  {
+                    strokes: action.strokes,
+                    putts: action.putts,
+                    points: action.points,
+                    holeId: action.holeId,
+                    par: action.par,
+                    extraStrokes: action.extraStrokes
+                  }
+                ]
+              }
+            }
+          }
+        )
+      } else {
+        playing = update(
+          state.playing,
+          {
+            [playingIndex]: {
+              eventScores: {
+                [scoreIndex]: {
+                  strokes: { $set: action.strokes },
+                  putts: { $set: action.putts },
+                  points: { $set: action.points }
+                }
+              }
+            }
+          }
+        )
+      }
+      return {
+        ...state,
+        playing
       }
     }
 
