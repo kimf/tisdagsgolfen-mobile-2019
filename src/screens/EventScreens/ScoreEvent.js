@@ -7,7 +7,7 @@ import gql from 'graphql-tag'
 import HoleView from 'Scoring/HoleView'
 import Loading from 'shared/Loading'
 import ScoreInput from 'Scoring/ScoreInput'
-import { startScoringInput, stopScoringInput } from 'actions/event'
+import { startScoringInput, stopScoringInput, cancelEvent } from 'actions/event'
 
 const width = Dimensions.get('window').width
 
@@ -23,14 +23,24 @@ class ScoreEvent extends Component {
     ]
   }
 
+  constructor(props) {
+    super(props)
+    props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this))
+  }
+
   componentWillReceiveProps(nextProps) {
     if (nextProps.currentHole !== this.props.currentHole) {
       this.scrollView.scrollTo({ x: (nextProps.currentHole * width) - width, animated: true })
     }
   }
 
-  componentWillUpdate() {
-    LayoutAnimation.spring()
+  onNavigatorEvent = (event) => {
+    if (event.type === 'NavBarButtonPress') {
+      if (event.id === 'cancel') {
+        this.props.navigator.dismissAllModals({ animated: true })
+        this.props.onCancelEvent()
+      }
+    }
   }
 
   render() {
@@ -38,6 +48,8 @@ class ScoreEvent extends Component {
     if (data.loading) {
       return <Loading text="Laddar hål och sånt..." />
     }
+
+    const scoringId = scoring ? scoring.scoreItem.id : false
 
     return (
       <View style={{ width: '100%' }}>
@@ -61,6 +73,7 @@ class ScoreEvent extends Component {
               event={event}
               navigator={navigator}
               onStartScoring={onStartScoring}
+              scoringId={scoringId}
             />
           ))}
         </ScrollView>
@@ -87,9 +100,9 @@ ScoreEvent.propTypes = {
       index: PropTypes.number,
       par: PropTypes.number
     }))
-  }).isRequired,
+  }),
   currentHole: PropTypes.number.isRequired,
-  event: PropTypes.shape().isRequired,
+  event: PropTypes.shape(),
   playing: PropTypes.arrayOf(PropTypes.shape()).isRequired,
   navigator: PropTypes.shape().isRequired,
   scoring: PropTypes.oneOfType([
@@ -97,20 +110,30 @@ ScoreEvent.propTypes = {
     PropTypes.bool
   ]).isRequired,
   onStartScoring: PropTypes.func.isRequired,
-  onStopScoring: PropTypes.func.isRequired
+  onStopScoring: PropTypes.func.isRequired,
+  onCancelEvent: PropTypes.func.isRequired
+}
+
+ScoreEvent.defaultProps = {
+  data: {
+    loading: true,
+    holes: []
+  },
+  event: null
 }
 
 const mapDispatchToProps = dispatch => ({
   onStartScoring: (scoreItem, holeId, eventId, playerId) => {
     dispatch(startScoringInput(scoreItem, holeId, eventId, playerId))
   },
-  onStopScoring: () => dispatch(stopScoringInput())
+  onStopScoring: () => dispatch(stopScoringInput()),
+  onCancelEvent: () => dispatch(cancelEvent())
 })
 
 const mapStateToProps = state => ({
   scoring: state.event.currentlyScoring,
   event: state.event.event,
-  courseId: state.event.event.course.id,
+  courseId: state.event.event ? state.event.event.course.id : null,
   playing: state.event.playing,
   currentHole: state.event.currentHole
 })
@@ -143,11 +166,12 @@ const holesQuery = gql`
 `
 
 export default compose(
-  connect(mapStateToProps, mapDispatchToProps),
+  connect(mapStateToProps, mapDispatchToProps, null),
   graphql(holesQuery, {
     options: ({ courseId, event }) => ({
       forceFetch: false,
-      variables: { courseId, eventId: event.id }
+      skip: !courseId,
+      variables: { courseId, eventId: (event ? event.id : null) }
     })
   })
 )(ScoreEvent)

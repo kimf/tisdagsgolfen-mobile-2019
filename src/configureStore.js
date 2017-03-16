@@ -2,7 +2,6 @@ import { AsyncStorage } from 'react-native'
 import { applyMiddleware, createStore, combineReducers, compose } from 'redux'
 import { persistStore, autoRehydrate } from 'redux-persist'
 import thunk from 'redux-thunk'
-import invariant from 'redux-immutable-state-invariant'
 
 import event from 'reducers/event'
 import app from 'reducers/app'
@@ -10,9 +9,10 @@ import app from 'reducers/app'
 const configureStore = (client, onComplete) => {
   // eslint-disable-next-line no-underscore-dangle
   const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
-  const middleware = __DEV__
-    ? [invariant(), thunk, client.middleware()]
-    : [thunk, client.middleware()]
+  const middleware = [thunk, client.middleware()]
+  /*  if (__DEV__) {
+    middleware.push(freeze)
+  } */
 
   const reducers = combineReducers({
     app,

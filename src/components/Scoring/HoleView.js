@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react'
+import React, { PropTypes } from 'react'
 import { View, Dimensions } from 'react-native'
 
 import ScoreRow from 'Scoring/ScoreRow'
@@ -7,6 +7,19 @@ import ScorecardHeaderRow from 'Scoring/ScorecardHeaderRow'
 
 const deviceWidth = Dimensions.get('window').width
 
+const calculateExtraStrokes = (holeIndex, playerStrokes, holesCount) => {
+  let extra = 0
+  if (holeIndex <= playerStrokes) {
+    extra = 1
+    if (playerStrokes > holesCount) {
+      if (holeIndex <= (playerStrokes - holesCount)) {
+        extra = 2
+      }
+    }
+  }
+  return extra
+}
+
 const HoleView = ({ event, hole, playing, holesCount, onStartScoring }) => (
   <View style={{ width: deviceWidth }}>
     <HoleHeader {...hole} />
@@ -14,18 +27,31 @@ const HoleView = ({ event, hole, playing, holesCount, onStartScoring }) => (
 
     <View style={{ flexDirection: 'column' }}>
       {
-        playing.map(item => (
-          <ScoreRow
-            key={`player_score_row_${item.id}`}
-            player={item}
-            hole={hole}
-            scoringType={event.scoringType}
-            teamEvent={event.teamEvent}
-            eventId={event.id}
-            holesCount={holesCount}
-            onStartScoring={onStartScoring}
-          />
-        ))
+        playing.map((item) => {
+          const liveScore = hole.liveScores.find(ls => ls.user.id === item.id)
+
+          const scoreItem = liveScore || {
+            strokes: hole.par,
+            putts: 2,
+            points: 0,
+            beers: 0,
+            extraStrokes: calculateExtraStrokes(hole.index, item.strokes, holesCount)
+          }
+
+          return (
+            <ScoreRow
+              key={`player_score_row_${item.id}`}
+              player={item}
+              hole={hole}
+              scoringType={event.scoringType}
+              teamEvent={event.teamEvent}
+              eventId={event.id}
+              holesCount={holesCount}
+              onStartScoring={onStartScoring}
+              scoreItem={scoreItem}
+            />
+          )
+        })
       }
     </View>
   </View>

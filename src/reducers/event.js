@@ -28,6 +28,7 @@ export default (state = initialState, action) => {
       }
 
       return {
+        ...state,
         event: action.event,
         playing: [firstItem],
         currentHole: state.currentHole
@@ -47,6 +48,7 @@ export default (state = initialState, action) => {
         ]
       }
     }
+
     case 'REMOVED_PLAYER_FROM_EVENT': {
       const playingIndex = state.playing.findIndex(p => p.id === action.player.id)
       const playing = update(state.playing, { $splice: [[playingIndex, 1]] })
@@ -151,6 +153,7 @@ export default (state = initialState, action) => {
         ...state,
         currentlyScoring: false
       }
+
 
     case 'CANCEL_EVENT':
       return initialState

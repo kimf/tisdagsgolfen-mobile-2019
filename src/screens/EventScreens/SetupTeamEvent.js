@@ -46,7 +46,7 @@ class SetupIndividualEvent extends Component {
 
   startPlay = () => {
     this.props.onStartPlay()
-    this.props.navigator.resetTo({
+    this.props.navigator.showModal({
       screen: 'tisdagsgolfen.ScoreEvent',
       title: 'Scoring...',
       passProps: {},
