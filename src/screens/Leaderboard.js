@@ -7,7 +7,7 @@ import gql from 'graphql-tag'
 
 import { ranked } from 'utils'
 import withOneSignal from 'withOneSignal'
-import { changeSeason, changeSort } from 'reducers/app'
+import { changeSeason, changeSort } from 'actions/app'
 
 import LeaderboardCard from 'Season/LeaderboardCard'
 import SeasonPicker from 'Season/SeasonPicker'
@@ -160,21 +160,6 @@ class Leaderboard extends Component {
           : null
         }
 
-        {activeEvent ? <TGText
-          viewStyle={{ backgroundColor: '#006BA6', padding: 10, width: '100%' }}
-          style={{ color: 'white', textAlign: 'center', fontWeight: 'bold' }}
-          onPress={() => this.props.navigator.showModal({
-            screen: 'tisdagsgolfen.ScoreEvent',
-            title: 'Fortsätt simma...',
-            passProps: {},
-            animated: true,
-            navigatorStyle: {}, // override the navigator style for the pushed screen (optional)
-            navigatorButtons: {} // override the nav buttons for the pushed screen (optional)
-          })}
-        >
-          FORTSÄTT RUNDA
-          </TGText> : null}
-
         {emptyLeaderboard
           ? <EmptyState text="Inga rundor spelade ännu" />
           : <ImageHeaderScrollView
@@ -202,6 +187,18 @@ class Leaderboard extends Component {
             </View>
           </ImageHeaderScrollView>
         }
+        {activeEvent ? <TGText
+          viewStyle={{ backgroundColor: '#c00', marginTop: 10, paddingVertical: 20, width: '100%' }}
+          style={{ color: 'white', textAlign: 'center', fontWeight: 'bold', fontSize: 16 }}
+          onPress={() => this.props.navigator.showModal({
+            screen: 'tisdagsgolfen.ScoreEvent',
+            title: 'Fortsätt simma...',
+            passProps: {},
+            animated: true
+          })}
+        >
+          FORTSÄTT AKTIV RUNDA PÅ {activeEvent.course.name.toUpperCase()}
+        </TGText> : null}
       </View>
     )
   }

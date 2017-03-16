@@ -1,3 +1,4 @@
+// TODO: Dry this up with SetupIndividualEvent
 import React, { Component, PropTypes } from 'react'
 import { View, ScrollView } from 'react-native'
 import { connect } from 'react-redux'
@@ -5,17 +6,7 @@ import { connect } from 'react-redux'
 import EventSetupPlayingCard from 'Scoring/EventSetupPlayingCard'
 import TGText from 'shared/TGText'
 
-import {
-  cancelEvent,
-  removePlayerFromTeam,
-  changeTeamStrokes,
-  removeTeam,
-  addTeam,
-  startPlay
-} from 'reducers/event'
-
-
-// TODO: Dry this up with SetupIndividualEvent
+import { cancelEvent, removePlayerFromTeam, changeTeamStrokes, removeTeam, addTeam, startPlay } from 'actions/event'
 
 // userId, seasonId
 class SetupIndividualEvent extends Component {

@@ -1,6 +1,13 @@
 import { StyleSheet } from 'react-native'
 
-import colors from 'colors'
+export const colors = {
+  cellBorder: '#CECECE',
+  green: '#2ECC71',
+  lightBlue: '#D9EEFF',
+  dark: '#444444',
+  semiDark: '#777777',
+  lightGray: '#EEEEEE'
+}
 
 export const navigatorStyle = {
   navBarTranslucent: true,
@@ -9,7 +16,7 @@ export const navigatorStyle = {
   navBarButtonColor: 'white',
   navBarSubtitleColor: 'white',
   statusBarTextColorScheme: 'light',
-  navBarBackgroundColor: '#2ecc71',
+  navBarBackgroundColor: colors.green,
   fontFamily: 'Akrobat',
   navBarHideOnScroll: false
 }
@@ -17,7 +24,7 @@ export const navigatorStyle = {
 export default StyleSheet.create({
   /* MAIN LAYOUT PARTS */
   container: {
-    backgroundColor: '#fff',
+    backgroundColor: 'white',
     alignItems: 'stretch',
     flex: 1
   },
@@ -25,7 +32,7 @@ export default StyleSheet.create({
   inlineHeader: {
     paddingVertical: 5,
     paddingHorizontal: 5,
-    backgroundColor: '#D9EEFF'
+    backgroundColor: colors.lightBlue
   },
 
   listrow: {
@@ -48,7 +55,7 @@ export default StyleSheet.create({
   },
 
   points: {
-    color: '#000',
+    color: 'black',
     fontFamily: 'Akrobat',
     fontSize: 22,
     fontWeight: '900',
@@ -57,7 +64,7 @@ export default StyleSheet.create({
   },
 
   dimmerPoints: {
-    color: '#444',
+    color: colors.dark,
     fontFamily: 'Akrobat',
     fontSize: 14,
     fontWeight: '700',
@@ -80,7 +87,7 @@ export default StyleSheet.create({
 
   meta: {
     fontFamily: 'Akrobat',
-    color: '#777',
+    color: colors.semiDark,
     flex: 1,
     fontSize: 12,
     marginTop: 3
@@ -88,14 +95,14 @@ export default StyleSheet.create({
 
   metaLarger: {
     fontFamily: 'Akrobat',
-    color: '#777',
+    color: colors.semiDark,
     flex: 1,
     fontSize: 14,
     marginTop: 3
   },
 
   name: {
-    color: '#000',
+    color: 'black',
     fontFamily: 'Akrobat',
     fontWeight: '800',
     flex: 1,
@@ -106,7 +113,7 @@ export default StyleSheet.create({
     fontFamily: 'Akrobat',
     marginTop: 10,
     marginLeft: 10,
-    color: '#444',
+    color: colors.dark,
     fontSize: 16
   },
 
@@ -136,12 +143,12 @@ export default StyleSheet.create({
   },
 
   sectionHeader: {
-    backgroundColor: '#eee',
+    backgroundColor: colors.lightGray,
     padding: 10
   },
 
   sectionHeaderText: {
-    color: '#777',
+    color: colors.semiDark,
     fontSize: 12,
     fontFamily: 'Akrobat'
   },

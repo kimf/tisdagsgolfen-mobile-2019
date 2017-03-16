@@ -6,7 +6,7 @@ import gql from 'graphql-tag'
 
 import TGText from 'shared/TGText'
 import styles from 'styles'
-import { addPlayerToEvent, addPlayerToTeam } from 'reducers/event'
+import { addPlayerToEvent, addPlayerToTeam } from 'actions/event'
 
 const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 })
 

@@ -7,7 +7,7 @@ import registerScreens from 'screens'
 import apolloClient from 'apolloClient'
 import configureStore from 'configureStore'
 import tabConfig from 'tabConfig'
-import { getLoggedInState } from 'reducers/app'
+import { getLoggedInState } from 'actions/app'
 
 deviceLog.init(AsyncStorage, {
   logToConsole: false,

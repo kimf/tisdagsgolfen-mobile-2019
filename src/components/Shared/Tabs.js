@@ -7,7 +7,7 @@ const Tabs = ({ currentRoute, onChange, tabs, style }) => (
   <View
     style={{
       ...style,
-      backgroundColor: '#ececec',
+      backgroundColor: '#eee',
       flexDirection: 'row',
       justifyContent: 'center',
       alignItems: 'stretch',
@@ -21,8 +21,8 @@ const Tabs = ({ currentRoute, onChange, tabs, style }) => (
         tab={tab}
         isCurrent={currentRoute === tab.value}
         onChange={onChange}
-        fontSize={12}
-        padding={8}
+        fontSize={14}
+        padding={10}
       />
     )}
   </View>

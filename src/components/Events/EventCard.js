@@ -6,7 +6,7 @@ import 'moment/locale/sv'
 
 import TGText from 'shared/TGText'
 
-import { startSettingUpEvent } from 'reducers/event'
+import { startSettingUpEvent } from 'actions/event'
 import { navigatorStyle } from 'styles'
 
 const s = StyleSheet.create({

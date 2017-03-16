@@ -21,7 +21,10 @@ const TouchableView = ({ isRippleDisabled, rippleColor, children, style, ...rest
 TouchableView.propTypes = {
   isRippleDisabled: PropTypes.bool,
   rippleColor: PropTypes.string,
-  children: PropTypes.element.isRequired,
+  children: React.PropTypes.oneOfType([
+    React.PropTypes.arrayOf(React.PropTypes.node),
+    React.PropTypes.node
+  ]).isRequired,
   style: View.propTypes.style
 }
 

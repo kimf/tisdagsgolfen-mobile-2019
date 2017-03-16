@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 
 import styles from 'styles'
 import TGText from 'shared/TGText'
-import { logout } from 'reducers/app'
+import { logout } from 'actions/app'
 
 class Profile extends Component {
   constructor(props) {

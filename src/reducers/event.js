@@ -1,59 +1,12 @@
 import update from 'immutability-helper'
 
-const initialState = { event: null, playing: [], currentHole: 1, isStarted: false }
-
-const settingUpEvent = (event, player) => ({
-  type: 'BEGIN_SCORING_SETUP', event, player
-})
-
-export const startSettingUpEvent = event => (
-  (dispatch, getState) => {
-    const player = getState().app.user
-    dispatch(settingUpEvent(event, player))
-  }
-)
-
-export const cancelEvent = () => ({
-  type: 'CANCEL_EVENT'
-})
-
-export const addPlayerToEvent = (player, strokes) => ({
-  type: 'ADDED_PLAYER_TO_EVENT', player, strokes
-})
-
-export const removePlayerFromEvent = player => ({
-  type: 'REMOVED_PLAYER_FROM_EVENT', player
-})
-
-export const changePlayerStrokes = (player, strokes) => ({
-  type: 'CHANGED_PLAYER_STROKES', player, strokes
-})
-
-export const addPlayerToTeam = (team, player) => ({
-  type: 'ADDED_PLAYER_TO_TEAM', team, player
-})
-export const removePlayerFromTeam = (team, player) => ({
-  type: 'REMOVED_PLAYER_FROM_TEAM', team, player
-})
-export const removeTeam = team => ({
-  type: 'REMOVED_TEAM_FROM_EVENT', team
-})
-export const addTeam = () => ({
-  type: 'ADDED_TEAM_TO_EVENT'
-})
-export const changeTeamStrokes = (team, strokes) => ({
-  type: 'CHANGED_TEAM_STROKES', team, strokes
-})
-
-export const startPlay = () => ({
-  type: 'START_PLAY'
-})
-
-export const saveEventScore = (
-  eventId, itemId, holeId, strokes, putts, points, par, extraStrokes
-) => ({
-  type: 'SAVE_EVENT_SCORE', eventId, itemId, holeId, strokes, putts, points, par, extraStrokes
-})
+const initialState = {
+  event: null,
+  playing: [],
+  currentHole: 1,
+  isStarted: false,
+  currentlyScoring: false
+}
 
 export default (state = initialState, action) => {
   switch (action.type) {
@@ -179,6 +132,26 @@ export default (state = initialState, action) => {
       }
     }
 
+    case 'START_SCORING_INPUT': {
+      const playing = state.playing.find(p => p.id === action.playerId)
+      const teamEvent = state.event.teamEvent
+      const currentlyScoring = {
+        ...action,
+        playerName: teamEvent ? `Lag ${playing.id}` : `${playing.firstName} ${playing.lastName}`
+      }
+      delete currentlyScoring.type
+      return {
+        ...state,
+        currentlyScoring
+      }
+    }
+
+    case 'STOP_SCORING_INPUT':
+      return {
+        ...state,
+        currentlyScoring: false
+      }
+
     case 'CANCEL_EVENT':
       return initialState
 
@@ -189,176 +162,7 @@ export default (state = initialState, action) => {
       }
     }
 
-    case 'SAVE_EVENT_SCORE': {
-      const playingIndex = state.playing.findIndex(p => p.id === action.itemId)
-      const tmpPlaying = state.playing[playingIndex]
-      const scoreIndex = tmpPlaying.eventScores.findIndex(es => es.holeId === action.holeId)
-      let playing = null
-      if (scoreIndex === -1) {
-        playing = update(
-          state.playing,
-          {
-            [playingIndex]: {
-              eventScores: {
-                $push: [
-                  {
-                    strokes: action.strokes,
-                    putts: action.putts,
-                    points: action.points,
-                    holeId: action.holeId,
-                    par: action.par,
-                    extraStrokes: action.extraStrokes
-                  }
-                ]
-              }
-            }
-          }
-        )
-      } else {
-        playing = update(
-          state.playing,
-          {
-            [playingIndex]: {
-              eventScores: {
-                [scoreIndex]: {
-                  strokes: { $set: action.strokes },
-                  putts: { $set: action.putts },
-                  points: { $set: action.points }
-                }
-              }
-            }
-          }
-        )
-      }
-      return {
-        ...state,
-        playing
-      }
-    }
-
     default:
       return state
   }
 }
-
-// import Immutable from 'seamless-immutable';
-// const initialState = Immutable({ event: null, playing: [], currentHole: 1 });
-
-// export default function reducer(state = initialState, action = {}) {
-//   switch (action.type) {
-
-//     case "CHANGED_HOLE":
-//       return Immutable({
-//         event: state.event,
-//         playing: state.playing,
-//         currentHole: action.holeNr
-//       })
-
-//     case "CREATED_EVENT_SCORE":
-//       //playerId, holeNr, data
-//       const playingPlayers = state.playing.map((player) => {
-//         if (player.id === action.playerId) {
-//           const eventScores = Immutable(player.eventScores).concat(action.data)
-//           return Immutable(player).merge({ eventScores: eventScores })
-//         }
-//         return Immutable(player)
-//       })
-
-//       return Immutable({
-//         event: state.event,
-//         playing: playingPlayers,
-//         currentHole: state.currentHole
-//       })
-
-//     case "PUSHING_SCORE":
-//       const pushingPlayers = state.playing.map((player) => {
-//         if (player.id === action.playerId) {
-//           const eventScores = player.eventScores.map((es) => {
-//             if (es.hole === action.holeNr) {
-//               return Immutable(es).merge(
-//                 {
-//                   isBeingSaved: true,
-//                   isScored: false,
-//                   strokes: action.strokes,
-//                   putts: action.putts,
-//                   points: action.points
-//                 }
-//               )
-//             }
-//             return Immutable(es);
-//           })
-//           return Immutable(player).merge({ eventScores })
-//         }
-//         return Immutable(player)
-//       })
-
-//       return Immutable({
-//         event: state.event,
-//         playing: pushingPlayers,
-//         currentHole: state.currentHole,
-//       })
-
-//     case "SCORE_WAS_SAVED":
-//       // add externalId from response.id!!!!
-//       const savingPlayers = state.playing.map((player) => {
-//         if (player.id === action.playerId) {
-//           const eventScores = player.eventScores.map((es) => {
-//             if (es.hole === action.holeNr) {
-//               return Immutable(es).merge(
-//                 {
-//                   isBeingSaved: false,
-//                   isScored: true,
-//                   externalId: action.response.id
-//                 }
-//               )
-//             }
-//             return Immutable(es);
-//           })
-//           return Immutable(player).merge({ eventScores })
-//         }
-//         return Immutable(player)
-//       })
-
-//       return Immutable({
-//         event: state.event,
-//         playing: savingPlayers,
-//         currentHole: state.currentHole
-//       })
-
-//     case "FAILED_TO_SAVE_SCORE":
-//       const erroredPlayers = state.playing.map((player) => {
-//         if (player.id === action.playerId) {
-//           const eventScores = player.eventScores.map((es) => {
-//             if (es.hole === action.holeNr) {
-//               return Immutable(es).merge(
-//                 {
-//                   isBeingSaved: false,
-//                   isScored: false,
-//                   hasError: true,
-//                   error: action.error
-//                 }
-//               )
-//             }
-//             return Immutable(es);
-//           })
-//           return Immutable(player).merge({ eventScores })
-//         }
-//         return Immutable(player)
-//       })
-
-//       return Immutable({
-//         event: state.event,
-//         playing: erroredPlayers,
-//         currentHole: state.currentHole
-//       })
-
-//     case "LOGGED_OUT":
-//       return initialState;
-
-//     case "FINISHED_SCORING":
-//       return initialState;
-
-//     default:
-//       return state;
-//   }
-// }

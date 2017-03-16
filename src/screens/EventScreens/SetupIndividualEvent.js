@@ -5,15 +5,8 @@ import { connect } from 'react-redux'
 import EventSetupPlayingCard from 'Scoring/EventSetupPlayingCard'
 import TGText from 'shared/TGText'
 
-import {
-  cancelEvent,
-  removePlayerFromEvent,
-  changePlayerStrokes,
-  startPlay
-} from 'reducers/event'
+import { cancelEvent, removePlayerFromEvent, changePlayerStrokes, startPlay } from 'actions/event'
 
-
-// userId, seasonId
 class SetupIndividualEvent extends Component {
   static navigatorButtons = {
     leftButtons: [

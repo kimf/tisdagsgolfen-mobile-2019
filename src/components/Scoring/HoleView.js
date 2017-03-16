@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react'
+import React, { Component, PropTypes } from 'react'
 import { View, Dimensions } from 'react-native'
 
 import ScoreRow from 'Scoring/ScoreRow'
@@ -7,7 +7,7 @@ import ScorecardHeaderRow from 'Scoring/ScorecardHeaderRow'
 
 const deviceWidth = Dimensions.get('window').width
 
-const HoleView = ({ event, hole, holesCount, playing }) => (
+const HoleView = ({ event, hole, playing, holesCount, onStartScoring }) => (
   <View style={{ width: deviceWidth }}>
     <HoleHeader {...hole} />
     <ScorecardHeaderRow teamEvent={event.teamEvent} />
@@ -16,13 +16,14 @@ const HoleView = ({ event, hole, holesCount, playing }) => (
       {
         playing.map(item => (
           <ScoreRow
+            key={`player_score_row_${item.id}`}
             player={item}
             hole={hole}
-            holesCount={holesCount}
             scoringType={event.scoringType}
             teamEvent={event.teamEvent}
             eventId={event.id}
-            key={`player_score_row_${item.id}`}
+            holesCount={holesCount}
+            onStartScoring={onStartScoring}
           />
         ))
       }
@@ -34,7 +35,8 @@ HoleView.propTypes = {
   event: PropTypes.shape().isRequired,
   hole: PropTypes.shape().isRequired,
   holesCount: PropTypes.number.isRequired,
-  playing: PropTypes.arrayOf(PropTypes.shape()).isRequired
+  playing: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+  onStartScoring: PropTypes.func.isRequired
 }
 
 export default HoleView

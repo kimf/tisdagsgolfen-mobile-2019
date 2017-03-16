@@ -9,7 +9,7 @@ import LoginError from 'Login/LoginError'
 import Form from 'Login/LoginForm'
 import Wallpaper from 'Login/Wallpaper'
 
-import { login } from 'reducers/app'
+import { login } from 'actions/app'
 
 class Login extends Component {
   constructor(props) {
