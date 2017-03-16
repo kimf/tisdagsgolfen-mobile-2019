@@ -160,7 +160,20 @@ class Leaderboard extends Component {
           : null
         }
 
-        {activeEvent ? <TGText>AKTIV RUNDA</TGText> : null}
+        {activeEvent ? <TGText
+          viewStyle={{ backgroundColor: '#006BA6', padding: 10, width: '100%' }}
+          style={{ color: 'white', textAlign: 'center', fontWeight: 'bold' }}
+          onPress={() => this.props.navigator.showModal({
+            screen: 'tisdagsgolfen.ScoreEvent',
+            title: 'Fortsätt simma...',
+            passProps: {},
+            animated: true,
+            navigatorStyle: {}, // override the navigator style for the pushed screen (optional)
+            navigatorButtons: {} // override the nav buttons for the pushed screen (optional)
+          })}
+        >
+          FORTSÄTT RUNDA
+          </TGText> : null}
 
         {emptyLeaderboard
           ? <EmptyState text="Inga rundor spelade ännu" />

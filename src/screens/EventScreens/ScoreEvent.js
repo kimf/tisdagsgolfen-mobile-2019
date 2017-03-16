@@ -7,8 +7,6 @@ import gql from 'graphql-tag'
 import HoleView from 'Scoring/HoleView'
 import Loading from 'shared/Loading'
 
-import { saveEventScore } from 'reducers/event'
-
 const width = Dimensions.get('window').width
 
 class ScoreEvent extends Component {
@@ -21,7 +19,7 @@ class ScoreEvent extends Component {
   }
 
   render() {
-    const { data, event, onSaveEventScore, playing } = this.props
+    const { data, event, playing } = this.props
     if (data.loading) {
       return <Loading text="Laddar hål och sånt..." />
     }
@@ -45,7 +43,6 @@ class ScoreEvent extends Component {
             playing={playing}
             holesCount={data.holes.length}
             event={event}
-            saveEventScore={onSaveEventScore}
           />
         ))}
       </ScrollView>
@@ -65,8 +62,7 @@ ScoreEvent.propTypes = {
   }).isRequired,
   currentHole: PropTypes.number.isRequired,
   event: PropTypes.shape().isRequired,
-  playing: PropTypes.arrayOf(PropTypes.shape()).isRequired,
-  onSaveEventScore: PropTypes.func.isRequired
+  playing: PropTypes.arrayOf(PropTypes.shape()).isRequired
 }
 
 
@@ -77,16 +73,8 @@ const mapStateToProps = state => ({
   currentHole: state.event.currentHole
 })
 
-const mapDispatchToProps = dispatch => (
-  {
-    onSaveEventScore: (eventId, itemId, holeId, strokes, putts, points, par, extraStrokes) => {
-      dispatch(saveEventScore(eventId, itemId, holeId, strokes, putts, points, par, extraStrokes))
-    }
-  }
-)
-
 const holesQuery = gql`
-  query scoringHoles ($courseId: ID!) {
+  query scoringHoles ($courseId: ID!, $eventId: ID!) {
     holes: allHoles (
       orderBy: number_ASC
       filter: { course: { id: $courseId } }
@@ -95,13 +83,29 @@ const holesQuery = gql`
       number
       par
       index
+      liveScores (
+        filter: { event: { id: $eventId } }
+      ) {
+        id
+        extraStrokes
+        strokes
+        putts
+        points
+        beers
+        user {
+          id
+        }
+      }
     }
   }
 `
 
 export default compose(
-  connect(mapStateToProps, mapDispatchToProps),
+  connect(mapStateToProps),
   graphql(holesQuery, {
-    options: ({ courseId }) => ({ forceFetch: false, variables: { courseId } })
+    options: ({ courseId, event }) => ({
+      forceFetch: false,
+      variables: { courseId, eventId: event.id }
+    })
   })
 )(ScoreEvent)
