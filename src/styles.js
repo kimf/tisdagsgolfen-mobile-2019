@@ -10,6 +10,7 @@ export const navigatorStyle = {
   navBarSubtitleColor: 'white',
   statusBarTextColorScheme: 'light',
   navBarBackgroundColor: '#2ecc71',
+  fontFamily: 'Akrobat',
   navBarHideOnScroll: false
 }
 
@@ -48,7 +49,7 @@ export default StyleSheet.create({
 
   points: {
     color: '#000',
-    fontFamily: 'Avenir',
+    fontFamily: 'Akrobat',
     fontSize: 22,
     fontWeight: '900',
     textAlign: 'right',
@@ -57,7 +58,7 @@ export default StyleSheet.create({
 
   dimmerPoints: {
     color: '#444',
-    fontFamily: 'Avenir',
+    fontFamily: 'Akrobat',
     fontSize: 14,
     fontWeight: '700',
     textAlign: 'center',
@@ -78,7 +79,7 @@ export default StyleSheet.create({
   },
 
   meta: {
-    fontFamily: 'Avenir',
+    fontFamily: 'Akrobat',
     color: '#777',
     flex: 1,
     fontSize: 12,
@@ -86,7 +87,7 @@ export default StyleSheet.create({
   },
 
   metaLarger: {
-    fontFamily: 'Avenir',
+    fontFamily: 'Akrobat',
     color: '#777',
     flex: 1,
     fontSize: 14,
@@ -95,14 +96,14 @@ export default StyleSheet.create({
 
   name: {
     color: '#000',
-    fontFamily: 'Avenir',
+    fontFamily: 'Akrobat',
     fontWeight: '800',
     flex: 1,
     fontSize: 18
   },
 
   label: {
-    fontFamily: 'Avenir',
+    fontFamily: 'Akrobat',
     marginTop: 10,
     marginLeft: 10,
     color: '#444',
@@ -110,7 +111,7 @@ export default StyleSheet.create({
   },
 
   inputField: {
-    fontFamily: 'Avenir',
+    fontFamily: 'Akrobat',
     padding: 5,
     margin: 10,
     height: 40,
@@ -126,12 +127,12 @@ export default StyleSheet.create({
   strokeInfo: {
     flex: 1,
     textAlign: 'right',
-    fontFamily: 'Avenir'
+    fontFamily: 'Akrobat'
   },
 
   smallLabel: {
     fontSize: 10,
-    fontFamily: 'Avenir'
+    fontFamily: 'Akrobat'
   },
 
   sectionHeader: {
@@ -142,7 +143,7 @@ export default StyleSheet.create({
   sectionHeaderText: {
     color: '#777',
     fontSize: 12,
-    fontFamily: 'Avenir'
+    fontFamily: 'Akrobat'
   },
 
   courserow: {

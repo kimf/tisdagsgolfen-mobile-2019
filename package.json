@@ -54,6 +54,11 @@
 		"react-test-renderer": "~15.4.0-rc.4",
 		"why-did-you-update": "^0.0.8"
 	},
+	"rnpm": {
+		"assets": [
+			"assets/fonts"
+		]
+	},
 	"jest": {
 		"preset": "react-native"
 	}

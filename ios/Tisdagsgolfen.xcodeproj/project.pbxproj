@@ -5,7 +5,6 @@
 	};
 	objectVersion = 48;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -34,6 +33,14 @@
 		976D3A121E78973C0080AD93 /* MobileCenterCrashes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 976D3A0E1E78973C0080AD93 /* MobileCenterCrashes.framework */; };
 		976D3A131E78973C0080AD93 /* RNMobileCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 976D3A0F1E78973C0080AD93 /* RNMobileCenter.framework */; };
 		9CE9A2A4927844B98C88C236 /* libRNAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E8AEFB193BA4343B00CAF2F /* libRNAnalytics.a */; };
+		9455D57804904ADBA0B89C6F /* Akrobat-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = F5C38E1F26A7450BB20122A0 /* Akrobat-Black.otf */; };
+		BFE326ACB90C48498703DA85 /* Akrobat-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 594617B60F4C4604804DE89E /* Akrobat-Bold.otf */; };
+		880D8FE31F8F4B329DAC461E /* Akrobat-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = A3309C4DFC62439994DCB660 /* Akrobat-ExtraBold.otf */; };
+		C9D1660F578C43309E94E84F /* Akrobat-ExtraLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = A5E7F06B881E4A49ACC69EEF /* Akrobat-ExtraLight.otf */; };
+		B667B7E0127448B19BDA4EA2 /* Akrobat-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = F67B6BCFDDBF4686807DB901 /* Akrobat-Light.otf */; };
+		F1E90327A23A4C5D9E6D4855 /* Akrobat-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = D390D1F17C8D4328B1977544 /* Akrobat-Regular.otf */; };
+		4DE929B48DAB4B37801DD617 /* Akrobat-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = B957612C154C426EBD4004CC /* Akrobat-SemiBold.otf */; };
+		ED3B69E79DA44F30AD35CC70 /* Akrobat-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8ACE5F9970A74C40AE3E8BD4 /* Akrobat-Thin.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -259,6 +266,14 @@
 		976D3A0F1E78973C0080AD93 /* RNMobileCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RNMobileCenter.framework; sourceTree = "<group>"; };
 		BDB82B1D08FE4660A5618E9F /* libRCTOneSignal.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTOneSignal.a; sourceTree = "<group>"; };
 		FAE6805C153C470B92C12C06 /* MobileCenter-Config.plist */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = text.plist.xml; name = "MobileCenter-Config.plist"; path = "Tisdagsgolfen/MobileCenter-Config.plist"; sourceTree = "<group>"; };
+		F5C38E1F26A7450BB20122A0 /* Akrobat-Black.otf */ = {isa = PBXFileReference; name = "Akrobat-Black.otf"; path = "../assets/fonts/Akrobat-Black.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		594617B60F4C4604804DE89E /* Akrobat-Bold.otf */ = {isa = PBXFileReference; name = "Akrobat-Bold.otf"; path = "../assets/fonts/Akrobat-Bold.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		A3309C4DFC62439994DCB660 /* Akrobat-ExtraBold.otf */ = {isa = PBXFileReference; name = "Akrobat-ExtraBold.otf"; path = "../assets/fonts/Akrobat-ExtraBold.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		A5E7F06B881E4A49ACC69EEF /* Akrobat-ExtraLight.otf */ = {isa = PBXFileReference; name = "Akrobat-ExtraLight.otf"; path = "../assets/fonts/Akrobat-ExtraLight.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		F67B6BCFDDBF4686807DB901 /* Akrobat-Light.otf */ = {isa = PBXFileReference; name = "Akrobat-Light.otf"; path = "../assets/fonts/Akrobat-Light.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		D390D1F17C8D4328B1977544 /* Akrobat-Regular.otf */ = {isa = PBXFileReference; name = "Akrobat-Regular.otf"; path = "../assets/fonts/Akrobat-Regular.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		B957612C154C426EBD4004CC /* Akrobat-SemiBold.otf */ = {isa = PBXFileReference; name = "Akrobat-SemiBold.otf"; path = "../assets/fonts/Akrobat-SemiBold.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		8ACE5F9970A74C40AE3E8BD4 /* Akrobat-Thin.otf */ = {isa = PBXFileReference; name = "Akrobat-Thin.otf"; path = "../assets/fonts/Akrobat-Thin.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -464,6 +479,7 @@
 				976D3A0D1E78973C0080AD93 /* MobileCenterAnalytics.framework */,
 				976D3A0E1E78973C0080AD93 /* MobileCenterCrashes.framework */,
 				976D3A0F1E78973C0080AD93 /* RNMobileCenter.framework */,
+				64CB119AE5FE4C5892723F0F /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -508,6 +524,22 @@
 				976D4F0A1E6F6211004E2C9B /* libReactNativeNavigation.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		64CB119AE5FE4C5892723F0F /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				F5C38E1F26A7450BB20122A0 /* Akrobat-Black.otf */,
+				594617B60F4C4604804DE89E /* Akrobat-Bold.otf */,
+				A3309C4DFC62439994DCB660 /* Akrobat-ExtraBold.otf */,
+				A5E7F06B881E4A49ACC69EEF /* Akrobat-ExtraLight.otf */,
+				F67B6BCFDDBF4686807DB901 /* Akrobat-Light.otf */,
+				D390D1F17C8D4328B1977544 /* Akrobat-Regular.otf */,
+				B957612C154C426EBD4004CC /* Akrobat-SemiBold.otf */,
+				8ACE5F9970A74C40AE3E8BD4 /* Akrobat-Thin.otf */,
+			);
+			name = Resources;
+			path = "";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -850,6 +882,14 @@
 				976885871E61B98E007FCF99 /* glf_swng.caf in Resources */,
 				976885881E61B98E007FCF99 /* golfball.caf in Resources */,
 				0575AE6D434942188E2425F0 /* MobileCenter-Config.plist in Resources */,
+				9455D57804904ADBA0B89C6F /* Akrobat-Black.otf in Resources */,
+				BFE326ACB90C48498703DA85 /* Akrobat-Bold.otf in Resources */,
+				880D8FE31F8F4B329DAC461E /* Akrobat-ExtraBold.otf in Resources */,
+				C9D1660F578C43309E94E84F /* Akrobat-ExtraLight.otf in Resources */,
+				B667B7E0127448B19BDA4EA2 /* Akrobat-Light.otf in Resources */,
+				F1E90327A23A4C5D9E6D4855 /* Akrobat-Regular.otf in Resources */,
+				4DE929B48DAB4B37801DD617 /* Akrobat-SemiBold.otf in Resources */,
+				ED3B69E79DA44F30AD35CC70 /* Akrobat-Thin.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

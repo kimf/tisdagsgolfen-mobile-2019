@@ -9,14 +9,15 @@ const FONT_SIZE = 14
 const styles = StyleSheet.create({
   text: {
     fontSize: FONT_SIZE,
-    fontFamily: 'Avenir'
+    fontFamily: 'Akrobat',
+    fontWeight: '300'
   }
 })
 
 const TGText = ({ onPress, style, viewStyle, children, ...rest }) => {
   const fontSize = style
-                   ? (StyleSheet.flatten(style).fontSize || FONT_SIZE)
-                   : FONT_SIZE
+    ? (StyleSheet.flatten(style).fontSize || FONT_SIZE)
+    : FONT_SIZE
   const scaledFontSize = Math.round((fontSize * DEVICE_WIDTH) / 375)
 
   const text = (
