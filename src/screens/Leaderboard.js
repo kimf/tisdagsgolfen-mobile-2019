@@ -2,12 +2,14 @@ import React, { Component } from 'react'
 import { View, Image, LayoutAnimation } from 'react-native'
 import { connect } from 'react-redux'
 import { LogView } from 'react-native-device-log'
-import { graphql, compose } from 'react-apollo'
-import gql from 'graphql-tag'
+import { compose } from 'react-apollo'
+
+import leaderboardQuery, { withLeaderboardQuery } from 'queries/leaderboardQuery'
 
 import { ranked } from 'utils'
 import withOneSignal from 'withOneSignal'
 import { changeSeason, changeSort } from 'actions/app'
+import { navigatorStyle } from 'styles'
 
 import LeaderboardCard from 'Season/LeaderboardCard'
 import SeasonPicker from 'Season/SeasonPicker'
@@ -18,12 +20,44 @@ import TGText from 'shared/TGText'
 import ImageHeaderScrollView from 'shared/ImageHeaderScrollView'
 import TriggeringView from 'shared/TriggeringView'
 
-import { navigatorStyle } from 'styles'
-
 // eslint-disable-next-line import/no-unresolved
 import userImg from '../images/user.png'
 
+const { arrayOf, bool, func, shape, string } = React.PropTypes
+
 class Leaderboard extends Component {
+
+  static propTypes = {
+    userId: string.isRequired,
+    seasons: arrayOf(shape({
+      name: string,
+      id: string,
+      closed: bool,
+      photo: shape({
+        url: string
+      })
+    })).isRequired,
+    seasonId: string.isRequired,
+    sorting: string.isRequired,
+    onChangeSort: func.isRequired,
+    onChangeSeason: func.isRequired,
+    data: shape({
+      loading: bool,
+      players: arrayOf(LeaderboardCard.propTypes.data)
+    }),
+    navigator: shape({
+      setOnNavigatorEvent: func.isRequired
+    }).isRequired
+  }
+
+  static defaultProps = {
+    data: {
+      loading: true,
+      players: []
+    },
+    activeEvent: null
+  }
+
   static navigatorButtons = {
     leftButtons: [
       {
@@ -110,7 +144,7 @@ class Leaderboard extends Component {
       return null
     }
 
-    const { data, sorting, seasonId, seasons, userId, activeEvent } = this.props
+    const { data, sorting, seasonId, seasons, userId } = this.props
     const { showSeasonPicker } = this.state
 
     let sortedPlayers = null
@@ -140,6 +174,8 @@ class Leaderboard extends Component {
         />
       )
     }
+
+    const activeEvent = false
 
     return (
       <View style={{ flex: 1, backgroundColor: 'transparent' }}>
@@ -204,81 +240,20 @@ class Leaderboard extends Component {
   }
 }
 
-const { arrayOf, bool, func, shape, string } = React.PropTypes
+const mapStateToProps = state => ({
+  seasonId: state.app.seasonId,
+  userId: state.app.user.id,
+  sorting: state.app.sorting,
+  seasons: state.app.seasons
+})
 
-Leaderboard.propTypes = {
-  userId: string.isRequired,
-  seasons: arrayOf(shape({
-    name: string,
-    id: string,
-    closed: bool,
-    photo: shape({
-      url: string
-    })
-  })).isRequired,
-  seasonId: string.isRequired,
-  sorting: string.isRequired,
-  onChangeSort: func.isRequired,
-  onChangeSeason: func.isRequired,
-  data: shape({
-    loading: bool,
-    players: arrayOf(LeaderboardCard.propTypes.data)
-  }).isRequired,
-  navigator: shape({
-    setOnNavigatorEvent: func.isRequired
-  }).isRequired,
-  activeEvent: shape()
-}
-
-Leaderboard.defaultProps = {
-  activeEvent: null
-}
-
-const leaderboardQuery = gql`
-  query($seasonId: ID!) {
-    players: allSeasonLeaderboards (
-      orderBy: position_DESC
-      filter: { season: { id: $seasonId } }
-    ) {
-      id
-      averagePoints
-      position
-      previousPosition
-      totalPoints
-      totalBeers
-      totalKr
-      top5Points
-      eventCount
-      user {
-        id
-        firstName
-        lastName
-      }
-    }
-  }
-`
-
-const mapStateToProps = state => (
-  {
-    seasonId: state.app.seasonId,
-    userId: state.app.user.id,
-    sorting: state.app.sorting,
-    seasons: state.app.seasons,
-    activeEvent: state.event.isStarted ? state.event.event : null
-  }
-)
-
-const mapDispatchToProps = dispatch => (
-  {
-    onChangeSeason: seasonId => dispatch(changeSeason(seasonId)),
-    onChangeSort: sorting => dispatch(changeSort(sorting))
-  }
-)
+const mapDispatchToProps = dispatch => ({
+  onChangeSeason: seasonId => dispatch(changeSeason(seasonId)),
+  onChangeSort: sorting => dispatch(changeSort(sorting))
+})
 
 export default compose(
   connect(mapStateToProps, mapDispatchToProps),
-  graphql(leaderboardQuery, {
-    options: ({ seasonId }) => ({ forceFetch: false, variables: { seasonId } })
-  }),
+  withLeaderboardQuery,
   withOneSignal
 )(Leaderboard)

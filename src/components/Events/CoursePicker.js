@@ -1,7 +1,5 @@
 import React, { Component, PropTypes } from 'react'
 import { TextInput, View, ListView } from 'react-native'
-import { graphql } from 'react-apollo'
-import gql from 'graphql-tag'
 import Fuse from 'fuse.js'
 
 import CourseRow from 'Events/CourseRow'
@@ -9,13 +7,32 @@ import Loading from 'shared/Loading'
 import EmptyState from 'shared/EmptyState'
 
 import styles from 'styles'
+import { withCoursesQuery } from 'queries/coursesQuery'
 
 const ds = new ListView.DataSource({
   rowHasChanged: (row1, row2) => row1 !== row2
 })
 
+const { arrayOf, shape, func } = PropTypes
+
 class CoursePicker extends Component {
   static fuse = null
+
+  static propTypes = {
+    selectCourse: func.isRequired,
+    data: shape({
+      loading: true,
+      courses: arrayOf(shape())
+    })
+  }
+
+  static defaultProps = {
+    data: {
+      loading: true,
+      courses: []
+    }
+  }
+
   state = { query: '' }
 
   componentWillReceiveProps(nextProps) {
@@ -81,28 +98,4 @@ class CoursePicker extends Component {
   }
 }
 
-CoursePicker.propTypes = {
-  selectCourse: PropTypes.func.isRequired,
-  data: PropTypes.shape({
-    loading: PropTypes.bool.isRequired,
-    courses: PropTypes.arrayOf(PropTypes.shape())
-  }).isRequired
-}
-
-const coursesQuery = gql`
-   query {
-    courses: allCourses ( 
-      orderBy: club_ASC
-    ) {
-      id
-      club
-      name
-      par
-      holes: _holesMeta {
-        count
-      } 
-    }
-   }
-`
-
-export default graphql(coursesQuery)(CoursePicker)
+export default withCoursesQuery(CoursePicker)

@@ -13,23 +13,27 @@ const gametypeName = (scoringType) => {
   }
 }
 
-const EventHeader = ({ course, club, teamEvent, scoringType }) => (
+const EventHeader = ({ course, club, oldCourseName, teamEvent, scoringType }) => (
   <TGText style={{ padding: 10, backgroundColor: '#2A1313', textAlign: 'center', color: '#fff' }}>
     {gametypeName(scoringType)}
     {' ↝ '}
-    {club}
-    {' | '}
-    {course}
-    {' ↝ '}
+    {oldCourseName ? `${oldCourseName} ↝ ` : `${club} | ${course} ↝ `}
     {teamEvent ? 'Lag' : 'Individuellt'}
   </TGText>
 )
 
 EventHeader.propTypes = {
-  course: PropTypes.string.isRequired,
-  club: PropTypes.string.isRequired,
+  course: PropTypes.string,
+  club: PropTypes.string,
+  oldCourseName: PropTypes.string,
   teamEvent: PropTypes.bool.isRequired,
   scoringType: PropTypes.string.isRequired
+}
+
+EventHeader.defaultProps = {
+  course: null,
+  club: null,
+  oldCourseName: null
 }
 
 export default EventHeader

@@ -1,19 +1,10 @@
 import React from 'react'
-import {
-  Dimensions,
-  Image,
-  KeyboardAvoidingView,
-  StyleSheet,
-  TextInput,
-  View
-} from 'react-native'
+import { Image, KeyboardAvoidingView, StyleSheet, TextInput, View } from 'react-native'
 
 import TGText from 'shared/TGText'
 
 import usernameImg from 'images/username.png'
 import passwordImg from 'images/password.png'
-
-const DEVICE_WIDTH = Dimensions.get('window').width
 
 const styles = StyleSheet.create({
   container: {
@@ -23,7 +14,7 @@ const styles = StyleSheet.create({
   },
   input: {
     backgroundColor: 'rgba(0, 0, 0, 0.75)',
-    width: DEVICE_WIDTH - 40,
+    width: '90%',
     height: 40,
     marginHorizontal: 20,
     paddingHorizontal: 10,
@@ -44,7 +35,7 @@ const styles = StyleSheet.create({
   },
   button: {
     padding: 10,
-    width: DEVICE_WIDTH - 40,
+    width: '90%',
     marginHorizontal: 20,
     textAlign: 'center',
     backgroundColor: 'rgba(30,152,223, 0.95)',
@@ -52,7 +43,7 @@ const styles = StyleSheet.create({
   }
 })
 
-const LoginForm = ({ email, password, changeValue, onSubmit, loggingIn }) =>
+const LoginForm = ({ email, password, changeValue, onSubmit, loggingIn }) => (
   <KeyboardAvoidingView behavior="padding" style={styles.container}>
     <View style={styles.inputWrapper}>
       <Image source={usernameImg} style={styles.inlineImg} />
@@ -88,7 +79,7 @@ const LoginForm = ({ email, password, changeValue, onSubmit, loggingIn }) =>
       LOGGA IN
     </TGText>
   </KeyboardAvoidingView>
-
+)
 
 const { bool, string, func } = React.PropTypes
 
@@ -104,6 +95,5 @@ LoginForm.defaultProps = {
   email: '',
   password: ''
 }
-
 
 export default LoginForm

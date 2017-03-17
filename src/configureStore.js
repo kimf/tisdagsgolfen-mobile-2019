@@ -3,7 +3,6 @@ import { applyMiddleware, createStore, combineReducers, compose } from 'redux'
 import { persistStore, autoRehydrate } from 'redux-persist'
 import thunk from 'redux-thunk'
 
-import event from 'reducers/event'
 import app from 'reducers/app'
 
 const configureStore = (client, onComplete) => {
@@ -14,11 +13,7 @@ const configureStore = (client, onComplete) => {
     middleware.push(freeze)
   } */
 
-  const reducers = combineReducers({
-    app,
-    event,
-    apollo: client.reducer()
-  })
+  const reducers = combineReducers({ app, apollo: client.reducer() })
   const store = createStore(
     reducers,
     composeEnhancers(

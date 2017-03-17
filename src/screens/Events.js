@@ -1,17 +1,37 @@
 import React, { Component } from 'react'
 import { View, ListView } from 'react-native'
 import { connect } from 'react-redux'
-import { graphql, compose } from 'react-apollo'
-import gql from 'graphql-tag'
+import { compose } from 'react-apollo'
 
 import EmptyState from 'shared/EmptyState'
 import EventCard from 'Events/EventCard'
 
 // import { sortedByParsedDate } from '../utils'
+import { navigatorStyle } from 'styles'
+import { withEventsQuery } from 'queries/eventsQuery'
 
 const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 })
+const { arrayOf, shape, bool, string } = React.PropTypes
 
 class Events extends Component {
+  static propTypes = {
+    data: shape({
+      loading: bool,
+      events: arrayOf(EventCard.propTypes.event)
+    }),
+    navigator: shape().isRequired,
+    userId: string.isRequired,
+    seasonId: string.isRequired,
+    seasonClosed: bool.isRequired
+  }
+
+  static defaultProps = {
+    data: {
+      loading: true,
+      events: []
+    }
+  }
+
   constructor(props) {
     super(props)
     this.setButtons(props.seasonClosed)
@@ -33,6 +53,11 @@ class Events extends Component {
           title: 'Ny Runda',
           passProps: {
             seasonId
+          },
+          animated: true,
+          navigatorStyle: {
+            ...navigatorStyle,
+            tabBarHidden: true
           }
         })
       }
@@ -75,59 +100,13 @@ class Events extends Component {
   }
 }
 
-const { arrayOf, shape, bool, string } = React.PropTypes
-
-Events.propTypes = {
-  data: shape({
-    loading: bool,
-    events: arrayOf(shape())
-  }),
-  navigator: shape().isRequired,
-  userId: string.isRequired,
-  seasonId: string.isRequired,
-  seasonClosed: bool.isRequired
-}
-
-Events.defaultProps = {
-  data: {
-    loading: true,
-    events: []
-  }
-}
-
-
-const eventsQuery = gql`
-  query($seasonId: ID!) {
-    events: allEvents (
-      orderBy: startsAt_DESC
-      filter: { season: { id: $seasonId } }
-    ) {
-      id
-      status
-      startsAt
-      oldCourseName
-      course {
-        id
-        club
-        name
-      }
-      scoringType
-      teamEvent
-    }
-  }
-`
-
-const mapStateToProps = state => (
-  {
-    seasonId: state.app.seasonId,
-    seasonClosed: state.app.seasonClosed,
-    userId: state.app.user.id
-  }
-)
+const mapStateToProps = state => ({
+  seasonId: state.app.seasonId,
+  seasonClosed: state.app.seasonClosed,
+  userId: state.app.user.id
+})
 
 export default compose(
   connect(mapStateToProps),
-  graphql(eventsQuery, {
-    options: ({ seasonId }) => ({ forceFetch: false, variables: { seasonId } })
-  })
+  withEventsQuery
 )(Events)

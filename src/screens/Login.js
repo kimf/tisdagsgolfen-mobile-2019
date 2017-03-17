@@ -1,7 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { Linking } from 'react-native'
-import { graphql } from 'react-apollo'
-import gql from 'graphql-tag'
+import { compose } from 'react-apollo'
 import { connect } from 'react-redux'
 
 import Logo from 'Login/Logo'
@@ -11,7 +9,19 @@ import Wallpaper from 'Login/Wallpaper'
 
 import { login } from 'actions/app'
 
+import { withSigninUserMutation } from 'mutations/signinUserMutation'
+
 class Login extends Component {
+  static propTypes = {
+    email: PropTypes.string,
+    signinUser: PropTypes.func.isRequired,
+    onLogin: PropTypes.func.isRequired
+  }
+
+  static defaultProps = {
+    email: ''
+  }
+
   constructor(props) {
     super(props)
 
@@ -42,10 +52,6 @@ class Login extends Component {
     this.setState(valueObject)
   }
 
-  openPassword = () => {
-    Linking.openURL('https://www.tisdagsgolfen.se/password_resets/new')
-  }
-
   render() {
     const { error } = this.state
 
@@ -63,37 +69,13 @@ class Login extends Component {
   }
 }
 
-Login.propTypes = {
-  email: PropTypes.string,
-  signinUser: PropTypes.func.isRequired,
-  onLogin: PropTypes.func.isRequired
-}
+const mapStateToProps = state => ({ email: state.app.email })
 
-Login.defaultProps = {
-  email: ''
-}
-
-const signinUser = gql`
-  mutation ($email: String!, $password: String!) {
-    signinUser(email: {email: $email, password: $password}) {
-      token
-    }
-  }
-`
-
-const mapStateToProps = state => ({
-  email: state.app.email
+const mapDispatchToProps = dispatch => ({
+  onLogin: (email, token) => dispatch(login(email, token))
 })
 
-const mapDispatchToProps = dispatch => (
-  {
-    onLogin: (email, token) => dispatch(login(email, token))
-  }
-)
-
-const withData = graphql(signinUser, { name: 'signinUser' })(Login)
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withData)
+export default compose(
+  connect(mapStateToProps, mapDispatchToProps),
+  withSigninUserMutation
+)(Login)

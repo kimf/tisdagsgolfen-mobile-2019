@@ -14,14 +14,14 @@ const SeasonPicker = ({ seasons, currentSeasonId, onChangeSeason }) => (
       justifyContent: 'space-between'
     }}
   >
-    { seasons.map((season) => {
+    {seasons.map((season) => {
       const color = currentSeasonId && season.id === currentSeasonId ? '#3FB4CF' : '#ccc'
       return (
         <TGText
           onPress={() => onChangeSeason(season.id)}
           key={`SeasonPicker_${season.id}`}
           viewStyle={{ flex: 1, flexDirection: 'row', justifyContent: 'center', paddingVertical: 5 }}
-          style={{ color }}
+          style={{ textAlign: 'center', color, fontSize: 20, fontWeight: 'bold' }}
         >
           {season.name}
         </TGText>

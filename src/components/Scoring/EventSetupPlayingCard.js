@@ -3,7 +3,24 @@ import { View, Slider } from 'react-native'
 
 import TGText from 'shared/TGText'
 
+const { shape, func, bool } = PropTypes
+
 class EventSetupPlayingCard extends Component {
+  static propTypes = {
+    item: shape().isRequired,
+    onRemove: func.isRequired,
+    onChangeStrokes: func.isRequired,
+    onRemovePlayerFromTeam: func,
+    onAddPlayerToTeam: func,
+    teamEvent: bool.isRequired
+  }
+
+  static defaultProps = {
+    onRemovePlayerFromTeam: () => { },
+    onAddPlayerToTeam: () => { }
+  }
+
+
   constructor(props) {
     super(props)
     this.state = { strokes: props.item.strokes }
@@ -15,7 +32,9 @@ class EventSetupPlayingCard extends Component {
     const {
       item, onRemove, onChangeStrokes, onRemovePlayerFromTeam, onAddPlayerToTeam, teamEvent
     } = this.props
+
     const name = teamEvent ? `Lag ${item.id + 1}` : `${item.firstName} ${item.lastName}`
+
     return (
       <View
         style={{
@@ -47,7 +66,7 @@ class EventSetupPlayingCard extends Component {
             {this.state.strokes}
           </TGText>
         </View>
-        { teamEvent
+        {teamEvent
           ? <View
             style={{
               paddingVertical: 10,
@@ -56,7 +75,7 @@ class EventSetupPlayingCard extends Component {
               flexDirection: 'column'
             }}
           >
-            { item.players.map(player => (
+            {item.players.map(player => (
               <View key={`pl_team_player_${player.id}`} style={{ width: '100%', paddingVertical: 5, flexDirection: 'row' }}>
                 <TGText style={{ flex: 1, fontWeight: 'bold', fontSize: 14 }}>
                   {player.firstName} {player.lastName}
@@ -74,8 +93,9 @@ class EventSetupPlayingCard extends Component {
                 paddingHorizontal: 10,
                 backgroundColor: '#ccc'
               }}
-              style={{ textAlign: 'left' }}
-              onPress={() => onAddPlayerToTeam(item)}>
+              style={{ textAlign: 'center' }}
+              onPress={() => onAddPlayerToTeam(item)}
+            >
               + Lägg till spelare i {name}
             </TGText>
           </View>
@@ -84,20 +104,6 @@ class EventSetupPlayingCard extends Component {
       </View>
     )
   }
-}
-
-EventSetupPlayingCard.propTypes = {
-  item: PropTypes.shape().isRequired,
-  onRemove: PropTypes.func.isRequired,
-  onChangeStrokes: PropTypes.func.isRequired,
-  onRemovePlayerFromTeam: PropTypes.func,
-  onAddPlayerToTeam: PropTypes.func,
-  teamEvent: PropTypes.bool.isRequired
-}
-
-EventSetupPlayingCard.defaultProps = {
-  onRemovePlayerFromTeam: () => {},
-  onAddPlayerToTeam: () => {}
 }
 
 export default EventSetupPlayingCard

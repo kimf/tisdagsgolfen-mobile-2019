@@ -6,7 +6,25 @@ import styles from 'styles'
 import TGText from 'shared/TGText'
 import { logout } from 'actions/app'
 
+const { shape, string, func } = PropTypes
+
 class Profile extends Component {
+  static navigatorButtons = {
+    leftButtons: [
+      { title: 'Tillbaka', id: 'back' }
+    ]
+  }
+
+  static propTypes = {
+    user: shape({
+      firstName: string,
+      lastName: string,
+      email: string
+    }).isRequired,
+    onLogout: func.isRequired,
+    navigator: shape().isRequired
+  }
+
   constructor(props) {
     super(props)
     props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this))
@@ -40,33 +58,10 @@ class Profile extends Component {
   }
 }
 
-Profile.navigatorButtons = {
-  leftButtons: [
-    { title: 'Tillbaka', id: 'back' }
-  ]
-}
+const mapStateToProps = state => ({ user: state.app.user })
 
-const { shape, string, func } = PropTypes
-Profile.propTypes = {
-  user: shape({
-    firstName: string,
-    lastName: string,
-    email: string
-  }).isRequired,
-  onLogout: func.isRequired,
-  navigator: shape().isRequired
-}
-
-const mapStateToProps = state => (
-  {
-    user: state.app.user
-  }
-)
-
-const mapDispatchToProps = dispatch => (
-  {
-    onLogout: () => dispatch(logout())
-  }
-)
+const mapDispatchToProps = dispatch => ({
+  onLogout: () => dispatch(logout())
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profile)

@@ -1,12 +1,9 @@
 import React from 'react'
 import { View, StyleSheet } from 'react-native'
-import { connect } from 'react-redux'
 import moment from 'moment'
 import 'moment/locale/sv'
 
 import TGText from 'shared/TGText'
-
-import { startSettingUpEvent } from 'actions/event'
 import { navigatorStyle } from 'styles'
 
 const s = StyleSheet.create({
@@ -54,7 +51,7 @@ const s = StyleSheet.create({
   }
 })
 
-const EventCard = ({ event, userId, navigator, onStartSettingUpEvent }) => {
+const EventCard = ({ event, userId, navigator }) => {
   let gametypeName = ''
   if (event.scoringType === 'modified_points') {
     gametypeName = 'Modifierad Poäng'
@@ -131,7 +128,7 @@ const EventCard = ({ event, userId, navigator, onStartSettingUpEvent }) => {
         {event.status === 'finished'
           ? <TGText
             onPress={() => {
-              navigator.showModal({
+              navigator.push({
                 ...navigatorProps,
                 screen: 'tisdagsgolfen.EventResult'
               })
@@ -143,10 +140,10 @@ const EventCard = ({ event, userId, navigator, onStartSettingUpEvent }) => {
           </TGText>
           : <TGText
             onPress={() => {
-              onStartSettingUpEvent(event)
-              navigator.showModal({
+              navigator.push({
                 ...navigatorProps,
-                screen: setupEventScreen
+                screen: setupEventScreen,
+                passProps: { event }
               })
             }}
             backgroundColor="#16a085"
@@ -160,7 +157,7 @@ const EventCard = ({ event, userId, navigator, onStartSettingUpEvent }) => {
   )
 }
 
-const { shape, string, bool, func } = React.PropTypes
+const { shape, string, bool } = React.PropTypes
 
 EventCard.propTypes = {
   event: shape({
@@ -175,16 +172,7 @@ EventCard.propTypes = {
     })
   }).isRequired,
   navigator: shape().isRequired,
-  userId: string.isRequired,
-  onStartSettingUpEvent: func.isRequired
+  userId: string.isRequired
 }
 
-const mapDispatchToProps = dispatch => (
-  {
-    onStartSettingUpEvent: (event) => {
-      dispatch(startSettingUpEvent(event))
-    }
-  }
-)
-
-export default connect(null, mapDispatchToProps)(EventCard)
+export default EventCard

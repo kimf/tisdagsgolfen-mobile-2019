@@ -1,0 +1,176 @@
+﻿type Course {
+  club: String!
+  createdAt: DateTime!
+  events: [Event!]! @relation(name: "EventCourse")
+  holes: [Hole!]! @relation(name: "CourseHoles")
+  id: ID!
+  lat: String
+  lng: String
+  name: String!
+  oldId: Int
+  par: Int!
+  scoringSessions: [ScoringSession!]! @relation(name: "ScoringSessionCourse")
+  updatedAt: DateTime!
+}
+
+type Event {
+  course: Course @relation(name: "EventCourse")
+  createdAt: DateTime
+  eventLeaderboards: [EventLeaderboard!]! @relation(name: "EventLeaderboards")
+  id: ID!
+  liveScores: [LiveScore!]! @relation(name: "EventLiveScore")
+  oldCourseName: String
+  oldId: Int
+  scores: [Score!]! @relation(name: "EventScore")
+  scoringSessions: [ScoringSession!]! @relation(name: "ScoringSessionEvent")
+  scoringType: String!
+  season: Season @relation(name: "SeasonEvent")
+  startsAt: DateTime!
+  status: String!
+  teamEvent: Boolean!
+  updatedAt: DateTime
+}
+
+type EventLeaderboard {
+  createdAt: DateTime
+  event: Event @relation(name: "EventLeaderboards")
+  id: ID!
+  position: Int!
+  previousTotalPosition: Int!
+  score: Score @relation(name: "ScoreEventLeaderboard")
+  totalAveragePoints: Float!
+  totalEventCount: Int!
+  totalEventPoints: Float!
+  totalPosition: Int!
+  updatedAt: DateTime
+}
+
+type File {
+  contentType: String!
+  createdAt: DateTime
+  id: ID!
+  name: String!
+  season: Season @relation(name: "SeasonPhoto")
+  secret: String!
+  size: Int!
+  updatedAt: DateTime
+  url: String!
+}
+
+type Hole {
+  course: Course @relation(name: "CourseHoles")
+  createdAt: DateTime!
+  id: ID!
+  index: Int!
+  liveScores: [LiveScore!]! @relation(name: "LiveScoreHole")
+  number: Int!
+  par: Int!
+  updatedAt: DateTime!
+}
+
+type LiveScore {
+  beers: Int
+  createdAt: DateTime!
+  event: Event @relation(name: "EventLiveScore")
+  extraStrokes: Int!
+  hole: Hole @relation(name: "LiveScoreHole")
+  id: ID!
+  points: Int
+  putts: Int!
+  scoringPlayer: ScoringPlayer @relation(name: "ScoringPlayerLiveScores")
+  scoringSession: ScoringSession @relation(name: "ScoringSessionLiveScore")
+  scoringTeam: ScoringTeam @relation(name: "ScoringTeamLiveScores")
+  strokes: Int!
+  updatedAt: DateTime!
+}
+
+type Score {
+  beers: Int!
+  createdAt: DateTime
+  event: Event @relation(name: "EventScore")
+  eventLeaderboard: EventLeaderboard @relation(name: "ScoreEventLeaderboard")
+  eventPoints: Int!
+  id: ID!
+  kr: Int!
+  oldId: Int
+  updatedAt: DateTime
+  user: User @relation(name: "UserScore")
+  value: Int!
+}
+
+type ScoringPlayer {
+  createdAt: DateTime!
+  extraStrokes: Int!
+  id: ID!
+  liveScores: [LiveScore!]! @relation(name: "ScoringPlayerLiveScores")
+  scoringSession: ScoringSession @relation(name: "ScoringPlayerScoringSession")
+  updatedAt: DateTime!
+  user: User @relation(name: "ScoringPlayerUser")
+}
+
+type ScoringSession {
+  course: Course @relation(name: "ScoringSessionCourse")
+  createdAt: DateTime!
+  currentHole: Int!
+  event: Event @relation(name: "ScoringSessionEvent")
+  id: ID!
+  liveScores: [LiveScore!]! @relation(name: "ScoringSessionLiveScore")
+  scorer: User @relation(name: "ScoringSessionScorer")
+  scoringPlayers: [ScoringPlayer!]! @relation(name: "ScoringPlayerScoringSession")
+  scoringTeams: [ScoringTeam!]! @relation(name: "ScoringTeamScoringSession")
+  updatedAt: DateTime!
+}
+
+type ScoringTeam {
+  createdAt: DateTime!
+  extraStrokes: Int!
+  id: ID!
+  liveScores: [LiveScore!]! @relation(name: "ScoringTeamLiveScores")
+  scoringSession: ScoringSession @relation(name: "ScoringTeamScoringSession")
+  updatedAt: DateTime!
+  users: [User!]! @relation(name: "ScoringTeamUser")
+}
+
+type Season {
+  closed: Boolean!
+  createdAt: DateTime
+  events: [Event!]! @relation(name: "SeasonEvent")
+  id: ID!
+  name: String!
+  oldId: Int
+  photo: File @relation(name: "SeasonPhoto")
+  seasonLeaderboards: [SeasonLeaderboard!]! @relation(name: "SeasonLeaderboards")
+  updatedAt: DateTime
+}
+
+type SeasonLeaderboard {
+  averagePoints: Float!
+  createdAt: DateTime
+  eventCount: Int!
+  id: ID!
+  position: Int!
+  previousPosition: Int!
+  season: Season @relation(name: "SeasonLeaderboards")
+  top5Points: [Float!]!
+  totalBeers: Int!
+  totalKr: Int!
+  totalPoints: Float!
+  updatedAt: DateTime
+  user: User @relation(name: "UserSeasonLeaderboard")
+}
+
+type User {
+  createdAt: DateTime
+  email: String
+  firstName: String!
+  id: ID!
+  lastName: String!
+  oldId: Int
+  password: String
+  scores: [Score!]! @relation(name: "UserScore")
+  scoringPlayers: [ScoringPlayer!]! @relation(name: "ScoringPlayerUser")
+  scoringSession: ScoringSession @relation(name: "ScoringSessionScorer")
+  scoringTeams: [ScoringTeam!]! @relation(name: "ScoringTeamUser")
+  seasonLeaderboard: SeasonLeaderboard @relation(name: "UserSeasonLeaderboard")
+  updatedAt: DateTime
+}

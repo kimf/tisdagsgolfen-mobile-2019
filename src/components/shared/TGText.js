@@ -4,8 +4,9 @@ import { StyleSheet, Text, Dimensions } from 'react-native'
 
 import TouchableView from 'shared/TouchableView'
 
-const DEVICE_WIDTH = Dimensions.get('window').width
-const FONT_SIZE = 14
+const { width, height } = Dimensions.get('window')
+const realWidth = height > width ? width : height
+const FONT_SIZE = 16
 const styles = StyleSheet.create({
   text: {
     fontSize: FONT_SIZE,
@@ -18,7 +19,7 @@ const TGText = ({ onPress, style, viewStyle, children, ...rest }) => {
   const fontSize = style
     ? (StyleSheet.flatten(style).fontSize || FONT_SIZE)
     : FONT_SIZE
-  const scaledFontSize = Math.round((fontSize * DEVICE_WIDTH) / 375)
+  const scaledFontSize = Math.round((fontSize * realWidth) / 375)
 
   const text = (
     <Text style={[styles.text, style, { fontSize: scaledFontSize }]} {...rest}>

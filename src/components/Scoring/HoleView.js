@@ -4,21 +4,9 @@ import { View, Dimensions } from 'react-native'
 import ScoreRow from 'Scoring/ScoreRow'
 import HoleHeader from 'Scoring/HoleHeader'
 import ScorecardHeaderRow from 'Scoring/ScorecardHeaderRow'
+import { calculateExtraStrokes } from 'utils'
 
 const deviceWidth = Dimensions.get('window').width
-
-const calculateExtraStrokes = (holeIndex, playerStrokes, holesCount) => {
-  let extra = 0
-  if (holeIndex <= playerStrokes) {
-    extra = 1
-    if (playerStrokes > holesCount) {
-      if (holeIndex <= (playerStrokes - holesCount)) {
-        extra = 2
-      }
-    }
-  }
-  return extra
-}
 
 const HoleView = ({ event, hole, playing, holesCount, onStartScoring }) => (
   <View style={{ width: deviceWidth }}>

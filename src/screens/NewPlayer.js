@@ -1,16 +1,42 @@
 import React, { Component, PropTypes } from 'react'
 import { View, ListView } from 'react-native'
-import { connect } from 'react-redux'
-import { graphql, compose } from 'react-apollo'
-import gql from 'graphql-tag'
 
 import TGText from 'shared/TGText'
 import styles from 'styles'
-import { addPlayerToEvent, addPlayerToTeam } from 'actions/event'
+
+import { withUserQuery } from 'queries/userQuery'
 
 const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 })
+const { shape, bool, arrayOf, func, string, number } = PropTypes
 
 class NewPlayer extends Component {
+  static propTypes = {
+    data: shape({
+      loading: bool,
+      players: arrayOf(
+        shape({
+          id: string.isRequired,
+          firstName: string.isRequired,
+          lastName: string.isRequired
+        })
+      )
+    }),
+    team: shape({
+      id: number.isRequired
+    }),
+    addedIds: arrayOf(string).isRequired,
+    onAdd: func.isRequired,
+    navigator: shape().isRequired
+  }
+
+  static defaultProps = {
+    team: null,
+    data: {
+      loading: true,
+      players: []
+    }
+  }
+
   static navigatorStyle = {
     navBarTextColor: 'white',
     navBarBackgroundColor: '#1E98DF'
@@ -39,22 +65,13 @@ class NewPlayer extends Component {
   }
 
   addPlayer = (player, team = null) => {
-    if (team) {
-      this.props.onAddPlayerToTeam(team, player)
-    } else {
-      this.props.onAddPlayerToEvent(player)
-    }
+    this.props.onAdd(player, team)
     this.props.navigator.dismissModal()
   }
 
-
   render() {
-    const { data, playing, team } = this.props
+    const { data, team, addedIds } = this.props
     if (data.loading) { return null }
-
-    const players = team
-      ? [].concat(...playing.map(p => p.players))
-      : playing
 
     return (
       <View style={styles.container}>
@@ -63,7 +80,7 @@ class NewPlayer extends Component {
           initialListSize={100}
           dataSource={ds.cloneWithRows(data.players)}
           renderRow={(player) => {
-            const isPlaying = players.find(p => p.id === player.id)
+            const isPlaying = addedIds.includes(player.id)
             return !isPlaying ? (
               <TGText
                 key={`setup_player_row_${player.id}`}
@@ -88,56 +105,4 @@ class NewPlayer extends Component {
   }
 }
 
-const { shape, bool, arrayOf, func } = PropTypes
-NewPlayer.propTypes = {
-  data: shape({
-    loading: bool.isRequired,
-    players: arrayOf(shape())
-  }).isRequired,
-  playing: arrayOf(shape()).isRequired,
-  team: shape(),
-  onAddPlayerToEvent: func.isRequired,
-  onAddPlayerToTeam: func.isRequired,
-  navigator: shape().isRequired
-}
-
-NewPlayer.defaultProps = {
-  team: null
-}
-
-const userQuery = gql`
-  query getAllUsers {
-    players: allUsers (
-      orderBy: firstName_ASC
-    ) {
-      id
-      email
-      firstName
-      lastName
-    }
-  }
-`
-
-const mapStateToProps = state => (
-  {
-    playing: state.event.playing,
-    event: state.event.event
-  }
-)
-
-const mapDispatchToProps = dispatch => (
-  {
-    onAddPlayerToEvent: (player, strokes) => {
-      dispatch(addPlayerToEvent(player, strokes))
-    },
-    onAddPlayerToTeam: (team, player) => {
-      dispatch(addPlayerToTeam(team, player))
-    }
-  }
-)
-
-
-export default compose(
-  connect(mapStateToProps, mapDispatchToProps),
-  graphql(userQuery)
-)(NewPlayer)
+export default withUserQuery(NewPlayer)

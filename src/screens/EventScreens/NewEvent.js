@@ -6,6 +6,11 @@ import NewEventSetup from 'Events/NewEventSetup'
 import styles from 'styles'
 
 class NewEvent extends Component {
+  static propTypes = {
+    seasonId: PropTypes.string.isRequired,
+    navigator: PropTypes.shape().isRequired
+  }
+
   static navigatorStyle = {
     navBarTextColor: 'white',
     navBarBackgroundColor: '#1E98DF'
@@ -13,10 +18,7 @@ class NewEvent extends Component {
 
   static navigatorButtons = {
     leftButtons: [
-      {
-        title: 'Avbryt',
-        id: 'cancel'
-      }
+      { title: 'Avbryt', id: 'cancel' }
     ]
   }
 
@@ -48,24 +50,19 @@ class NewEvent extends Component {
     const { course } = this.state
     return (
       <View style={styles.container}>
-        { course
+        {course
           ?
             <NewEventSetup
-              seasonId={seasonId}
-              changeCourse={this.setCourse}
-              course={course}
-              done={this.done}
-            />
+            seasonId={seasonId}
+            changeCourse={this.setCourse}
+            course={course}
+            done={this.done}
+          />
           : <CoursePicker selectCourse={this.setCourse} />
         }
       </View>
     )
   }
-}
-
-NewEvent.propTypes = {
-  seasonId: PropTypes.string.isRequired,
-  navigator: PropTypes.shape().isRequired
 }
 
 export default NewEvent

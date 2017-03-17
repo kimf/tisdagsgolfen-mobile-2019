@@ -12,18 +12,19 @@ const styles = StyleSheet.create({
   }
 })
 
-const Wallpaper = ({ children }) =>
+const Wallpaper = ({ children }) => (
   <Image style={styles.picture} source={bgSrc}>
     {children}
   </Image>
+)
 
+const { oneOfType, arrayOf, node } = React.PropTypes
 
 Wallpaper.propTypes = {
-  children: React.PropTypes.arrayOf(React.PropTypes.element)
-}
-
-Wallpaper.defaultProps = {
-  children: []
+  children: oneOfType([
+    arrayOf(node),
+    node
+  ]).isRequired
 }
 
 export default Wallpaper

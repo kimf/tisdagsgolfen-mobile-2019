@@ -1,51 +1,112 @@
-// TODO: Dry this up with SetupIndividualEvent
 import React, { Component, PropTypes } from 'react'
 import { View, ScrollView } from 'react-native'
 import { connect } from 'react-redux'
+import update from 'immutability-helper'
 
 import EventSetupPlayingCard from 'Scoring/EventSetupPlayingCard'
 import TGText from 'shared/TGText'
 
-import { cancelEvent, removePlayerFromTeam, changeTeamStrokes, removeTeam, addTeam, startPlay } from 'actions/event'
+const { bool, shape, string } = PropTypes
 
-// userId, seasonId
-class SetupIndividualEvent extends Component {
-  static navigatorButtons = {
-    leftButtons: [
-      {
-        title: 'Avbryt',
-        id: 'cancel'
-      }
-    ]
+class SetupTeamEvent extends Component {
+  static propTypes = {
+    event: shape({
+      id: string.isRequired,
+      scoringType: string.isRequired,
+      status: string.isRequired,
+      teamEvent: bool.isRequired,
+      course: shape({
+        club: string,
+        name: string
+      })
+    }).isRequired,
+    user: shape({
+      id: string.isRequired,
+      firstName: string.isRequired,
+      lastName: string.isRequired
+    }).isRequired,
+    navigator: shape().isRequired
   }
 
   constructor(props) {
     super(props)
-    props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this))
+
+    const playing = [
+      {
+        id: 0,
+        players: [props.user],
+        strokes: 0
+      }
+    ]
+
+    this.state = { playing }
   }
 
-  state = { course: null }
+  onRemove = (team) => {
+    const playingIndex = this.state.playing.findIndex(p => p.id === team.id)
+    const playing = update(this.state.playing, { $splice: [[playingIndex, 1]] })
+    this.setState({ playing })
+  }
 
-  onNavigatorEvent = (event) => {
-    const { navigator, onCancelEvent } = this.props
-    if (event.type === 'NavBarButtonPress') {
-      if (event.id === 'cancel') {
-        onCancelEvent()
-        navigator.dismissModal()
-      }
+  onAddTeam = () => {
+    const oldPlaying = this.state.playing
+    const newItem = {
+      id: oldPlaying.length,
+      players: [],
+      strokes: 0
     }
+    const playing = oldPlaying.concat(newItem)
+    this.setState({ playing })
+  }
+
+  onAddPlayer = (player, team) => {
+    const teamIndex = this.state.playing.findIndex(p => p.id === team.id)
+    const playing = update(
+      this.state.playing,
+      { [teamIndex]: { players: { $push: [player] } } }
+    )
+
+    this.setState({ playing })
+  }
+
+  onChangeStrokes = (team, strokes) => {
+    const playingIndex = this.state.playing.findIndex(p => p.id === team.id)
+    const playing = update(
+      this.state.playing,
+      { [playingIndex]: { strokes: { $set: strokes } } }
+    )
+
+    this.setState({ playing })
+  }
+
+  onRemovePlayerFromTeam = (team, player) => {
+    const teamIndex = this.state.playing.findIndex(p => p.id === team.id)
+    const playerIndex = this.state.playing[teamIndex].players.findIndex(p => p.id === player.id)
+    const playing = update(
+      this.state.playing, {
+        [teamIndex]: {
+          players: { $splice: [[playerIndex, 1]] }
+        }
+      }
+    )
+    this.setState({ playing })
   }
 
   openAddPlayer = (team) => {
     this.props.navigator.showModal({
       screen: 'tisdagsgolfen.NewPlayer',
       title: `Lägg till i Lag ${team.id + 1}`,
-      passProps: { team }
+      passProps: {
+        team,
+        event: this.props.event,
+        onAdd: this.onAddPlayer,
+        addedIds: [].concat(...this.state.playing.map(t => t.players)).map(p => p.id)
+      }
     })
   }
 
   startPlay = () => {
-    this.props.onStartPlay()
+    // TODO: Save a ScoringSession here and then...->
     this.props.navigator.showModal({
       screen: 'tisdagsgolfen.ScoreEvent',
       title: 'Scoring...',
@@ -57,32 +118,27 @@ class SetupIndividualEvent extends Component {
   }
 
   render() {
-    const {
-      playing, event, onRemove, onAddTeam, onChangeStrokes, onRemovePlayerFromTeam
-    } = this.props
-    if (!event) {
-      return null
-    }
+    const { playing } = this.state
 
     return (
       <View style={{ flex: 1 }}>
         <TGText
           viewStyle={{ width: '100%', padding: 10, backgroundColor: '#ccc' }}
           style={{ fontSize: 12, fontWeight: 'bold', color: '#888', textAlign: 'center' }}
-          onPress={onAddTeam}
+          onPress={this.onAddTeam}
         >
           + LÄGG TILL LAG
         </TGText>
         <ScrollView>
-          {playing.map((pl) => {
+          {playing.map((team) => {
             const props = {
-              onRemove,
-              onChangeStrokes,
-              onRemovePlayerFromTeam,
-              onAddPlayerToTeam: () => this.openAddPlayer(pl),
+              onRemove: this.onRemove,
+              onChangeStrokes: this.onChangeStrokes,
+              onRemovePlayerFromTeam: this.onRemovePlayerFromTeam,
+              onAddPlayerToTeam: () => this.openAddPlayer(team),
               teamEvent: true
             }
-            return <EventSetupPlayingCard key={`setup_pl_${pl.id}`} item={pl} {...props} />
+            return <EventSetupPlayingCard key={`setup_team_${team.id}`} item={team} {...props} />
           })}
         </ScrollView>
         <TGText
@@ -97,58 +153,6 @@ class SetupIndividualEvent extends Component {
   }
 }
 
-const { arrayOf, bool, shape, string, func } = PropTypes
+const mapStateToProps = state => ({ user: state.app.user })
 
-SetupIndividualEvent.propTypes = {
-  event: shape({
-    id: string.isRequired,
-    scoringType: string.isRequired,
-    status: string.isRequired,
-    teamEvent: bool.isRequired,
-    course: shape({
-      club: string,
-      name: string
-    })
-  }),
-  playing: arrayOf(shape()).isRequired,
-  navigator: shape().isRequired,
-  onCancelEvent: func.isRequired,
-  onRemove: func.isRequired,
-  onChangeStrokes: func.isRequired,
-  onAddTeam: func.isRequired,
-  onRemovePlayerFromTeam: func.isRequired,
-  onStartPlay: func.isRequired
-}
-
-SetupIndividualEvent.defaultProps = {
-  event: null
-}
-
-
-const mapStateToProps = state => (
-  {
-    playing: state.event.playing,
-    event: state.event.event
-  }
-)
-
-const mapDispatchToProps = dispatch => (
-  {
-    onCancelEvent: () => {
-      dispatch(cancelEvent())
-    },
-    onRemove: (team) => {
-      dispatch(removeTeam(team))
-    },
-    onChangeStrokes: (team, strokes) => {
-      dispatch(changeTeamStrokes(team, strokes))
-    },
-    onRemovePlayerFromTeam: (team, player) => {
-      dispatch(removePlayerFromTeam(team, player))
-    },
-    onAddTeam: () => dispatch(addTeam()),
-    onStartPlay: () => dispatch(startPlay())
-  }
-)
-
-export default connect(mapStateToProps, mapDispatchToProps)(SetupIndividualEvent)
+export default connect(mapStateToProps)(SetupTeamEvent)

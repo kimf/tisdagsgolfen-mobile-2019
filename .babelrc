@@ -9,7 +9,8 @@
       {
         "root": [
           "./src",
-          "./src/components"
+          "./src/components",
+          "./src/graph"
         ],
         "alias": {
           "shared": "./src/components/shared"

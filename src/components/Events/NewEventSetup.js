@@ -3,13 +3,26 @@ import { Switch, View, StyleSheet } from 'react-native'
 import Calendar from 'react-native-calendar-datepicker'
 import moment from 'moment'
 import 'moment/locale/sv'
-import { graphql } from 'react-apollo'
-import gql from 'graphql-tag'
 
 import TGText from 'shared/TGText'
 import styles from 'styles'
+import { withCreateEventMutation } from 'mutations/createEventMutation'
+
+const { string, shape, func } = React.PropTypes
 
 class NewEventSetup extends Component {
+  static propTypes = {
+    course: shape({
+      id: string.isRequired,
+      club: string.isRequired,
+      name: string.isRequired
+    }).isRequired,
+    changeCourse: func.isRequired,
+    createEvent: func.isRequired,
+    seasonId: string.isRequired,
+    done: func.isRequired
+  }
+
   state = {
     isStrokes: false,
     teamEvent: false,
@@ -113,51 +126,4 @@ class NewEventSetup extends Component {
   }
 }
 
-const { string, number, shape, func } = React.PropTypes
-
-NewEventSetup.propTypes = {
-  course: shape({
-    id: string.isRequired,
-    club: string.isRequired,
-    name: string.isRequired
-  }).isRequired,
-  changeCourse: func.isRequired,
-  createEvent: func.isRequired,
-  seasonId: string.isRequired,
-  done: func.isRequired
-}
-
-const createEventMutation = gql`
-  mutation createEvent(
-    $seasonId:ID!,
-    $courseId:ID!,
-    $teamEvent:Boolean!,
-    $scoringType:String!,
-    $startsAt:DateTime!
-  )
-  {
-    createEvent(
-      seasonId: $seasonId,
-      courseId: $courseId,
-      teamEvent: $teamEvent,
-      scoringType: $scoringType,
-      startsAt: $startsAt,
-      status: "planned",
-      oldId: 0
-    ) {
-      id
-    }
-  }
-`
-
-export default graphql(createEventMutation, {
-  props({ mutate }) {
-    return {
-      createEvent({ seasonId, courseId, teamEvent, scoringType, startsAt }) {
-        return mutate({
-          variables: { seasonId, courseId, teamEvent, scoringType, startsAt }
-        })
-      }
-    }
-  }
-})(NewEventSetup)
+export default withCreateEventMutation(NewEventSetup)

@@ -57,6 +57,18 @@ export const rankedUsers = (realUsers) => {
   return rankings
 }
 
+export const calculateExtraStrokes = (holeIndex, playerStrokes, holesCount) => {
+  let extra = 0
+  if (holeIndex <= playerStrokes) {
+    extra = 1
+    if (playerStrokes > holesCount) {
+      if (holeIndex <= (playerStrokes - holesCount)) {
+        extra = 2
+      }
+    }
+  }
+  return extra
+}
 
 export const setCache = async (key, val) => {
   try {

@@ -1,9 +1,7 @@
 import React from 'react'
-import { View, StyleSheet, Dimensions } from 'react-native'
+import { View, StyleSheet } from 'react-native'
 
 import TGText from 'shared/TGText'
-
-const DEVICE_WIDTH = Dimensions.get('window').width
 
 const styles = StyleSheet.create({
   container: {
@@ -13,7 +11,7 @@ const styles = StyleSheet.create({
   },
   errorText: {
     backgroundColor: 'rgba(255, 0, 0, 0.75)',
-    width: DEVICE_WIDTH - 40,
+    width: '90%',
     padding: 10,
     marginHorizontal: 20,
     textAlign: 'center',

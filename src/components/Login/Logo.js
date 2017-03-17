@@ -20,9 +20,10 @@ const styles = StyleSheet.create({
   }
 })
 
-const Logo = () =>
+const Logo = () => (
   <View style={styles.container}>
     <Image source={logoImg} style={styles.image} />
   </View>
+)
 
 export default Logo

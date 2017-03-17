@@ -1,7 +1,5 @@
 import React, { Component, PropTypes } from 'react'
 import { View, ListView } from 'react-native'
-import { graphql } from 'react-apollo'
-import gql from 'graphql-tag'
 
 import EventHeader from 'Events/EventHeader'
 import EventLeaderboardCard from 'Events/EventLeaderboardCard'
@@ -10,34 +8,36 @@ import Loading from 'shared/Loading'
 
 import { ranked } from 'utils'
 import styles from 'styles'
+import { withEventQuery } from 'queries/eventQuery'
 
 const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 })
+const { arrayOf, shape, string, bool } = PropTypes
 
-class Event extends Component {
-  static navigatorButtons = {
-    leftButtons: [
-      {
-        title: 'Stäng',
-        id: 'cancel'
-      }
-    ]
+class EventResult extends Component {
+  static propTypes = {
+    event: shape({
+      id: string.isRequired,
+      scoringType: string.isRequired,
+      status: string.isRequired,
+      teamEvent: bool.isRequired,
+      club: string,
+      course: string
+    }).isRequired,
+    data: shape({
+      loading: bool,
+      players: arrayOf(EventLeaderboardCard.propTypes.data)
+    }),
+    userId: string.isRequired
   }
 
-  constructor(props) {
-    super(props)
-    props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this))
+  static defaultProps = {
+    data: {
+      loading: true,
+      players: []
+    }
   }
 
   state = { sorting: 'totalPoints' }
-
-  onNavigatorEvent = (event) => {
-    const { navigator } = this.props
-    if (event.type === 'NavBarButtonPress') {
-      if (event.id === 'cancel') {
-        navigator.dismissModal()
-      }
-    }
-  }
 
   changeSort = (sorting) => {
     this.listView.scrollTo({ x: 0, y: 0, animated: true })
@@ -73,7 +73,7 @@ class Event extends Component {
 
     return (
       <View style={styles.container}>
-        { eventHeader }
+        {eventHeader}
         <Tabs
           currentRoute={sorting}
           onChange={sort => this.changeSort(sort)}
@@ -99,62 +99,4 @@ class Event extends Component {
   }
 }
 
-const { arrayOf, shape, string, bool } = PropTypes
-
-Event.propTypes = {
-  event: shape({
-    id: string.isRequired,
-    scoringType: string.isRequired,
-    status: string.isRequired,
-    teamEvent: bool.isRequired,
-    club: string,
-    course: string
-  }).isRequired,
-  data: shape({
-    loading: bool,
-    players: arrayOf(EventLeaderboardCard.propTypes.data)
-  }),
-  userId: string.isRequired,
-  navigator: shape().isRequired
-}
-
-Event.defaultProps = {
-  data: {
-    loading: true,
-    players: []
-  }
-}
-
-const eventQuery = gql`
-  query eventQuery($eventId: ID!) {
-    players: allEventLeaderboards(
-      orderBy: position_ASC,
-      filter: { event: { id: $eventId } }
-    ) {
-      id
-      position
-      previousTotalPosition
-      totalAveragePoints
-      totalEventCount
-      totalEventPoints
-      totalPosition
-      score {
-        id
-        beers
-        eventPoints
-        kr
-        value
-        user {
-          id
-          firstName
-          lastName
-        }
-      }
-    }
-  }
-`
-
-
-export default graphql(eventQuery, {
-  options: ({ event }) => ({ variables: { eventId: event.id } })
-})(Event)
+export default withEventQuery(EventResult)

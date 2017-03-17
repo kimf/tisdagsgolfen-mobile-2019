@@ -6,7 +6,7 @@
   version "2.0.39"
   resolved "https://registry.yarnpkg.com/@types/async/-/async-2.0.39.tgz#dd078f9ce8e9fff0c9410e0595f27a1f5a97db90"
 
-"@types/graphql@^0.8.0":
+"@types/graphql@^0.8.0", "@types/graphql@^0.8.6":
   version "0.8.6"
   resolved "https://registry.yarnpkg.com/@types/graphql/-/graphql-0.8.6.tgz#b34fb880493ba835b0c067024ee70130d6f9bb68"
 
@@ -14,7 +14,13 @@
   version "0.0.33"
   resolved "https://registry.yarnpkg.com/@types/isomorphic-fetch/-/isomorphic-fetch-0.0.33.tgz#3ea1b86f8b73e6a7430d01d4dbd5b1f63fd72718"
 
-"@types/node@*":
+"@types/node-fetch@^1.6.7":
+  version "1.6.7"
+  resolved "https://registry.yarnpkg.com/@types/node-fetch/-/node-fetch-1.6.7.tgz#521078e8f0c69a158e5022005aca92d2620f6d57"
+  dependencies:
+    "@types/node" "*"
+
+"@types/node@*", "@types/node@^7.0.4":
   version "7.0.8"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-7.0.8.tgz#25e4dd804b630c916ae671233e6d71f6ce18124a"
 
@@ -2073,6 +2079,16 @@ get-caller-file@^1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/get-caller-file/-/get-caller-file-1.0.2.tgz#f702e63127e7e231c160a80c1554acb70d5047e5"
 
+get-graphql-schema@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/get-graphql-schema/-/get-graphql-schema-1.0.1.tgz#0efa2d578d38eca30c279bb16d7c9883fbb50e6f"
+  dependencies:
+    "@types/graphql" "^0.8.6"
+    "@types/node" "^7.0.4"
+    "@types/node-fetch" "^1.6.7"
+    graphql "^0.9.1"
+    node-fetch "^1.6.3"
+
 getpass@^0.1.1:
   version "0.1.6"
   resolved "https://registry.yarnpkg.com/getpass/-/getpass-0.1.6.tgz#283ffd9fc1256840875311c1b60e8c40187110e6"
@@ -2163,7 +2179,7 @@ graphql-tag@^1.2.4, graphql-tag@^1.3.1:
   version "1.3.1"
   resolved "https://registry.yarnpkg.com/graphql-tag/-/graphql-tag-1.3.1.tgz#16cdf13635f10bbc968c6f2c6265ffe883a906da"
 
-graphql@^0.9.0:
+graphql@^0.9.0, graphql@^0.9.1:
   version "0.9.1"
   resolved "https://registry.yarnpkg.com/graphql/-/graphql-0.9.1.tgz#f4d154cbec054d4a5d3b1be95f23435c09aa86c8"
   dependencies:
@@ -3360,7 +3376,7 @@ negotiator@0.6.1:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/negotiator/-/negotiator-0.6.1.tgz#2b327184e8992101177b28563fb5e7102acd0ca9"
 
-node-fetch@^1.0.1, node-fetch@^1.3.3:
+node-fetch@^1.0.1, node-fetch@^1.3.3, node-fetch@^1.6.3:
   version "1.6.3"
   resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-1.6.3.tgz#dc234edd6489982d58e8f0db4f695029abcd8c04"
   dependencies:
@@ -3761,8 +3777,8 @@ react-native-invertible-scroll-view@^1.0.0:
     react-native-scrollable-mixin "^1.0.1"
 
 react-native-navigation@next:
-  version "2.0.0-experimental.247"
-  resolved "https://registry.yarnpkg.com/react-native-navigation/-/react-native-navigation-2.0.0-experimental.247.tgz#490d2d28e0011aea2633c43a59d4dfabde903309"
+  version "2.0.0-experimental.249"
+  resolved "https://registry.yarnpkg.com/react-native-navigation/-/react-native-navigation-2.0.0-experimental.249.tgz#06be1d4bba0cfe849717840f2e59bd42c24a5f36"
   dependencies:
     lodash "4.x.x"
 
@@ -3780,9 +3796,9 @@ react-native-slowlog@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/react-native-slowlog/-/react-native-slowlog-1.0.2.tgz#5520979e3ef9d5273495d431ff3be34f02e35c89"
 
-react-native@0.42.0:
-  version "0.42.0"
-  resolved "https://registry.yarnpkg.com/react-native/-/react-native-0.42.0.tgz#59b501603a63232598fff653a36307a26010402e"
+react-native@^0.42.2:
+  version "0.42.2"
+  resolved "https://registry.yarnpkg.com/react-native/-/react-native-0.42.2.tgz#5498dc09ea75fbae86af6cf61a1f37a131a062c8"
   dependencies:
     absolute-path "^0.0.0"
     art "^0.10.0"
@@ -3958,8 +3974,8 @@ rechoir@^0.6.2:
     resolve "^1.1.6"
 
 redux-persist@^4.4.2:
-  version "4.4.2"
-  resolved "https://registry.yarnpkg.com/redux-persist/-/redux-persist-4.4.2.tgz#0e874284f3d155215d1f33f48fadfc850526618e"
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/redux-persist/-/redux-persist-4.5.0.tgz#9730c93c1e3b3782cecf68ae5f4753d65d50c2b7"
   dependencies:
     json-stringify-safe "^5.0.1"
     lodash "^4.17.4"
@@ -4588,8 +4604,8 @@ ua-parser-js@^0.7.9:
   resolved "https://registry.yarnpkg.com/ua-parser-js/-/ua-parser-js-0.7.12.tgz#04c81a99bdd5dc52263ea29d24c6bf8d4818a4bb"
 
 uglify-js@^2.6, uglify-js@^2.6.2:
-  version "2.8.12"
-  resolved "https://registry.yarnpkg.com/uglify-js/-/uglify-js-2.8.12.tgz#8a50f5d482243650b7108f6080aa3a6afe2a6c55"
+  version "2.8.13"
+  resolved "https://registry.yarnpkg.com/uglify-js/-/uglify-js-2.8.13.tgz#d0cdf02f3c661484fac601b7e723207b735a374c"
   dependencies:
     source-map "~0.5.1"
     uglify-to-browserify "~1.0.0"

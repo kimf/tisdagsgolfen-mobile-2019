@@ -1,11 +1,11 @@
 import React, { Component, PropTypes } from 'react'
 import { Alert, View, Picker } from 'react-native'
-import { graphql } from 'react-apollo'
-import gql from 'graphql-tag'
-import update from 'immutability-helper'
+import { compose } from 'react-apollo'
 
 import TGText from 'shared/TGText'
 import { pointsArray, STROKE_VALUES, PUTT_VALUES, BEER_VALUES } from 'Scoring/constants'
+import { withCreateLiveScoreMutation } from 'mutations/createLiveScoreMutation'
+import { withUpdateLiveScoreMutation } from 'mutations/updateLiveScoreMutation'
 
 const { bool, shape, number, string, func } = PropTypes
 
@@ -151,111 +151,7 @@ class ScoreInput extends Component {
   }
 }
 
-const createLiveScoreMutation = gql`
-  mutation createLiveScore(
-    $eventId: ID!,
-    $userId: ID!,
-    $holeId: ID!,
-    $extraStrokes: Int!,
-    $strokes:Int!,
-    $putts:Int!,
-    $points:Int!,
-    $beers:Int!
-  ) {
-    createLiveScore(
-      eventId:$eventId,
-      userId:$userId,
-      holeId:$holeId,
-      extraStrokes:$extraStrokes,
-      strokes:$strokes,
-      putts:$putts,
-      points:$points,
-      beers:$beers
-    ) {
-      id
-      extraStrokes
-      strokes
-      putts
-      points
-      beers
-      user {
-        id
-      }
-    }
-  }
-`
-
-const updateLiveScoreMutation = gql`
-  mutation updateLiveScore(
-    $id: ID!,
-    $extraStrokes: Int!,
-    $strokes:Int!,
-    $putts:Int!,
-    $points:Int!,
-    $beers:Int!
-  ) {
-    updateLiveScore(
-      id:$id,
-      extraStrokes:$extraStrokes,
-      strokes:$strokes,
-      putts:$putts,
-      points:$points,
-      beers:$beers
-    ) {
-      id
-      extraStrokes
-      strokes
-      putts
-      points
-      beers
-      user {
-        id
-      }
-    }
-  }
-`
-/*
-client.mutate({
-  mutation: TodoCreateMutation,
-  variables: {
-    text,
-  },
-  update: (proxy, { data: { createTodo } }) => {
-    // Read the data from our cache for this query.
-    const data = proxy.readQuery({ query: TodoAppQuery });
-    // Add our todo from the mutation to the end.
-    data.todos.push(createTodo);
-    // Write our data back to the cache.
-    proxy.writeQuery({ query: TodoAppQuery, data });
-  },
-});
-*/
-
-const WithCreateMutation = graphql(createLiveScoreMutation, {
-  props: ({ mutate }) => ({
-    createLiveScore: (eventId, userId, holeId, scoreItem) => (
-      mutate({
-        variables: { eventId, userId, holeId, ...scoreItem },
-        updateQueries: {
-          scoringHoles: (prev, { mutationResult }) => {
-            const holeIndex = prev.holes.findIndex(h => h.id === holeId)
-            const newLs = mutationResult.data.createLiveScore
-            return update(prev, {
-              holes: {
-                [holeIndex]: {
-                  liveScores: { $push: [newLs] }
-                }
-              }
-            })
-          }
-        }
-      })
-    )
-  })
-})(ScoreInput)
-
-export default graphql(updateLiveScoreMutation, {
-  props: ({ mutate }) => ({
-    updateLiveScore: scoreItem => mutate({ variables: { ...scoreItem } })
-  })
-})(WithCreateMutation)
+export default compose(
+  withCreateLiveScoreMutation,
+  withUpdateLiveScoreMutation
+)(ScoreInput)
