@@ -13,7 +13,8 @@
           "./src/graph"
         ],
         "alias": {
-          "shared": "./src/components/shared"
+          "shared": "./src/components/shared",
+          "screens": "./src/screens"
         }
       }
     ]

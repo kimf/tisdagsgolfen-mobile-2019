@@ -2,20 +2,20 @@ import React from 'react'
 import { Navigation } from 'react-native-navigation'
 import { ApolloProvider } from 'react-apollo'
 
-import Leaderboard from './Leaderboard'
-import Events from './Events'
-import Login from './Login'
-import Profile from './Profile'
+import Leaderboard from 'screens/Leaderboard'
+import Events from 'screens/Events'
+import Login from 'screens/Login'
+import Profile from 'screens/Profile'
 
-import NewEvent from './EventScreens/NewEvent'
-import EventResult from './EventScreens/EventResult'
-import SetupIndividualEvent from './EventScreens/SetupIndividualEvent'
-import SetupTeamEvent from './EventScreens/SetupTeamEvent'
-import LiveEvent from './EventScreens/LiveEvent'
+import NewEvent from 'screens/EventScreens/NewEvent'
+import EventResult from 'screens/EventScreens/EventResult'
+import SetupIndividualEvent from 'screens/EventScreens/SetupIndividualEvent'
+import SetupTeamEvent from 'screens/EventScreens/SetupTeamEvent'
+import LiveEvent from 'screens/EventScreens/LiveEvent'
 
-import NewPlayer from './NewPlayer'
+import NewPlayer from 'screens/NewPlayer'
 
-import ScoreEvent from './EventScreens/ScoreEvent'
+import ScoreEvent from 'screens/EventScreens/ScoreEvent'
 
 
 const withApollo = (WrappedComponent, store, client) => (

@@ -5,6 +5,7 @@
 	};
 	objectVersion = 48;
 	objects = {
+
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -22,25 +23,58 @@
 		140ED2AC1D01E1AD002B40FF /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		22C292D7F2B645F0A257EA0D /* libRCTOneSignal.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BDB82B1D08FE4660A5618E9F /* libRCTOneSignal.a */; };
+		4DE929B48DAB4B37801DD617 /* Akrobat-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = B957612C154C426EBD4004CC /* Akrobat-SemiBold.otf */; };
 		52151E2938354B9F90FDBC5F /* libRNCrashes.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24F6C0896BA443B2AA360D4F /* libRNCrashes.a */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		674A995FB44C46BDBE217A65 /* libReactNativeNavigation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 235F7134104D4CF898809A4A /* libReactNativeNavigation.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
+		880D8FE31F8F4B329DAC461E /* Akrobat-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = A3309C4DFC62439994DCB660 /* Akrobat-ExtraBold.otf */; };
+		9455D57804904ADBA0B89C6F /* Akrobat-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = F5C38E1F26A7450BB20122A0 /* Akrobat-Black.otf */; };
 		976885871E61B98E007FCF99 /* glf_swng.caf in Resources */ = {isa = PBXBuildFile; fileRef = 976885851E61B98E007FCF99 /* glf_swng.caf */; };
 		976885881E61B98E007FCF99 /* golfball.caf in Resources */ = {isa = PBXBuildFile; fileRef = 976885861E61B98E007FCF99 /* golfball.caf */; };
 		976D3A101E78973C0080AD93 /* MobileCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 976D3A0C1E78973C0080AD93 /* MobileCenter.framework */; };
 		976D3A111E78973C0080AD93 /* MobileCenterAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 976D3A0D1E78973C0080AD93 /* MobileCenterAnalytics.framework */; };
 		976D3A121E78973C0080AD93 /* MobileCenterCrashes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 976D3A0E1E78973C0080AD93 /* MobileCenterCrashes.framework */; };
 		976D3A131E78973C0080AD93 /* RNMobileCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 976D3A0F1E78973C0080AD93 /* RNMobileCenter.framework */; };
+		97E7EFD61E7E933700D6B3C3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
+		97E7EFD71E7E933700D6B3C3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		97E7EFD91E7E933700D6B3C3 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
+		97E7EFDA1E7E933700D6B3C3 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
+		97E7EFDB1E7E933700D6B3C3 /* MobileCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 976D3A0C1E78973C0080AD93 /* MobileCenter.framework */; };
+		97E7EFDC1E7E933700D6B3C3 /* MobileCenterCrashes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 976D3A0E1E78973C0080AD93 /* MobileCenterCrashes.framework */; };
+		97E7EFDD1E7E933700D6B3C3 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
+		97E7EFDE1E7E933700D6B3C3 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
+		97E7EFDF1E7E933700D6B3C3 /* libRCTImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302C01ABCB91800DB3ED1 /* libRCTImage.a */; };
+		97E7EFE01E7E933700D6B3C3 /* libRCTLinking.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 78C398B91ACF4ADC00677621 /* libRCTLinking.a */; };
+		97E7EFE11E7E933700D6B3C3 /* libRCTNetwork.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302DC1ABCB9D200DB3ED1 /* libRCTNetwork.a */; };
+		97E7EFE21E7E933700D6B3C3 /* libRCTSettings.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 139105C11AF99BAD00B5F7CC /* libRCTSettings.a */; };
+		97E7EFE31E7E933700D6B3C3 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
+		97E7EFE41E7E933700D6B3C3 /* libRCTVibration.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302E41ABCB9EE00DB3ED1 /* libRCTVibration.a */; };
+		97E7EFE51E7E933700D6B3C3 /* libRCTWebSocket.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 139FDEF41B06529B00C62182 /* libRCTWebSocket.a */; };
+		97E7EFE61E7E933700D6B3C3 /* MobileCenterAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 976D3A0D1E78973C0080AD93 /* MobileCenterAnalytics.framework */; };
+		97E7EFE71E7E933700D6B3C3 /* libRCTOneSignal.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BDB82B1D08FE4660A5618E9F /* libRCTOneSignal.a */; };
+		97E7EFE81E7E933700D6B3C3 /* RNMobileCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 976D3A0F1E78973C0080AD93 /* RNMobileCenter.framework */; };
+		97E7EFE91E7E933700D6B3C3 /* libReactNativeNavigation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 235F7134104D4CF898809A4A /* libReactNativeNavigation.a */; };
+		97E7EFEA1E7E933700D6B3C3 /* libRNAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E8AEFB193BA4343B00CAF2F /* libRNAnalytics.a */; };
+		97E7EFEB1E7E933700D6B3C3 /* libRNCrashes.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24F6C0896BA443B2AA360D4F /* libRNCrashes.a */; };
+		97E7EFED1E7E933700D6B3C3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
+		97E7EFEE1E7E933700D6B3C3 /* glf_swng.caf in Resources */ = {isa = PBXBuildFile; fileRef = 976885851E61B98E007FCF99 /* glf_swng.caf */; };
+		97E7EFEF1E7E933700D6B3C3 /* golfball.caf in Resources */ = {isa = PBXBuildFile; fileRef = 976885861E61B98E007FCF99 /* golfball.caf */; };
+		97E7EFF01E7E933700D6B3C3 /* MobileCenter-Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = FAE6805C153C470B92C12C06 /* MobileCenter-Config.plist */; };
+		97E7EFF11E7E933700D6B3C3 /* Akrobat-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = F5C38E1F26A7450BB20122A0 /* Akrobat-Black.otf */; };
+		97E7EFF21E7E933700D6B3C3 /* Akrobat-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 594617B60F4C4604804DE89E /* Akrobat-Bold.otf */; };
+		97E7EFF31E7E933700D6B3C3 /* Akrobat-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = A3309C4DFC62439994DCB660 /* Akrobat-ExtraBold.otf */; };
+		97E7EFF41E7E933700D6B3C3 /* Akrobat-ExtraLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = A5E7F06B881E4A49ACC69EEF /* Akrobat-ExtraLight.otf */; };
+		97E7EFF51E7E933700D6B3C3 /* Akrobat-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = F67B6BCFDDBF4686807DB901 /* Akrobat-Light.otf */; };
+		97E7EFF61E7E933700D6B3C3 /* Akrobat-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = D390D1F17C8D4328B1977544 /* Akrobat-Regular.otf */; };
+		97E7EFF71E7E933700D6B3C3 /* Akrobat-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = B957612C154C426EBD4004CC /* Akrobat-SemiBold.otf */; };
+		97E7EFF81E7E933700D6B3C3 /* Akrobat-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8ACE5F9970A74C40AE3E8BD4 /* Akrobat-Thin.otf */; };
 		9CE9A2A4927844B98C88C236 /* libRNAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E8AEFB193BA4343B00CAF2F /* libRNAnalytics.a */; };
-		9455D57804904ADBA0B89C6F /* Akrobat-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = F5C38E1F26A7450BB20122A0 /* Akrobat-Black.otf */; };
-		BFE326ACB90C48498703DA85 /* Akrobat-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 594617B60F4C4604804DE89E /* Akrobat-Bold.otf */; };
-		880D8FE31F8F4B329DAC461E /* Akrobat-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = A3309C4DFC62439994DCB660 /* Akrobat-ExtraBold.otf */; };
-		C9D1660F578C43309E94E84F /* Akrobat-ExtraLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = A5E7F06B881E4A49ACC69EEF /* Akrobat-ExtraLight.otf */; };
 		B667B7E0127448B19BDA4EA2 /* Akrobat-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = F67B6BCFDDBF4686807DB901 /* Akrobat-Light.otf */; };
-		F1E90327A23A4C5D9E6D4855 /* Akrobat-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = D390D1F17C8D4328B1977544 /* Akrobat-Regular.otf */; };
-		4DE929B48DAB4B37801DD617 /* Akrobat-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = B957612C154C426EBD4004CC /* Akrobat-SemiBold.otf */; };
+		BFE326ACB90C48498703DA85 /* Akrobat-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 594617B60F4C4604804DE89E /* Akrobat-Bold.otf */; };
+		C9D1660F578C43309E94E84F /* Akrobat-ExtraLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = A5E7F06B881E4A49ACC69EEF /* Akrobat-ExtraLight.otf */; };
 		ED3B69E79DA44F30AD35CC70 /* Akrobat-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8ACE5F9970A74C40AE3E8BD4 /* Akrobat-Thin.otf */; };
+		F1E90327A23A4C5D9E6D4855 /* Akrobat-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = D390D1F17C8D4328B1977544 /* Akrobat-Regular.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -226,6 +260,34 @@
 			remoteGlobalIDString = D8AFADBD1BEE6F3F00A4592D;
 			remoteInfo = ReactNativeNavigation;
 		};
+		97E7F0191E7E933800D6B3C3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 146833FF1AC3E56700842450 /* React.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 2D2A28131D9B038B00D4039D;
+			remoteInfo = "React-tvOS";
+		};
+		97E7F01B1E7E933800D6B3C3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 146833FF1AC3E56700842450 /* React.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3D3C06751DE3340C00C268FA;
+			remoteInfo = "yoga-tvOS";
+		};
+		97E7F01D1E7E933800D6B3C3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 146833FF1AC3E56700842450 /* React.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3D3CD9321DE5FBEE00167DC4;
+			remoteInfo = "cxxreact-tvOS";
+		};
+		97E7F01F1E7E933800D6B3C3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 146833FF1AC3E56700842450 /* React.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3D3CD9181DE5FBD800167DC4;
+			remoteInfo = "jschelpers-tvOS";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -253,9 +315,11 @@
 		235F7134104D4CF898809A4A /* libReactNativeNavigation.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libReactNativeNavigation.a; sourceTree = "<group>"; };
 		24F6C0896BA443B2AA360D4F /* libRNCrashes.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNCrashes.a; sourceTree = "<group>"; };
 		4E8AEFB193BA4343B00CAF2F /* libRNAnalytics.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNAnalytics.a; sourceTree = "<group>"; };
+		594617B60F4C4604804DE89E /* Akrobat-Bold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Akrobat-Bold.otf"; path = "../assets/fonts/Akrobat-Bold.otf"; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
+		8ACE5F9970A74C40AE3E8BD4 /* Akrobat-Thin.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Akrobat-Thin.otf"; path = "../assets/fonts/Akrobat-Thin.otf"; sourceTree = "<group>"; };
 		96DEE0B0E82E4948B20B7DF9 /* RCTOneSignal.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTOneSignal.xcodeproj; path = "../node_modules/react-native-onesignal/ios/RCTOneSignal.xcodeproj"; sourceTree = "<group>"; };
 		9715AA101E5FA23F003CFE40 /* Tisdagsgolfen.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = Tisdagsgolfen.entitlements; path = Tisdagsgolfen/Tisdagsgolfen.entitlements; sourceTree = "<group>"; };
 		976885851E61B98E007FCF99 /* glf_swng.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = glf_swng.caf; sourceTree = "<group>"; };
@@ -264,16 +328,16 @@
 		976D3A0D1E78973C0080AD93 /* MobileCenterAnalytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MobileCenterAnalytics.framework; sourceTree = "<group>"; };
 		976D3A0E1E78973C0080AD93 /* MobileCenterCrashes.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MobileCenterCrashes.framework; sourceTree = "<group>"; };
 		976D3A0F1E78973C0080AD93 /* RNMobileCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RNMobileCenter.framework; sourceTree = "<group>"; };
+		97E7EFFD1E7E933700D6B3C3 /* TisdagsgolfenStorybook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TisdagsgolfenStorybook.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		97E7EFFE1E7E933800D6B3C3 /* Tisdagsgolfen copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Tisdagsgolfen copy-Info.plist"; path = "/Users/kifr/projects/Tisdagsgolfen2017/TisdagsgolfenReactNativeApolloGraphCool/ios/Tisdagsgolfen copy-Info.plist"; sourceTree = "<absolute>"; };
+		A3309C4DFC62439994DCB660 /* Akrobat-ExtraBold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Akrobat-ExtraBold.otf"; path = "../assets/fonts/Akrobat-ExtraBold.otf"; sourceTree = "<group>"; };
+		A5E7F06B881E4A49ACC69EEF /* Akrobat-ExtraLight.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Akrobat-ExtraLight.otf"; path = "../assets/fonts/Akrobat-ExtraLight.otf"; sourceTree = "<group>"; };
+		B957612C154C426EBD4004CC /* Akrobat-SemiBold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Akrobat-SemiBold.otf"; path = "../assets/fonts/Akrobat-SemiBold.otf"; sourceTree = "<group>"; };
 		BDB82B1D08FE4660A5618E9F /* libRCTOneSignal.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTOneSignal.a; sourceTree = "<group>"; };
+		D390D1F17C8D4328B1977544 /* Akrobat-Regular.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Akrobat-Regular.otf"; path = "../assets/fonts/Akrobat-Regular.otf"; sourceTree = "<group>"; };
+		F5C38E1F26A7450BB20122A0 /* Akrobat-Black.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Akrobat-Black.otf"; path = "../assets/fonts/Akrobat-Black.otf"; sourceTree = "<group>"; };
+		F67B6BCFDDBF4686807DB901 /* Akrobat-Light.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Akrobat-Light.otf"; path = "../assets/fonts/Akrobat-Light.otf"; sourceTree = "<group>"; };
 		FAE6805C153C470B92C12C06 /* MobileCenter-Config.plist */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = text.plist.xml; name = "MobileCenter-Config.plist"; path = "Tisdagsgolfen/MobileCenter-Config.plist"; sourceTree = "<group>"; };
-		F5C38E1F26A7450BB20122A0 /* Akrobat-Black.otf */ = {isa = PBXFileReference; name = "Akrobat-Black.otf"; path = "../assets/fonts/Akrobat-Black.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		594617B60F4C4604804DE89E /* Akrobat-Bold.otf */ = {isa = PBXFileReference; name = "Akrobat-Bold.otf"; path = "../assets/fonts/Akrobat-Bold.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		A3309C4DFC62439994DCB660 /* Akrobat-ExtraBold.otf */ = {isa = PBXFileReference; name = "Akrobat-ExtraBold.otf"; path = "../assets/fonts/Akrobat-ExtraBold.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		A5E7F06B881E4A49ACC69EEF /* Akrobat-ExtraLight.otf */ = {isa = PBXFileReference; name = "Akrobat-ExtraLight.otf"; path = "../assets/fonts/Akrobat-ExtraLight.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		F67B6BCFDDBF4686807DB901 /* Akrobat-Light.otf */ = {isa = PBXFileReference; name = "Akrobat-Light.otf"; path = "../assets/fonts/Akrobat-Light.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		D390D1F17C8D4328B1977544 /* Akrobat-Regular.otf */ = {isa = PBXFileReference; name = "Akrobat-Regular.otf"; path = "../assets/fonts/Akrobat-Regular.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		B957612C154C426EBD4004CC /* Akrobat-SemiBold.otf */ = {isa = PBXFileReference; name = "Akrobat-SemiBold.otf"; path = "../assets/fonts/Akrobat-SemiBold.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		8ACE5F9970A74C40AE3E8BD4 /* Akrobat-Thin.otf */ = {isa = PBXFileReference; name = "Akrobat-Thin.otf"; path = "../assets/fonts/Akrobat-Thin.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -308,6 +372,32 @@
 				674A995FB44C46BDBE217A65 /* libReactNativeNavigation.a in Frameworks */,
 				9CE9A2A4927844B98C88C236 /* libRNAnalytics.a in Frameworks */,
 				52151E2938354B9F90FDBC5F /* libRNCrashes.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		97E7EFD81E7E933700D6B3C3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				97E7EFD91E7E933700D6B3C3 /* libReact.a in Frameworks */,
+				97E7EFDA1E7E933700D6B3C3 /* libRCTAnimation.a in Frameworks */,
+				97E7EFDB1E7E933700D6B3C3 /* MobileCenter.framework in Frameworks */,
+				97E7EFDC1E7E933700D6B3C3 /* MobileCenterCrashes.framework in Frameworks */,
+				97E7EFDD1E7E933700D6B3C3 /* libRCTActionSheet.a in Frameworks */,
+				97E7EFDE1E7E933700D6B3C3 /* libRCTGeolocation.a in Frameworks */,
+				97E7EFDF1E7E933700D6B3C3 /* libRCTImage.a in Frameworks */,
+				97E7EFE01E7E933700D6B3C3 /* libRCTLinking.a in Frameworks */,
+				97E7EFE11E7E933700D6B3C3 /* libRCTNetwork.a in Frameworks */,
+				97E7EFE21E7E933700D6B3C3 /* libRCTSettings.a in Frameworks */,
+				97E7EFE31E7E933700D6B3C3 /* libRCTText.a in Frameworks */,
+				97E7EFE41E7E933700D6B3C3 /* libRCTVibration.a in Frameworks */,
+				97E7EFE51E7E933700D6B3C3 /* libRCTWebSocket.a in Frameworks */,
+				97E7EFE61E7E933700D6B3C3 /* MobileCenterAnalytics.framework in Frameworks */,
+				97E7EFE71E7E933700D6B3C3 /* libRCTOneSignal.a in Frameworks */,
+				97E7EFE81E7E933700D6B3C3 /* RNMobileCenter.framework in Frameworks */,
+				97E7EFE91E7E933700D6B3C3 /* libReactNativeNavigation.a in Frameworks */,
+				97E7EFEA1E7E933700D6B3C3 /* libRNAnalytics.a in Frameworks */,
+				97E7EFEB1E7E933700D6B3C3 /* libRNCrashes.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -411,9 +501,13 @@
 			isa = PBXGroup;
 			children = (
 				146834041AC3E56700842450 /* libReact.a */,
+				97E7F01A1E7E933800D6B3C3 /* libReact.a */,
 				3DAD3EA51DF850E9000B6D8A /* libyoga.a */,
+				97E7F01C1E7E933800D6B3C3 /* libyoga.a */,
 				3DAD3EA91DF850E9000B6D8A /* libcxxreact.a */,
+				97E7F01E1E7E933800D6B3C3 /* libcxxreact.a */,
 				3DAD3EAD1DF850E9000B6D8A /* libjschelpers.a */,
+				97E7F0201E7E933800D6B3C3 /* libjschelpers.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -425,6 +519,21 @@
 				5E9157351DD0AC6500FF2AA8 /* libRCTAnimation-tvOS.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		64CB119AE5FE4C5892723F0F /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				F5C38E1F26A7450BB20122A0 /* Akrobat-Black.otf */,
+				594617B60F4C4604804DE89E /* Akrobat-Bold.otf */,
+				A3309C4DFC62439994DCB660 /* Akrobat-ExtraBold.otf */,
+				A5E7F06B881E4A49ACC69EEF /* Akrobat-ExtraLight.otf */,
+				F67B6BCFDDBF4686807DB901 /* Akrobat-Light.otf */,
+				D390D1F17C8D4328B1977544 /* Akrobat-Regular.otf */,
+				B957612C154C426EBD4004CC /* Akrobat-SemiBold.otf */,
+				8ACE5F9970A74C40AE3E8BD4 /* Akrobat-Thin.otf */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 		78C398B11ACF4ADC00677621 /* Products */ = {
@@ -480,6 +589,7 @@
 				976D3A0E1E78973C0080AD93 /* MobileCenterCrashes.framework */,
 				976D3A0F1E78973C0080AD93 /* RNMobileCenter.framework */,
 				64CB119AE5FE4C5892723F0F /* Resources */,
+				97E7EFFE1E7E933800D6B3C3 /* Tisdagsgolfen copy-Info.plist */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -490,6 +600,7 @@
 			children = (
 				13B07F961A680F5B00A75B9A /* Tisdagsgolfen.app */,
 				00E356EE1AD99517003FC87E /* TisdagsgolfenTests.xctest */,
+				97E7EFFD1E7E933700D6B3C3 /* TisdagsgolfenStorybook.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -524,22 +635,6 @@
 				976D4F0A1E6F6211004E2C9B /* libReactNativeNavigation.a */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		64CB119AE5FE4C5892723F0F /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				F5C38E1F26A7450BB20122A0 /* Akrobat-Black.otf */,
-				594617B60F4C4604804DE89E /* Akrobat-Bold.otf */,
-				A3309C4DFC62439994DCB660 /* Akrobat-ExtraBold.otf */,
-				A5E7F06B881E4A49ACC69EEF /* Akrobat-ExtraLight.otf */,
-				F67B6BCFDDBF4686807DB901 /* Akrobat-Light.otf */,
-				D390D1F17C8D4328B1977544 /* Akrobat-Regular.otf */,
-				B957612C154C426EBD4004CC /* Akrobat-SemiBold.otf */,
-				8ACE5F9970A74C40AE3E8BD4 /* Akrobat-Thin.otf */,
-			);
-			name = Resources;
-			path = "";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -579,6 +674,24 @@
 			name = Tisdagsgolfen;
 			productName = "Hello World";
 			productReference = 13B07F961A680F5B00A75B9A /* Tisdagsgolfen.app */;
+			productType = "com.apple.product-type.application";
+		};
+		97E7EFD41E7E933700D6B3C3 /* TisdagsgolfenStorybook */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 97E7EFFA1E7E933700D6B3C3 /* Build configuration list for PBXNativeTarget "TisdagsgolfenStorybook" */;
+			buildPhases = (
+				97E7EFD51E7E933700D6B3C3 /* Sources */,
+				97E7EFD81E7E933700D6B3C3 /* Frameworks */,
+				97E7EFEC1E7E933700D6B3C3 /* Resources */,
+				97E7EFF91E7E933700D6B3C3 /* Bundle React Native code and images */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TisdagsgolfenStorybook;
+			productName = "Hello World";
+			productReference = 97E7EFFD1E7E933700D6B3C3 /* TisdagsgolfenStorybook.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -684,6 +797,7 @@
 			targets = (
 				13B07F861A680F5B00A75B9A /* Tisdagsgolfen */,
 				00E356ED1AD99517003FC87E /* TisdagsgolfenTests */,
+				97E7EFD41E7E933700D6B3C3 /* TisdagsgolfenStorybook */,
 			);
 		};
 /* End PBXProject section */
@@ -864,6 +978,34 @@
 			remoteRef = 976D4F091E6F6211004E2C9B /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		97E7F01A1E7E933800D6B3C3 /* libReact.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libReact.a;
+			remoteRef = 97E7F0191E7E933800D6B3C3 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		97E7F01C1E7E933800D6B3C3 /* libyoga.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libyoga.a;
+			remoteRef = 97E7F01B1E7E933800D6B3C3 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		97E7F01E1E7E933800D6B3C3 /* libcxxreact.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libcxxreact.a;
+			remoteRef = 97E7F01D1E7E933800D6B3C3 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		97E7F0201E7E933800D6B3C3 /* libjschelpers.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libjschelpers.a;
+			remoteRef = 97E7F01F1E7E933800D6B3C3 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -893,10 +1035,43 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		97E7EFEC1E7E933700D6B3C3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				97E7EFED1E7E933700D6B3C3 /* Images.xcassets in Resources */,
+				97E7EFEE1E7E933700D6B3C3 /* glf_swng.caf in Resources */,
+				97E7EFEF1E7E933700D6B3C3 /* golfball.caf in Resources */,
+				97E7EFF01E7E933700D6B3C3 /* MobileCenter-Config.plist in Resources */,
+				97E7EFF11E7E933700D6B3C3 /* Akrobat-Black.otf in Resources */,
+				97E7EFF21E7E933700D6B3C3 /* Akrobat-Bold.otf in Resources */,
+				97E7EFF31E7E933700D6B3C3 /* Akrobat-ExtraBold.otf in Resources */,
+				97E7EFF41E7E933700D6B3C3 /* Akrobat-ExtraLight.otf in Resources */,
+				97E7EFF51E7E933700D6B3C3 /* Akrobat-Light.otf in Resources */,
+				97E7EFF61E7E933700D6B3C3 /* Akrobat-Regular.otf in Resources */,
+				97E7EFF71E7E933700D6B3C3 /* Akrobat-SemiBold.otf in Resources */,
+				97E7EFF81E7E933700D6B3C3 /* Akrobat-Thin.otf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
 		00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Bundle React Native code and images";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/packager/react-native-xcode.sh";
+		};
+		97E7EFF91E7E933700D6B3C3 /* Bundle React Native code and images */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -927,6 +1102,15 @@
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		97E7EFD51E7E933700D6B3C3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				97E7EFD61E7E933700D6B3C3 /* AppDelegate.m in Sources */,
+				97E7EFD71E7E933700D6B3C3 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1153,6 +1337,77 @@
 			};
 			name = Release;
 		};
+		97E7EFFB1E7E933700D6B3C3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = Tisdagsgolfen/Tisdagsgolfen.entitlements;
+				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_TEAM = 3ZCFLELL43;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+					"STORYBOOK=1",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../node_modules/react-native-onesignal/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-navigation/ios/**",
+					"$(SRCROOT)/../node_modules/mobile-center-analytics/ios/RNAnalytics",
+					"$(SRCROOT)/../node_modules/mobile-center-crashes/ios/RNCrashes",
+				);
+				INFOPLIST_FILE = TisdagsgolfenStorybookInfo.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-lc++",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = se.calces.Tisdagsgolfen;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				VERSIONING_SYSTEM = "apple-generic";
+			};
+			name = Debug;
+		};
+		97E7EFFC1E7E933700D6B3C3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = Tisdagsgolfen/Tisdagsgolfen.entitlements;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 3ZCFLELL43;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = "STORYBOOK=1";
+				HEADER_SEARCH_PATHS = (
+					"$(SRCROOT)/../node_modules/react-native-onesignal/ios/**",
+					"$(SRCROOT)/../node_modules/react-native-navigation/ios/**",
+					"$(SRCROOT)/../node_modules/mobile-center-analytics/ios/RNAnalytics",
+					"$(SRCROOT)/../node_modules/mobile-center-crashes/ios/RNCrashes",
+				);
+				INFOPLIST_FILE = TisdagsgolfenStorybookInfo.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-lc++",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = se.calces.Tisdagsgolfen;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				VERSIONING_SYSTEM = "apple-generic";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1179,6 +1434,15 @@
 			buildConfigurations = (
 				83CBBA201A601CBA00E9B192 /* Debug */,
 				83CBBA211A601CBA00E9B192 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		97E7EFFA1E7E933700D6B3C3 /* Build configuration list for PBXNativeTarget "TisdagsgolfenStorybook" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				97E7EFFB1E7E933700D6B3C3 /* Debug */,
+				97E7EFFC1E7E933700D6B3C3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

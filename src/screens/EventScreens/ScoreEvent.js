@@ -8,7 +8,7 @@ import { withScoringSessionQuery } from 'queries/scoringSessionQuery'
 
 const { shape, bool } = PropTypes
 
-class ScoreEvent extends Component {
+export class ScoreEvent extends Component {
   static scrollView = null
 
   static propTypes = {
