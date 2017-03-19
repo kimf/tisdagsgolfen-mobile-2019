@@ -6,7 +6,9 @@ const createLiveScoreMutation = gql`
   mutation createLiveScore(
     $eventId: ID!,
     $holeId: ID!,
-    $scoreSessionId: ID!,
+    $scoringSessionId: ID!,
+    $scoringPlayerId: ID,
+    $scoringTeamId: ID,
     $extraStrokes: Int!,
     $strokes:Int!,
     $putts:Int!,
@@ -16,7 +18,9 @@ const createLiveScoreMutation = gql`
     createLiveScore(
       eventId:$eventId,
       holeId:$holeId,
-      scoringSessionId:$scoreSessionId,
+      scoringSessionId:$scoringSessionId,
+      scoringPlayerId:$scoringPlayerId,
+      scoringTeamId:$scoringTeamId,
       extraStrokes:$extraStrokes,
       strokes:$strokes,
       putts:$putts,
@@ -24,12 +28,18 @@ const createLiveScoreMutation = gql`
       beers:$beers
     ) {
       id
-      extraStrokes
-      strokes
-      putts
-      points
       beers
-      scoringSession {
+      extraStrokes
+      points
+      putts
+      strokes
+      hole {
+        id
+      }
+      scoringPlayer {
+        id
+      }
+      scoringTeam {
         id
       }
     }
@@ -55,25 +65,31 @@ client.mutate({
 });
 */
 
+// ids = { eventId, holeId, scoringSessionId, (scoringPlayerId | scoringTeamId) }
+// scoreItem = { extraStrokes, strokes, putts, points, beers}
 export const withCreateLiveScoreMutation = graphql(createLiveScoreMutation, {
   props: ({ mutate }) => ({
-    createLiveScore: (eventId, userId, holeId, scoreItem) => (
-      mutate({
-        variables: { eventId, userId, holeId, ...scoreItem },
-        updateQueries: {
-          scoringHoles: (prev, { mutationResult }) => {
-            const holeIndex = prev.holes.findIndex(h => h.id === holeId)
-            const newLs = mutationResult.data.createLiveScore
-            return update(prev, {
-              holes: {
-                [holeIndex]: {
-                  liveScores: { $push: [newLs] }
+    createLiveScore: (ids, scoreItem) => mutate({
+      variables: { ...ids, ...scoreItem },
+      updateQueries: {
+        scoringSession: (prev, { mutationResult }) => {
+          // eslint-disable-next-line no-console
+          const holeIndex = prev.scoringSession.course.holes.findIndex(h => h.id === ids.holeId)
+          const newLs = mutationResult.data.createLiveScore
+          return update(prev, {
+            scoringSession: {
+              course: {
+                holes: {
+                  [holeIndex]: {
+                    liveScores: { $push: [newLs] }
+                  }
                 }
               }
-            })
-          }
+            }
+          })
         }
-      })
-    )
+      }
+    })
   })
 })
+

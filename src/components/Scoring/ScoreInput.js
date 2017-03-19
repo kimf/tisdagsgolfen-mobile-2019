@@ -7,22 +7,26 @@ import { pointsArray, STROKE_VALUES, PUTT_VALUES, BEER_VALUES } from 'Scoring/co
 import { withCreateLiveScoreMutation } from 'mutations/createLiveScoreMutation'
 import { withUpdateLiveScoreMutation } from 'mutations/updateLiveScoreMutation'
 
-const { bool, shape, number, string, func } = PropTypes
+const { bool, shape, number, string, func, oneOfType } = PropTypes
 
 class ScoreInput extends Component {
   static propTypes = {
-    playerId: string.isRequired,
-    playerName: string.isRequired,
+    itemName: string.isRequired,
     holeId: string.isRequired,
     eventId: string.isRequired,
+    playerId: string.isRequired,
+    scoringSessionId: string.isRequired,
     par: number.isRequired,
     teamEvent: bool.isRequired,
-    scoreItem: shape({
-      beers: number.isRequired,
-      strokes: number.isRequired,
-      putts: number.isRequired,
-      extraStrokes: number.isRequired
-    }).isRequired,
+    scoreItem: oneOfType([
+      bool,
+      shape({
+        beers: number.isRequired,
+        strokes: number.isRequired,
+        putts: number.isRequired,
+        extraStrokes: number.isRequired
+      })
+    ]).isRequired,
     createLiveScore: func.isRequired,
     updateLiveScore: func.isRequired,
     onClose: func.isRequired
@@ -40,10 +44,15 @@ class ScoreInput extends Component {
   state = { beers: null, strokes: null, putts: null }
 
   onCloseScoreForm = () => {
-    const { playerId, holeId, par, eventId, createLiveScore, updateLiveScore } = this.props
+    const {
+      holeId, par, teamEvent, eventId, playerId, scoringSessionId, createLiveScore, updateLiveScore
+    } = this.props
     const { extraStrokes } = this.props.scoreItem
     const { beers, strokes, putts } = this.state
     const newScoreItem = { ...this.props.scoreItem, beers, strokes, putts }
+
+    const playingId = teamEvent ? { scoringTeamId: playerId } : { scoringPlayerId: playerId }
+    const ids = { eventId, holeId, scoringSessionId, ...playingId }
 
     if (putts > strokes) {
       Alert.alert('Du verkar ha angett fler puttar än slag!')
@@ -58,7 +67,7 @@ class ScoreInput extends Component {
           if (newScoreItem.id) {
             await updateLiveScore(newScoreItem)
           } else {
-            await createLiveScore(eventId, playerId, holeId, newScoreItem)
+            await createLiveScore(ids, newScoreItem)
           }
         } catch (err) {
           // eslint-disable-next-line no-console
@@ -73,7 +82,8 @@ class ScoreInput extends Component {
   }
 
   render() {
-    const { teamEvent, playerName } = this.props
+    const { teamEvent, itemName } = this.props
+
     const putsPicker = teamEvent ? null : (
       <Picker
         style={{ flex: 1 }}
@@ -107,20 +117,9 @@ class ScoreInput extends Component {
     )
 
     return (
-      <View
-        style={{
-          paddingHorizontal: 40,
-          paddingTop: '25%',
-          position: 'absolute',
-          top: 0,
-          bottom: 0,
-          width: '100%',
-          height: 2000,
-          backgroundColor: 'rgba(0, 0, 0, 0.85)'
-        }}
-      >
+      <View>
         <View style={{ backgroundColor: 'white' }}>
-          <TGText style={{ width: '100%', padding: 10, textAlign: 'center', fontWeight: 'bold', backgroundColor: '#eee' }}>{playerName}</TGText>
+          <TGText style={{ width: '100%', padding: 10, textAlign: 'center', fontWeight: 'bold', backgroundColor: '#eee' }}>{itemName}</TGText>
           <View style={{ flexDirection: 'row' }}>
             {beersPicker}
             <Picker

@@ -3,9 +3,8 @@ import { View, ScrollView } from 'react-native'
 
 import HoleView from 'Scoring/HoleView'
 import Loading from 'shared/Loading'
-import ScoreInput from 'Scoring/ScoreInput'
 
-import scoringSessionQuery, { withScoringSessionQuery } from 'queries/scoringSessionQuery'
+import { withScoringSessionQuery } from 'queries/scoringSessionQuery'
 
 const { shape, bool } = PropTypes
 
@@ -24,8 +23,7 @@ class ScoreEvent extends Component {
     data: {
       loading: true,
       scoringSession: null
-    },
-    event: null
+    }
   }
 
   static navigatorButtons = {
@@ -68,12 +66,10 @@ class ScoreEvent extends Component {
     const scoringSession = data.scoringSession
     const teamEvent = scoringSession.event.teamEvent
 
-    const scoring = false  // tmp should be state!
-
     return (
       <View style={{ width: '100%' }}>
         <ScrollView
-          style={{ width: '100%' }}
+          style={{ width: '100%', height: '100%' }}
           ref={(sv) => { this.scrollView = sv }}
           showsHorizontalScrollIndicator={false}
           scrollEnabled
@@ -85,29 +81,19 @@ class ScoreEvent extends Component {
         >
           {scoringSession.course.holes.map((hole) => {
             const playing = teamEvent ? scoringSession.scoringTeams : scoringSession.scoringPlayers
-            const liveScores = scoringSession.liveScores.find(ls => ls.hole.id === hole.id)
             return (
               <HoleView
                 key={`hole_view_${hole.id}`}
                 hole={hole}
                 playing={playing}
-                liveScores={liveScores}
                 holesCount={scoringSession.course.holes.length}
                 event={scoringSession.event}
                 navigator={navigator}
+                scoringSessionId={scoringSession.id}
               />
             )
           })}
         </ScrollView>
-        {scoring
-          ? <ScoreInput
-            {...scoring}
-            eventId={scoringSession.event.id}
-            teamEvent={scoringSession.event.teamEvent}
-            onClose={() => { }}
-          />
-          : null
-        }
       </View>
     )
   }

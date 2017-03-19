@@ -22,6 +22,7 @@
 		"react": "~15.4.1",
 		"react-apollo": "^1.0.0-rc.2",
 		"react-native": "^0.42.2",
+		"react-native-animated-modal": "^1.0.2",
 		"react-native-calendar-datepicker": "^1.2.2",
 		"react-native-device-log": "^0.0.16",
 		"react-native-navigation": "next",
@@ -52,8 +53,7 @@
 		"jest": "19.0.2",
 		"mobile-center-analytics": "^0.3.0",
 		"mobile-center-crashes": "^0.3.0",
-		"react-test-renderer": "~15.4.0-rc.4",
-		"why-did-you-update": "^0.0.8"
+		"react-test-renderer": "~15.4.0-rc.4"
 	},
 	"rnpm": {
 		"assets": [

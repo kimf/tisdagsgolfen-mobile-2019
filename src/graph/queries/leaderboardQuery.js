@@ -2,7 +2,7 @@ import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 
 const leaderboardQuery = gql`
-  query($seasonId: ID!) {
+  query($seasonId: ID!, $userId: ID!) {
     players: allSeasonLeaderboards (
       orderBy: position_DESC
       filter: { season: { id: $seasonId } }
@@ -22,11 +22,26 @@ const leaderboardQuery = gql`
         lastName
       }
     }
+    scoringSessions: allScoringSessions (
+      filter: { scorer: { id: $userId } }
+    ) {
+      id
+      event {
+        id
+        course {
+          id
+          club
+          name
+        }
+      }
+    }
   }
 `
 
 export default leaderboardQuery
 
 export const withLeaderboardQuery = graphql(leaderboardQuery, {
-  options: ({ seasonId }) => ({ forceFetch: false, variables: { seasonId } })
+  options: ({ seasonId, userId }) => ({
+    forceFetch: false, variables: { seasonId, userId }
+  })
 })

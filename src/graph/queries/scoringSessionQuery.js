@@ -14,48 +14,49 @@ const scoringSessionQuery = gql`
           number
           par
           index
+          liveScores (
+            filter: { scoringSession: { id: $scoringSessionId } }
+          ) {
+            id
+            beers
+            extraStrokes
+            points
+            putts
+            strokes
+            hole {
+              id
+            }
+            scoringPlayer {
+              id
+            }
+            scoringTeam {
+              id
+            }
+          }
         }
       }
-      event {
-        id
-        scoringType
-        teamEvent
-      }
       scoringPlayers {
+        id
         extraStrokes
         user {
           id
           firstName
           lastName
         }
-        liveScores {
-          beers
-          extraStrokes
-          points
-          putts
-          strokes
-          hole {
-            id
-          }
-        }
       }
       scoringTeams {
+        id
         extraStrokes
         users {
           id
           firstName
           lastName
         }
-        liveScores {
-          beers
-          extraStrokes
-          points
-          putts
-          strokes
-          hole {
-            id
-          }
-        }
+      }
+      event {
+        id
+        scoringType
+        teamEvent
       }
     }
   }

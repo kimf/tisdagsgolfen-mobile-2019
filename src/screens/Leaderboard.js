@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { LogView } from 'react-native-device-log'
 import { compose } from 'react-apollo'
 
-import leaderboardQuery, { withLeaderboardQuery } from 'queries/leaderboardQuery'
+import { withLeaderboardQuery } from 'queries/leaderboardQuery'
 
 import { ranked } from 'utils'
 import withOneSignal from 'withOneSignal'
@@ -175,7 +175,7 @@ class Leaderboard extends Component {
       )
     }
 
-    const activeEvent = false
+    const activeEvent = data.scoringSessions[0]
 
     return (
       <View style={{ flex: 1, backgroundColor: 'transparent' }}>
@@ -229,11 +229,11 @@ class Leaderboard extends Component {
           onPress={() => this.props.navigator.showModal({
             screen: 'tisdagsgolfen.ScoreEvent',
             title: 'Fortsätt simma...',
-            passProps: {},
+            passProps: { scoringSessionId: activeEvent.id },
             animated: true
           })}
         >
-          FORTSÄTT AKTIV RUNDA PÅ {activeEvent.course.name.toUpperCase()}
+          FORTSÄTT AKTIV RUNDA PÅ {activeEvent.event.course.name.toUpperCase()}
         </TGText> : null}
       </View>
     )

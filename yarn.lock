@@ -3164,10 +3164,6 @@ lodash.templatesettings@^3.0.0:
     lodash._reinterpolate "^3.0.0"
     lodash.escape "^3.0.0"
 
-lodash@4.12.0:
-  version "4.12.0"
-  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.12.0.tgz#2bd6dc46a040f59e686c972ed21d93dc59053258"
-
 lodash@4.x.x, lodash@^4.0.0, lodash@^4.11.1, lodash@^4.14.0, lodash@^4.15.0, lodash@^4.16.6, lodash@^4.17.4, lodash@^4.2.0, lodash@^4.2.1, lodash@^4.3.0, lodash@^4.6.1:
   version "4.17.4"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.4.tgz#78203a4d1c328ae1d86dca6460e369b57f4055ae"
@@ -3751,6 +3747,16 @@ react-deep-force-update@^1.0.0:
     fbjs "^0.8.1"
     loose-envify "^1.1.0"
     object-assign "^4.1.0"
+
+react-native-animatable@^0.6.1:
+  version "0.6.1"
+  resolved "https://registry.yarnpkg.com/react-native-animatable/-/react-native-animatable-0.6.1.tgz#bd85023d42ad0ceb3cc98d7b490f7d6dd6ba11b0"
+
+react-native-animated-modal@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/react-native-animated-modal/-/react-native-animated-modal-1.0.2.tgz#116d860c59c3a18168995de151c40bb78d9cf535"
+  dependencies:
+    react-native-animatable "^0.6.1"
 
 react-native-calendar-datepicker@^1.2.2:
   version "1.2.2"
@@ -4734,12 +4740,6 @@ which@^1.1.1, which@^1.2.11, which@^1.2.12, which@^1.2.9:
   resolved "https://registry.yarnpkg.com/which/-/which-1.2.12.tgz#de67b5e450269f194909ef23ece4ebe416fa1192"
   dependencies:
     isexe "^1.1.1"
-
-why-did-you-update@^0.0.8:
-  version "0.0.8"
-  resolved "https://registry.yarnpkg.com/why-did-you-update/-/why-did-you-update-0.0.8.tgz#389d97dd6c147e1edbc9f5d5470d44d985c8ae38"
-  dependencies:
-    lodash "4.12.0"
 
 window-size@0.1.0:
   version "0.1.0"
