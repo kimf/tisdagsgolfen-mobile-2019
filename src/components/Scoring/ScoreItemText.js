@@ -5,7 +5,7 @@ const ScoreItemText = ({ title, textAlign, fontWeight, fontSize, dimmed }) => {
   const regularColor = fontWeight === 'bold' ? '#000' : '#555'
   const color = dimmed ? '#ccc' : regularColor
   const style = { flex: 1, textAlign, fontWeight, fontSize, color }
-  return <TGText style={style}>{`${title === 1 ? '' : title}`}</TGText>
+  return <TGText style={style}>{`${title === 0 && dimmed ? '' : title}`}</TGText>
 }
 
 ScoreItemText.propTypes = {

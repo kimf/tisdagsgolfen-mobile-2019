@@ -15,11 +15,11 @@ const deviceWidth = Dimensions.get('window').width
 const { shape, number, arrayOf, func, string } = PropTypes
 
 const CustomLayoutSpring = {
-  duration: 400,
+  duration: 500,
   create: {
-    type: LayoutAnimation.Types.spring,
-    property: LayoutAnimation.Properties.scaleXY,
-    springDamping: 0.7
+    duration: 300,
+    type: LayoutAnimation.Types.easeInEaseOut,
+    property: LayoutAnimation.Properties.opacity
   },
   update: {
     type: LayoutAnimation.Types.spring,
@@ -53,7 +53,17 @@ class HoleView extends Component {
     const { scoringId } = this.state
 
     return (
-      <View style={{ width: deviceWidth }}>
+      <View
+        style={{
+          width: deviceWidth,
+          marginTop: 22,
+          height: '100%',
+          backgroundColor: '#eee',
+          borderColor: '#fff',
+          borderRightWidth: 1,
+          borderLeftWidth: 1
+        }}
+      >
         <HoleHeader {...hole} />
         <ScorecardHeaderRow teamEvent={event.teamEvent} scoring={scoringId !== null} />
 

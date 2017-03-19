@@ -11,7 +11,6 @@ const { bool, shape, number, string, func, oneOfType } = PropTypes
 
 class ScoreInput extends Component {
   static propTypes = {
-    itemName: string.isRequired,
     holeId: string.isRequired,
     eventId: string.isRequired,
     playerId: string.isRequired,
@@ -82,7 +81,7 @@ class ScoreInput extends Component {
   }
 
   render() {
-    const { teamEvent, itemName, scoreItem } = this.props
+    const { teamEvent } = this.props
 
     const putsPicker = teamEvent ? null : (
       <Picker

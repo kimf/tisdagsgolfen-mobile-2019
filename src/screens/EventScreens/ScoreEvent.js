@@ -26,18 +26,13 @@ export class ScoreEvent extends Component {
     }
   }
 
-  static navigatorButtons = {
-    leftButtons: [
-      {
-        title: 'Avbryt',
-        id: 'cancel'
-      }
-    ]
+  static navigatorStyle = {
+    navBarHidden: true,
+    statusBarHidden: false
   }
 
   constructor(props) {
     super(props)
-    props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this))
     this.state = {
       scrollEnabled: true
     }
@@ -51,13 +46,9 @@ export class ScoreEvent extends Component {
   }
   */
 
-  onNavigatorEvent = (event) => {
-    if (event.type === 'NavBarButtonPress') {
-      if (event.id === 'cancel') {
-        // await this.props.onCancelEvent()
-        this.props.navigator.dismissAllModals({ animated: true })
-      }
-    }
+  onCancel = () => {
+    // await this.props.onCancelEvent()
+    this.props.navigator.dismissAllModals({ animated: true })
   }
 
   toggleScroll = () => {
@@ -75,7 +66,7 @@ export class ScoreEvent extends Component {
     const teamEvent = scoringSession.event.teamEvent
 
     return (
-      <View style={{ width: '100%' }}>
+      <View style={{ width: '100%', backgroundColor: '#efc' }}>
         <ScrollView
           style={{ width: '100%', height: '100%' }}
           ref={(sv) => { this.scrollView = sv }}

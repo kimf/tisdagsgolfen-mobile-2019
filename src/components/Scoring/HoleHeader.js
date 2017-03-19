@@ -2,16 +2,17 @@ import React, { PropTypes } from 'react'
 import { View } from 'react-native'
 
 import TGText from 'shared/TGText'
+import { colors } from 'styles'
 
 const HoleHeader = ({ par, number, index }) => (
-  <View style={{ flexDirection: 'row', padding: 10, backgroundColor: '#222' }}>
-    <TGText style={{ textAlign: 'left', color: 'white' }}>
+  <View style={{ flexDirection: 'row', padding: 20, backgroundColor: colors.green }}>
+    <TGText style={{ textAlign: 'left', fontSize: 20, lineHeight: 40, color: 'white' }}>
       Par {par}
     </TGText>
-    <TGText style={{ textAlign: 'center', color: 'white', flex: 1, fontSize: 24, fontWeight: 'bold' }}>
+    <TGText style={{ textAlign: 'center', color: 'white', flex: 1, fontSize: 40, lineHeight: 40, fontWeight: 'bold' }}>
       {number}
     </TGText>
-    <TGText style={{ textAlign: 'right', color: 'white' }}>
+    <TGText style={{ textAlign: 'right', fontSize: 20, lineHeight: 40, color: 'white' }}>
       Index: {index}
     </TGText>
   </View>
