@@ -38,6 +38,9 @@ export class ScoreEvent extends Component {
   constructor(props) {
     super(props)
     props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this))
+    this.state = {
+      scrollEnabled: true
+    }
   }
 
   /*
@@ -57,8 +60,13 @@ export class ScoreEvent extends Component {
     }
   }
 
+  toggleScroll = () => {
+    this.setState(state => ({ scrollEnabled: !state.scrollEnabled }))
+  }
+
   render() {
     const { data, navigator } = this.props
+    const { scrollEnabled } = this.state
     if (data.loading) {
       return <Loading text="Laddar hål och sånt..." />
     }
@@ -72,7 +80,7 @@ export class ScoreEvent extends Component {
           style={{ width: '100%', height: '100%' }}
           ref={(sv) => { this.scrollView = sv }}
           showsHorizontalScrollIndicator={false}
-          scrollEnabled
+          scrollEnabled={scrollEnabled}
           horizontal
           paging
           bounces
@@ -90,6 +98,7 @@ export class ScoreEvent extends Component {
                 event={scoringSession.event}
                 navigator={navigator}
                 scoringSessionId={scoringSession.id}
+                toggleScroll={this.toggleScroll}
               />
             )
           })}

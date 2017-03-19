@@ -82,7 +82,7 @@ class ScoreInput extends Component {
   }
 
   render() {
-    const { teamEvent, itemName } = this.props
+    const { teamEvent, itemName, scoreItem } = this.props
 
     const putsPicker = teamEvent ? null : (
       <Picker
@@ -117,34 +117,31 @@ class ScoreInput extends Component {
     )
 
     return (
-      <View>
-        <View style={{ backgroundColor: 'white' }}>
-          <TGText style={{ width: '100%', padding: 10, textAlign: 'center', fontWeight: 'bold', backgroundColor: '#eee' }}>{itemName}</TGText>
-          <View style={{ flexDirection: 'row' }}>
-            {beersPicker}
-            <Picker
-              style={{ flex: 1 }}
-              selectedValue={this.state.strokes}
-              onValueChange={strokes => this.setState({ strokes })}
-            >
-              {STROKE_VALUES.map(val => (
-                <Picker.Item
-                  key={val}
-                  value={val}
-                  label={`${val} slag`}
-                />
-              ))}
-            </Picker>
-            {putsPicker}
-          </View>
-          <TGText
-            viewStyle={{ padding: 10, width: '100%', backgroundColor: 'green' }}
-            style={{ color: '#fff', fontWeight: 'bold', textAlign: 'center' }}
-            onPress={this.onCloseScoreForm}
+      <View style={{ backgroundColor: 'white' }}>
+        <View style={{ flexDirection: 'row' }}>
+          {beersPicker}
+          <Picker
+            style={{ flex: 1 }}
+            selectedValue={this.state.strokes}
+            onValueChange={strokes => this.setState({ strokes })}
           >
-            SPARA SCORE
-          </TGText>
+            {STROKE_VALUES.map(val => (
+              <Picker.Item
+                key={val}
+                value={val}
+                label={`${val} slag`}
+              />
+            ))}
+          </Picker>
+          {putsPicker}
         </View>
+        <TGText
+          viewStyle={{ padding: 10, width: '100%', backgroundColor: 'green' }}
+          style={{ color: '#fff', fontWeight: 'bold', textAlign: 'center' }}
+          onPress={this.onCloseScoreForm}
+        >
+          SPARA SCORE
+        </TGText>
       </View>
     )
   }

@@ -3,26 +3,35 @@ import { View } from 'react-native'
 
 import TGText from 'shared/TGText'
 
-const ScorecardHeaderRow = ({ teamEvent }) => {
+const style = { paddingVertical: 10, flex: 1, textAlign: 'left' }
+
+const ScorecardHeaderRow = ({ teamEvent, scoring }) => {
   const puttsHeader = teamEvent ? null : (
-    <TGText style={{ flex: 1, textAlign: 'center' }}>PUTTAR</TGText>
+    <TGText style={style}>PUTT</TGText>
   )
   const beersHeader = teamEvent ? null : (
-    <TGText style={{ flex: 1, textAlign: 'center' }}>ÖL</TGText>
+    <TGText style={style}>ÖL</TGText>
   )
   return (
-    <View style={{ paddingVertical: 15, paddingHorizontal: 10, flexDirection: 'row', backgroundColor: '#eee' }}>
-      <TGText style={{ flex: 2 }}>SPELARE</TGText>
+    <View
+      style={{
+        flexDirection: 'row',
+        backgroundColor: '#ccc',
+        paddingHorizontal: 20
+      }}
+    >
+      <TGText style={{ ...style, flex: 2 }}>SPELARE</TGText>
       {beersHeader}
-      <TGText style={{ flex: 1, textAlign: 'center' }}>SLAG</TGText>
+      <TGText style={style}>SLAG</TGText>
       {puttsHeader}
-      <TGText style={{ flex: 1, textAlign: 'center' }}>POÄNG</TGText>
+      {scoring ? null : <TGText style={{ ...style, textAlign: 'center' }}>POÄNG</TGText>}
     </View>
   )
 }
 
 ScorecardHeaderRow.propTypes = {
-  teamEvent: PropTypes.bool.isRequired
+  teamEvent: PropTypes.bool.isRequired,
+  scoring: PropTypes.bool.isRequired
 }
 
 export default ScorecardHeaderRow
