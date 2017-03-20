@@ -1,15 +1,3 @@
-propTypes = { ...ChildThing.propTypes }
-
-#p12 vqgxruyqgk
-#onesignal app-id: 92ef9314-1d1d-4c51-99c7-f265769161da
-
-Server key
-AAAAW2IglYI:APA91bG_sByB8wyg7ruZVmxAQ-eMT1o5iXsx0JUX8AHnDadLK78JFRgd-RRm39UqSmCY3Jgaj7iZck6Aig2salP5po6ai8aJVDf9zQqD3FI4WjdNL78KXDWA2yQKXXOgVvOK7fEa_4Pf
-
-Sender ID
-392488326530
-
-
 Notification object received example:
 
 {
@@ -55,9 +43,8 @@ const FeedEntry = ({ entry, currentUser, onVote, client }) => {
   );
 };
 
-const FeedEntryWithApollo = withApollo(FeedEntry);
 
-
+# smart stuff to put in npm scripts
 
 
   "scripts": {
