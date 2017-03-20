@@ -5,7 +5,7 @@ import TGText from 'shared/TGText'
 import { colors } from 'styles'
 
 const HoleHeader = ({ par, number, index }) => (
-  <View style={{ flexDirection: 'row', padding: 20, backgroundColor: colors.green }}>
+  <View style={{ flexDirection: 'row', paddingTop: 42, padding: 20, backgroundColor: colors.green }}>
     <TGText style={{ textAlign: 'left', fontSize: 20, lineHeight: 40, color: 'white' }}>
       Par {par}
     </TGText>

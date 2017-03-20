@@ -34,7 +34,7 @@
   [RNAnalytics registerWithInitiallyEnabled:true];  // Initialize Mobile Center analytics
 
   #ifdef STORYBOOK
-    jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"storybook/index.ios" fallbackResource:nil];.
+    jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"storybook/index.ios" fallbackResource:nil];
     RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
                                                         moduleName:@"Tisdagsgolfen"
                                                  initialProperties:nil

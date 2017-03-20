@@ -5,8 +5,9 @@ import { storiesOf, action } from '@kadira/react-native-storybook'
 import TGText from 'shared/TGText'
 
 import { ScoreEvent } from 'screens/EventScreens/ScoreEvent'
+import HoleView from 'Scoring/HoleView'
 
-import NavigationBar from './NavigationBar'
+// import NavigationBar from './NavigationBar'
 import CenterView from './CenterView'
 import WithContext from '../WithContext'
 
@@ -20,10 +21,26 @@ const reduxContext = {
   store: {}
 }
 
+storiesOf('HoleView', module)
+  .addDecorator(getStory => (
+    <View style={{ flex: 1 }}>
+      <WithContext context={{ ...reduxContext }}>
+        {getStory()}
+      </WithContext>
+    </View>
+  ))
+  .add('Default', () => (
+    <HoleView
+      key={'hole_view_stringid'}
+      {...require('../holeViewProps.json')}
+      toggleScroll={action('call on prop toggleScroll')}
+      onChangeHole={action('changeHole')}
+    />
+  ))
+
 storiesOf('ScoreEvent', module)
   .addDecorator(getStory => (
     <View style={{ flex: 1 }}>
-      <NavigationBar title="SCORING" />
       <WithContext context={{ ...reduxContext }}>
         {getStory()}
       </WithContext>

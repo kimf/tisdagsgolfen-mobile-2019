@@ -5,6 +5,7 @@ import TouchableView from 'shared/TouchableView'
 import TGText from 'shared/TGText'
 import ScoreRow from 'Scoring/ScoreRow'
 import HoleHeader from 'Scoring/HoleHeader'
+import HoleFooter from 'Scoring/HoleFooter'
 import ScorecardHeaderRow from 'Scoring/ScorecardHeaderRow'
 import ScoreInput from 'Scoring/ScoreInput'
 
@@ -34,7 +35,8 @@ class HoleView extends Component {
     holesCount: number.isRequired,
     playing: arrayOf(shape()).isRequired,
     scoringSessionId: string.isRequired,
-    toggleScroll: func.isRequired
+    toggleScroll: func.isRequired,
+    onChangeHole: func.isRequired
   }
 
   state = { scoringId: null }
@@ -49,24 +51,19 @@ class HoleView extends Component {
   }
 
   render() {
-    const { event, hole, playing, holesCount, scoringSessionId } = this.props
+    const { event, hole, playing, holesCount, scoringSessionId, onChangeHole } = this.props
     const { scoringId } = this.state
 
     return (
       <View
         style={{
           width: deviceWidth,
-          marginTop: 22,
           height: '100%',
-          backgroundColor: '#eee',
-          borderColor: '#fff',
-          borderRightWidth: 1,
-          borderLeftWidth: 1
+          backgroundColor: '#eee'
         }}
       >
         <HoleHeader {...hole} />
         <ScorecardHeaderRow teamEvent={event.teamEvent} scoring={scoringId !== null} />
-
         {
           playing.map((item, index) => {
             const attrWithId = event.teamEvent ? 'scoringTeam' : 'scoringPlayer'
@@ -150,6 +147,7 @@ class HoleView extends Component {
             )
           })
         }
+        <HoleFooter number={hole.number} maxNumber={holesCount} changeHole={onChangeHole} />
       </View>
     )
   }

@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { View, ScrollView } from 'react-native'
+import { View, ScrollView, Dimensions } from 'react-native'
 
 import HoleView from 'Scoring/HoleView'
 import Loading from 'shared/Loading'
@@ -7,6 +7,7 @@ import Loading from 'shared/Loading'
 import { withScoringSessionQuery } from 'queries/scoringSessionQuery'
 
 const { shape, bool } = PropTypes
+const deviceWidth = Dimensions.get('window').width
 
 export class ScoreEvent extends Component {
   static scrollView = null
@@ -51,12 +52,16 @@ export class ScoreEvent extends Component {
     this.props.navigator.dismissAllModals({ animated: true })
   }
 
+  changeHole = (nextHole) => {
+    this.scrollView.scrollTo({ x: (nextHole * deviceWidth) - deviceWidth, animated: true })
+  }
+
   toggleScroll = () => {
     this.setState(state => ({ scrollEnabled: !state.scrollEnabled }))
   }
 
   render() {
-    const { data, navigator } = this.props
+    const { data } = this.props
     const { scrollEnabled } = this.state
     if (data.loading) {
       return <Loading text="Laddar hål och sånt..." />
@@ -87,9 +92,9 @@ export class ScoreEvent extends Component {
                 playing={playing}
                 holesCount={scoringSession.course.holes.length}
                 event={scoringSession.event}
-                navigator={navigator}
                 scoringSessionId={scoringSession.id}
                 toggleScroll={this.toggleScroll}
+                onChangeHole={this.changeHole}
               />
             )
           })}

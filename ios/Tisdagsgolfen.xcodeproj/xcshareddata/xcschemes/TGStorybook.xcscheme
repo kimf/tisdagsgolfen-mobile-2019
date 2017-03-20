@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "97E7EFD41E7E933700D6B3C3"
-               BuildableName = "TisdagsgolfenStorybook.app"
-               BlueprintName = "TisdagsgolfenStorybook"
+               BlueprintIdentifier = "970DCEAE1E7FD3670053E802"
+               BuildableName = "TGStorybook"
+               BlueprintName = "TGStorybook"
                ReferencedContainer = "container:Tisdagsgolfen.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -32,9 +32,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "97E7EFD41E7E933700D6B3C3"
-            BuildableName = "TisdagsgolfenStorybook.app"
-            BlueprintName = "TisdagsgolfenStorybook"
+            BlueprintIdentifier = "970DCEAE1E7FD3670053E802"
+            BuildableName = "TGStorybook"
+            BlueprintName = "TGStorybook"
             ReferencedContainer = "container:Tisdagsgolfen.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -55,9 +55,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "97E7EFD41E7E933700D6B3C3"
-            BuildableName = "TisdagsgolfenStorybook.app"
-            BlueprintName = "TisdagsgolfenStorybook"
+            BlueprintIdentifier = "970DCEAE1E7FD3670053E802"
+            BuildableName = "TGStorybook"
+            BlueprintName = "TGStorybook"
             ReferencedContainer = "container:Tisdagsgolfen.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -74,9 +74,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "97E7EFD41E7E933700D6B3C3"
-            BuildableName = "TisdagsgolfenStorybook.app"
-            BlueprintName = "TisdagsgolfenStorybook"
+            BlueprintIdentifier = "970DCEAE1E7FD3670053E802"
+            BuildableName = "TGStorybook"
+            BlueprintName = "TGStorybook"
             ReferencedContainer = "container:Tisdagsgolfen.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
