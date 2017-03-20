@@ -30,45 +30,45 @@
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		880D8FE31F8F4B329DAC461E /* Akrobat-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = A3309C4DFC62439994DCB660 /* Akrobat-ExtraBold.otf */; };
 		9455D57804904ADBA0B89C6F /* Akrobat-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = F5C38E1F26A7450BB20122A0 /* Akrobat-Black.otf */; };
+		972881FF1E80094F009E79AC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
+		972882001E80094F009E79AC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		972882021E80094F009E79AC /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
+		972882031E80094F009E79AC /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
+		972882041E80094F009E79AC /* MobileCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 976D3A0C1E78973C0080AD93 /* MobileCenter.framework */; };
+		972882051E80094F009E79AC /* MobileCenterCrashes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 976D3A0E1E78973C0080AD93 /* MobileCenterCrashes.framework */; };
+		972882061E80094F009E79AC /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
+		972882071E80094F009E79AC /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
+		972882081E80094F009E79AC /* libRCTImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302C01ABCB91800DB3ED1 /* libRCTImage.a */; };
+		972882091E80094F009E79AC /* libRCTLinking.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 78C398B91ACF4ADC00677621 /* libRCTLinking.a */; };
+		9728820A1E80094F009E79AC /* libRCTNetwork.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302DC1ABCB9D200DB3ED1 /* libRCTNetwork.a */; };
+		9728820B1E80094F009E79AC /* libRCTSettings.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 139105C11AF99BAD00B5F7CC /* libRCTSettings.a */; };
+		9728820C1E80094F009E79AC /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
+		9728820D1E80094F009E79AC /* libRCTVibration.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302E41ABCB9EE00DB3ED1 /* libRCTVibration.a */; };
+		9728820E1E80094F009E79AC /* libRCTWebSocket.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 139FDEF41B06529B00C62182 /* libRCTWebSocket.a */; };
+		9728820F1E80094F009E79AC /* MobileCenterAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 976D3A0D1E78973C0080AD93 /* MobileCenterAnalytics.framework */; };
+		972882101E80094F009E79AC /* libRCTOneSignal.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BDB82B1D08FE4660A5618E9F /* libRCTOneSignal.a */; };
+		972882111E80094F009E79AC /* RNMobileCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 976D3A0F1E78973C0080AD93 /* RNMobileCenter.framework */; };
+		972882121E80094F009E79AC /* libReactNativeNavigation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 235F7134104D4CF898809A4A /* libReactNativeNavigation.a */; };
+		972882131E80094F009E79AC /* libRNAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E8AEFB193BA4343B00CAF2F /* libRNAnalytics.a */; };
+		972882141E80094F009E79AC /* libRNCrashes.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24F6C0896BA443B2AA360D4F /* libRNCrashes.a */; };
+		972882161E80094F009E79AC /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
+		972882171E80094F009E79AC /* glf_swng.caf in Resources */ = {isa = PBXBuildFile; fileRef = 976885851E61B98E007FCF99 /* glf_swng.caf */; };
+		972882181E80094F009E79AC /* golfball.caf in Resources */ = {isa = PBXBuildFile; fileRef = 976885861E61B98E007FCF99 /* golfball.caf */; };
+		972882191E80094F009E79AC /* MobileCenter-Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = FAE6805C153C470B92C12C06 /* MobileCenter-Config.plist */; };
+		9728821A1E80094F009E79AC /* Akrobat-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = F5C38E1F26A7450BB20122A0 /* Akrobat-Black.otf */; };
+		9728821B1E80094F009E79AC /* Akrobat-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 594617B60F4C4604804DE89E /* Akrobat-Bold.otf */; };
+		9728821C1E80094F009E79AC /* Akrobat-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = A3309C4DFC62439994DCB660 /* Akrobat-ExtraBold.otf */; };
+		9728821D1E80094F009E79AC /* Akrobat-ExtraLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = A5E7F06B881E4A49ACC69EEF /* Akrobat-ExtraLight.otf */; };
+		9728821E1E80094F009E79AC /* Akrobat-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = F67B6BCFDDBF4686807DB901 /* Akrobat-Light.otf */; };
+		9728821F1E80094F009E79AC /* Akrobat-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = D390D1F17C8D4328B1977544 /* Akrobat-Regular.otf */; };
+		972882201E80094F009E79AC /* Akrobat-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = B957612C154C426EBD4004CC /* Akrobat-SemiBold.otf */; };
+		972882211E80094F009E79AC /* Akrobat-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8ACE5F9970A74C40AE3E8BD4 /* Akrobat-Thin.otf */; };
 		976885871E61B98E007FCF99 /* glf_swng.caf in Resources */ = {isa = PBXBuildFile; fileRef = 976885851E61B98E007FCF99 /* glf_swng.caf */; };
 		976885881E61B98E007FCF99 /* golfball.caf in Resources */ = {isa = PBXBuildFile; fileRef = 976885861E61B98E007FCF99 /* golfball.caf */; };
 		976D3A101E78973C0080AD93 /* MobileCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 976D3A0C1E78973C0080AD93 /* MobileCenter.framework */; };
 		976D3A111E78973C0080AD93 /* MobileCenterAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 976D3A0D1E78973C0080AD93 /* MobileCenterAnalytics.framework */; };
 		976D3A121E78973C0080AD93 /* MobileCenterCrashes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 976D3A0E1E78973C0080AD93 /* MobileCenterCrashes.framework */; };
 		976D3A131E78973C0080AD93 /* RNMobileCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 976D3A0F1E78973C0080AD93 /* RNMobileCenter.framework */; };
-		97E7EFD61E7E933700D6B3C3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
-		97E7EFD71E7E933700D6B3C3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		97E7EFD91E7E933700D6B3C3 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
-		97E7EFDA1E7E933700D6B3C3 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
-		97E7EFDB1E7E933700D6B3C3 /* MobileCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 976D3A0C1E78973C0080AD93 /* MobileCenter.framework */; };
-		97E7EFDC1E7E933700D6B3C3 /* MobileCenterCrashes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 976D3A0E1E78973C0080AD93 /* MobileCenterCrashes.framework */; };
-		97E7EFDD1E7E933700D6B3C3 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
-		97E7EFDE1E7E933700D6B3C3 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
-		97E7EFDF1E7E933700D6B3C3 /* libRCTImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302C01ABCB91800DB3ED1 /* libRCTImage.a */; };
-		97E7EFE01E7E933700D6B3C3 /* libRCTLinking.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 78C398B91ACF4ADC00677621 /* libRCTLinking.a */; };
-		97E7EFE11E7E933700D6B3C3 /* libRCTNetwork.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302DC1ABCB9D200DB3ED1 /* libRCTNetwork.a */; };
-		97E7EFE21E7E933700D6B3C3 /* libRCTSettings.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 139105C11AF99BAD00B5F7CC /* libRCTSettings.a */; };
-		97E7EFE31E7E933700D6B3C3 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
-		97E7EFE41E7E933700D6B3C3 /* libRCTVibration.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302E41ABCB9EE00DB3ED1 /* libRCTVibration.a */; };
-		97E7EFE51E7E933700D6B3C3 /* libRCTWebSocket.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 139FDEF41B06529B00C62182 /* libRCTWebSocket.a */; };
-		97E7EFE61E7E933700D6B3C3 /* MobileCenterAnalytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 976D3A0D1E78973C0080AD93 /* MobileCenterAnalytics.framework */; };
-		97E7EFE71E7E933700D6B3C3 /* libRCTOneSignal.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BDB82B1D08FE4660A5618E9F /* libRCTOneSignal.a */; };
-		97E7EFE81E7E933700D6B3C3 /* RNMobileCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 976D3A0F1E78973C0080AD93 /* RNMobileCenter.framework */; };
-		97E7EFE91E7E933700D6B3C3 /* libReactNativeNavigation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 235F7134104D4CF898809A4A /* libReactNativeNavigation.a */; };
-		97E7EFEA1E7E933700D6B3C3 /* libRNAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E8AEFB193BA4343B00CAF2F /* libRNAnalytics.a */; };
-		97E7EFEB1E7E933700D6B3C3 /* libRNCrashes.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24F6C0896BA443B2AA360D4F /* libRNCrashes.a */; };
-		97E7EFED1E7E933700D6B3C3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
-		97E7EFEE1E7E933700D6B3C3 /* glf_swng.caf in Resources */ = {isa = PBXBuildFile; fileRef = 976885851E61B98E007FCF99 /* glf_swng.caf */; };
-		97E7EFEF1E7E933700D6B3C3 /* golfball.caf in Resources */ = {isa = PBXBuildFile; fileRef = 976885861E61B98E007FCF99 /* golfball.caf */; };
-		97E7EFF01E7E933700D6B3C3 /* MobileCenter-Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = FAE6805C153C470B92C12C06 /* MobileCenter-Config.plist */; };
-		97E7EFF11E7E933700D6B3C3 /* Akrobat-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = F5C38E1F26A7450BB20122A0 /* Akrobat-Black.otf */; };
-		97E7EFF21E7E933700D6B3C3 /* Akrobat-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 594617B60F4C4604804DE89E /* Akrobat-Bold.otf */; };
-		97E7EFF31E7E933700D6B3C3 /* Akrobat-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = A3309C4DFC62439994DCB660 /* Akrobat-ExtraBold.otf */; };
-		97E7EFF41E7E933700D6B3C3 /* Akrobat-ExtraLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = A5E7F06B881E4A49ACC69EEF /* Akrobat-ExtraLight.otf */; };
-		97E7EFF51E7E933700D6B3C3 /* Akrobat-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = F67B6BCFDDBF4686807DB901 /* Akrobat-Light.otf */; };
-		97E7EFF61E7E933700D6B3C3 /* Akrobat-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = D390D1F17C8D4328B1977544 /* Akrobat-Regular.otf */; };
-		97E7EFF71E7E933700D6B3C3 /* Akrobat-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = B957612C154C426EBD4004CC /* Akrobat-SemiBold.otf */; };
-		97E7EFF81E7E933700D6B3C3 /* Akrobat-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8ACE5F9970A74C40AE3E8BD4 /* Akrobat-Thin.otf */; };
 		9CE9A2A4927844B98C88C236 /* libRNAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E8AEFB193BA4343B00CAF2F /* libRNAnalytics.a */; };
 		B667B7E0127448B19BDA4EA2 /* Akrobat-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = F67B6BCFDDBF4686807DB901 /* Akrobat-Light.otf */; };
 		BFE326ACB90C48498703DA85 /* Akrobat-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 594617B60F4C4604804DE89E /* Akrobat-Bold.otf */; };
@@ -322,14 +322,14 @@
 		8ACE5F9970A74C40AE3E8BD4 /* Akrobat-Thin.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Akrobat-Thin.otf"; path = "../assets/fonts/Akrobat-Thin.otf"; sourceTree = "<group>"; };
 		96DEE0B0E82E4948B20B7DF9 /* RCTOneSignal.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTOneSignal.xcodeproj; path = "../node_modules/react-native-onesignal/ios/RCTOneSignal.xcodeproj"; sourceTree = "<group>"; };
 		9715AA101E5FA23F003CFE40 /* Tisdagsgolfen.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = Tisdagsgolfen.entitlements; path = Tisdagsgolfen/Tisdagsgolfen.entitlements; sourceTree = "<group>"; };
+		972882261E80094F009E79AC /* TGStorybook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TGStorybook.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		972882281E8009A0009E79AC /* TGStorybookInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TGStorybookInfo.plist; sourceTree = "<group>"; };
 		976885851E61B98E007FCF99 /* glf_swng.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = glf_swng.caf; sourceTree = "<group>"; };
 		976885861E61B98E007FCF99 /* golfball.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = golfball.caf; sourceTree = "<group>"; };
 		976D3A0C1E78973C0080AD93 /* MobileCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MobileCenter.framework; sourceTree = "<group>"; };
 		976D3A0D1E78973C0080AD93 /* MobileCenterAnalytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MobileCenterAnalytics.framework; sourceTree = "<group>"; };
 		976D3A0E1E78973C0080AD93 /* MobileCenterCrashes.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MobileCenterCrashes.framework; sourceTree = "<group>"; };
 		976D3A0F1E78973C0080AD93 /* RNMobileCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RNMobileCenter.framework; sourceTree = "<group>"; };
-		97E7EFFD1E7E933700D6B3C3 /* TisdagsgolfenStorybook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TisdagsgolfenStorybook.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		97E7EFFE1E7E933800D6B3C3 /* Tisdagsgolfen copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Tisdagsgolfen copy-Info.plist"; path = "/Users/kifr/projects/Tisdagsgolfen2017/TisdagsgolfenReactNativeApolloGraphCool/ios/Tisdagsgolfen copy-Info.plist"; sourceTree = "<absolute>"; };
 		A3309C4DFC62439994DCB660 /* Akrobat-ExtraBold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Akrobat-ExtraBold.otf"; path = "../assets/fonts/Akrobat-ExtraBold.otf"; sourceTree = "<group>"; };
 		A5E7F06B881E4A49ACC69EEF /* Akrobat-ExtraLight.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Akrobat-ExtraLight.otf"; path = "../assets/fonts/Akrobat-ExtraLight.otf"; sourceTree = "<group>"; };
 		B957612C154C426EBD4004CC /* Akrobat-SemiBold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Akrobat-SemiBold.otf"; path = "../assets/fonts/Akrobat-SemiBold.otf"; sourceTree = "<group>"; };
@@ -375,29 +375,29 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		97E7EFD81E7E933700D6B3C3 /* Frameworks */ = {
+		972882011E80094F009E79AC /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				97E7EFD91E7E933700D6B3C3 /* libReact.a in Frameworks */,
-				97E7EFDA1E7E933700D6B3C3 /* libRCTAnimation.a in Frameworks */,
-				97E7EFDB1E7E933700D6B3C3 /* MobileCenter.framework in Frameworks */,
-				97E7EFDC1E7E933700D6B3C3 /* MobileCenterCrashes.framework in Frameworks */,
-				97E7EFDD1E7E933700D6B3C3 /* libRCTActionSheet.a in Frameworks */,
-				97E7EFDE1E7E933700D6B3C3 /* libRCTGeolocation.a in Frameworks */,
-				97E7EFDF1E7E933700D6B3C3 /* libRCTImage.a in Frameworks */,
-				97E7EFE01E7E933700D6B3C3 /* libRCTLinking.a in Frameworks */,
-				97E7EFE11E7E933700D6B3C3 /* libRCTNetwork.a in Frameworks */,
-				97E7EFE21E7E933700D6B3C3 /* libRCTSettings.a in Frameworks */,
-				97E7EFE31E7E933700D6B3C3 /* libRCTText.a in Frameworks */,
-				97E7EFE41E7E933700D6B3C3 /* libRCTVibration.a in Frameworks */,
-				97E7EFE51E7E933700D6B3C3 /* libRCTWebSocket.a in Frameworks */,
-				97E7EFE61E7E933700D6B3C3 /* MobileCenterAnalytics.framework in Frameworks */,
-				97E7EFE71E7E933700D6B3C3 /* libRCTOneSignal.a in Frameworks */,
-				97E7EFE81E7E933700D6B3C3 /* RNMobileCenter.framework in Frameworks */,
-				97E7EFE91E7E933700D6B3C3 /* libReactNativeNavigation.a in Frameworks */,
-				97E7EFEA1E7E933700D6B3C3 /* libRNAnalytics.a in Frameworks */,
-				97E7EFEB1E7E933700D6B3C3 /* libRNCrashes.a in Frameworks */,
+				972882021E80094F009E79AC /* libReact.a in Frameworks */,
+				972882031E80094F009E79AC /* libRCTAnimation.a in Frameworks */,
+				972882041E80094F009E79AC /* MobileCenter.framework in Frameworks */,
+				972882051E80094F009E79AC /* MobileCenterCrashes.framework in Frameworks */,
+				972882061E80094F009E79AC /* libRCTActionSheet.a in Frameworks */,
+				972882071E80094F009E79AC /* libRCTGeolocation.a in Frameworks */,
+				972882081E80094F009E79AC /* libRCTImage.a in Frameworks */,
+				972882091E80094F009E79AC /* libRCTLinking.a in Frameworks */,
+				9728820A1E80094F009E79AC /* libRCTNetwork.a in Frameworks */,
+				9728820B1E80094F009E79AC /* libRCTSettings.a in Frameworks */,
+				9728820C1E80094F009E79AC /* libRCTText.a in Frameworks */,
+				9728820D1E80094F009E79AC /* libRCTVibration.a in Frameworks */,
+				9728820E1E80094F009E79AC /* libRCTWebSocket.a in Frameworks */,
+				9728820F1E80094F009E79AC /* MobileCenterAnalytics.framework in Frameworks */,
+				972882101E80094F009E79AC /* libRCTOneSignal.a in Frameworks */,
+				972882111E80094F009E79AC /* RNMobileCenter.framework in Frameworks */,
+				972882121E80094F009E79AC /* libReactNativeNavigation.a in Frameworks */,
+				972882131E80094F009E79AC /* libRNAnalytics.a in Frameworks */,
+				972882141E80094F009E79AC /* libRNCrashes.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -524,6 +524,7 @@
 		64CB119AE5FE4C5892723F0F /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				972882281E8009A0009E79AC /* TGStorybookInfo.plist */,
 				F5C38E1F26A7450BB20122A0 /* Akrobat-Black.otf */,
 				594617B60F4C4604804DE89E /* Akrobat-Bold.otf */,
 				A3309C4DFC62439994DCB660 /* Akrobat-ExtraBold.otf */,
@@ -589,7 +590,6 @@
 				976D3A0E1E78973C0080AD93 /* MobileCenterCrashes.framework */,
 				976D3A0F1E78973C0080AD93 /* RNMobileCenter.framework */,
 				64CB119AE5FE4C5892723F0F /* Resources */,
-				97E7EFFE1E7E933800D6B3C3 /* Tisdagsgolfen copy-Info.plist */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -600,7 +600,7 @@
 			children = (
 				13B07F961A680F5B00A75B9A /* Tisdagsgolfen.app */,
 				00E356EE1AD99517003FC87E /* TisdagsgolfenTests.xctest */,
-				97E7EFFD1E7E933700D6B3C3 /* TisdagsgolfenStorybook.app */,
+				972882261E80094F009E79AC /* TGStorybook.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -676,22 +676,22 @@
 			productReference = 13B07F961A680F5B00A75B9A /* Tisdagsgolfen.app */;
 			productType = "com.apple.product-type.application";
 		};
-		97E7EFD41E7E933700D6B3C3 /* TisdagsgolfenStorybook */ = {
+		972881FD1E80094F009E79AC /* TGStorybook */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 97E7EFFA1E7E933700D6B3C3 /* Build configuration list for PBXNativeTarget "TisdagsgolfenStorybook" */;
+			buildConfigurationList = 972882231E80094F009E79AC /* Build configuration list for PBXNativeTarget "TGStorybook" */;
 			buildPhases = (
-				97E7EFD51E7E933700D6B3C3 /* Sources */,
-				97E7EFD81E7E933700D6B3C3 /* Frameworks */,
-				97E7EFEC1E7E933700D6B3C3 /* Resources */,
-				97E7EFF91E7E933700D6B3C3 /* Bundle React Native code and images */,
+				972881FE1E80094F009E79AC /* Sources */,
+				972882011E80094F009E79AC /* Frameworks */,
+				972882151E80094F009E79AC /* Resources */,
+				972882221E80094F009E79AC /* Bundle React Native code and images */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = TisdagsgolfenStorybook;
+			name = TGStorybook;
 			productName = "Hello World";
-			productReference = 97E7EFFD1E7E933700D6B3C3 /* TisdagsgolfenStorybook.app */;
+			productReference = 972882261E80094F009E79AC /* TGStorybook.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -797,7 +797,7 @@
 			targets = (
 				13B07F861A680F5B00A75B9A /* Tisdagsgolfen */,
 				00E356ED1AD99517003FC87E /* TisdagsgolfenTests */,
-				97E7EFD41E7E933700D6B3C3 /* TisdagsgolfenStorybook */,
+				972881FD1E80094F009E79AC /* TGStorybook */,
 			);
 		};
 /* End PBXProject section */
@@ -1035,22 +1035,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		97E7EFEC1E7E933700D6B3C3 /* Resources */ = {
+		972882151E80094F009E79AC /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				97E7EFED1E7E933700D6B3C3 /* Images.xcassets in Resources */,
-				97E7EFEE1E7E933700D6B3C3 /* glf_swng.caf in Resources */,
-				97E7EFEF1E7E933700D6B3C3 /* golfball.caf in Resources */,
-				97E7EFF01E7E933700D6B3C3 /* MobileCenter-Config.plist in Resources */,
-				97E7EFF11E7E933700D6B3C3 /* Akrobat-Black.otf in Resources */,
-				97E7EFF21E7E933700D6B3C3 /* Akrobat-Bold.otf in Resources */,
-				97E7EFF31E7E933700D6B3C3 /* Akrobat-ExtraBold.otf in Resources */,
-				97E7EFF41E7E933700D6B3C3 /* Akrobat-ExtraLight.otf in Resources */,
-				97E7EFF51E7E933700D6B3C3 /* Akrobat-Light.otf in Resources */,
-				97E7EFF61E7E933700D6B3C3 /* Akrobat-Regular.otf in Resources */,
-				97E7EFF71E7E933700D6B3C3 /* Akrobat-SemiBold.otf in Resources */,
-				97E7EFF81E7E933700D6B3C3 /* Akrobat-Thin.otf in Resources */,
+				972882161E80094F009E79AC /* Images.xcassets in Resources */,
+				972882171E80094F009E79AC /* glf_swng.caf in Resources */,
+				972882181E80094F009E79AC /* golfball.caf in Resources */,
+				972882191E80094F009E79AC /* MobileCenter-Config.plist in Resources */,
+				9728821A1E80094F009E79AC /* Akrobat-Black.otf in Resources */,
+				9728821B1E80094F009E79AC /* Akrobat-Bold.otf in Resources */,
+				9728821C1E80094F009E79AC /* Akrobat-ExtraBold.otf in Resources */,
+				9728821D1E80094F009E79AC /* Akrobat-ExtraLight.otf in Resources */,
+				9728821E1E80094F009E79AC /* Akrobat-Light.otf in Resources */,
+				9728821F1E80094F009E79AC /* Akrobat-Regular.otf in Resources */,
+				972882201E80094F009E79AC /* Akrobat-SemiBold.otf in Resources */,
+				972882211E80094F009E79AC /* Akrobat-Thin.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1071,7 +1071,7 @@
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/packager/react-native-xcode.sh";
 		};
-		97E7EFF91E7E933700D6B3C3 /* Bundle React Native code and images */ = {
+		972882221E80094F009E79AC /* Bundle React Native code and images */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1105,12 +1105,12 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		97E7EFD51E7E933700D6B3C3 /* Sources */ = {
+		972881FE1E80094F009E79AC /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				97E7EFD61E7E933700D6B3C3 /* AppDelegate.m in Sources */,
-				97E7EFD71E7E933700D6B3C3 /* main.m in Sources */,
+				972881FF1E80094F009E79AC /* AppDelegate.m in Sources */,
+				972882001E80094F009E79AC /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1337,7 +1337,7 @@
 			};
 			name = Release;
 		};
-		97E7EFFB1E7E933700D6B3C3 /* Debug */ = {
+		972882241E80094F009E79AC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1350,7 +1350,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = (
 					"DEBUG=1",
 					"$(inherited)",
 					"STORYBOOK=1",
@@ -1361,7 +1361,7 @@
 					"$(SRCROOT)/../node_modules/mobile-center-analytics/ios/RNAnalytics",
 					"$(SRCROOT)/../node_modules/mobile-center-crashes/ios/RNCrashes",
 				);
-				INFOPLIST_FILE = TisdagsgolfenStorybookInfo.plist;
+				INFOPLIST_FILE = TGStorybookInfo.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -1375,7 +1375,7 @@
 			};
 			name = Debug;
 		};
-		97E7EFFC1E7E933700D6B3C3 /* Release */ = {
+		972882251E80094F009E79AC /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1394,7 +1394,7 @@
 					"$(SRCROOT)/../node_modules/mobile-center-analytics/ios/RNAnalytics",
 					"$(SRCROOT)/../node_modules/mobile-center-crashes/ios/RNCrashes",
 				);
-				INFOPLIST_FILE = TisdagsgolfenStorybookInfo.plist;
+				INFOPLIST_FILE = TGStorybookInfo.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -1438,11 +1438,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		97E7EFFA1E7E933700D6B3C3 /* Build configuration list for PBXNativeTarget "TisdagsgolfenStorybook" */ = {
+		972882231E80094F009E79AC /* Build configuration list for PBXNativeTarget "TGStorybook" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				97E7EFFB1E7E933700D6B3C3 /* Debug */,
-				97E7EFFC1E7E933700D6B3C3 /* Release */,
+				972882241E80094F009E79AC /* Debug */,
+				972882251E80094F009E79AC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

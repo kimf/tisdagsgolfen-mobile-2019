@@ -6,7 +6,7 @@ import TGText from 'shared/TGText'
 const styles = { textAlign: 'center', width: '100%', height: '100%', paddingTop: 10, fontSize: 40, color: 'white', fontWeight: 'bold' }
 
 const HoleFooter = ({ number, maxNumber, changeHole }) => (
-  <View style={{ flexDirection: 'row', height: 64, backgroundColor: '#999' }}>
+  <View style={{ flex: 1, height: 64, alignSelf: 'flex-end', flexDirection: 'row', backgroundColor: '#999' }}>
     <TGText
       viewStyle={{ flex: 1 }}
       style={styles}

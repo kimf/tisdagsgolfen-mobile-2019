@@ -14,8 +14,8 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "970DCEAE1E7FD3670053E802"
-               BuildableName = "TGStorybook"
+               BlueprintIdentifier = "972881FD1E80094F009E79AC"
+               BuildableName = "TGStorybook.app"
                BlueprintName = "TGStorybook"
                ReferencedContainer = "container:Tisdagsgolfen.xcodeproj">
             </BuildableReference>
@@ -32,8 +32,8 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "970DCEAE1E7FD3670053E802"
-            BuildableName = "TGStorybook"
+            BlueprintIdentifier = "972881FD1E80094F009E79AC"
+            BuildableName = "TGStorybook.app"
             BlueprintName = "TGStorybook"
             ReferencedContainer = "container:Tisdagsgolfen.xcodeproj">
          </BuildableReference>
@@ -55,8 +55,8 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "970DCEAE1E7FD3670053E802"
-            BuildableName = "TGStorybook"
+            BlueprintIdentifier = "972881FD1E80094F009E79AC"
+            BuildableName = "TGStorybook.app"
             BlueprintName = "TGStorybook"
             ReferencedContainer = "container:Tisdagsgolfen.xcodeproj">
          </BuildableReference>
@@ -74,8 +74,8 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "970DCEAE1E7FD3670053E802"
-            BuildableName = "TGStorybook"
+            BlueprintIdentifier = "972881FD1E80094F009E79AC"
+            BuildableName = "TGStorybook.app"
             BlueprintName = "TGStorybook"
             ReferencedContainer = "container:Tisdagsgolfen.xcodeproj">
          </BuildableReference>

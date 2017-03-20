@@ -1,32 +1,17 @@
 import React, { Component, PropTypes } from 'react'
-import { View, Dimensions, LayoutAnimation } from 'react-native'
+import { View, LayoutAnimation } from 'react-native'
 
 import TouchableView from 'shared/TouchableView'
 import TGText from 'shared/TGText'
 import ScoreRow from 'Scoring/ScoreRow'
 import HoleHeader from 'Scoring/HoleHeader'
-import HoleFooter from 'Scoring/HoleFooter'
 import ScorecardHeaderRow from 'Scoring/ScorecardHeaderRow'
 import ScoreInput from 'Scoring/ScoreInput'
 
 import { calculateExtraStrokes } from 'utils'
+import { spring } from 'animations'
 
-const deviceWidth = Dimensions.get('window').width
-
-const { shape, number, arrayOf, func, string } = PropTypes
-
-const CustomLayoutSpring = {
-  duration: 500,
-  create: {
-    duration: 300,
-    type: LayoutAnimation.Types.easeInEaseOut,
-    property: LayoutAnimation.Properties.opacity
-  },
-  update: {
-    type: LayoutAnimation.Types.spring,
-    springDamping: 0.7
-  }
-}
+const { shape, number, arrayOf, string } = PropTypes
 
 class HoleView extends Component {
   static propTypes = {
@@ -34,16 +19,13 @@ class HoleView extends Component {
     hole: shape().isRequired,
     holesCount: number.isRequired,
     playing: arrayOf(shape()).isRequired,
-    scoringSessionId: string.isRequired,
-    toggleScroll: func.isRequired,
-    onChangeHole: func.isRequired
+    scoringSessionId: string.isRequired
   }
 
   state = { scoringId: null }
 
   toggleScoring = (scoringId) => {
-    LayoutAnimation.configureNext(CustomLayoutSpring)
-    this.props.toggleScroll()
+    LayoutAnimation.configureNext(spring)
     this.setState((state) => {
       if (state.scoringId) { return { scoringId: null } }
       return { scoringId }
@@ -51,17 +33,11 @@ class HoleView extends Component {
   }
 
   render() {
-    const { event, hole, playing, holesCount, scoringSessionId, onChangeHole } = this.props
+    const { event, hole, playing, holesCount, scoringSessionId } = this.props
     const { scoringId } = this.state
 
     return (
-      <View
-        style={{
-          width: deviceWidth,
-          height: '100%',
-          backgroundColor: '#eee'
-        }}
-      >
+      <View style={{ backgroundColor: '#eee' }}>
         <HoleHeader {...hole} />
         <ScorecardHeaderRow teamEvent={event.teamEvent} scoring={scoringId !== null} />
         {
@@ -74,7 +50,7 @@ class HoleView extends Component {
               putts: 2,
               points: 0,
               beers: 0,
-              extraStrokes: calculateExtraStrokes(hole.index, item.strokes, holesCount)
+              extraStrokes: calculateExtraStrokes(hole.index, item.extraStrokes, holesCount)
             }
 
             let playerNames = null
@@ -147,7 +123,6 @@ class HoleView extends Component {
             )
           })
         }
-        <HoleFooter number={hole.number} maxNumber={holesCount} changeHole={onChangeHole} />
       </View>
     )
   }
