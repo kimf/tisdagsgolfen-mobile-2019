@@ -63,7 +63,7 @@ export class ScoreEvent extends Component {
     const playing = teamEvent ? scoringSession.scoringTeams : scoringSession.scoringPlayers
 
     return (
-      <View style={{ flex: 1, alignItems: 'stretch' }}>
+      <View style={{ flex: 1, height: '100%', alignItems: 'stretch' }}>
         <View style={{ height: deviceHeight - 64 }}>
           <HoleView
             key={`hole_view_${hole.id}`}

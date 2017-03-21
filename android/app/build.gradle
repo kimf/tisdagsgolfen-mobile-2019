@@ -83,8 +83,8 @@ def enableSeparateBuildPerCPUArchitecture = false
 def enableProguardInReleaseBuilds = false
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion '25.0.2'
+    compileSdkVersion 23
+    buildToolsVersion '25.0.0'
     defaultConfig {
         applicationId "se.calces.tisdagsgolfen"
         minSdkVersion 23
@@ -129,8 +129,6 @@ android {
 }
 
 dependencies {
-    compile project(':mobile-center-crashes')
-    compile project(':mobile-center-analytics')
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:appcompat-v7:23.0.1'
     compile 'com.facebook.react:react-native:+'

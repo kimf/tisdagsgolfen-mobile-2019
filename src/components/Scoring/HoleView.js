@@ -37,7 +37,7 @@ class HoleView extends Component {
     const { scoringId } = this.state
 
     return (
-      <View style={{ backgroundColor: '#eee' }}>
+      <View style={{ flex: 1, height: '100%', backgroundColor: '#eee' }}>
         <HoleHeader {...hole} />
         <ScorecardHeaderRow teamEvent={event.teamEvent} scoring={scoringId !== null} />
         {
