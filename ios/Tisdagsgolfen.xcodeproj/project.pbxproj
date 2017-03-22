@@ -23,13 +23,10 @@
 		140ED2AC1D01E1AD002B40FF /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		22C292D7F2B645F0A257EA0D /* libRCTOneSignal.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BDB82B1D08FE4660A5618E9F /* libRCTOneSignal.a */; };
-		4DE929B48DAB4B37801DD617 /* Akrobat-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = B957612C154C426EBD4004CC /* Akrobat-SemiBold.otf */; };
 		52151E2938354B9F90FDBC5F /* libRNCrashes.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24F6C0896BA443B2AA360D4F /* libRNCrashes.a */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		674A995FB44C46BDBE217A65 /* libReactNativeNavigation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 235F7134104D4CF898809A4A /* libReactNativeNavigation.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
-		880D8FE31F8F4B329DAC461E /* Akrobat-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = A3309C4DFC62439994DCB660 /* Akrobat-ExtraBold.otf */; };
-		9455D57804904ADBA0B89C6F /* Akrobat-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = F5C38E1F26A7450BB20122A0 /* Akrobat-Black.otf */; };
 		972881FF1E80094F009E79AC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		972882001E80094F009E79AC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		972882021E80094F009E79AC /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
@@ -55,14 +52,6 @@
 		972882171E80094F009E79AC /* glf_swng.caf in Resources */ = {isa = PBXBuildFile; fileRef = 976885851E61B98E007FCF99 /* glf_swng.caf */; };
 		972882181E80094F009E79AC /* golfball.caf in Resources */ = {isa = PBXBuildFile; fileRef = 976885861E61B98E007FCF99 /* golfball.caf */; };
 		972882191E80094F009E79AC /* MobileCenter-Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = FAE6805C153C470B92C12C06 /* MobileCenter-Config.plist */; };
-		9728821A1E80094F009E79AC /* Akrobat-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = F5C38E1F26A7450BB20122A0 /* Akrobat-Black.otf */; };
-		9728821B1E80094F009E79AC /* Akrobat-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 594617B60F4C4604804DE89E /* Akrobat-Bold.otf */; };
-		9728821C1E80094F009E79AC /* Akrobat-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = A3309C4DFC62439994DCB660 /* Akrobat-ExtraBold.otf */; };
-		9728821D1E80094F009E79AC /* Akrobat-ExtraLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = A5E7F06B881E4A49ACC69EEF /* Akrobat-ExtraLight.otf */; };
-		9728821E1E80094F009E79AC /* Akrobat-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = F67B6BCFDDBF4686807DB901 /* Akrobat-Light.otf */; };
-		9728821F1E80094F009E79AC /* Akrobat-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = D390D1F17C8D4328B1977544 /* Akrobat-Regular.otf */; };
-		972882201E80094F009E79AC /* Akrobat-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = B957612C154C426EBD4004CC /* Akrobat-SemiBold.otf */; };
-		972882211E80094F009E79AC /* Akrobat-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8ACE5F9970A74C40AE3E8BD4 /* Akrobat-Thin.otf */; };
 		976885871E61B98E007FCF99 /* glf_swng.caf in Resources */ = {isa = PBXBuildFile; fileRef = 976885851E61B98E007FCF99 /* glf_swng.caf */; };
 		976885881E61B98E007FCF99 /* golfball.caf in Resources */ = {isa = PBXBuildFile; fileRef = 976885861E61B98E007FCF99 /* golfball.caf */; };
 		976D3A101E78973C0080AD93 /* MobileCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 976D3A0C1E78973C0080AD93 /* MobileCenter.framework */; };
@@ -70,11 +59,6 @@
 		976D3A121E78973C0080AD93 /* MobileCenterCrashes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 976D3A0E1E78973C0080AD93 /* MobileCenterCrashes.framework */; };
 		976D3A131E78973C0080AD93 /* RNMobileCenter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 976D3A0F1E78973C0080AD93 /* RNMobileCenter.framework */; };
 		9CE9A2A4927844B98C88C236 /* libRNAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E8AEFB193BA4343B00CAF2F /* libRNAnalytics.a */; };
-		B667B7E0127448B19BDA4EA2 /* Akrobat-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = F67B6BCFDDBF4686807DB901 /* Akrobat-Light.otf */; };
-		BFE326ACB90C48498703DA85 /* Akrobat-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 594617B60F4C4604804DE89E /* Akrobat-Bold.otf */; };
-		C9D1660F578C43309E94E84F /* Akrobat-ExtraLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = A5E7F06B881E4A49ACC69EEF /* Akrobat-ExtraLight.otf */; };
-		ED3B69E79DA44F30AD35CC70 /* Akrobat-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8ACE5F9970A74C40AE3E8BD4 /* Akrobat-Thin.otf */; };
-		F1E90327A23A4C5D9E6D4855 /* Akrobat-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = D390D1F17C8D4328B1977544 /* Akrobat-Regular.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -260,6 +244,34 @@
 			remoteGlobalIDString = D8AFADBD1BEE6F3F00A4592D;
 			remoteInfo = ReactNativeNavigation;
 		};
+		978A59181E82CE7000CCDF96 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 146833FF1AC3E56700842450 /* React.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 2D2A28131D9B038B00D4039D;
+			remoteInfo = "React-tvOS";
+		};
+		978A591A1E82CE7000CCDF96 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 146833FF1AC3E56700842450 /* React.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3D3C06751DE3340C00C268FA;
+			remoteInfo = "yoga-tvOS";
+		};
+		978A591C1E82CE7000CCDF96 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 146833FF1AC3E56700842450 /* React.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3D3CD9321DE5FBEE00167DC4;
+			remoteInfo = "cxxreact-tvOS";
+		};
+		978A591E1E82CE7000CCDF96 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 146833FF1AC3E56700842450 /* React.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3D3CD9181DE5FBD800167DC4;
+			remoteInfo = "jschelpers-tvOS";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -287,11 +299,9 @@
 		235F7134104D4CF898809A4A /* libReactNativeNavigation.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libReactNativeNavigation.a; sourceTree = "<group>"; };
 		24F6C0896BA443B2AA360D4F /* libRNCrashes.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNCrashes.a; sourceTree = "<group>"; };
 		4E8AEFB193BA4343B00CAF2F /* libRNAnalytics.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNAnalytics.a; sourceTree = "<group>"; };
-		594617B60F4C4604804DE89E /* Akrobat-Bold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Akrobat-Bold.otf"; path = "../assets/fonts/Akrobat-Bold.otf"; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
-		8ACE5F9970A74C40AE3E8BD4 /* Akrobat-Thin.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Akrobat-Thin.otf"; path = "../assets/fonts/Akrobat-Thin.otf"; sourceTree = "<group>"; };
 		96DEE0B0E82E4948B20B7DF9 /* RCTOneSignal.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTOneSignal.xcodeproj; path = "../node_modules/react-native-onesignal/ios/RCTOneSignal.xcodeproj"; sourceTree = "<group>"; };
 		9715AA101E5FA23F003CFE40 /* Tisdagsgolfen.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = Tisdagsgolfen.entitlements; path = Tisdagsgolfen/Tisdagsgolfen.entitlements; sourceTree = "<group>"; };
 		972882261E80094F009E79AC /* TGStorybook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TGStorybook.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -302,13 +312,7 @@
 		976D3A0D1E78973C0080AD93 /* MobileCenterAnalytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MobileCenterAnalytics.framework; sourceTree = "<group>"; };
 		976D3A0E1E78973C0080AD93 /* MobileCenterCrashes.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MobileCenterCrashes.framework; sourceTree = "<group>"; };
 		976D3A0F1E78973C0080AD93 /* RNMobileCenter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = RNMobileCenter.framework; sourceTree = "<group>"; };
-		A3309C4DFC62439994DCB660 /* Akrobat-ExtraBold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Akrobat-ExtraBold.otf"; path = "../assets/fonts/Akrobat-ExtraBold.otf"; sourceTree = "<group>"; };
-		A5E7F06B881E4A49ACC69EEF /* Akrobat-ExtraLight.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Akrobat-ExtraLight.otf"; path = "../assets/fonts/Akrobat-ExtraLight.otf"; sourceTree = "<group>"; };
-		B957612C154C426EBD4004CC /* Akrobat-SemiBold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Akrobat-SemiBold.otf"; path = "../assets/fonts/Akrobat-SemiBold.otf"; sourceTree = "<group>"; };
 		BDB82B1D08FE4660A5618E9F /* libRCTOneSignal.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTOneSignal.a; sourceTree = "<group>"; };
-		D390D1F17C8D4328B1977544 /* Akrobat-Regular.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Akrobat-Regular.otf"; path = "../assets/fonts/Akrobat-Regular.otf"; sourceTree = "<group>"; };
-		F5C38E1F26A7450BB20122A0 /* Akrobat-Black.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Akrobat-Black.otf"; path = "../assets/fonts/Akrobat-Black.otf"; sourceTree = "<group>"; };
-		F67B6BCFDDBF4686807DB901 /* Akrobat-Light.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Akrobat-Light.otf"; path = "../assets/fonts/Akrobat-Light.otf"; sourceTree = "<group>"; };
 		FAE6805C153C470B92C12C06 /* MobileCenter-Config.plist */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = text.plist.xml; name = "MobileCenter-Config.plist"; path = "Tisdagsgolfen/MobileCenter-Config.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -473,9 +477,13 @@
 			isa = PBXGroup;
 			children = (
 				146834041AC3E56700842450 /* libReact.a */,
+				978A59191E82CE7000CCDF96 /* libReact.a */,
 				3DAD3EA51DF850E9000B6D8A /* libyoga.a */,
+				978A591B1E82CE7000CCDF96 /* libyoga.a */,
 				3DAD3EA91DF850E9000B6D8A /* libcxxreact.a */,
+				978A591D1E82CE7000CCDF96 /* libcxxreact.a */,
 				3DAD3EAD1DF850E9000B6D8A /* libjschelpers.a */,
+				978A591F1E82CE7000CCDF96 /* libjschelpers.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -493,14 +501,6 @@
 			isa = PBXGroup;
 			children = (
 				972882281E8009A0009E79AC /* TGStorybookInfo.plist */,
-				F5C38E1F26A7450BB20122A0 /* Akrobat-Black.otf */,
-				594617B60F4C4604804DE89E /* Akrobat-Bold.otf */,
-				A3309C4DFC62439994DCB660 /* Akrobat-ExtraBold.otf */,
-				A5E7F06B881E4A49ACC69EEF /* Akrobat-ExtraLight.otf */,
-				F67B6BCFDDBF4686807DB901 /* Akrobat-Light.otf */,
-				D390D1F17C8D4328B1977544 /* Akrobat-Regular.otf */,
-				B957612C154C426EBD4004CC /* Akrobat-SemiBold.otf */,
-				8ACE5F9970A74C40AE3E8BD4 /* Akrobat-Thin.otf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -945,6 +945,34 @@
 			remoteRef = 976D4F091E6F6211004E2C9B /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		978A59191E82CE7000CCDF96 /* libReact.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libReact.a;
+			remoteRef = 978A59181E82CE7000CCDF96 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		978A591B1E82CE7000CCDF96 /* libyoga.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libyoga.a;
+			remoteRef = 978A591A1E82CE7000CCDF96 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		978A591D1E82CE7000CCDF96 /* libcxxreact.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libcxxreact.a;
+			remoteRef = 978A591C1E82CE7000CCDF96 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		978A591F1E82CE7000CCDF96 /* libjschelpers.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libjschelpers.a;
+			remoteRef = 978A591E1E82CE7000CCDF96 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -963,14 +991,6 @@
 				976885871E61B98E007FCF99 /* glf_swng.caf in Resources */,
 				976885881E61B98E007FCF99 /* golfball.caf in Resources */,
 				0575AE6D434942188E2425F0 /* MobileCenter-Config.plist in Resources */,
-				9455D57804904ADBA0B89C6F /* Akrobat-Black.otf in Resources */,
-				BFE326ACB90C48498703DA85 /* Akrobat-Bold.otf in Resources */,
-				880D8FE31F8F4B329DAC461E /* Akrobat-ExtraBold.otf in Resources */,
-				C9D1660F578C43309E94E84F /* Akrobat-ExtraLight.otf in Resources */,
-				B667B7E0127448B19BDA4EA2 /* Akrobat-Light.otf in Resources */,
-				F1E90327A23A4C5D9E6D4855 /* Akrobat-Regular.otf in Resources */,
-				4DE929B48DAB4B37801DD617 /* Akrobat-SemiBold.otf in Resources */,
-				ED3B69E79DA44F30AD35CC70 /* Akrobat-Thin.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -982,14 +1002,6 @@
 				972882171E80094F009E79AC /* glf_swng.caf in Resources */,
 				972882181E80094F009E79AC /* golfball.caf in Resources */,
 				972882191E80094F009E79AC /* MobileCenter-Config.plist in Resources */,
-				9728821A1E80094F009E79AC /* Akrobat-Black.otf in Resources */,
-				9728821B1E80094F009E79AC /* Akrobat-Bold.otf in Resources */,
-				9728821C1E80094F009E79AC /* Akrobat-ExtraBold.otf in Resources */,
-				9728821D1E80094F009E79AC /* Akrobat-ExtraLight.otf in Resources */,
-				9728821E1E80094F009E79AC /* Akrobat-Light.otf in Resources */,
-				9728821F1E80094F009E79AC /* Akrobat-Regular.otf in Resources */,
-				972882201E80094F009E79AC /* Akrobat-SemiBold.otf in Resources */,
-				972882211E80094F009E79AC /* Akrobat-Thin.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1068,6 +1080,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				DEVELOPMENT_TEAM = 3ZCFLELL43;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -1102,6 +1115,7 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
+				DEVELOPMENT_TEAM = 3ZCFLELL43;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-navigation/ios/**",

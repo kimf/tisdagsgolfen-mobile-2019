@@ -69,7 +69,7 @@ class HoleView extends Component {
                 style={{
                   flexDirection: 'row',
                   borderBottomWidth: 1,
-                  borderBottomColor: '#eee',
+                  borderBottomColor: '#ccc',
                   backgroundColor: (scoringId && scoringId === item.id) ? '#eee' : '#fff'
                 }}
               >

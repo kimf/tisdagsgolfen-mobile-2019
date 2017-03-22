@@ -7,6 +7,9 @@ import TGText from 'shared/TGText'
 import { ScoreEvent } from 'screens/EventScreens/ScoreEvent'
 import HoleView from 'Scoring/HoleView'
 
+import NewLeaderBoard from 'screens/NewLeaderboard'
+import Login from 'screens/Login'
+
 // import NavigationBar from './NavigationBar'
 import CenterView from './CenterView'
 import WithContext from '../WithContext'
@@ -18,8 +21,18 @@ const fakeNavigator = {
 
 const reduxContext = {
   client: {},
-  store: {}
+  store: {
+    getState: () => ({ app: {} }),
+    subscribe: () => { }
+  }
 }
+
+storiesOf('NewLeaderboard', module)
+  .add('Default', () => (
+    <NewLeaderBoard
+      data={{ loading: false, scoringSession: require('../leaderboardProps.json').data }}
+    />
+  ))
 
 storiesOf('HoleView', module)
   .addDecorator(getStory => (
@@ -76,4 +89,11 @@ storiesOf('TGText', module)
     >
       HELLO BLACK BUTTON
     </TGText>
+  ))
+
+storiesOf('Login', module)
+  .add('Default', () => (
+    <WithContext context={{ ...reduxContext }}>
+      <Login />
+    </WithContext>
   ))

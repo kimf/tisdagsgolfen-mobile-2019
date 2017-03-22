@@ -6,7 +6,7 @@ import TGText from 'shared/TGText'
 const containerStyle = {
   backgroundColor: '#fff',
   alignItems: 'center',
-  justifyContent: 'flex-start',
+  justifyContent: 'center',
   flex: 1
 }
 

@@ -11,7 +11,7 @@ const { shape, string, func } = PropTypes
 class Profile extends Component {
   static navigatorButtons = {
     leftButtons: [
-      { title: 'Tillbaka', id: 'back' }
+      { icon: require('../images/close.png'), id: 'back' }
     ]
   }
 

@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet, Platform } from 'react-native'
 
 export const colors = {
   cellBorder: '#CECECE',
@@ -17,9 +17,12 @@ export const navigatorStyle = {
   navBarSubtitleColor: 'white',
   statusBarTextColorScheme: 'light',
   navBarBackgroundColor: colors.green,
-  fontFamily: 'Akrobat',
+  fontFamily: 'System',
   navBarHideOnScroll: false
 }
+
+export const NAVBAR_HEIGHT = 120
+export const STATUS_BAR_HEIGHT = Platform.select({ ios: 20, android: 24 })
 
 export default StyleSheet.create({
   /* MAIN LAYOUT PARTS */
@@ -56,16 +59,16 @@ export default StyleSheet.create({
 
   points: {
     color: 'black',
-    fontFamily: 'Akrobat',
-    fontSize: 22,
+    fontFamily: 'System',
+    fontSize: 20,
     fontWeight: '900',
     textAlign: 'right',
-    flex: 2
+    flex: 3
   },
 
   dimmerPoints: {
     color: colors.dark,
-    fontFamily: 'Akrobat',
+    fontFamily: 'System',
     fontSize: 14,
     fontWeight: '700',
     textAlign: 'center',
@@ -86,7 +89,7 @@ export default StyleSheet.create({
   },
 
   meta: {
-    fontFamily: 'Akrobat',
+    fontFamily: 'System',
     color: colors.semiDark,
     flex: 1,
     fontSize: 12,
@@ -94,7 +97,7 @@ export default StyleSheet.create({
   },
 
   metaLarger: {
-    fontFamily: 'Akrobat',
+    fontFamily: 'System',
     color: colors.semiDark,
     flex: 1,
     fontSize: 14,
@@ -103,14 +106,14 @@ export default StyleSheet.create({
 
   name: {
     color: 'black',
-    fontFamily: 'Akrobat',
+    fontFamily: 'System',
     fontWeight: '800',
     flex: 1,
     fontSize: 18
   },
 
   label: {
-    fontFamily: 'Akrobat',
+    fontFamily: 'System',
     marginTop: 10,
     marginLeft: 10,
     color: colors.dark,
@@ -118,7 +121,7 @@ export default StyleSheet.create({
   },
 
   inputField: {
-    fontFamily: 'Akrobat',
+    fontFamily: 'System',
     padding: 5,
     margin: 10,
     height: 40,
@@ -134,12 +137,12 @@ export default StyleSheet.create({
   strokeInfo: {
     flex: 1,
     textAlign: 'right',
-    fontFamily: 'Akrobat'
+    fontFamily: 'System'
   },
 
   smallLabel: {
     fontSize: 10,
-    fontFamily: 'Akrobat'
+    fontFamily: 'System'
   },
 
   sectionHeader: {
@@ -150,7 +153,7 @@ export default StyleSheet.create({
   sectionHeaderText: {
     color: colors.semiDark,
     fontSize: 12,
-    fontFamily: 'Akrobat'
+    fontFamily: 'System'
   },
 
   courserow: {
@@ -158,5 +161,9 @@ export default StyleSheet.create({
     borderColor: colors.cellBorder,
     flexDirection: 'row',
     padding: 20
+  },
+
+  navbarIcon: {
+    opacity: 0.75
   }
 })

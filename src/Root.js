@@ -3,10 +3,9 @@ import { AsyncStorage } from 'react-native'
 import { Navigation } from 'react-native-navigation'
 import deviceLog from 'react-native-device-log'
 
-import registerScreens from 'screens'
+import registerScreens from 'screens/index'
 import apolloClient from 'apolloClient'
 import configureStore from 'configureStore'
-import tabConfig from 'tabConfig'
 import { getLoggedInState } from 'actions/app'
 
 deviceLog.init(AsyncStorage, {
@@ -45,7 +44,15 @@ class Root extends Component {
     if (this.needsToCheckLogin) {
       this.store.dispatch(getLoggedInState())
     } else if (this.loggedIn) {
-      Navigation.startTabBasedApp(tabConfig)
+      Navigation.startSingleScreenApp({
+        screen: {
+          screen: 'tisdagsgolfen.Leaderboard',
+          navigatorStyle: {
+            navBarHidden: true
+          },
+          animationType: 'fade'
+        }
+      })
     } else {
       Navigation.startSingleScreenApp({
         screen: {

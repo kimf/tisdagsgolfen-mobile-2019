@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 20,
     paddingHorizontal: 10,
     color: '#fff',
-    fontFamily: 'Akrobat',
+    fontFamily: 'System',
     paddingLeft: 50
   },
   inputWrapper: {
@@ -74,7 +74,7 @@ const LoginForm = ({ email, password, changeValue, onSubmit, loggingIn }) => (
     </View>
     <TGText
       style={styles.button}
-      onPress={loggingIn ? () => { } : this.onSubmit}
+      onPress={this.onSubmit}
     >
       LOGGA IN
     </TGText>

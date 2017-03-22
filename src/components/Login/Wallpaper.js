@@ -1,7 +1,7 @@
 import React from 'react'
 import { StyleSheet, Image } from 'react-native'
 
-import bgSrc from 'images/wrapper.jpg'
+import bgSrc from 'images/wrapper.png'
 
 const styles = StyleSheet.create({
   picture: {

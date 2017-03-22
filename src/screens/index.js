@@ -15,7 +15,7 @@ import LiveEvent from 'screens/EventScreens/LiveEvent'
 
 import NewPlayer from 'screens/NewPlayer'
 
-import ScoreEvent from 'screens/EventScreens/ScoreEvent'
+import ScoreEventScreen from 'screens/EventScreens/ScoreEvent'
 
 
 const withApollo = (WrappedComponent, store, client) => (
@@ -42,11 +42,10 @@ const registerScreenWithApollo = (name, Component, store, client) => {
 const registerScreens = (store, client) => {
   // if not logged in, maybe only register this screen?
   registerScreenWithApollo('tisdagsgolfen.Login', Login, store, client)
-
-  // main tabs
   registerScreenWithApollo('tisdagsgolfen.Leaderboard', Leaderboard, store, client)
-  registerScreenWithApollo('tisdagsgolfen.Events', Events, store, client)
 
+  // modals from main view
+  registerScreenWithApollo('tisdagsgolfen.Events', Events, store, client)
   registerScreenWithApollo('tisdagsgolfen.Profile', Profile, store, client)
 
   // event sub-screens
@@ -57,7 +56,7 @@ const registerScreens = (store, client) => {
   // scoring event screens
   registerScreenWithApollo('tisdagsgolfen.SetupIndividualEvent', SetupIndividualEvent, store, client)
   registerScreenWithApollo('tisdagsgolfen.SetupTeamEvent', SetupTeamEvent, store, client)
-  registerScreenWithApollo('tisdagsgolfen.ScoreEvent', ScoreEvent, store, client)
+  registerScreenWithApollo('tisdagsgolfen.ScoreEvent', ScoreEventScreen, store, client)
 
   // misc
   registerScreenWithApollo('tisdagsgolfen.NewPlayer', NewPlayer, store, client)

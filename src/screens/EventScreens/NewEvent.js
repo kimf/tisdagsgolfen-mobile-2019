@@ -18,7 +18,7 @@ class NewEvent extends Component {
 
   static navigatorButtons = {
     leftButtons: [
-      { title: 'Avbryt', id: 'cancel' }
+      { icon: require('../../images/close.png'), id: 'cancel' }
     ]
   }
 
@@ -52,7 +52,7 @@ class NewEvent extends Component {
       <View style={styles.container}>
         {course
           ?
-            <NewEventSetup
+          <NewEventSetup
             seasonId={seasonId}
             changeCourse={this.setCourse}
             course={course}

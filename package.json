@@ -16,21 +16,20 @@
     "ios:storybook": "react-native run-ios --simulator \"iPhone 7\" --scheme TGStorybook"
   },
   "dependencies": {
-    "apollo-client": "^1.0.0-rc.4",
+    "apollo-client": "^1.0.0-rc.6",
     "babel-preset-react-native-stage-0": "^1.0.1",
     "fuse.js": "^2.6.2",
-    "graphql-tag": "^1.3.1",
+    "graphql-tag": "^1.3.2",
     "immutability-helper": "^2.1.2",
     "lodash.keys": "^4.2.0",
     "lodash.pick": "^4.4.0",
-    "moment": "^2.18.0",
+    "moment": "^2.18.1",
     "react": "~15.4.1",
     "react-apollo": "^1.0.0-rc.3",
     "react-native": "^0.42.3",
-    "react-native-animated-modal": "^1.0.2",
+    "react-native-animated-modal": "^1.1.0",
     "react-native-calendar-datepicker": "^1.2.2",
     "react-native-device-log": "^0.0.16",
-    "react-native-navigation": "next",
     "react-native-onesignal": "^3.0.3",
     "react-native-slowlog": "^1.0.2",
     "react-redux": "^5.0.3",
@@ -42,7 +41,7 @@
   },
   "devDependencies": {
     "@kadira/react-native-storybook": "^2.2.4",
-    "babel-eslint": "^7.1.1",
+    "babel-eslint": "^7.2.0",
     "babel-jest": "19.0.0",
     "babel-plugin-module-resolver": "^2.5.0",
     "babel-preset-react-native": "1.9.1",
@@ -53,18 +52,13 @@
     "eslint-plugin-graphql": "^0.7.0",
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^4.0.0",
-    "eslint-plugin-react": "^6.10.1",
+    "eslint-plugin-react": "^6.10.3",
     "eslint-plugin-react-native": "^2.3.1",
     "get-graphql-schema": "^1.0.1",
     "jest": "19.0.2",
     "mobile-center-analytics": "^0.3.0",
     "mobile-center-crashes": "^0.3.0",
     "react-test-renderer": "~15.4.0-rc.4"
-  },
-  "rnpm": {
-    "assets": [
-      "assets/fonts"
-    ]
   },
   "jest": {
     "preset": "react-native"

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Image, LayoutAnimation } from 'react-native'
+import { View, Image, LayoutAnimation, Animated } from 'react-native'
 import { connect } from 'react-redux'
 import { LogView } from 'react-native-device-log'
 import { compose } from 'react-apollo'
@@ -9,19 +9,13 @@ import { withLeaderboardQuery } from 'queries/leaderboardQuery'
 import { ranked } from 'utils'
 import withOneSignal from 'withOneSignal'
 import { changeSeason, changeSort } from 'actions/app'
-import { navigatorStyle } from 'styles'
 
+import LeaderboardHeader from 'Season/LeaderboardHeader'
 import LeaderboardCard from 'Season/LeaderboardCard'
 import SeasonPicker from 'Season/SeasonPicker'
 import Tabs from 'shared/Tabs'
 import EmptyState from 'shared/EmptyState'
-import TGText from 'shared/TGText'
-
-import ImageHeaderScrollView from 'shared/ImageHeaderScrollView'
-import TriggeringView from 'shared/TriggeringView'
-
-// eslint-disable-next-line import/no-unresolved
-import userImg from '../images/user.png'
+import BottomButton from 'shared/BottomButton'
 
 const { arrayOf, bool, func, shape, string } = React.PropTypes
 
@@ -46,7 +40,7 @@ class Leaderboard extends Component {
       players: arrayOf(LeaderboardCard.propTypes.data)
     }),
     navigator: shape({
-      setOnNavigatorEvent: func.isRequired
+      showModal: func.isRequired
     }).isRequired
   }
 
@@ -58,70 +52,21 @@ class Leaderboard extends Component {
     activeEvent: null
   }
 
-  static navigatorButtons = {
-    leftButtons: [
-      {
-        icon: userImg,
-        id: 'profile'
-      },
-      {
-        title: 'Log',
-        id: 'log'
-      }
-    ]
-  }
 
   constructor(props) {
     super(props)
-    this.setButtons()
-    props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this))
+
+    this.state = {
+      scrollY: new Animated.Value(0)
+    }
   }
 
   state = { showSeasonPicker: false, showLog: false }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.seasonId && (nextProps.seasonId !== this.props.seasonId)) {
-      this.setButtons(nextProps.seasonId)
-    }
-  }
-
-  onNavigatorEvent = (event) => {
-    if (event.type === 'NavBarButtonPress') {
-      if (event.id === 'toggleSeasonpicker') {
-        this.toggleSeasonpicker()
-        this.setButtons()
-      } else if (event.id === 'log') {
-        this.toggleLog()
-      } else if (event.id === 'profile') {
-        this.props.navigator.showModal({
-          animated: true,
-          navigatorStyle: {
-            ...navigatorStyle,
-            tabBarHidden: true
-          },
-          screen: 'tisdagsgolfen.Profile',
-          title: 'Profil'
-        })
-      }
-    }
-  }
-
-  setButtons = (newSeasonId = null) => {
-    const caret = this.state.showSeasonPicker ? '↑' : '↓'
-    const { seasons, seasonId } = this.props
-    const findId = newSeasonId || seasonId
-    const seasonName = seasons.find(s => s.id === findId).name
-    this.props.navigator.setButtons({
-      rightButtons: [{
-        title: `${seasonName} ${caret}`,
-        id: 'toggleSeasonpicker'
-      }],
-      animated: true
-    })
-  }
-
   changeSort = (sorting) => {
-    this.listView.scrollTo({ x: 0, y: 0, animated: true })
+    // TODO: Warning. The `_component` part is private api, can change!
+    // eslint-disable-next-line no-underscore-dangle
+    this.listView._component.scrollTo({ x: 0, y: 0, animated: true })
     this.props.onChangeSort(sorting)
   }
 
@@ -139,13 +84,23 @@ class Leaderboard extends Component {
     this.setState({ showLog: !this.state.showLog })
   }
 
+  showActiveEvent = () => {
+    const scoringSessionId = this.props.data.scoringSessions[0].id
+    this.props.navigator.showModal({
+      screen: 'tisdagsgolfen.ScoreEvent',
+      title: 'Fortsätt simma...',
+      passProps: { scoringSessionId },
+      animated: true
+    })
+  }
+
   render() {
     if (this.props.data.loading) {
       return null
     }
 
-    const { data, sorting, seasonId, seasons, userId } = this.props
-    const { showSeasonPicker } = this.state
+    const { data, sorting, seasonId, seasons, userId, navigator } = this.props
+    const { showSeasonPicker, showLog, scrollY } = this.state
 
     let sortedPlayers = null
 
@@ -162,9 +117,9 @@ class Leaderboard extends Component {
     const season = seasons.find(s => s.id === seasonId)
     const emptyLeaderboard = sortedPlayers.filter(sl => sl.eventCount !== 0).length === 0
     const showLeaderboardTabs = !emptyLeaderboard && parseInt(season.name, 10) > 2015
-    const showPhoto = sorting === 'totalPoints' && season.closed && season.photo.url
+    const showPhoto = season.closed && season.photo.url
 
-    if (this.state.showLog) {
+    if (showLog) {
       return (
         <LogView
           style={{ flex: 1 }}
@@ -175,7 +130,15 @@ class Leaderboard extends Component {
       )
     }
 
+    const seasonName = seasons.find(s => s.id === seasonId).name
+
     const activeEvent = data.scoringSessions[0]
+
+    const paddingTop = scrollY.interpolate({
+      inputRange: [0, showSeasonPicker ? 160 : 60],
+      outputRange: [90, 40],
+      extrapolate: 'clamp'
+    })
 
     return (
       <View style={{ flex: 1, backgroundColor: 'transparent' }}>
@@ -188,53 +151,49 @@ class Leaderboard extends Component {
           : null
         }
 
-        {showLeaderboardTabs
-          ? <Tabs
-            currentRoute={sorting}
-            onChange={sort => this.changeSort(sort)}
-          />
-          : null
-        }
+        <LeaderboardHeader
+          scrollY={scrollY}
+          toggleSeasonpicker={this.toggleSeasonpicker}
+          currentSeason={seasonName}
+          navigator={navigator}
+        />
 
         {emptyLeaderboard
-          ? <EmptyState text="Inga rundor spelade ännu" />
-          : <ImageHeaderScrollView
-            maxHeight={showPhoto ? 220 : 0}
-            minHeight={0}
+          ? <EmptyState style={{ paddingTop: 200 }} text="Inga rundor spelade ännu" />
+          : <Animated.ScrollView
+            style={[
+              { padding: 10 },
+              { transform: [{ translateY: paddingTop }] }
+            ]}
             ref={(c) => { this.listView = c }}
-            renderHeader={() => (
-              showPhoto ? (
-                <Image
-                  style={{ width: '100%', height: 220 }}
-                  source={{ uri: season.photo.url, cache: 'force-cache' }}
-                  resizeMode="cover"
-                />
-              ) : null
+            scrollEventThrottle={1}
+            stickyHeaderIndices={showLeaderboardTabs ? [0] : null}
+            onScroll={Animated.event(
+              [{ nativeEvent: { contentOffset: { y: this.state.scrollY } } }],
+              { useNativeDriver: true }
             )}
           >
-            <View style={{ height: 1000 }}>
-              <TriggeringView
-                onHide={() => { }}
-              >
-                {sortedPlayers.map(player => (
-                  <LeaderboardCard key={`l_${player.id}`} currentUserId={userId} data={player} sorting={sorting} />
-                ))}
-              </TriggeringView>
-            </View>
-          </ImageHeaderScrollView>
+            {showLeaderboardTabs
+              ? <Tabs
+                currentRoute={sorting}
+                onChange={sort => this.changeSort(sort)}
+              />
+              : null
+            }
+            {showPhoto ? <Image
+              style={{ width: '100%', height: 220 }}
+              source={{ uri: season.photo.url, cache: 'force-cache' }}
+              resizeMode="cover"
+            /> : null}
+            {sortedPlayers.map(player => (
+              <LeaderboardCard key={`l_${player.id}`} currentUserId={userId} data={player} sorting={sorting} />
+            ))}
+          </Animated.ScrollView>
         }
-        {activeEvent ? <TGText
-          viewStyle={{ backgroundColor: '#c00', marginTop: 10, paddingVertical: 20, width: '100%' }}
-          style={{ color: 'white', textAlign: 'center', fontWeight: 'bold', fontSize: 16 }}
-          onPress={() => this.props.navigator.showModal({
-            screen: 'tisdagsgolfen.ScoreEvent',
-            title: 'Fortsätt simma...',
-            passProps: { scoringSessionId: activeEvent.id },
-            animated: true
-          })}
-        >
-          FORTSÄTT AKTIV RUNDA PÅ {activeEvent.event.course.name.toUpperCase()}
-        </TGText> : null}
+        {activeEvent ? <BottomButton
+          title={`FORTSÄTT AKTIV RUNDA PÅ ${activeEvent.event.course.name.toUpperCase()}`}
+          onPress={this.showActiveEvent}
+        /> : null}
       </View>
     )
   }

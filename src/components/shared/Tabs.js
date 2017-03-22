@@ -1,21 +1,35 @@
 import React from 'react'
-import { View } from 'react-native'
+import { View, SegmentedControlIOS } from 'react-native'
 
-import Tab from 'shared/Tab'
+// import Tab from 'shared/Tab'
 
-const Tabs = ({ currentRoute, onChange, tabs, style }) => (
-  <View
-    style={{
+const Tabs = ({ currentRoute, onChange, tabs /* , style */ }) => {
+  const currentIndex = tabs.findIndex(t => t.value === currentRoute)
+  return (
+    <View style={{ width: '100%', paddingVertical: 10, flex: 1, backgroundColor: '#fff' }}>
+      <SegmentedControlIOS
+        selectedIndex={currentIndex}
+        values={tabs.map(t => t.title)}
+        onValueChange={val => onChange(tabs.find(t => t.title === val).value)}
+        tintColor="#2ECC71"
+      />
+    </View>
+  )
+}
+
+/*  < View
+style = {{
       ...style,
-      backgroundColor: '#eee',
+    backgroundColor: '#eee',
       flexDirection: 'row',
-      justifyContent: 'center',
-      alignItems: 'stretch',
-      paddingHorizontal: 5,
-      paddingVertical: 5
-    }}
+        justifyContent: 'center',
+          alignItems: 'stretch',
+            paddingHorizontal: 5,
+              paddingVertical: 5
+}}
   >
-    {tabs.map(tab =>
+  {
+    tabs.map(tab =>
       <Tab
         key={tab.value}
         tab={tab}
@@ -24,9 +38,9 @@ const Tabs = ({ currentRoute, onChange, tabs, style }) => (
         fontSize={16}
         padding={10}
       />
-    )}
-  </View>
-)
+    )
+  }
+  </View >*/
 
 const { arrayOf, string, func, shape } = React.PropTypes
 

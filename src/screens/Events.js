@@ -14,6 +14,12 @@ const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 })
 const { arrayOf, shape, bool, string } = React.PropTypes
 
 class Events extends Component {
+  static navigatorButtons = {
+    leftButtons: [
+      { icon: require('../images/white_back.png'), id: 'back' }
+    ]
+  }
+
   static propTypes = {
     data: shape({
       loading: bool,
@@ -56,10 +62,13 @@ class Events extends Component {
           },
           animated: true,
           navigatorStyle: {
-            ...navigatorStyle,
-            tabBarHidden: true
+            ...navigatorStyle
           }
         })
+      }
+
+      if (event.id === 'back') {
+        this.props.navigator.pop()
       }
     }
   }

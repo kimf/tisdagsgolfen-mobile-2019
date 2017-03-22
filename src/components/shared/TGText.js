@@ -10,7 +10,7 @@ const FONT_SIZE = 16
 const styles = StyleSheet.create({
   text: {
     fontSize: FONT_SIZE,
-    fontFamily: 'Akrobat',
+    fontFamily: 'System',
     fontWeight: '300'
   }
 })

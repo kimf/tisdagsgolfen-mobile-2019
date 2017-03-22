@@ -68,8 +68,7 @@ const EventCard = ({ event, userId, navigator }) => {
     passProps: { event, userId },
     animated: true,
     navigatorStyle: {
-      ...navigatorStyle,
-      tabBarHidden: true
+      ...navigatorStyle
     }
   }
 

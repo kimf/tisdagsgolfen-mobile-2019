@@ -6,6 +6,7 @@ import TGText from 'shared/TGText'
 const SeasonPicker = ({ seasons, currentSeasonId, onChangeSeason }) => (
   <View
     style={{
+      zIndex: 2000,
       padding: 5,
       paddingTop: 10,
       paddingBottom: 10,
