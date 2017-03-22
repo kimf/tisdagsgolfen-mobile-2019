@@ -33,14 +33,6 @@ const routes = {
 
 // eslint-disable-next-line import/prefer-default-export
 export const MainStack = StackNavigator(routes, { initialRouteName: 'Main', headerMode: 'screen', mode: 'modal' })
-/*
-NewEvent: { screen: NewEvent },
-EventResult: { screen: EventResult },
-SetupIndividualEvent: { screen: SetupIndividualEvent },
-SetupTeamEvent: { screen: SetupTeamEvent },
-LiveEvent: { screen: LiveEvent },
-NewPlayer: { screen: NewPlayer },
-*/
 
 /* path + getScreen
 Profile: {

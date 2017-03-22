@@ -1,8 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { View, ScrollView } from 'react-native'
-import { connect } from 'react-redux'
-import { compose } from 'react-apollo'
 import update from 'immutability-helper'
+import { NavigationActions } from 'react-navigation'
 
 import EventSetupPlayingCard from 'Scoring/EventSetupPlayingCard'
 import TGText from 'shared/TGText'
@@ -13,31 +12,37 @@ const { bool, shape, string, func } = PropTypes
 
 class SetupIndividualEvent extends Component {
   static propTypes = {
-    event: shape({
-      id: string.isRequired,
-      scoringType: string.isRequired,
-      status: string.isRequired,
-      teamEvent: bool.isRequired,
-      club: string,
-      course: shape({
-        id: string,
-        club: string,
-        name: string
+    navigation: shape({
+      state: shape({
+        params: shape({
+          event: shape({
+            id: string.isRequired,
+            scoringType: string.isRequired,
+            status: string.isRequired,
+            teamEvent: bool.isRequired,
+            club: string,
+            course: shape({
+              id: string,
+              club: string,
+              name: string
+            })
+          }).isRequired,
+          user: shape({
+            id: string.isRequired,
+            firstName: string.isRequired,
+            lastName: string.isRequired
+          }).isRequired
+        })
       })
     }).isRequired,
-    user: shape({
-      id: string.isRequired,
-      firstName: string.isRequired,
-      lastName: string.isRequired
-    }).isRequired,
-    navigator: shape().isRequired,
     createScoringSession: func.isRequired
   }
 
   constructor(props) {
     super(props)
+    const user = props.navigation.state.params.user
     this.state = {
-      playing: [{ ...props.user, strokes: 0 }]
+      playing: [{ ...user, strokes: 0 }]
     }
   }
 
@@ -66,17 +71,19 @@ class SetupIndividualEvent extends Component {
 
   startPlay = async () => {
     try {
-      const { event, user, createScoringSession } = this.props
+      const { event, user, createScoringSession, navigation } = this.props
       const scoringPlayers = this.state.playing.map(p => (
         { extraStrokes: p.strokes, userId: p.id }
       ))
       const res = await createScoringSession(event.id, event.course.id, user.id, scoringPlayers)
-      this.props.navigator.showModal({
-        screen: 'tisdagsgolfen.ScoreEvent',
-        title: 'Scoring...',
-        passProps: { scoringSessionId: res.data.createScoringSession.id },
-        animated: true
+
+      const resetAction = NavigationActions.reset({
+        index: 0,
+        actions: [
+          NavigationActions.navigate('ScoreEventScreen', { scoringSessionId: res.data.createScoringSession.id })
+        ]
       })
+      navigation.dispatch(resetAction)
     } catch (err) {
       // eslint-disable-next-line no-console
       console.log(err)
@@ -84,15 +91,12 @@ class SetupIndividualEvent extends Component {
   }
 
   openAddPlayer = () => {
-    this.props.navigator.showModal({
-      screen: 'tisdagsgolfen.NewPlayer',
-      title: 'Lägg till spelare',
-      passProps: {
-        event: this.props.event,
-        onAdd: this.onAddPlayer,
-        addedIds: this.state.playing.map(p => p.id)
-      }
-    })
+    this.props.navigation.navigate('NewPlayer', {
+      event: this.props.navigation.state.params.event,
+      onAdd: this.onAddPlayer,
+      addedIds: this.state.playing.map(p => p.id)
+    }
+    )
   }
 
   render() {
@@ -129,9 +133,4 @@ class SetupIndividualEvent extends Component {
   }
 }
 
-const mapStateToProps = state => ({ user: state.app.user })
-
-export default compose(
-  connect(mapStateToProps),
-  withScoringSessionMutation
-)(SetupIndividualEvent)
+export default withScoringSessionMutation(SetupIndividualEvent)

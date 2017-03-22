@@ -21,12 +21,17 @@ class NewPlayer extends Component {
         })
       )
     }),
-    team: shape({
-      id: number.isRequired
-    }),
-    addedIds: arrayOf(string).isRequired,
-    onAdd: func.isRequired,
-    navigator: shape().isRequired
+    navigation: shape({
+      state: shape({
+        params: shape({
+          team: shape({
+            id: number.isRequired
+          }),
+          addedIds: arrayOf(string).isRequired,
+          onAdd: func.isRequired
+        })
+      }).isRequired
+    }).isRequired
   }
 
   static defaultProps = {
@@ -37,40 +42,15 @@ class NewPlayer extends Component {
     }
   }
 
-  static navigatorStyle = {
-    navBarTextColor: 'white',
-    navBarBackgroundColor: '#1E98DF'
-  }
-
-  static navigatorButtons = {
-    leftButtons: [
-      {
-        title: 'Avbryt',
-        id: 'cancel'
-      }
-    ]
-  }
-
-  constructor(props) {
-    super(props)
-    props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this))
-  }
-
-  onNavigatorEvent = (event) => {
-    if (event.type === 'NavBarButtonPress') {
-      if (event.id === 'cancel') {
-        this.props.navigator.dismissModal()
-      }
-    }
-  }
 
   addPlayer = (player, team = null) => {
-    this.props.onAdd(player, team)
-    this.props.navigator.dismissModal()
+    this.props.navigation.state.params.onAdd(player, team)
+    this.props.navigation.goBack()
   }
 
   render() {
-    const { data, team, addedIds } = this.props
+    const { data } = this.props
+    const { team, addedIds } = this.props.navigation.state.params
     if (data.loading) { return null }
 
     return (

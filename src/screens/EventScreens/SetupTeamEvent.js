@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react'
 import { View, ScrollView } from 'react-native'
-import { connect } from 'react-redux'
 import update from 'immutability-helper'
 
 import EventSetupPlayingCard from 'Scoring/EventSetupPlayingCard'
@@ -10,22 +9,27 @@ const { bool, shape, string } = PropTypes
 
 class SetupTeamEvent extends Component {
   static propTypes = {
-    event: shape({
-      id: string.isRequired,
-      scoringType: string.isRequired,
-      status: string.isRequired,
-      teamEvent: bool.isRequired,
-      course: shape({
-        club: string,
-        name: string
-      })
-    }).isRequired,
-    user: shape({
-      id: string.isRequired,
-      firstName: string.isRequired,
-      lastName: string.isRequired
-    }).isRequired,
-    navigator: shape().isRequired
+    navigation: shape({
+      state: shape({
+        params: shape({
+          event: shape({
+            id: string.isRequired,
+            scoringType: string.isRequired,
+            status: string.isRequired,
+            teamEvent: bool.isRequired,
+            course: shape({
+              club: string,
+              name: string
+            })
+          }).isRequired,
+          user: shape({
+            id: string.isRequired,
+            firstName: string.isRequired,
+            lastName: string.isRequired
+          }).isRequired
+        }).isRequired
+      }).isRequired
+    }).isRequired
   }
 
   constructor(props) {
@@ -34,7 +38,7 @@ class SetupTeamEvent extends Component {
     const playing = [
       {
         id: 0,
-        players: [props.user],
+        players: [props.navigation.state.params.user],
         strokes: 0
       }
     ]
@@ -93,28 +97,17 @@ class SetupTeamEvent extends Component {
   }
 
   openAddPlayer = (team) => {
-    this.props.navigator.showModal({
-      screen: 'tisdagsgolfen.NewPlayer',
-      title: `Lägg till i Lag ${team.id + 1}`,
-      passProps: {
-        team,
-        event: this.props.event,
-        onAdd: this.onAddPlayer,
-        addedIds: [].concat(...this.state.playing.map(t => t.players)).map(p => p.id)
-      }
+    this.props.navigation.navigate('NewPlayer', {
+      team,
+      event: this.props.navigation.state.params.event,
+      onAdd: this.onAddPlayer,
+      addedIds: [].concat(...this.state.playing.map(t => t.players)).map(p => p.id),
+      title: `Lägg till i Lag ${team.id + 1}`
     })
   }
 
   startPlay = () => {
     // TODO: Save a ScoringSession here and then...->
-    this.props.navigator.showModal({
-      screen: 'tisdagsgolfen.ScoreEvent',
-      title: 'Scoring...',
-      passProps: {},
-      animated: true,
-      navigatorStyle: {}, // override the navigator style for the pushed screen (optional)
-      navigatorButtons: {} // override the nav buttons for the pushed screen (optional)
-    })
   }
 
   render() {
@@ -153,6 +146,4 @@ class SetupTeamEvent extends Component {
   }
 }
 
-const mapStateToProps = state => ({ user: state.app.user })
-
-export default connect(mapStateToProps)(SetupTeamEvent)
+export default SetupTeamEvent
