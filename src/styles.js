@@ -9,18 +9,6 @@ export const colors = {
   lightGray: '#EEEEEE'
 }
 
-export const navigatorStyle = {
-  navBarTranslucent: true,
-  drawUnderNavBar: false,
-  navBarTextColor: 'white',
-  navBarButtonColor: 'white',
-  navBarSubtitleColor: 'white',
-  statusBarTextColorScheme: 'light',
-  navBarBackgroundColor: colors.green,
-  fontFamily: 'System',
-  navBarHideOnScroll: false
-}
-
 export const NAVBAR_HEIGHT = 120
 export const STATUS_BAR_HEIGHT = Platform.select({ ios: 20, android: 24 })
 

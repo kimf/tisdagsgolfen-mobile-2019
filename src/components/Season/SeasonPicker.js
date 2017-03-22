@@ -3,6 +3,8 @@ import { View } from 'react-native'
 
 import TGText from 'shared/TGText'
 
+import { STATUS_BAR_HEIGHT } from 'styles'
+
 const SeasonPicker = ({ seasons, currentSeasonId, onChangeSeason }) => (
   <View
     style={{
@@ -10,6 +12,7 @@ const SeasonPicker = ({ seasons, currentSeasonId, onChangeSeason }) => (
       padding: 5,
       paddingTop: 10,
       paddingBottom: 10,
+      marginTop: STATUS_BAR_HEIGHT,
       backgroundColor: '#222',
       flexDirection: 'row',
       justifyContent: 'space-between'
@@ -22,7 +25,7 @@ const SeasonPicker = ({ seasons, currentSeasonId, onChangeSeason }) => (
           onPress={() => onChangeSeason(season.id)}
           key={`SeasonPicker_${season.id}`}
           viewStyle={{ flex: 1, flexDirection: 'row', justifyContent: 'center', paddingVertical: 5 }}
-          style={{ textAlign: 'center', color, fontSize: 20, fontWeight: 'bold' }}
+          style={{ textAlign: 'center', color, fontSize: 16, fontWeight: 'bold' }}
         >
           {season.name}
         </TGText>

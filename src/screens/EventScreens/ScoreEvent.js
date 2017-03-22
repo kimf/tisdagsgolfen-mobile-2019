@@ -12,12 +12,21 @@ const { shape, bool } = PropTypes
 const deviceHeight = Dimensions.get('window').height
 
 export class ScoreEvent extends Component {
+  static navigationOptions = {
+    header: () => ({
+      visible: false
+    }),
+    cardStack: {
+      gesturesEnabled: false
+    }
+  }
+
   static propTypes = {
     data: shape({
       loading: bool,
       scoringSession: shape()
     }),
-    navigator: shape().isRequired
+    navigation: shape().isRequired
   }
 
   static defaultProps = {
@@ -25,11 +34,6 @@ export class ScoreEvent extends Component {
       loading: true,
       scoringSession: null
     }
-  }
-
-  static navigatorStyle = {
-    navBarHidden: true,
-    statusBarHidden: false
   }
 
   constructor(props) {
@@ -41,7 +45,7 @@ export class ScoreEvent extends Component {
 
   onCancel = () => {
     // await this.props.onCancelEvent()
-    this.props.navigator.dismissAllModals({ animated: true })
+    this.props.navigation.goBack()
   }
 
   changeHole = (currentHole) => {

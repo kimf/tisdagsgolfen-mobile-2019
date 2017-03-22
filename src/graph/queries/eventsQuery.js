@@ -25,5 +25,7 @@ const eventsQuery = gql`
 export default eventsQuery
 
 export const withEventsQuery = graphql(eventsQuery, {
-  options: ({ seasonId }) => ({ forceFetch: false, variables: { seasonId } })
+  options: ({ navigation }) => ({
+    variables: { ...navigation.state.params }
+  })
 })

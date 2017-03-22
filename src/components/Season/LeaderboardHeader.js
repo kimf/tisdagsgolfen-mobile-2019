@@ -4,7 +4,7 @@ import { View, Image, Animated, StyleSheet } from 'react-native'
 import TGText from 'shared/TGText'
 import TouchableView from 'shared/TouchableView'
 
-import { navigatorStyle, NAVBAR_HEIGHT, STATUS_BAR_HEIGHT } from 'styles'
+import { NAVBAR_HEIGHT, STATUS_BAR_HEIGHT } from 'styles'
 
 const styles = StyleSheet.create({
   navbar: {
@@ -55,47 +55,17 @@ class LeaderboardHeader extends Component {
   static propTypes = {
     scrollY: shape(),
     toggleSeasonpicker: func.isRequired,
-    navigator: shape({
-      showModal: func.isRequired,
-      push: func.isRequired
-    }).isRequired,
-    currentSeason: string.isRequired
+    currentSeason: string.isRequired,
+    gotoEvents: func.isRequired,
+    gotoProfile: func.isRequired
   }
 
   static defaultProps = {
     scrollY: null
   }
 
-  gotoProfile = () => {
-    this.props.navigator.showModal({
-      animated: true,
-      navigatorStyle: {
-        ...navigatorStyle
-      },
-      screen: 'tisdagsgolfen.Profile',
-      title: 'Profil'
-    })
-  }
-
-  gotoEvents = () => {
-    const navigatorProps = {
-      title: 'Rundor',
-      passProps: {},
-      animated: true,
-      navigatorStyle: {
-        ...navigatorStyle
-      }
-    }
-
-    this.props.navigator.push({
-      ...navigatorProps,
-      screen: 'tisdagsgolfen.Events'
-    })
-  }
-
-
   render() {
-    const { scrollY, toggleSeasonpicker, currentSeason } = this.props
+    const { scrollY, toggleSeasonpicker, currentSeason, gotoEvents, gotoProfile } = this.props
 
 
     const navbarTranslate = scrollY.interpolate({
@@ -149,13 +119,13 @@ class LeaderboardHeader extends Component {
                 onPress={toggleSeasonpicker}
               >
                 <Image style={{ resizeMode: 'contain', height: 12, width: 12, marginRight: 8 }} source={require('../../images/up.png')} />
-                <TGText style={{ fontWeight: 'bold', color: '#2ECC71' }}>{currentSeason}</TGText>
+                <TGText style={{ fontWeight: 'bold', color: '#2ECC71' }}>{currentSeason.name}</TGText>
               </TouchableView>
               <View style={{ flex: 1, justifyContent: 'flex-end', flexDirection: 'row' }}>
-                <TouchableView onPress={this.gotoProfile}>
+                <TouchableView onPress={gotoProfile}>
                   <Image style={styles.navbarIcon} source={require('../../images/user.png')} />
                 </TouchableView>
-                <TouchableView onPress={this.gotoEvents}>
+                <TouchableView onPress={gotoEvents}>
                   <Image style={[styles.navbarIcon, { marginLeft: 18 }]} source={require('../../images/calendar.png')} />
                 </TouchableView>
               </View>

@@ -29,9 +29,6 @@ const onOpened = (openResult) => {
 
 const withOneSignal = WrappedComponent => (
   class WO extends Component {
-    static navigatorButtons = WrappedComponent.navigatorButtons
-    static navigatorStyle = WrappedComponent.navigatorStyle
-
     constructor(props) {
       super(props)
 

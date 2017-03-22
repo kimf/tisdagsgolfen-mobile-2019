@@ -1,45 +1,54 @@
 import React, { Component, PropTypes } from 'react'
-import { View } from 'react-native'
+import { View/* , Image*/ } from 'react-native'
 import { connect } from 'react-redux'
+import { compose } from 'react-apollo'
 
 import styles from 'styles'
 import TGText from 'shared/TGText'
 import { logout } from 'actions/app'
 
-const { shape, string, func } = PropTypes
+import { withCurrentUserQuery } from 'queries/currentUserQuery'
+
+const { bool, shape, string, func } = PropTypes
 
 class Profile extends Component {
-  static navigatorButtons = {
+  static navigationOptions = {
+    title: 'Profil',
+    header: () => ({
+      visible: true
+    })
+  }
+
+  /* static navigatorButtons = {
     leftButtons: [
       { icon: require('../images/close.png'), id: 'back' }
     ]
-  }
+  }*/
 
   static propTypes = {
-    user: shape({
-      firstName: string,
-      lastName: string,
-      email: string
-    }).isRequired,
-    onLogout: func.isRequired,
-    navigator: shape().isRequired
+    data: shape({
+      loading: bool,
+      user: shape({
+        firstName: string,
+        lastName: string,
+        email: string
+      })
+    }),
+    onLogout: func.isRequired
   }
 
-  constructor(props) {
-    super(props)
-    props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this))
-  }
-
-  onNavigatorEvent = (event) => {
-    if (event.type === 'NavBarButtonPress') {
-      if (event.id === 'back') {
-        this.props.navigator.dismissModal()
-      }
+  static defaultProps = {
+    data: {
+      loading: true,
+      user: null
     }
   }
 
   render() {
-    const { user, onLogout } = this.props
+    const { data, onLogout } = this.props
+    if (data.loading) { return null }
+    const { user } = data
+
     return (
       <View style={styles.container}>
         <TGText
@@ -58,10 +67,11 @@ class Profile extends Component {
   }
 }
 
-const mapStateToProps = state => ({ user: state.app.user })
-
 const mapDispatchToProps = dispatch => ({
   onLogout: () => dispatch(logout())
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(Profile)
+export default compose(
+  connect(null, mapDispatchToProps),
+  withCurrentUserQuery
+)(Profile)

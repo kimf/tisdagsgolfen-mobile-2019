@@ -1,12 +1,12 @@
-import { Component } from 'react'
+import React, { Component } from 'react'
 import { AsyncStorage } from 'react-native'
-import { Navigation } from 'react-native-navigation'
+import { ApolloProvider } from 'react-apollo'
 import deviceLog from 'react-native-device-log'
 
-import registerScreens from 'screens/index'
 import apolloClient from 'apolloClient'
 import configureStore from 'configureStore'
-import { getLoggedInState } from 'actions/app'
+
+import App from './App'
 
 deviceLog.init(AsyncStorage, {
   logToConsole: false,
@@ -18,54 +18,22 @@ deviceLog.init(AsyncStorage, {
 })
 
 class Root extends Component {
-  constructor(props) {
-    super(props)
-    this.store = configureStore(apolloClient, () => this.startApp(apolloClient))
-  }
+  state = { hasLoaded: false }
+  store = configureStore(apolloClient, () => { this.setState({ hasLoaded: true }) })
 
-  onStoreUpdate = () => {
-    const { loggedIn } = this.store.getState().app
+  render() {
+    const { hasLoaded } = this.state
 
-    if (this.loggedIn !== loggedIn) {
-      this.loggedIn = loggedIn
-      this.needsToCheckLogin = false
-      this.startApp(apolloClient)
+    if (!hasLoaded) {
+      return null
     }
-  }
 
-  store = null
-  needsToCheckLogin = true
-  loggedIn = null
-
-  startApp = (client) => {
-    registerScreens(this.store, client)
-    this.store.subscribe(this.onStoreUpdate)
-
-    if (this.needsToCheckLogin) {
-      this.store.dispatch(getLoggedInState())
-    } else if (this.loggedIn) {
-      Navigation.startSingleScreenApp({
-        screen: {
-          screen: 'tisdagsgolfen.Leaderboard',
-          navigatorStyle: {
-            navBarHidden: true
-          },
-          animationType: 'fade'
-        }
-      })
-    } else {
-      Navigation.startSingleScreenApp({
-        screen: {
-          screen: 'tisdagsgolfen.Login',
-          navigatorStyle: {
-            navBarHidden: true
-          },
-          animationType: 'fade'
-        }
-      })
-    }
+    return (
+      <ApolloProvider client={apolloClient} store={this.store}>
+        <App />
+      </ApolloProvider>
+    )
   }
 }
-
 
 export default Root

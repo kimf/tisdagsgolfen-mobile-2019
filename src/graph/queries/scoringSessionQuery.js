@@ -64,7 +64,7 @@ const scoringSessionQuery = gql`
 export default scoringSessionQuery
 
 export const withScoringSessionQuery = graphql(scoringSessionQuery, {
-  options: ({ scoringSessionId }) => ({
-    variables: { scoringSessionId }
+  options: ({ navigation }) => ({
+    variables: { scoringSessionId: navigation.state.params.scoringSessionId }
   })
 })

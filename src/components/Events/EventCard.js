@@ -4,7 +4,6 @@ import moment from 'moment'
 import 'moment/locale/sv'
 
 import TGText from 'shared/TGText'
-import { navigatorStyle } from 'styles'
 
 const s = StyleSheet.create({
   /* EVENT CARDS */
@@ -51,7 +50,7 @@ const s = StyleSheet.create({
   }
 })
 
-const EventCard = ({ event, userId, navigator }) => {
+const EventCard = ({ event, userId, navigation }) => {
   let gametypeName = ''
   if (event.scoringType === 'modified_points') {
     gametypeName = 'Modifierad Poäng'
@@ -62,19 +61,7 @@ const EventCard = ({ event, userId, navigator }) => {
   }
   const startsAt = moment(event.startsAt).format('DD MMM')
 
-
-  const navigatorProps = {
-    title: startsAt,
-    passProps: { event, userId },
-    animated: true,
-    navigatorStyle: {
-      ...navigatorStyle
-    }
-  }
-
-  const setupEventScreen = event.teamEvent
-    ? 'tisdagsgolfen.SetupTeamEvent'
-    : 'tisdagsgolfen.SetupIndividualEvent'
+  const setupEventScreen = event.teamEvent ? 'SetupTeamEvent' : 'SetupIndividualEvent'
 
   let courseRow = null
   if (event.course) {
@@ -112,10 +99,7 @@ const EventCard = ({ event, userId, navigator }) => {
         {event.status === 'live'
           ? <TGText
             onPress={() => {
-              navigator.showModal({
-                ...navigatorProps,
-                screen: 'tisdagsgolfen.LiveEvent'
-              })
+              navigation.navigate('LiveEvent')
             }}
             viewStyle={{ marginRight: 16 }}
             style={{ color: '#f39c12', fontWeight: 'bold' }}
@@ -127,10 +111,7 @@ const EventCard = ({ event, userId, navigator }) => {
         {event.status === 'finished'
           ? <TGText
             onPress={() => {
-              navigator.push({
-                ...navigatorProps,
-                screen: 'tisdagsgolfen.EventResult'
-              })
+              navigation.navigate('EventResult')
             }}
             backgroundColor="#7f8c8d"
             color="white"
@@ -139,11 +120,7 @@ const EventCard = ({ event, userId, navigator }) => {
           </TGText>
           : <TGText
             onPress={() => {
-              navigator.push({
-                ...navigatorProps,
-                screen: setupEventScreen,
-                passProps: { event }
-              })
+              navigation.push(setupEventScreen, { event })
             }}
             backgroundColor="#16a085"
             color="white"
@@ -170,7 +147,7 @@ EventCard.propTypes = {
       course: string
     })
   }).isRequired,
-  navigator: shape().isRequired,
+  navigation: shape().isRequired,
   userId: string.isRequired
 }
 
