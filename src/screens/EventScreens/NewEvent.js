@@ -8,41 +8,17 @@ import styles from 'styles'
 class NewEvent extends Component {
   static propTypes = {
     seasonId: PropTypes.string.isRequired,
-    navigator: PropTypes.shape().isRequired
-  }
-
-  static navigatorStyle = {
-    navBarTextColor: 'white',
-    navBarBackgroundColor: '#1E98DF'
-  }
-
-  static navigatorButtons = {
-    leftButtons: [
-      { icon: require('../../images/close.png'), id: 'cancel' }
-    ]
-  }
-
-  constructor(props) {
-    super(props)
-    props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this))
+    navigation: PropTypes.shape().isRequired
   }
 
   state = { course: null }
-
-  onNavigatorEvent = (event) => {
-    if (event.type === 'NavBarButtonPress') {
-      if (event.id === 'cancel') {
-        this.props.navigator.dismissModal()
-      }
-    }
-  }
 
   setCourse = (course) => {
     this.setState({ course })
   }
 
   done = () => {
-    this.props.navigator.dismissModal()
+    this.props.navigation.goBack()
   }
 
   render() {
@@ -51,8 +27,7 @@ class NewEvent extends Component {
     return (
       <View style={styles.container}>
         {course
-          ?
-          <NewEventSetup
+          ? <NewEventSetup
             seasonId={seasonId}
             changeCourse={this.setCourse}
             course={course}

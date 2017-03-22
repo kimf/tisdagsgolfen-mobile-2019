@@ -14,20 +14,30 @@ const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 })
 const { arrayOf, shape, string, bool } = PropTypes
 
 class EventResult extends Component {
+  static navigationOptions = {
+    title: ({ state }) => state.params.title
+  }
+
   static propTypes = {
-    event: shape({
-      id: string.isRequired,
-      scoringType: string.isRequired,
-      status: string.isRequired,
-      teamEvent: bool.isRequired,
-      club: string,
-      course: string
+    navigation: shape({
+      state: shape({
+        params: shape({
+          userId: string.isRequired,
+          event: shape({
+            id: string.isRequired,
+            scoringType: string.isRequired,
+            status: string.isRequired,
+            teamEvent: bool.isRequired,
+            club: string,
+            course: string
+          }).isRequired
+        })
+      })
     }).isRequired,
     data: shape({
       loading: bool,
       players: arrayOf(EventLeaderboardCard.propTypes.data)
-    }),
-    userId: string.isRequired
+    })
   }
 
   static defaultProps = {
@@ -45,7 +55,8 @@ class EventResult extends Component {
   }
 
   render() {
-    const { event, data, userId } = this.props
+    const { navigation, data } = this.props
+    const { event, userId } = navigation.state.params
     const { sorting } = this.state
 
     const eventHeader = <EventHeader {...event} />

@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import { View, ListView } from 'react-native'
+import { View, Image, ListView } from 'react-native'
 
 import EmptyState from 'shared/EmptyState'
 import EventCard from 'Events/EventCard'
-
+import TouchableView from 'shared/TouchableView'
 // import { sortedByParsedDate } from '../utils'
 import { withEventsQuery } from 'queries/eventsQuery'
 
@@ -13,6 +13,24 @@ const { arrayOf, shape, bool, string } = React.PropTypes
 // { icon: require('../images/white_back.png'), id: 'back' }
 // { icon: require('../images/plus.png'), id: 'add' }
 class Events extends Component {
+  static navigationOptions = {
+    header: ({ state, navigate }) => {
+      let right = null
+      if (!state.params.seasonClosed) {
+        right = (
+          <TouchableView
+            style={{ paddingVertical: 10, paddingHorizontal: 20 }}
+            onPress={() => navigate('NewEvent')}
+          >
+            <Image source={require('../images/plus.png')} />
+          </TouchableView>
+        )
+      }
+      const title = 'Rundor'
+      return { right, title }
+    }
+  }
+
   static propTypes = {
     data: shape({
       loading: bool,

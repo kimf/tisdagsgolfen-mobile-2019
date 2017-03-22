@@ -99,7 +99,7 @@ const EventCard = ({ event, userId, navigation }) => {
         {event.status === 'live'
           ? <TGText
             onPress={() => {
-              navigation.navigate('LiveEvent')
+              navigation.navigate('LiveEvent', { userId })
             }}
             viewStyle={{ marginRight: 16 }}
             style={{ color: '#f39c12', fontWeight: 'bold' }}
@@ -111,7 +111,7 @@ const EventCard = ({ event, userId, navigation }) => {
         {event.status === 'finished'
           ? <TGText
             onPress={() => {
-              navigation.navigate('EventResult')
+              navigation.navigate('EventResult', { event, userId, title: startsAt })
             }}
             backgroundColor="#7f8c8d"
             color="white"
@@ -120,7 +120,7 @@ const EventCard = ({ event, userId, navigation }) => {
           </TGText>
           : <TGText
             onPress={() => {
-              navigation.push(setupEventScreen, { event })
+              navigation.navigate(setupEventScreen, { event, userId })
             }}
             backgroundColor="#16a085"
             color="white"

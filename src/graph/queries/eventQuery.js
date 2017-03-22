@@ -34,5 +34,7 @@ const eventQuery = gql`
 export default eventQuery
 
 export const withEventQuery = graphql(eventQuery, {
-  options: ({ event }) => ({ variables: { eventId: event.id } })
+  options: ({ navigation }) => ({
+    variables: { eventId: navigation.state.params.event.id }
+  })
 })
