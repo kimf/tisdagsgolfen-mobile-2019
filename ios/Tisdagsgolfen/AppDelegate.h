@@ -11,7 +11,7 @@
 #import <UIKit/UIKit.h>
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
-@property (strong, nonatomic) RCTOneSignal* oneSignal;
-@property (nonatomic, strong) UIWindow *window;
+@property(strong, nonatomic) RCTOneSignal *oneSignal;
+@property(nonatomic, strong) UIWindow *window;
 
 @end

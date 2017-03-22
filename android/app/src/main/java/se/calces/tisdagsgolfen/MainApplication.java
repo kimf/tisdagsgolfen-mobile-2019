@@ -1,65 +1,43 @@
 package se.calces.tisdagsgolfen;
 
 import android.app.Application;
-import android.util.Log;
-
-import android.support.annotation.Nullable;
 
 import com.facebook.react.ReactApplication;
-import com.geektime.rnonesignalandroid.ReactNativeOneSignalPackage;
-import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
 
-import com.reactnativenavigation.NavigationApplication;
-
+import com.geektime.rnonesignalandroid.ReactNativeOneSignalPackage;
 
 import java.util.Arrays;
 import java.util.List;
 
-public class MainApplication extends NavigationApplication {
+public class MainApplication extends Application implements ReactApplication {
 
-  @Override
-  public boolean isDebug() {
+  private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
+    @Override
+    public boolean getUseDeveloperSupport() {
       return BuildConfig.DEBUG;
-  }
+    }
 
-  @Nullable
-  @Override
-  public List<ReactPackage> createAdditionalReactPackages() {
+    @Override
+    protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
+          new MainReactPackage(),
           new ReactNativeOneSignalPackage()
       );
+    }
+  };
+
+  @Override
+  public ReactNativeHost getReactNativeHost() {
+    return mReactNativeHost;
   }
 
-  // private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
-  //   @Override
-  //   public boolean getUseDeveloperSupport() {
-  //     return BuildConfig.DEBUG;
-  //   }
-
-  //   @Override
-  //   protected List<ReactPackage> getPackages() {
-  //     return Arrays.<ReactPackage>asList(
-  //         new MainReactPackage(),
-//             new RNCrashesPackage(MainApplication.this, getResources().getString(R.string.mobileCenterCrashes_whenToSendCrashes)),
- //            new RNAnalyticsPackage(MainApplication.this, getResources().getString(R.string.mobileCenterAnalytics_whenToEnableAnalytics)),
-  //           new NavigationReactPackage(),
-  //         new ReactNativeOneSignalPackage()
-  //     );
-  //   }
-  // };
-
-  // @Override
-  // public ReactNativeHost getReactNativeHost() {
-  //   return mReactNativeHost;
-  // }
-
-  // @Override
-  // public void onCreate() {
-  //   super.onCreate();
-  //   SoLoader.init(this, /* native exopackage */ false);
-  // }
+  @Override
+  public void onCreate() {
+    super.onCreate();
+    SoLoader.init(this, /* native exopackage */ false);
+  }
 }

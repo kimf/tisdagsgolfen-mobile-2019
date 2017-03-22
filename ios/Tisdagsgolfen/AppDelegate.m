@@ -9,11 +9,7 @@
 
 #import "AppDelegate.h"
 #import <RNCrashes/RNCrashes.h>
-
 #import <RNAnalytics/RNAnalytics.h>
-
-
-#import "RCCManager.h"
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
 
@@ -29,29 +25,27 @@
 
   NSURL *jsCodeLocation;
 
-  [RNCrashes registerWithCrashDelegate: [[RNCrashesDelegateAlwaysSend alloc] init]];  // Initialize Mobile Center crashes
-
-  [RNAnalytics registerWithInitiallyEnabled:true];  // Initialize Mobile Center analytics
+  [RNCrashes registerWithCrashDelegate: [[RNCrashesDelegateAlwaysSend alloc] init]];
+  [RNAnalytics registerWithInitiallyEnabled:true];
 
   #ifdef STORYBOOK
     jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"storybook/index.ios" fallbackResource:nil];
-    RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
-                                                        moduleName:@"Tisdagsgolfen"
-                                                 initialProperties:nil
-                                                     launchOptions:launchOptions];
-    rootView.backgroundColor = [[UIColor alloc] initWithRed:1.0f green:1.0f blue:1.0f alpha:1];
-
-    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    UIViewController *rootViewController = [UIViewController new];
-    rootViewController.view = rootView;
-    self.window.rootViewController = rootViewController;
-    [self.window makeKeyAndVisible];
   #else
     jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"index.ios" fallbackResource:nil];
-    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    self.window.backgroundColor = [[UIColor alloc] initWithRed:1.0f green:1.0f blue:1.0f alpha:1];
-    [[RCCManager sharedInstance] initBridgeWithBundleURL:jsCodeLocation];
   #endif
+
+  RCTRootView *rootView = [[RCTRootView alloc] initWithBundleURL:jsCodeLocation
+                                                      moduleName:@"Tisdagsgolfen"
+                                               initialProperties:nil
+                                                   launchOptions:launchOptions];
+
+  rootView.backgroundColor = [[UIColor alloc] initWithRed:1.0f green:1.0f blue:1.0f alpha:1];
+
+  self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+  UIViewController *rootViewController = [UIViewController new];
+  rootViewController.view = rootView;
+  self.window.rootViewController = rootViewController;
+  [self.window makeKeyAndVisible];
 
   return YES;
 }
