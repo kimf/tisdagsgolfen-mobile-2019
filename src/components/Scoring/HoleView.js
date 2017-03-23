@@ -1,17 +1,18 @@
 import React, { Component, PropTypes } from 'react'
-import { View, LayoutAnimation } from 'react-native'
+import { View, Dimensions, LayoutAnimation } from 'react-native'
 
 import TouchableView from 'shared/TouchableView'
 import TGText from 'shared/TGText'
 import ScoreRow from 'Scoring/ScoreRow'
-import HoleHeader from 'Scoring/HoleHeader'
 import ScorecardHeaderRow from 'Scoring/ScorecardHeaderRow'
 import ScoreInput from 'Scoring/ScoreInput'
+import { colors } from 'styles'
 
 import { calculateExtraStrokes } from 'utils'
 import { spring } from 'animations'
 
 const { shape, number, arrayOf, string } = PropTypes
+const deviceWidth = Dimensions.get('window').width
 
 class HoleView extends Component {
   static propTypes = {
@@ -37,92 +38,106 @@ class HoleView extends Component {
     const { scoringId } = this.state
 
     return (
-      <View style={{ flex: 1, height: '100%', backgroundColor: '#eee' }}>
-        <HoleHeader {...hole} />
-        <ScorecardHeaderRow teamEvent={event.teamEvent} scoring={scoringId !== null} />
-        {
-          playing.map((item, index) => {
-            const attrWithId = event.teamEvent ? 'scoringTeam' : 'scoringPlayer'
-            const liveScore = hole.liveScores.find(ls => ls[attrWithId].id === item.id)
-            const itemName = event.teamEvent ? `Lag ${index + 1}` : `${item.user.firstName} ${item.user.lastName.substr(0, 1)}`
-            const scoreItem = liveScore || {
-              strokes: hole.par,
-              putts: 2,
-              points: 0,
-              beers: 0,
-              extraStrokes: calculateExtraStrokes(hole.index, item.extraStrokes, holesCount)
-            }
+      <View style={{ flex: 1, height: '100%', backgroundColor: colors.green }}>
+        <View
+          style={{
+            marginHorizontal: 10,
+            height: '95%',
+            width: deviceWidth - 20,
+            backgroundColor: '#fff',
+            borderRadius: 10,
+            shadowColor: '#363',
+            shadowOffset: { width: 2, height: 8 },
+            shadowRadius: 10,
+            shadowOpacity: 0.2,
+            elevation: 5
+          }}
+        >
+          <ScorecardHeaderRow teamEvent={event.teamEvent} scoring={scoringId !== null} />
+          {
+            playing.map((item, index) => {
+              const attrWithId = event.teamEvent ? 'scoringTeam' : 'scoringPlayer'
+              const liveScore = hole.liveScores.find(ls => ls[attrWithId].id === item.id)
+              const itemName = event.teamEvent ? `Lag ${index + 1}` : `${item.user.firstName} ${item.user.lastName.substr(0, 1)}`
+              const scoreItem = liveScore || {
+                strokes: hole.par,
+                putts: 2,
+                points: 0,
+                beers: 0,
+                extraStrokes: calculateExtraStrokes(hole.index, item.extraStrokes, holesCount)
+              }
 
-            let playerNames = null
+              let playerNames = null
 
-            if (event.teamEvent) {
-              playerNames = item.users.map(p => (
-                <TGText key={`team_player_name_${p.id}`}>
-                  {p.firstName} {p.lastName.substr(0, 1)}
-                </TGText>
-              ))
-            }
+              if (event.teamEvent) {
+                playerNames = item.users.map(p => (
+                  <TGText key={`team_player_name_${p.id}`}>
+                    {p.firstName} {p.lastName.substr(0, 1)}
+                  </TGText>
+                ))
+              }
 
-            return (
-              <View
-                key={`player_score_row_${item.id}`}
-                style={{
-                  flexDirection: 'row',
-                  borderBottomWidth: 1,
-                  borderBottomColor: '#ccc',
-                  backgroundColor: (scoringId && scoringId === item.id) ? '#eee' : '#fff'
-                }}
-              >
-                {scoringId && scoringId !== item.id
-                  ? null
-                  : <View style={{ flex: 2, paddingTop: 20, paddingLeft: 20, paddingBottom: 20 }}>
-                    <TGText style={{ fontWeight: 'bold', lineHeight: 30, fontSize: '24' }}>
-                      {itemName}
-                    </TGText>
-                    <TGText style={{ color: '#777' }}>{scoreItem.extraStrokes} slag</TGText>
-                    {event.teamEvent ? <TGText>{playerNames}</TGText> : null}
-                  </View>
-                }
+              return (
+                <View
+                  key={`player_score_row_${item.id}`}
+                  style={{
+                    flexDirection: 'row',
+                    borderBottomWidth: (index < (playing.length - 1) ? 1 : 0),
+                    borderBottomColor: '#eee',
+                    backgroundColor: (scoringId && scoringId === item.id) ? '#eee' : '#fff'
+                  }}
+                >
+                  {scoringId && scoringId !== item.id
+                    ? null
+                    : <View style={{ flex: 2, paddingTop: 20, paddingLeft: 20, paddingBottom: 20 }}>
+                      <TGText style={{ fontWeight: 'bold', lineHeight: 30, fontSize: '24' }}>
+                        {itemName}
+                      </TGText>
+                      <TGText style={{ color: '#777' }}>{scoreItem.extraStrokes} slag</TGText>
+                      {event.teamEvent ? <TGText>{playerNames}</TGText> : null}
+                    </View>
+                  }
 
-                {scoringId
-                  ? null
-                  : <TouchableView
-                    style={{ flex: 4, paddingVertical: 20, paddingRight: 20 }}
-                    onPress={() => this.toggleScoring(item.id)}
-                  >
-                    <ScoreRow
-                      player={item}
-                      hole={hole}
-                      scoringType={event.scoringType}
-                      teamEvent={event.teamEvent}
-                      eventId={event.id}
-                      holesCount={holesCount}
-                      scoreItem={scoreItem}
-                      itemName={itemName}
-                    />
-                  </TouchableView>
-                }
+                  {scoringId
+                    ? null
+                    : <TouchableView
+                      style={{ flex: 4, paddingVertical: 20, paddingRight: 20 }}
+                      onPress={() => this.toggleScoring(item.id)}
+                    >
+                      <ScoreRow
+                        player={item}
+                        hole={hole}
+                        scoringType={event.scoringType}
+                        teamEvent={event.teamEvent}
+                        eventId={event.id}
+                        holesCount={holesCount}
+                        scoreItem={scoreItem}
+                        itemName={itemName}
+                      />
+                    </TouchableView>
+                  }
 
-                {scoringId !== item.id
-                  ? null
-                  : <View style={{ flex: 6 }}>
-                    <ScoreInput
-                      scoreItem={scoreItem}
-                      itemName={itemName}
-                      playerId={item.id}
-                      holeId={hole.id}
-                      par={hole.par}
-                      eventId={event.id}
-                      teamEvent={event.teamEvent}
-                      onClose={this.toggleScoring}
-                      scoringSessionId={scoringSessionId}
-                    />
-                  </View>
-                }
-              </View>
-            )
-          })
-        }
+                  {scoringId !== item.id
+                    ? null
+                    : <View style={{ flex: 6 }}>
+                      <ScoreInput
+                        scoreItem={scoreItem}
+                        itemName={itemName}
+                        playerId={item.id}
+                        holeId={hole.id}
+                        par={hole.par}
+                        eventId={event.id}
+                        teamEvent={event.teamEvent}
+                        onClose={this.toggleScoring}
+                        scoringSessionId={scoringSessionId}
+                      />
+                    </View>
+                  }
+                </View>
+              )
+            })
+          }
+        </View>
       </View>
     )
   }

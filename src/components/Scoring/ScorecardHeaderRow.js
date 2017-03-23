@@ -3,7 +3,7 @@ import { View } from 'react-native'
 
 import TGText from 'shared/TGText'
 
-const style = { paddingVertical: 10, flex: 1, textAlign: 'left' }
+const style = { paddingVertical: 10, flex: 1, textAlign: 'left', fontSize: 12 }
 
 const ScorecardHeaderRow = ({ teamEvent, scoring }) => {
   const puttsHeader = teamEvent ? null : (
@@ -17,7 +17,9 @@ const ScorecardHeaderRow = ({ teamEvent, scoring }) => {
       style={{
         flexDirection: 'row',
         backgroundColor: '#ccc',
-        paddingHorizontal: 20
+        paddingHorizontal: 20,
+        borderTopLeftRadius: 10,
+        borderTopRightRadius: 10
       }}
     >
       <TGText style={{ ...style, flex: 2 }}>SPELARE</TGText>
