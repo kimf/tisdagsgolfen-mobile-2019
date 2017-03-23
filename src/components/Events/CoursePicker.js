@@ -13,7 +13,7 @@ const ds = new ListView.DataSource({
   rowHasChanged: (row1, row2) => row1 !== row2
 })
 
-const { arrayOf, shape, func } = PropTypes
+const { arrayOf, bool, shape, func } = PropTypes
 
 class CoursePicker extends Component {
   static fuse = null
@@ -21,7 +21,7 @@ class CoursePicker extends Component {
   static propTypes = {
     selectCourse: func.isRequired,
     data: shape({
-      loading: true,
+      loading: bool,
       courses: arrayOf(shape())
     })
   }

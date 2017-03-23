@@ -1,15 +1,12 @@
 import React, { Component, PropTypes } from 'react'
 import { View/* , Image*/ } from 'react-native'
 import { connect } from 'react-redux'
-import { compose } from 'react-apollo'
 
 import styles from 'styles'
 import TGText from 'shared/TGText'
 import { logout } from 'actions/app'
 
-import { withCurrentUserQuery } from 'queries/currentUserQuery'
-
-const { bool, shape, string, func } = PropTypes
+const { shape, string, func } = PropTypes
 
 class Profile extends Component {
   static navigationOptions = {
@@ -26,14 +23,17 @@ class Profile extends Component {
   }*/
 
   static propTypes = {
-    data: shape({
-      loading: bool,
-      user: shape({
-        firstName: string,
-        lastName: string,
-        email: string
+    navigation: shape({
+      state: shape({
+        params: shape({
+          user: shape({
+            firstName: string,
+            lastName: string,
+            email: string
+          })
+        })
       })
-    }),
+    }).isRequired,
     onLogout: func.isRequired
   }
 
@@ -45,9 +45,8 @@ class Profile extends Component {
   }
 
   render() {
-    const { data, onLogout } = this.props
-    if (data.loading) { return null }
-    const { user } = data
+    const onLogout = this.props.onLogout
+    const user = this.props.navigation.state.params.user
 
     return (
       <View style={styles.container}>
@@ -71,7 +70,4 @@ const mapDispatchToProps = dispatch => ({
   onLogout: () => dispatch(logout())
 })
 
-export default compose(
-  connect(null, mapDispatchToProps),
-  withCurrentUserQuery
-)(Profile)
+export default connect(null, mapDispatchToProps)(Profile)

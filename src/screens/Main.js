@@ -2,13 +2,13 @@ import React, { Component } from 'react'
 import { View } from 'react-native'
 import { LogView } from 'react-native-device-log'
 
-import { withMainQuery } from 'queries/mainQuery'
+import { withMainQuery, mainQueryProps } from 'queries/mainQuery'
 
 import Season from 'Season/Season'
 import SeasonPicker from 'Season/SeasonPicker'
 import BottomButton from 'shared/BottomButton'
 
-const { arrayOf, bool, func, shape, string } = React.PropTypes
+const { func, shape } = React.PropTypes
 
 class Main extends Component {
   static navigationOptions = {
@@ -18,24 +18,7 @@ class Main extends Component {
   }
 
   static propTypes = {
-    data: shape({
-      user: shape({
-        id: string.isRequired,
-        scoringSession: shape({
-          id: string.isRequired,
-          event: shape({
-            course: shape({
-              name: string.isRequired
-            })
-          })
-        })
-      }),
-      seasons: arrayOf(shape({
-        id: string.isRequired,
-        name: string.isRequired
-      })),
-      loading: bool
-    }),
+    data: mainQueryProps,
     navigation: shape({
       navigate: func.isRequired
     }).isRequired
@@ -72,6 +55,27 @@ class Main extends Component {
     this.props.navigation.navigate('ScoreEvent', { scoringSessionId })
   }
 
+  gotoProfile = () => {
+    const { id, email, firstName, lastName } = this.props.data.user
+    this.props.navigation.navigate('Profile', { user: { id, email, firstName, lastName } })
+  }
+
+  gotoEvents = () => {
+    const { id, email, firstName, lastName } = this.props.data.user
+    const currentSeason = this.currentSeason()
+    this.props.navigation.navigate('Events', {
+      user: { id, email, firstName, lastName },
+      seasonId: currentSeason.id,
+      seasonClosed: currentSeason.closed
+    })
+  }
+
+  // TODO: Memoize
+  currentSeason = () => {
+    const currentSeasonId = this.state.currentSeasonId || this.props.data.seasons[0].id
+    return this.props.data.seasons.find(s => s.id === currentSeasonId)
+  }
+
   render() {
     if (this.props.data.loading) {
       return null
@@ -81,7 +85,7 @@ class Main extends Component {
     const { showSeasonPicker, showLog } = this.state
     const activeEvent = data.user.scoringSession
     const smallerSeasons = data.seasons.map(s => ({ id: s.id, name: s.name }))
-    const currentSeasonId = this.state.currentSeasonId || smallerSeasons[0].id
+    const currentSeason = this.currentSeason()
 
     if (showLog) {
       return (
@@ -99,19 +103,20 @@ class Main extends Component {
         {showSeasonPicker
           ? <SeasonPicker
             seasons={smallerSeasons}
-            currentSeasonId={currentSeasonId}
+            currentSeasonId={currentSeason.id}
             onChangeSeason={s => this.changeSeason(s)}
           />
           : null
         }
 
         <Season
-          key={`season_${currentSeasonId}`}
-          seasons={data.seasons}
-          currentSeasonId={currentSeasonId}
+          key={`season_${currentSeason.id}`}
+          season={currentSeason}
           currentUserId={data.user.id}
           navigation={navigation}
           toggleSeasonpicker={this.toggleSeasonpicker}
+          gotoProfile={this.gotoProfile}
+          gotoEvents={this.gotoEvents}
         />
 
         {activeEvent

@@ -27,7 +27,6 @@
     "react": "~15.4.1",
     "react-apollo": "^1.0.0-rc.3",
     "react-native": "^0.42.3",
-    "react-native-animated-modal": "^1.1.0",
     "react-native-calendar-datepicker": "^1.2.2",
     "react-native-device-log": "^0.0.16",
     "react-native-onesignal": "^3.0.3",

@@ -20,7 +20,7 @@ class Events extends Component {
         right = (
           <TouchableView
             style={{ paddingVertical: 10, paddingHorizontal: 20 }}
-            onPress={() => navigate('NewEvent')}
+            onPress={() => navigate('NewEvent', state.params)}
           >
             <Image source={require('../images/plus.png')} />
           </TouchableView>
@@ -28,7 +28,8 @@ class Events extends Component {
       }
       const title = 'Rundor'
       return { right, title }
-    }
+    },
+    gestureResponseDistance: 0
   }
 
   static propTypes = {
@@ -39,7 +40,9 @@ class Events extends Component {
     navigation: shape({
       state: shape({
         params: shape({
-          userId: string.isRequired,
+          user: shape({
+            id: string.isRequired
+          }).isRequired,
           seasonId: string.isRequired,
           seasonClosed: bool.isRequired
         })
@@ -54,21 +57,14 @@ class Events extends Component {
     }
   }
 
-  onNavigatorEvent = (event) => {
-    const { seasonId } = this.props.navigation.state.params
-    if (event.type === 'NavBarButtonPress') {
-      if (event.id === 'add') {
-        this.props.navigation.navigate('NewEvent', { seasonId })
-      }
-      if (event.id === 'back') {
-        this.props.navigation.goBack()
-      }
-    }
+  navigateToEvent = (screen, params) => {
+    const navigation = this.props.navigation
+    navigation.navigate(screen, { ...this.props.navigation.state.params, ...params })
   }
 
   render() {
     const { data, navigation } = this.props
-    const { userId } = navigation.state.params
+    const userId = navigation.state.params.user.id
 
     if (data.loading) {
       return null
@@ -87,7 +83,7 @@ class Events extends Component {
           initialListSize={100}
           dataSource={ds.cloneWithRows(data.events)}
           renderRow={rowData => (
-            <EventCard userId={userId} event={rowData} navigation={navigation} />
+            <EventCard userId={userId} event={rowData} onNavigate={this.navigateToEvent} />
           )}
           enableEmptySections
         />

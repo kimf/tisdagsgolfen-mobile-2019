@@ -50,7 +50,7 @@ const s = StyleSheet.create({
   }
 })
 
-const EventCard = ({ event, userId, navigation }) => {
+const EventCard = ({ event, onNavigate }) => {
   let gametypeName = ''
   if (event.scoringType === 'modified_points') {
     gametypeName = 'Modifierad Poäng'
@@ -98,9 +98,7 @@ const EventCard = ({ event, userId, navigation }) => {
       <View style={[s.row, s.rightRow]}>
         {event.status === 'live'
           ? <TGText
-            onPress={() => {
-              navigation.navigate('LiveEvent', { userId })
-            }}
+            onPress={() => onNavigate('LiveEvent', { event })}
             viewStyle={{ marginRight: 16 }}
             style={{ color: '#f39c12', fontWeight: 'bold' }}
           >
@@ -110,18 +108,14 @@ const EventCard = ({ event, userId, navigation }) => {
         }
         {event.status === 'finished'
           ? <TGText
-            onPress={() => {
-              navigation.navigate('EventResult', { event, userId, title: startsAt })
-            }}
+            onPress={() => onNavigate('EventResult', { event, title: startsAt })}
             backgroundColor="#7f8c8d"
             color="white"
           >
             SE RESULTAT
           </TGText>
           : <TGText
-            onPress={() => {
-              navigation.navigate(setupEventScreen, { event, userId })
-            }}
+            onPress={() => onNavigate(setupEventScreen, { event })}
             backgroundColor="#16a085"
             color="white"
           >
@@ -133,7 +127,7 @@ const EventCard = ({ event, userId, navigation }) => {
   )
 }
 
-const { shape, string, bool } = React.PropTypes
+const { shape, string, bool, func } = React.PropTypes
 
 EventCard.propTypes = {
   event: shape({
@@ -147,8 +141,7 @@ EventCard.propTypes = {
       course: string
     })
   }).isRequired,
-  navigation: shape().isRequired,
-  userId: string.isRequired
+  onNavigate: func.isRequired
 }
 
 export default EventCard

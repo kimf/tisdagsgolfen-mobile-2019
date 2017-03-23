@@ -32,7 +32,7 @@ const routes = {
 }
 
 // eslint-disable-next-line import/prefer-default-export
-export const MainStack = StackNavigator(routes, { initialRouteName: 'Main', headerMode: 'screen', mode: 'modal' })
+export const MainStack = StackNavigator(routes, { initialRouteName: 'Main', headerMode: 'screen' })
 
 /* path + getScreen
 Profile: {

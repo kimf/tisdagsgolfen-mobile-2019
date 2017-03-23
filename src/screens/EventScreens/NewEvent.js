@@ -5,10 +5,18 @@ import CoursePicker from 'Events/CoursePicker'
 import NewEventSetup from 'Events/NewEventSetup'
 import styles from 'styles'
 
+const { shape, string, func } = PropTypes
+
 class NewEvent extends Component {
   static propTypes = {
-    seasonId: PropTypes.string.isRequired,
-    navigation: PropTypes.shape().isRequired
+    navigation: shape({
+      state: shape({
+        params: shape({
+          seasonId: string.isRequired
+        }).isRequired
+      }).isRequired,
+      goBack: func.isRequired
+    }).isRequired
   }
 
   state = { course: null }
@@ -22,8 +30,8 @@ class NewEvent extends Component {
   }
 
   render() {
-    const { seasonId } = this.props
-    const { course } = this.state
+    const seasonId = this.props.navigation.state.params.seasonId
+    const course = this.state.course
     return (
       <View style={styles.container}>
         {course

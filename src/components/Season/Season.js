@@ -12,7 +12,7 @@ const { arrayOf, string, bool, shape, func } = PropTypes
 
 class Season extends Component {
   static propTypes = {
-    seasons: arrayOf(shape({
+    season: shape({
       name: string,
       id: string,
       closed: bool,
@@ -20,11 +20,11 @@ class Season extends Component {
         url: string
       }),
       players: arrayOf(LeaderboardCard.propTypes.data)
-    })).isRequired,
+    }).isRequired,
     currentUserId: string.isRequired,
-    currentSeasonId: string.isRequired,
-    navigation: shape().isRequired,
-    toggleSeasonpicker: func.isRequired
+    toggleSeasonpicker: func.isRequired,
+    gotoProfile: func.isRequired,
+    gotoEvents: func.isRequired
   }
 
   constructor(props) {
@@ -43,24 +43,10 @@ class Season extends Component {
     this.setState(state => ({ ...state, sorting }))
   }
 
-  gotoProfile = () => {
-    this.props.navigation.navigate('Profile')
-  }
-
-  gotoEvents = () => {
-    const { seasons, currentSeasonId, currentUserId } = this.props
-    const season = seasons.find(s => s.id === currentSeasonId)
-    this.props.navigation.navigate('Events', {
-      userId: currentUserId,
-      seasonId: season.id,
-      seasonClosed: season.closed
-    })
-  }
-
   render() {
     const { scrollY, sorting } = this.state
-    const { currentSeasonId, currentUserId, seasons, toggleSeasonpicker } = this.props
-    const season = seasons.find(s => s.id === currentSeasonId)
+    const { season, currentUserId, toggleSeasonpicker } = this.props
+    const { gotoEvents, gotoProfile } = this.props
 
     let sortedPlayers = null
     if (sorting === 'beers') {
@@ -89,8 +75,8 @@ class Season extends Component {
           scrollY={scrollY}
           toggleSeasonpicker={toggleSeasonpicker}
           currentSeason={season.name}
-          gotoEvents={this.gotoEvents}
-          gotoProfile={this.gotoProfile}
+          gotoEvents={gotoEvents}
+          gotoProfile={gotoProfile}
         />
 
         {emptyLeaderboard

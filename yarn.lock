@@ -5179,16 +5179,6 @@ react-modal@^1.2.1:
     exenv "1.2.0"
     lodash.assign "^4.2.0"
 
-react-native-animatable@^1.1.1:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/react-native-animatable/-/react-native-animatable-1.1.1.tgz#00ddc72985f62f62a11a505abb1a06e77a92cd8a"
-
-react-native-animated-modal@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/react-native-animated-modal/-/react-native-animated-modal-1.1.0.tgz#bdb62c7ec40ad6dc4af7259757ccaf623c2b898c"
-  dependencies:
-    react-native-animatable "^1.1.1"
-
 react-native-calendar-datepicker@^1.2.2:
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/react-native-calendar-datepicker/-/react-native-calendar-datepicker-1.2.2.tgz#d51aef4f155aeaec9ac8fd9874776a49411b8fea"
