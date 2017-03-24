@@ -5,7 +5,7 @@ export const colors = {
   green: '#2ECC71',
   lightBlue: '#D9EEFF',
   dark: '#444444',
-  semiDark: '#777777',
+  semiDark: '#555',
   lightGray: '#EEEEEE'
 }
 
@@ -65,8 +65,8 @@ export default StyleSheet.create({
   },
 
   position: {
+    width: 20,
     marginRight: 5,
-    width: 40,
     flexDirection: 'column'
   },
 
@@ -74,6 +74,13 @@ export default StyleSheet.create({
     minHeight: 40,
     flex: 6,
     flexDirection: 'column'
+  },
+
+  cardImage: {
+    height: 30,
+    width: 30,
+    borderRadius: 15,
+    marginRight: 8
   },
 
   meta: {
@@ -89,7 +96,7 @@ export default StyleSheet.create({
     color: colors.semiDark,
     flex: 1,
     fontSize: 14,
-    marginTop: 3
+    marginTop: 5
   },
 
   name: {
@@ -97,7 +104,7 @@ export default StyleSheet.create({
     fontFamily: 'System',
     fontWeight: '800',
     flex: 1,
-    fontSize: 18
+    fontSize: 16
   },
 
   label: {

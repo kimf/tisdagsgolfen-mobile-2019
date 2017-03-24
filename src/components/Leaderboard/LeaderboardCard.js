@@ -1,5 +1,5 @@
 import React from 'react'
-import { View } from 'react-native'
+import { View, Image } from 'react-native'
 
 import TGText from 'shared/TGText'
 import styles from 'styles'
@@ -24,9 +24,9 @@ const LeaderboardCard = ({ data, currentUserId, sorting }) => {
     pointText = 'p'
     position = data.position
     if (data.position < data.previousPosition) {
-      upOrDown = <TGText style={{ flex: 1, color: 'green' }}>↥{data.previousPosition - data.position}</TGText>
+      upOrDown = <TGText style={{ fontSize: 14, flex: 1, color: 'green' }}>↥{data.previousPosition - data.position}</TGText>
     } else if (data.position > data.previousPosition) {
-      upOrDown = <TGText style={{ flex: 1, color: 'red' }}>↧{data.position - data.previousPosition}</TGText>
+      upOrDown = <TGText style={{ fontSize: 14, flex: 1, color: 'red' }}>↧{data.position - data.previousPosition}</TGText>
     }
   }
 
@@ -39,12 +39,20 @@ const LeaderboardCard = ({ data, currentUserId, sorting }) => {
     return null
   }
 
+  const num = Math.floor(Math.random() * 110) + 1
+
   return (
     <View key={data.id} style={[styles.listrow, currentUserStyle]}>
       <View style={styles.position}>
         <TGText style={{ flex: 1, fontWeight: '800', color: '#000', fontSize: 16 }}>{position}</TGText>
         {upOrDown}
       </View>
+      <Image
+        style={styles.cardImage}
+        source={{ uri: `https://randomuser.me/api/portraits/men/${num}.jpg` }}
+        defaultSource={require('../../images/defaultavatar.png')}
+        resizeMode="cover"
+      />
       <View style={styles.cardTitle}>
         <TGText style={styles.name}>{player.firstName} {player.lastName}</TGText>
         {sorting === 'totalPoints'
