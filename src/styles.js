@@ -9,7 +9,7 @@ export const colors = {
   lightGray: '#EEEEEE'
 }
 
-export const NAVBAR_HEIGHT = 120
+export const NAVBAR_HEIGHT = 100
 export const STATUS_BAR_HEIGHT = Platform.select({ ios: 20, android: 24 })
 
 export default StyleSheet.create({
@@ -151,7 +151,34 @@ export default StyleSheet.create({
     padding: 20
   },
 
-  navbarIcon: {
-    opacity: 0.75
+  navbar: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    zIndex: 1000,
+    width: '100%',
+    backgroundColor: '#fff',
+    marginBottom: 10,
+    height: NAVBAR_HEIGHT
+  },
+
+  navbarTitle: {
+    color: '#000',
+    fontWeight: '800',
+    fontSize: 34,
+    textAlign: 'left',
+    justifyContent: 'flex-start'
+  },
+
+  navbarInner: {
+    height: '100%',
+    marginLeft: 15,
+    backgroundColor: '#fff',
+    borderBottomColor: 'rgba(142,142,147, 0.5)',
+    borderBottomWidth: 1,
+    paddingTop: STATUS_BAR_HEIGHT * 2,
+    paddingRight: STATUS_BAR_HEIGHT,
+    flexDirection: 'row',
+    alignItems: 'center'
   }
 })

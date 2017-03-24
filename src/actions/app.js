@@ -20,11 +20,5 @@ export const login = (email, token) => (
 )
 
 export const changeSeason = seasonId => ({
-  type: 'CHANGE_SEASON',
-  payload: { seasonId }
-})
-
-export const changeSort = sorting => ({
-  type: 'CHANGE_SORT',
-  payload: { sorting }
+  type: 'CHANGE_SEASON', seasonId
 })

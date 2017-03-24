@@ -2,8 +2,8 @@ import React from 'react'
 import { View } from 'react-native'
 
 import TGText from 'shared/TGText'
-
 import styles from 'styles'
+import { leaderboardPlayerShape } from 'propTypes'
 
 const LeaderboardCard = ({ data, currentUserId, sorting }) => {
   let pointText
@@ -43,16 +43,15 @@ const LeaderboardCard = ({ data, currentUserId, sorting }) => {
     <View key={data.id} style={[styles.listrow, currentUserStyle]}>
       <View style={styles.position}>
         <TGText style={{ flex: 1, fontWeight: '800', color: '#000', fontSize: 16 }}>{position}</TGText>
-        { upOrDown }
+        {upOrDown}
       </View>
       <View style={styles.cardTitle}>
         <TGText style={styles.name}>{player.firstName} {player.lastName}</TGText>
-        { sorting === 'totalPoints'
-          ?
-            <TGText style={styles.metaLarger}>
-              {data.eventCount} Rundor.
+        {sorting === 'totalPoints'
+          ? <TGText style={styles.metaLarger}>
+            {data.eventCount} Rundor.
               Snitt: {averagePoints}p
-            </TGText>
+          </TGText>
           : null
         }
       </View>
@@ -61,26 +60,9 @@ const LeaderboardCard = ({ data, currentUserId, sorting }) => {
   )
 }
 
-const { shape, string, number } = React.PropTypes
-
+const { string } = React.PropTypes
 LeaderboardCard.propTypes = {
-  data: shape({
-    averagePoints: number.isRequired,
-    beerPos: number,
-    eventCount: number.isRequired,
-    id: string.isRequired,
-    krPos: number,
-    position: number.isRequired,
-    previousPosition: number.isRequired,
-    totalBeers: number,
-    totalKr: number,
-    totalPoints: number.isRequired,
-    user: shape({
-      id: string.isRequired,
-      firstName: string.isRequired,
-      lastName: string.isRequired
-    }).isRequired
-  }).isRequired,
+  data: leaderboardPlayerShape.isRequired,
   currentUserId: string.isRequired,
   sorting: string.isRequired
 }

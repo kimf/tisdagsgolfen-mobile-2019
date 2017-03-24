@@ -1,9 +1,10 @@
 import { PropTypes } from 'react'
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
+import { seasonShape } from 'propTypes'
 
 const mainQuery = gql`
-  query  {
+  query mainQuery {
     user {
       id
       email
@@ -30,24 +31,6 @@ const mainQuery = gql`
       photo {
         url
       }
-      players: seasonLeaderboards (
-        orderBy: position_DESC
-      ) {
-        id
-        averagePoints
-        position
-        previousPosition
-        totalPoints
-        totalBeers
-        totalKr
-        top5Points
-        eventCount
-        user {
-          id
-          firstName
-          lastName
-        }
-      }
     }
   }
 `
@@ -56,7 +39,7 @@ export default mainQuery
 
 export const withMainQuery = graphql(mainQuery)
 
-const { arrayOf, shape, string, bool, number } = PropTypes
+const { arrayOf, shape, string, bool } = PropTypes
 
 export const mainQueryProps = shape({
   data: shape({
@@ -74,15 +57,7 @@ export const mainQueryProps = shape({
         })
       })
     }),
-    seasons: arrayOf(shape({
-      id: string.isRequired,
-      name: string.isRequired,
-      closed: bool.isRequired,
-      photo: shape({
-        url: string
-      }),
-      players: arrayOf(shape())
-    })),
+    seasons: arrayOf(seasonShape),
     loading: bool
   })
 })

@@ -18,6 +18,9 @@ export class ScoreEvent extends Component {
     header: () => ({
       visible: false
     }),
+    tabBar: () => ({
+      visible: false
+    }),
     cardStack: {
       gesturesEnabled: false
     }

@@ -1,5 +1,8 @@
+import { PropTypes } from 'react'
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
+
+import { eventShape } from 'propTypes'
 
 const eventsQuery = gql`
   query($seasonId: ID!) {
@@ -25,7 +28,11 @@ const eventsQuery = gql`
 export default eventsQuery
 
 export const withEventsQuery = graphql(eventsQuery, {
-  options: ({ navigation }) => ({
-    variables: { ...navigation.state.params }
-  })
+  options: ({ seasonId }) => ({ variables: { seasonId } })
+})
+
+const { arrayOf, bool, shape } = PropTypes
+export const eventsQueryProps = shape({
+  events: arrayOf(eventShape),
+  loading: bool
 })

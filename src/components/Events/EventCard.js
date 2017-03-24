@@ -4,6 +4,7 @@ import moment from 'moment'
 import 'moment/locale/sv'
 
 import TGText from 'shared/TGText'
+import { eventShape } from 'propTypes'
 
 const s = StyleSheet.create({
   /* EVENT CARDS */
@@ -13,12 +14,12 @@ const s = StyleSheet.create({
     marginTop: 10,
     paddingHorizontal: 20,
     paddingVertical: 10,
-    backgroundColor: '#fff',
-    shadowColor: '#000',
-    shadowOffset: { width: 2, height: 8 },
+    backgroundColor: '#eee',
+    shadowColor: '#363',
     shadowRadius: 10,
-    shadowOpacity: 0.1,
-    elevation: 5
+    shadowOpacity: 0.5,
+    elevation: 5,
+    borderRadius: 10
   },
 
   row: {
@@ -127,21 +128,9 @@ const EventCard = ({ event, onNavigate }) => {
   )
 }
 
-const { shape, string, bool, func } = React.PropTypes
-
 EventCard.propTypes = {
-  event: shape({
-    id: string.isRequired,
-    scoringType: string.isRequired,
-    status: string.isRequired,
-    teamEvent: bool.isRequired,
-    oldCourseName: string,
-    course: shape({
-      club: string,
-      course: string
-    })
-  }).isRequired,
-  onNavigate: func.isRequired
+  event: eventShape.isRequired,
+  onNavigate: React.PropTypes.func.isRequired
 }
 
 export default EventCard

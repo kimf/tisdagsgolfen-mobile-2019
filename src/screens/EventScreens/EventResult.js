@@ -9,6 +9,7 @@ import Loading from 'shared/Loading'
 import { ranked } from 'utils'
 import styles from 'styles'
 import { withEventQuery } from 'queries/eventQuery'
+import { eventShape } from 'propTypes'
 
 const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 })
 const { arrayOf, shape, string, bool } = PropTypes
@@ -23,14 +24,7 @@ class EventResult extends Component {
       state: shape({
         params: shape({
           userId: string.isRequired,
-          event: shape({
-            id: string.isRequired,
-            scoringType: string.isRequired,
-            status: string.isRequired,
-            teamEvent: bool.isRequired,
-            club: string,
-            course: string
-          }).isRequired
+          event: eventShape.isRequired
         })
       })
     }).isRequired,

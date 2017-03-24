@@ -2,7 +2,7 @@ import React from 'react'
 import { View } from 'react-native'
 
 import TGText from 'shared/TGText'
-
+import { seasonShape } from 'propTypes'
 import { STATUS_BAR_HEIGHT } from 'styles'
 
 const SeasonPicker = ({ seasons, currentSeasonId, onChangeSeason }) => (
@@ -35,15 +35,10 @@ const SeasonPicker = ({ seasons, currentSeasonId, onChangeSeason }) => (
 )
 
 
-const { arrayOf, shape, string, func } = React.PropTypes
+const { arrayOf, string, func } = React.PropTypes
 
 SeasonPicker.propTypes = {
-  seasons: arrayOf(
-    shape({
-      id: string.isRequired,
-      name: string.isRequired
-    }).isRequired
-  ).isRequired,
+  seasons: arrayOf(seasonShape).isRequired,
   currentSeasonId: string.isRequired,
   onChangeSeason: func.isRequired
 }

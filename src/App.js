@@ -1,23 +1,45 @@
-import React, { PropTypes } from 'react'
+import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
+import { compose } from 'react-apollo'
+import { withMainQuery, mainQueryProps } from 'queries/mainQuery'
 
-import { MainStack } from 'routes'
+import { TabStack } from 'routes'
 import Login from 'screens/Login'
+import Loading from 'shared/Loading'
 
-const App = ({ loggedIn }) => {
-  if (!loggedIn) {
-    return <Login />
+class App extends Component {
+  static propTypes = {
+    data: mainQueryProps,
+    loggedIn: PropTypes.bool.isRequired
   }
 
-  return (
-    <MainStack />
-  )
-}
+  static defaultProps = {
+    data: {
+      loading: true,
+      user: null,
+      seasons: null
+    }
+  }
 
-App.propTypes = {
-  loggedIn: PropTypes.bool.isRequired
+  render() {
+    const { data, loggedIn } = this.props
+
+    if (!loggedIn) {
+      return <Login />
+    }
+
+    if (data.loading) {
+      return <Loading />
+    }
+
+    return <TabStack />
+  }
 }
 
 const mapStateToProps = state => ({ loggedIn: state.app.loggedIn })
 
-export default connect(mapStateToProps)(App)
+export default compose(
+  connect(mapStateToProps),
+  withMainQuery
+)(App)
+

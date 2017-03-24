@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { View } from 'react-native'
+import { connect } from 'react-redux'
 
 import CoursePicker from 'Events/CoursePicker'
 import NewEventSetup from 'Events/NewEventSetup'
@@ -9,12 +10,8 @@ const { shape, string, func } = PropTypes
 
 class NewEvent extends Component {
   static propTypes = {
+    seasonId: string.isRequired,
     navigation: shape({
-      state: shape({
-        params: shape({
-          seasonId: string.isRequired
-        }).isRequired
-      }).isRequired,
       goBack: func.isRequired
     }).isRequired
   }
@@ -30,7 +27,7 @@ class NewEvent extends Component {
   }
 
   render() {
-    const seasonId = this.props.navigation.state.params.seasonId
+    const seasonId = this.props.seasonId
     const course = this.state.course
     return (
       <View style={styles.container}>
@@ -48,4 +45,8 @@ class NewEvent extends Component {
   }
 }
 
-export default NewEvent
+const mapStateToProps = state => ({
+  seasonId: state.app.currentSeason.id
+})
+
+export default connect(mapStateToProps)(NewEvent)

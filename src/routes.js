@@ -1,10 +1,10 @@
-import { StackNavigator } from 'react-navigation'
+import { TabNavigator, TabView, StackNavigator } from 'react-navigation'
 
-import Main from 'screens/Main'
+import Leaderboard from 'screens/Leaderboard'
 import Events from 'screens/Events'
 import Profile from 'screens/Profile'
-import ScoreEventScreen from 'screens/EventScreens/ScoreEvent'
 
+import ScoreEventScreen from 'screens/EventScreens/ScoreEvent'
 import NewEvent from 'screens/EventScreens/NewEvent'
 import EventResult from 'screens/EventScreens/EventResult'
 import SetupIndividualEvent from 'screens/EventScreens/SetupIndividualEvent'
@@ -19,20 +19,34 @@ const eventRoutes = {
   SetupIndividualEvent: { screen: SetupIndividualEvent },
   SetupTeamEvent: { screen: SetupTeamEvent },
   LiveEvent: { screen: LiveEvent },
-  NewPlayer: { screen: NewPlayer }
-}
-
-const EventStack = StackNavigator(eventRoutes, { headerMode: 'none', initialRouteName: 'Events' })
-
-const routes = {
-  Main: { screen: Main },
-  Events: { screen: EventStack },
-  Profile: { screen: Profile },
+  NewPlayer: { screen: NewPlayer },
   ScoreEvent: { screen: ScoreEventScreen }
 }
 
+const EventStack = StackNavigator(eventRoutes, { headerMode: 'none', initialRouteName: 'Events' })
+const routes = {
+  Leaderboard: { screen: Leaderboard },
+  Events: { screen: EventStack },
+  Profile: { screen: Profile }
+}
+
 // eslint-disable-next-line import/prefer-default-export
-export const MainStack = StackNavigator(routes, { initialRouteName: 'Main', headerMode: 'screen' })
+export const TabStack = TabNavigator(routes, {
+  tabBarComponent: TabView.TabBarBottom,
+  tabBarPosition: 'bottom',
+  initialRouteName: 'Leaderboard',
+  animationEnabled: false,
+  tabBarOptions: {
+    inactiveTintColor: '#777',
+    activeTintColor: '#2ECC71',
+    showIcon: true,
+    showLabel: false
+  }
+})
+// export const MainStack = StackNavigator(
+//   routes,
+//   { initialRouteName: 'Main', headerMode: 'screen' }
+// )
 
 /* path + getScreen
 Profile: {

@@ -5,7 +5,7 @@ import TGText from 'shared/TGText'
 import styles from 'styles'
 
 import { withUserQuery } from 'queries/userQuery'
-
+import { userShape } from 'propTypes'
 const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 })
 const { shape, bool, arrayOf, func, string, number } = PropTypes
 
@@ -13,13 +13,7 @@ class NewPlayer extends Component {
   static propTypes = {
     data: shape({
       loading: bool,
-      players: arrayOf(
-        shape({
-          id: string.isRequired,
-          firstName: string.isRequired,
-          lastName: string.isRequired
-        })
-      )
+      players: arrayOf(userShape).isRequired
     }),
     navigation: shape({
       state: shape({

@@ -1,30 +1,23 @@
 import React, { Component, PropTypes } from 'react'
 import { View, Image, Animated } from 'react-native'
 
-import { ranked } from 'utils'
-
-import LeaderboardHeader from 'Season/LeaderboardHeader'
-import LeaderboardCard from 'Season/LeaderboardCard'
+import LeaderboardCard from 'Leaderboard/LeaderboardCard'
+import AnimatedHeader from 'shared/AnimatedHeader'
 import Tabs from 'shared/Tabs'
 import EmptyState from 'shared/EmptyState'
+import TGText from 'shared/TGText'
+import TouchableView from 'shared/TouchableView'
+import { seasonShape, leaderboardPlayerShape } from 'propTypes'
+import { ranked } from 'utils'
 
-const { arrayOf, string, bool, shape, func } = PropTypes
+const { arrayOf, string, func } = PropTypes
 
-class Season extends Component {
+class LeaderboardContent extends Component {
   static propTypes = {
-    season: shape({
-      name: string,
-      id: string,
-      closed: bool,
-      photo: shape({
-        url: string
-      }),
-      players: arrayOf(LeaderboardCard.propTypes.data)
-    }).isRequired,
+    season: seasonShape.isRequired,
+    players: arrayOf(leaderboardPlayerShape).isRequired,
     currentUserId: string.isRequired,
-    toggleSeasonpicker: func.isRequired,
-    gotoProfile: func.isRequired,
-    gotoEvents: func.isRequired
+    toggleSeasonpicker: func.isRequired
   }
 
   constructor(props) {
@@ -45,18 +38,17 @@ class Season extends Component {
 
   render() {
     const { scrollY, sorting } = this.state
-    const { season, currentUserId, toggleSeasonpicker } = this.props
-    const { gotoEvents, gotoProfile } = this.props
+    const { players, season, currentUserId, toggleSeasonpicker } = this.props
 
     let sortedPlayers = null
     if (sorting === 'beers') {
-      const sorted = season.players.slice().sort((a, b) => b.totalBeers - a.totalBeers)
+      const sorted = players.slice().sort((a, b) => b.totalBeers - a.totalBeers)
       sortedPlayers = ranked(sorted, 'beerPos', 'totalBeers')
     } else if (sorting === 'kr') {
-      const sorted = season.players.slice().sort((a, b) => a.totalKr - b.totalKr)
+      const sorted = players.slice().sort((a, b) => a.totalKr - b.totalKr)
       sortedPlayers = ranked(sorted, 'krPos', 'totalKr')
     } else {
-      sortedPlayers = season.players.slice().sort((a, b) => a.position - b.position)
+      sortedPlayers = players.slice().sort((a, b) => a.position - b.position)
     }
 
     const emptyLeaderboard = sortedPlayers.filter(sl => sl.eventCount !== 0).length === 0
@@ -64,20 +56,34 @@ class Season extends Component {
     const showPhoto = season.closed && season.photo.url
 
     const paddingTop = scrollY.interpolate({
-      inputRange: [0, 60],
-      outputRange: [90, 40],
+      inputRange: [0, 40],
+      outputRange: [90, 60],
       extrapolate: 'clamp'
     })
 
     return (
       <View style={{ flex: 1, backgroundColor: '#fff' }}>
-        <LeaderboardHeader
+        <AnimatedHeader
           scrollY={scrollY}
-          toggleSeasonpicker={toggleSeasonpicker}
-          currentSeason={season.name}
-          gotoEvents={gotoEvents}
-          gotoProfile={gotoProfile}
-        />
+          title="Ledartavla"
+        >
+          <TouchableView
+            style={{
+              paddingTop: 10,
+              paddingBottom: 10,
+              paddingRight: 0,
+              paddingLeft: 20,
+              flex: 1,
+              justifyContent: 'flex-end',
+              alignItems: 'center',
+              flexDirection: 'row'
+            }}
+            onPress={toggleSeasonpicker}
+          >
+            <Image style={{ tintColor: '#777', resizeMode: 'contain', height: 12, width: 12, marginRight: 8 }} source={require('../../images/up.png')} />
+            <TGText style={{ fontWeight: 'bold', color: '#2ECC71' }}>{season.name}</TGText>
+          </TouchableView>
+        </AnimatedHeader>
 
         {emptyLeaderboard
           ? <EmptyState style={{ paddingTop: 200 }} text="Inga rundor spelade ännu" />
@@ -116,4 +122,4 @@ class Season extends Component {
   }
 }
 
-export default Season
+export default LeaderboardContent

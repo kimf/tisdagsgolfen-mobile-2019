@@ -7,31 +7,17 @@ import EventSetupPlayingCard from 'Scoring/EventSetupPlayingCard'
 import TGText from 'shared/TGText'
 
 import { withScoringSessionMutation } from 'mutations/scoringSessionMutation'
+import { eventShape, userShape } from 'propTypes'
 
-const { bool, shape, string, func } = PropTypes
+const { shape, func } = PropTypes
 
 class SetupIndividualEvent extends Component {
   static propTypes = {
     navigation: shape({
       state: shape({
         params: shape({
-          event: shape({
-            id: string.isRequired,
-            scoringType: string.isRequired,
-            status: string.isRequired,
-            teamEvent: bool.isRequired,
-            club: string,
-            course: shape({
-              id: string,
-              club: string,
-              name: string
-            })
-          }).isRequired,
-          user: shape({
-            id: string.isRequired,
-            firstName: string.isRequired,
-            lastName: string.isRequired
-          }).isRequired
+          event: eventShape.isRequired,
+          user: userShape.isRequired
         })
       })
     }).isRequired,
@@ -95,8 +81,7 @@ class SetupIndividualEvent extends Component {
       event: this.props.navigation.state.params.event,
       onAdd: this.onAddPlayer,
       addedIds: this.state.playing.map(p => p.id)
-    }
-    )
+    })
   }
 
   render() {

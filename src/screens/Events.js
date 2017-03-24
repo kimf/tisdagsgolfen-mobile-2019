@@ -1,53 +1,38 @@
 import React, { Component } from 'react'
-import { View, Image, ListView } from 'react-native'
+import { View, Image, ScrollView } from 'react-native'
+import { connect } from 'react-redux'
+import { compose } from 'react-apollo'
 
 import EmptyState from 'shared/EmptyState'
 import EventCard from 'Events/EventCard'
+import Header from 'shared/Header'
 import TouchableView from 'shared/TouchableView'
+
 // import { sortedByParsedDate } from '../utils'
-import { withEventsQuery } from 'queries/eventsQuery'
+import { withEventsQuery, eventsQueryProps } from 'queries/eventsQuery'
+import { userShape } from 'propTypes'
+import { NAVBAR_HEIGHT, colors } from 'styles'
 
-const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 })
-const { arrayOf, shape, bool, string } = React.PropTypes
+const { shape } = React.PropTypes
 
-// { icon: require('../images/white_back.png'), id: 'back' }
-// { icon: require('../images/plus.png'), id: 'add' }
 class Events extends Component {
   static navigationOptions = {
-    header: ({ state, navigate }) => {
-      let right = null
-      if (!state.params.seasonClosed) {
-        right = (
-          <TouchableView
-            style={{ paddingVertical: 10, paddingHorizontal: 20 }}
-            onPress={() => navigate('NewEvent', state.params)}
-          >
-            <Image source={require('../images/plus.png')} />
-          </TouchableView>
-        )
-      }
-      const title = 'Rundor'
-      return { right, title }
-    },
+    tabBar: () => ({
+      label: 'Rundor',
+      icon: ({ tintColor }) => (
+        <Image
+          source={require('../images/calendar-filled.png')}
+          style={{ tintColor, height: 22, width: 22 }}
+        />
+      )
+    }),
     gestureResponseDistance: 0
   }
 
   static propTypes = {
-    data: shape({
-      loading: bool,
-      events: arrayOf(EventCard.propTypes.event)
-    }),
-    navigation: shape({
-      state: shape({
-        params: shape({
-          user: shape({
-            id: string.isRequired
-          }).isRequired,
-          seasonId: string.isRequired,
-          seasonClosed: bool.isRequired
-        })
-      })
-    }).isRequired
+    data: eventsQueryProps,
+    currentUser: userShape.isRequired,
+    navigation: shape().isRequired
   }
 
   static defaultProps = {
@@ -63,33 +48,63 @@ class Events extends Component {
   }
 
   render() {
-    const { data, navigation } = this.props
-    const userId = navigation.state.params.user.id
+    const { data, currentUser } = this.props
 
     if (data.loading) {
       return null
     }
 
     if (data.events.length === 0) {
-      return <EmptyState text="Inga rundor :(" />
+      return <EmptyState style={{ paddingTop: NAVBAR_HEIGHT + 20 }} text="Inga rundor :(" />
     }
 
     // const sortedEvents = sortedByParsedDate(events, 'startsAt')
 
     return (
-      <View style={{ flex: 1, backgroundColor: '#eee' }}>
-        <ListView
+      <View style={{ flex: 1, backgroundColor: colors.green, paddingTop: NAVBAR_HEIGHT }}>
+        <Header
+          title="Rundor"
+          backgroundColor={colors.green}
+        >
+          <TouchableView
+            style={{
+              marginTop: -40,
+              marginRight: -10,
+              padding: 10,
+              flex: 1,
+              justifyContent: 'flex-end',
+              alignItems: 'center',
+              flexDirection: 'row'
+            }}
+            onPress={() => { this.props.navigation.navigate('NewEvent') }}
+          >
+            <Image
+              style={{ tintColor: '#fff' }}
+              source={require('../images/plus.png')}
+            />
+          </TouchableView>
+        </Header>
+        <ScrollView
+          style={{ paddingHorizontal: 5 }}
           ref={(c) => { this.listView = c }}
-          initialListSize={100}
-          dataSource={ds.cloneWithRows(data.events)}
-          renderRow={rowData => (
-            <EventCard userId={userId} event={rowData} onNavigate={this.navigateToEvent} />
-          )}
-          enableEmptySections
-        />
+          initialListSize={10}
+          scrollEventThrottle={1}
+        >
+          {data.events.map(event => (
+            <EventCard key={`event_${event.id}}`} userId={currentUser.id} event={event} onNavigate={this.navigateToEvent} />
+          ))}
+        </ScrollView>
       </View>
     )
   }
 }
 
-export default withEventsQuery(Events)
+const mapStateToProps = state => ({
+  seasonId: state.app.currentSeason.id,
+  currentUser: state.app.currentUser
+})
+
+export default compose(
+  connect(mapStateToProps),
+  withEventsQuery
+)(Events)
