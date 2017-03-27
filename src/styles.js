@@ -1,4 +1,4 @@
-import { StyleSheet, Platform } from 'react-native'
+import { StyleSheet, Platform, Dimensions } from 'react-native'
 
 export const colors = {
   cellBorder: '#CECECE',
@@ -11,6 +11,8 @@ export const colors = {
 
 export const NAVBAR_HEIGHT = 100
 export const STATUS_BAR_HEIGHT = Platform.select({ ios: 20, android: 24 })
+export const deviceWidth = Dimensions.get('window').width
+export const deviceHeight = Dimensions.get('window').height
 
 export default StyleSheet.create({
   /* MAIN LAYOUT PARTS */

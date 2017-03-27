@@ -1,6 +1,5 @@
-import { StyleSheet, Dimensions } from 'react-native'
-
-const deviceWidth = Dimensions.get('window').width
+import { StyleSheet } from 'react-native'
+import { deviceWidth } from 'styles'
 
 const styles = StyleSheet.create({
   /* EVENT CARDS */

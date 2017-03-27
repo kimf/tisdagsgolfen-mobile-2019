@@ -1,29 +1,19 @@
 import React, { Component, PropTypes } from 'react'
-import { View, Dimensions, LayoutAnimation, ScrollView } from 'react-native'
+import { Animated, View } from 'react-native'
 
 import HoleView from 'Scoring/HoleView'
-import HoleFooter from 'Scoring/HoleFooter'
-import HoleHeader from 'Scoring/HoleHeader'
+import ScoringFooter from 'Scoring/ScoringFooter'
 import Loading from 'shared/Loading'
-import { colors } from 'styles'
+import { colors, deviceHeight, deviceWidth } from 'styles'
 import { withScoringSessionQuery } from 'queries/scoringSessionQuery'
-import { ease } from 'animations'
 
 const { shape, bool } = PropTypes
-const deviceHeight = Dimensions.get('window').height
-const deviceWidth = Dimensions.get('window').width
 
 export class ScoreEvent extends Component {
   static navigationOptions = {
-    header: () => ({
-      visible: false
-    }),
-    tabBar: () => ({
-      visible: false
-    }),
-    cardStack: {
-      gesturesEnabled: false
-    }
+    header: () => ({ visible: false }),
+    tabBar: () => ({ visible: false }),
+    cardStack: { gesturesEnabled: false }
   }
 
   static propTypes = {
@@ -47,7 +37,8 @@ export class ScoreEvent extends Component {
     super(props)
     this.state = {
       currentHole: 1,
-      scrollEnabled: true
+      scrollEnabled: true,
+      scrollX: new Animated.Value(0)
     }
   }
 
@@ -58,10 +49,17 @@ export class ScoreEvent extends Component {
 
   changeHole = (nextHole) => {
     this.setState((state) => {
-      LayoutAnimation.configureNext(ease)
       this.scrollView.scrollTo({ x: (nextHole * deviceWidth) - deviceWidth, animated: true })
       return { ...state, currentHole: nextHole }
     })
+  }
+
+  gotoMenu = () => {
+    this.props.navigation.navigate('ScoringMenu')
+  }
+
+  gotoLeaderboard = () => {
+    this.props.navigation.navigate('ScoringLeaderboard')
   }
 
   handlePageChange = (e) => {
@@ -69,7 +67,6 @@ export class ScoreEvent extends Component {
     if (offset) {
       const page = Math.round(offset.x / deviceWidth) + 1
       if (this.state.currentHole !== page) {
-        LayoutAnimation.configureNext(ease)
         this.setState(state => ({ ...state, currentHole: page }))
       }
     }
@@ -77,7 +74,7 @@ export class ScoreEvent extends Component {
 
   render() {
     const { data } = this.props
-    const { currentHole, scrollEnabled } = this.state
+    const { currentHole, scrollEnabled, scrollX } = this.state
     if (data.loading) {
       return <Loading text="Laddar hål och sånt..." />
     }
@@ -85,19 +82,22 @@ export class ScoreEvent extends Component {
     const scoringSession = data.scoringSession
     const teamEvent = scoringSession.event.teamEvent
 
-    const hole = scoringSession.course.holes.find(h => h.number === currentHole)
     const playing = teamEvent ? scoringSession.scoringTeams : scoringSession.scoringPlayers
 
     return (
       <View style={{ flex: 1, height: '100%', alignItems: 'stretch', backgroundColor: colors.green }}>
-        <View style={{ height: deviceHeight - 44 }}>
-          <HoleHeader {...hole} />
-          <ScrollView
+        <View style={{ height: deviceHeight - 48 }}>
+          <Animated.ScrollView
             style={{ width: '100%', height: '100%' }}
             ref={(sv) => { this.scrollView = sv }}
             showsHorizontalScrollIndicator={false}
             scrollEnabled={scrollEnabled}
             onMomentumScrollEnd={this.handlePageChange}
+            scrollEventThrottle={1}
+            onScroll={Animated.event(
+              [{ nativeEvent: { contentOffset: { x: this.state.scrollX } } }],
+              { useNativeDriver: true }
+            )}
             horizontal
             paging
             bounces
@@ -112,15 +112,18 @@ export class ScoreEvent extends Component {
                 playing={playing}
                 holesCount={scoringSession.course.holes.length}
                 event={scoringSession.event}
+                scrollX={scrollX}
                 scoringSessionId={scoringSession.id}
               />
             ))}
-          </ScrollView>
+          </Animated.ScrollView>
         </View>
-        <HoleFooter
+
+        <ScoringFooter
           number={currentHole}
           maxNumber={scoringSession.course.holes.length}
-          changeHole={this.changeHole}
+          gotoMenu={this.gotoMenu}
+          gotoLeaderboard={this.gotoLeaderboard}
         />
       </View>
     )

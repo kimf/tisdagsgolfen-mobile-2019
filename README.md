@@ -1,3 +1,7 @@
+// TODO:
+ - Move styles to StyleSheet (Performance)
+ - Refactor to re-use common views
+
 Notification object received example:
 
 {

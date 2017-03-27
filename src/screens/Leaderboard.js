@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { View, Image } from 'react-native'
+import { NavigationActions } from 'react-navigation'
 import { LogView } from 'react-native-device-log'
 import { connect } from 'react-redux'
 import { compose } from 'react-apollo'
@@ -16,6 +17,7 @@ const { arrayOf, func, shape } = React.PropTypes
 
 class Leaderboard extends Component {
   static navigationOptions = {
+    header: () => ({ visible: false }),
     tabBar: () => ({
       label: 'Ledartavla',
       icon: ({ tintColor }) => (
@@ -68,7 +70,13 @@ class Leaderboard extends Component {
 
   showActiveScoringSession = () => {
     const scoringSessionId = this.props.activeScoringSession.id
-    this.props.navigation.navigate('ScoreEvent', { scoringSessionId })
+    const resetAction = NavigationActions.reset({
+      index: 0,
+      actions: [
+        NavigationActions.navigate({ routeName: 'ScoreEvent', params: { scoringSessionId } })
+      ]
+    })
+    this.props.navigation.dispatch(resetAction)
   }
 
   render() {

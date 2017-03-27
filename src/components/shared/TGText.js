@@ -1,11 +1,12 @@
 /* eslint-disable react/prop-types */
 import React from 'react'
-import { StyleSheet, Text, Dimensions } from 'react-native'
+import { StyleSheet, Text } from 'react-native'
+
+import { deviceWidth, deviceHeight } from 'styles'
 
 import TouchableView from 'shared/TouchableView'
 
-const { width, height } = Dimensions.get('window')
-const realWidth = height > width ? width : height
+const realWidth = deviceHeight > deviceWidth ? deviceWidth : deviceHeight
 const FONT_SIZE = 16
 const styles = StyleSheet.create({
   text: {

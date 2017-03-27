@@ -3,7 +3,7 @@ import Root from './src/Root'
 
 // eslint-disable-next-line no-console
 console.ignoredYellowBox = [
-  'Calling of `[-RCTUIManager setFrame:forView:]` which is deprecated.'
+  'Warning: You are manually calling a React.PropTypes validation function for the'
 ]
 
 AppRegistry.registerComponent('Tisdagsgolfen', () => Root)

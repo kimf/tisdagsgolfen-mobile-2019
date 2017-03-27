@@ -1,18 +1,17 @@
 import React, { Component, PropTypes } from 'react'
-import { View, Dimensions, LayoutAnimation } from 'react-native'
+import { View } from 'react-native'
 
 import TouchableView from 'shared/TouchableView'
 import TGText from 'shared/TGText'
 import ScoreRow from 'Scoring/ScoreRow'
 import ScorecardHeaderRow from 'Scoring/ScorecardHeaderRow'
 import ScoreInput from 'Scoring/ScoreInput'
-import { colors } from 'styles'
+import HoleHeader from 'Scoring/HoleHeader'
+import { colors, deviceHeight, deviceWidth } from 'styles'
 
 import { calculateExtraStrokes } from 'utils'
-import { spring } from 'animations'
 
 const { shape, number, arrayOf, string } = PropTypes
-const deviceWidth = Dimensions.get('window').width
 
 class HoleView extends Component {
   static propTypes = {
@@ -20,13 +19,13 @@ class HoleView extends Component {
     hole: shape().isRequired,
     holesCount: number.isRequired,
     playing: arrayOf(shape()).isRequired,
-    scoringSessionId: string.isRequired
+    scoringSessionId: string.isRequired,
+    scrollX: shape().isRequired
   }
 
   state = { scoringId: null }
 
   toggleScoring = (scoringId) => {
-    LayoutAnimation.configureNext(spring)
     this.setState((state) => {
       if (state.scoringId) { return { scoringId: null } }
       return { scoringId }
@@ -34,15 +33,16 @@ class HoleView extends Component {
   }
 
   render() {
-    const { event, hole, playing, holesCount, scoringSessionId } = this.props
+    const { event, hole, playing, holesCount, scoringSessionId, scrollX } = this.props
     const { scoringId } = this.state
 
     return (
-      <View style={{ flex: 1, height: '100%', backgroundColor: colors.green }}>
+      <View style={{ flex: 1, backgroundColor: colors.green }}>
+        <HoleHeader {...hole} scrollX={scrollX} />
         <View
           style={{
             marginHorizontal: 10,
-            height: '95%',
+            height: deviceHeight - 170,
             width: deviceWidth - 20,
             backgroundColor: '#fff',
             borderRadius: 10,
@@ -90,7 +90,7 @@ class HoleView extends Component {
                   {scoringId && scoringId !== item.id
                     ? null
                     : <View style={{ flex: 2, paddingTop: 20, paddingLeft: 20, paddingBottom: 20 }}>
-                      <TGText style={{ fontWeight: 'bold', lineHeight: 30, fontSize: '24' }}>
+                      <TGText style={{ fontWeight: 'bold', lineHeight: 30, fontSize: '20' }}>
                         {itemName}
                       </TGText>
                       <TGText style={{ color: '#777' }}>{scoreItem.extraStrokes} slag</TGText>

@@ -1,37 +1,44 @@
 import { TabNavigator, TabView, StackNavigator } from 'react-navigation'
 
 import Leaderboard from 'screens/Leaderboard'
-import Events from 'screens/Events'
+import EventsScreen from 'screens/Events'
 import Profile from 'screens/Profile'
 
-import ScoreEventScreen from 'screens/EventScreens/ScoreEvent'
 import NewEvent from 'screens/EventScreens/NewEvent'
 import EventResult from 'screens/EventScreens/EventResult'
 import SetupIndividualEvent from 'screens/EventScreens/SetupIndividualEvent'
 import SetupTeamEvent from 'screens/EventScreens/SetupTeamEvent'
-import LiveEvent from 'screens/EventScreens/LiveEvent'
 import NewPlayer from 'screens/NewPlayer'
 
+import ScoreEventScreen from 'screens/ScoringScreens/ScoreEvent'
+import ScoringMenu from 'screens/ScoringScreens/ScoringMenu'
+import ScoringLeaderboard from 'screens/ScoringScreens/ScoringLeaderboard'
+
+const scoringRoutes = {
+  Leaderboard: { screen: Leaderboard },
+  ScoreEvent: { screen: ScoreEventScreen },
+  ScoringLeaderboard: { screen: ScoringLeaderboard },
+  ScoringMenu: { screen: ScoringMenu }
+}
+const ScoreStack = StackNavigator(scoringRoutes, { headerMode: 'screen', initialRouteName: 'Leaderboard', mode: 'modal' })
+
 const eventRoutes = {
-  Events: { screen: Events },
+  EventsIndex: { screen: EventsScreen },
   NewEvent: { screen: NewEvent },
   EventResult: { screen: EventResult },
   SetupIndividualEvent: { screen: SetupIndividualEvent },
   SetupTeamEvent: { screen: SetupTeamEvent },
-  LiveEvent: { screen: LiveEvent },
-  NewPlayer: { screen: NewPlayer },
-  ScoreEvent: { screen: ScoreEventScreen }
+  NewPlayer: { screen: NewPlayer }
 }
+const EventStack = StackNavigator(eventRoutes, { headerMode: 'screen', initialRouteName: 'EventsIndex' })
 
-const EventStack = StackNavigator(eventRoutes, { headerMode: 'screen', initialRouteName: 'Events' })
-const routes = {
-  Leaderboard: { screen: Leaderboard },
+const tabRoutes = {
+  Leaderboard: { screen: ScoreStack },
   Events: { screen: EventStack },
   Profile: { screen: Profile }
 }
 
-// eslint-disable-next-line import/prefer-default-export
-export const TabStack = TabNavigator(routes, {
+const TabStack = TabNavigator(tabRoutes, {
   tabBarComponent: TabView.TabBarBottom,
   tabBarPosition: 'bottom',
   initialRouteName: 'Leaderboard',
@@ -43,6 +50,20 @@ export const TabStack = TabNavigator(routes, {
     showLabel: false
   }
 })
+
+const mainRoutes = {
+  Home: { screen: TabStack },
+  Scoring: { screen: ScoreStack },
+  Events: { screen: EventStack }
+}
+
+const RootStack = StackNavigator(mainRoutes, {
+  headerMode: 'none',
+  initialRouteName: 'Home'
+})
+
+export default RootStack
+
 // export const MainStack = StackNavigator(
 //   routes,
 //   { initialRouteName: 'Main', headerMode: 'screen' }

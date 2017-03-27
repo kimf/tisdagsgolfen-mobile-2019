@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { compose } from 'react-apollo'
 import { withMainQuery, mainQueryProps } from 'queries/mainQuery'
 
-import { TabStack } from 'routes'
+import RootStack from 'routes'
 import Login from 'screens/Login'
 import Loading from 'shared/Loading'
 
@@ -32,7 +32,7 @@ class App extends Component {
       return <Loading />
     }
 
-    return <TabStack />
+    return <RootStack />
   }
 }
 

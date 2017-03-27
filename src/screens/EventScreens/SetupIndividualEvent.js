@@ -79,7 +79,7 @@ class SetupIndividualEvent extends Component {
         index: 0,
         actions: [
           NavigationActions.navigate({
-            routeName: 'ScoreEvent',
+            routeName: 'Scoring',
             params: { scoringSessionId: res.data.createScoringSession.id }
           })
         ]
