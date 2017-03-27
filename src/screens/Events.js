@@ -27,6 +27,9 @@ export class Events extends Component {
         />
       )
     }),
+    header: () => ({
+      visible: false
+    }),
     gestureResponseDistance: 0
   }
 

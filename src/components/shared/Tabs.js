@@ -1,21 +1,21 @@
 import React from 'react'
-import { View, SegmentedControlIOS } from 'react-native'
+import { View } from 'react-native'
 
-// import Tab from 'shared/Tab'
+import Tab from 'shared/Tab'
+import styles from 'styles'
 
-const Tabs = ({ currentRoute, onChange, tabs /* , style */ }) => {
-  const currentIndex = tabs.findIndex(t => t.value === currentRoute)
-  return (
-    <View style={{ width: '100%', paddingVertical: 10, flex: 1, backgroundColor: '#fff' }}>
-      <SegmentedControlIOS
-        selectedIndex={currentIndex}
-        values={tabs.map(t => t.title)}
-        onValueChange={val => onChange(tabs.find(t => t.title === val).value)}
-        tintColor="#2ECC71"
+const Tabs = ({ currentRoute, onChange, tabs }) => (
+  <View style={styles.tabs}>
+    {tabs.map(t => (
+      <Tab
+        key={`tab_${t.value}`}
+        tab={t}
+        isCurrent={currentRoute === t.value}
+        onChange={onChange}
       />
-    </View>
-  )
-}
+    ))}
+  </View>
+)
 
 const { arrayOf, string, func, shape } = React.PropTypes
 

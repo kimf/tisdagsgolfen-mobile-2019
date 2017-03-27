@@ -1,5 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { View, ListView } from 'react-native'
+import { connect } from 'react-redux'
+import { compose } from 'react-apollo'
 
 import EventHeader from 'Events/EventHeader'
 import EventLeaderboardCard from 'Events/EventLeaderboardCard'
@@ -16,18 +18,24 @@ const { arrayOf, shape, string, bool } = PropTypes
 
 class EventResult extends Component {
   static navigationOptions = {
-    title: ({ state }) => state.params.title
+    title: ({ state }) => state.params.title,
+    header: () => ({
+      visible: true
+    }),
+    tabBar: () => ({
+      visible: false
+    })
   }
 
   static propTypes = {
     navigation: shape({
       state: shape({
         params: shape({
-          userId: string.isRequired,
           event: eventShape.isRequired
         })
       })
     }).isRequired,
+    currentUserId: string.isRequired,
     data: shape({
       loading: bool,
       players: arrayOf(EventLeaderboardCard.propTypes.data)
@@ -49,8 +57,8 @@ class EventResult extends Component {
   }
 
   render() {
-    const { navigation, data } = this.props
-    const { event, userId } = navigation.state.params
+    const { navigation, data, currentUserId } = this.props
+    const { event } = navigation.state.params
     const { sorting } = this.state
 
     const eventHeader = <EventHeader {...event} />
@@ -90,9 +98,9 @@ class EventResult extends Component {
           ref={(ref) => { this.listView = ref }}
           renderRow={rowData =>
             <EventLeaderboardCard
-              key={`l_${userId}`}
+              key={`l_${currentUserId}`}
               scoringType={event.scoringType}
-              currentUserId={userId}
+              currentUserId={currentUserId}
               data={rowData}
               sorting={sorting}
             />
@@ -104,4 +112,9 @@ class EventResult extends Component {
   }
 }
 
-export default withEventQuery(EventResult)
+const mapStateToProps = state => ({ currentUserId: state.app.currentUser.id })
+
+export default compose(
+  connect(mapStateToProps),
+  withEventQuery
+)(EventResult)

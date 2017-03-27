@@ -34,7 +34,10 @@ export default StyleSheet.create({
 
   formColumn: {
     flex: 1,
-    padding: 10
+    paddingTop: 10,
+    paddingBottom: 20,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderColor: '#cecece'
   },
 
   formColumnContent: {
@@ -212,5 +215,25 @@ export default StyleSheet.create({
     backgroundColor: '#64C48B',
     borderTopWidth: 1,
     borderTopColor: '#2ABC63'
+  },
+
+  tabs: {
+    flexDirection: 'row',
+    width: '100%',
+    maxHeight: 60,
+    paddingVertical: 10,
+    flex: 1,
+    backgroundColor: '#fff'
+  },
+
+  tab: {
+    flex: 1,
+    paddingVertical: 8,
+    flexDirection: 'row',
+    justifyContent: 'center'
+  },
+
+  tabText: {
+    fontSize: 14
   }
 })

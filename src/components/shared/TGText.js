@@ -22,12 +22,12 @@ const TGText = ({ onPress, style, viewStyle, children, ...rest }) => {
   const scaledFontSize = Math.round((fontSize * realWidth) / 375)
 
   const text = (
-    <Text style={[styles.text, style, { fontSize: scaledFontSize }]} {...rest}>
+    <Text key={`${rest.key}_inner`} style={[styles.text, style, { fontSize: scaledFontSize }]} {...rest}>
       {children}
     </Text>
   )
   return onPress
-    ? <TouchableView style={viewStyle} onPress={onPress}>{text}</TouchableView>
+    ? <TouchableView key={rest.key} style={viewStyle} onPress={onPress}>{text}</TouchableView>
     : text
 }
 

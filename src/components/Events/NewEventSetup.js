@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import { Switch, View, StyleSheet } from 'react-native'
-import Calendar from 'react-native-calendar-datepicker'
-import moment from 'moment'
-import 'moment/locale/sv'
+import { Switch, View, StyleSheet, Platform, DatePickerAndroid, DatePickerIOS } from 'react-native'
+// import moment from 'moment'
+// import 'moment/locale/sv'
 
 import TGText from 'shared/TGText'
+import BottomButton from 'shared/BottomButton'
 import styles from 'styles'
 import { withCreateEventMutation } from 'mutations/createEventMutation'
 
@@ -28,7 +28,7 @@ class NewEventSetup extends Component {
     teamEvent: false,
     isSaving: false,
     error: false,
-    startsAt: moment().startOf('day')
+    startsAt: new Date()
   }
 
   onSubmit = () => {
@@ -54,6 +54,14 @@ class NewEventSetup extends Component {
     this.setState({ startsAt })
   }
 
+  renderDatePicker = () => {
+    const startsAt = this.state.startsAt
+    if (Platform.OS === 'android') {
+      return <DatePickerAndroid />
+    }
+    return <DatePickerIOS date={startsAt} mode="date" onDateChange={this.onDateChange} />
+  }
+
   render() {
     const { changeCourse, course } = this.props
     const { teamEvent, isStrokes, startsAt, isSaving, error } = this.state
@@ -69,7 +77,7 @@ class NewEventSetup extends Component {
     }
 
     return (
-      <View style={[styles.container, { alignItems: 'stretch', flexDirection: 'column' }]}>
+      <View style={styles.container}>
         <View style={[styles.inlineHeader, { flexDirection: 'row' }]}>
           <TGText style={{ flex: 1, padding: 10 }}>{course.club}: {course.name}</TGText>
           <TGText
@@ -83,7 +91,7 @@ class NewEventSetup extends Component {
         {showError}
 
         <View style={[styles.formRow, { flexDirection: 'row' }]}>
-          <View style={[styles.formColumn, { borderRightWidth: StyleSheet.hairlineWidth, borderColor: '#cecece' }]}>
+          <View style={[styles.formColumn, { borderRightWidth: StyleSheet.hairlineWidth }]}>
             <TGText style={styles.label}>Lagtävling?</TGText>
             <Switch
               onValueChange={te => this.setState({ teamEvent: te })}
@@ -102,26 +110,16 @@ class NewEventSetup extends Component {
         </View>
 
         <View style={styles.formRow}>
-          <Calendar
-            onChange={d => this.onDateChange(d)}
-            selected={startsAt}
-            minDate={moment().startOf('day')}
-            maxDate={moment().add(2, 'years').startOf('day')}
-          />
+          <TGText style={styles.label}>Datum</TGText>
+          {this.renderDatePicker()}
         </View>
 
 
         {isSaving || !startsAt
           ? null
-          : <TGText
-            viewStyle={{ backgroundColor: 'green', padding: 10, width: '100%' }}
-            style={{ color: 'white', textAlign: 'center', fontWeight: 'bold' }}
-            onPress={this.onSubmit}
-          >
-            SKAPA RUNDA
-          </TGText>
+          : <BottomButton title="SKAPA RUNDA" onPress={this.onSubmit} />
         }
-      </View>
+      </View >
     )
   }
 }

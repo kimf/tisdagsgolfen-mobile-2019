@@ -1,33 +1,29 @@
 import React from 'react'
-import { TouchableOpacity, Text } from 'react-native'
 
-// TODO: Rewrite with TGText
+import TGText from 'shared/TGText'
+import styles, { colors } from 'styles'
 
-const tabStyle = (padding, isCurrent) => ({
-  flex: 1,
-  paddingTop: padding,
-  paddingBottom: padding,
-  backgroundColor: isCurrent ? '#feb' : '#eee',
-  flexDirection: 'row',
-  justifyContent: 'center'
-})
-
-const Tab = ({ tab, isCurrent, onChange, fontSize, padding }) => {
+const Tab = ({ tab, isCurrent, onChange }) => {
   const text = `${tab.icon} ${tab.title}`
   return (
-    <TouchableOpacity
+    <TGText
       key={tab.title}
-      style={tabStyle(padding, isCurrent)}
+      viewStyle={[styles.tab, { backgroundColor: isCurrent ? colors.green : colors.lightGray }]}
+      style={[
+        styles.tabText,
+        {
+          color: isCurrent ? '#fff' : '#444',
+          fontWeight: isCurrent ? 'bold' : 'normal'
+        }
+      ]}
       onPress={() => onChange(tab.value)}
     >
-      <Text style={{ fontSize, color: isCurrent ? '#000' : '#444' }}>
-        {text}
-      </Text>
-    </TouchableOpacity>
+      {text}
+    </TGText>
   )
 }
 
-const { shape, string, bool, func, number } = React.PropTypes
+const { shape, string, bool, func } = React.PropTypes
 
 Tab.propTypes = {
   tab: shape({
@@ -36,10 +32,7 @@ Tab.propTypes = {
     title: string.isRequired
   }).isRequired,
   isCurrent: bool.isRequired,
-  onChange: func.isRequired,
-  fontSize: number.isRequired,
-  padding: number.isRequired
+  onChange: func.isRequired
 }
-
 
 export default Tab

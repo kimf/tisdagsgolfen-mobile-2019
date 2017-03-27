@@ -7,7 +7,6 @@ import { compose } from 'react-apollo'
 import { seasonShape, userShape } from 'propTypes'
 import { withLeaderboardQuery, leaderboardQueryProps } from 'queries/leaderboardQuery'
 import { changeSeason } from 'actions/app'
-import { spring } from 'animations'
 
 import LeaderboardContent from 'Leaderboard/LeaderboardContent'
 import SeasonPicker from 'Leaderboard/SeasonPicker'
@@ -125,8 +124,8 @@ class Leaderboard extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => ({
-  onChangeSeason: seasonId => dispatch(changeSeason(seasonId))
+const mapDispatchToProps = dp => ({
+  onChangeSeason: seasonId => dp(changeSeason(seasonId))
 })
 
 const mapStateToProps = state => ({

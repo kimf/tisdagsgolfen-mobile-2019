@@ -1,20 +1,29 @@
 import React, { Component, PropTypes } from 'react'
 import { View, ScrollView } from 'react-native'
 import update from 'immutability-helper'
+import { connect } from 'react-redux'
+import { compose } from 'react-apollo'
 
 import EventSetupPlayingCard from 'Scoring/EventSetupPlayingCard'
-import TGText from 'shared/TGText'
+import BottomButton from 'shared/BottomButton'
+import TopButton from 'shared/TopButton'
+
 import { eventShape, userShape } from 'propTypes'
 
 const { shape } = PropTypes
 
 class SetupTeamEvent extends Component {
+  static navigationOptions = {
+    title: 'Starta runda',
+    tabBar: () => ({ visible: false })
+  }
+
   static propTypes = {
+    currentUser: userShape.isRequired,
     navigation: shape({
       state: shape({
         params: shape({
-          event: eventShape.isRequired,
-          user: userShape.isRequired
+          event: eventShape.isRequired
         }).isRequired
       }).isRequired
     }).isRequired
@@ -26,7 +35,7 @@ class SetupTeamEvent extends Component {
     const playing = [
       {
         id: 0,
-        players: [props.navigation.state.params.user],
+        players: [props.currentUser],
         strokes: 0
       }
     ]
@@ -103,13 +112,7 @@ class SetupTeamEvent extends Component {
 
     return (
       <View style={{ flex: 1 }}>
-        <TGText
-          viewStyle={{ width: '100%', padding: 10, backgroundColor: '#ccc' }}
-          style={{ fontSize: 12, fontWeight: 'bold', color: '#888', textAlign: 'center' }}
-          onPress={this.onAddTeam}
-        >
-          + LÄGG TILL LAG
-        </TGText>
+        <TopButton title="+ LÄGG TILL LAG" onPress={this.onAddTeam} />
         <ScrollView>
           {playing.map((team) => {
             const props = {
@@ -122,16 +125,14 @@ class SetupTeamEvent extends Component {
             return <EventSetupPlayingCard key={`setup_team_${team.id}`} item={team} {...props} />
           })}
         </ScrollView>
-        <TGText
-          viewStyle={{ alignSelf: 'center', width: '100%', paddingVertical: 10, backgroundColor: 'green' }}
-          style={{ fontWeight: 'bold', color: 'white', textAlign: 'center' }}
-          onPress={this.startPlay}
-        >
-          STARTA RUNDA
-        </TGText>
+        <BottomButton title="STARTA RUNDA" onPress={this.startPlay} />
       </View>
     )
   }
 }
 
-export default SetupTeamEvent
+const mapStateToProps = state => ({ currentUser: state.app.currentUser })
+
+export default compose(
+  connect(mapStateToProps)
+)(SetupTeamEvent)

@@ -3,17 +3,22 @@ import { View, ListView } from 'react-native'
 
 import TGText from 'shared/TGText'
 import styles from 'styles'
-
 import { withUserQuery } from 'queries/userQuery'
 import { userShape } from 'propTypes'
+
 const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 })
 const { shape, bool, arrayOf, func, string, number } = PropTypes
 
 class NewPlayer extends Component {
+  static navigationOptions = {
+    title: 'Lägg till spelare',
+    tabBar: () => ({ visible: false })
+  }
+
   static propTypes = {
     data: shape({
       loading: bool,
-      players: arrayOf(userShape).isRequired
+      players: arrayOf(userShape)
     }),
     navigation: shape({
       state: shape({

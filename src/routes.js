@@ -23,7 +23,7 @@ const eventRoutes = {
   ScoreEvent: { screen: ScoreEventScreen }
 }
 
-const EventStack = StackNavigator(eventRoutes, { headerMode: 'none', initialRouteName: 'Events' })
+const EventStack = StackNavigator(eventRoutes, { headerMode: 'screen', initialRouteName: 'Events' })
 const routes = {
   Leaderboard: { screen: Leaderboard },
   Events: { screen: EventStack },

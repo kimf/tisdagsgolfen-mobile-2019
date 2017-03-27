@@ -77,20 +77,18 @@ class EventSetupPlayingCard extends Component {
           >
             {item.players.map(player => (
               <View key={`pl_team_player_${player.id}`} style={{ width: '100%', paddingVertical: 5, flexDirection: 'row' }}>
+                <TGText style={{ flex: 1, color: 'red', marginRight: 10 }} onPress={() => onRemovePlayerFromTeam(item, player)}>
+                  X
+                </TGText>
                 <TGText style={{ flex: 1, fontWeight: 'bold', fontSize: 14 }}>
                   {player.firstName} {player.lastName}
-                </TGText>
-                <TGText style={{ flex: 1, color: 'red' }} onPress={() => onRemovePlayerFromTeam(item, player)}>
-                  Ta bort
                 </TGText>
               </View>
             ))}
             <TGText
               viewStyle={{
                 marginTop: 10,
-                maxWidth: '60%',
-                paddingVertical: 5,
-                paddingHorizontal: 10,
+                padding: 10,
                 backgroundColor: '#ccc'
               }}
               style={{ textAlign: 'center' }}
