@@ -1,0 +1,108 @@
+{
+  "data": {
+    "events": [
+      {
+        "course": null,
+        "startsAt": "2014-08-12T17:00:50.000Z",
+        "teamEvent": true,
+        "id": "ciyw18yagmnnt0197kvnndl1q",
+        "scoringType": "strokes",
+        "status": "finished",
+        "oldCourseName": "Nynäshamns GK: Dal-Sjö"
+      },
+      {
+        "course": null,
+        "startsAt": "2014-04-22T15:00:00.000Z",
+        "teamEvent": false,
+        "id": "ciyw18yammnny0197vgof34bu",
+        "scoringType": "points",
+        "status": "finished",
+        "oldCourseName": "Nynäshamn: Dal-Sjö"
+      },
+      {
+        "course": null,
+        "startsAt": "2015-07-28T17:00:00.000Z",
+        "teamEvent": false,
+        "id": "ciyw18yavx4he0114c26ekcz5",
+        "scoringType": "points",
+        "status": "finished",
+        "oldCourseName": "Riksten"
+      },
+      {
+        "course": null,
+        "startsAt": "2014-04-15T15:00:00.000Z",
+        "teamEvent": false,
+        "id": "ciyw18yb6mns00197nwu6jaq3",
+        "scoringType": "points",
+        "status": "finished",
+        "oldCourseName": "Nynäshamn: Sjö-Berg"
+      },
+      {
+        "course": null,
+        "startsAt": "2014-05-27T17:20:00.000Z",
+        "teamEvent": false,
+        "id": "ciyw18yblmns50197czrtu93o",
+        "scoringType": "strokes",
+        "status": "finished",
+        "oldCourseName": "Nynäshamn: Sjö-Berg"
+      },
+      {
+        "course": null,
+        "startsAt": "2014-06-10T17:20:21.000Z",
+        "teamEvent": false,
+        "id": "ciyw18ybqx4j101149dw392qq",
+        "scoringType": "points",
+        "status": "finished",
+        "oldCourseName": "Nynäshamn: Berg-Dal"
+      },
+      {
+        "course": null,
+        "startsAt": "2014-04-29T15:00:00.000Z",
+        "teamEvent": false,
+        "id": "ciyw18ycxx4v501140cs7q6mn",
+        "scoringType": "points",
+        "status": "finished",
+        "oldCourseName": "Nynäshamn: Dal-Sjö"
+      },
+      {
+        "course": {
+          "id": "cj0asp1fg1etr0194mkjld10u",
+          "club": "Nynäshamns Golfklubb",
+          "name": "Berg-Dal "
+        },
+        "startsAt": "2017-05-01T22:00:00.000Z",
+        "teamEvent": false,
+        "id": "cj0aw6gsw7mfy0194wlw0gwel",
+        "scoringType": "points",
+        "status": "planned",
+        "oldCourseName": null
+      },
+      {
+        "course": {
+          "id": "cj0asovzqdykl0124x3evoyeg",
+          "club": "Ågesta Golfklubb",
+          "name": "18-hålsbanan"
+        },
+        "startsAt": "2017-03-30T22:00:00.000Z",
+        "teamEvent": true,
+        "id": "cj0awsq87m2cq0124qcjaeqat",
+        "scoringType": "strokes",
+        "status": "planned",
+        "oldCourseName": null
+      },
+      {
+        "course": {
+          "id": "cj0asp1y7e24901243x1vlh25",
+          "club": "Landeryds Golfklubb",
+          "name": "Södra"
+        },
+        "startsAt": "2017-03-22T23:00:00.000Z",
+        "teamEvent": true,
+        "id": "cj0ma8qld1en80105lr2us8nk",
+        "scoringType": "strokes",
+        "status": "live",
+        "oldCourseName": null
+      }
+    ]
+  }
+}

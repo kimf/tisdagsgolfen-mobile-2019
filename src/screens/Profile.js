@@ -3,9 +3,11 @@ import { View, Image } from 'react-native'
 import { connect } from 'react-redux'
 
 import styles from 'styles'
+import Header from 'shared/Header'
 import TGText from 'shared/TGText'
 import { logout } from 'actions/app'
 import { userShape } from 'propTypes'
+import { NAVBAR_HEIGHT } from 'styles'
 
 const { func } = PropTypes
 
@@ -36,17 +38,16 @@ class Profile extends Component {
 
     return (
       <View style={styles.container}>
-        <TGText
-          style={{ marginVertical: 40, height: 40, textAlign: 'center' }}
-        >
-          Hej {user.firstName} {user.lastName}
-        </TGText>
-        <TGText
-          style={{ textAlign: 'center' }}
-          onPress={() => { onLogout(user.email) }}
-        >
-          LOGGA UT
-        </TGText>
+        <Header title="Profil" />
+        <View style={{ flex: 1, paddingTop: NAVBAR_HEIGHT }}>
+          <TGText
+            viewStyle={{ backgroundColor: 'red', marginVertical: 100, marginHorizontal: 20, padding: 20 }}
+            style={{ textAlign: 'center', color: 'white', fontWeight: 'bold' }}
+            onPress={() => { onLogout(user.email) }}
+          >
+            LOGGA UT
+          </TGText>
+        </View>
       </View>
     )
   }

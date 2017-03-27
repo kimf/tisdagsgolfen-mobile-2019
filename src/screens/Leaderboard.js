@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Image, LayoutAnimation } from 'react-native'
+import { View, Image } from 'react-native'
 import { LogView } from 'react-native-device-log'
 import { connect } from 'react-redux'
 import { compose } from 'react-apollo'
@@ -56,7 +56,6 @@ class Leaderboard extends Component {
 
   onChangeSeason = (seasonId) => {
     this.props.onChangeSeason(seasonId)
-    LayoutAnimation.configureNext(spring)
     this.toggleSeasonpicker()
   }
 

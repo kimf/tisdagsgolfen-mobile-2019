@@ -6,9 +6,8 @@ import TGText from 'shared/TGText'
 
 import { ScoreEvent } from 'screens/EventScreens/ScoreEvent'
 import HoleView from 'Scoring/HoleView'
-
-import NewLeaderBoard from 'screens/NewLeaderboard'
 import Login from 'screens/Login'
+import { Events } from 'screens/Events'
 
 // import NavigationBar from './NavigationBar'
 import CenterView from './CenterView'
@@ -19,18 +18,55 @@ const fakeNavigator = {
   dismissAllModals: () => { action('navigator.dismissAllModals') }
 }
 
+const currentUser = {
+  id: 'userid',
+  firstName: 'Kim',
+  lastName: 'Fransman'
+}
+
+const currentSeason = {
+  id: 'seasonid',
+  name: '2017',
+  closed: true
+}
+
 const reduxContext = {
-  client: {},
   store: {
-    getState: () => ({ app: {} }),
-    subscribe: () => { }
+    getState: () => ({}),
+    subscribe: () => { },
+    dispatch: () => { }
   }
 }
 
-storiesOf('NewLeaderboard', module)
-  .add('Default', () => (
-    <NewLeaderBoard
-      data={{ loading: false, scoringSession: require('../leaderboardProps.json').data }}
+const navigation = {
+  navigate: () => { }
+}
+
+const events = require('../eventsProps.json').data.events.reverse()
+
+storiesOf('EventsScreen', module)
+  .addDecorator(getStory => (
+    <WithContext context={{ ...reduxContext }}>
+      {getStory()}
+    </WithContext>
+  ))
+  .add('Closed Season', () => (
+    <Events
+      seasonClosed
+      currentSeason={currentSeason}
+      currentUser={currentUser}
+      navigation={navigation}
+      data={{ loading: false, events }}
+    />
+  ))
+
+  .add('Open Season', () => (
+    <Events
+      seasonClosed={false}
+      currentSeason={currentSeason}
+      currentUser={currentUser}
+      navigation={navigation}
+      data={{ loading: false, events }}
     />
   ))
 
@@ -45,7 +81,7 @@ storiesOf('HoleView', module)
   .add('Default', () => (
     <HoleView
       key={'hole_view_stringid'}
-      {...require('../holeViewProps.json')}
+      {...require('../holeViewProps.json') }
       toggleScroll={action('call on prop toggleScroll')}
       onChangeHole={action('changeHole')}
     />

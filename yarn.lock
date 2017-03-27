@@ -2827,7 +2827,7 @@ function-bind@^1.0.2, function-bind@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/function-bind/-/function-bind-1.1.0.tgz#16176714c801798e4e8f2cf7f7529467bb4a5771"
 
-fuse.js@^2.2.0, fuse.js@^2.6.2:
+fuse.js@^2.2.0:
   version "2.6.2"
   resolved "https://registry.yarnpkg.com/fuse.js/-/fuse.js-2.6.2.tgz#d5d994fda96f543b5a51df38b72cec9cc60d9dea"
 
@@ -5389,9 +5389,9 @@ react-transform-hmr@^1.0.4:
     global "^4.3.0"
     react-proxy "^1.1.7"
 
-react@~16.0.0-alpha.3:
-  version "16.0.0-alpha.5"
-  resolved "https://registry.yarnpkg.com/react/-/react-16.0.0-alpha.5.tgz#ba5ca2058e7f39b010661497286e37133eb1c9fa"
+react@16.0.0-alpha.4:
+  version "16.0.0-alpha.4"
+  resolved "https://registry.yarnpkg.com/react/-/react-16.0.0-alpha.4.tgz#1c25369aeee934df86466cf4f09144c7f6e3fac2"
   dependencies:
     fbjs "^0.8.9"
     loose-envify "^1.1.0"

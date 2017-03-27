@@ -21,9 +21,8 @@ export default StyleSheet.create({
   },
 
   inlineHeader: {
-    paddingVertical: 5,
-    paddingHorizontal: 5,
-    backgroundColor: colors.lightBlue
+    padding: 2,
+    backgroundColor: colors.lightGray
   },
 
   listrow: {
@@ -187,5 +186,31 @@ export default StyleSheet.create({
     paddingRight: STATUS_BAR_HEIGHT,
     flexDirection: 'row',
     alignItems: 'center'
+  },
+
+  subHeader: {
+    width: '100%',
+    paddingLeft: 10
+  },
+
+  subHeaderTitle: {
+    color: '#000',
+    fontWeight: '800',
+    fontSize: 20,
+    textAlign: 'left',
+    justifyContent: 'flex-start'
+  },
+
+  topSection: {
+    height: '50%',
+    paddingVertical: 16
+  },
+
+  bottomSection: {
+    height: '50%',
+    paddingVertical: 16,
+    backgroundColor: '#64C48B',
+    borderTopWidth: 1,
+    borderTopColor: '#2ABC63'
   }
 })

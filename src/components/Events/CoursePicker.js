@@ -1,23 +1,30 @@
 import React, { Component, PropTypes } from 'react'
-import { TextInput, View, ListView } from 'react-native'
-import Fuse from 'fuse.js'
+import { TextInput, View, FlatList } from 'react-native'
 
 import CourseRow from 'Events/CourseRow'
 import Loading from 'shared/Loading'
 import EmptyState from 'shared/EmptyState'
+import SubHeader from 'shared/SubHeader'
 
 import styles from 'styles'
+import { cacheable } from 'utils'
 import { withCoursesQuery } from 'queries/coursesQuery'
-
-const ds = new ListView.DataSource({
-  rowHasChanged: (row1, row2) => row1 !== row2
-})
 
 const { arrayOf, bool, shape, func } = PropTypes
 
-class CoursePicker extends Component {
-  static fuse = null
+const fixString = string => string.trim().replace(/-/g, '').replace(/ /g, '').toLowerCase()
 
+const filterCourses = cacheable((courses, query) => courses.filter((c) => {
+  const searchString = fixString(`${c.club}${c.name}`)
+  const trimmedQuery = fixString(query)
+  return searchString.indexOf(trimmedQuery) !== -1
+}))
+
+const getPreviouslyPlayedCourses = cacheable(
+  courses => courses.filter(c => c.events.count > 0).sort((a, b) => a.events.count - b.events.count)
+)
+
+class CoursePicker extends Component {
   static propTypes = {
     selectCourse: func.isRequired,
     data: shape({
@@ -35,27 +42,12 @@ class CoursePicker extends Component {
 
   state = { query: '' }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.data.courses && nextProps.data.courses.length > 0) {
-      this.fuse = new Fuse(
-        nextProps.data.courses,
-        {
-          shouldSort: true,
-          minMatchCharLength: 2,
-          maxPatternLength: 10,
-          keys: ['name', 'club']
-        }
-      )
-    }
-  }
-
-  setSearchQuery = (query) => {
-    this.setState({ query })
-  }
+  setSearchQuery = query => this.setState(state => ({ ...state, query }))
 
   render() {
-    const { data } = this.props
+    const { data, selectCourse } = this.props
     const { query } = this.state
+    const previousCourses = []
 
     if (data.loading) {
       return <Loading text="Laddar banor..." />
@@ -66,31 +58,43 @@ class CoursePicker extends Component {
     }
 
     let courses = []
-    if (this.fuse && query !== null && query.length > 2) {
-      const filtered = this.fuse.search(query)
-      courses = ds.cloneWithRows(filtered)
+    let previously = false
+    if (query !== '') {
+      previously = false
+      courses = filterCourses(data.courses, query)
     } else {
-      courses = ds.cloneWithRows(data.courses)
+      previously = true
+      courses = getPreviouslyPlayedCourses(data.courses)
     }
 
     return (
-      <View style={[styles.container]}>
+      <View style={styles.container}>
         <View style={styles.inlineHeader}>
           <TextInput
             style={styles.inputField}
             autoCapitalize="words"
             autoCorrect={false}
-            placeholder="Sök klubb"
+            placeholder="Sök bana eller klubb"
             returnKeyType="search"
             onChangeText={q => this.setSearchQuery(q)}
             value={query}
           />
         </View>
-        <ListView
-          dataSource={courses}
-          renderRow={rowData =>
-            <CourseRow course={rowData} selectCourse={this.props.selectCourse} />
-          }
+
+        {previously
+          ? <View style={{ paddingVertical: 20, marginHorizontal: 20, borderBottomWidth: 2, borderBottomColor: '#ccc' }}>
+            <SubHeader title="Vanliga banor" />
+          </View>
+          : null
+        }
+
+        <FlatList
+          style={{ paddingHorizontal: 20 }}
+          data={courses}
+          renderItem={({ item }) => (
+            <CourseRow course={item} selectCourse={selectCourse} />
+          )}
+          keyExtractor={item => `course_${item.id}}`}
           keyboardShouldPersistTaps="always"
         />
       </View>

@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
-import { View, Image, ScrollView } from 'react-native'
+import { View, Image } from 'react-native'
 import { connect } from 'react-redux'
 import { compose } from 'react-apollo'
 
+// import OpenSeasonEventList from 'Events/OpenSeasonEventList'
+import ClosedSeasonEventList from 'Events/ClosedSeasonEventList'
 import EmptyState from 'shared/EmptyState'
-import EventCard from 'Events/EventCard'
 import Header from 'shared/Header'
 import TouchableView from 'shared/TouchableView'
 
@@ -13,9 +14,9 @@ import { withEventsQuery, eventsQueryProps } from 'queries/eventsQuery'
 import { userShape } from 'propTypes'
 import { NAVBAR_HEIGHT, colors } from 'styles'
 
-const { shape } = React.PropTypes
+const { bool, shape } = React.PropTypes
 
-class Events extends Component {
+export class Events extends Component {
   static navigationOptions = {
     tabBar: () => ({
       label: 'Rundor',
@@ -32,6 +33,7 @@ class Events extends Component {
   static propTypes = {
     data: eventsQueryProps,
     currentUser: userShape.isRequired,
+    seasonClosed: bool.isRequired,
     navigation: shape().isRequired
   }
 
@@ -48,7 +50,7 @@ class Events extends Component {
   }
 
   render() {
-    const { data, currentUser } = this.props
+    const { data, currentUser, seasonClosed } = this.props
 
     if (data.loading) {
       return null
@@ -60,40 +62,41 @@ class Events extends Component {
 
     // const sortedEvents = sortedByParsedDate(events, 'startsAt')
 
+    // const ListComponent = seasonClosed ? ClosedSeasonEventList : OpenSeasonEventList
+    const ListComponent = ClosedSeasonEventList
+
     return (
       <View style={{ flex: 1, backgroundColor: colors.green, paddingTop: NAVBAR_HEIGHT }}>
         <Header
           title="Rundor"
           backgroundColor={colors.green}
         >
-          <TouchableView
-            style={{
-              marginTop: -40,
-              marginRight: -10,
-              padding: 10,
-              flex: 1,
-              justifyContent: 'flex-end',
-              alignItems: 'center',
-              flexDirection: 'row'
-            }}
-            onPress={() => { this.props.navigation.navigate('NewEvent') }}
-          >
-            <Image
-              style={{ tintColor: '#fff' }}
-              source={require('../images/plus.png')}
-            />
-          </TouchableView>
+          {seasonClosed
+            ? null
+            : <TouchableView
+              style={{
+                marginTop: -40,
+                marginRight: -10,
+                padding: 10,
+                flex: 1,
+                justifyContent: 'flex-end',
+                alignItems: 'center',
+                flexDirection: 'row'
+              }}
+              onPress={() => { this.props.navigation.navigate('NewEvent') }}
+            >
+              <Image
+                style={{ tintColor: '#fff' }}
+                source={require('../images/plus.png')}
+              />
+            </TouchableView>
+          }
         </Header>
-        <ScrollView
-          style={{ paddingHorizontal: 5 }}
-          ref={(c) => { this.listView = c }}
-          initialListSize={10}
-          scrollEventThrottle={1}
-        >
-          {data.events.map(event => (
-            <EventCard key={`event_${event.id}}`} userId={currentUser.id} event={event} onNavigate={this.navigateToEvent} />
-          ))}
-        </ScrollView>
+        <ListComponent
+          events={data.events}
+          userId={currentUser.id}
+          onNavigate={this.navigateToEvent}
+        />
       </View>
     )
   }
@@ -101,6 +104,7 @@ class Events extends Component {
 
 const mapStateToProps = state => ({
   seasonId: state.app.currentSeason.id,
+  seasonClosed: state.app.currentSeason.closed,
   currentUser: state.app.currentUser
 })
 

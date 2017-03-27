@@ -104,3 +104,31 @@ export const removeCache = async (key) => {
     return null
   }
 }
+
+
+export const cacheable = (fn) => {
+  /* May store args and result on fn like this:
+   * fn.lastArgs = ...
+   * fn.lastResult = ...
+   */
+  let lastArgs = []
+  let lastResult = null
+
+  const eq = (args1, args2) => {
+    if (!args1 || !args2 || args1.length !== args2.length) return false
+    return args1.every((arg, index) => arg === args2[index])
+  }
+
+  return (...args) => {
+    if (eq(args, lastArgs)) {
+      // eslint-disable-next-line no-console
+      console.log(`> from cache - ${fn.name}`)
+      return lastResult
+    }
+
+    const result = fn(...args)
+    lastArgs = args
+    lastResult = result
+    return result
+  }
+}

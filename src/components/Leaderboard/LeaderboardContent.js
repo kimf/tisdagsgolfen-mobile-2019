@@ -86,7 +86,7 @@ class LeaderboardContent extends Component {
         </AnimatedHeader>
 
         {emptyLeaderboard
-          ? <EmptyState style={{ paddingTop: 200 }} text="Inga rundor spelade ännu" />
+          ? <EmptyState text="Inga rundor spelade ännu" />
           : <Animated.ScrollView
             style={[
               { padding: 10 },

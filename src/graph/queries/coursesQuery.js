@@ -13,6 +13,9 @@ const coursesQuery = gql`
       holes: _holesMeta {
         count
       }
+      events: _eventsMeta {
+        count
+      }
     }
    }
 `
