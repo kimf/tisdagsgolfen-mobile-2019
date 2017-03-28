@@ -2,9 +2,10 @@ import React from 'react'
 import { View } from 'react-native'
 
 import TGText from 'shared/TGText'
+import { colors } from 'styles'
 
 const containerStyle = {
-  backgroundColor: '#eee',
+  backgroundColor: colors.lightGray,
   alignItems: 'center',
   justifyContent: 'center',
   flex: 1
@@ -13,12 +14,12 @@ const containerStyle = {
 const textStyle = {
   fontWeight: 'bold',
   fontSize: 24,
-  color: '#ccc'
+  color: colors.muted
 }
 
 const Loading = ({ text }) =>
   <View style={containerStyle}>
-    <TGText style={textStyle}>{ text }</TGText>
+    <TGText style={textStyle}>{text}</TGText>
   </View>
 
 

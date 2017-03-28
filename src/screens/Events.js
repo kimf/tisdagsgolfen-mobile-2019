@@ -69,11 +69,8 @@ export class Events extends Component {
     const ListComponent = ClosedSeasonEventList
 
     return (
-      <View style={{ flex: 1, backgroundColor: colors.green, paddingTop: NAVBAR_HEIGHT }}>
-        <Header
-          title="Rundor"
-          backgroundColor={colors.green}
-        >
+      <View style={{ flex: 1, paddingTop: NAVBAR_HEIGHT }}>
+        <Header title="Rundor">
           {seasonClosed
             ? null
             : <TouchableView
@@ -89,7 +86,7 @@ export class Events extends Component {
               onPress={() => { this.props.navigation.navigate('NewEvent') }}
             >
               <Image
-                style={{ tintColor: '#fff' }}
+                style={{ tintColor: colors.muted }}
                 source={require('../images/plus.png')}
               />
             </TouchableView>

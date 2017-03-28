@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { View, ListView } from 'react-native'
 
 import TGText from 'shared/TGText'
-import styles from 'styles'
+import styles, { colors } from 'styles'
 import { withUserQuery } from 'queries/userQuery'
 import { userShape } from 'propTypes'
 
@@ -66,7 +66,7 @@ class NewPlayer extends Component {
                 onPress={() => this.addPlayer(player, team)}
                 viewStyle={{
                   borderBottomWidth: 1,
-                  borderColor: '#eee',
+                  borderColor: colors.lightGray,
                   flexDirection: 'row',
                   paddingHorizontal: 20,
                   paddingVertical: 15

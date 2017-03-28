@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { View, Slider } from 'react-native'
 
 import TGText from 'shared/TGText'
+import { colors } from 'styles'
 
 const { shape, func, bool } = PropTypes
 
@@ -43,12 +44,12 @@ class EventSetupPlayingCard extends Component {
           marginVertical: 5,
           paddingVertical: 15,
           paddingHorizontal: 20,
-          backgroundColor: '#eee'
+          backgroundColor: colors.lightGray
         }}
       >
         <View style={{ flex: 1, flexDirection: 'row' }}>
           <TGText style={{ flex: 1, fontWeight: 'bold', fontSize: 18 }}>{name}</TGText>
-          <TGText style={{ flex: 1, color: 'red' }} onPress={() => onRemove(item)}>
+          <TGText style={{ flex: 1, color: colors.red }} onPress={() => onRemove(item)}>
             Ta bort {teamEvent ? 'lag' : 'spelare'}
           </TGText>
         </View>
@@ -62,7 +63,7 @@ class EventSetupPlayingCard extends Component {
             onSlidingComplete={val => onChangeStrokes(item, val)}
             onValueChange={strokes => this.setState({ strokes })}
           />
-          <TGText style={{ flex: 0, textAlign: 'right', fontSize: 20, fontWeight: 'bold', color: 'green' }}>
+          <TGText style={{ flex: 0, textAlign: 'right', fontSize: 20, fontWeight: 'bold', color: colors.green }}>
             {this.state.strokes}
           </TGText>
         </View>
@@ -71,13 +72,13 @@ class EventSetupPlayingCard extends Component {
             style={{
               paddingVertical: 10,
               borderTopWidth: 1,
-              borderColor: '#ccc',
+              borderColor: colors.white,
               flexDirection: 'column'
             }}
           >
             {item.players.map(player => (
               <View key={`pl_team_player_${player.id}`} style={{ width: '100%', paddingVertical: 5, flexDirection: 'row' }}>
-                <TGText style={{ flex: 1, color: 'red', marginRight: 10 }} onPress={() => onRemovePlayerFromTeam(item, player)}>
+                <TGText style={{ flex: 1, color: colors.red, marginRight: 10 }} onPress={() => onRemovePlayerFromTeam(item, player)}>
                   X
                 </TGText>
                 <TGText style={{ flex: 1, fontWeight: 'bold', fontSize: 14 }}>
@@ -89,9 +90,9 @@ class EventSetupPlayingCard extends Component {
               viewStyle={{
                 marginTop: 10,
                 padding: 10,
-                backgroundColor: '#ccc'
+                backgroundColor: colors.muted
               }}
-              style={{ textAlign: 'center' }}
+              style={{ textAlign: 'center', color: colors.white, fontSize: 12, fontWeight: 'bold' }}
               onPress={() => onAddPlayerToTeam(item)}
             >
               + Lägg till spelare i {name}

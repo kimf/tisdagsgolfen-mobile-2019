@@ -3,12 +3,11 @@ import { View } from 'react-native'
 
 import TGText from 'shared/TGText'
 import BottomButton from 'shared/BottomButton'
-import styles from 'styles'
+import styles, { colors } from 'styles'
 
 class ScoringLeaderboard extends Component {
   static navigationOptions = {
     title: 'Ledartavla',
-    header: () => ({ visible: false }),
     tabBar: () => ({ visible: false }),
     cardStack: {
       gesturesEnabled: true
@@ -18,11 +17,12 @@ class ScoringLeaderboard extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <TGText style={{ fontSize: 20, fontWeight: '900', textAlign: 'center', marginBottom: 20 }}>
-          Här kommer text sen
-        </TGText>
-
-        <BottomButton backgroundColor="red" title="AVSLUTA RUNDA" onPress={() => { }} />
+        <View style={{ flex: 1, paddingTop: 20 }}>
+          <TGText style={{ fontSize: 20, fontWeight: '900', textAlign: 'center', marginBottom: 20 }}>
+            Här kommer text sen
+          </TGText>
+        </View>
+        <BottomButton backgroundColor={colors.red} title="AVSLUTA RUNDA" onPress={() => { }} />
       </View>
     )
   }

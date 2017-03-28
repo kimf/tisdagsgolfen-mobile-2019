@@ -1,12 +1,18 @@
 import { StyleSheet, Platform, Dimensions } from 'react-native'
 
 export const colors = {
-  cellBorder: '#CECECE',
-  green: '#2ECC71',
-  lightBlue: '#D9EEFF',
-  dark: '#444444',
-  semiDark: '#555',
-  lightGray: '#EEEEEE'
+  lightGray: '#ECEBEB',
+  green: '#04B742',
+  darkGreen: '#058D35',
+  mutedGreen: '#D4F4E0',
+  dark: '#35383E',
+  muted: '#7D8986',
+  gray: '#A3A4A6',
+  yellow: '#EDD21B',
+  mutedYellow: '#F5E682',
+  blue: '#3290FC',
+  white: '#FFF',
+  red: '#E30050'
 }
 
 export const NAVBAR_HEIGHT = 100
@@ -24,12 +30,12 @@ export default StyleSheet.create({
 
   inlineHeader: {
     padding: 2,
-    backgroundColor: colors.lightGray
+    backgroundColor: colors.muted
   },
 
   listrow: {
     borderBottomWidth: StyleSheet.hairlineWidth,
-    borderColor: colors.cellBorder,
+    borderColor: colors.lightGray,
     flexDirection: 'row',
     padding: 10
   },
@@ -39,7 +45,7 @@ export default StyleSheet.create({
     paddingTop: 10,
     paddingBottom: 20,
     borderBottomWidth: StyleSheet.hairlineWidth,
-    borderColor: '#cecece'
+    borderColor: colors.lightGray
   },
 
   formColumnContent: {
@@ -69,7 +75,7 @@ export default StyleSheet.create({
   },
 
   position: {
-    width: 20,
+    width: 30,
     marginRight: 5,
     flexDirection: 'column'
   },
@@ -157,7 +163,7 @@ export default StyleSheet.create({
 
   courserow: {
     borderBottomWidth: StyleSheet.hairlineWidth,
-    borderColor: colors.cellBorder,
+    borderColor: colors.lightGray,
     flexDirection: 'row',
     padding: 20
   },
@@ -168,13 +174,13 @@ export default StyleSheet.create({
     left: 0,
     zIndex: 1000,
     width: '100%',
-    backgroundColor: '#fff',
+    backgroundColor: colors.white,
     marginBottom: 10,
     height: NAVBAR_HEIGHT
   },
 
   navbarTitle: {
-    color: '#000',
+    color: colors.dark,
     fontWeight: '800',
     fontSize: 34,
     textAlign: 'left',
@@ -184,8 +190,8 @@ export default StyleSheet.create({
   navbarInner: {
     height: '100%',
     marginLeft: 15,
-    backgroundColor: '#fff',
-    borderBottomColor: 'rgba(142,142,147, 0.5)',
+    backgroundColor: colors.white,
+    borderBottomColor: colors.lightGray,
     borderBottomWidth: 1,
     paddingTop: STATUS_BAR_HEIGHT * 2,
     paddingRight: STATUS_BAR_HEIGHT,
@@ -199,7 +205,7 @@ export default StyleSheet.create({
   },
 
   subHeaderTitle: {
-    color: '#000',
+    color: colors.dark,
     fontWeight: '800',
     fontSize: 20,
     textAlign: 'left',
@@ -214,9 +220,9 @@ export default StyleSheet.create({
   bottomSection: {
     height: '50%',
     paddingVertical: 16,
-    backgroundColor: '#64C48B',
+    backgroundColor: colors.darkGreen,
     borderTopWidth: 1,
-    borderTopColor: '#2ABC63'
+    borderTopColor: colors.blue
   },
 
   tabs: {
@@ -225,7 +231,7 @@ export default StyleSheet.create({
     maxHeight: 60,
     paddingVertical: 10,
     flex: 1,
-    backgroundColor: '#fff'
+    backgroundColor: colors.white
   },
 
   tab: {

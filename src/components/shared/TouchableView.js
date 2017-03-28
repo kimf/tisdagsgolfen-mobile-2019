@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react'
 import { View, TouchableNativeFeedback, TouchableOpacity, Platform } from 'react-native'
+import { colors } from 'styles'
 
 const TouchableView = ({ isRippleDisabled, rippleColor, children, style, ...rest }) => {
   if (Platform.OS === 'android') {
@@ -30,7 +31,7 @@ TouchableView.propTypes = {
 
 TouchableView.defaultProps = {
   isRippleDisabled: true,
-  rippleColor: '#c00',
+  rippleColor: colors.darkGreen,
   style: {}
 }
 

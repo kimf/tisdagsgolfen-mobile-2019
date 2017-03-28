@@ -3,7 +3,6 @@ import { compose } from 'react-apollo'
 import { connect } from 'react-redux'
 
 import Logo from 'Login/Logo'
-import LoginError from 'Login/LoginError'
 import Form from 'Login/LoginForm'
 import Wallpaper from 'Login/Wallpaper'
 
@@ -44,7 +43,7 @@ class Login extends Component {
       .catch((e) => {
         // eslint-disable-next-line no-console
         console.warn(e)
-        this.setState({ error: e, loggingIn: false })
+        this.setState({ error: true, loggingIn: false })
       })
   }
 
@@ -53,12 +52,9 @@ class Login extends Component {
   }
 
   render() {
-    const { error } = this.state
-
     return (
       <Wallpaper>
         <Logo />
-        {error ? <LoginError /> : null}
         <Form
           {...this.state}
           changeValue={this.changeValue}

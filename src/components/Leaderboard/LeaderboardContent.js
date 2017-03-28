@@ -9,6 +9,7 @@ import TGText from 'shared/TGText'
 import TouchableView from 'shared/TouchableView'
 import { seasonShape, leaderboardPlayerShape } from 'propTypes'
 import { ranked } from 'utils'
+import { colors } from 'styles'
 
 const { arrayOf, string, func } = PropTypes
 
@@ -62,7 +63,7 @@ class LeaderboardContent extends Component {
     })
 
     return (
-      <View style={{ flex: 1, backgroundColor: '#fff' }}>
+      <View style={{ flex: 1, backgroundColor: colors.white }}>
         <AnimatedHeader
           scrollY={scrollY}
           title="Ledartavla"
@@ -80,8 +81,8 @@ class LeaderboardContent extends Component {
             }}
             onPress={toggleSeasonpicker}
           >
-            <Image style={{ tintColor: '#777', resizeMode: 'contain', height: 12, width: 12, marginRight: 8 }} source={require('../../images/up.png')} />
-            <TGText style={{ fontWeight: 'bold', color: '#2ECC71' }}>{season.name}</TGText>
+            <Image style={{ tintColor: colors.muted, resizeMode: 'contain', height: 12, width: 12, marginRight: 8 }} source={require('../../images/up.png')} />
+            <TGText style={{ fontWeight: 'bold', color: colors.darkGreen }}>{season.name}</TGText>
           </TouchableView>
         </AnimatedHeader>
 

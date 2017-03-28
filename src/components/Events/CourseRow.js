@@ -3,7 +3,7 @@ import { View } from 'react-native'
 
 import TGText from 'shared/TGText'
 import TouchableView from 'shared/TouchableView'
-import styles from 'styles'
+import styles, { colors } from 'styles'
 
 const CourseRow = ({ course, selectCourse }) =>
   <TouchableView
@@ -13,18 +13,18 @@ const CourseRow = ({ course, selectCourse }) =>
   >
     <View style={{ flex: 1 }}>
       <View style={{ flex: 1, flexDirection: 'row' }}>
-        <TGText style={{ flex: 2 }}>
+        <TGText style={{ flex: 4, fontWeight: 'bold' }}>
           {course.name}
         </TGText>
-        <TGText style={{ flex: 1 }}>
+        <TGText style={{ flex: 1, fontSize: 14, color: colors.muted }}>
           PAR {course.par}
         </TGText>
-        <TGText style={{ flex: 1 }}>
+        <TGText style={{ flex: 1, fontSize: 14, color: colors.muted }}>
           {course.holes.count} HÅL
         </TGText>
       </View>
       <View style={{ flex: 1 }}>
-        <TGText style={{ color: '#777', marginTop: 10 }}>
+        <TGText style={{ color: colors.muted, marginTop: 10 }}>
           {course.club}
         </TGText>
       </View>

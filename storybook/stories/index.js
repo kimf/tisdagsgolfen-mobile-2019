@@ -4,12 +4,11 @@ import { View } from 'react-native'
 import { storiesOf, action } from '@kadira/react-native-storybook'
 import TGText from 'shared/TGText'
 
-import { ScoreEvent } from 'screens/EventScreens/ScoreEvent'
 import HoleView from 'Scoring/HoleView'
 import Login from 'screens/Login'
+import { ScoreEvent } from 'screens/ScoringScreens/ScoreEvent'
 import { Events } from 'screens/Events'
 
-// import NavigationBar from './NavigationBar'
 import CenterView from './CenterView'
 import WithContext from '../WithContext'
 
@@ -81,7 +80,7 @@ storiesOf('HoleView', module)
   .add('Default', () => (
     <HoleView
       key={'hole_view_stringid'}
-      {...require('../holeViewProps.json') }
+      {...require('../holeViewProps.json')}
       toggleScroll={action('call on prop toggleScroll')}
       onChangeHole={action('changeHole')}
     />

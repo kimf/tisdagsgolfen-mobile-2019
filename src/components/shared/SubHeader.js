@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { View } from 'react-native'
 
 import TGText from 'shared/TGText'
-import styles from 'styles'
+import styles, { colors } from 'styles'
 
 const { string } = PropTypes
 
@@ -14,7 +14,7 @@ class SubHeader extends Component {
   }
 
   static defaultProps = {
-    color: '#000',
+    color: colors.dark,
     backgroundColor: 'transparent'
   }
 

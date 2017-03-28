@@ -2,7 +2,7 @@ import React from 'react'
 import { View, Image } from 'react-native'
 
 import TGText from 'shared/TGText'
-import styles from 'styles'
+import styles, { colors } from 'styles'
 import { leaderboardPlayerShape } from 'propTypes'
 
 const LeaderboardCard = ({ data, currentUserId, sorting }) => {
@@ -24,16 +24,16 @@ const LeaderboardCard = ({ data, currentUserId, sorting }) => {
     pointText = 'p'
     position = data.position
     if (data.position < data.previousPosition) {
-      upOrDown = <TGText style={{ fontSize: 14, flex: 1, color: 'green' }}>↥{data.previousPosition - data.position}</TGText>
+      upOrDown = <TGText style={{ fontSize: 14, flex: 1, color: colors.green }}>↥{data.previousPosition - data.position}</TGText>
     } else if (data.position > data.previousPosition) {
-      upOrDown = <TGText style={{ fontSize: 14, flex: 1, color: 'red' }}>↧{data.position - data.previousPosition}</TGText>
+      upOrDown = <TGText style={{ fontSize: 14, flex: 1, color: colors.red }}>↧{data.position - data.previousPosition}</TGText>
     }
   }
 
   const player = data.user
   const averagePoints = (data.averagePoints * 2).toFixed() / 2
 
-  const currentUserStyle = player.id === currentUserId ? { backgroundColor: '#feb' } : null
+  const currentUserStyle = player.id === currentUserId ? { backgroundColor: colors.mutedYellow } : null
 
   if (data.eventCount < 1) {
     return null
@@ -44,7 +44,7 @@ const LeaderboardCard = ({ data, currentUserId, sorting }) => {
   return (
     <View key={data.id} style={[styles.listrow, currentUserStyle]}>
       <View style={styles.position}>
-        <TGText style={{ flex: 1, fontWeight: '800', color: '#000', fontSize: 16 }}>{position}</TGText>
+        <TGText style={{ flex: 1, fontWeight: '800', color: colors.dark, fontSize: 16 }}>{position}</TGText>
         {upOrDown}
       </View>
       <Image

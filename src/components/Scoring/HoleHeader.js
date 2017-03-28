@@ -16,15 +16,15 @@ const styles = StyleSheet.create({
     textAlign: 'left',
     fontSize: 20,
     lineHeight: 40,
-    color: '#363'
+    color: colors.yellow
   },
 
   number: {
     textAlign: 'center',
-    color: 'white',
+    color: colors.white,
     flex: 1,
     fontSize: 50,
-    lineHeight: 50,
+    lineHeight: 55,
     fontWeight: 'bold'
   },
 
@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     textAlign: 'right',
     fontSize: 20,
     lineHeight: 40,
-    color: '#363'
+    color: colors.yellow
   }
 })
 

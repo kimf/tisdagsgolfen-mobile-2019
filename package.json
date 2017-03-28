@@ -52,6 +52,7 @@
     "eslint-plugin-jsx-a11y": "^4.0.0",
     "eslint-plugin-react": "^6.10.3",
     "eslint-plugin-react-native": "^2.3.1",
+    "eslint-plugin-react-perf": "^2.0.4",
     "get-graphql-schema": "^1.0.1",
     "jest": "19.0.2",
     "mobile-center-analytics": "^0.3.0",

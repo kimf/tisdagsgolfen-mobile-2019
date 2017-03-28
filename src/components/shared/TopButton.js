@@ -1,11 +1,29 @@
 import React, { PropTypes } from 'react'
+import { StyleSheet } from 'react-native'
 
 import TGText from 'shared/TGText'
+import { colors } from 'styles'
+
+const styles = StyleSheet.create({
+  button: {
+    backgroundColor: colors.yellow,
+    padding: 16,
+    width: '100%',
+    alignSelf: 'flex-end'
+  },
+
+  text: {
+    color: colors.dark,
+    textAlign: 'center',
+    fontWeight: 'bold',
+    fontSize: 12
+  }
+})
 
 const TopButton = ({ title, onPress }) => (
   <TGText
-    viewStyle={{ backgroundColor: '#ececec', padding: 16, width: '100%', alignSelf: 'flex-end' }}
-    style={{ color: '#444', textAlign: 'center', fontWeight: 'bold', fontSize: 12 }}
+    viewStyle={styles.button}
+    style={styles.text}
     onPress={onPress}
   >
     {title}

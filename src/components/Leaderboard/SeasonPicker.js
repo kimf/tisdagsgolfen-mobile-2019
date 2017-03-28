@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Animated, Easing } from 'react-native'
+import { Animated } from 'react-native'
 
 import TGText from 'shared/TGText'
 import { seasonShape } from 'propTypes'
@@ -44,9 +44,9 @@ class SeasonPicker extends Component {
           padding: 10,
           paddingTop: 80,
           paddingBottom: 80,
-          backgroundColor: '#eee',
+          backgroundColor: colors.lightGray,
           flexDirection: 'column',
-          shadowColor: '#000',
+          shadowColor: colors.dark,
           shadowOffset: { width: 0, height: 200 },
           shadowRadius: 200,
           shadowOpacity: 1,
@@ -64,7 +64,7 @@ class SeasonPicker extends Component {
         </TGText>
         {seasons.map((season) => {
           const isCurrentSeason = currentSeasonId && season.id === currentSeasonId
-          const color = isCurrentSeason ? colors.green : colors.semiDark
+          const color = isCurrentSeason ? colors.green : colors.muted
           const fontWeight = isCurrentSeason ? '900' : '400'
           return (
             <TGText

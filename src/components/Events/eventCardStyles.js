@@ -1,10 +1,10 @@
 import { StyleSheet } from 'react-native'
-import { deviceWidth } from 'styles'
+import { deviceWidth, colors } from 'styles'
 
 const styles = StyleSheet.create({
   /* EVENT CARDS */
   eventCard: {
-    backgroundColor: '#fff',
+    backgroundColor: colors.white,
     borderRadius: 5,
     elevation: 5,
     flexDirection: 'row',
@@ -13,8 +13,9 @@ const styles = StyleSheet.create({
     minHeight: 90,
     paddingVertical: 10,
     paddingHorizontal: 20,
-    shadowColor: '#363',
-    shadowOpacity: 0.2,
+    shadowColor: colors.muted,
+    shadowOffset: { height: 10, width: 0 },
+    shadowOpacity: 0.4,
     shadowRadius: 10
   },
 
@@ -25,13 +26,13 @@ const styles = StyleSheet.create({
   },
 
   date: {
-    color: '#000',
+    color: colors.darkGreen,
     fontSize: 24,
     fontWeight: '900'
   },
 
   month: {
-    color: '#222',
+    color: colors.muted,
     fontSize: 12,
     fontWeight: '600'
   },
@@ -44,7 +45,7 @@ const styles = StyleSheet.create({
   gametype: {
     fontSize: 14,
     marginTop: 5,
-    color: '#777'
+    color: colors.muted
   },
 
   row: {
@@ -60,7 +61,7 @@ const styles = StyleSheet.create({
 
   inlineButtonText: {
     fontSize: 18,
-    color: '#c00',
+    color: colors.red,
     textAlign: 'right',
     fontWeight: 'bold'
   },
@@ -69,7 +70,7 @@ const styles = StyleSheet.create({
     height: '90%',
     shadowRadius: 1,
     width: deviceWidth - 40,
-    shadowColor: '#363',
+    shadowColor: colors.darkGreen,
     shadowOpacity: 0.2
   },
 

@@ -2,7 +2,9 @@ import React from 'react'
 import { View } from 'react-native'
 
 import TGText from 'shared/TGText'
-import styles from 'styles'
+import styles, { colors } from 'styles'
+
+// TODO: Refactor and re-use LeaderboardCard as much as possible + avatar
 
 const EventLeaderboardCard = ({ data, currentUserId, sorting, scoringType }) => {
   let pointText
@@ -23,37 +25,36 @@ const EventLeaderboardCard = ({ data, currentUserId, sorting, scoringType }) => 
     pointText = 'p'
     position = data.position
     if (data.totalPosition < data.previousTotalPosition) {
-      upOrDown = <TGText style={{ flex: 1, color: 'green' }}>↥{data.previousTotalPosition - data.totalPosition}</TGText>
+      upOrDown = <TGText style={{ flex: 1, color: colors.green }}>↥{data.previousTotalPosition - data.totalPosition}</TGText>
     } else if (data.totalPosition > data.previousTotalPosition) {
-      upOrDown = <TGText style={{ flex: 1, color: 'red' }}>↧{data.totalPosition - data.previousTotalPosition}</TGText>
+      upOrDown = <TGText style={{ flex: 1, color: colors.red }}>↧{data.totalPosition - data.previousTotalPosition}</TGText>
     }
   }
 
   const player = data.score.user
   const averagePoints = (data.totalAveragePoints * 2).toFixed() / 2
 
-  const currentUserStyle = player.id === currentUserId ? { backgroundColor: '#feb' } : null
+  const currentUserStyle = player.id === currentUserId ? { backgroundColor: colors.mutedYellow } : null
 
 
   return (
     <View key={data.id} style={[styles.listrow, currentUserStyle]}>
       <View style={styles.position}>
-        <TGText style={{ flex: 1, fontWeight: '800', color: '#000', fontSize: 16 }}>{position}</TGText>
-        { upOrDown }
+        <TGText style={{ flex: 1, fontWeight: '800', color: colors.dark, fontSize: 16 }}>{position}</TGText>
+        {upOrDown}
       </View>
       <View style={styles.cardTitle}>
         <TGText style={styles.name}>{player.firstName} {player.lastName}</TGText>
-        { sorting === 'totalPoints'
-          ?
-            <TGText style={styles.meta}>
-              {data.totalEventCount} Rundor.
+        {sorting === 'totalPoints'
+          ? <TGText style={styles.meta}>
+            {data.totalEventCount} Rundor.
               Totalt: {data.totalEventPoints}p
               Snitt: {averagePoints}p
             </TGText>
           : null
         }
       </View>
-      { sorting === 'totalPoints'
+      {sorting === 'totalPoints'
         ? <TGText style={styles.dimmerPoints}>
           {data.score.value} {scoringType === 'points' ? 'p' : 'slag'}
         </TGText>

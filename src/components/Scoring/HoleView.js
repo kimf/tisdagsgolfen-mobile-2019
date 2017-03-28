@@ -44,12 +44,12 @@ class HoleView extends Component {
             marginHorizontal: 10,
             height: deviceHeight - 170,
             width: deviceWidth - 20,
-            backgroundColor: '#fff',
+            backgroundColor: colors.white,
             borderRadius: 10,
-            shadowColor: '#363',
-            shadowOffset: { width: 2, height: 8 },
-            shadowRadius: 10,
-            shadowOpacity: 0.2,
+            shadowColor: colors.darkGreen,
+            shadowOffset: { width: 5, height: 5 },
+            shadowRadius: 1,
+            shadowOpacity: 0.5,
             elevation: 5
           }}
         >
@@ -77,23 +77,25 @@ class HoleView extends Component {
                 ))
               }
 
+              const isScoring = (scoringId && scoringId === item.id)
+
               return (
                 <View
                   key={`player_score_row_${item.id}`}
                   style={{
                     flexDirection: 'row',
                     borderBottomWidth: (index < (playing.length - 1) ? 1 : 0),
-                    borderBottomColor: '#eee',
-                    backgroundColor: (scoringId && scoringId === item.id) ? '#eee' : '#fff'
+                    borderBottomColor: colors.lightGray,
+                    backgroundColor: isScoring ? colors.lightGray : colors.white
                   }}
                 >
                   {scoringId && scoringId !== item.id
                     ? null
                     : <View style={{ flex: 2, paddingTop: 20, paddingLeft: 20, paddingBottom: 20 }}>
-                      <TGText style={{ fontWeight: 'bold', lineHeight: 30, fontSize: '20' }}>
+                      <TGText style={{ fontWeight: 'bold', lineHeight: 30, fontSize: 18 }}>
                         {itemName}
                       </TGText>
-                      <TGText style={{ color: '#777' }}>{scoreItem.extraStrokes} slag</TGText>
+                      <TGText style={{ color: colors.muted }}>{scoreItem.extraStrokes} slag</TGText>
                       {event.teamEvent ? <TGText>{playerNames}</TGText> : null}
                     </View>
                   }

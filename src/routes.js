@@ -1,5 +1,7 @@
 import { TabNavigator, TabView, StackNavigator } from 'react-navigation'
 
+import { colors } from 'styles'
+
 import Leaderboard from 'screens/Leaderboard'
 import EventsScreen from 'screens/Events'
 import Profile from 'screens/Profile'
@@ -44,8 +46,8 @@ const TabStack = TabNavigator(tabRoutes, {
   initialRouteName: 'Leaderboard',
   animationEnabled: false,
   tabBarOptions: {
-    inactiveTintColor: '#777',
-    activeTintColor: '#2ECC71',
+    inactiveTintColor: colors.muted,
+    activeTintColor: colors.green,
     showIcon: true,
     showLabel: false
   }

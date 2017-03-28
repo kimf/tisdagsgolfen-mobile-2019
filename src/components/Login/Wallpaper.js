@@ -6,8 +6,8 @@ import bgSrc from 'images/wrapper.png'
 const styles = StyleSheet.create({
   picture: {
     flex: 1,
-    width: null,
-    height: null,
+    width: '100%',
+    height: '100%',
     resizeMode: 'cover'
   }
 })

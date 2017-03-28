@@ -2,7 +2,7 @@
 import React from 'react'
 import { StyleSheet, Text } from 'react-native'
 
-import { deviceWidth, deviceHeight } from 'styles'
+import { colors, deviceWidth, deviceHeight } from 'styles'
 
 import TouchableView from 'shared/TouchableView'
 
@@ -12,7 +12,8 @@ const styles = StyleSheet.create({
   text: {
     fontSize: FONT_SIZE,
     fontFamily: 'System',
-    fontWeight: '300'
+    fontWeight: '300',
+    color: colors.dark
   }
 })
 

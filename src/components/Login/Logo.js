@@ -5,18 +5,18 @@ import {
   Image
 } from 'react-native'
 
-import logoImg from 'images/logo.png'
+import logoImg from 'images/logo4.png'
 
 const styles = StyleSheet.create({
   container: {
-    flex: 3,
-    top: 0,
+    paddingTop: 120,
     alignItems: 'center',
-    justifyContent: 'center'
+    width: '100%',
+    height: '50%'
   },
   image: {
     width: 200,
-    height: 210
+    height: 200
   }
 })
 

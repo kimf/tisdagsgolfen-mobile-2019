@@ -37,7 +37,9 @@ const mainQuery = gql`
 
 export default mainQuery
 
-export const withMainQuery = graphql(mainQuery)
+export const withMainQuery = graphql(mainQuery, {
+  skip: ({ loggedIn }) => !loggedIn
+})
 
 const { arrayOf, shape, string, bool } = PropTypes
 

@@ -7,7 +7,7 @@ import { compose } from 'react-apollo'
 import EventSetupPlayingCard from 'Scoring/EventSetupPlayingCard'
 import BottomButton from 'shared/BottomButton'
 import TopButton from 'shared/TopButton'
-
+import { colors } from 'styles'
 import { eventShape, userShape } from 'propTypes'
 
 const { shape } = PropTypes
@@ -111,7 +111,7 @@ class SetupTeamEvent extends Component {
     const { playing } = this.state
 
     return (
-      <View style={{ flex: 1 }}>
+      <View style={{ flex: 1, backgroundColor: colors.white }}>
         <TopButton title="+ LÄGG TILL LAG" onPress={this.onAddTeam} />
         <ScrollView>
           {playing.map((team) => {

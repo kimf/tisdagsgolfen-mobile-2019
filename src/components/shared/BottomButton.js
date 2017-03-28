@@ -1,11 +1,27 @@
 import React, { PropTypes } from 'react'
+import { StyleSheet } from 'react-native'
 
 import TGText from 'shared/TGText'
+import { colors } from 'styles'
+
+const styles = StyleSheet.create({
+  button: {
+    padding: 25,
+    width: '100%',
+    alignSelf: 'flex-end'
+  },
+
+  text: {
+    textAlign: 'center',
+    fontWeight: 'bold',
+    fontSize: 14
+  }
+})
 
 const BottomButton = ({ title, onPress, backgroundColor, color }) => (
   <TGText
-    viewStyle={{ backgroundColor, padding: 25, width: '100%', alignSelf: 'flex-end' }}
-    style={{ color, textAlign: 'center', fontWeight: 'bold', fontSize: 14 }}
+    viewStyle={[styles.button, { backgroundColor }]}
+    style={[styles.text, { color }]}
     onPress={onPress}
   >
     {title}
@@ -22,8 +38,8 @@ BottomButton.propTypes = {
 }
 
 BottomButton.defaultProps = {
-  backgroundColor: '#2ECC71',
-  color: '#fff'
+  backgroundColor: colors.green,
+  color: colors.white
 }
 
 export default BottomButton

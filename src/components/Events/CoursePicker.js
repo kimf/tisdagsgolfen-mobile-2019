@@ -6,7 +6,7 @@ import Loading from 'shared/Loading'
 import EmptyState from 'shared/EmptyState'
 import SubHeader from 'shared/SubHeader'
 
-import styles from 'styles'
+import styles, { colors } from 'styles'
 import { cacheable } from 'utils'
 import { withCoursesQuery } from 'queries/coursesQuery'
 
@@ -47,7 +47,6 @@ class CoursePicker extends Component {
   render() {
     const { data, selectCourse } = this.props
     const { query } = this.state
-    const previousCourses = []
 
     if (data.loading) {
       return <Loading text="Laddar banor..." />
@@ -82,7 +81,14 @@ class CoursePicker extends Component {
         </View>
 
         {previously
-          ? <View style={{ paddingVertical: 20, marginHorizontal: 20, borderBottomWidth: 2, borderBottomColor: '#ccc' }}>
+          ? <View
+            style={{
+              paddingVertical: 20,
+              marginHorizontal: 20,
+              borderBottomWidth: 2,
+              borderBottomColor: colors.lightGray
+            }}
+          >
             <SubHeader title="Vanliga banor" />
           </View>
           : null

@@ -5,7 +5,7 @@ import { Switch, View, StyleSheet, Platform, DatePickerAndroid, DatePickerIOS } 
 
 import TGText from 'shared/TGText'
 import BottomButton from 'shared/BottomButton'
-import styles from 'styles'
+import styles, { colors } from 'styles'
 import { withCreateEventMutation } from 'mutations/createEventMutation'
 
 const { string, shape, func } = React.PropTypes
@@ -69,7 +69,7 @@ class NewEventSetup extends Component {
     if (error) {
       showError = (
         <TGText
-          style={{ backgroundColor: 'red', width: '100%', padding: 10, color: 'white', fontWeight: 'bold', textAlign: 'center' }}
+          style={{ backgroundColor: colors.red, width: '100%', padding: 10, color: colors.white, fontWeight: 'bold', textAlign: 'center' }}
         >
           Något gick fel med att spara, se över infon
         </TGText>
@@ -78,43 +78,46 @@ class NewEventSetup extends Component {
 
     return (
       <View style={styles.container}>
-        <View style={[styles.inlineHeader, { flexDirection: 'row' }]}>
-          <TGText style={{ flex: 1, padding: 10 }}>{course.club}: {course.name}</TGText>
-          <TGText
-            style={{ flex: 1, padding: 10, textAlign: 'right' }}
-            onPress={() => changeCourse(null)}
-          >
-            Byt
+        <View style={{ flex: 1 }}>
+          <View style={[styles.inlineHeader, { flexDirection: 'row' }]}>
+            <TGText style={{ flex: 1, padding: 10, color: colors.white }}>
+              {course.club}: {course.name}
+            </TGText>
+            <TGText
+              style={{ flex: 1, padding: 10, textAlign: 'right' }}
+              onPress={() => changeCourse(null)}
+            >
+              Byt
           </TGText>
-        </View>
-
-        {showError}
-
-        <View style={[styles.formRow, { flexDirection: 'row' }]}>
-          <View style={[styles.formColumn, { borderRightWidth: StyleSheet.hairlineWidth }]}>
-            <TGText style={styles.label}>Lagtävling?</TGText>
-            <Switch
-              onValueChange={te => this.setState({ teamEvent: te })}
-              style={styles.formColumnContent}
-              value={teamEvent}
-            />
           </View>
-          <View style={styles.formColumn}>
-            <TGText style={styles.label}>Slaggolf?</TGText>
-            <Switch
-              onValueChange={isS => this.setState({ isStrokes: isS })}
-              style={styles.formColumnContent}
-              value={isStrokes}
-            />
+
+          {showError}
+
+          <View style={[styles.formRow, { flexDirection: 'row' }]}>
+            <View style={[styles.formColumn, { borderRightWidth: StyleSheet.hairlineWidth }]}>
+              <TGText style={styles.label}>Lagtävling?</TGText>
+              <Switch
+                onValueChange={te => this.setState({ teamEvent: te })}
+                style={styles.formColumnContent}
+                value={teamEvent}
+              />
+            </View>
+            <View style={styles.formColumn}>
+              <TGText style={styles.label}>Slaggolf?</TGText>
+              <Switch
+                onValueChange={isS => this.setState({ isStrokes: isS })}
+                style={styles.formColumnContent}
+                value={isStrokes}
+              />
+            </View>
           </View>
+
+          <View style={styles.formRow}>
+            <TGText style={styles.label}>Datum</TGText>
+            {this.renderDatePicker()}
+          </View>
+
         </View>
-
-        <View style={styles.formRow}>
-          <TGText style={styles.label}>Datum</TGText>
-          {this.renderDatePicker()}
-        </View>
-
-
         {isSaving || !startsAt
           ? null
           : <BottomButton title="SKAPA RUNDA" onPress={this.onSubmit} />

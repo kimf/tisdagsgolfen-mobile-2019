@@ -40,7 +40,8 @@ export default (state = initialState, action) => {
     }
 
     case 'LOGGED_OUT': {
-      return { ...initialState }
+      const currentUser = { email: state.currentUser.email }
+      return { ...initialState, currentUser }
     }
 
     default:

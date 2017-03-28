@@ -2,11 +2,12 @@ import React, { PropTypes } from 'react'
 import { View, StyleSheet } from 'react-native'
 
 import TGText from 'shared/TGText'
+import { colors } from 'styles'
 
 const styles = StyleSheet.create({
   view: {
     height: 44,
-    backgroundColor: 'transparent',
+    backgroundColor: colors.green,
     flexDirection: 'row',
     width: '100%',
     paddingHorizontal: 15,
@@ -16,7 +17,7 @@ const styles = StyleSheet.create({
     flex: 1
   },
   text: {
-    color: '#229553',
+    color: colors.darkGreen,
     fontWeight: 'bold'
   },
   menu: {

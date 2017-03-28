@@ -2,10 +2,11 @@ import React, { Component, PropTypes } from 'react'
 import { Alert, View, Picker } from 'react-native'
 import { compose } from 'react-apollo'
 
-import TGText from 'shared/TGText'
+import TopButton from 'shared/TopButton'
 import { pointsArray, STROKE_VALUES, PUTT_VALUES, BEER_VALUES } from 'Scoring/constants'
 import { withCreateLiveScoreMutation } from 'mutations/createLiveScoreMutation'
 import { withUpdateLiveScoreMutation } from 'mutations/updateLiveScoreMutation'
+import { colors } from 'styles'
 
 const { bool, shape, number, string, func, oneOfType } = PropTypes
 
@@ -116,7 +117,7 @@ class ScoreInput extends Component {
     )
 
     return (
-      <View style={{ backgroundColor: 'white' }}>
+      <View style={{ backgroundColor: colors.white }}>
         <View style={{ flexDirection: 'row' }}>
           {beersPicker}
           <Picker
@@ -134,13 +135,7 @@ class ScoreInput extends Component {
           </Picker>
           {putsPicker}
         </View>
-        <TGText
-          viewStyle={{ padding: 10, width: '100%', backgroundColor: 'green' }}
-          style={{ color: '#fff', fontWeight: 'bold', textAlign: 'center' }}
-          onPress={this.onCloseScoreForm}
-        >
-          SPARA SCORE
-        </TGText>
+        <TopButton title="SPARA" onPress={this.onCloseScoreForm} />
       </View>
     )
   }

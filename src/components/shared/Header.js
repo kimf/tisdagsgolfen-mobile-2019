@@ -3,7 +3,7 @@ import { View, Image } from 'react-native'
 
 import TouchableView from 'shared/TouchableView'
 import TGText from 'shared/TGText'
-import styles from 'styles'
+import styles, { colors } from 'styles'
 
 const { string, func, oneOfType, arrayOf, node } = PropTypes
 
@@ -21,8 +21,8 @@ class Header extends Component {
 
   static defaultProps = {
     children: null,
-    color: '#000',
-    backgroundColor: '#eee',
+    color: colors.dark,
+    backgroundColor: colors.lightGray,
     goBack: null
   }
 
@@ -37,7 +37,7 @@ class Header extends Component {
       onPress={this.props.goBack}
     >
       <Image
-        style={{ tintColor: '#ccc' }}
+        style={{ tintColor: colors.muted }}
         source={require('../../images/close.png')}
       />
     </TouchableView >

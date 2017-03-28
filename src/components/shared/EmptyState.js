@@ -2,16 +2,16 @@ import React from 'react'
 import { View, Image } from 'react-native'
 
 import TGText from 'shared/TGText'
+import { colors } from 'styles'
 
 const containerStyle = {
-  backgroundColor: '#fff',
+  backgroundColor: colors.white,
   alignItems: 'center',
   justifyContent: 'center',
   flex: 1
 }
 
 const imageStyle = {
-  marginBottom: 40,
   width: '90%',
   height: '60%'
 }
@@ -19,7 +19,7 @@ const imageStyle = {
 const textStyle = {
   fontWeight: 'bold',
   fontSize: 24,
-  color: '#5CCD7A'
+  color: colors.muted
 }
 
 const emptyImage = require('images/emptystate.png')

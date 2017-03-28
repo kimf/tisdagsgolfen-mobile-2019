@@ -1,5 +1,10 @@
 module.exports = {
   parser: "babel-eslint",
+  plugins: [
+    "react",
+    "react-native",
+    "graphql"
+  ],
   extends: [
     "airbnb"
   ],
@@ -39,10 +44,5 @@ module.exports = {
     "import/resolver": {
       "babel-module": {}
     }
-  },
-  plugins: [
-    "react",
-    "react-native",
-    "graphql"
-  ]
+  }
 }

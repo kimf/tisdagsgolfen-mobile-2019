@@ -12,7 +12,7 @@ const Tab = ({ tab, isCurrent, onChange }) => {
       style={[
         styles.tabText,
         {
-          color: isCurrent ? '#fff' : '#444',
+          color: isCurrent ? colors.white : colors.muted,
           fontWeight: isCurrent ? 'bold' : 'normal'
         }
       ]}

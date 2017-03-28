@@ -8,6 +8,7 @@ import { compose } from 'react-apollo'
 import { seasonShape, userShape } from 'propTypes'
 import { withLeaderboardQuery, leaderboardQueryProps } from 'queries/leaderboardQuery'
 import { changeSeason } from 'actions/app'
+import { colors } from 'styles'
 
 import LeaderboardContent from 'Leaderboard/LeaderboardContent'
 import SeasonPicker from 'Leaderboard/SeasonPicker'
@@ -100,7 +101,7 @@ class Leaderboard extends Component {
     }
 
     return (
-      <View style={{ flex: 1, alignItems: 'stretch', backgroundColor: '#eee' }}>
+      <View style={{ flex: 1, alignItems: 'stretch', backgroundColor: colors.lightGray }}>
         {
           showSeasonPicker
             ? <SeasonPicker

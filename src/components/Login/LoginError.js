@@ -1,31 +1,27 @@
 import React from 'react'
-import { View, StyleSheet } from 'react-native'
+import { StyleSheet } from 'react-native'
 
 import TGText from 'shared/TGText'
+import { colors } from 'styles'
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
   errorText: {
-    backgroundColor: 'rgba(255, 0, 0, 0.75)',
+    backgroundColor: colors.red,
     width: '90%',
     padding: 10,
     marginHorizontal: 20,
     textAlign: 'center',
-    color: '#ffffff',
-    marginBottom: 20
+    fontWeight: 'bold',
+    fontSize: 14,
+    color: colors.white,
+    marginBottom: 10
   }
 })
 
 const LoginError = () => (
-  <View style={styles.container}>
-    <TGText style={styles.errorText}>
-      Något gick fel, se över infon
-    </TGText>
-  </View>
+  <TGText style={styles.errorText}>
+    Något gick fel, se över infon
+  </TGText>
 )
 
 export default LoginError

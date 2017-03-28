@@ -7,7 +7,7 @@ import { eventShape } from 'propTypes'
 const { arrayOf, string, func } = PropTypes
 
 const ClosedSeasonEventList = ({ events, userId, onNavigate }) => (
-  <View>
+  <View style={{ flex: 1 }}>
     <FlatList
       style={{ paddingHorizontal: 5 }}
       data={events}
