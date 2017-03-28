@@ -14,7 +14,10 @@ export const seasonShape = shape({
 export const userShape = shape({
   id: string.isRequired,
   firstName: string.isRequired,
-  lastName: string.isRequired
+  lastName: string.isRequired,
+  photo: shape({
+    url: string.isRequired
+  })
 })
 
 export const leaderboardPlayerShape = shape({

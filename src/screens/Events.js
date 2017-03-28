@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
-import { View, Image } from 'react-native'
+import { Animated, View, Image, FlatList } from 'react-native'
 import { connect } from 'react-redux'
 import { compose } from 'react-apollo'
 
 // import OpenSeasonEventList from 'Events/OpenSeasonEventList'
-import ClosedSeasonEventList from 'Events/ClosedSeasonEventList'
+import AnimatedHeader from 'shared/AnimatedHeader'
+import EventCard from 'Events/EventCard'
 import EmptyState from 'shared/EmptyState'
-import Header from 'shared/Header'
 import TouchableView from 'shared/TouchableView'
 
 // import { sortedByParsedDate } from '../utils'
@@ -14,6 +14,8 @@ import { withEventsQuery, eventsQueryProps } from 'queries/eventsQuery'
 import { userShape } from 'propTypes'
 import { NAVBAR_HEIGHT, colors } from 'styles'
 
+
+const AnimatedFlatList = Animated.createAnimatedComponent(FlatList)
 const { bool, shape } = React.PropTypes
 
 export class Events extends Component {
@@ -47,6 +49,14 @@ export class Events extends Component {
     }
   }
 
+  constructor() {
+    super()
+
+    this.state = {
+      scrollY: new Animated.Value(0)
+    }
+  }
+
   navigateToEvent = (screen, params) => {
     const navigation = this.props.navigation
     navigation.navigate(screen, { ...this.props.navigation.state.params, ...params })
@@ -54,6 +64,7 @@ export class Events extends Component {
 
   render() {
     const { data, currentUser, seasonClosed } = this.props
+    const scrollY = this.state.scrollY
 
     if (data.loading) {
       return null
@@ -65,23 +76,35 @@ export class Events extends Component {
 
     // const sortedEvents = sortedByParsedDate(events, 'startsAt')
 
-    // const ListComponent = seasonClosed ? ClosedSeasonEventList : OpenSeasonEventList
-    const ListComponent = ClosedSeasonEventList
+    const paddingTop = scrollY.interpolate({
+      inputRange: [0, 40],
+      outputRange: [90, 60],
+      extrapolate: 'clamp'
+    })
+
+    const marginTop = scrollY.interpolate({
+      inputRange: [0, 40],
+      outputRange: [-20, 0],
+      extrapolate: 'clamp'
+    })
 
     return (
-      <View style={{ flex: 1, paddingTop: NAVBAR_HEIGHT }}>
-        <Header title="Rundor">
+      <View style={{ flex: 1 }}>
+        <AnimatedHeader
+          scrollY={scrollY}
+          title="Rundor"
+        >
           {seasonClosed
             ? null
             : <TouchableView
               style={{
-                marginTop: -40,
                 marginRight: -10,
                 padding: 10,
                 flex: 1,
                 justifyContent: 'flex-end',
                 alignItems: 'center',
-                flexDirection: 'row'
+                flexDirection: 'row',
+                transform: [{ translateY: marginTop }]
               }}
               onPress={() => { this.props.navigation.navigate('NewEvent') }}
             >
@@ -91,11 +114,18 @@ export class Events extends Component {
               />
             </TouchableView>
           }
-        </Header>
-        <ListComponent
-          events={data.events}
-          userId={currentUser.id}
-          onNavigate={this.navigateToEvent}
+        </AnimatedHeader>
+        <AnimatedFlatList
+          style={{ padding: 10, transform: [{ translateY: paddingTop }] }}
+          data={data.events}
+          renderItem={({ item }) => (
+            <EventCard userId={currentUser.id} event={item} onNavigate={this.navigateToEvent} />
+          )}
+          keyExtractor={item => `event_${item.id}}`}
+          onScroll={Animated.event(
+            [{ nativeEvent: { contentOffset: { y: scrollY } } }],
+            { useNativeDriver: true }
+          )}
         />
       </View>
     )

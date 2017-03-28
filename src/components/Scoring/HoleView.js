@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { View } from 'react-native'
+import { View, Image } from 'react-native'
 
 import TouchableView from 'shared/TouchableView'
 import TGText from 'shared/TGText'
@@ -7,9 +7,10 @@ import ScoreRow from 'Scoring/ScoreRow'
 import ScorecardHeaderRow from 'Scoring/ScorecardHeaderRow'
 import ScoreInput from 'Scoring/ScoreInput'
 import HoleHeader from 'Scoring/HoleHeader'
-import { colors, deviceHeight, deviceWidth } from 'styles'
-
+import styles, { colors, deviceHeight, deviceWidth } from 'styles'
 import { calculateExtraStrokes } from 'utils'
+
+const defaultAvatar = require('../../images/defaultavatar.png')
 
 const { shape, number, arrayOf, string } = PropTypes
 
@@ -24,6 +25,8 @@ class HoleView extends Component {
   }
 
   state = { scoringId: null }
+
+  getPhotoUrl = item => (item.photo ? { uri: item.photo.url } : defaultAvatar)
 
   toggleScoring = (scoringId) => {
     this.setState((state) => {
@@ -92,9 +95,32 @@ class HoleView extends Component {
                   {scoringId && scoringId !== item.id
                     ? null
                     : <View style={{ flex: 2, paddingTop: 20, paddingLeft: 20, paddingBottom: 20 }}>
-                      <TGText style={{ fontWeight: 'bold', lineHeight: 30, fontSize: 18 }}>
-                        {itemName}
-                      </TGText>
+                      <View style={{ flexDirection: 'row' }}>
+                        {event.teamEvent
+                          ? <View style={{ flex: 0, flexDirection: 'row' }}>
+                            {item.players.map(teamItem => (
+                              <Image
+                                key={`team_player_photo_${teamItem.user.id}`}
+                                style={[styles.smallCardImage, { flex: 1 }]}
+                                source={this.getPhotoUrl(teamItem.user)}
+                                resizeMode="cover"
+                              />
+                            ))}
+                          </View>
+                          : <Image
+                            key={`player_photo_${item.id}`}
+                            style={[
+                              styles.smallCardImage,
+                              { marginBottom: 6, marginRight: 10, marginLeft: 0 }
+                            ]}
+                            source={this.getPhotoUrl(item.user)}
+                            resizeMode="cover"
+                          />
+                        }
+                        <TGText style={{ fontWeight: 'bold', lineHeight: 30, fontSize: 18 }}>
+                          {itemName}
+                        </TGText>
+                      </View>
                       <TGText style={{ color: colors.muted }}>{scoreItem.extraStrokes} slag</TGText>
                       {event.teamEvent ? <TGText>{playerNames}</TGText> : null}
                     </View>

@@ -5,6 +5,10 @@ import TGText from 'shared/TGText'
 import styles, { colors } from 'styles'
 import { leaderboardPlayerShape } from 'propTypes'
 
+const mutedYellow = { backgroundColor: colors.mutedYellow }
+
+const defaultAvatar = require('../../images/defaultavatar.png')
+
 const LeaderboardCard = ({ data, currentUserId, sorting }) => {
   let pointText
   let pointValue = ''
@@ -24,23 +28,30 @@ const LeaderboardCard = ({ data, currentUserId, sorting }) => {
     pointText = 'p'
     position = data.position
     if (data.position < data.previousPosition) {
-      upOrDown = <TGText style={{ fontSize: 14, flex: 1, color: colors.green }}>↥{data.previousPosition - data.position}</TGText>
+      upOrDown = (
+        <TGText style={{ fontSize: 14, flex: 1, color: colors.green }}>
+          ↥{data.previousPosition - data.position}
+        </TGText>
+      )
     } else if (data.position > data.previousPosition) {
-      upOrDown = <TGText style={{ fontSize: 14, flex: 1, color: colors.red }}>↧{data.position - data.previousPosition}</TGText>
+      upOrDown = (
+        <TGText style={{ fontSize: 14, flex: 1, color: colors.red }}>
+          ↧{data.position - data.previousPosition}
+        </TGText>
+      )
     }
   }
 
   const player = data.user
   const averagePoints = (data.averagePoints * 2).toFixed() / 2
 
-  const currentUserStyle = player.id === currentUserId ? { backgroundColor: colors.mutedYellow } : null
+  const currentUserStyle = player.id === currentUserId ? mutedYellow : null
 
   if (data.eventCount < 1) {
     return null
   }
 
-  const num = Math.floor(Math.random() * 110) + 1
-
+  const photoSrc = player.photo ? { uri: player.photo.url } : defaultAvatar
   return (
     <View key={data.id} style={[styles.listrow, currentUserStyle]}>
       <View style={styles.position}>
@@ -49,8 +60,7 @@ const LeaderboardCard = ({ data, currentUserId, sorting }) => {
       </View>
       <Image
         style={styles.cardImage}
-        source={{ uri: `https://randomuser.me/api/portraits/men/${num}.jpg` }}
-        defaultSource={require('../../images/defaultavatar.png')}
+        source={photoSrc}
         resizeMode="cover"
       />
       <View style={styles.cardTitle}>

@@ -8,6 +8,9 @@ const currentUserQuery = gql`
       email
       firstName
       lastName
+      photo {
+        url
+      }
     }
   }
 `

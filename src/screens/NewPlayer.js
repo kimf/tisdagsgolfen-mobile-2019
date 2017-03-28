@@ -1,10 +1,12 @@
 import React, { Component, PropTypes } from 'react'
-import { View, ListView } from 'react-native'
+import { View, ListView, Image } from 'react-native'
 
 import TGText from 'shared/TGText'
 import styles, { colors } from 'styles'
 import { withUserQuery } from 'queries/userQuery'
 import { userShape } from 'propTypes'
+
+const defaultAvatar = require('../images/defaultavatar.png')
 
 const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 })
 const { shape, bool, arrayOf, func, string, number } = PropTypes
@@ -60,6 +62,7 @@ class NewPlayer extends Component {
           dataSource={ds.cloneWithRows(data.players)}
           renderRow={(player) => {
             const isPlaying = addedIds.includes(player.id)
+            const photoSrc = player.photo ? { uri: player.photo.url } : defaultAvatar
             return !isPlaying ? (
               <TGText
                 key={`setup_player_row_${player.id}`}
@@ -73,6 +76,11 @@ class NewPlayer extends Component {
                 }}
                 style={{ fontSize: 18, fontWeight: 'bold' }}
               >
+                <Image
+                  style={styles.cardImage}
+                  source={photoSrc}
+                  resizeMode="cover"
+                />
                 {player.firstName} {player.lastName}
               </TGText>
             ) : null

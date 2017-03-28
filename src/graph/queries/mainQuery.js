@@ -10,6 +10,9 @@ const mainQuery = gql`
       email
       firstName
       lastName
+      photo {
+        url
+      }
       scoringSession {
         id
         event {

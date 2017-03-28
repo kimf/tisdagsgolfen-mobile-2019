@@ -13,14 +13,10 @@ import SetupTeamEvent from 'screens/EventScreens/SetupTeamEvent'
 import NewPlayer from 'screens/NewPlayer'
 
 import ScoreEventScreen from 'screens/ScoringScreens/ScoreEvent'
-import ScoringMenu from 'screens/ScoringScreens/ScoringMenu'
-import ScoringLeaderboard from 'screens/ScoringScreens/ScoringLeaderboard'
 
 const scoringRoutes = {
   Leaderboard: { screen: Leaderboard },
-  ScoreEvent: { screen: ScoreEventScreen },
-  ScoringLeaderboard: { screen: ScoringLeaderboard },
-  ScoringMenu: { screen: ScoringMenu }
+  ScoreEvent: { screen: ScoreEventScreen }
 }
 const ScoreStack = StackNavigator(scoringRoutes, { headerMode: 'screen', initialRouteName: 'Leaderboard', mode: 'modal' })
 

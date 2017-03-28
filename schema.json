@@ -164,18 +164,6 @@
         "enumValues": null,
         "fields": [
           {
-            "name": "eventsEvent",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null,
-            "args": [],
-            "type": {
-              "kind": "OBJECT",
-              "name": "Event",
-              "ofType": null
-            }
-          },
-          {
             "name": "courseCourse",
             "description": null,
             "isDeprecated": false,
@@ -184,6 +172,18 @@
             "type": {
               "kind": "OBJECT",
               "name": "Course",
+              "ofType": null
+            }
+          },
+          {
+            "name": "eventsEvent",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null,
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "Event",
               "ofType": null
             }
           }
@@ -304,18 +304,6 @@
         "enumValues": null,
         "fields": [
           {
-            "name": "liveScoresLiveScore",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null,
-            "args": [],
-            "type": {
-              "kind": "OBJECT",
-              "name": "LiveScore",
-              "ofType": null
-            }
-          },
-          {
             "name": "holeHole",
             "description": null,
             "isDeprecated": false,
@@ -324,6 +312,18 @@
             "type": {
               "kind": "OBJECT",
               "name": "Hole",
+              "ofType": null
+            }
+          },
+          {
+            "name": "liveScoresLiveScore",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null,
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "LiveScore",
               "ofType": null
             }
           }
@@ -444,18 +444,6 @@
         "enumValues": null,
         "fields": [
           {
-            "name": "scoringSessionsScoringSession",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null,
-            "args": [],
-            "type": {
-              "kind": "OBJECT",
-              "name": "ScoringSession",
-              "ofType": null
-            }
-          },
-          {
             "name": "courseCourse",
             "description": null,
             "isDeprecated": false,
@@ -464,6 +452,18 @@
             "type": {
               "kind": "OBJECT",
               "name": "Course",
+              "ofType": null
+            }
+          },
+          {
+            "name": "scoringSessionsScoringSession",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null,
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "ScoringSession",
               "ofType": null
             }
           }
@@ -4322,6 +4322,16 @@
               "ofType": null
             },
             "defaultValue": null
+          },
+          {
+            "name": "userId",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "ID",
+              "ofType": null
+            },
+            "defaultValue": null
           }
         ],
         "name": "CourseeventsEventseasonSeasonphotoFile",
@@ -7129,6 +7139,16 @@
             "defaultValue": null
           },
           {
+            "name": "photoId",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "ID",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
             "name": "scoringSessionId",
             "description": null,
             "type": {
@@ -7804,6 +7824,16 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "FileseasonSeason",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "userId",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "ID",
               "ofType": null
             },
             "defaultValue": null
@@ -8899,6 +8929,26 @@
             "type": {
               "kind": "SCALAR",
               "name": "Int",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "photoId",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "ID",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "photo",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "UserphotoFile",
               "ofType": null
             },
             "defaultValue": null
@@ -12861,6 +12911,16 @@
           },
           {
             "name": "seasonId",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "ID",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "userId",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -19505,6 +19565,16 @@
             "defaultValue": null
           },
           {
+            "name": "photoId",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "ID",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
             "name": "scoringSessionId",
             "description": null,
             "type": {
@@ -21617,6 +21687,16 @@
             "defaultValue": null
           },
           {
+            "name": "photoId",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "ID",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
             "name": "scoringSessionId",
             "description": null,
             "type": {
@@ -22631,6 +22711,16 @@
                 "name": "String",
                 "ofType": null
               }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "userId",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "ID",
+              "ofType": null
             },
             "defaultValue": null
           }
@@ -24084,6 +24174,16 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "SeasonFilter",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "user",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "UserFilter",
               "ofType": null
             },
             "defaultValue": null
@@ -30355,6 +30455,16 @@
             "defaultValue": null
           },
           {
+            "name": "photoId",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "ID",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
             "name": "scoringSessionId",
             "description": null,
             "type": {
@@ -34156,6 +34266,16 @@
           },
           {
             "name": "seasonId",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "ID",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "userId",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -39498,6 +39618,16 @@
             "defaultValue": null
           },
           {
+            "name": "photoId",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "ID",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
             "name": "scoringSessionId",
             "description": null,
             "type": {
@@ -41039,6 +41169,26 @@
             "defaultValue": null
           },
           {
+            "name": "photoId",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "ID",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "photo",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "LiveScorescoringTeamScoringTeamusersUserphotoFile",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
             "name": "scoringSessionId",
             "description": null,
             "type": {
@@ -41188,6 +41338,51 @@
           }
         ],
         "name": "LiveScorescoringTeamScoringTeamusersUser",
+        "description": null,
+        "interfaces": null,
+        "enumValues": null,
+        "fields": null,
+        "kind": "INPUT_OBJECT",
+        "possibleTypes": null
+      },
+      {
+        "inputFields": [
+          {
+            "name": "name",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "seasonId",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "ID",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "userId",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "ID",
+              "ofType": null
+            },
+            "defaultValue": null
+          }
+        ],
+        "name": "LiveScorescoringTeamScoringTeamusersUserphotoFile",
         "description": null,
         "interfaces": null,
         "enumValues": null,
@@ -42258,6 +42453,16 @@
                 "type": {
                   "kind": "INPUT_OBJECT",
                   "name": "FileseasonSeason",
+                  "ofType": null
+                },
+                "defaultValue": null
+              },
+              {
+                "name": "userId",
+                "description": null,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "ID",
                   "ofType": null
                 },
                 "defaultValue": null
@@ -43973,6 +44178,16 @@
                   "ofType": null
                 },
                 "defaultValue": null
+              },
+              {
+                "name": "userId",
+                "description": null,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "ID",
+                  "ofType": null
+                },
+                "defaultValue": null
               }
             ],
             "type": {
@@ -45170,6 +45385,26 @@
                 "defaultValue": null
               },
               {
+                "name": "photoId",
+                "description": null,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "ID",
+                  "ofType": null
+                },
+                "defaultValue": null
+              },
+              {
+                "name": "photo",
+                "description": null,
+                "type": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "UserphotoFile",
+                  "ofType": null
+                },
+                "defaultValue": null
+              },
+              {
                 "name": "scoringSessionId",
                 "description": null,
                 "type": {
@@ -46332,6 +46567,47 @@
             }
           },
           {
+            "name": "setUserPhoto",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null,
+            "args": [
+              {
+                "name": "photoFileId",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "ID",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null
+              },
+              {
+                "name": "userUserId",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "ID",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null
+              }
+            ],
+            "type": {
+              "kind": "OBJECT",
+              "name": "SetUserPhotoPayload",
+              "ofType": null
+            }
+          },
+          {
             "name": "setUserSeasonLeaderboard",
             "description": null,
             "isDeprecated": false,
@@ -46496,6 +46772,47 @@
             }
           },
           {
+            "name": "unsetUserPhoto",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null,
+            "args": [
+              {
+                "name": "photoFileId",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "ID",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null
+              },
+              {
+                "name": "userUserId",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "ID",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null
+              }
+            ],
+            "type": {
+              "kind": "OBJECT",
+              "name": "UnsetUserPhotoPayload",
+              "ofType": null
+            }
+          },
+          {
             "name": "unsetUserSeasonLeaderboard",
             "description": null,
             "isDeprecated": false,
@@ -46584,7 +46901,7 @@
             "deprecationReason": null,
             "args": [
               {
-                "name": "courseCourseId",
+                "name": "eventsEventId",
                 "description": null,
                 "type": {
                   "kind": "NON_NULL",
@@ -46598,7 +46915,7 @@
                 "defaultValue": null
               },
               {
-                "name": "eventsEventId",
+                "name": "courseCourseId",
                 "description": null,
                 "type": {
                   "kind": "NON_NULL",
@@ -46748,7 +47065,7 @@
             "deprecationReason": null,
             "args": [
               {
-                "name": "holeHoleId",
+                "name": "liveScoresLiveScoreId",
                 "description": null,
                 "type": {
                   "kind": "NON_NULL",
@@ -46762,7 +47079,7 @@
                 "defaultValue": null
               },
               {
-                "name": "liveScoresLiveScoreId",
+                "name": "holeHoleId",
                 "description": null,
                 "type": {
                   "kind": "NON_NULL",
@@ -46912,7 +47229,7 @@
             "deprecationReason": null,
             "args": [
               {
-                "name": "courseCourseId",
+                "name": "scoringSessionsScoringSessionId",
                 "description": null,
                 "type": {
                   "kind": "NON_NULL",
@@ -46926,7 +47243,7 @@
                 "defaultValue": null
               },
               {
-                "name": "scoringSessionsScoringSessionId",
+                "name": "courseCourseId",
                 "description": null,
                 "type": {
                   "kind": "NON_NULL",
@@ -47322,7 +47639,7 @@
             "deprecationReason": null,
             "args": [
               {
-                "name": "courseCourseId",
+                "name": "eventsEventId",
                 "description": null,
                 "type": {
                   "kind": "NON_NULL",
@@ -47336,7 +47653,7 @@
                 "defaultValue": null
               },
               {
-                "name": "eventsEventId",
+                "name": "courseCourseId",
                 "description": null,
                 "type": {
                   "kind": "NON_NULL",
@@ -47486,7 +47803,7 @@
             "deprecationReason": null,
             "args": [
               {
-                "name": "holeHoleId",
+                "name": "liveScoresLiveScoreId",
                 "description": null,
                 "type": {
                   "kind": "NON_NULL",
@@ -47500,7 +47817,7 @@
                 "defaultValue": null
               },
               {
-                "name": "liveScoresLiveScoreId",
+                "name": "holeHoleId",
                 "description": null,
                 "type": {
                   "kind": "NON_NULL",
@@ -47650,7 +47967,7 @@
             "deprecationReason": null,
             "args": [
               {
-                "name": "courseCourseId",
+                "name": "scoringSessionsScoringSessionId",
                 "description": null,
                 "type": {
                   "kind": "NON_NULL",
@@ -47664,7 +47981,7 @@
                 "defaultValue": null
               },
               {
-                "name": "scoringSessionsScoringSessionId",
+                "name": "courseCourseId",
                 "description": null,
                 "type": {
                   "kind": "NON_NULL",
@@ -48084,6 +48401,26 @@
                 "defaultValue": null
               },
               {
+                "name": "photoId",
+                "description": null,
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "ID",
+                  "ofType": null
+                },
+                "defaultValue": null
+              },
+              {
+                "name": "photo",
+                "description": null,
+                "type": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "UserphotoFile",
+                  "ofType": null
+                },
+                "defaultValue": null
+              },
+              {
                 "name": "scoringSessionId",
                 "description": null,
                 "type": {
@@ -48299,18 +48636,6 @@
         "enumValues": null,
         "fields": [
           {
-            "name": "eventsEvent",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null,
-            "args": [],
-            "type": {
-              "kind": "OBJECT",
-              "name": "Event",
-              "ofType": null
-            }
-          },
-          {
             "name": "courseCourse",
             "description": null,
             "isDeprecated": false,
@@ -48319,6 +48644,18 @@
             "type": {
               "kind": "OBJECT",
               "name": "Course",
+              "ofType": null
+            }
+          },
+          {
+            "name": "eventsEvent",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null,
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "Event",
               "ofType": null
             }
           }
@@ -48439,18 +48776,6 @@
         "enumValues": null,
         "fields": [
           {
-            "name": "liveScoresLiveScore",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null,
-            "args": [],
-            "type": {
-              "kind": "OBJECT",
-              "name": "LiveScore",
-              "ofType": null
-            }
-          },
-          {
             "name": "holeHole",
             "description": null,
             "isDeprecated": false,
@@ -48459,6 +48784,18 @@
             "type": {
               "kind": "OBJECT",
               "name": "Hole",
+              "ofType": null
+            }
+          },
+          {
+            "name": "liveScoresLiveScore",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null,
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "LiveScore",
               "ofType": null
             }
           }
@@ -48579,18 +48916,6 @@
         "enumValues": null,
         "fields": [
           {
-            "name": "scoringSessionsScoringSession",
-            "description": null,
-            "isDeprecated": false,
-            "deprecationReason": null,
-            "args": [],
-            "type": {
-              "kind": "OBJECT",
-              "name": "ScoringSession",
-              "ofType": null
-            }
-          },
-          {
             "name": "courseCourse",
             "description": null,
             "isDeprecated": false,
@@ -48599,6 +48924,18 @@
             "type": {
               "kind": "OBJECT",
               "name": "Course",
+              "ofType": null
+            }
+          },
+          {
+            "name": "scoringSessionsScoringSession",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null,
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "ScoringSession",
               "ofType": null
             }
           }
@@ -52581,6 +52918,16 @@
           },
           {
             "name": "seasonId",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "ID",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "userId",
             "description": null,
             "type": {
               "kind": "SCALAR",
@@ -57002,6 +57349,16 @@
             "defaultValue": null
           },
           {
+            "name": "photoId",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "ID",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
             "name": "scoringSessionId",
             "description": null,
             "type": {
@@ -59673,6 +60030,16 @@
             "type": {
               "kind": "SCALAR",
               "name": "Int",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "photoId",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "ID",
               "ofType": null
             },
             "defaultValue": null
@@ -64830,6 +65197,16 @@
               "ofType": null
             },
             "defaultValue": null
+          },
+          {
+            "name": "userId",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "ID",
+              "ofType": null
+            },
+            "defaultValue": null
           }
         ],
         "name": "ScoringSessioneventEventseasonSeasonphotoFile",
@@ -67067,6 +67444,16 @@
             "defaultValue": null
           },
           {
+            "name": "photoId",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "ID",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
             "name": "scoringSessionId",
             "description": null,
             "type": {
@@ -68496,6 +68883,26 @@
             "defaultValue": null
           },
           {
+            "name": "photoId",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "ID",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "photo",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "ScoringSessionscoringTeamsScoringTeamusersUserphotoFile",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
             "name": "scoringSessionId",
             "description": null,
             "type": {
@@ -68645,6 +69052,51 @@
           }
         ],
         "name": "ScoringSessionscoringTeamsScoringTeamusersUser",
+        "description": null,
+        "interfaces": null,
+        "enumValues": null,
+        "fields": null,
+        "kind": "INPUT_OBJECT",
+        "possibleTypes": null
+      },
+      {
+        "inputFields": [
+          {
+            "name": "name",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "seasonId",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "ID",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "userId",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "ID",
+              "ofType": null
+            },
+            "defaultValue": null
+          }
+        ],
+        "name": "ScoringSessionscoringTeamsScoringTeamusersUserphotoFile",
         "description": null,
         "interfaces": null,
         "enumValues": null,
@@ -74949,6 +75401,16 @@
             "defaultValue": null
           },
           {
+            "name": "photoId",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "ID",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
             "name": "scoringSessionId",
             "description": null,
             "type": {
@@ -75067,6 +75529,26 @@
             "type": {
               "kind": "SCALAR",
               "name": "Int",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "photoId",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "ID",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "photo",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "ScoringTeamusersUserphotoFile",
               "ofType": null
             },
             "defaultValue": null
@@ -75221,6 +75703,142 @@
           }
         ],
         "name": "ScoringTeamusersUser",
+        "description": null,
+        "interfaces": null,
+        "enumValues": null,
+        "fields": null,
+        "kind": "INPUT_OBJECT",
+        "possibleTypes": null
+      },
+      {
+        "inputFields": [
+          {
+            "name": "name",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "seasonId",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "ID",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "season",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "ScoringTeamusersUserphotoFileseasonSeason",
+              "ofType": null
+            },
+            "defaultValue": null
+          }
+        ],
+        "name": "ScoringTeamusersUserphotoFile",
+        "description": null,
+        "interfaces": null,
+        "enumValues": null,
+        "fields": null,
+        "kind": "INPUT_OBJECT",
+        "possibleTypes": null
+      },
+      {
+        "inputFields": [
+          {
+            "name": "closed",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "name",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "oldId",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "photoId",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "ID",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "eventsIds",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "ID",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "seasonLeaderboardsIds",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "ID",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null
+          }
+        ],
+        "name": "ScoringTeamusersUserphotoFileseasonSeason",
         "description": null,
         "interfaces": null,
         "enumValues": null,
@@ -76995,6 +77613,16 @@
             "type": {
               "kind": "SCALAR",
               "name": "Int",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "photoId",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "ID",
               "ofType": null
             },
             "defaultValue": null
@@ -79634,6 +80262,16 @@
                 "name": "String",
                 "ofType": null
               }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "userId",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "ID",
+              "ofType": null
             },
             "defaultValue": null
           }
@@ -82927,6 +83565,16 @@
               }
             },
             "defaultValue": null
+          },
+          {
+            "name": "userId",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "ID",
+              "ofType": null
+            },
+            "defaultValue": null
           }
         ],
         "name": "SeasonphotoFile",
@@ -83136,6 +83784,41 @@
             "type": {
               "kind": "OBJECT",
               "name": "Season",
+              "ofType": null
+            }
+          },
+          {
+            "name": "photoFile",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null,
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "File",
+              "ofType": null
+            }
+          }
+        ],
+        "kind": "OBJECT",
+        "possibleTypes": null
+      },
+      {
+        "inputFields": null,
+        "name": "SetUserPhotoPayload",
+        "description": null,
+        "interfaces": [],
+        "enumValues": null,
+        "fields": [
+          {
+            "name": "userUser",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null,
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "User",
               "ofType": null
             }
           },
@@ -83621,6 +84304,41 @@
             "type": {
               "kind": "OBJECT",
               "name": "Season",
+              "ofType": null
+            }
+          },
+          {
+            "name": "photoFile",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null,
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "File",
+              "ofType": null
+            }
+          }
+        ],
+        "kind": "OBJECT",
+        "possibleTypes": null
+      },
+      {
+        "inputFields": null,
+        "name": "UnsetUserPhotoPayload",
+        "description": null,
+        "interfaces": [],
+        "enumValues": null,
+        "fields": [
+          {
+            "name": "userUser",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null,
+            "args": [],
+            "type": {
+              "kind": "OBJECT",
+              "name": "User",
               "ofType": null
             }
           },
@@ -84304,6 +85022,16 @@
             "type": {
               "kind": "INPUT_OBJECT",
               "name": "FileseasonSeason",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "userId",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "ID",
               "ofType": null
             },
             "defaultValue": null
@@ -85481,6 +86209,26 @@
             "type": {
               "kind": "SCALAR",
               "name": "Int",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "photoId",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "ID",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "photo",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "UserphotoFile",
               "ofType": null
             },
             "defaultValue": null
@@ -86953,6 +87701,16 @@
             "defaultValue": null
           },
           {
+            "name": "photo",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "FileFilter",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
             "name": "scores_every",
             "description": null,
             "type": {
@@ -87140,6 +87898,458 @@
           }
         ],
         "kind": "OBJECT",
+        "possibleTypes": null
+      },
+      {
+        "inputFields": [
+          {
+            "name": "name",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "seasonId",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "ID",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "season",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "UserphotoFileseasonSeason",
+              "ofType": null
+            },
+            "defaultValue": null
+          }
+        ],
+        "name": "UserphotoFile",
+        "description": null,
+        "interfaces": null,
+        "enumValues": null,
+        "fields": null,
+        "kind": "INPUT_OBJECT",
+        "possibleTypes": null
+      },
+      {
+        "inputFields": [
+          {
+            "name": "closed",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "name",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "oldId",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "eventsIds",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "ID",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "events",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "UserphotoFileseasonSeasoneventsEvent",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "seasonLeaderboardsIds",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "ID",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "seasonLeaderboards",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "UserphotoFileseasonSeasonseasonLeaderboardsSeasonLeaderboard",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null
+          }
+        ],
+        "name": "UserphotoFileseasonSeason",
+        "description": null,
+        "interfaces": null,
+        "enumValues": null,
+        "fields": null,
+        "kind": "INPUT_OBJECT",
+        "possibleTypes": null
+      },
+      {
+        "inputFields": [
+          {
+            "name": "oldCourseName",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "oldId",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "scoringType",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "startsAt",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "DateTime",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "status",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "teamEvent",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "courseId",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "ID",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "seasonId",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "ID",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "eventLeaderboardsIds",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "ID",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "liveScoresIds",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "ID",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "scoresIds",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "ID",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "scoringSessionsIds",
+            "description": null,
+            "type": {
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "ID",
+                  "ofType": null
+                }
+              }
+            },
+            "defaultValue": null
+          }
+        ],
+        "name": "UserphotoFileseasonSeasoneventsEvent",
+        "description": null,
+        "interfaces": null,
+        "enumValues": null,
+        "fields": null,
+        "kind": "INPUT_OBJECT",
+        "possibleTypes": null
+      },
+      {
+        "inputFields": [
+          {
+            "name": "averagePoints",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "eventCount",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "position",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "previousPosition",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "top5Points",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "Float",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "totalBeers",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "totalKr",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "totalPoints",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Float",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "seasonId",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "ID",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "userId",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "ID",
+              "ofType": null
+            },
+            "defaultValue": null
+          }
+        ],
+        "name": "UserphotoFileseasonSeasonseasonLeaderboardsSeasonLeaderboard",
+        "description": null,
+        "interfaces": null,
+        "enumValues": null,
+        "fields": null,
+        "kind": "INPUT_OBJECT",
         "possibleTypes": null
       },
       {
@@ -92368,6 +93578,16 @@
             "defaultValue": null
           },
           {
+            "name": "photoId",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "ID",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
             "name": "scoringSessionId",
             "description": null,
             "type": {
@@ -93909,6 +95129,26 @@
             "defaultValue": null
           },
           {
+            "name": "photoId",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "ID",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "photo",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "UserscoringTeamsScoringTeamusersUserphotoFile",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
             "name": "scoringSessionId",
             "description": null,
             "type": {
@@ -94058,6 +95298,51 @@
           }
         ],
         "name": "UserscoringTeamsScoringTeamusersUser",
+        "description": null,
+        "interfaces": null,
+        "enumValues": null,
+        "fields": null,
+        "kind": "INPUT_OBJECT",
+        "possibleTypes": null
+      },
+      {
+        "inputFields": [
+          {
+            "name": "name",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "seasonId",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "ID",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "userId",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "ID",
+              "ofType": null
+            },
+            "defaultValue": null
+          }
+        ],
+        "name": "UserscoringTeamsScoringTeamusersUserphotoFile",
         "description": null,
         "interfaces": null,
         "enumValues": null,
@@ -94970,6 +96255,16 @@
               "ofType": null
             },
             "defaultValue": null
+          },
+          {
+            "name": "userId",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "ID",
+              "ofType": null
+            },
+            "defaultValue": null
           }
         ],
         "name": "UserseasonLeaderboardSeasonLeaderboardseasonSeasonphotoFile",
@@ -95135,7 +96430,7 @@
       {
         "inputFields": null,
         "name": "Course",
-        "description": null,
+        "description": "",
         "interfaces": [
           {
             "kind": "INTERFACE",
@@ -100946,6 +102241,29 @@
                 "ofType": null
               }
             }
+          },
+          {
+            "name": "user",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null,
+            "args": [
+              {
+                "name": "filter",
+                "description": "",
+                "type": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "UserFilter",
+                  "ofType": null
+                },
+                "defaultValue": null
+              }
+            ],
+            "type": {
+              "kind": "OBJECT",
+              "name": "User",
+              "ofType": null
+            }
           }
         ],
         "kind": "OBJECT",
@@ -102066,6 +103384,16 @@
               "ofType": null
             },
             "defaultValue": null
+          },
+          {
+            "name": "user",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "UserFilter",
+              "ofType": null
+            },
+            "defaultValue": null
           }
         ],
         "name": "FileFilter",
@@ -102186,7 +103514,7 @@
       {
         "inputFields": null,
         "name": "Hole",
-        "description": null,
+        "description": "",
         "interfaces": [
           {
             "kind": "INTERFACE",
@@ -114845,6 +116173,29 @@
             }
           },
           {
+            "name": "photo",
+            "description": null,
+            "isDeprecated": false,
+            "deprecationReason": null,
+            "args": [
+              {
+                "name": "filter",
+                "description": "",
+                "type": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "FileFilter",
+                  "ofType": null
+                },
+                "defaultValue": null
+              }
+            ],
+            "type": {
+              "kind": "OBJECT",
+              "name": "File",
+              "ofType": null
+            }
+          },
+          {
             "name": "scores",
             "description": null,
             "isDeprecated": false,
@@ -116542,6 +117893,16 @@
             "type": {
               "kind": "SCALAR",
               "name": "DateTime",
+              "ofType": null
+            },
+            "defaultValue": null
+          },
+          {
+            "name": "photo",
+            "description": null,
+            "type": {
+              "kind": "INPUT_OBJECT",
+              "name": "FileFilter",
               "ofType": null
             },
             "defaultValue": null

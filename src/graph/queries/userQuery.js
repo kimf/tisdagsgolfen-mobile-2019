@@ -10,6 +10,9 @@ const userQuery = gql`
       email
       firstName
       lastName
+      photo {
+        url
+      }
     }
   }
 `

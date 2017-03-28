@@ -87,10 +87,17 @@ export default StyleSheet.create({
   },
 
   cardImage: {
-    height: 30,
-    width: 30,
+    height: 40,
+    width: 40,
+    borderRadius: 20,
+    marginRight: 16
+  },
+
+  smallCardImage: {
+    height: 25,
+    width: 25,
     borderRadius: 15,
-    marginRight: 8
+    marginRight: -5
   },
 
   meta: {

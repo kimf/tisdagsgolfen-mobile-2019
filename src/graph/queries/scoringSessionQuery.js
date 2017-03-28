@@ -42,6 +42,9 @@ const scoringSessionQuery = gql`
           id
           firstName
           lastName
+          photo {
+            url
+          }
         }
       }
       scoringTeams {
@@ -51,6 +54,9 @@ const scoringSessionQuery = gql`
           id
           firstName
           lastName
+          photo {
+            url
+          }
         }
       }
       event {

@@ -40,6 +40,7 @@ class SeasonPicker extends Component {
           zIndex: 2000,
           position: 'absolute',
           width: '100%',
+          height: '100%',
           top: 0,
           padding: 10,
           paddingTop: 80,
@@ -59,7 +60,7 @@ class SeasonPicker extends Component {
           }]
         }}
       >
-        <TGText style={{ fontSize: 20, fontWeight: '900', textAlign: 'center', marginBottom: 20 }}>
+        <TGText style={{ fontSize: 24, fontWeight: '900', textAlign: 'center', marginBottom: 20 }}>
           Byt säsong
         </TGText>
         {seasons.map((season) => {
@@ -72,7 +73,7 @@ class SeasonPicker extends Component {
               key={`SeasonPicker_${season.id}`}
               viewStyle={{ flex: 1, flexDirection: 'row', justifyContent: 'center', paddingVertical: 5 }}
               style={{
-                paddingTop: 5, textAlign: 'center', color, fontSize: 20, fontWeight
+                paddingTop: 40, textAlign: 'center', color, fontSize: 20, fontWeight
               }}
             >
               {season.name}

@@ -1,8 +1,10 @@
 import React, { Component, PropTypes } from 'react'
-import { Animated, View } from 'react-native'
+import { Animated, Easing } from 'react-native'
 
 import HoleView from 'Scoring/HoleView'
 import ScoringFooter from 'Scoring/ScoringFooter'
+import ScoringMenu from 'Scoring/ScoringMenu'
+import ScoringLeaderboard from 'Scoring/ScoringLeaderboard'
 import Loading from 'shared/Loading'
 import { colors, deviceHeight, deviceWidth } from 'styles'
 import { withScoringSessionQuery } from 'queries/scoringSessionQuery'
@@ -33,12 +35,15 @@ export class ScoreEvent extends Component {
 
   static scrollView = null
 
-  constructor(props) {
-    super(props)
+  constructor() {
+    super()
     this.state = {
       currentHole: 1,
       scrollEnabled: true,
-      scrollX: new Animated.Value(0)
+      scrollX: new Animated.Value(0),
+      menuOpen: false,
+      leaderboardOpen: false,
+      modal: new Animated.Value(0)
     }
   }
 
@@ -54,12 +59,37 @@ export class ScoreEvent extends Component {
     })
   }
 
-  gotoMenu = () => {
-    this.props.navigation.navigate('ScoringMenu')
+  showMenu = () => {
+    this.setState(state => ({ ...state, menuOpen: true }))
+    Animated.timing(
+      this.state.modal,
+      {
+        toValue: 1,
+        easing: Easing.inOut(Easing.quad)
+      },
+     ).start()
   }
 
-  gotoLeaderboard = () => {
-    this.props.navigation.navigate('ScoringLeaderboard')
+  showLeaderboard = () => {
+    this.setState(state => ({ ...state, leaderboardOpen: true }))
+    Animated.timing(
+      this.state.modal,
+      {
+        toValue: 1,
+        easing: Easing.inOut(Easing.quad)
+      },
+     ).start()
+  }
+
+  closeModal = () => {
+    this.setState(state => ({ ...state, menuOpen: false, leaderboardOpen: false }))
+    Animated.timing(
+      this.state.modal,
+      {
+        toValue: 0,
+        easing: Easing.out(Easing.quad)
+      }
+     ).start()
   }
 
   handlePageChange = (e) => {
@@ -74,7 +104,9 @@ export class ScoreEvent extends Component {
 
   render() {
     const { data } = this.props
-    const { currentHole, scrollEnabled, scrollX } = this.state
+    const { currentHole, scrollEnabled, scrollX,
+      menuOpen, leaderboardOpen, modal
+    } = this.state
     if (data.loading) {
       return <Loading text="Laddar hål och sånt..." />
     }
@@ -84,9 +116,24 @@ export class ScoreEvent extends Component {
 
     const playing = teamEvent ? scoringSession.scoringTeams : scoringSession.scoringPlayers
 
+    const transformScale = modal.interpolate({
+      inputRange: [0, 1],
+      outputRange: [1, 0.9],
+      extrapolate: 'clamp'
+    })
+
     return (
-      <View style={{ flex: 1, height: '100%', alignItems: 'stretch', backgroundColor: colors.green }}>
-        <View style={{ height: deviceHeight - 48 }}>
+      <Animated.View
+        style={{
+          flex: 1,
+          height: '100%',
+          alignItems: 'stretch',
+          backgroundColor: colors.green
+        }}
+      >
+        <Animated.View
+          style={{ height: deviceHeight - 48, transform: [{ scale: transformScale }] }}
+        >
           <Animated.ScrollView
             style={{ width: '100%', height: '100%' }}
             ref={(sv) => { this.scrollView = sv }}
@@ -117,15 +164,25 @@ export class ScoreEvent extends Component {
               />
             ))}
           </Animated.ScrollView>
-        </View>
+        </Animated.View>
 
         <ScoringFooter
           number={currentHole}
           maxNumber={scoringSession.course.holes.length}
-          gotoMenu={this.gotoMenu}
-          gotoLeaderboard={this.gotoLeaderboard}
+          showMenu={this.showMenu}
+          showLeaderboard={this.showLeaderboard}
         />
-      </View>
+
+        { menuOpen
+          ? <ScoringMenu onClose={this.closeModal} />
+          : null
+        }
+
+        { leaderboardOpen
+          ? <ScoringLeaderboard onClose={this.closeModal} />
+          : null
+        }
+      </Animated.View>
     )
   }
 }

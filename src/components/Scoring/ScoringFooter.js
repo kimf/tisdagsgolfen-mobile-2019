@@ -28,17 +28,17 @@ const styles = StyleSheet.create({
   }
 })
 
-const ScoringFooter = ({ gotoMenu, gotoLeaderboard }) => (
+const ScoringFooter = ({ showMenu, showLeaderboard }) => (
   <View style={styles.view}>
     <TGText
-      onPress={() => gotoMenu()}
+      onPress={() => showMenu()}
       viewStyle={styles.button}
       style={[styles.text, styles.menu]}
     >
       MENY
     </TGText>
     <TGText
-      onPress={() => gotoLeaderboard()}
+      onPress={() => showLeaderboard()}
       viewStyle={styles.button}
       style={[styles.text, styles.leaderboard]}
     >
@@ -49,8 +49,8 @@ const ScoringFooter = ({ gotoMenu, gotoLeaderboard }) => (
 
 const { func } = PropTypes
 ScoringFooter.propTypes = {
-  gotoMenu: func.isRequired,
-  gotoLeaderboard: func.isRequired
+  showMenu: func.isRequired,
+  showLeaderboard: func.isRequired
 }
 
 export default ScoringFooter

@@ -25,6 +25,9 @@ const eventQuery = gql`
           id
           firstName
           lastName
+          photo {
+            url
+          }
         }
       }
     }

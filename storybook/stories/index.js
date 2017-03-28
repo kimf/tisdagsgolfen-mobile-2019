@@ -97,7 +97,7 @@ storiesOf('ScoreEvent', module)
   .add('Individual Event...', () => (
     <ScoreEvent
       data={{ loading: false, scoringSession: require('../scoringSession.json').data.scoringSession }}
-      navigator={fakeNavigator}
+      navigation={fakeNavigator}
     />
   ))
   .add('Loading...', () => (

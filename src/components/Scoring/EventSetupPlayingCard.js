@@ -1,11 +1,12 @@
 import React, { Component, PropTypes } from 'react'
-import { View, Slider } from 'react-native'
+import { View, Slider, Image } from 'react-native'
 
 import TGText from 'shared/TGText'
-import { colors } from 'styles'
+import styles, { colors } from 'styles'
+
+const defaultAvatar = require('../../images/defaultavatar.png')
 
 const { shape, func, bool } = PropTypes
-
 class EventSetupPlayingCard extends Component {
   static propTypes = {
     item: shape().isRequired,
@@ -29,12 +30,15 @@ class EventSetupPlayingCard extends Component {
 
   state = { strokes: 0 }
 
+  getPhotoUrl = item => (item.photo ? { uri: item.photo.url } : defaultAvatar)
+
   render() {
     const {
       item, onRemove, onChangeStrokes, onRemovePlayerFromTeam, onAddPlayerToTeam, teamEvent
     } = this.props
 
     const name = teamEvent ? `Lag ${item.id + 1}` : `${item.firstName} ${item.lastName}`
+    const photoSrc = this.getPhotoUrl(item)
 
     return (
       <View
@@ -48,6 +52,23 @@ class EventSetupPlayingCard extends Component {
         }}
       >
         <View style={{ flex: 1, flexDirection: 'row' }}>
+          {teamEvent
+            ? <View style={{ flex: 0, marginRight: 20, flexDirection: 'row' }}>
+              {item.players.map(player => (
+                <Image
+                  key={`team_player_photo_${player.id}`}
+                  style={styles.smallCardImage}
+                  source={this.getPhotoUrl(player)}
+                  resizeMode="cover"
+                />
+              ))}
+            </View>
+            : <Image
+              style={styles.cardImage}
+              source={photoSrc}
+              resizeMode="cover"
+            />
+          }
           <TGText style={{ flex: 1, fontWeight: 'bold', fontSize: 18 }}>{name}</TGText>
           <TGText style={{ flex: 1, color: colors.red }} onPress={() => onRemove(item)}>
             Ta bort {teamEvent ? 'lag' : 'spelare'}
@@ -78,7 +99,10 @@ class EventSetupPlayingCard extends Component {
           >
             {item.players.map(player => (
               <View key={`pl_team_player_${player.id}`} style={{ width: '100%', paddingVertical: 5, flexDirection: 'row' }}>
-                <TGText style={{ flex: 1, color: colors.red, marginRight: 10 }} onPress={() => onRemovePlayerFromTeam(item, player)}>
+                <TGText
+                  style={{ flex: 1, color: colors.red, marginRight: 10 }}
+                  onPress={() => onRemovePlayerFromTeam(item, player)}
+                >
                   X
                 </TGText>
                 <TGText style={{ flex: 1, fontWeight: 'bold', fontSize: 14 }}>

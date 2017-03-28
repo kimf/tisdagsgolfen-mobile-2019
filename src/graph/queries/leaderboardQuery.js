@@ -21,6 +21,9 @@ const leaderboardQuery = gql`
         id
         firstName
         lastName
+        photo {
+          url
+        }
       }
     }
   }
