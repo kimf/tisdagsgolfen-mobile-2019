@@ -9,14 +9,13 @@ import logoImg from 'images/logo4.png'
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 120,
+    paddingTop: 60,
     alignItems: 'center',
-    width: '100%',
-    height: '50%'
+    width: '100%'
   },
   image: {
-    width: 200,
-    height: 200
+    width: 150,
+    height: 150
   }
 })
 

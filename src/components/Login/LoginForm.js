@@ -1,5 +1,5 @@
 import React from 'react'
-import { Image, KeyboardAvoidingView, StyleSheet, TextInput, View } from 'react-native'
+import { Image, StyleSheet, TextInput, View } from 'react-native'
 
 import LoginError from 'Login/LoginError'
 import BottomButton from 'shared/BottomButton'
@@ -11,7 +11,7 @@ import { colors } from 'styles'
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    height: '50%',
+    height: '100%',
     justifyContent: 'flex-end'
   },
   wrapper: {
@@ -41,12 +41,13 @@ const styles = StyleSheet.create({
 })
 
 const LoginForm = ({ email, password, changeValue, onSubmit, loggingIn, error }) => (
-  <KeyboardAvoidingView behavior="padding" style={styles.container}>
+  <View style={styles.container}>
     {error ? <LoginError /> : null}
     <View style={styles.wrapper}>
       <View style={styles.inputWrapper}>
         <Image source={usernameImg} style={styles.inlineImg} />
         <TextInput
+          autoFocus
           style={styles.input}
           autoCapitalize="none"
           autoCorrect={false}
@@ -77,7 +78,7 @@ const LoginForm = ({ email, password, changeValue, onSubmit, loggingIn, error })
       title={loggingIn ? '...LOGGAR IN...' : 'LOGGA IN'}
       onPress={() => !loggingIn && onSubmit()}
     />
-  </KeyboardAvoidingView>
+  </View>
 )
 
 const { bool, string, func, shape } = React.PropTypes
