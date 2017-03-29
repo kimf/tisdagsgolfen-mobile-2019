@@ -10,11 +10,11 @@ const styles = StyleSheet.create({
     backgroundColor: colors.green,
     flexDirection: 'row',
     width: '100%',
-    paddingHorizontal: 15,
     alignItems: 'center'
   },
   button: {
-    flex: 1
+    flex: 1,
+    padding: 20
   },
   text: {
     color: colors.darkGreen,

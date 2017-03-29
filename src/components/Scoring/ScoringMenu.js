@@ -1,40 +1,11 @@
-import React, { Component, PropTypes } from 'react'
-import { Animated, Easing, View, StyleSheet } from 'react-native'
+import React, { PropTypes } from 'react'
+import { View, StyleSheet } from 'react-native'
 
 import TGText from 'shared/TGText'
 import BottomButton from 'shared/BottomButton'
 import { colors } from 'styles'
 
-const MODAL_HEIGHT = 300
-
 const styles = StyleSheet.create({
-  wrapper: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    width: '100%',
-    height: '100%',
-    backgroundColor: 'transparent'
-  },
-
-  backdrop: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    width: '100%',
-    height: '100%',
-    backgroundColor: 'rgba(0,0,0,0.7)'
-  },
-
-  container: {
-    backgroundColor: '#fff',
-    flex: 1,
-    height: MODAL_HEIGHT,
-    width: '100%',
-    position: 'absolute',
-    bottom: 0,
-    left: 0
-  },
   inner: {
     flex: 1,
     paddingTop: 40
@@ -47,72 +18,23 @@ const styles = StyleSheet.create({
   }
 })
 
-class ScoringMenu extends Component {
-  static propTypes = {
-    onClose: PropTypes.func.isRequired
-  }
+const ScoringMenu = ({ onClose }) => (
+  <View style={{ flex: 1 }}>
+    <View style={styles.inner}>
+      <TGText style={styles.text}>
+        Här kommer text sen
+      </TGText>
+    </View>
+    <BottomButton
+      backgroundColor={colors.red}
+      title="AVSLUTA RUNDA"
+      onPress={() => onClose()}
+    />
+  </View>
+)
 
-  state = { animated: new Animated.Value(0) }
-
-  componentDidMount() {
-    Animated.timing(
-      this.state.animated,
-      {
-        toValue: 1,
-        easing: Easing.inOut(Easing.quad)
-      },
-     ).start()
-  }
-
-  close = () => this.props.onClose()
-  /* Animated.timing(
-    this.state.animated,
-    {
-      toValue: 0,
-      easing: Easing.out,
-      duration: 10000
-    },
-  ).start() */
-
-  render() {
-    const animated = this.state.animated
-
-    const position = animated.interpolate({
-      inputRange: [0, 1],
-      outputRange: [MODAL_HEIGHT, 0],
-      extrapolate: 'clamp'
-    })
-
-
-    return (
-      <View style={styles.wrapper}>
-        <Animated.View
-          onStartShouldSetResponder={this.close}
-          style={[
-            styles.backdrop,
-            { opacity: animated }
-          ]}
-        />
-        <Animated.View
-          style={[
-            styles.container,
-            { transform: [{ translateY: position }] }
-          ]}
-        >
-          <View style={styles.inner}>
-            <TGText style={styles.text}>
-              Här kommer text sen
-            </TGText>
-          </View>
-          <BottomButton
-            backgroundColor={colors.red}
-            title="AVSLUTA RUNDA"
-            onPress={() => { }}
-          />
-        </Animated.View>
-      </View>
-    )
-  }
+ScoringMenu.propTypes = {
+  onClose: PropTypes.func.isRequired
 }
 
 export default ScoringMenu
