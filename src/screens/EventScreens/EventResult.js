@@ -93,6 +93,7 @@ class EventResult extends Component {
         />
 
         <ListView
+          removeClippedSubviews={false}
           initialListSize={20}
           dataSource={ds.cloneWithRows(sortedPlayers)}
           ref={(ref) => { this.listView = ref }}

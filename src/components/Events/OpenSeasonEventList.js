@@ -15,6 +15,7 @@ const OpenSeasonEventList = ({ events, userId, onNavigate }) => {
     <View style={{ flex: 1 }}>
       <View style={styles.topSection}>
         <FlatList
+          removeClippedSubviews={false}
           style={{ paddingHorizontal: 20 }}
           horizontal
           data={unPlayedEvents}
@@ -37,6 +38,7 @@ const OpenSeasonEventList = ({ events, userId, onNavigate }) => {
       <View style={styles.bottomSection}>
         <SubHeader title="Färdigspelade" />
         <FlatList
+          removeClippedSubviews={false}
           horizontal
           data={playedEvents}
           renderItem={({ item }) => (

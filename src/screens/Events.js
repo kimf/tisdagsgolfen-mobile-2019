@@ -20,7 +20,7 @@ const { bool, shape } = React.PropTypes
 
 export class Events extends Component {
   static navigationOptions = {
-    header: false,
+    header: null,
     gestureResponseDistance: 0,
     tabBarLabel: 'Rundor',
     tabBarIcon: ({ tintColor }) => (
@@ -112,6 +112,7 @@ export class Events extends Component {
           }
         </AnimatedHeader>
         <AnimatedFlatList
+          removeClippedSubviews={false}
           style={{ padding: 10, transform: [{ translateY: paddingTop }] }}
           data={data.events}
           renderItem={({ item }) => (

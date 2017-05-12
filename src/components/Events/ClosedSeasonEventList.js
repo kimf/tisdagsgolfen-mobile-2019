@@ -9,6 +9,7 @@ const { arrayOf, string, func } = PropTypes
 const ClosedSeasonEventList = ({ events, userId, onNavigate }) => (
   <View style={{ flex: 1 }}>
     <FlatList
+      removeClippedSubviews={false}
       style={{ paddingHorizontal: 5 }}
       data={events}
       renderItem={({ item }) => (

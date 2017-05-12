@@ -16,9 +16,9 @@ const LEADERBOARD_HEIGHT = deviceHeight - 100
 
 export class ScoreEvent extends Component {
   static navigationOptions = {
-    header: false,
-    tabBar: false,
-    cardStack: { gesturesEnabled: false }
+    header: null,
+    tabBar: null,
+    gesturesEnabled: false
   }
 
   static propTypes = {

@@ -31,7 +31,7 @@
     "react-native-onesignal": "^3.0.4",
     "react-native-segmented-view": "^2.0.0",
     "react-native-slowlog": "^1.0.2",
-    "react-navigation": "^1.0.0-beta.9",
+    "react-navigation": "react-community/react-navigation",
     "react-redux": "^5.0.4",
     "redux": "^3.6.0",
     "redux-persist": "^4.8.0",

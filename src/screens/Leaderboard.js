@@ -19,7 +19,7 @@ const { arrayOf, func, shape } = React.PropTypes
 class Leaderboard extends Component {
 
   static navigationOptions = {
-    header: false,
+    header: null,
     tabBarLabel: 'Ledartavla',
     tabBarIcon: ({ tintColor }) => (
       <Image

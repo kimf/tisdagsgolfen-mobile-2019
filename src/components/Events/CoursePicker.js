@@ -94,6 +94,7 @@ class CoursePicker extends Component {
         }
 
         <FlatList
+          removeClippedSubviews={false}
           style={{ paddingHorizontal: 20 }}
           data={courses}
           renderItem={({ item }) => (

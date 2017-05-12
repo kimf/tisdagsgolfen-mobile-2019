@@ -17,7 +17,7 @@ import { eventShape, userShape } from 'propTypes'
 class SetupIndividualEvent extends Component {
   static navigationOptions = {
     title: 'Starta runda',
-    tabBar: () => ({ visible: false })
+    tabBarVisible: false
   }
 
   static propTypes = {

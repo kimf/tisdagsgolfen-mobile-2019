@@ -1,4 +1,4 @@
-import { TabNavigator, TabView, StackNavigator } from 'react-navigation'
+import { TabNavigator, TabBarBottom, StackNavigator } from 'react-navigation'
 
 import { colors } from 'styles'
 
@@ -37,7 +37,7 @@ const tabRoutes = {
 }
 
 const TabStack = TabNavigator(tabRoutes, {
-  tabBarComponent: TabView.TabBarBottom,
+  tabBarComponent: TabBarBottom,
   tabBarPosition: 'bottom',
   initialRouteName: 'Leaderboard',
   animationEnabled: false,
@@ -62,14 +62,3 @@ const RootStack = StackNavigator(mainRoutes, {
 
 export default RootStack
 
-// export const MainStack = StackNavigator(
-//   routes,
-//   { initialRouteName: 'Main', headerMode: 'screen' }
-// )
-
-/* path + getScreen
-Profile: {
-  path: 'profile/:name',
-  getScreen: () => require('Profile').default,
-}
-*/

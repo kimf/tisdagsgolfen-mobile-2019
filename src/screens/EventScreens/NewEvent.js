@@ -10,7 +10,7 @@ import styles from 'styles'
 class NewEvent extends Component {
   static navigationOptions = {
     title: 'Lägg till runda',
-    tabBar: () => ({ visible: false })
+    tabBarVisible: false
   }
 
   static propTypes = {

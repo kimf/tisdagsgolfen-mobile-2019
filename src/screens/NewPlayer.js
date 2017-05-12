@@ -14,7 +14,7 @@ const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 })
 class NewPlayer extends Component {
   static navigationOptions = {
     title: 'Lägg till spelare',
-    tabBar: () => ({ visible: false })
+    tabBarVisible: false
   }
 
   static propTypes = {
@@ -57,6 +57,7 @@ class NewPlayer extends Component {
     return (
       <View style={styles.container}>
         <ListView
+          removeClippedSubviews={false}
           ref={(c) => { this.listView = c }}
           initialListSize={100}
           dataSource={ds.cloneWithRows(data.players)}
