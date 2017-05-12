@@ -1,5 +1,6 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
 import { View, ScrollView } from 'react-native'
+import { shape } from 'prop-types'
 import update from 'immutability-helper'
 import { connect } from 'react-redux'
 import { compose } from 'react-apollo'
@@ -9,8 +10,6 @@ import BottomButton from 'shared/BottomButton'
 import TopButton from 'shared/TopButton'
 import { colors } from 'styles'
 import { eventShape, userShape } from 'propTypes'
-
-const { shape } = PropTypes
 
 class SetupTeamEvent extends Component {
   static navigationOptions = {

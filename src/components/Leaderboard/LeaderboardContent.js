@@ -1,5 +1,6 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
 import { View, Image, Animated } from 'react-native'
+import { arrayOf, string, func } from 'prop-types'
 
 import LeaderboardCard from 'Leaderboard/LeaderboardCard'
 import AnimatedHeader from 'shared/AnimatedHeader'
@@ -10,8 +11,6 @@ import TouchableView from 'shared/TouchableView'
 import { seasonShape, leaderboardPlayerShape } from 'propTypes'
 import { ranked } from 'utils'
 import { colors } from 'styles'
-
-const { arrayOf, string, func } = PropTypes
 
 class LeaderboardContent extends Component {
   static propTypes = {

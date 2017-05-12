@@ -1,6 +1,7 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
 import { compose } from 'react-apollo'
 import { connect } from 'react-redux'
+import { func, string } from 'prop-types'
 
 import Logo from 'Login/Logo'
 import Form from 'Login/LoginForm'
@@ -12,9 +13,9 @@ import { withSigninUserMutation } from 'mutations/signinUserMutation'
 
 class Login extends Component {
   static propTypes = {
-    email: PropTypes.string,
-    signinUser: PropTypes.func.isRequired,
-    onLogin: PropTypes.func.isRequired
+    email: string,
+    signinUser: func.isRequired,
+    onLogin: func.isRequired
   }
 
   static defaultProps = {

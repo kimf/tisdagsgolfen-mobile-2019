@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
+import { bool } from 'prop-types'
 
 import { connect } from 'react-redux'
 import { compose } from 'react-apollo'
@@ -11,7 +12,7 @@ import Loading from 'shared/Loading'
 class App extends Component {
   static propTypes = {
     data: mainQueryProps,
-    loggedIn: PropTypes.bool.isRequired
+    loggedIn: bool.isRequired
   }
 
   static defaultProps = {

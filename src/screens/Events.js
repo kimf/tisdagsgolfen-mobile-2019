@@ -20,19 +20,15 @@ const { bool, shape } = React.PropTypes
 
 export class Events extends Component {
   static navigationOptions = {
-    tabBar: () => ({
-      label: 'Rundor',
-      icon: ({ tintColor }) => (
-        <Image
-          source={require('../images/calendar-filled.png')}
-          style={{ tintColor, height: 22, width: 22 }}
-        />
-      )
-    }),
-    header: () => ({
-      visible: false
-    }),
-    gestureResponseDistance: 0
+    header: false,
+    gestureResponseDistance: 0,
+    tabBarLabel: 'Rundor',
+    tabBarIcon: ({ tintColor }) => (
+      <Image
+        source={require('../images/calendar-filled.png')}
+        style={{ tintColor, height: 22, width: 22 }}
+      />
+    )
   }
 
   static propTypes = {

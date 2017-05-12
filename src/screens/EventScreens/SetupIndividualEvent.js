@@ -1,5 +1,6 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
 import { View, ScrollView } from 'react-native'
+import { shape, func } from 'prop-types'
 import update from 'immutability-helper'
 import { NavigationActions } from 'react-navigation'
 import { connect } from 'react-redux'
@@ -12,8 +13,6 @@ import styles from 'styles'
 
 import { withScoringSessionMutation } from 'mutations/scoringSessionMutation'
 import { eventShape, userShape } from 'propTypes'
-
-const { shape, func } = PropTypes
 
 class SetupIndividualEvent extends Component {
   static navigationOptions = {

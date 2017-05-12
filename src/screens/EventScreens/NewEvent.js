@@ -1,12 +1,11 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
 import { View } from 'react-native'
+import { shape, string, func } from 'prop-types'
 import { connect } from 'react-redux'
 
 import CoursePicker from 'Events/CoursePicker'
 import NewEventSetup from 'Events/NewEventSetup'
 import styles from 'styles'
-
-const { shape, string, func } = PropTypes
 
 class NewEvent extends Component {
   static navigationOptions = {

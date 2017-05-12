@@ -1,5 +1,6 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
 import { View, ListView, Image } from 'react-native'
+import { shape, bool, arrayOf, func, string, number } from 'prop-types'
 
 import TGText from 'shared/TGText'
 import styles, { colors } from 'styles'
@@ -9,7 +10,6 @@ import { userShape } from 'propTypes'
 const defaultAvatar = require('../images/defaultavatar.png')
 
 const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 })
-const { shape, bool, arrayOf, func, string, number } = PropTypes
 
 class NewPlayer extends Component {
   static navigationOptions = {

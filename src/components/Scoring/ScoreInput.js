@@ -1,5 +1,6 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
 import { Alert, View, Picker } from 'react-native'
+import { bool, shape, number, string, func, oneOfType } from 'prop-types'
 import { compose } from 'react-apollo'
 
 import TopButton from 'shared/TopButton'
@@ -7,8 +8,6 @@ import { pointsArray, STROKE_VALUES, PUTT_VALUES, BEER_VALUES } from 'Scoring/co
 import { withCreateLiveScoreMutation } from 'mutations/createLiveScoreMutation'
 import { withUpdateLiveScoreMutation } from 'mutations/updateLiveScoreMutation'
 import { colors } from 'styles'
-
-const { bool, shape, number, string, func, oneOfType } = PropTypes
 
 class ScoreInput extends Component {
   static propTypes = {

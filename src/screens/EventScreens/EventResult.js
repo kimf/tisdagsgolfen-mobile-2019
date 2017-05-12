@@ -1,5 +1,6 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
 import { View, ListView } from 'react-native'
+import { arrayOf, shape, string, bool } from 'prop-types'
 import { connect } from 'react-redux'
 import { compose } from 'react-apollo'
 
@@ -14,7 +15,6 @@ import { withEventQuery } from 'queries/eventQuery'
 import { eventShape } from 'propTypes'
 
 const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 })
-const { arrayOf, shape, string, bool } = PropTypes
 
 class EventResult extends Component {
   static navigationOptions = {

@@ -1,11 +1,10 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
 import { View, Image } from 'react-native'
+import { string, func, oneOfType, arrayOf, node } from 'prop-types'
 
 import TouchableView from 'shared/TouchableView'
 import TGText from 'shared/TGText'
 import styles, { colors } from 'styles'
-
-const { string, func, oneOfType, arrayOf, node } = PropTypes
 
 class Header extends Component {
   static propTypes = {

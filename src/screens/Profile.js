@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
+import { func } from 'prop-types'
 import { View, Image } from 'react-native'
 import { connect } from 'react-redux'
 
@@ -10,23 +11,16 @@ import { logout } from 'actions/app'
 import { userShape } from 'propTypes'
 import styles, { colors, NAVBAR_HEIGHT } from 'styles'
 
-const { func } = PropTypes
-
 class Profile extends Component {
   static navigationOptions = {
     title: 'Profil',
-    tabBar: () => ({
-      label: 'Profil',
-      icon: ({ tintColor }) => (
-        <Image
-          source={require('../images/contacts-filled.png')}
-          style={{ tintColor, height: 22, width: 22 }}
-        />
-      )
-    }),
-    header: () => ({
-      visible: true
-    })
+    tabBarLabel: 'Profil',
+    tabBarIcon: ({ tintColor }) => (
+      <Image
+        source={require('../images/contacts-filled.png')}
+        style={{ tintColor, height: 22, width: 22 }}
+      />
+    )
   }
 
   static propTypes = {

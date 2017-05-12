@@ -17,17 +17,16 @@ import BottomButton from 'shared/BottomButton'
 const { arrayOf, func, shape } = React.PropTypes
 
 class Leaderboard extends Component {
+
   static navigationOptions = {
-    header: () => ({ visible: false }),
-    tabBar: () => ({
-      label: 'Ledartavla',
-      icon: ({ tintColor }) => (
-        <Image
-          source={require('../images/trophy-filled.png')}
-          style={{ tintColor, height: 22, width: 22 }}
-        />
-      )
-    })
+    header: false,
+    tabBarLabel: 'Ledartavla',
+    tabBarIcon: ({ tintColor }) => (
+      <Image
+        source={require('../images/trophy-filled.png')}
+        style={{ tintColor, height: 22, width: 22 }}
+      />
+    )
   }
 
   static propTypes = {

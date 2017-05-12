@@ -1,6 +1,6 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
+import { any, arrayOf, node, oneOfType, shape } from 'prop-types'
 
-const { arrayOf, node, oneOfType, shape } = PropTypes
 const propTypes = {
   context: shape().isRequired,
   children: oneOfType([
@@ -23,7 +23,7 @@ const WithContext = ({ context, children }) => {
 
   DynamicWithContext.childContextTypes = {}
   Object.keys(context).forEach(propertyName => (
-    DynamicWithContext.childContextTypes[propertyName] = PropTypes.any
+    DynamicWithContext.childContextTypes[propertyName] = any
   ))
 
   return (

@@ -1,5 +1,6 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
 import { TextInput, View, FlatList } from 'react-native'
+import { arrayOf, bool, shape, func } from 'prop-types'
 
 import CourseRow from 'Events/CourseRow'
 import Loading from 'shared/Loading'
@@ -9,8 +10,6 @@ import SubHeader from 'shared/SubHeader'
 import styles, { colors } from 'styles'
 import { cacheable } from 'utils'
 import { withCoursesQuery } from 'queries/coursesQuery'
-
-const { arrayOf, bool, shape, func } = PropTypes
 
 const fixString = string => string.trim().replace(/-/g, '').replace(/ /g, '').toLowerCase()
 

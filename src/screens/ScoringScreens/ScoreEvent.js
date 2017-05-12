@@ -1,5 +1,6 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
 import { Animated, Easing } from 'react-native'
+import { shape, bool } from 'prop-types'
 
 import HoleView from 'Scoring/HoleView'
 import ScoringFooter from 'Scoring/ScoringFooter'
@@ -10,15 +11,13 @@ import Loading from 'shared/Loading'
 import styles, { colors, deviceHeight, deviceWidth } from 'styles'
 import { withScoringSessionQuery } from 'queries/scoringSessionQuery'
 
-const { shape, bool } = PropTypes
-
 const MENU_HEIGHT = 300
 const LEADERBOARD_HEIGHT = deviceHeight - 100
 
 export class ScoreEvent extends Component {
   static navigationOptions = {
-    header: () => ({ visible: false }),
-    tabBar: () => ({ visible: false }),
+    header: false,
+    tabBar: false,
     cardStack: { gesturesEnabled: false }
   }
 

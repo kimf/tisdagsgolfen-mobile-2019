@@ -1,5 +1,6 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
 import { View, Image } from 'react-native'
+import { shape, number, arrayOf, string } from 'prop-types'
 
 import TouchableView from 'shared/TouchableView'
 import TGText from 'shared/TGText'
@@ -11,8 +12,6 @@ import styles, { colors, deviceHeight, deviceWidth } from 'styles'
 import { calculateExtraStrokes } from 'utils'
 
 const defaultAvatar = require('../../images/defaultavatar.png')
-
-const { shape, number, arrayOf, string } = PropTypes
 
 class HoleView extends Component {
   static propTypes = {

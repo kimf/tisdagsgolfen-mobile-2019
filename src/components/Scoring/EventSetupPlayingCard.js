@@ -1,12 +1,12 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
 import { View, Slider, Image } from 'react-native'
+import { shape, func, bool } from 'prop-types'
 
 import TGText from 'shared/TGText'
 import styles, { colors } from 'styles'
 
 const defaultAvatar = require('../../images/defaultavatar.png')
 
-const { shape, func, bool } = PropTypes
 class EventSetupPlayingCard extends Component {
   static propTypes = {
     item: shape().isRequired,
