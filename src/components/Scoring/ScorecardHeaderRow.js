@@ -30,7 +30,7 @@ const ScorecardHeaderRow = ({ teamEvent, scoring }) => {
   )
   return (
     <View style={style.view}>
-      <TGText style={[style.text, { flex: 2 }]}>SPELARE</TGText>
+      <TGText style={[style.text, { flex: 3 }]}>SPELARE</TGText>
       {beersHeader}
       <TGText style={style.text}>SLAG</TGText>
       {puttsHeader}

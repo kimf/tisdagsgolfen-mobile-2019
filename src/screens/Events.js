@@ -66,10 +66,6 @@ export class Events extends Component {
       return null
     }
 
-    if (data.events.length === 0) {
-      return <EmptyState style={{ paddingTop: NAVBAR_HEIGHT + 20 }} text="Inga rundor :(" />
-    }
-
     // const sortedEvents = sortedByParsedDate(events, 'startsAt')
 
     const paddingTop = scrollY.interpolate({
@@ -111,19 +107,22 @@ export class Events extends Component {
             </TouchableView>
           }
         </AnimatedHeader>
-        <AnimatedFlatList
-          removeClippedSubviews={false}
-          style={{ padding: 10, transform: [{ translateY: paddingTop }] }}
-          data={data.events}
-          renderItem={({ item }) => (
-            <EventCard userId={currentUser.id} event={item} onNavigate={this.navigateToEvent} />
-          )}
-          keyExtractor={item => `event_${item.id}}`}
-          onScroll={Animated.event(
+        {data.events.length === 0
+          ? <EmptyState style={{ paddingTop: NAVBAR_HEIGHT + 20 }} text="Inga rundor :(" />
+          : <AnimatedFlatList
+            removeClippedSubviews={false}
+            style={{ padding: 10, transform: [{ translateY: paddingTop }] }}
+            data={data.events}
+            renderItem={({ item }) => (
+              <EventCard userId={currentUser.id} event={item} onNavigate={this.navigateToEvent} />
+            )}
+            keyExtractor={item => `event_${item.id}}`}
+            onScroll={Animated.event(
             [{ nativeEvent: { contentOffset: { y: scrollY } } }],
             { useNativeDriver: true }
           )}
-        />
+          />
+        }
       </View>
     )
   }

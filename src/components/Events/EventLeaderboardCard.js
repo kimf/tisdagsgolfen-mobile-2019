@@ -5,6 +5,7 @@ import TGText from 'shared/TGText'
 import styles, { colors } from 'styles'
 
 const mutedYellow = { backgroundColor: colors.mutedYellow }
+const defaultPhoto = require('../../images/defaultavatar.png')
 
 // TODO: Refactor and re-use LeaderboardCard as much as possible + avatar
 const EventLeaderboardCard = ({ data, currentUserId, sorting, scoringType }) => {
@@ -53,8 +54,7 @@ const EventLeaderboardCard = ({ data, currentUserId, sorting, scoringType }) => 
       </View>
       <Image
         style={styles.cardImage}
-        source={{ uri: photoUrl }}
-        defaultSource={require('../../images/defaultavatar.png')}
+        source={photoUrl ? { uri: photoUrl } : defaultPhoto}
         resizeMode="cover"
       />
       <View style={styles.cardTitle}>

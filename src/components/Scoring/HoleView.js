@@ -93,7 +93,7 @@ class HoleView extends Component {
                 >
                   {scoringId && scoringId !== item.id
                     ? null
-                    : <View style={{ flex: 2, paddingTop: 20, paddingLeft: 20, paddingBottom: 20 }}>
+                    : <View style={{ flex: 3, paddingTop: 20, paddingLeft: 20, paddingBottom: 20 }}>
                       <View style={{ flexDirection: 'row' }}>
                         {event.teamEvent
                           ? <View style={{ flex: 0, flexDirection: 'row' }}>
@@ -116,11 +116,13 @@ class HoleView extends Component {
                             resizeMode="cover"
                           />
                         }
-                        <TGText style={{ fontWeight: 'bold', lineHeight: 30, fontSize: 18 }}>
+                        <TGText style={{ fontWeight: 'bold', lineHeight: 24, fontSize: 16 }}>
                           {itemName}
                         </TGText>
                       </View>
-                      <TGText style={{ color: colors.muted }}>{scoreItem.extraStrokes} slag</TGText>
+                      <TGText style={{ color: colors.muted, fontSize: 12 }}>
+                        {scoreItem.extraStrokes} extraslag
+                      </TGText>
                       {event.teamEvent ? <TGText>{playerNames}</TGText> : null}
                     </View>
                   }

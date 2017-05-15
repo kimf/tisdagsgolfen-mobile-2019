@@ -132,3 +132,43 @@ export const cacheable = (fn) => {
     return result
   }
 }
+
+
+export const STROKES_MONEY = {
+  [-4]: 500,
+  [-3]: 300,
+  [-2]: 100,
+  [-1]: 10
+}
+
+
+export const PUTT_MONEY = {
+  3: -10,
+  4: -20,
+  5: -30,
+  6: -50,
+  7: -75,
+  8: -100,
+  9: -125,
+  10: -150,
+  11: -175
+}
+
+export const calculateEarnings = (putts, strokes, par) => {
+  let earnings = 0
+
+  if (putts > 2) {
+    earnings += PUTT_MONEY[putts]
+  }
+
+  if (strokes === 1) {
+    earnings += 500
+  }
+
+  const strokesOverPar = strokes - par
+  if (strokesOverPar < 0) {
+    earnings += STROKES_MONEY[strokesOverPar]
+  }
+
+  return earnings
+}

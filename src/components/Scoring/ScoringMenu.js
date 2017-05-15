@@ -22,7 +22,7 @@ const ScoringMenu = ({ onClose }) => (
   <View style={{ flex: 1 }}>
     <View style={styles.inner}>
       <TGText style={styles.text}>
-        Här kommer text sen
+        Här kommer fler val sen
       </TGText>
     </View>
     <BottomButton

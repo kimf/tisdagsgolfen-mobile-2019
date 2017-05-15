@@ -12,19 +12,18 @@ import styles, { colors, deviceHeight, deviceWidth } from 'styles'
 import { withScoringSessionQuery } from 'queries/scoringSessionQuery'
 
 const MENU_HEIGHT = 300
-const LEADERBOARD_HEIGHT = deviceHeight - 100
+const LEADERBOARD_HEIGHT = deviceHeight
 
 export class ScoreEvent extends Component {
   static navigationOptions = {
     header: null,
-    tabBar: null,
-    gesturesEnabled: false
+    tabBarVisible: false
   }
 
   static propTypes = {
     data: shape({
       loading: bool,
-      scoringSession: shape()
+      scoringSession: shape() // TODO: Make into re-usable propType
     }),
     navigation: shape().isRequired
   }
@@ -74,7 +73,7 @@ export class ScoreEvent extends Component {
         toValue: open ? 1 : 0,
         easing: Easing.inOut(Easing.quad)
       },
-     ).start()
+    ).start()
   }
 
   animateModal = (modal, open) => {
@@ -94,21 +93,22 @@ export class ScoreEvent extends Component {
       animVal,
       {
         toValue,
-        easing: Easing.inOut(Easing.quad)
+        easing: Easing.inOut(Easing.quad),
+        duration: 250
       }
     ).start()
   }
 
   showModal = (modal) => {
     this.openModal = modal
-    Animated.stagger(500, [
+    Animated.stagger(150, [
       this.animateBackdrop(true),
       this.animateModal(modal, true)
     ])
   }
 
   closeModal = (modal) => {
-    Animated.stagger(350, [
+    Animated.stagger(150, [
       this.animateModal(modal, false),
       this.animateBackdrop(false)
     ])
@@ -229,7 +229,11 @@ export class ScoreEvent extends Component {
         </AnimatedModal>
 
         <AnimatedModal height={LEADERBOARD_HEIGHT} position={leaderboardPosition} >
-          <ScoringLeaderboard onClose={() => this.closeModal('leaderboard')} />
+          <ScoringLeaderboard
+            onClose={() => this.closeModal('leaderboard')}
+            scoringType={scoringSession.event.scoringType}
+            eventId={scoringSession.event.id}
+          />
         </AnimatedModal>
       </Animated.View>
     )

@@ -78,17 +78,19 @@ class SetupIndividualEvent extends Component {
         index: 0,
         actions: [
           NavigationActions.navigate({
-            routeName: 'Scoring',
+            routeName: 'ScoreEvent',
             params: { scoringSessionId: res.data.createScoringSession.id }
           })
         ]
       })
+
       navigation.dispatch(resetAction)
     } catch (err) {
       // eslint-disable-next-line no-console
       console.log(err)
     }
   }
+
 
   openAddPlayer = () => {
     this.props.navigation.navigate('NewPlayer', {

@@ -20,7 +20,7 @@ const LeaderboardCard = ({ data, currentUserId, sorting }) => {
     pointText = '🍺'
     position = data.beerPos
   } else if (sorting === 'kr') {
-    pointValue = data.totalKr
+    pointValue = data.totalKr - (data.totalKr * 2)
     pointText = 'kr'
     position = data.krPos
   } else {

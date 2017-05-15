@@ -17,15 +17,11 @@ import { eventShape } from 'propTypes'
 const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 })
 
 class EventResult extends Component {
-  static navigationOptions = {
-    title: ({ state }) => state.params.title,
-    header: () => ({
-      visible: true
-    }),
-    tabBar: () => ({
-      visible: false
-    })
-  }
+  static navigationOptions = ({ navigation }) => ({
+    title: navigation.state.params.title,
+    headerVisible: true,
+    tabBarVisible: false
+  })
 
   static propTypes = {
     navigation: shape({

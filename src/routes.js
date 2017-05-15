@@ -14,51 +14,60 @@ import NewPlayer from 'screens/NewPlayer'
 
 import ScoreEventScreen from 'screens/ScoringScreens/ScoreEvent'
 
-const scoringRoutes = {
-  Leaderboard: { screen: Leaderboard },
-  ScoreEvent: { screen: ScoreEventScreen }
-}
-const ScoreStack = StackNavigator(scoringRoutes, { headerMode: 'screen', initialRouteName: 'Leaderboard', mode: 'modal' })
+const ScoreStack = StackNavigator(
+  {
+    Leaderboard: { screen: Leaderboard },
+    ScoreEvent: { screen: ScoreEventScreen }
+  },
+  { headerMode: 'screen', initialRouteName: 'Leaderboard', mode: 'modal' }
+)
 
-const eventRoutes = {
-  EventsIndex: { screen: EventsScreen },
-  NewEvent: { screen: NewEvent },
-  EventResult: { screen: EventResult },
-  SetupIndividualEvent: { screen: SetupIndividualEvent },
-  SetupTeamEvent: { screen: SetupTeamEvent },
-  NewPlayer: { screen: NewPlayer }
-}
-const EventStack = StackNavigator(eventRoutes, { headerMode: 'screen', initialRouteName: 'EventsIndex' })
-
-const tabRoutes = {
-  Leaderboard: { screen: ScoreStack },
-  Events: { screen: EventStack },
-  Profile: { screen: Profile }
-}
-
-const TabStack = TabNavigator(tabRoutes, {
-  tabBarComponent: TabBarBottom,
-  tabBarPosition: 'bottom',
-  initialRouteName: 'Leaderboard',
-  animationEnabled: false,
-  tabBarOptions: {
-    inactiveTintColor: colors.muted,
-    activeTintColor: colors.green,
-    showIcon: true,
-    showLabel: false
+const EventStack = StackNavigator(
+  {
+    EventsIndex: { screen: EventsScreen },
+    NewEvent: { screen: NewEvent },
+    EventResult: { screen: EventResult },
+    SetupIndividualEvent: { screen: SetupIndividualEvent },
+    SetupTeamEvent: { screen: SetupTeamEvent },
+    NewPlayer: { screen: NewPlayer },
+    ScoreEvent: { screen: ScoreEventScreen }
+  },
+  {
+    headerMode: 'screen',
+    initialRouteName: 'EventsIndex'
   }
-})
+)
 
-const mainRoutes = {
-  Home: { screen: TabStack },
-  Scoring: { screen: ScoreStack },
-  Events: { screen: EventStack }
-}
+const TabStack = TabNavigator(
+  {
+    Leaderboard: { screen: ScoreStack },
+    Events: { screen: EventStack },
+    Profile: { screen: Profile }
+  },
+  {
+    tabBarComponent: TabBarBottom,
+    tabBarPosition: 'bottom',
+    initialRouteName: 'Leaderboard',
+    animationEnabled: false,
+    tabBarOptions: {
+      inactiveTintColor: colors.muted,
+      activeTintColor: colors.green,
+      showIcon: true,
+      showLabel: false
+    }
+  }
+)
 
-const RootStack = StackNavigator(mainRoutes, {
-  headerMode: 'none',
-  initialRouteName: 'Home'
-})
+const RootStack = StackNavigator(
+  {
+    Home: { screen: TabStack },
+    Scoring: { screen: ScoreStack },
+    Events: { screen: EventStack }
+  },
+  {
+    headerMode: 'none',
+    initialRouteName: 'Home'
+  }
+)
 
 export default RootStack
-
