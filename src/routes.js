@@ -14,14 +14,6 @@ import NewPlayer from 'screens/NewPlayer'
 
 import ScoreEventScreen from 'screens/ScoringScreens/ScoreEvent'
 
-const ScoreStack = StackNavigator(
-  {
-    Leaderboard: { screen: Leaderboard },
-    ScoreEvent: { screen: ScoreEventScreen }
-  },
-  { headerMode: 'screen', initialRouteName: 'Leaderboard', mode: 'modal' }
-)
-
 const EventStack = StackNavigator(
   {
     EventsIndex: { screen: EventsScreen },
@@ -29,8 +21,7 @@ const EventStack = StackNavigator(
     EventResult: { screen: EventResult },
     SetupIndividualEvent: { screen: SetupIndividualEvent },
     SetupTeamEvent: { screen: SetupTeamEvent },
-    NewPlayer: { screen: NewPlayer },
-    ScoreEvent: { screen: ScoreEventScreen }
+    NewPlayer: { screen: NewPlayer }
   },
   {
     headerMode: 'screen',
@@ -40,7 +31,7 @@ const EventStack = StackNavigator(
 
 const TabStack = TabNavigator(
   {
-    Leaderboard: { screen: ScoreStack },
+    Leaderboard: { screen: Leaderboard },
     Events: { screen: EventStack },
     Profile: { screen: Profile }
   },
@@ -58,16 +49,16 @@ const TabStack = TabNavigator(
   }
 )
 
-const RootStack = StackNavigator(
+const MainStack = StackNavigator(
   {
-    Home: { screen: TabStack },
-    Scoring: { screen: ScoreStack },
-    Events: { screen: EventStack }
+    Main: { screen: TabStack },
+    ScoreEvent: { screen: ScoreEventScreen }
   },
   {
     headerMode: 'none',
-    initialRouteName: 'Home'
+    initialRouteName: 'Main'
   }
+
 )
 
-export default RootStack
+export default MainStack

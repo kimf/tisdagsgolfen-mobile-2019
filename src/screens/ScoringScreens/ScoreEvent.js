@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { Animated, Easing } from 'react-native'
-import { shape, bool } from 'prop-types'
+import { func, shape, bool } from 'prop-types'
+import { compose } from 'react-apollo'
+import { NavigationActions } from 'react-navigation'
 
 import HoleView from 'Scoring/HoleView'
 import ScoringFooter from 'Scoring/ScoringFooter'
@@ -10,6 +12,7 @@ import AnimatedModal from 'shared/AnimatedModal'
 import Loading from 'shared/Loading'
 import styles, { colors, deviceHeight, deviceWidth } from 'styles'
 import { withScoringSessionQuery } from 'queries/scoringSessionQuery'
+import { withCancelRoundMutation } from 'mutations/cancelRoundMutation'
 
 const MENU_HEIGHT = 300
 const LEADERBOARD_HEIGHT = deviceHeight
@@ -21,6 +24,7 @@ export class ScoreEvent extends Component {
   }
 
   static propTypes = {
+    cancelRound: func.isRequired,
     data: shape({
       loading: bool,
       scoringSession: shape() // TODO: Make into re-usable propType
@@ -47,11 +51,6 @@ export class ScoreEvent extends Component {
       scrollEnabled: true,
       scrollX: new Animated.Value(0)
     }
-  }
-
-  onCancel = () => {
-    // await this.props.onCancelEvent()
-    this.props.navigation.goBack()
   }
 
   modal = new Animated.Value(0)
@@ -112,6 +111,27 @@ export class ScoreEvent extends Component {
       this.animateModal(modal, false),
       this.animateBackdrop(false)
     ])
+  }
+
+  cancelRound = () => {
+    const { data, cancelRound, navigation } = this.props
+
+    const save = async () => {
+      try {
+        await cancelRound(data.scoringSession.id)
+      } catch (err) {
+        // eslint-disable-next-line no-console
+        console.log(err)
+      }
+      const resetAction = NavigationActions.reset({
+        index: 0,
+        actions: [
+          NavigationActions.navigate({ routeName: 'Main' })
+        ]
+      })
+      navigation.dispatch(resetAction)
+    }
+    save()
   }
 
   handlePageChange = (e) => {
@@ -225,14 +245,18 @@ export class ScoreEvent extends Component {
         />
 
         <AnimatedModal height={MENU_HEIGHT} position={menuPosition}>
-          <ScoringMenu onClose={() => this.closeModal('menu')} />
+          <ScoringMenu
+            onClose={() => this.closeModal('menu')}
+            cancelRound={this.cancelRound}
+          />
         </AnimatedModal>
 
-        <AnimatedModal height={LEADERBOARD_HEIGHT} position={leaderboardPosition} >
+        <AnimatedModal height={LEADERBOARD_HEIGHT} position={leaderboardPosition}>
           <ScoringLeaderboard
             onClose={() => this.closeModal('leaderboard')}
             scoringType={scoringSession.event.scoringType}
             eventId={scoringSession.event.id}
+            teamEvent={scoringSession.event.teamEvent}
           />
         </AnimatedModal>
       </Animated.View>
@@ -240,4 +264,7 @@ export class ScoreEvent extends Component {
   }
 }
 
-export default withScoringSessionQuery(ScoreEvent)
+export default compose(
+  withScoringSessionQuery,
+  withCancelRoundMutation
+)(ScoreEvent)

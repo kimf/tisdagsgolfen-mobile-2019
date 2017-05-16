@@ -1,5 +1,7 @@
 import React from 'react'
 import { View, Image } from 'react-native'
+import { arrayOf, bool, shape, string, number } from 'prop-types'
+// import requiredIf from 'react-required-if'
 
 import TGText from 'shared/TGText'
 import styles, { colors } from 'styles'
@@ -7,10 +9,20 @@ import styles, { colors } from 'styles'
 const mutedYellow = { backgroundColor: colors.mutedYellow }
 const defaultPhoto = require('../../images/defaultavatar.png')
 
-const ScoringLeaderboardCard = ({ player, currentUserId, sorting, scoringType }) => {
+const getItemName = (teamEvent, player) => {
+  if (!teamEvent) {
+    return `${player.firstName} ${player.lastName.substr(0, 1)}`
+  }
+
+  return player.users.map(u => u.firstName).join(', ')
+}
+
+const ScoringLeaderboardCard = ({ player, currentUserId, sorting, scoringType, teamEvent }) => {
   let pointText
   let pointValue = ''
   let position
+
+  const strokePlay = scoringType === 'strokes'
 
   if (sorting === 'beers') {
     pointValue = player.beers
@@ -21,14 +33,16 @@ const ScoringLeaderboardCard = ({ player, currentUserId, sorting, scoringType })
     pointText = 'kr'
     position = player.krPos
   } else {
-    pointValue = player.points
-    pointText = 'p'
+    pointValue = strokePlay ? player.strokes : player.points
+    pointText = strokePlay ? '' : 'p'
     position = player.position
   }
 
   const currentUserStyle = player.id === currentUserId ? mutedYellow : null
   const photoUrl = player.photo ? player.photo.url : null
-  console.log(player)
+
+  const itemName = getItemName(teamEvent, player)
+
   return (
     <View key={player.id} style={[styles.listrow, currentUserStyle]}>
       <View style={styles.position}>
@@ -36,48 +50,59 @@ const ScoringLeaderboardCard = ({ player, currentUserId, sorting, scoringType })
           {position}
         </TGText>
       </View>
-      <Image
-        style={styles.cardImage}
-        source={photoUrl ? { uri: photoUrl } : defaultPhoto}
-        resizeMode="cover"
-      />
+      {!teamEvent
+        ? <Image
+          style={styles.cardImage}
+          source={photoUrl ? { uri: photoUrl } : defaultPhoto}
+          resizeMode="cover"
+        />
+        : null
+      }
       <View style={styles.cardTitle}>
-        <TGText style={styles.name}>{player.firstName} {player.lastName.substr(0, 1)}</TGText>
-        {sorting === 'totalPoints'
+        <TGText style={styles.name}>{itemName}</TGText>
+        {sorting === 'totalPoints' && player.holes
           ? <TGText style={styles.meta}>
-            Efter {player.holes} hål
+            {scoringType === 'points'
+              ? `${player.strokes} slag på `
+              : `${player.points} poäng på `
+            }
+            {player.holes} hål
           </TGText>
           : null
         }
       </View>
-      {sorting === 'totalPoints'
-        ? <TGText style={styles.dimmerPoints}>
-          {scoringType === 'points' ? `${player.strokes} slag` : null}
-        </TGText>
-        : null
-      }
-      <TGText style={styles.points}>{`${pointValue} ${pointText}`}</TGText>
+      <TGText style={styles.points}>
+        {`${pointValue} ${pointText}`}
+      </TGText>
     </View>
   )
 }
-
-const { shape, string, number } = React.PropTypes
 
 ScoringLeaderboardCard.propTypes = {
   player: shape({
     holes: number.isRequired,
     strokes: number.isRequired,
     points: number.isRequired,
-    beerPos: number.isRequired,
+    beerPos: number,
     id: string.isRequired,
-    krPos: number.isRequired,
+    krPos: number,
     position: number.isRequired,
-    firstName: string.isRequired,
-    lastName: string.isRequired
+    photo: shape({
+      url: string.isRequired
+    }),
+    firstName: string,
+    lastName: string,
+    users: arrayOf(
+      shape({
+        firstName: string.isRequired,
+        lastName: string.isRequired
+      }).isRequired
+    )
   }).isRequired,
   currentUserId: string.isRequired,
   sorting: string.isRequired,
-  scoringType: string.isRequired
+  scoringType: string.isRequired,
+  teamEvent: bool.isRequired
 }
 
 export default ScoringLeaderboardCard

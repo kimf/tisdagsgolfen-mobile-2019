@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { View, ScrollView } from 'react-native'
 import { shape, func } from 'prop-types'
 import update from 'immutability-helper'
-import { NavigationActions } from 'react-navigation'
 import { connect } from 'react-redux'
 import { compose } from 'react-apollo'
 
@@ -73,18 +72,7 @@ class SetupIndividualEvent extends Component {
       const res = await createScoringSession(
         event.id, event.course.id, currentUser.id, scoringPlayers
       )
-
-      const resetAction = NavigationActions.reset({
-        index: 0,
-        actions: [
-          NavigationActions.navigate({
-            routeName: 'ScoreEvent',
-            params: { scoringSessionId: res.data.createScoringSession.id }
-          })
-        ]
-      })
-
-      navigation.dispatch(resetAction)
+      navigation.navigate('ScoreEvent', { scoringSessionId: res.data.createScoringSession.id })
     } catch (err) {
       // eslint-disable-next-line no-console
       console.log(err)

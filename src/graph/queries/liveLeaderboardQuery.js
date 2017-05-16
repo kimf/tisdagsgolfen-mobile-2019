@@ -4,7 +4,10 @@ import gql from 'graphql-tag'
 const liveLeaderboardQuery = gql`
   query liveLeaderboardQuery($eventId: ID!) {
     liveScores: allLiveScores(
-      filter: { event: { id: $eventId } }
+      filter: {
+        event: { id: $eventId }
+        scoringSession:{ id_not: ""}
+      }
     ) {
       id
       beers
@@ -26,6 +29,17 @@ const liveLeaderboardQuery = gql`
           }
         }
       }
+      scoringTeam {
+        id
+        users {
+          id
+          firstName
+          lastName
+          photo {
+            url
+          }
+        }
+      }
     }
   }
 `
@@ -34,8 +48,8 @@ export default liveLeaderboardQuery
 
 export const withLiveLeaderboardQuery = graphql(liveLeaderboardQuery, {
   options: ({ eventId }) => ({
-    fetchPolicy: 'cache-and-network',
-    pollInterval: 60000,
+    fetchPolicy: 'network-only',
+    pollInterval: 30000,
     variables: { eventId }
   })
 })

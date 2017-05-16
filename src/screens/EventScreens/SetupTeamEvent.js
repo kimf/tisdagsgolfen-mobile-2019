@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { View, ScrollView } from 'react-native'
-import { shape } from 'prop-types'
+import { shape, func } from 'prop-types'
 import update from 'immutability-helper'
 import { connect } from 'react-redux'
 import { compose } from 'react-apollo'
@@ -10,6 +10,7 @@ import BottomButton from 'shared/BottomButton'
 import TopButton from 'shared/TopButton'
 import { colors } from 'styles'
 import { eventShape, userShape } from 'propTypes'
+import { withScoringSessionMutation } from 'mutations/scoringSessionMutation'
 
 class SetupTeamEvent extends Component {
   static navigationOptions = {
@@ -19,6 +20,7 @@ class SetupTeamEvent extends Component {
 
   static propTypes = {
     currentUser: userShape.isRequired,
+    createScoringSession: func.isRequired,
     navigation: shape({
       state: shape({
         params: shape({
@@ -102,8 +104,23 @@ class SetupTeamEvent extends Component {
     })
   }
 
-  startPlay = () => {
-    // TODO: Save a ScoringSession here and then...->
+  startPlay = async () => {
+    try {
+      const { currentUser, createScoringSession, navigation } = this.props
+
+      const scoringTeams = this.state.playing.map(team => (
+        { extraStrokes: team.strokes, usersIds: team.players.map(p => p.id) })
+      )
+
+      const event = navigation.state.params.event
+      const res = await createScoringSession(
+        event.id, event.course.id, currentUser.id, null, scoringTeams
+      )
+      navigation.navigate('ScoreEvent', { scoringSessionId: res.data.createScoringSession.id })
+    } catch (err) {
+      // eslint-disable-next-line no-console
+      console.log(err)
+    }
   }
 
   render() {
@@ -133,5 +150,6 @@ class SetupTeamEvent extends Component {
 const mapStateToProps = state => ({ currentUser: state.app.currentUser })
 
 export default compose(
-  connect(mapStateToProps)
+  connect(mapStateToProps),
+  withScoringSessionMutation
 )(SetupTeamEvent)

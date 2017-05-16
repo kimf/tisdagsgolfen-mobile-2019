@@ -2,7 +2,7 @@ import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 
 const coursesQuery = gql`
-   query {
+   query coursesQuery {
     courses: allCourses (
       orderBy: club_ASC
     ) {

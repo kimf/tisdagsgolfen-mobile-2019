@@ -1,5 +1,6 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
 import { View, StyleSheet } from 'react-native'
+import { bool, string } from 'prop-types'
 
 import TGText from 'shared/TGText'
 import { colors } from 'styles'
@@ -21,27 +22,36 @@ const style = StyleSheet.create({
   }
 })
 
-const ScorecardHeaderRow = ({ teamEvent, scoring }) => {
+const ScorecardHeaderRow = ({ teamEvent, scoring, scoringType }) => {
   const puttsHeader = teamEvent ? null : (
     <TGText style={style.text}>PUTT</TGText>
   )
   const beersHeader = teamEvent ? null : (
     <TGText style={style.text}>ÖL</TGText>
   )
+  const strokes = scoringType === 'strokes'
   return (
     <View style={style.view}>
       <TGText style={[style.text, { flex: 3 }]}>SPELARE</TGText>
       {beersHeader}
-      <TGText style={style.text}>SLAG</TGText>
+      <TGText style={style.text}>
+        {strokes ? 'POÄNG' : 'SLAG'}
+      </TGText>
       {puttsHeader}
-      {scoring ? null : <TGText style={[style.text, { textAlign: 'center' }]}>POÄNG</TGText>}
+      {scoring
+        ? null
+        : <TGText style={[style.text, { textAlign: 'center' }]}>
+          {strokes ? 'SLAG' : 'POÄNG'}
+        </TGText>
+      }
     </View>
   )
 }
 
 ScorecardHeaderRow.propTypes = {
-  teamEvent: PropTypes.bool.isRequired,
-  scoring: PropTypes.bool.isRequired
+  teamEvent: bool.isRequired,
+  scoring: bool.isRequired,
+  scoringType: string.isRequired
 }
 
 export default ScorecardHeaderRow

@@ -38,16 +38,19 @@ class NewEventSetup extends Component {
     const scoringType = isStrokes ? 'strokes' : 'points'
     const courseId = this.props.course.id
 
-    createEvent({ seasonId, courseId, teamEvent, scoringType, startsAt })
-      .then(() => {
-        this.setState({ isSaving: false, error: false })
-        done()
-      })
-      .catch((e) => {
+    const save = async () => {
+      try {
+        await createEvent(seasonId, courseId, teamEvent, scoringType, startsAt)
+      } catch (err) {
         // eslint-disable-next-line no-console
-        console.warn(e)
-        this.setState({ error: e, isSaving: false })
-      })
+        console.warn(err)
+        this.setState({ error: err, isSaving: false })
+      }
+      this.setState({ isSaving: false, error: false })
+      done()
+    }
+
+    save()
   }
 
   onDateChange = (startsAt) => {

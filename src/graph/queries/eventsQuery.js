@@ -5,7 +5,7 @@ import gql from 'graphql-tag'
 import { eventShape } from 'propTypes'
 
 const eventsQuery = gql`
-  query($seasonId: ID!) {
+  query seasonEventsQuery($seasonId: ID!) {
     events: allEvents (
       orderBy: startsAt_DESC
       filter: { season: { id: $seasonId } }

@@ -1,5 +1,6 @@
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
+import update from 'immutability-helper'
 
 const createEventMutation = gql`
   mutation createEvent(
@@ -20,6 +21,16 @@ const createEventMutation = gql`
       oldId: 0
     ) {
       id
+      status
+      startsAt
+      oldCourseName
+      course {
+        id
+        club
+        name
+      }
+      scoringType
+      teamEvent
     }
   }
 `
@@ -27,13 +38,14 @@ const createEventMutation = gql`
 export default createEventMutation
 
 export const withCreateEventMutation = graphql(createEventMutation, {
-  props({ mutate }) {
-    return {
-      createEvent({ seasonId, courseId, teamEvent, scoringType, startsAt }) {
-        return mutate({
-          variables: { seasonId, courseId, teamEvent, scoringType, startsAt }
+  props: ({ mutate }) => ({
+    createEvent: (seasonId, courseId, teamEvent, scoringType, startsAt) => mutate({
+      variables: { seasonId, courseId, teamEvent, scoringType, startsAt },
+      updateQueries: {
+        seasonEventsQuery: (prev, { mutationResult }) => update(prev, {
+          events: { $push: [mutationResult.data.createEvent] }
         })
       }
-    }
-  }
+    })
+  })
 })

@@ -55,7 +55,7 @@ class HoleView extends Component {
             elevation: 5
           }}
         >
-          <ScorecardHeaderRow teamEvent={event.teamEvent} scoring={scoringId !== null} />
+          <ScorecardHeaderRow teamEvent={event.teamEvent} scoringType={event.scoringType} scoring={scoringId !== null} />
           {
             playing.map((item, index) => {
               const attrWithId = event.teamEvent ? 'scoringTeam' : 'scoringPlayer'
@@ -72,15 +72,10 @@ class HoleView extends Component {
               let playerNames = null
 
               if (event.teamEvent) {
-                playerNames = item.users.map(p => (
-                  <TGText key={`team_player_name_${p.id}`}>
-                    {p.firstName} {p.lastName.substr(0, 1)}
-                  </TGText>
-                ))
+                playerNames = item.users.map(p => p.firstName)
               }
 
               const isScoring = (scoringId && scoringId === item.id)
-
               return (
                 <View
                   key={`player_score_row_${item.id}`}
@@ -97,11 +92,11 @@ class HoleView extends Component {
                       <View style={{ flexDirection: 'row' }}>
                         {event.teamEvent
                           ? <View style={{ flex: 0, flexDirection: 'row' }}>
-                            {item.players.map(teamItem => (
+                            {item.users.map(user => (
                               <Image
-                                key={`team_player_photo_${teamItem.user.id}`}
+                                key={`team_player_photo_${user.id}`}
                                 style={[styles.smallCardImage, { flex: 1 }]}
-                                source={this.getPhotoUrl(teamItem.user)}
+                                source={this.getPhotoUrl(user)}
                                 resizeMode="cover"
                               />
                             ))}
@@ -120,10 +115,13 @@ class HoleView extends Component {
                           {itemName}
                         </TGText>
                       </View>
+                      {event.teamEvent
+                        ? <TGText style={{ color: colors.muted, fontSize: 12 }}>{playerNames.join(', ')}</TGText>
+                        : null
+                      }
                       <TGText style={{ color: colors.muted, fontSize: 12 }}>
                         {scoreItem.extraStrokes} extraslag
                       </TGText>
-                      {event.teamEvent ? <TGText>{playerNames}</TGText> : null}
                     </View>
                   }
 

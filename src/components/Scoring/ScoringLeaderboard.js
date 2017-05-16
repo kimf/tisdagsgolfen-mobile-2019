@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { compose } from 'react-apollo'
 
 import ScoringLeaderboardCard from 'Scoring/ScoringLeaderboardCard'
-import BottomButton from 'shared/BottomButton'
+import TopButton from 'shared/TopButton'
 import Tabs from 'shared/Tabs'
 import TGText from 'shared/TGText'
 
@@ -34,6 +34,7 @@ class ScoringLeaderboard extends Component {
     eventId: string.isRequired,
     onClose: func.isRequired,
     scoringType: string.isRequired,
+    teamEvent: bool.isRequired,
     data: shape({
       loading: bool,
       liveScores: arrayOf(shape()) // TODO: How do we want the data to look?
@@ -55,54 +56,80 @@ class ScoringLeaderboard extends Component {
   }
 
   render() {
-    const { data, eventId, currentUserId, onClose, scoringType } = this.props
+    const { data, eventId, currentUserId, onClose, scoringType, teamEvent } = this.props
     const { sorting } = this.state
 
     let sortedPlayers = []
 
+    // TODO: Refactor!
     if (data.liveScores && data.liveScores.length > 0) {
       const players = []
       data.liveScores.forEach((item) => {
-        const playerIndex = players.findIndex(p => p.id === item.scoringPlayer.user.id)
-        const kr = calculateEarnings(item.putts, item.strokes, item.hole.par)
-        if (playerIndex !== -1) {
-          const player = players[playerIndex]
-          players[playerIndex] = {
-            ...player,
-            beers: player.beers + item.beers,
-            points: player.points + item.points,
-            putts: player.putts + item.putts,
-            strokes: player.strokes + item.strokes,
-            holes: player.holes + 1,
-            kr: player.kr + kr
+        if (teamEvent) {
+          const teamIndex = players.findIndex(p => p.id === item.scoringTeam.id)
+          if (teamIndex !== -1) {
+            const team = players[teamIndex]
+            players[teamIndex] = {
+              ...team,
+              strokes: team.strokes + item.strokes,
+              points: team.points + item.points,
+              holes: team.holes + 1
+            }
+          } else {
+            const { scoringTeam, strokes, points } = item
+            const teamItem = {
+              id: scoringTeam.id,
+              users: scoringTeam.users,
+              holes: 1,
+              strokes,
+              points
+            }
+            players.push(teamItem)
           }
         } else {
-          const { scoringPlayer, points, putts, beers, strokes } = item
-          const playerItem = {
-            ...scoringPlayer.user,
-            beers,
-            kr,
-            points,
-            putts,
-            strokes,
-            holes: 1,
-            beerPos: 0,
-            krPos: 0,
-            position: 0
+          const playerIndex = players.findIndex(p => p.id === item.scoringPlayer.user.id)
+          const kr = calculateEarnings(item.putts, item.strokes, item.hole.par)
+          if (playerIndex !== -1) {
+            const player = players[playerIndex]
+            players[playerIndex] = {
+              ...player,
+              beers: player.beers + item.beers,
+              points: player.points + item.points,
+              putts: player.putts + item.putts,
+              strokes: player.strokes + item.strokes,
+              holes: player.holes + 1,
+              kr: player.kr + kr
+            }
+          } else {
+            const { scoringPlayer, points, putts, beers, strokes } = item
+            const playerItem = {
+              ...scoringPlayer.user,
+              beers,
+              kr,
+              points,
+              putts,
+              strokes,
+              holes: 1,
+              beerPos: 0,
+              krPos: 0,
+              position: 0
+            }
+            players.push(playerItem)
           }
-          players.push(playerItem)
         }
       })
 
       let sorted = null
-      if (sorting === 'beers') {
+      if (teamEvent) {
+        sortedPlayers = ranked(players, 'position', scoringType, scoringType === 'strokes')
+      } else if (sorting === 'beers') {
         sorted = players.slice().sort((a, b) => b.beers - a.beers)
         sortedPlayers = ranked(sorted, 'beerPos', 'beers')
       } else if (sorting === 'kr') {
         sorted = players.slice().sort((a, b) => a.kr - b.kr)
         sortedPlayers = ranked(sorted, 'krPos', 'kr')
       } else {
-        sortedPlayers = ranked(players, 'position', scoringType, scoringType === 'strokes')
+        sortedPlayers = ranked(players, 'position', scoringType)
       }
     }
 
@@ -110,10 +137,13 @@ class ScoringLeaderboard extends Component {
       <View style={{ flex: 1 }}>
         <View style={styles.inner}>
           {data.loading ? <TGText>Uppdaterar...</TGText> : null}
-          <Tabs
-            currentRoute={sorting}
-            onChange={sort => this.changeSort(sort)}
-          />
+          {!teamEvent
+            ? <Tabs
+              currentRoute={sorting}
+              onChange={sort => this.changeSort(sort)}
+            />
+            : null
+          }
           <ListView
             removeClippedSubviews={false}
             initialListSize={20}
@@ -127,12 +157,13 @@ class ScoringLeaderboard extends Component {
                 player={rowData}
                 eventId={eventId}
                 sorting={sorting}
+                teamEvent={teamEvent}
               />
             }
             enableEmptySections
           />
         </View>
-        <BottomButton
+        <TopButton
           backgroundColor={colors.red}
           title="STÄNG"
           onPress={() => onClose()}

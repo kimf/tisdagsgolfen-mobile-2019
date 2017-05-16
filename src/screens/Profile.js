@@ -13,6 +13,7 @@ import styles, { colors, NAVBAR_HEIGHT } from 'styles'
 
 class Profile extends Component {
   static navigationOptions = {
+    header: null,
     title: 'Profil',
     tabBarLabel: 'Profil',
     tabBarIcon: ({ tintColor }) => (

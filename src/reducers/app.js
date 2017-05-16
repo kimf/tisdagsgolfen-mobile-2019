@@ -34,6 +34,17 @@ export default (state = initialState, action) => {
       return state
     }
 
+    case 'APOLLO_MUTATION_RESULT': {
+      if (action.operationName === 'cancelRoundMutation') {
+        return {
+          ...state,
+          activeScoringSession: null
+        }
+      }
+
+      return state
+    }
+
     case 'CHANGE_SEASON': {
       const currentSeason = state.seasons.find(s => s.id === action.seasonId)
       return { ...state, currentSeason }

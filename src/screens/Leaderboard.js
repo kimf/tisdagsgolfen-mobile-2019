@@ -70,13 +70,7 @@ class Leaderboard extends Component {
 
   showActiveScoringSession = () => {
     const scoringSessionId = this.props.activeScoringSession.id
-    const resetAction = NavigationActions.reset({
-      index: 0,
-      actions: [
-        NavigationActions.navigate({ routeName: 'ScoreEvent', params: { scoringSessionId } })
-      ]
-    })
-    this.props.navigation.dispatch(resetAction)
+    this.props.navigation.navigate('ScoreEvent', { scoringSessionId })
   }
 
   render() {

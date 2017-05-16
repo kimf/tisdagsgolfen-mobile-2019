@@ -9,7 +9,7 @@ import EventCard from 'Events/EventCard'
 import EmptyState from 'shared/EmptyState'
 import TouchableView from 'shared/TouchableView'
 
-// import { sortedByParsedDate } from '../utils'
+import { sortedByParsedDate } from 'utils'
 import { withEventsQuery, eventsQueryProps } from 'queries/eventsQuery'
 import { userShape } from 'propTypes'
 import { NAVBAR_HEIGHT, colors } from 'styles'
@@ -66,7 +66,7 @@ export class Events extends Component {
       return null
     }
 
-    // const sortedEvents = sortedByParsedDate(events, 'startsAt')
+    const sortedEvents = sortedByParsedDate(data.events, 'startsAt')
 
     const paddingTop = scrollY.interpolate({
       inputRange: [0, 40],
@@ -107,20 +107,20 @@ export class Events extends Component {
             </TouchableView>
           }
         </AnimatedHeader>
-        {data.events.length === 0
+        {sortedEvents.length === 0
           ? <EmptyState style={{ paddingTop: NAVBAR_HEIGHT + 20 }} text="Inga rundor :(" />
           : <AnimatedFlatList
             removeClippedSubviews={false}
             style={{ padding: 10, transform: [{ translateY: paddingTop }] }}
-            data={data.events}
+            data={sortedEvents}
             renderItem={({ item }) => (
               <EventCard userId={currentUser.id} event={item} onNavigate={this.navigateToEvent} />
             )}
             keyExtractor={item => `event_${item.id}}`}
             onScroll={Animated.event(
-            [{ nativeEvent: { contentOffset: { y: scrollY } } }],
-            { useNativeDriver: true }
-          )}
+              [{ nativeEvent: { contentOffset: { y: scrollY } } }],
+              { useNativeDriver: true }
+            )}
           />
         }
       </View>
