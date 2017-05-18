@@ -2,6 +2,9 @@
  - Move styles to StyleSheet (Performance)
  - Refactor to re-use common views
 
+ graphcool pull + push for schema stuff! :D
+ functions will come there as well
+
 Notification object received example:
 
 {

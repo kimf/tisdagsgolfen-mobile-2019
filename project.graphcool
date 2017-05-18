@@ -1,9 +1,12 @@
-﻿type Course {
+# project: ciyqax2o04t37012092ntrd7e
+# version: 1
+
+type Course implements Node {
   club: String!
   createdAt: DateTime!
   events: [Event!]! @relation(name: "EventCourse")
   holes: [Hole!]! @relation(name: "CourseHoles")
-  id: ID!
+  id: ID! @isUnique
   lat: String
   lng: String
   name: String!
@@ -13,54 +16,55 @@
   updatedAt: DateTime!
 }
 
-type Event {
+type Event implements Node {
   course: Course @relation(name: "EventCourse")
   createdAt: DateTime
   eventLeaderboards: [EventLeaderboard!]! @relation(name: "EventLeaderboards")
-  id: ID!
+  id: ID! @isUnique
   liveScores: [LiveScore!]! @relation(name: "EventLiveScore")
   oldCourseName: String
   oldId: Int
   scores: [Score!]! @relation(name: "EventScore")
   scoringSessions: [ScoringSession!]! @relation(name: "ScoringSessionEvent")
-  scoringType: String!
+  scoringType: String! @defaultValue(value: "strokes")
   season: Season @relation(name: "SeasonEvent")
   startsAt: DateTime!
-  status: String!
-  teamEvent: Boolean!
+  status: String! @defaultValue(value: "planned")
+  teamEvent: Boolean! @defaultValue(value: false)
   updatedAt: DateTime
 }
 
-type EventLeaderboard {
+type EventLeaderboard implements Node {
   createdAt: DateTime
   event: Event @relation(name: "EventLeaderboards")
-  id: ID!
-  position: Int!
-  previousTotalPosition: Int!
+  id: ID! @isUnique
+  position: Int! @defaultValue(value: 0)
+  previousTotalPosition: Int! @defaultValue(value: 0)
   score: Score @relation(name: "ScoreEventLeaderboard")
-  totalAveragePoints: Float!
-  totalEventCount: Int!
-  totalEventPoints: Float!
-  totalPosition: Int!
+  totalAveragePoints: Float! @defaultValue(value: 0.0)
+  totalEventCount: Int! @defaultValue(value: 0)
+  totalEventPoints: Float! @defaultValue(value: 0.0)
+  totalPosition: Int! @defaultValue(value: 0)
   updatedAt: DateTime
 }
 
-type File {
+type File implements Node {
   contentType: String!
   createdAt: DateTime
-  id: ID!
+  id: ID! @isUnique
   name: String!
   season: Season @relation(name: "SeasonPhoto")
-  secret: String!
+  secret: String! @isUnique
   size: Int!
   updatedAt: DateTime
-  url: String!
+  url: String! @isUnique
+  user: User @relation(name: "UserPhoto")
 }
 
-type Hole {
+type Hole implements Node {
   course: Course @relation(name: "CourseHoles")
   createdAt: DateTime!
-  id: ID!
+  id: ID! @isUnique
   index: Int!
   liveScores: [LiveScore!]! @relation(name: "LiveScoreHole")
   number: Int!
@@ -68,13 +72,13 @@ type Hole {
   updatedAt: DateTime!
 }
 
-type LiveScore {
+type LiveScore implements Node {
   beers: Int
   createdAt: DateTime!
   event: Event @relation(name: "EventLiveScore")
-  extraStrokes: Int!
+  extraStrokes: Int! @defaultValue(value: 0)
   hole: Hole @relation(name: "LiveScoreHole")
-  id: ID!
+  id: ID! @isUnique
   points: Int
   putts: Int!
   scoringPlayer: ScoringPlayer @relation(name: "ScoringPlayerLiveScores")
@@ -84,36 +88,36 @@ type LiveScore {
   updatedAt: DateTime!
 }
 
-type Score {
-  beers: Int!
+type Score implements Node {
+  beers: Int! @defaultValue(value: 0)
   createdAt: DateTime
   event: Event @relation(name: "EventScore")
   eventLeaderboard: EventLeaderboard @relation(name: "ScoreEventLeaderboard")
-  eventPoints: Int!
-  id: ID!
-  kr: Int!
+  eventPoints: Int! @defaultValue(value: 0)
+  id: ID! @isUnique
+  kr: Int! @defaultValue(value: 0)
   oldId: Int
   updatedAt: DateTime
   user: User @relation(name: "UserScore")
-  value: Int!
+  value: Int! @defaultValue(value: 0)
 }
 
-type ScoringPlayer {
+type ScoringPlayer implements Node {
   createdAt: DateTime!
   extraStrokes: Int!
-  id: ID!
+  id: ID! @isUnique
   liveScores: [LiveScore!]! @relation(name: "ScoringPlayerLiveScores")
   scoringSession: ScoringSession @relation(name: "ScoringPlayerScoringSession")
   updatedAt: DateTime!
   user: User @relation(name: "ScoringPlayerUser")
 }
 
-type ScoringSession {
+type ScoringSession implements Node {
   course: Course @relation(name: "ScoringSessionCourse")
   createdAt: DateTime!
-  currentHole: Int!
+  currentHole: Int! @defaultValue(value: 1)
   event: Event @relation(name: "ScoringSessionEvent")
-  id: ID!
+  id: ID! @isUnique
   liveScores: [LiveScore!]! @relation(name: "ScoringSessionLiveScore")
   scorer: User @relation(name: "ScoringSessionScorer")
   scoringPlayers: [ScoringPlayer!]! @relation(name: "ScoringPlayerScoringSession")
@@ -121,21 +125,21 @@ type ScoringSession {
   updatedAt: DateTime!
 }
 
-type ScoringTeam {
+type ScoringTeam implements Node {
   createdAt: DateTime!
   extraStrokes: Int!
-  id: ID!
+  id: ID! @isUnique
   liveScores: [LiveScore!]! @relation(name: "ScoringTeamLiveScores")
   scoringSession: ScoringSession @relation(name: "ScoringTeamScoringSession")
   updatedAt: DateTime!
   users: [User!]! @relation(name: "ScoringTeamUser")
 }
 
-type Season {
-  closed: Boolean!
+type Season implements Node {
+  closed: Boolean! @defaultValue(value: false)
   createdAt: DateTime
   events: [Event!]! @relation(name: "SeasonEvent")
-  id: ID!
+  id: ID! @isUnique
   name: String!
   oldId: Int
   photo: File @relation(name: "SeasonPhoto")
@@ -143,30 +147,31 @@ type Season {
   updatedAt: DateTime
 }
 
-type SeasonLeaderboard {
-  averagePoints: Float!
+type SeasonLeaderboard implements Node {
+  averagePoints: Float! @defaultValue(value: 0.0)
   createdAt: DateTime
-  eventCount: Int!
-  id: ID!
-  position: Int!
-  previousPosition: Int!
+  eventCount: Int! @defaultValue(value: 0)
+  id: ID! @isUnique
+  position: Int! @defaultValue(value: 0)
+  previousPosition: Int! @defaultValue(value: 0)
   season: Season @relation(name: "SeasonLeaderboards")
   top5Points: [Float!]!
-  totalBeers: Int!
-  totalKr: Int!
-  totalPoints: Float!
+  totalBeers: Int! @defaultValue(value: 0)
+  totalKr: Int! @defaultValue(value: 0)
+  totalPoints: Float! @defaultValue(value: 0.0)
   updatedAt: DateTime
   user: User @relation(name: "UserSeasonLeaderboard")
 }
 
-type User {
+type User implements Node {
   createdAt: DateTime
-  email: String
+  email: String @isUnique
   firstName: String!
-  id: ID!
+  id: ID! @isUnique
   lastName: String!
   oldId: Int
   password: String
+  photo: File @relation(name: "UserPhoto")
   scores: [Score!]! @relation(name: "UserScore")
   scoringPlayers: [ScoringPlayer!]! @relation(name: "ScoringPlayerUser")
   scoringSession: ScoringSession @relation(name: "ScoringSessionScorer")
