@@ -1,5 +1,6 @@
 import React from 'react'
 import { StyleSheet, Image } from 'react-native'
+import { oneOfType, arrayOf, node } from 'prop-types'
 
 import bgSrc from 'images/wrapper.png'
 
@@ -17,8 +18,6 @@ const Wallpaper = ({ children }) => (
     {children}
   </Image>
 )
-
-const { oneOfType, arrayOf, node } = React.PropTypes
 
 Wallpaper.propTypes = {
   children: oneOfType([

@@ -1,8 +1,9 @@
 import React from 'react'
-import { Image, StyleSheet, TextInput, View } from 'react-native'
+import { Image, StyleSheet, TextInput, View, KeyboardAvoidingView } from 'react-native'
+import { bool, string, func } from 'prop-types'
 
 import LoginError from 'Login/LoginError'
-import BottomButton from 'shared/BottomButton'
+import TGText from 'shared/TGText'
 import usernameImg from 'images/username.png'
 import passwordImg from 'images/password.png'
 
@@ -10,12 +11,10 @@ import { colors } from 'styles'
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    height: '100%',
-    justifyContent: 'flex-end'
-  },
-  wrapper: {
-    marginBottom: 20
+    position: 'absolute',
+    bottom: 100,
+    paddingBottom: 20,
+    width: '100%'
   },
   input: {
     backgroundColor: colors.dark,
@@ -37,51 +36,64 @@ const styles = StyleSheet.create({
     height: 16,
     left: 35,
     top: 12
+  },
+  loginButton: {
+    paddingVertical: 16,
+    backgroundColor: colors.blue,
+    width: '90%',
+    marginHorizontal: 20
+  },
+  loginButtonText: {
+    textAlign: 'center',
+    fontWeight: 'bold',
+    fontSize: 14,
+    color: colors.white
   }
 })
 
 const LoginForm = ({ email, password, changeValue, onSubmit, loggingIn, error }) => (
-  <View style={styles.container}>
+  <KeyboardAvoidingView behavior="position" style={styles.container}>
     {error ? <LoginError /> : null}
-    <View style={styles.wrapper}>
-      <View style={styles.inputWrapper}>
-        <Image source={usernameImg} style={styles.inlineImg} />
-        <TextInput
-          autoFocus
-          style={styles.input}
-          autoCapitalize="none"
-          autoCorrect={false}
-          keyboardType="email-address"
-          returnKeyType="next"
-          onChangeText={emailValue => changeValue({ email: emailValue })}
-          onSubmitEditing={() => this.password.focus()}
-          value={email}
-        />
-      </View>
-      <View style={styles.inputWrapper}>
-        <Image source={passwordImg} style={styles.inlineImg} />
-        <TextInput
-          style={styles.input}
-          autoCapitalize="none"
-          returnKeyType={'go'}
-          autoCorrect={false}
-          ref={(c) => { this.password = c }}
-          onChangeText={passwordValue => changeValue({ password: passwordValue })}
-          onSubmitEditing={onSubmit}
-          value={password}
-          secureTextEntry
-        />
-      </View>
-    </View>
-    <BottomButton
-      backgroundColor={colors.blue}
-      title={loggingIn ? '...LOGGAR IN...' : 'LOGGA IN'}
-      onPress={() => !loggingIn && onSubmit()}
-    />
-  </View>
-)
 
-const { bool, string, func, shape } = React.PropTypes
+    <View style={styles.inputWrapper}>
+      <Image source={usernameImg} style={styles.inlineImg} />
+      <TextInput
+        autoFocus
+        style={styles.input}
+        autoCapitalize="none"
+        autoCorrect={false}
+        keyboardType="email-address"
+        returnKeyType="next"
+        onChangeText={emailValue => changeValue({ email: emailValue })}
+        onSubmitEditing={() => this.password.focus()}
+        blurOnSubmit={false}
+        value={email}
+      />
+    </View>
+    <View style={styles.inputWrapper}>
+      <Image source={passwordImg} style={styles.inlineImg} />
+      <TextInput
+        style={styles.input}
+        autoCapitalize="none"
+        returnKeyType={'go'}
+        autoCorrect={false}
+        ref={(c) => { this.password = c }}
+        onChangeText={passwordValue => changeValue({ password: passwordValue })}
+        onSubmitEditing={onSubmit}
+        blurOnSubmit={false}
+        value={password}
+        secureTextEntry
+      />
+    </View>
+    <TGText
+      viewStyle={styles.loginButton}
+      style={styles.loginButtonText}
+      onPress={() => !loggingIn && onSubmit()}
+    >
+      {loggingIn ? '...LOGGAR IN...' : 'LOGGA IN'}
+    </TGText>
+  </KeyboardAvoidingView>
+)
 
 LoginForm.propTypes = {
   email: string,
