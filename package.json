@@ -40,7 +40,9 @@
     "subscriptions-transport-ws": "^0.6.0"
   },
   "devDependencies": {
-    "@kadira/react-native-storybook": "^2.3.0",
+    "@storybook/addon-actions": "^3.0.0-alpha.0",
+    "@storybook/addon-links": "^3.0.0-alpha.0",
+    "@storybook/react-native": "^2.0.0",
     "babel-eslint": "^7.2.3",
     "babel-jest": "20.0.1",
     "babel-plugin-module-resolver": "^2.7.0",

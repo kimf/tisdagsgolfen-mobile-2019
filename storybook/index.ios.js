@@ -1,5 +1,6 @@
 import { AppRegistry } from 'react-native'
-import { getStorybookUI, configure } from '@kadira/react-native-storybook'
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { getStorybookUI, configure } from '@storybook/react-native'
 
 // import stories
 configure(() => {
