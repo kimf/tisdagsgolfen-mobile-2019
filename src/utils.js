@@ -172,3 +172,92 @@ export const calculateEarnings = (putts, strokes, par) => {
 
   return earnings
 }
+
+const massageTeams = (scoringSessions) => {
+  const teams = []
+  scoringSessions.forEach((scoringSession) => {
+    scoringSession.scoringTeams.forEach((team) => {
+      const holes = team.liveScores.length
+      let strokes = 0
+      let points = 0
+
+      team.liveScores.forEach((ls) => {
+        strokes += ls.strokes
+        points += ls.points
+      })
+
+      const teamItem = {
+        ...team,
+        holes,
+        strokes,
+        points
+      }
+      teams.push(teamItem)
+    })
+  })
+
+  return teams
+}
+
+const massagePlayers = (scoringSessions) => {
+  const players = []
+  scoringSessions.forEach((scoringSession) => {
+    scoringSession.scoringPlayers.forEach((player) => {
+      const holes = player.liveScores.length
+      let beers = 0
+      let kr = 0
+      let points = 0
+      let putts = 0
+      let strokes = 0
+
+      player.liveScores.forEach((ls) => {
+        beers += ls.beers
+        kr += calculateEarnings(ls.putts, ls.strokes, ls.hole.par)
+        points += ls.points
+        putts += ls.putts
+        strokes += ls.strokes
+      })
+
+      const playerItem = {
+        ...player.user,
+        beers,
+        kr,
+        points,
+        putts,
+        strokes,
+        holes,
+        beerPos: 0,
+        krPos: 0,
+        position: 0
+      }
+      players.push(playerItem)
+    })
+  })
+
+  return players
+}
+
+export const massageIntoLeaderboard = (scoringSessions, teamEvent) => {
+  let items = []
+  if (teamEvent) {
+    items = massageTeams(scoringSessions)
+  } else {
+    items = massagePlayers(scoringSessions)
+  }
+  return items
+}
+
+
+export const rankBySorting = (players, sorting, teamEvent, scoringType) => {
+  let sortedPlayers = []
+  if (teamEvent) {
+    sortedPlayers = ranked(players, 'position', scoringType, scoringType === 'strokes')
+  } else if (sorting === 'beers') {
+    sortedPlayers = ranked(players.slice().sort((a, b) => b.beers - a.beers), 'beerPos', 'beers')
+  } else if (sorting === 'kr') {
+    sortedPlayers = ranked(players.slice().sort((a, b) => a.kr - b.kr), 'krPos', 'kr')
+  } else {
+    sortedPlayers = ranked(players, 'position', scoringType)
+  }
+  return sortedPlayers
+}

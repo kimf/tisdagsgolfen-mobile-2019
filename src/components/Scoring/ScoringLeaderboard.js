@@ -8,10 +8,12 @@ import ScoringLeaderboardCard from 'Scoring/ScoringLeaderboardCard'
 import TopButton from 'shared/TopButton'
 import Tabs from 'shared/Tabs'
 import TGText from 'shared/TGText'
+// import Header from 'shared/Header'
+// import EventHeader from 'Events/EventHeader'
 
 import { colors } from 'styles'
 import { withLiveLeaderboardQuery } from 'queries/liveLeaderboardQuery'
-import { ranked, calculateEarnings } from 'utils'
+import { rankBySorting, massageIntoLeaderboard } from 'utils'
 
 const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 })
 
@@ -37,14 +39,14 @@ class ScoringLeaderboard extends Component {
     teamEvent: bool.isRequired,
     data: shape({
       loading: bool,
-      liveScores: arrayOf(shape()) // TODO: How do we want the data to look?
+      scoringSessions: arrayOf(shape()) // TODO: How do we want the data to look?
     })
   }
 
   static defaultProps = {
     data: {
       loading: true,
-      liveScores: []
+      scoringSessions: []
     }
   }
 
@@ -60,78 +62,12 @@ class ScoringLeaderboard extends Component {
     const { sorting } = this.state
 
     let sortedPlayers = []
-
-    // TODO: Refactor!
-    if (data.liveScores && data.liveScores.length > 0) {
-      const players = []
-      data.liveScores.forEach((item) => {
-        if (teamEvent) {
-          const teamIndex = players.findIndex(p => p.id === item.scoringTeam.id)
-          if (teamIndex !== -1) {
-            const team = players[teamIndex]
-            players[teamIndex] = {
-              ...team,
-              strokes: team.strokes + item.strokes,
-              points: team.points + item.points,
-              holes: team.holes + 1
-            }
-          } else {
-            const { scoringTeam, strokes, points } = item
-            const teamItem = {
-              id: scoringTeam.id,
-              users: scoringTeam.users,
-              holes: 1,
-              strokes,
-              points
-            }
-            players.push(teamItem)
-          }
-        } else {
-          const playerIndex = players.findIndex(p => p.id === item.scoringPlayer.user.id)
-          const kr = calculateEarnings(item.putts, item.strokes, item.hole.par)
-          if (playerIndex !== -1) {
-            const player = players[playerIndex]
-            players[playerIndex] = {
-              ...player,
-              beers: player.beers + item.beers,
-              points: player.points + item.points,
-              putts: player.putts + item.putts,
-              strokes: player.strokes + item.strokes,
-              holes: player.holes + 1,
-              kr: player.kr + kr
-            }
-          } else {
-            const { scoringPlayer, points, putts, beers, strokes } = item
-            const playerItem = {
-              ...scoringPlayer.user,
-              beers,
-              kr,
-              points,
-              putts,
-              strokes,
-              holes: 1,
-              beerPos: 0,
-              krPos: 0,
-              position: 0
-            }
-            players.push(playerItem)
-          }
-        }
-      })
-
-      let sorted = null
-      if (teamEvent) {
-        sortedPlayers = ranked(players, 'position', scoringType, scoringType === 'strokes')
-      } else if (sorting === 'beers') {
-        sorted = players.slice().sort((a, b) => b.beers - a.beers)
-        sortedPlayers = ranked(sorted, 'beerPos', 'beers')
-      } else if (sorting === 'kr') {
-        sorted = players.slice().sort((a, b) => a.kr - b.kr)
-        sortedPlayers = ranked(sorted, 'krPos', 'kr')
-      } else {
-        sortedPlayers = ranked(players, 'position', scoringType)
-      }
+    if (data.scoringSessions && data.scoringSessions.length > 0) {
+      const players = massageIntoLeaderboard(data.scoringSessions, teamEvent)
+      sortedPlayers = rankBySorting(players, sorting, teamEvent, scoringType)
     }
+
+    // <Header title="Ledartavla" />
 
     return (
       <View style={{ flex: 1 }}>
@@ -168,7 +104,7 @@ class ScoringLeaderboard extends Component {
           title="STÄNG"
           onPress={() => onClose()}
         />
-      </View>
+      </View >
     )
   }
 }

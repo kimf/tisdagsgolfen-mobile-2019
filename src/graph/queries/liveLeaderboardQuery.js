@@ -3,23 +3,24 @@ import gql from 'graphql-tag'
 
 const liveLeaderboardQuery = gql`
   query liveLeaderboardQuery($eventId: ID!) {
-    liveScores: allLiveScores(
+    scoringSessions: allScoringSessions(
       filter: {
         event: { id: $eventId }
-        scoringSession:{ id_not: ""}
       }
     ) {
-      id
-      beers
-      points
-      putts
-      strokes
-      hole {
+      scoringPlayers {
         id
-        par
-      }
-      scoringPlayer {
-        id
+        liveScores {
+          id
+          beers
+          points
+          putts
+          strokes
+          hole {
+            id
+            par
+          }
+        }
         user {
           id
           firstName
@@ -29,8 +30,19 @@ const liveLeaderboardQuery = gql`
           }
         }
       }
-      scoringTeam {
+      scoringTeams {
         id
+        liveScores {
+          id
+          beers
+          points
+          putts
+          strokes
+          hole {
+            id
+            par
+          }
+        }
         users {
           id
           firstName
