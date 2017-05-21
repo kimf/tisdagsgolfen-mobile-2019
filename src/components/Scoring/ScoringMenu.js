@@ -1,6 +1,6 @@
 import React from 'react'
 import { Alert, View, StyleSheet } from 'react-native'
-import { func } from 'prop-types'
+import { arrayOf, shape, number, func } from 'prop-types'
 
 import TGText from 'shared/TGText'
 import TopButton from 'shared/TopButton'
@@ -9,13 +9,27 @@ import { colors } from 'styles'
 const styles = StyleSheet.create({
   inner: {
     flex: 1,
-    paddingTop: 40
+    paddingTop: 20
   },
   text: {
     fontSize: 20,
     fontWeight: '900',
     textAlign: 'center',
     marginBottom: 20
+  },
+  buttonRow: {
+    width: '100%',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+    marginBottom: 40
+  },
+  holeButton: {
+    paddingVertical: 14,
+    width: 40
+  },
+  holeButtonText: {
+    textAlign: 'center'
   }
 })
 
@@ -32,17 +46,29 @@ const confirmCancel = (cancelFunc) => {
 }
 
 
-const ScoringMenu = ({ onClose, cancelRound }) => (
+const ScoringMenu = ({ onClose, cancelRound, currentHole, holes, changeHole }) => (
   <View style={{ flex: 1 }}>
     <View style={styles.inner}>
       <TGText style={styles.text}>
-        Här kommer fler val sen
+        MENY
       </TGText>
+      <View style={styles.buttonRow}>
+        {holes.map(hole => (
+          <TGText
+            key={hole.number}
+            style={[styles.holeButtonText, { color: currentHole === hole.number ? colors.white : colors.dark }]}
+            onPress={() => changeHole(hole.number)}
+            viewStyle={[styles.holeButton, { backgroundColor: currentHole === hole.number ? colors.green : colors.lightGray }]}
+          >
+            {hole.number}
+          </TGText>
+        ))}
+      </View>
       <TGText
         style={{ color: colors.red, textAlign: 'center' }}
         onPress={() => confirmCancel(cancelRound)}
       >
-        AVSLUTA RUNDA
+        AVBRYT & AVSLUTA RUNDA
       </TGText>
     </View>
     <TopButton
@@ -55,7 +81,14 @@ const ScoringMenu = ({ onClose, cancelRound }) => (
 
 ScoringMenu.propTypes = {
   onClose: func.isRequired,
-  cancelRound: func.isRequired
+  cancelRound: func.isRequired,
+  currentHole: number.isRequired,
+  holes: arrayOf(
+    shape({
+      number: number.isRequired
+    }).isRequired
+  ).isRequired,
+  changeHole: func.isRequired
 }
 
 export default ScoringMenu

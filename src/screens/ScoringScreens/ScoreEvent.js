@@ -60,7 +60,12 @@ export class ScoreEvent extends Component {
 
   changeHole = (nextHole) => {
     this.setState((state) => {
-      this.scrollView.scrollTo({ x: (nextHole * deviceWidth) - deviceWidth, animated: true })
+      // eslint-disable-next-line no-underscore-dangle
+      this.scrollView._component.scrollTo({
+        x: (nextHole * deviceWidth) - deviceWidth,
+        animated: false
+      })
+      this.closeModal('menu')
       return { ...state, currentHole: nextHole }
     })
   }
@@ -248,6 +253,9 @@ export class ScoreEvent extends Component {
           <ScoringMenu
             onClose={() => this.closeModal('menu')}
             cancelRound={this.cancelRound}
+            holes={scoringSession.course.holes}
+            currentHole={currentHole}
+            changeHole={this.changeHole}
           />
         </AnimatedModal>
 
