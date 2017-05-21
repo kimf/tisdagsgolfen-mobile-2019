@@ -58,7 +58,7 @@ const EventCard = ({ event, layoutStyle, onNavigate }) => {
         </TGText>
       </View>
 
-      {event.status === 'live'
+      {event.liveSessions && event.liveSessions.count > 0
         ? <AnimatedText
           onPress={() => onNavigate('LiveEvent', { event })}
           viewStyle={styles.inlineButton}

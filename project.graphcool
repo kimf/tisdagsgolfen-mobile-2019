@@ -1,5 +1,5 @@
-# project: ciyqax2o04t37012092ntrd7e
-# version: 1
+# project: tisdagsgolfen
+# version: 10
 
 type Course implements Node {
   club: String!
@@ -122,6 +122,7 @@ type ScoringSession implements Node {
   scorer: User @relation(name: "ScoringSessionScorer")
   scoringPlayers: [ScoringPlayer!]! @relation(name: "ScoringPlayerScoringSession")
   scoringTeams: [ScoringTeam!]! @relation(name: "ScoringTeamScoringSession")
+  status: String! @defaultValue(value: "live")
   updatedAt: DateTime!
 }
 

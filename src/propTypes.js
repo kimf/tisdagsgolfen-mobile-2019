@@ -43,5 +43,8 @@ export const eventShape = shape({
   course: shape({
     club: string,
     course: string
+  }),
+  liveSessions: shape({
+    count: number.isRequired
   })
 })
