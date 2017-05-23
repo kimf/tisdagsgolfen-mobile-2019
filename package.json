@@ -7,6 +7,7 @@
     "clean": "watchman watch-del-all && rm -rf $TMPDIR/react-*",
     "test": "jest",
     "lint": "eslint src",
+    "graphql:schema": "get-graphql-schema -j https://api.graph.cool/simple/v1/ciyqax2o04t37012092ntrd7e > schema.json", // This is needed until eslint-graphql/template-strings supports graphql IDL schemas
     "storybook": "storybook start -p 7007",
     "android:build": "cd android && ./gradlew assembleRelease",
     "android:emulator": "emulator -avd Nexus6-android7.1.1-apiLevel25",
