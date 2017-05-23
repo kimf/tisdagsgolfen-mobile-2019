@@ -249,15 +249,22 @@ export const massageIntoLeaderboard = (scoringSessions, teamEvent) => {
 
 
 export const rankBySorting = (players, sorting, teamEvent, scoringType) => {
-  let sortedPlayers = []
-  if (teamEvent) {
-    sortedPlayers = ranked(players, 'position', scoringType, scoringType === 'strokes')
-  } else if (sorting === 'beers') {
-    sortedPlayers = ranked(players.slice().sort((a, b) => b.beers - a.beers), 'beerPos', 'beers')
-  } else if (sorting === 'kr') {
-    sortedPlayers = ranked(players.slice().sort((a, b) => a.kr - b.kr), 'krPos', 'kr')
-  } else {
-    sortedPlayers = ranked(players, 'position', scoringType)
+  if (sorting === 'beers' || sorting === 'kr') {
+    const sortedBySorting = players.slice().sort((a, b) => b[sorting] - a[sorting])
+    return ranked(sortedBySorting, sorting === 'beers' ? 'beerPos' : 'krPos', sorting)
   }
-  return sortedPlayers
+
+  const isStrokePlay = scoringType === 'strokes'
+  const sortedPlayers = isStrokePlay
+    ? players.slice().sort((a, b) => a.strokes - b.strokes)
+    : players.slice().sort((a, b) => b.points - a.points)
+
+  if (teamEvent) {
+    return ranked(sortedPlayers, 'position', scoringType, !isStrokePlay)
+  }
+
+  return ranked(sortedPlayers, 'position', scoringType, !isStrokePlay)
 }
+
+
+export const capitalize = string => string[0].toUpperCase() + string.slice(1)

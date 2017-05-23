@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, ListView, StyleSheet } from 'react-native'
+import { View, FlatList, StyleSheet } from 'react-native'
 import { arrayOf, bool, func, string, shape } from 'prop-types'
 import { connect } from 'react-redux'
 import { compose } from 'react-apollo'
@@ -14,8 +14,6 @@ import TGText from 'shared/TGText'
 import { colors } from 'styles'
 import { withLiveLeaderboardQuery } from 'queries/liveLeaderboardQuery'
 import { rankBySorting, massageIntoLeaderboard } from 'utils'
-
-const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 })
 
 const styles = StyleSheet.create({
   inner: {
@@ -53,7 +51,7 @@ class ScoringLeaderboard extends Component {
   state = { sorting: 'totalPoints' }
 
   changeSort = (sorting) => {
-    this.listView.scrollTo({ x: 0, y: 0, animated: true })
+    this.listView.scrollToIndex({ index: 0 })
     this.setState({ sorting })
   }
 
@@ -77,26 +75,26 @@ class ScoringLeaderboard extends Component {
             ? <Tabs
               currentRoute={sorting}
               onChange={sort => this.changeSort(sort)}
+              scoringType={scoringType}
             />
             : null
           }
-          <ListView
+          <FlatList
             removeClippedSubviews={false}
-            initialListSize={20}
-            dataSource={ds.cloneWithRows(sortedPlayers)}
+            data={sortedPlayers}
             ref={(ref) => { this.listView = ref }}
-            renderRow={rowData =>
+            renderItem={({ item }) => (
               <ScoringLeaderboardCard
                 key={`l_${currentUserId}`}
                 scoringType={scoringType}
                 currentUserId={currentUserId}
-                player={rowData}
+                player={item}
                 eventId={eventId}
                 sorting={sorting}
                 teamEvent={teamEvent}
               />
-            }
-            enableEmptySections
+            )}
+            keyExtractor={item => `leaderboardPlayer_${item.id}}`}
           />
         </View>
         <TopButton

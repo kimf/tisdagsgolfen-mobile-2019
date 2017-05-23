@@ -8,6 +8,7 @@ import HoleView from 'Scoring/HoleView'
 import ScoringFooter from 'Scoring/ScoringFooter'
 import ScoringMenu from 'Scoring/ScoringMenu'
 import ScoringLeaderboard from 'Scoring/ScoringLeaderboard'
+import FinishScoringSession from 'Scoring/FinishScoringSession'
 import AnimatedModal from 'shared/AnimatedModal'
 import Loading from 'shared/Loading'
 import styles, { colors, deviceHeight, deviceWidth } from 'styles'
@@ -226,6 +227,11 @@ export class ScoreEvent extends Component {
                 scoringSessionId={scoringSession.id}
               />
             ))}
+            <FinishScoringSession
+              playing={playing}
+              scoringSession={scoringSession}
+              scrollX={scrollX}
+            />
           </Animated.ScrollView>
         </Animated.View>
 

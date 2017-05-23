@@ -132,14 +132,9 @@ class HoleView extends Component {
                       onPress={() => this.toggleScoring(item.id)}
                     >
                       <ScoreRow
-                        player={item}
-                        hole={hole}
                         scoringType={event.scoringType}
                         teamEvent={event.teamEvent}
-                        eventId={event.id}
-                        holesCount={holesCount}
                         scoreItem={scoreItem}
-                        itemName={itemName}
                       />
                     </TouchableView>
                   }

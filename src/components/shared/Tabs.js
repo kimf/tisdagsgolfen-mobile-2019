@@ -1,38 +1,44 @@
 import React from 'react'
 import { View } from 'react-native'
+import { string, func } from 'prop-types'
 
 import Tab from 'shared/Tab'
 import styles from 'styles'
 
-const Tabs = ({ currentRoute, onChange, tabs }) => (
-  <View style={styles.tabs}>
-    {tabs.map(t => (
-      <Tab
-        key={`tab_${t.value}`}
-        tab={t}
-        isCurrent={currentRoute === t.value}
-        onChange={onChange}
-      />
-    ))}
-  </View>
-)
+const Tabs = ({ currentRoute, onChange, scoringType }) => {
+  const strokes = scoringType === 'strokes'
+  const tabs = [
+    { value: 'totalPoints', icon: '🤷', title: strokes ? 'Slag' : 'Poäng' },
+    { value: 'beers', icon: '🍻', title: 'Öl' },
+    { value: 'kr', icon: '💸', title: 'Skuld' }
+  ]
 
-const { arrayOf, string, func, shape } = React.PropTypes
+  return (
+    <View style={styles.tabs} >
+      {
+        tabs.map(t => (
+          <Tab
+            key={`tab_${t.value}`}
+            tab={t}
+            isCurrent={currentRoute === t.value}
+            onChange={onChange}
+          />
+        ))
+      }
+    </View >
+  )
+}
 
 Tabs.propTypes = {
   currentRoute: string.isRequired,
   onChange: func.isRequired,
-  tabs: arrayOf(shape())
+  scoringType: string
 }
 
 Tabs.defaultProps = {
   bottom: false,
   style: {},
-  tabs: [
-    { value: 'totalPoints', icon: '🤷', title: 'Poäng' },
-    { value: 'beers', icon: '🍻', title: 'Öl' },
-    { value: 'kr', icon: '💸', title: 'Skuld' }
-  ]
+  scoringType: 'points'
 }
 
 export default Tabs

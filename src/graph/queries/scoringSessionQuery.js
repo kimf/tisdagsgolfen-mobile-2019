@@ -8,7 +8,9 @@ const scoringSessionQuery = gql`
       currentHole
       course {
         id
+        club
         name
+        par
         holes (orderBy: number_ASC) {
           id
           number
