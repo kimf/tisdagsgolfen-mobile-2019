@@ -31,6 +31,11 @@ const createEventMutation = gql`
       }
       scoringType
       teamEvent
+      liveSessions: _scoringSessionsMeta (
+        filter: { status_in: "live" }
+      ) {
+        count
+      }
     }
   }
 `

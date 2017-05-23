@@ -66,7 +66,7 @@ export class Events extends Component {
       return null
     }
 
-    const sortedEvents = sortedByParsedDate(data.events, 'startsAt')
+    const sortedEvents = data.events.length > 0 ? sortedByParsedDate(data.events, 'startsAt') : []
 
     const paddingTop = scrollY.interpolate({
       inputRange: [0, 40],

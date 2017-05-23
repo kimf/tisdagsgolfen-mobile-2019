@@ -13,7 +13,9 @@ const mainQuery = gql`
       photo {
         url
       }
-      scoringSession {
+      scoringSession(
+        filter: { status_in: "live" }
+      ) {
         id
         event {
           id
