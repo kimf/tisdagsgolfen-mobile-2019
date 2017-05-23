@@ -111,14 +111,10 @@ class HoleView extends Component {
                             resizeMode="cover"
                           />
                         }
-                        <TGText style={{ fontWeight: 'bold', lineHeight: 24, fontSize: 16 }}>
-                          {itemName}
+                        <TGText style={{ fontWeight: 'bold', lineHeight: 24, fontSize: 14 }}>
+                          {event.teamEvent ? playerNames.join(', ') : itemName}
                         </TGText>
                       </View>
-                      {event.teamEvent
-                        ? <TGText style={{ color: colors.muted, fontSize: 12 }}>{playerNames.join(', ')}</TGText>
-                        : null
-                      }
                       <TGText style={{ color: colors.muted, fontSize: 12 }}>
                         {scoreItem.extraStrokes} extraslag
                       </TGText>

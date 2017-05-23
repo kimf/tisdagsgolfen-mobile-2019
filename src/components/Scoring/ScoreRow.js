@@ -24,13 +24,9 @@ const ScoreRow = ({ teamEvent, scoreItem, scoringType }) => {
           textAlign="center"
           title={strokes ? scoreItem.strokes : scoreItem.points}
         />
-        : null
-      }
-      {!scoreItem.id
-        ? <TGText style={{ color: colors.muted, paddingLeft: 80 }}>
-          SÄTT RESULTAT
+        : <TGText style={{ color: colors.red, paddingLeft: 80, paddingTop: 10 }}>
+          TRYCK HÄR
         </TGText>
-        : null
       }
     </View>
   )

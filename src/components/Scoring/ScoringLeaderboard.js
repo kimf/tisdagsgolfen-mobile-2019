@@ -102,7 +102,7 @@ class ScoringLeaderboard extends Component {
           title="STÄNG"
           onPress={() => onClose()}
         />
-      </View >
+      </View>
     )
   }
 }
