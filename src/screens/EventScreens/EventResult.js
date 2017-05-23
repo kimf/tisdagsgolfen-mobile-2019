@@ -57,7 +57,15 @@ class EventResult extends Component {
     const { event } = navigation.state.params
     const { sorting } = this.state
 
-    const eventHeader = <EventHeader {...event} />
+    const eventHeader = (
+      <EventHeader
+        course={event.course.name}
+        club={event.course.club}
+        oldCourseName={event.oldCourseName}
+        teamEvent={event.teamEvent}
+        scoringType={event.scoringType}
+      />
+    )
 
     if (data.loading) {
       return (
