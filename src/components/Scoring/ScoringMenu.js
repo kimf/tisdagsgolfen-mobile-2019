@@ -56,9 +56,15 @@ const ScoringMenu = ({ onClose, cancelRound, currentHole, holes, changeHole }) =
         {holes.map(hole => (
           <TGText
             key={hole.number}
-            style={[styles.holeButtonText, { color: currentHole === hole.number ? colors.white : colors.dark }]}
+            style={[
+              styles.holeButtonText,
+              { color: currentHole === hole.number ? colors.white : colors.dark }
+            ]}
             onPress={() => changeHole(hole.number)}
-            viewStyle={[styles.holeButton, { backgroundColor: currentHole === hole.number ? colors.green : colors.lightGray }]}
+            viewStyle={[
+              styles.holeButton,
+              { backgroundColor: currentHole === hole.number ? colors.green : colors.lightGray }
+            ]}
           >
             {hole.number}
           </TGText>

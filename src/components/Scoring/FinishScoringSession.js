@@ -1,6 +1,6 @@
 import React from 'react'
-import { View, Image } from 'react-native'
-import { arrayOf, shape, number } from 'prop-types'
+import { Alert, View, Image } from 'react-native'
+import { arrayOf, func, shape, number } from 'prop-types'
 
 import BottomButton from 'shared/BottomButton'
 import HoleHeader from 'Scoring/HoleHeader'
@@ -13,7 +13,20 @@ const defaultAvatar = require('../../images/defaultavatar.png')
 
 const getPhotoUrl = item => (item.photo ? { uri: item.photo.url } : defaultAvatar)
 
-const FinishScoringSession = ({ scrollX, scoringSession, playing }) => (
+const confirmFinish = (finishFunc) => {
+  Alert.alert(
+    'Vill du verkligen stänga spara och stänga??',
+    'Du kommer inte kunna gå in och ändra!',
+    [
+      { text: 'Cancel', onPress: () => null, style: 'cancel' },
+      { text: 'OK', onPress: () => finishFunc() }
+    ],
+    { cancelable: false }
+  )
+}
+
+
+const FinishScoringSession = ({ scrollX, scoringSession, playing, finishRound }) => (
   <View style={{ flex: 1, backgroundColor: colors.green }}>
     <HoleHeader scrollX={scrollX} par={scoringSession.course.par} index={0} number={19} />
     <View
@@ -128,13 +141,18 @@ const FinishScoringSession = ({ scrollX, scoringSession, playing }) => (
             })
           }
         </View>
-        <BottomButton backgroundColor={colors.blue} title="SPARA RUNDA" onPress={() => null} />
+        <BottomButton
+          backgroundColor={colors.blue}
+          title="SPARA RUNDA"
+          onPress={() => confirmFinish(finishRound)}
+        />
       </View>
     </View>
   </View>
 )
 
 FinishScoringSession.propTypes = {
+  finishRound: func.isRequired,
   scoringSession: shape({
     course: shape({
       par: number.isRequired

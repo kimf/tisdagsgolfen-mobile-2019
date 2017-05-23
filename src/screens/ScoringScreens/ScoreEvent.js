@@ -14,10 +14,19 @@ import Loading from 'shared/Loading'
 import styles, { colors, deviceHeight, deviceWidth } from 'styles'
 import { withScoringSessionQuery } from 'queries/scoringSessionQuery'
 import { withCancelRoundMutation } from 'mutations/cancelRoundMutation'
+import { withFinishRoundMutation } from 'mutations/finishRoundMutation'
 
 const MENU_HEIGHT = 300
 const LEADERBOARD_HEIGHT = deviceHeight
 
+const resetAction = NavigationActions.reset({
+  index: 0,
+  actions: [
+    NavigationActions.navigate({ routeName: 'Main' })
+  ]
+})
+
+// TODO: Break this big ass component apart!
 export class ScoreEvent extends Component {
   static navigationOptions = {
     header: null,
@@ -26,6 +35,7 @@ export class ScoreEvent extends Component {
 
   static propTypes = {
     cancelRound: func.isRequired,
+    finishRound: func.isRequired,
     data: shape({
       loading: bool,
       scoringSession: shape() // TODO: Make into re-usable propType
@@ -129,16 +139,26 @@ export class ScoreEvent extends Component {
         // eslint-disable-next-line no-console
         console.log(err)
       }
-      const resetAction = NavigationActions.reset({
-        index: 0,
-        actions: [
-          NavigationActions.navigate({ routeName: 'Main' })
-        ]
-      })
       navigation.dispatch(resetAction)
     }
     save()
   }
+
+  finishRound = () => {
+    const { data, finishRound, navigation } = this.props
+
+    const save = async () => {
+      try {
+        await finishRound(data.scoringSession.id)
+      } catch (err) {
+        // eslint-disable-next-line no-console
+        console.log(err)
+      }
+      navigation.dispatch(resetAction)
+    }
+    save()
+  }
+
 
   handlePageChange = (e) => {
     const offset = e.nativeEvent.contentOffset
@@ -268,6 +288,7 @@ export class ScoreEvent extends Component {
         <AnimatedModal height={LEADERBOARD_HEIGHT} position={leaderboardPosition}>
           <ScoringLeaderboard
             onClose={() => this.closeModal('leaderboard')}
+            finishRound={this.finishRound}
             scoringType={scoringSession.event.scoringType}
             eventId={scoringSession.event.id}
             teamEvent={scoringSession.event.teamEvent}
@@ -280,5 +301,6 @@ export class ScoreEvent extends Component {
 
 export default compose(
   withScoringSessionQuery,
-  withCancelRoundMutation
+  withCancelRoundMutation,
+  withFinishRoundMutation
 )(ScoreEvent)
