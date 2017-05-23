@@ -4,10 +4,10 @@ import { getCache } from 'utils'
 
 const dataIdFromObject = result => result.id
 
-const wsClient = new SubscriptionClient('ws://subscriptions.graph.cool/ciyqax2o04t37012092ntrd7e', {
+const wsClient = new SubscriptionClient('wss://subscriptions.graph.cool/v1/ciyqax2o04t37012092ntrd7e', {
   reconnect: true,
   connectionParams: {
-      // Pass any arguments you want for initialization
+    // Pass any arguments you want for initialization
   }
 })
 
