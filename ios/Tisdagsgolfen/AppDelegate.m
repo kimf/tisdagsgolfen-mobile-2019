@@ -8,10 +8,10 @@
  */
 
 #import "AppDelegate.h"
-#import <RNCrashes/RNCrashes.h>
-#import <RNAnalytics/RNAnalytics.h>
 #import <React/RCTBundleURLProvider.h>
 #import <React/RCTRootView.h>
+#import <React/RNSentry.h>
+#import "ReactNativeConfig.h"
 
 @implementation AppDelegate
 @synthesize oneSignal = _oneSignal;
@@ -19,14 +19,12 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
 
+  NSString *oneSignalAppId = [ReactNativeConfig envFor:@"ONESIGNAL_APP_ID"];
   self.oneSignal = [[RCTOneSignal alloc] initWithLaunchOptions:launchOptions
-                      appId:@"92ef9314-1d1d-4c51-99c7-f265769161da"
+                      appId:oneSignalAppId
                       settings:@{kOSSettingsKeyInFocusDisplayOption : @(OSNotificationDisplayTypeNone), kOSSettingsKeyAutoPrompt : @YES}];
 
   NSURL *jsCodeLocation;
-
-  [RNCrashes registerWithCrashDelegate: [[RNCrashesDelegateAlwaysSend alloc] init]];
-  [RNAnalytics registerWithInitiallyEnabled:true];
 
   #ifdef STORYBOOK
     jsCodeLocation = [[RCTBundleURLProvider sharedSettings] jsBundleURLForBundleRoot:@"storybook/index.ios" fallbackResource:nil];
@@ -38,6 +36,8 @@
                                                       moduleName:@"Tisdagsgolfen"
                                                initialProperties:nil
                                                    launchOptions:launchOptions];
+
+  [RNSentry installWithRootView:rootView];
 
   rootView.backgroundColor = [[UIColor alloc] initWithRed:1.0f green:1.0f blue:1.0f alpha:1];
 

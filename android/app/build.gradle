@@ -1,5 +1,7 @@
 apply plugin: "com.android.application"
 
+apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
+
 import com.android.build.OutputFile
 
 /**
@@ -67,6 +69,7 @@ import com.android.build.OutputFile
 */
 
 apply from: "../../node_modules/react-native/react.gradle"
+apply from: "../../node_modules/react-native-sentry/sentry.gradle"
 /**
  * Set this to true to create two separate APKs instead of one:
  *   - An APK that only works on ARM devices
@@ -94,8 +97,8 @@ android {
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
-        manifestPlaceholders = [onesignal_app_id: "92ef9314-1d1d-4c51-99c7-f265769161da",
-                                onesignal_google_project_number: "392488326530"]
+        manifestPlaceholders = [onesignal_app_id: project.env.get("ONESIGNAL_APP_ID"),
+                                onesignal_google_project_number: project.env.get("ONESIGNAL_GOOGLE_PROJECT_NR")]
     }
     splits {
         abi {
@@ -129,6 +132,8 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-sentry')
+    compile project(':react-native-config')
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.facebook.react:react-native:+'

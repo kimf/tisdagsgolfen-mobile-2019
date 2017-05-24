@@ -1,10 +1,11 @@
 import ApolloClient, { createBatchingNetworkInterface } from 'apollo-client'
 import { SubscriptionClient, addGraphQLSubscriptions } from 'subscriptions-transport-ws'
+import Config from 'react-native-config'
 import { getCache } from 'utils'
 
 const dataIdFromObject = result => result.id
 
-const wsClient = new SubscriptionClient('wss://subscriptions.graph.cool/v1/ciyqax2o04t37012092ntrd7e', {
+const wsClient = new SubscriptionClient(Config.SUBSCRIPTION_URL, {
   reconnect: true,
   connectionParams: {
     // Pass any arguments you want for initialization
@@ -12,7 +13,7 @@ const wsClient = new SubscriptionClient('wss://subscriptions.graph.cool/v1/ciyqa
 })
 
 const networkInterface = createBatchingNetworkInterface({
-  uri: 'https://api.graph.cool/simple/v1/ciyqax2o04t37012092ntrd7e',
+  uri: Config.API_URL,
   batchInterval: 10,
   queryDeduplication: true
 })
