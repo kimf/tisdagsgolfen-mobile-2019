@@ -1,4 +1,5 @@
 import React from 'react'
+import { shape, string, bool, func } from 'prop-types'
 
 import TGText from 'shared/TGText'
 import styles, { colors } from 'styles'
@@ -22,8 +23,6 @@ const Tab = ({ tab, isCurrent, onChange }) => {
     </TGText>
   )
 }
-
-const { shape, string, bool, func } = React.PropTypes
 
 Tab.propTypes = {
   tab: shape({

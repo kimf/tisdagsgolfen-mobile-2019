@@ -1,5 +1,6 @@
 import React from 'react'
 import { View, Image } from 'react-native'
+import { string } from 'prop-types'
 
 import TGText from 'shared/TGText'
 import styles, { colors } from 'styles'
@@ -78,7 +79,6 @@ const LeaderboardCard = ({ data, currentUserId, sorting }) => {
   )
 }
 
-const { string } = React.PropTypes
 LeaderboardCard.propTypes = {
   data: leaderboardPlayerShape.isRequired,
   currentUserId: string.isRequired,

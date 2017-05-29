@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Animated, View, Image, FlatList } from 'react-native'
 import { connect } from 'react-redux'
 import { compose } from 'react-apollo'
+import { bool, shape } from 'prop-types'
 
 // import OpenSeasonEventList from 'Events/OpenSeasonEventList'
 import AnimatedHeader from 'shared/AnimatedHeader'
@@ -14,9 +15,7 @@ import { withEventsQuery, eventsQueryProps } from 'queries/eventsQuery'
 import { userShape } from 'propTypes'
 import { NAVBAR_HEIGHT, colors } from 'styles'
 
-
 const AnimatedFlatList = Animated.createAnimatedComponent(FlatList)
-const { bool, shape } = React.PropTypes
 
 export class Events extends Component {
   static navigationOptions = {

@@ -1,5 +1,6 @@
 import React from 'react'
 import { View } from 'react-native'
+import { string } from 'prop-types'
 
 import TGText from 'shared/TGText'
 import { colors } from 'styles'
@@ -24,7 +25,7 @@ const Loading = ({ text }) =>
 
 
 Loading.propTypes = {
-  text: React.PropTypes.string
+  text: string
 }
 
 Loading.defaultProps = {

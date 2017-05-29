@@ -1,5 +1,6 @@
 import React from 'react'
 import { View } from 'react-native'
+import { oneOfType, arrayOf, node } from 'prop-types'
 
 const style = {
   flex: 1,
@@ -14,7 +15,6 @@ const CenterView = props => (
   </View>
 )
 
-const { oneOfType, arrayOf, node } = React.PropTypes
 CenterView.propTypes = {
   children: oneOfType([
     arrayOf(node),

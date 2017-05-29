@@ -2,6 +2,7 @@ import React from 'react'
 import { View } from 'react-native'
 import moment from 'moment'
 import 'moment/locale/sv'
+import { func, string } from 'prop-types'
 
 import AnimatedText from 'shared/AnimatedText'
 import TGText from 'shared/TGText'
@@ -74,8 +75,8 @@ const EventCard = ({ event, layoutStyle, onNavigate }) => {
 
 EventCard.propTypes = {
   event: eventShape.isRequired,
-  onNavigate: React.PropTypes.func.isRequired,
-  layoutStyle: React.PropTypes.string
+  onNavigate: func.isRequired,
+  layoutStyle: string
 }
 
 EventCard.defaultProps = {

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Switch, View, StyleSheet, Platform, DatePickerAndroid, DatePickerIOS } from 'react-native'
+import { string, shape, func } from 'prop-types'
 // import moment from 'moment'
 // import 'moment/locale/sv'
 
@@ -7,8 +8,6 @@ import TGText from 'shared/TGText'
 import BottomButton from 'shared/BottomButton'
 import styles, { colors } from 'styles'
 import { withCreateEventMutation } from 'mutations/createEventMutation'
-
-const { string, shape, func } = React.PropTypes
 
 class NewEventSetup extends Component {
   static propTypes = {

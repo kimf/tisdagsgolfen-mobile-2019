@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { View, Image } from 'react-native'
-import { NavigationActions } from 'react-navigation'
+import { arrayOf, func, shape } from 'prop-types'
 import { LogView } from 'react-native-device-log'
 import { connect } from 'react-redux'
 import { compose } from 'react-apollo'
@@ -13,8 +13,6 @@ import { colors } from 'styles'
 import LeaderboardContent from 'Leaderboard/LeaderboardContent'
 import SeasonPicker from 'Leaderboard/SeasonPicker'
 import BottomButton from 'shared/BottomButton'
-
-const { arrayOf, func, shape } = React.PropTypes
 
 class Leaderboard extends Component {
 

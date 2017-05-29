@@ -1,5 +1,6 @@
 import React from 'react'
 import { View, Image } from 'react-native'
+import { string } from 'prop-types'
 
 import TGText from 'shared/TGText'
 import { colors } from 'styles'
@@ -31,7 +32,7 @@ const EmptyState = ({ text }) =>
   </View>
 
 EmptyState.propTypes = {
-  text: React.PropTypes.string
+  text: string
 }
 
 EmptyState.defaultProps = {

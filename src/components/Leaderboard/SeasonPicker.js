@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
 import { Animated } from 'react-native'
+import { arrayOf, string, func } from 'prop-types'
 
 import TGText from 'shared/TGText'
 import { seasonShape } from 'propTypes'
 import { colors } from 'styles'
-
-const { arrayOf, string, func } = React.PropTypes
 
 class SeasonPicker extends Component {
   static propTypes = {
