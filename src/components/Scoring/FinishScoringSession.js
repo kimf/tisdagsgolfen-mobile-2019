@@ -8,6 +8,7 @@ import ScoreRow from 'Scoring/ScoreRow'
 import ScorecardHeaderRow from 'Scoring/ScorecardHeaderRow'
 import TGText from 'shared/TGText'
 import styles, { colors, deviceHeight, deviceWidth } from 'styles'
+import { withFinishRoundMutation } from 'mutations/finishRoundMutation'
 
 const defaultAvatar = require('../../images/defaultavatar.png')
 
@@ -162,4 +163,4 @@ FinishScoringSession.propTypes = {
   scrollX: shape().isRequired
 }
 
-export default FinishScoringSession
+export default withFinishRoundMutation(FinishScoringSession)
