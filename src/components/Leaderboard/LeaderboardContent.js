@@ -1,16 +1,16 @@
 import React, { Component } from 'react'
-import { View, Image, Animated } from 'react-native'
+import { View, Image, ScrollView } from 'react-native'
 import { arrayOf, string, func } from 'prop-types'
 
 import LeaderboardCard from 'Leaderboard/LeaderboardCard'
-import AnimatedHeader from 'shared/AnimatedHeader'
+import Header from 'shared/Header'
 import Tabs from 'shared/Tabs'
 import EmptyState from 'shared/EmptyState'
 import TGText from 'shared/TGText'
 import TouchableView from 'shared/TouchableView'
 import { seasonShape, leaderboardPlayerShape } from 'propTypes'
 import { ranked } from 'utils'
-import { colors } from 'styles'
+import { colors, NAVBAR_HEIGHT } from 'styles'
 
 class LeaderboardContent extends Component {
   static propTypes = {
@@ -24,8 +24,7 @@ class LeaderboardContent extends Component {
     super(props)
 
     this.state = {
-      sorting: 'totalPoints',
-      scrollY: new Animated.Value(0)
+      sorting: 'totalPoints'
     }
   }
 
@@ -37,7 +36,7 @@ class LeaderboardContent extends Component {
   }
 
   render() {
-    const { scrollY, sorting } = this.state
+    const { sorting } = this.state
     const { players, season, currentUserId, toggleSeasonpicker } = this.props
 
     let sortedPlayers = null
@@ -55,18 +54,9 @@ class LeaderboardContent extends Component {
     const showLeaderboardTabs = !emptyLeaderboard && parseInt(season.name, 10) > 2015
     const showPhoto = season.closed && season.photo.url
 
-    const paddingTop = scrollY.interpolate({
-      inputRange: [0, 40],
-      outputRange: [90, 60],
-      extrapolate: 'clamp'
-    })
-
     return (
       <View style={{ flex: 1, backgroundColor: colors.white }}>
-        <AnimatedHeader
-          scrollY={scrollY}
-          title="Ledartavla"
-        >
+        <Header title="Ledartavla">
           <TouchableView
             style={{
               paddingTop: 10,
@@ -83,30 +73,24 @@ class LeaderboardContent extends Component {
             <Image style={{ tintColor: colors.muted, resizeMode: 'contain', height: 12, width: 12, marginRight: 8 }} source={require('../../images/up.png')} />
             <TGText style={{ fontWeight: 'bold', color: colors.darkGreen }}>{season.name}</TGText>
           </TouchableView>
-        </AnimatedHeader>
-
+        </Header>
+        <View style={{ marginTop: NAVBAR_HEIGHT - 10, height: 60 }}>
+          {showLeaderboardTabs
+            ? <Tabs
+              currentRoute={sorting}
+              onChange={sort => this.changeSort(sort)}
+            />
+            : null
+          }
+        </View>
         {emptyLeaderboard
           ? <EmptyState text="Inga rundor spelade ännu" />
-          : <Animated.ScrollView
-            style={[
-              { padding: 10 },
-              { transform: [{ translateY: paddingTop }] }
-            ]}
+          : <ScrollView
+            style={{ paddingHorizontal: 10, paddingBottom: 20 }}
             ref={(c) => { this.listView = c }}
             scrollEventThrottle={1}
             stickyHeaderIndices={showLeaderboardTabs ? [0] : null}
-            onScroll={Animated.event(
-              [{ nativeEvent: { contentOffset: { y: this.state.scrollY } } }],
-              { useNativeDriver: true }
-            )}
           >
-            {showLeaderboardTabs
-              ? <Tabs
-                currentRoute={sorting}
-                onChange={sort => this.changeSort(sort)}
-              />
-              : null
-            }
             {showPhoto ? <Image
               style={{ width: '100%', height: 220 }}
               source={{ uri: season.photo.url, cache: 'force-cache' }}
@@ -115,7 +99,7 @@ class LeaderboardContent extends Component {
             {sortedPlayers.map(player => (
               <LeaderboardCard key={`l_${player.id}`} currentUserId={currentUserId} data={player} sorting={sorting} />
             ))}
-          </Animated.ScrollView>
+          </ScrollView>
         }
       </View>
     )
