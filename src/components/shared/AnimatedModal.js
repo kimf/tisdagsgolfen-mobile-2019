@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
+import { shape, number, node } from 'prop-types'
 import { Animated, StyleSheet } from 'react-native'
 
 const styles = StyleSheet.create({
@@ -39,9 +40,9 @@ const AnimatedModal = ({ position, children, height }) => (
 )
 
 AnimatedModal.propTypes = {
-  position: PropTypes.shape().isRequired,
-  height: PropTypes.number.isRequired,
-  children: PropTypes.node.isRequired
+  position: shape().isRequired,
+  height: number.isRequired,
+  children: node.isRequired
 }
 
 export default AnimatedModal

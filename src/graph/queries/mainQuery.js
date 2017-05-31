@@ -1,4 +1,4 @@
-import { PropTypes } from 'react'
+import { arrayOf, shape, string, bool } from 'prop-types'
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 import { seasonShape } from 'propTypes'
@@ -45,8 +45,6 @@ export default mainQuery
 export const withMainQuery = graphql(mainQuery, {
   skip: ({ loggedIn }) => !loggedIn
 })
-
-const { arrayOf, shape, string, bool } = PropTypes
 
 export const mainQueryProps = shape({
   data: shape({

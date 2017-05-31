@@ -1,5 +1,6 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
 import { StyleSheet } from 'react-native'
+import { string, func } from 'prop-types'
 
 import TGText from 'shared/TGText'
 import { colors } from 'styles'
@@ -27,8 +28,6 @@ const BottomButton = ({ title, onPress, backgroundColor, color }) => (
     {title}
   </TGText>
 )
-
-const { string, func } = PropTypes
 
 BottomButton.propTypes = {
   title: string.isRequired,

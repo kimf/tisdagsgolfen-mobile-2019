@@ -1,6 +1,4 @@
-import { PropTypes } from 'react'
-
-const { shape, string, bool, number } = PropTypes
+import { shape, string, bool, number } from 'prop-types'
 
 export const seasonShape = shape({
   id: string.isRequired,

@@ -1,4 +1,4 @@
-import { PropTypes } from 'react'
+import { arrayOf, shape, string, bool, number } from 'prop-types'
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 
@@ -34,8 +34,6 @@ export default leaderboardQuery
 export const withLeaderboardQuery = graphql(leaderboardQuery, {
   options: ({ seasonId }) => ({ variables: { seasonId } })
 })
-
-const { arrayOf, shape, string, bool, number } = PropTypes
 
 export const leaderboardQueryProps = shape({
   data: shape({

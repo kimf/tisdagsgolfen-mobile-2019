@@ -1,5 +1,6 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
 import { View, StyleSheet } from 'react-native'
+import { func } from 'prop-types'
 
 import TGText from 'shared/TGText'
 import { colors } from 'styles'
@@ -47,7 +48,6 @@ const ScoringFooter = ({ showMenu, showLeaderboard }) => (
   </View>
 )
 
-const { func } = PropTypes
 ScoringFooter.propTypes = {
   showMenu: func.isRequired,
   showLeaderboard: func.isRequired

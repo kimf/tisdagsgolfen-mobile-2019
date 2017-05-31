@@ -1,11 +1,12 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
 import { View } from 'react-native'
+import { string, number, shape, func } from 'prop-types'
 
 import TGText from 'shared/TGText'
 import TouchableView from 'shared/TouchableView'
 import styles, { colors } from 'styles'
 
-const CourseRow = ({ course, selectCourse }) =>
+const CourseRow = ({ course, selectCourse }) => (
   <TouchableView
     key={`course_row_${course.id}`}
     style={styles.courserow}
@@ -30,8 +31,7 @@ const CourseRow = ({ course, selectCourse }) =>
       </View>
     </View>
   </TouchableView>
-
-const { string, number, shape, func } = PropTypes
+)
 
 CourseRow.propTypes = {
   course: shape({

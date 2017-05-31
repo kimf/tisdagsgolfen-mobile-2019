@@ -1,5 +1,6 @@
-import React, { PropTypes } from 'react'
 import { StyleSheet } from 'react-native'
+import React from 'react'
+import { shape, string, bool } from 'prop-types'
 
 import TGText from 'shared/TGText'
 import { colors } from 'styles'
@@ -34,11 +35,13 @@ const EventHeader = ({ course, club, oldCourseName, teamEvent, scoringType }) =>
 )
 
 EventHeader.propTypes = {
-  course: PropTypes.string,
-  club: PropTypes.string,
-  oldCourseName: PropTypes.string,
-  teamEvent: PropTypes.bool.isRequired,
-  scoringType: PropTypes.string.isRequired
+  course: shape({
+    name: string.isRequired,
+    club: string.isRequired
+  }),
+  oldCourseName: string,
+  teamEvent: bool.isRequired,
+  scoringType: string.isRequired
 }
 
 EventHeader.defaultProps = {

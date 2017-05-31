@@ -1,4 +1,6 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
+import { oneOfType, string, number, bool } from 'prop-types'
+
 import TGText from 'shared/TGText'
 import { colors } from 'styles'
 
@@ -10,14 +12,14 @@ const ScoreItemText = ({ title, textAlign, fontWeight, fontSize, dimmed }) => {
 }
 
 ScoreItemText.propTypes = {
-  title: PropTypes.oneOfType([
-    PropTypes.string,
-    PropTypes.number
+  title: oneOfType([
+    string,
+    number
   ]).isRequired,
-  textAlign: PropTypes.string,
-  fontWeight: PropTypes.string,
-  fontSize: PropTypes.string,
-  dimmed: PropTypes.bool
+  textAlign: string,
+  fontWeight: string,
+  fontSize: string,
+  dimmed: bool
 }
 
 ScoreItemText.defaultProps = {

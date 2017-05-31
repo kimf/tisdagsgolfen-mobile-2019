@@ -1,5 +1,6 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
 import { Animated, StyleSheet } from 'react-native'
+import { number as numPropType, shape } from 'prop-types'
 
 import TGText from 'shared/TGText'
 import { colors, deviceWidth } from 'styles'
@@ -36,13 +37,13 @@ const styles = StyleSheet.create({
   }
 })
 
-const startingPos = number => (deviceWidth * number) - (deviceWidth + 100)
-const middlePoint = number => (deviceWidth * number) - deviceWidth
-const stoppingPoint = number => (deviceWidth * number) - (deviceWidth - 100)
+const startingPos = num => (deviceWidth * num) - (deviceWidth + 100)
+const middlePoint = num => (deviceWidth * num) - deviceWidth
+const stoppingPoint = num => (deviceWidth * num) - (deviceWidth - 100)
 
-const headerOpacity = (scrollX, number) => (
+const headerOpacity = (scrollX, num) => (
   scrollX.interpolate({
-    inputRange: [startingPos(number), middlePoint(number), stoppingPoint(number)],
+    inputRange: [startingPos(num), middlePoint(num), stoppingPoint(num)],
     outputRange: [0.25, 1, 0.25],
     extrapolate: 'clamp'
   })
@@ -63,12 +64,10 @@ const HoleHeader = ({ par, number, index, scrollX }) => (
   </Animated.View>
 )
 
-const { number, shape } = PropTypes
-
 HoleHeader.propTypes = {
-  par: number.isRequired,
-  number: number.isRequired,
-  index: number.isRequired,
+  par: numPropType.isRequired,
+  number: numPropType.isRequired,
+  index: numPropType.isRequired,
   scrollX: shape().isRequired
 }
 

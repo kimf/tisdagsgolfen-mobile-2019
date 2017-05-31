@@ -1,4 +1,4 @@
-import { PropTypes } from 'react'
+import { arrayOf, bool, shape } from 'prop-types'
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 
@@ -36,7 +36,6 @@ export const withEventsQuery = graphql(eventsQuery, {
   options: ({ seasonId }) => ({ variables: { seasonId } })
 })
 
-const { arrayOf, bool, shape } = PropTypes
 export const eventsQueryProps = shape({
   events: arrayOf(eventShape),
   loading: bool

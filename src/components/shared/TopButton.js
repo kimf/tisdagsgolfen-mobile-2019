@@ -1,5 +1,6 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
 import { StyleSheet } from 'react-native'
+import { string, func } from 'prop-types'
 
 import TGText from 'shared/TGText'
 import { colors } from 'styles'
@@ -29,8 +30,6 @@ const TopButton = ({ title, onPress }) => (
     {title}
   </TGText>
 )
-
-const { string, func } = PropTypes
 
 TopButton.propTypes = {
   title: string.isRequired,
