@@ -46,11 +46,9 @@ export const withCreateEventMutation = graphql(createEventMutation, {
   props: ({ mutate }) => ({
     createEvent: (seasonId, courseId, teamEvent, scoringType, startsAt) => mutate({
       variables: { seasonId, courseId, teamEvent, scoringType, startsAt },
-      updateQueries: {
-        seasonEventsQuery: (prev, { mutationResult }) => update(prev, {
-          events: { $push: [mutationResult.data.createEvent] }
-        })
-      }
+      refetchQueries: [
+        'seasonEventsQuery'
+      ]
     })
   })
 })

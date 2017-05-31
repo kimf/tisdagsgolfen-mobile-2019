@@ -50,6 +50,10 @@ const EventCard = ({ event, userId, onNavigate }) => {
   const scoringTitle = ownScoringSession ? 'Ändra score' : 'För score'
   const scoringBackground = ownScoringSession ? colors.red : colors.dark
 
+  const isInFlux = event.status !== 'finished'
+  const resultTitle = isInFlux ? 'Följ Live' : 'Se Resultat'
+  const resultBackground = isInFlux ? colors.yellow : colors.green
+
   return (
     <View style={styles.eventCard}>
       <View style={styles.dateBox}>
@@ -72,10 +76,10 @@ const EventCard = ({ event, userId, onNavigate }) => {
 
         <View style={{ flexDirection: 'row', paddingTop: 20, paddingBottom: 10, justifyContent: 'space-between' }}>
           {event.scoringSessions.length > 0
-            ? <RowButton onPress={liveNavigation} title="Se Resultat" backgroundColor={colors.green} />
+            ? <RowButton onPress={liveNavigation} title={resultTitle} backgroundColor={resultBackground} />
             : null
           }
-          {event.status !== 'finished'
+          {isInFlux
             ? <RowButton
               onPress={mainNavigation}
               title={scoringTitle}
