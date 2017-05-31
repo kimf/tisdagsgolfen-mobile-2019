@@ -1,17 +1,15 @@
 import React, { Component } from 'react'
-import { View, Image } from 'react-native'
+import { View } from 'react-native'
 import { shape, number, arrayOf, string } from 'prop-types'
 
 import TouchableView from 'shared/TouchableView'
-import TGText from 'shared/TGText'
 import ScoreRow from 'Scoring/ScoreRow'
 import ScorecardHeaderRow from 'Scoring/ScorecardHeaderRow'
 import ScoreInput from 'Scoring/ScoreInput'
 import HoleHeader from 'Scoring/HoleHeader'
-import styles, { colors, deviceHeight, deviceWidth } from 'styles'
+import UserColumn from 'Scoring/UserColumn'
+import { colors, deviceHeight, deviceWidth } from 'styles'
 import { calculateExtraStrokes } from 'utils'
-
-const defaultAvatar = require('../../images/defaultavatar.png')
 
 class HoleView extends Component {
   static propTypes = {
@@ -24,8 +22,6 @@ class HoleView extends Component {
   }
 
   state = { scoringId: null }
-
-  getPhotoUrl = item => (item.photo ? { uri: item.photo.url } : defaultAvatar)
 
   toggleScoring = (scoringId) => {
     this.setState((state) => {
@@ -55,12 +51,16 @@ class HoleView extends Component {
             elevation: 5
           }}
         >
-          <ScorecardHeaderRow teamEvent={event.teamEvent} scoringType={event.scoringType} scoring={scoringId !== null} />
+          <ScorecardHeaderRow
+            teamEvent={event.teamEvent}
+            scoringType={event.scoringType}
+            scoring={scoringId !== null}
+          />
+
           {
             playing.map((item, index) => {
               const attrWithId = event.teamEvent ? 'scoringTeam' : 'scoringPlayer'
               const liveScore = hole.liveScores.find(ls => ls[attrWithId].id === item.id)
-              const itemName = event.teamEvent ? `Lag ${index + 1}` : `${item.user.firstName} ${item.user.lastName.substr(0, 1)}`
               const scoreItem = liveScore || {
                 strokes: hole.par,
                 putts: 2,
@@ -69,18 +69,13 @@ class HoleView extends Component {
                 extraStrokes: calculateExtraStrokes(hole.index, item.extraStrokes, holesCount)
               }
 
-              let playerNames = null
-
-              if (event.teamEvent) {
-                playerNames = item.users.map(p => p.firstName)
-              }
-
               const isScoring = (scoringId && scoringId === item.id)
               return (
                 <View
                   key={`player_score_row_${item.id}`}
                   style={{
                     flexDirection: 'row',
+                    paddingRight: 10,
                     borderBottomWidth: (index < (playing.length - 1) ? 1 : 0),
                     borderBottomColor: colors.lightGray,
                     backgroundColor: isScoring ? colors.lightGray : colors.white
@@ -88,43 +83,17 @@ class HoleView extends Component {
                 >
                   {scoringId && scoringId !== item.id
                     ? null
-                    : <View style={{ flex: 3, paddingTop: 20, paddingLeft: 20, paddingBottom: 20 }}>
-                      <View style={{ flexDirection: 'row' }}>
-                        {event.teamEvent
-                          ? <View style={{ flex: 0, flexDirection: 'row' }}>
-                            {item.users.map(user => (
-                              <Image
-                                key={`team_player_photo_${user.id}`}
-                                style={[styles.smallCardImage, { flex: 1 }]}
-                                source={this.getPhotoUrl(user)}
-                                resizeMode="cover"
-                              />
-                            ))}
-                          </View>
-                          : <Image
-                            key={`player_photo_${item.id}`}
-                            style={[
-                              styles.smallCardImage,
-                              { marginBottom: 6, marginRight: 10, marginLeft: 0 }
-                            ]}
-                            source={this.getPhotoUrl(item.user)}
-                            resizeMode="cover"
-                          />
-                        }
-                        <TGText style={{ fontWeight: 'bold', lineHeight: 24, fontSize: 14 }}>
-                          {event.teamEvent ? playerNames.join(', ') : itemName}
-                        </TGText>
-                      </View>
-                      <TGText style={{ color: colors.muted, fontSize: 12 }}>
-                        {scoreItem.extraStrokes} extraslag
-                      </TGText>
-                    </View>
+                    : <UserColumn
+                      teamEvent={event.teamEvent}
+                      item={item}
+                      scoreItem={scoreItem}
+                    />
                   }
 
                   {scoringId
                     ? null
                     : <TouchableView
-                      style={{ flex: 4, paddingVertical: 20, paddingRight: 20 }}
+                      style={{ flexGrow: 2, padding: 20 }}
                       onPress={() => this.toggleScoring(item.id)}
                     >
                       <ScoreRow
@@ -140,7 +109,6 @@ class HoleView extends Component {
                     : <View style={{ flex: 6 }}>
                       <ScoreInput
                         scoreItem={scoreItem}
-                        itemName={itemName}
                         playerId={item.id}
                         holeId={hole.id}
                         par={hole.par}

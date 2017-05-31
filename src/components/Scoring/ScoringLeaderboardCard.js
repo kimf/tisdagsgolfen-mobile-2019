@@ -13,7 +13,6 @@ const getItemName = (teamEvent, player) => {
   if (!teamEvent) {
     return `${player.firstName} ${player.lastName.substr(0, 1)}`
   }
-
   return player.users.map(u => u.firstName).join(', ')
 }
 
@@ -33,18 +32,25 @@ const ScoringLeaderboardCard = ({ player, currentUserId, sorting, scoringType, t
     pointText = 'kr'
     position = player.krPos
   } else {
-    pointValue = strokePlay ? player.strokes : player.points
+    pointValue = strokePlay ? player.calculatedStrokes : player.points
     pointText = strokePlay ? '' : 'p'
     position = player.position
   }
 
-  const currentUserStyle = player.id === currentUserId ? mutedYellow : null
+  const currentUserStyle = teamEvent
+    ? player.users.find(p => p.id === currentUserId) ? mutedYellow : null
+    : player.id === currentUserId ? mutedYellow : null
+
   const photoUrl = player.photo ? player.photo.url : null
 
   const itemName = getItemName(teamEvent, player)
 
   return (
-    <View key={player.id} style={[styles.listrow, currentUserStyle]}>
+    <View key={player.id} style={[
+      styles.listrow,
+      currentUserStyle,
+      { paddingHorizontal: 20 }
+    ]}>
       <View style={styles.position}>
         <TGText style={{ flex: 1, fontWeight: '800', color: colors.dark, fontSize: 16 }}>
           {position}
@@ -60,18 +66,14 @@ const ScoringLeaderboardCard = ({ player, currentUserId, sorting, scoringType, t
       }
       <View style={styles.cardTitle}>
         <TGText style={styles.name}>{itemName}</TGText>
-        {sorting === 'totalPoints' && player.holes
-          ? <TGText style={styles.meta}>
-            {scoringType === 'points'
-              ? `${player.strokes} slag på `
-              : `${player.points} poäng på `
-            }
-            {player.holes} hål
-          </TGText>
-          : null
-        }
       </View>
-      <TGText style={styles.points}>
+      {sorting === 'totalPoints'
+        ? <TGText style={[styles.points, { color: colors.gray}]}>
+          {player.strokes}
+        </TGText>
+        : null
+      }
+      <TGText style={[styles.points, { paddingRight: 10}]}>
         {`${pointValue} ${pointText}`}
       </TGText>
     </View>

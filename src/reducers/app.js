@@ -35,7 +35,14 @@ export default (state = initialState, action) => {
     }
 
     case 'APOLLO_MUTATION_RESULT': {
-      if (action.operationName === 'cancelRoundMutation') {
+      if (action.operationName === 'cancelRoundMutation' || '') {
+        return {
+          ...state,
+          activeScoringSession: null
+        }
+      }
+
+      if (action.operationName === 'finishRoundMutation') {
         return {
           ...state,
           activeScoringSession: null

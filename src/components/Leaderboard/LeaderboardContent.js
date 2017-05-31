@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Image, ScrollView } from 'react-native'
+import { View, Image, FlatList } from 'react-native'
 import { arrayOf, string, func } from 'prop-types'
 
 import LeaderboardCard from 'Leaderboard/LeaderboardCard'
@@ -28,10 +28,10 @@ class LeaderboardContent extends Component {
     }
   }
 
+  listView = null
+
   changeSort = (sorting) => {
-    // TODO: Warning. The `_component` part is private api, can change!
-    // eslint-disable-next-line no-underscore-dangle
-    this.listView._component.scrollTo({ x: 0, y: 0, animated: true })
+    this.listView.scrollToIndex({ index: 0 })
     this.setState(state => ({ ...state, sorting }))
   }
 
@@ -52,11 +52,21 @@ class LeaderboardContent extends Component {
 
     const emptyLeaderboard = sortedPlayers.filter(sl => sl.eventCount !== 0).length === 0
     const showLeaderboardTabs = !emptyLeaderboard && parseInt(season.name, 10) > 2015
-    const showPhoto = season.closed && season.photo.url
+    const showPhoto = !emptyLeaderboard && season.closed && season.photo.url
+
+    let listHeaderComponent = null
+    if (showLeaderboardTabs) {
+      listHeaderComponent = (
+        <Tabs
+          currentRoute={sorting}
+          onChange={sort => this.changeSort(sort)}
+        />
+      )
+    }
 
     return (
       <View style={{ flex: 1, backgroundColor: colors.white }}>
-        <Header title="Ledartavla">
+        <Header title="Ledartavla" backgroundColor={colors.white}>
           <TouchableView
             style={{
               paddingTop: 10,
@@ -74,33 +84,32 @@ class LeaderboardContent extends Component {
             <TGText style={{ fontWeight: 'bold', color: colors.darkGreen }}>{season.name}</TGText>
           </TouchableView>
         </Header>
-        <View style={{ marginTop: NAVBAR_HEIGHT - 10, height: 60 }}>
-          {showLeaderboardTabs
-            ? <Tabs
-              currentRoute={sorting}
-              onChange={sort => this.changeSort(sort)}
+
+        <View style={{ flex: 1, marginTop: NAVBAR_HEIGHT }}>
+          {listHeaderComponent}
+
+          {showPhoto ? <Image
+            style={{ width: '100%', height: 180 }}
+            source={{ uri: season.photo.url, cache: 'force-cache' }}
+            resizeMode="cover"
+          /> : null}
+
+          {emptyLeaderboard
+            ? <EmptyState text="Inga rundor spelade ännu" />
+            : <FlatList
+              removeClippedSubviews={false}
+              initialNumToRender={10}
+              ref={(ref) => { this.listView = ref }}
+              style={{ paddingHorizontal: 10, paddingBottom: 20 }}
+              data={sortedPlayers}
+              renderItem={({ item }) => (
+                <LeaderboardCard currentUserId={currentUserId} data={item} sorting={sorting} />
+              )}
+              extraData={this.state}
+              keyExtractor={player => `l_${player.id}`}
             />
-            : null
           }
         </View>
-        {emptyLeaderboard
-          ? <EmptyState text="Inga rundor spelade ännu" />
-          : <ScrollView
-            style={{ paddingHorizontal: 10, paddingBottom: 20 }}
-            ref={(c) => { this.listView = c }}
-            scrollEventThrottle={1}
-            stickyHeaderIndices={showLeaderboardTabs ? [0] : null}
-          >
-            {showPhoto ? <Image
-              style={{ width: '100%', height: 220 }}
-              source={{ uri: season.photo.url, cache: 'force-cache' }}
-              resizeMode="cover"
-            /> : null}
-            {sortedPlayers.map(player => (
-              <LeaderboardCard key={`l_${player.id}`} currentUserId={currentUserId} data={player} sorting={sorting} />
-            ))}
-          </ScrollView>
-        }
       </View>
     )
   }

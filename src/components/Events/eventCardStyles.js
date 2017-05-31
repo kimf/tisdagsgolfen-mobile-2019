@@ -4,36 +4,30 @@ import { deviceWidth, colors } from 'styles'
 const styles = StyleSheet.create({
   /* EVENT CARDS */
   eventCard: {
-    backgroundColor: colors.white,
-    borderRadius: 5,
-    elevation: 5,
     flexDirection: 'row',
-    marginHorizontal: 10,
-    marginTop: 10,
-    minHeight: 90,
+    marginBottom: 10,
+    minHeight: 100,
     paddingVertical: 10,
     paddingHorizontal: 20,
-    shadowColor: colors.muted,
-    shadowOffset: { height: 10, width: 0 },
-    shadowOpacity: 0.4,
-    shadowRadius: 10
+    borderBottomWidth: 1,
+    borderBottomColor: colors.lightGray
   },
 
   dateBox: {
-    width: 40,
-    marginRight: 10,
-    alignItems: 'center'
+    width: 60,
+    marginRight: 10
   },
 
   date: {
     color: colors.darkGreen,
-    fontSize: 24,
+    fontSize: 30,
     fontWeight: '900'
   },
 
   month: {
     color: colors.muted,
-    fontSize: 12,
+    fontSize: 14,
+    paddingLeft: 4,
     fontWeight: '600'
   },
 
@@ -43,42 +37,21 @@ const styles = StyleSheet.create({
   },
 
   gametype: {
-    fontSize: 14,
+    fontSize: 16,
     marginTop: 5,
     color: colors.muted
   },
 
   row: {
-    width: deviceWidth - 180,
+    width: deviceWidth - 120,
     flexDirection: 'column'
   },
 
-  inlineButton: {
-    width: 80,
-    borderRadius: 5,
-    paddingHorizontal: 16
-  },
-
   inlineButtonText: {
-    fontSize: 18,
+    fontSize: 14,
     color: colors.red,
-    textAlign: 'right',
+    paddingLeft: 4,
     fontWeight: 'bold'
-  },
-
-  plannedEvent: {
-    height: '90%',
-    shadowRadius: 1,
-    width: deviceWidth - 40,
-    shadowColor: colors.darkGreen,
-    shadowOpacity: 0.2
-  },
-
-  playedEvent: {
-    height: '90%',
-    shadowRadius: 1,
-    width: deviceWidth / 2.5,
-    marginHorizontal: 5
   }
 })
 

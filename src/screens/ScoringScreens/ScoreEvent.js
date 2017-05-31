@@ -39,7 +39,7 @@ export class ScoreEvent extends Component {
     data: shape({
       loading: bool,
       scoringSession: shape() // TODO: Make into re-usable propType
-    }),
+    }).isRequired,
     navigation: shape().isRequired
   }
 
@@ -206,6 +206,8 @@ export class ScoreEvent extends Component {
       extrapolate: 'clamp'
     })
 
+    const holesCount = scoringSession.course.holes.length
+
     return (
       <Animated.View
         style={{
@@ -241,7 +243,7 @@ export class ScoreEvent extends Component {
                 hole={h}
                 isActive={h.number === currentHole}
                 playing={playing}
-                holesCount={scoringSession.course.holes.length}
+                holesCount={holesCount}
                 event={scoringSession.event}
                 scrollX={scrollX}
                 scoringSessionId={scoringSession.id}
@@ -251,13 +253,14 @@ export class ScoreEvent extends Component {
               playing={playing}
               scoringSession={scoringSession}
               scrollX={scrollX}
+              finishRound={this.finishRound}
             />
           </Animated.ScrollView>
         </Animated.View>
 
         <ScoringFooter
           number={currentHole}
-          maxNumber={scoringSession.course.holes.length}
+          maxNumber={holesCount}
           showMenu={() => this.showModal('menu')}
           showLeaderboard={() => this.showModal('leaderboard')}
         />
@@ -278,6 +281,7 @@ export class ScoreEvent extends Component {
         <AnimatedModal height={MENU_HEIGHT} position={menuPosition}>
           <ScoringMenu
             onClose={() => this.closeModal('menu')}
+            onPreview={() => this.changeHole(holesCount + 1)}
             cancelRound={this.cancelRound}
             holes={scoringSession.course.holes}
             currentHole={currentHole}
@@ -287,8 +291,8 @@ export class ScoreEvent extends Component {
 
         <AnimatedModal height={LEADERBOARD_HEIGHT} position={leaderboardPosition}>
           <ScoringLeaderboard
+            showHeader
             onClose={() => this.closeModal('leaderboard')}
-            finishRound={this.finishRound}
             scoringType={scoringSession.event.scoringType}
             eventId={scoringSession.event.id}
             teamEvent={scoringSession.event.teamEvent}

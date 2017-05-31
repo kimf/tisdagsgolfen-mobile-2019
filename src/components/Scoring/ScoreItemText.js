@@ -24,8 +24,8 @@ ScoreItemText.propTypes = {
 
 ScoreItemText.defaultProps = {
   fontWeight: 'normal',
-  fontSize: '22',
-  textAlign: 'left',
+  fontSize: '26',
+  textAlign: 'center',
   dimmed: false
 }
 

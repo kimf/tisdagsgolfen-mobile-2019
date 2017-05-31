@@ -1,23 +1,19 @@
 import React from 'react'
-import { Alert, View, Image } from 'react-native'
+import { Alert, View } from 'react-native'
 import { arrayOf, func, shape, number } from 'prop-types'
 
 import BottomButton from 'shared/BottomButton'
+import TGText from 'shared/TGText'
 import HoleHeader from 'Scoring/HoleHeader'
 import ScoreRow from 'Scoring/ScoreRow'
+import UserColumn from 'Scoring/UserColumn'
 import ScorecardHeaderRow from 'Scoring/ScorecardHeaderRow'
-import TGText from 'shared/TGText'
-import styles, { colors, deviceHeight, deviceWidth } from 'styles'
-import { withFinishRoundMutation } from 'mutations/finishRoundMutation'
-
-const defaultAvatar = require('../../images/defaultavatar.png')
-
-const getPhotoUrl = item => (item.photo ? { uri: item.photo.url } : defaultAvatar)
+import { colors, deviceHeight, deviceWidth } from 'styles'
 
 const confirmFinish = (finishFunc) => {
   Alert.alert(
-    'Vill du verkligen stänga spara och stänga??',
-    'Du kommer inte kunna gå in och ändra!',
+    'Vill du verkligen spara och stänga??',
+    'Har du verkligen dubbelkollat?',
     [
       { text: 'Cancel', onPress: () => null, style: 'cancel' },
       { text: 'OK', onPress: () => finishFunc() }
@@ -54,7 +50,6 @@ const FinishScoringSession = ({ scrollX, scoringSession, playing, finishRound })
           {
             playing.map((item, index) => {
               const event = scoringSession.event
-              const itemName = event.teamEvent ? `Lag ${index + 1}` : `${item.user.firstName} ${item.user.lastName.substr(0, 1)}`
               const attrWithId = event.teamEvent ? 'scoringTeam' : 'scoringPlayer'
 
               const liveScores = scoringSession.course.holes.map(h => h.liveScores)
@@ -76,12 +71,13 @@ const FinishScoringSession = ({ scrollX, scoringSession, playing, finishRound })
                 }
               })
 
-              const scoreItem = { id: item.id, strokes, putts, points, beers }
-
-              let playerNames = null
-
-              if (event.teamEvent) {
-                playerNames = item.users.map(p => p.firstName)
+              const scoreItem = {
+                id: item.id,
+                strokes,
+                putts,
+                points,
+                beers,
+                extraStrokes: item.extraStrokes
               }
 
               return (
@@ -94,43 +90,13 @@ const FinishScoringSession = ({ scrollX, scoringSession, playing, finishRound })
                     backgroundColor: colors.white
                   }}
                 >
-                  <View style={{ flex: 3, paddingTop: 20, paddingLeft: 20, paddingBottom: 20 }}>
-                    <View style={{ flexDirection: 'row' }}>
-                      {event.teamEvent
-                        ? <View style={{ flex: 0, flexDirection: 'row' }}>
-                          {item.users.map(user => (
-                            <Image
-                              key={`team_player_photo_${user.id}`}
-                              style={[styles.smallCardImage, { flex: 1 }]}
-                              source={getPhotoUrl(user)}
-                              resizeMode="cover"
-                            />
-                          ))}
-                        </View>
-                        : <Image
-                          key={`player_photo_${item.id}`}
-                          style={[
-                            styles.smallCardImage,
-                            { marginBottom: 6, marginRight: 10, marginLeft: 0 }
-                          ]}
-                          source={getPhotoUrl(item.user)}
-                          resizeMode="cover"
-                        />
-                      }
-                      <TGText style={{ fontWeight: 'bold', lineHeight: 24, fontSize: 16 }}>
-                        {itemName}
-                      </TGText>
-                    </View>
-                    {event.teamEvent
-                      ? <TGText style={{ color: colors.muted, fontSize: 12 }}>{playerNames.join(', ')}</TGText>
-                      : null
-                    }
-                    <TGText style={{ color: colors.muted, fontSize: 12 }}>
-                      {item.extraStrokes} extraslag
-                    </TGText>
-                  </View>
+                  <UserColumn
+                    teamEvent={event.teamEvent}
+                    item={item}
+                    scoreItem={scoreItem}
+                  />
 
-                  <View style={{ flex: 4, paddingVertical: 20, paddingRight: 20 }}>
+                  <View style={{ flexGrow: 2, paddingVertical: 20, paddingRight: 20 }}>
                     <ScoreRow
                       scoringType={event.scoringType}
                       teamEvent={event.teamEvent}
@@ -142,8 +108,11 @@ const FinishScoringSession = ({ scrollX, scoringSession, playing, finishRound })
             })
           }
         </View>
+        <TGText style={{ textAlign: 'center', padding: 20, color: colors.red }}>
+          Dubbelkolla så att allt ser rätt ut!
+        </TGText>
         <BottomButton
-          backgroundColor={colors.blue}
+          backgroundColor={colors.red}
           title="SPARA RUNDA"
           onPress={() => confirmFinish(finishRound)}
         />
@@ -163,4 +132,4 @@ FinishScoringSession.propTypes = {
   scrollX: shape().isRequired
 }
 
-export default withFinishRoundMutation(FinishScoringSession)
+export default FinishScoringSession

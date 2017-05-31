@@ -10,6 +10,7 @@ const liveLeaderboardQuery = gql`
     ) {
       scoringPlayers {
         id
+        extraStrokes
         liveScores {
           id
           beers
@@ -32,6 +33,7 @@ const liveLeaderboardQuery = gql`
       }
       scoringTeams {
         id
+        extraStrokes
         liveScores {
           id
           beers

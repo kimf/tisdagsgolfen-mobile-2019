@@ -1,5 +1,5 @@
-import { StyleSheet } from 'react-native'
 import React from 'react'
+import { View, StyleSheet } from 'react-native'
 import { shape, string, bool } from 'prop-types'
 
 import TGText from 'shared/TGText'
@@ -17,21 +17,32 @@ const gametypeName = (scoringType) => {
 }
 
 const styles = StyleSheet.create({
+  view: {
+    paddingHorizontal: 8,
+    paddingVertical: 10,
+    backgroundColor: colors.gray,
+    flexDirection: 'column',
+    height: 60
+  },
+
   text: {
-    padding: 10,
-    backgroundColor: colors.muted,
     textAlign: 'center',
-    color: colors.white
+    color: colors.white,
+    fontSize: 14
   }
 })
 
-const EventHeader = ({ course, club, oldCourseName, teamEvent, scoringType }) => (
-  <TGText style={styles.text}>
-    {gametypeName(scoringType)}
-    {' ↝ '}
-    {oldCourseName ? `${oldCourseName} ↝ ` : `${club} | ${course} ↝ `}
-    {teamEvent ? 'Lag' : 'Individuellt'}
-  </TGText>
+const EventHeader = ({ course, oldCourseName, teamEvent, scoringType }) => (
+  <View style={styles.view}>
+    <TGText style={styles.text}>
+      {oldCourseName || `${course.club} / ${course.name}`}
+    </TGText>
+    <TGText style={styles.text}>
+      {teamEvent ? 'Lag' : 'Individuellt'}
+      {' ↝ '}
+      {gametypeName(scoringType)}
+    </TGText>
+  </View>
 )
 
 EventHeader.propTypes = {

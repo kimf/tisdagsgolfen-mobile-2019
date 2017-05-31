@@ -59,8 +59,7 @@ class EventResult extends Component {
 
     const eventHeader = (
       <EventHeader
-        course={event.course.name}
-        club={event.course.club}
+        course={event.course}
         oldCourseName={event.oldCourseName}
         teamEvent={event.teamEvent}
         scoringType={event.scoringType}
@@ -91,7 +90,9 @@ class EventResult extends Component {
     return (
       <View style={styles.container}>
         {eventHeader}
+
         <Tabs
+          teamEvent={event.teamEvent}
           currentRoute={sorting}
           onChange={sort => this.changeSort(sort)}
         />
@@ -101,7 +102,7 @@ class EventResult extends Component {
           initialListSize={20}
           dataSource={ds.cloneWithRows(sortedPlayers)}
           ref={(ref) => { this.listView = ref }}
-          renderRow={rowData =>
+          renderRow={rowData => (
             <EventLeaderboardCard
               key={`l_${currentUserId}`}
               scoringType={event.scoringType}
@@ -109,7 +110,7 @@ class EventResult extends Component {
               data={rowData}
               sorting={sorting}
             />
-          }
+          )}
           enableEmptySections
         />
       </View>

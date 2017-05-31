@@ -8,17 +8,15 @@ import { colors } from 'styles'
 const style = StyleSheet.create({
   view: {
     flexDirection: 'row',
-    backgroundColor: colors.yellow,
-    paddingHorizontal: 20,
-    borderTopLeftRadius: 10,
-    borderTopRightRadius: 10
+    backgroundColor: colors.lightGray,
+    paddingHorizontal: 20
   },
   text: {
-    color: colors.muted,
+    color: colors.dark,
     paddingVertical: 10,
     flex: 1,
-    textAlign: 'left',
-    fontSize: 12
+    textAlign: 'center',
+    fontSize: 14
   }
 })
 
@@ -32,18 +30,20 @@ const ScorecardHeaderRow = ({ teamEvent, scoring, scoringType }) => {
   const strokes = scoringType === 'strokes'
   return (
     <View style={style.view}>
-      <TGText style={[style.text, { flex: 3 }]}>SPELARE</TGText>
-      {beersHeader}
-      <TGText style={style.text}>
-        {strokes ? 'POÄNG' : 'SLAG'}
-      </TGText>
-      {puttsHeader}
-      {scoring
-        ? null
-        : <TGText style={[style.text, { textAlign: 'center' }]}>
-          {strokes ? 'SLAG' : 'POÄNG'}
+      <TGText style={[style.text, { flex: 3, textAlign: 'left', paddingLeft: 0 }]}>SPELARE</TGText>
+      <View style={{ flexGrow: 2, flexDirection: 'row' }}>
+        {beersHeader}
+        <TGText style={style.text}>
+          {strokes ? 'BRUTTO' : 'SLAG'}
         </TGText>
-      }
+        {puttsHeader}
+        {scoring
+          ? null
+          : <TGText style={[style.text, { textAlign: 'right' }]}>
+            {strokes ? 'NETTO' : 'POÄNG'}
+          </TGText>
+        }
+      </View>
     </View>
   )
 }

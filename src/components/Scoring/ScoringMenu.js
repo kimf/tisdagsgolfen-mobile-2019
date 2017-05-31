@@ -4,6 +4,7 @@ import { arrayOf, shape, number, func } from 'prop-types'
 
 import TGText from 'shared/TGText'
 import TopButton from 'shared/TopButton'
+import RowButton from 'shared/RowButton'
 import { colors } from 'styles'
 
 const styles = StyleSheet.create({
@@ -46,7 +47,7 @@ const confirmCancel = (cancelFunc) => {
 }
 
 
-const ScoringMenu = ({ onClose, cancelRound, currentHole, holes, changeHole }) => (
+const ScoringMenu = ({ onClose, onPreview, cancelRound, currentHole, holes, changeHole }) => (
   <View style={{ flex: 1 }}>
     <View style={styles.inner}>
       <TGText style={styles.text}>
@@ -70,12 +71,18 @@ const ScoringMenu = ({ onClose, cancelRound, currentHole, holes, changeHole }) =
           </TGText>
         ))}
       </View>
-      <TGText
-        style={{ color: colors.red, textAlign: 'center' }}
-        onPress={() => confirmCancel(cancelRound)}
-      >
-        AVBRYT & AVSLUTA RUNDA
-      </TGText>
+      <View style={{ flexDirection: 'row', padding: 10, justifyContent: 'space-between' }}>
+        <RowButton
+          backgroundColor={colors.red}
+          onPress={() => confirmCancel(cancelRound)}
+          title="AVBRYT RUNDA"
+        />
+        <RowButton
+          backgroundColor={colors.green}
+          onPress={onPreview}
+          title="SPARA RUNDA"
+        />
+      </View>
     </View>
     <TopButton
       backgroundColor={colors.blue}
@@ -87,6 +94,7 @@ const ScoringMenu = ({ onClose, cancelRound, currentHole, holes, changeHole }) =
 
 ScoringMenu.propTypes = {
   onClose: func.isRequired,
+  onPreview: func.isRequired,
   cancelRound: func.isRequired,
   currentHole: number.isRequired,
   holes: arrayOf(

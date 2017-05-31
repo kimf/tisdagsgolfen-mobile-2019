@@ -4,13 +4,14 @@ import moment from 'moment'
 import 'moment/locale/sv'
 import { func, string } from 'prop-types'
 
+import { colors } from 'styles'
 import AnimatedText from 'shared/AnimatedText'
 import TGText from 'shared/TGText'
-import TouchableView from 'shared/TouchableView'
+import RowButton from 'shared/RowButton'
 import { eventShape } from 'propTypes'
 import styles from './eventCardStyles'
 
-const EventCard = ({ event, layoutStyle, onNavigate }) => {
+const EventCard = ({ event, userId, onNavigate }) => {
   let gametypeName = ''
   if (event.scoringType === 'modified_points') {
     gametypeName = 'Modifierad Poäng'
@@ -35,20 +36,31 @@ const EventCard = ({ event, layoutStyle, onNavigate }) => {
     courseRow = <TGText style={styles.course}>{event.oldCourseName}</TGText>
   }
 
-  let mainNavigation = () => onNavigate('EventResult', { event, title: startsAt })
-  if (event.status !== 'finished') {
-    const setupEventScreen = event.teamEvent ? 'SetupTeamEvent' : 'SetupIndividualEvent'
-    mainNavigation = () => onNavigate(setupEventScreen, { event, title: startsAt })
-  }
+  const ownScoringSession = event.scoringSessions.find(ss => ss.scorer.id === userId)
+  const setupEventScreen = event.teamEvent ? 'SetupTeamEvent' : 'SetupIndividualEvent'
+  const mainNavigation = ownScoringSession
+    ? () => onNavigate('ScoreEvent', { scoringSessionId: ownScoringSession.id })
+    : () => onNavigate(setupEventScreen, { event, title: startsAt })
+
+  const liveNavigation = () => onNavigate('LiveEventResult', { event, title: 'Live Resultat' })
+  const resultNavigation = () => onNavigate('EventResult', { event, title: 'Resultat' })
+
+  const liveSessions = event.scoringSessions.filter(ss => ss.status === 'live')
+
+  const scoringTitle = ownScoringSession ? 'Ändra score' : 'För score'
+  const scoringBackground = ownScoringSession ? colors.red : colors.dark
 
   return (
-    <TouchableView
-      style={[styles.eventCard, styles[event.status], styles[layoutStyle]]}
-      onPress={mainNavigation}
-    >
+    <View style={styles.eventCard}>
       <View style={styles.dateBox}>
         <TGText style={styles.date}>{date}</TGText>
         <TGText style={styles.month}>{month}</TGText>
+        {liveSessions.length > 0
+          ? <AnimatedText style={styles.inlineButtonText} >
+            LIVE
+          </AnimatedText>
+          : null
+        }
       </View>
       <View style={styles.row}>
         {courseRow}
@@ -57,30 +69,34 @@ const EventCard = ({ event, layoutStyle, onNavigate }) => {
           {' ↝ '}
           {gametypeName}
         </TGText>
-      </View>
 
-      {event.liveSessions && event.liveSessions.count > 0
-        ? <AnimatedText
-          onPress={() => onNavigate('LiveEvent', { event })}
-          viewStyle={styles.inlineButton}
-          style={styles.inlineButtonText}
-        >
-          LIVE
-        </AnimatedText>
-        : null
-      }
-    </TouchableView>
+        <View style={{ flexDirection: 'row', paddingTop: 20, paddingBottom: 10, justifyContent: 'space-between' }}>
+          {event.scoringSessions.length > 0
+            ? <RowButton onPress={liveNavigation} title="Se Resultat" backgroundColor={colors.green} />
+            : null
+          }
+          {event.status !== 'finished'
+            ? <RowButton
+              onPress={mainNavigation}
+              title={scoringTitle}
+              backgroundColor={scoringBackground}
+            />
+            : <RowButton
+              onPress={resultNavigation}
+              title="Se Resultat"
+              backgroundColor={colors.green}
+            />
+          }
+        </View>
+      </View>
+    </View>
   )
 }
 
 EventCard.propTypes = {
+  userId: string.isRequired,
   event: eventShape.isRequired,
-  onNavigate: func.isRequired,
-  layoutStyle: string
-}
-
-EventCard.defaultProps = {
-  layoutStyle: ''
+  onNavigate: func.isRequired
 }
 
 export default EventCard

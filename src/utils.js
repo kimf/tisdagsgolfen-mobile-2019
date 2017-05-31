@@ -248,22 +248,25 @@ export const massageIntoLeaderboard = (scoringSessions, teamEvent) => {
 }
 
 
+const addCalculatedStrokes = p => ({ ...p, calculatedStrokes: p.strokes - p.extraStrokes })
+
+const breakOutTeamPlayers = teams => teams // TODO: Break out and read beers
+
 export const rankBySorting = (players, sorting, teamEvent, scoringType) => {
   if (sorting === 'beers' || sorting === 'kr') {
-    const sortedBySorting = players.slice().sort((a, b) => b[sorting] - a[sorting])
+    const items = teamEvent ? breakOutTeamPlayers(players) : players
+    const sortedBySorting = items.slice().sort((a, b) => b[sorting] - a[sorting])
     return ranked(sortedBySorting, sorting === 'beers' ? 'beerPos' : 'krPos', sorting)
   }
 
   const isStrokePlay = scoringType === 'strokes'
+
   const sortedPlayers = isStrokePlay
-    ? players.slice().sort((a, b) => a.strokes - b.strokes)
+    ? players.map(addCalculatedStrokes).sort((a, b) => a.calculatedStrokes - b.calculatedStrokes)
     : players.slice().sort((a, b) => b.points - a.points)
 
-  if (teamEvent) {
-    return ranked(sortedPlayers, 'position', scoringType, !isStrokePlay)
-  }
-
-  return ranked(sortedPlayers, 'position', scoringType, !isStrokePlay)
+  const sortKey = isStrokePlay ? 'calculatedStrokes' : 'points'
+  return ranked(sortedPlayers, 'position', sortKey, !isStrokePlay)
 }
 
 

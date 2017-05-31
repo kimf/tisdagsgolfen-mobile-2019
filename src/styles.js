@@ -236,8 +236,7 @@ export default StyleSheet.create({
     flexDirection: 'row',
     width: '100%',
     maxHeight: 60,
-    paddingVertical: 10,
-    flex: 1,
+    minHeight: 40,
     backgroundColor: colors.white
   },
 

@@ -43,7 +43,6 @@ const EventLeaderboardCard = ({ data, currentUserId, sorting, scoringType }) => 
   }
 
   const player = data.score.user
-  const averagePoints = (data.totalAveragePoints * 2).toFixed() / 2
 
   const currentUserStyle = player.id === currentUserId ? mutedYellow : null
   const photoUrl = player.photo ? player.photo.url : null
@@ -60,14 +59,6 @@ const EventLeaderboardCard = ({ data, currentUserId, sorting, scoringType }) => 
       />
       <View style={styles.cardTitle}>
         <TGText style={styles.name}>{player.firstName} {player.lastName}</TGText>
-        {sorting === 'totalPoints'
-          ? <TGText style={styles.meta}>
-            {data.totalEventCount} Rundor.
-              Totalt: {data.totalEventPoints}p
-              Snitt: {averagePoints}p
-            </TGText>
-          : null
-        }
       </View>
       {sorting === 'totalPoints'
         ? <TGText style={styles.dimmerPoints}>

@@ -5,20 +5,20 @@ import { connect } from 'react-redux'
 import { compose } from 'react-apollo'
 
 import ScoringLeaderboardCard from 'Scoring/ScoringLeaderboardCard'
+import ScorecardHeaderRow from 'Scoring/ScorecardHeaderRow'
+import Header from 'shared/Header'
 import TopButton from 'shared/TopButton'
 import Tabs from 'shared/Tabs'
-import TGText from 'shared/TGText'
 // import Header from 'shared/Header'
 // import EventHeader from 'Events/EventHeader'
 
-import { colors } from 'styles'
+import { colors, NAVBAR_HEIGHT } from 'styles'
 import { withLiveLeaderboardQuery } from 'queries/liveLeaderboardQuery'
 import { rankBySorting, massageIntoLeaderboard } from 'utils'
 
 const styles = StyleSheet.create({
   inner: {
-    flex: 1,
-    paddingTop: 40
+    flex: 1
   },
   text: {
     fontSize: 20,
@@ -32,8 +32,10 @@ class ScoringLeaderboard extends Component {
   static propTypes = {
     currentUserId: string.isRequired,
     eventId: string.isRequired,
-    onClose: func.isRequired,
+    onClose: func,
     scoringType: string.isRequired,
+    showHeader: bool,
+    showClose: bool,
     teamEvent: bool.isRequired,
     data: shape({
       loading: bool,
@@ -45,7 +47,10 @@ class ScoringLeaderboard extends Component {
     data: {
       loading: true,
       scoringSessions: []
-    }
+    },
+    showClose: true,
+    showHeader: false,
+    onClose: null
   }
 
   state = { sorting: 'totalPoints' }
@@ -56,7 +61,16 @@ class ScoringLeaderboard extends Component {
   }
 
   render() {
-    const { data, eventId, currentUserId, onClose, scoringType, teamEvent } = this.props
+    const {
+      data,
+      eventId,
+      currentUserId,
+      onClose,
+      showClose,
+      showHeader,
+      scoringType,
+      teamEvent
+    } = this.props
     const { sorting } = this.state
 
     let sortedPlayers = []
@@ -65,20 +79,33 @@ class ScoringLeaderboard extends Component {
       sortedPlayers = rankBySorting(players, sorting, teamEvent, scoringType)
     }
 
-    // <Header title="Ledartavla" />
-
+    // TODO: Show tabs for teamEvents when you figured out how to solve the beers part
     return (
       <View style={{ flex: 1 }}>
-        <View style={styles.inner}>
-          {data.loading ? <TGText>Uppdaterar...</TGText> : null}
-          {!teamEvent
-            ? <Tabs
+        {showHeader
+          ? <Header title="Ledartavla" />
+          : null
+        }
+        <View style={[styles.inner, { marginTop: showHeader ? NAVBAR_HEIGHT : 0 }]}>
+          {teamEvent
+            ? null
+            : <Tabs
+              teamEvent={teamEvent}
               currentRoute={sorting}
               onChange={sort => this.changeSort(sort)}
               scoringType={scoringType}
             />
+          }
+
+          {sorting === 'totalPoints'
+            ? <ScorecardHeaderRow
+              scoring={false}
+              scoringType={scoringType}
+              teamEvent={teamEvent}
+            />
             : null
           }
+
           <FlatList
             removeClippedSubviews={false}
             data={sortedPlayers}
@@ -97,11 +124,14 @@ class ScoringLeaderboard extends Component {
             keyExtractor={item => `leaderboardPlayer_${item.id}}`}
           />
         </View>
-        <TopButton
-          backgroundColor={colors.red}
-          title="STÄNG"
-          onPress={() => onClose()}
-        />
+        {showClose
+          ? <TopButton
+            backgroundColor={colors.red}
+            title="STÄNG"
+            onPress={() => onClose()}
+          />
+          : null
+        }
       </View>
     )
   }

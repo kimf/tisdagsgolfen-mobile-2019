@@ -10,6 +10,7 @@ const finishRoundMutation = gql`
         status: "finished"
     ) {
       id
+      status
     }
   }
 `
@@ -19,7 +20,10 @@ export default finishRoundMutation
 export const withFinishRoundMutation = graphql(finishRoundMutation, {
   props: ({ mutate }) => ({
     finishRound: scoringSessionId => mutate({
-      variables: { scoringSessionId }
+      variables: { scoringSessionId },
+      refetchQueries: [
+        'seasonEventsQuery'
+      ]
     })
   })
 })
