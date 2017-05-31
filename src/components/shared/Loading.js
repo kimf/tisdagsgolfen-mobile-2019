@@ -18,10 +18,11 @@ const textStyle = {
   color: colors.muted
 }
 
-const Loading = ({ text }) =>
+const Loading = ({ text }) => (
   <View style={containerStyle}>
     <TGText style={textStyle}>{text}</TGText>
   </View>
+)
 
 
 Loading.propTypes = {

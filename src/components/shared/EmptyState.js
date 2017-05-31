@@ -25,11 +25,12 @@ const textStyle = {
 
 const emptyImage = require('images/emptystate.png')
 
-const EmptyState = ({ text }) =>
+const EmptyState = ({ text }) => (
   <View style={containerStyle}>
     <Image style={imageStyle} source={emptyImage} />
     <TGText style={textStyle}>{text}</TGText>
   </View>
+)
 
 EmptyState.propTypes = {
   text: string

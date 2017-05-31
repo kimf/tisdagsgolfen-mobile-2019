@@ -1,6 +1,5 @@
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
-import update from 'immutability-helper'
 
 const createEventMutation = gql`
   mutation createEvent(

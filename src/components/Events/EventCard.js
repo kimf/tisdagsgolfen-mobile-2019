@@ -76,7 +76,11 @@ const EventCard = ({ event, userId, onNavigate }) => {
 
         <View style={{ flexDirection: 'row', paddingTop: 20, paddingBottom: 10, justifyContent: 'space-between' }}>
           {event.scoringSessions.length > 0
-            ? <RowButton onPress={liveNavigation} title={resultTitle} backgroundColor={resultBackground} />
+            ? <RowButton
+              onPress={liveNavigation}
+              title={resultTitle}
+              backgroundColor={resultBackground}
+            />
             : null
           }
           {isInFlux

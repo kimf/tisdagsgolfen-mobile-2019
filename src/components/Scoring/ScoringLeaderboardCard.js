@@ -16,6 +16,13 @@ const getItemName = (teamEvent, player) => {
   return player.users.map(u => u.firstName).join(', ')
 }
 
+const isCurrentUser = (teamEvent, player, currentUserId) => {
+  if (teamEvent) {
+    return player.users.find(p => p.id === currentUserId)
+  }
+  return player.id === currentUserId
+}
+
 const ScoringLeaderboardCard = ({ player, currentUserId, sorting, scoringType, teamEvent }) => {
   let pointText
   let pointValue = ''
@@ -37,20 +44,21 @@ const ScoringLeaderboardCard = ({ player, currentUserId, sorting, scoringType, t
     position = player.position
   }
 
-  const currentUserStyle = teamEvent
-    ? player.users.find(p => p.id === currentUserId) ? mutedYellow : null
-    : player.id === currentUserId ? mutedYellow : null
+  const currentUserStyle = isCurrentUser(teamEvent, player, currentUserId) ? mutedYellow : null
 
   const photoUrl = player.photo ? player.photo.url : null
 
   const itemName = getItemName(teamEvent, player)
 
   return (
-    <View key={player.id} style={[
-      styles.listrow,
-      currentUserStyle,
-      { paddingHorizontal: 20 }
-    ]}>
+    <View
+      key={player.id}
+      style={[
+        styles.listrow,
+        currentUserStyle,
+        { paddingHorizontal: 20 }
+      ]}
+    >
       <View style={styles.position}>
         <TGText style={{ flex: 1, fontWeight: '800', color: colors.dark, fontSize: 16 }}>
           {position}
@@ -68,12 +76,12 @@ const ScoringLeaderboardCard = ({ player, currentUserId, sorting, scoringType, t
         <TGText style={styles.name}>{itemName}</TGText>
       </View>
       {sorting === 'totalPoints'
-        ? <TGText style={[styles.points, { color: colors.gray}]}>
+        ? <TGText style={[styles.points, { color: colors.gray }]}>
           {player.strokes}
         </TGText>
         : null
       }
-      <TGText style={[styles.points, { paddingRight: 10}]}>
+      <TGText style={[styles.points, { paddingRight: 10 }]}>
         {`${pointValue} ${pointText}`}
       </TGText>
     </View>

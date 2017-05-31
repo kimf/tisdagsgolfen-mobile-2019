@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, TouchableNativeFeedback, TouchableOpacity, Platform } from 'react-native'
-import { any, bool, string, oneOfType, arrayOf, node } from 'prop-types'
+import { shape, bool, string, oneOfType, array, arrayOf, node } from 'prop-types'
 import { colors } from 'styles'
 
 const TouchableView = ({ isRippleDisabled, rippleColor, children, style, ...rest }) => {
@@ -27,7 +27,10 @@ TouchableView.propTypes = {
     arrayOf(node),
     node
   ]).isRequired,
-  style: any
+  style: oneOfType([
+    array,
+    shape()
+  ])
 }
 
 TouchableView.defaultProps = {
