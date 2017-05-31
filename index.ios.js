@@ -11,7 +11,14 @@ console.ignoredYellowBox = [
   'Missing field scoringSession'
 ]
 
-Sentry.config(Config.SENTRY_DSN).install()
+Sentry.config(Config.SENTRY_DSN, {
+  autoBreadcrumbs: {
+    xhr: false,
+    console: true,
+    dom: true,
+    location: true
+  }
+}).install()
 
 AppRegistry.registerComponent('Tisdagsgolfen', () => Root)
 
