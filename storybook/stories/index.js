@@ -1,7 +1,12 @@
+/* eslint-disable jsx-a11y */
 import React from 'react'
 import { View } from 'react-native'
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { storiesOf, action } from '@kadira/react-native-storybook'
+
+/* eslint-disable import/no-extraneous-dependencies */
+import { storiesOf } from '@storybook/react-native'
+import { action } from '@storybook/addon-actions'
+/* eslint-enable import/no-extraneous-dependencies */
+
 import TGText from 'shared/TGText'
 
 import HoleView from 'Scoring/HoleView'
@@ -42,6 +47,7 @@ const navigation = {
 }
 
 const events = require('../eventsProps.json').data.events.reverse()
+
 
 storiesOf('EventsScreen', module)
   .addDecorator(getStory => (
