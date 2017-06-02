@@ -75,7 +75,7 @@ const EventCard = ({ event, userId, onNavigate }) => {
         </TGText>
 
         <View style={{ flexDirection: 'row', paddingTop: 20, paddingBottom: 10, justifyContent: 'space-between' }}>
-          {event.scoringSessions.length > 0
+          {event.scoringSessions.length > 0 && event.status !== 'finished'
             ? <RowButton
               onPress={liveNavigation}
               title={resultTitle}
