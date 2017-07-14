@@ -1,6 +1,4 @@
 import { AppRegistry } from 'react-native'
-import { Sentry } from 'react-native-sentry'
-import Config from 'react-native-config'
 
 import Root from './src/Root'
 
@@ -10,15 +8,6 @@ console.ignoredYellowBox = [
   'Warning: BackAndroid is deprecated.  Please use BackHandler instead.',
   'Missing field scoringSession'
 ]
-
-Sentry.config(Config.SENTRY_DSN, {
-  autoBreadcrumbs: {
-    xhr: false,
-    console: true,
-    dom: true,
-    location: true
-  }
-}).install()
 
 AppRegistry.registerComponent('Tisdagsgolfen', () => Root)
 

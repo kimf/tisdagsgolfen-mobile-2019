@@ -569,7 +569,6 @@
 			children = (
 				BDB82B1D08FE4660A5618E9F /* libRCTOneSignal.a */,
 				0BE397B954BE40CCA36705AF /* libReactNativeConfig.a */,
-				92D97C25C845494197CB10A1 /* libRNSentry.a */,
 				4E8AEFB193BA4343B00CAF2F /* libRNAnalytics.a */,
 				24F6C0896BA443B2AA360D4F /* libRNCrashes.a */,
 				4CF9BD34B4154C41A027FC4F /* libz.tbd */,
