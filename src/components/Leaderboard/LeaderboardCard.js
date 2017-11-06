@@ -3,6 +3,7 @@ import { View, Image } from 'react-native'
 import { string } from 'prop-types'
 
 import TGText from 'shared/TGText'
+import UpOrDown from 'shared/UpOrDown'
 import styles, { colors } from 'styles'
 import { leaderboardPlayerShape } from 'propTypes'
 
@@ -10,69 +11,50 @@ const mutedYellow = { backgroundColor: colors.mutedYellow }
 
 const defaultAvatar = require('../../images/defaultavatar.png')
 
-const LeaderboardCard = ({ data, currentUserId, sorting }) => {
+const LeaderboardCard = ({ player, currentUserId, sorting }) => {
   let pointText
   let pointValue = ''
-  let upOrDown
   let position
 
   if (sorting === 'beers') {
-    pointValue = data.totalBeers
+    pointValue = player.beers
     pointText = '🍺'
-    position = data.beerPos
+    position = player.beerPos
   } else if (sorting === 'kr') {
-    pointValue = data.totalKr - (data.totalKr * 2)
+    pointValue = player.totalKr - player.totalKr * 2
     pointText = 'kr'
-    position = data.krPos
+    position = player.krPos
   } else {
-    pointValue = data.totalPoints
+    pointValue = player.totalPoints
     pointText = 'p'
-    position = data.position
-    if (data.position < data.previousPosition) {
-      upOrDown = (
-        <TGText style={{ fontSize: 14, flex: 1, color: colors.green }}>
-          ↥{data.previousPosition - data.position}
-        </TGText>
-      )
-    } else if (data.position > data.previousPosition) {
-      upOrDown = (
-        <TGText style={{ fontSize: 14, flex: 1, color: colors.red }}>
-          ↧{data.position - data.previousPosition}
-        </TGText>
-      )
-    }
+    position = player.position
   }
 
-  const player = data.user
-  const averagePoints = (data.averagePoints * 2).toFixed() / 2
+  const averagePoints = (player.average * 2).toFixed() / 2
 
   const currentUserStyle = player.id === currentUserId ? mutedYellow : null
 
-  if (data.eventCount < 1) {
+  if (player.eventCount < 1) {
     return null
   }
 
   const photoSrc = player.photo ? { uri: player.photo.url } : defaultAvatar
   return (
-    <View key={data.id} style={[styles.listrow, currentUserStyle]}>
+    <View key={player.id} style={[styles.listrow, currentUserStyle]}>
       <View style={styles.position}>
-        <TGText style={{ flex: 1, fontWeight: '800', color: colors.dark, fontSize: 16 }}>{position}</TGText>
-        {upOrDown}
+        <TGText style={{ flex: 1, fontWeight: '800', color: colors.dark, fontSize: 16 }}>
+          {position}
+        </TGText>
+        <UpOrDown prev={player.prevPosition} current={player.position} />
       </View>
-      <Image
-        style={styles.cardImage}
-        source={photoSrc}
-        resizeMode="cover"
-      />
+      <Image style={styles.cardImage} source={photoSrc} resizeMode="cover" />
       <View style={styles.cardTitle}>
-        <TGText style={styles.name}>{player.firstName} {player.lastName}</TGText>
-        {sorting === 'totalPoints'
-          ? <TGText style={styles.metaLarger}>
-            {data.eventCount} Rundor.
-              Snitt: {averagePoints}p
+        <TGText style={styles.name}>{player.name}</TGText>
+        {sorting === 'totalPoints' ? (
+          <TGText style={styles.metaLarger}>
+            {player.eventCount} Rundor. Snitt: {averagePoints}p
           </TGText>
-          : null
-        }
+        ) : null}
       </View>
       <TGText style={styles.points}>{`${pointValue} ${pointText}`}</TGText>
     </View>
@@ -80,9 +62,13 @@ const LeaderboardCard = ({ data, currentUserId, sorting }) => {
 }
 
 LeaderboardCard.propTypes = {
-  data: leaderboardPlayerShape.isRequired,
+  player: leaderboardPlayerShape,
   currentUserId: string.isRequired,
   sorting: string.isRequired
+}
+
+LeaderboardCard.defaultProps = {
+  player: null
 }
 
 export default LeaderboardCard

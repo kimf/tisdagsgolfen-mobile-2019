@@ -14,20 +14,14 @@ const CourseRow = ({ course, selectCourse }) => (
   >
     <View style={{ flex: 1 }}>
       <View style={{ flex: 1, flexDirection: 'row' }}>
-        <TGText style={{ flex: 4, fontWeight: 'bold' }}>
-          {course.name}
-        </TGText>
+        <TGText style={{ flex: 4, fontWeight: 'bold' }}>{course.name}</TGText>
+        <TGText style={{ flex: 1, fontSize: 14, color: colors.muted }}>PAR {course.par}</TGText>
         <TGText style={{ flex: 1, fontSize: 14, color: colors.muted }}>
-          PAR {course.par}
-        </TGText>
-        <TGText style={{ flex: 1, fontSize: 14, color: colors.muted }}>
-          {course.holes.count} HÅL
+          {course.holeCount} HÅL
         </TGText>
       </View>
       <View style={{ flex: 1 }}>
-        <TGText style={{ color: colors.muted, marginTop: 10 }}>
-          {course.club}
-        </TGText>
+        <TGText style={{ color: colors.muted, marginTop: 10 }}>{course.club}</TGText>
       </View>
     </View>
   </TouchableView>
@@ -39,9 +33,7 @@ CourseRow.propTypes = {
     club: string.isRequired,
     name: string.isRequired,
     par: number.isRequired,
-    holes: shape({
-      count: number.isRequired
-    }).isRequired
+    holeCount: number.isRequired
   }).isRequired,
   selectCourse: func.isRequired
 }

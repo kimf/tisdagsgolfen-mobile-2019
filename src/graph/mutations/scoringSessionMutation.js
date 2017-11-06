@@ -3,34 +3,48 @@ import gql from 'graphql-tag'
 
 const scoringSessionMutation = gql`
   mutation createScoringSession(
-    $eventId:ID!,
-    $courseId:ID!,
-    $scorerId:ID!,
-    $scoringPlayers: [ScoringSessionscoringPlayersScoringPlayer!],
-    $scoringTeams: [ScoringSessionscoringTeamsScoringTeam!]
-  )
-  {
+    $courseId: ID!
+    $scorerId: ID!
+    $teamEvent: Boolean!
+    $scoringType: String!
+    $scoringItems: [ScoringItemInput!]
+    $startsAt: String!
+  ) {
     createScoringSession(
-      eventId: $eventId,
       courseId: $courseId
-      scorerId:$scorerId,
+      scorerId: $scorerId
+      teamEvent: $teamEvent
+      scoringType: $scoringType
+      scoringItems: $scoringItems
+      startsAt: $startsAt
       currentHole: 1
-      scoringPlayers: $scoringPlayers
-      scoringTeams: $scoringTeams
     ) {
       id
+      course {
+        id
+        club
+        name
+      }
+      scoringType
+      teamEvent
     }
   }
 `
 
 export default scoringSessionMutation
 
-export const withScoringSessionMutation = graphql(scoringSessionMutation, {
+export const withCreateScoringSessionMutation = graphql(scoringSessionMutation, {
   props: ({ mutate }) => ({
-    createScoringSession: (eventId, courseId, scorerId, scoringPlayers, scoringTeams = null) => (
+    createScoringSession: (courseId, scorerId, teamEvent, scoringType, scoringItems) =>
       mutate({
-        variables: { eventId, courseId, scorerId, scoringPlayers, scoringTeams }
+        variables: {
+          courseId,
+          scorerId,
+          teamEvent,
+          scoringType,
+          scoringItems,
+          startsAt: new Date()
+        }
       })
-    )
   })
 })

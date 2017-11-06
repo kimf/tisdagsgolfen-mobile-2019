@@ -38,7 +38,7 @@ class Login extends Component {
     const { email, password } = this.state
     this.props.signinUser({ variables: { email, password } })
       .then((response) => {
-        this.props.onLogin(email, response.data.signinUser.token)
+        this.props.onLogin(email, response.data.authenticateUser.token)
         this.setState({ loggingIn: false, error: false })
       })
       .catch((e) => {

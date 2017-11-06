@@ -12,21 +12,19 @@ const ScoreRow = ({ teamEvent, scoreItem, scoringType }) => {
   return (
     <View style={{ flexDirection: 'row' }}>
       {teamEvent || !scoreItem.id ? null : <ScoreItemText dimmed title={scoreItem.beers} />}
-      {scoreItem.id
-        ? <ScoreItemText title={strokes ? scoreItem.strokes : scoreItem.strokes} />
-        : null
-      }
+      {scoreItem.id ? (
+        <ScoreItemText title={strokes ? scoreItem.strokes : scoreItem.strokes} />
+      ) : null}
       {teamEvent || !scoreItem.id ? null : <ScoreItemText title={scoreItem.putts} />}
-      {scoreItem.id
-        ? <ScoreItemText
+      {scoreItem.id ? (
+        <ScoreItemText
           fontWeight="bold"
           textAlign="right"
-          title={strokes ? (scoreItem.strokes - scoreItem.extraStrokes) : scoreItem.points}
+          title={strokes ? scoreItem.strokes - scoreItem.extraStrokes : scoreItem.points}
         />
-        : <TGText style={{ color: colors.red, paddingLeft: 80, paddingTop: 10 }}>
-          TRYCK HÄR
-        </TGText>
-      }
+      ) : (
+        <TGText style={{ color: colors.red, paddingLeft: 80, paddingTop: 10 }}>TRYCK HÄR</TGText>
+      )}
     </View>
   )
 }

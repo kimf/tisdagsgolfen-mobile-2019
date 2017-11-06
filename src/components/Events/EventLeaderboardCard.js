@@ -3,6 +3,7 @@ import { View, Image } from 'react-native'
 import { shape, string, number } from 'prop-types'
 
 import TGText from 'shared/TGText'
+import UpOrDown from 'shared/UpOrDown'
 import styles, { colors } from 'styles'
 
 const mutedYellow = { backgroundColor: colors.mutedYellow }
@@ -12,7 +13,6 @@ const defaultPhoto = require('../../images/defaultavatar.png')
 const EventLeaderboardCard = ({ data, currentUserId, sorting, scoringType }) => {
   let pointText
   let pointValue = ''
-  let upOrDown
   let position
 
   if (sorting === 'beers') {
@@ -27,19 +27,6 @@ const EventLeaderboardCard = ({ data, currentUserId, sorting, scoringType }) => 
     pointValue = data.score.eventPoints
     pointText = 'p'
     position = data.position
-    if (data.totalPosition < data.previousTotalPosition) {
-      upOrDown = (
-        <TGText style={{ flex: 1, color: colors.green }}>
-          ↥{data.previousTotalPosition - data.totalPosition}
-        </TGText>
-      )
-    } else if (data.totalPosition > data.previousTotalPosition) {
-      upOrDown = (
-        <TGText style={{ flex: 1, color: colors.red }}>
-          ↧{data.totalPosition - data.previousTotalPosition}
-        </TGText>
-      )
-    }
   }
 
   const player = data.score.user
@@ -49,8 +36,10 @@ const EventLeaderboardCard = ({ data, currentUserId, sorting, scoringType }) => 
   return (
     <View key={data.id} style={[styles.listrow, currentUserStyle]}>
       <View style={styles.position}>
-        <TGText style={{ flex: 1, fontWeight: '800', color: colors.dark, fontSize: 16 }}>{position}</TGText>
-        {upOrDown}
+        <TGText style={{ flex: 1, fontWeight: '800', color: colors.dark, fontSize: 16 }}>
+          {position}
+        </TGText>
+        <UpOrDown prev={data.previousTotalPosition} current={data.totalPosition} />
       </View>
       <Image
         style={styles.cardImage}
@@ -58,14 +47,15 @@ const EventLeaderboardCard = ({ data, currentUserId, sorting, scoringType }) => 
         resizeMode="cover"
       />
       <View style={styles.cardTitle}>
-        <TGText style={styles.name}>{player.firstName} {player.lastName}</TGText>
+        <TGText style={styles.name}>
+          {player.firstName} {player.lastName}
+        </TGText>
       </View>
-      {sorting === 'totalPoints'
-        ? <TGText style={styles.dimmerPoints}>
+      {sorting === 'totalPoints' ? (
+        <TGText style={styles.dimmerPoints}>
           {data.score.value} {scoringType === 'points' ? 'p' : 'slag'}
         </TGText>
-        : null
-      }
+      ) : null}
 
       <TGText style={styles.points}>{`${pointValue} ${pointText}`}</TGText>
     </View>

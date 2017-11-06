@@ -1,7 +1,7 @@
 import { arrayOf, shape, string, bool } from 'prop-types'
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
-import { seasonShape } from 'propTypes'
+import { seasonShape, userShape } from 'propTypes'
 
 const mainQuery = gql`
   query mainQuery {
@@ -10,32 +10,24 @@ const mainQuery = gql`
       email
       firstName
       lastName
-      photo {
-        url
-      }
-      scoringSession(
-        filter: { status_in: "live" }
-      ) {
+      photo
+      admin
+      scoringSessions {
         id
-        event {
+        scoringType
+        teamEvent
+        course {
           id
-          course {
-            id
-            club
-            name
-          }
+          club
+          name
         }
       }
     }
-    seasons: allSeasons(
-      orderBy: name_DESC
-    ) {
+    seasons {
       id
       name
       closed
-      photo {
-        url
-      }
+      photo
     }
   }
 `
@@ -49,10 +41,7 @@ export const withMainQuery = graphql(mainQuery, {
 export const mainQueryProps = shape({
   data: shape({
     user: shape({
-      id: string.isRequired,
-      email: string.isRequired,
-      firstName: string.isRequired,
-      lastname: string.isRequired,
+      ...userShape,
       scoringSession: shape({
         id: string.isRequired,
         event: shape({

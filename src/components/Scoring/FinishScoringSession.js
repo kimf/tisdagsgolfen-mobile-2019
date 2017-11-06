@@ -22,7 +22,6 @@ const confirmFinish = (finishFunc) => {
   )
 }
 
-
 const FinishScoringSession = ({ scrollX, scoringSession, playing, finishRound }) => (
   <View style={{ flex: 1, backgroundColor: colors.green }}>
     <HoleHeader scrollX={scrollX} par={scoringSession.course.par} index={0} number={19} />
@@ -43,70 +42,63 @@ const FinishScoringSession = ({ scrollX, scoringSession, playing, finishRound })
       <View style={{ flex: 1 }}>
         <View style={{ flex: 1 }}>
           <ScorecardHeaderRow
-            teamEvent={scoringSession.event.teamEvent}
-            scoringType={scoringSession.event.scoringType}
+            teamEvent={scoringSession.teamEvent}
+            scoringType={scoringSession.scoringType}
             scoring={false}
           />
-          {
-            playing.map((item, index) => {
-              const event = scoringSession.event
-              const attrWithId = event.teamEvent ? 'scoringTeam' : 'scoringPlayer'
+          {playing.map((item, index) => {
+            let strokes = 0
+            let putts = 0
+            let points = 0
+            let beers = 0
+            const userId = scoringSession.teamEvent ? index : item.users[0].id
 
-              const liveScores = scoringSession.course.holes.map(h => h.liveScores)
-              let strokes = 0
-              let putts = 0
-              let points = 0
-              let beers = 0
-
-              liveScores.forEach((liveScore) => {
-                if (liveScore.length > 0) {
-                  liveScore.forEach((ls) => {
-                    if (ls[attrWithId] && ls[attrWithId].id === item.id) {
-                      strokes += ls.strokes
-                      putts += ls.putts
-                      points += ls.points
-                      beers += ls.beers
-                    }
-                  })
-                }
-              })
-
-              const scoreItem = {
-                id: item.id,
-                strokes,
-                putts,
-                points,
-                beers,
-                extraStrokes: item.extraStrokes
+            scoringSession.liveScores.forEach((ls) => {
+              if (ls.user.id === userId) {
+                strokes += ls.strokes
+                putts += ls.putts
+                points += ls.points
+                beers += ls.beers
               }
+            })
 
-              return (
-                <View
-                  key={`player_score_row_${item.id}`}
-                  style={{
-                    flexDirection: 'row',
-                    borderBottomWidth: (index < (playing.length - 1) ? 1 : 0),
-                    borderBottomColor: colors.lightGray,
-                    backgroundColor: colors.white
-                  }}
-                >
-                  <UserColumn
-                    teamEvent={event.teamEvent}
-                    item={item}
+            const scoreItem = {
+              id: item.id,
+              strokes,
+              putts,
+              points,
+              beers,
+              extraStrokes: item.extraStrokes
+            }
+
+            console.log(scoreItem)
+
+            return (
+              <View
+                key={`player_score_row_${userId}`}
+                style={{
+                  flexDirection: 'row',
+                  borderBottomWidth: index < playing.length - 1 ? 1 : 0,
+                  borderBottomColor: colors.lightGray,
+                  backgroundColor: colors.white
+                }}
+              >
+                <UserColumn
+                  teamEvent={scoringSession.teamEvent}
+                  item={item}
+                  scoreItem={scoreItem}
+                />
+
+                <View style={{ flexGrow: 2, paddingVertical: 20, paddingRight: 20 }}>
+                  <ScoreRow
+                    scoringType={scoringSession.scoringType}
+                    teamEvent={scoringSession.teamEvent}
                     scoreItem={scoreItem}
                   />
-
-                  <View style={{ flexGrow: 2, paddingVertical: 20, paddingRight: 20 }}>
-                    <ScoreRow
-                      scoringType={event.scoringType}
-                      teamEvent={event.teamEvent}
-                      scoreItem={scoreItem}
-                    />
-                  </View>
                 </View>
-              )
-            })
-          }
+              </View>
+            )
+          })}
         </View>
         <TGText style={{ textAlign: 'center', padding: 20, color: colors.red }}>
           Dubbelkolla så att allt ser rätt ut!

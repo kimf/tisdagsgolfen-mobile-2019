@@ -8,7 +8,7 @@ import { colors } from 'styles'
 const styles = StyleSheet.create({
   view: {
     height: 44,
-    backgroundColor: colors.green,
+    backgroundColor: colors.blue,
     flexDirection: 'row',
     width: '100%',
     alignItems: 'center'
@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
     padding: 20
   },
   text: {
-    color: colors.darkGreen,
+    color: colors.lightGray,
     fontWeight: 'bold'
   },
   menu: {
@@ -31,11 +31,7 @@ const styles = StyleSheet.create({
 
 const ScoringFooter = ({ showMenu, showLeaderboard }) => (
   <View style={styles.view}>
-    <TGText
-      onPress={() => showMenu()}
-      viewStyle={styles.button}
-      style={[styles.text, styles.menu]}
-    >
+    <TGText onPress={() => showMenu()} viewStyle={styles.button} style={[styles.text, styles.menu]}>
       MENY
     </TGText>
     <TGText

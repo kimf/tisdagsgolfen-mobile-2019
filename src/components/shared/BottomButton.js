@@ -7,9 +7,10 @@ import { colors } from 'styles'
 
 const styles = StyleSheet.create({
   button: {
-    padding: 25,
-    width: '100%',
-    alignSelf: 'flex-end'
+    padding: 18,
+    width: '96%',
+    alignSelf: 'flex-end',
+    margin: '2%'
   },
 
   text: {
@@ -37,7 +38,7 @@ BottomButton.propTypes = {
 }
 
 BottomButton.defaultProps = {
-  backgroundColor: colors.green,
+  backgroundColor: colors.blue,
   color: colors.white
 }
 

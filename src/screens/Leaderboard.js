@@ -15,7 +15,6 @@ import SeasonPicker from 'Leaderboard/SeasonPicker'
 import BottomButton from 'shared/BottomButton'
 
 class Leaderboard extends Component {
-
   static navigationOptions = {
     header: null,
     tabBarLabel: 'Ledartavla',
@@ -76,32 +75,30 @@ class Leaderboard extends Component {
       return null
     }
     const {
-      data, currentSeason, currentUser, seasons, activeScoringSession, navigation
+      data,
+      currentSeason,
+      currentUser,
+      seasons,
+      activeScoringSession,
+      navigation
     } = this.props
     const { showLog, showSeasonPicker } = this.state
 
     if (showLog) {
       return (
-        <LogView
-          style={{ flex: 1 }}
-          inverted={false}
-          timeStampFormat="HH:mm:ss"
-          multiExpanded
-        />
+        <LogView style={{ flex: 1 }} inverted={false} timeStampFormat="HH:mm:ss" multiExpanded />
       )
     }
 
     return (
       <View style={{ flex: 1, alignItems: 'stretch', backgroundColor: colors.lightGray }}>
-        {
-          showSeasonPicker
-            ? <SeasonPicker
-              seasons={seasons}
-              currentSeasonId={currentSeason.id}
-              onChangeSeason={this.onChangeSeason}
-            />
-            : null
-        }
+        {showSeasonPicker ? (
+          <SeasonPicker
+            seasons={seasons}
+            currentSeasonId={currentSeason.id}
+            onChangeSeason={this.onChangeSeason}
+          />
+        ) : null}
 
         <LeaderboardContent
           key={`season_${currentSeason.id}`}
@@ -112,13 +109,12 @@ class Leaderboard extends Component {
           toggleSeasonpicker={this.toggleSeasonpicker}
         />
 
-        {activeScoringSession
-          ? <BottomButton
-            title={`FORTSÄTT AKTIV RUNDA PÅ ${activeScoringSession.event.course.name.toUpperCase()}`}
+        {activeScoringSession ? (
+          <BottomButton
+            title={`FORTSÄTT AKTIV RUNDA PÅ ${activeScoringSession.course.name.toUpperCase()}`}
             onPress={this.showActiveScoringSession}
           />
-          : null
-        }
+        ) : null}
       </View>
     )
   }
@@ -136,7 +132,6 @@ const mapStateToProps = state => ({
   seasonId: state.app.currentSeason.id
 })
 
-export default compose(
-  connect(mapStateToProps, mapDispatchToProps),
-  withLeaderboardQuery
-)(Leaderboard)
+export default compose(connect(mapStateToProps, mapDispatchToProps), withLeaderboardQuery)(
+  Leaderboard
+)

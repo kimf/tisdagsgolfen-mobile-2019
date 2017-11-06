@@ -5,29 +5,14 @@ import gql from 'graphql-tag'
 import { eventShape } from 'propTypes'
 
 const eventsQuery = gql`
-  query seasonEventsQuery($seasonId: ID!) {
-    events: allEvents (
-      orderBy: startsAt_DESC
-      filter: { season: { id: $seasonId } }
-    ) {
+  query events($seasonId: ID!) {
+    events(seasonId: $seasonId) {
       id
       status
       startsAt
-      oldCourseName
-      course {
-        id
-        club
-        name
-      }
       scoringType
       teamEvent
-      scoringSessions {
-        id
-        status
-        scorer {
-          id
-        }
-      }
+      course
     }
   }
 `
@@ -35,7 +20,9 @@ const eventsQuery = gql`
 export default eventsQuery
 
 export const withEventsQuery = graphql(eventsQuery, {
-  options: ({ seasonId }) => ({ variables: { seasonId } })
+  options: ({ seasonId }) => ({
+    variables: { seasonId }
+  })
 })
 
 export const eventsQueryProps = shape({

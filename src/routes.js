@@ -9,8 +9,6 @@ import Profile from 'screens/Profile'
 import NewEvent from 'screens/EventScreens/NewEvent'
 import EventResult from 'screens/EventScreens/EventResult'
 import LiveEventResult from 'screens/EventScreens/LiveEventResult' // TODO: Should this be a screen
-import SetupIndividualEvent from 'screens/EventScreens/SetupIndividualEvent'
-import SetupTeamEvent from 'screens/EventScreens/SetupTeamEvent'
 import NewPlayer from 'screens/NewPlayer'
 
 import ScoreEventScreen from 'screens/ScoringScreens/ScoreEvent'
@@ -21,8 +19,6 @@ const EventStack = StackNavigator(
     NewEvent: { screen: NewEvent },
     EventResult: { screen: EventResult },
     LiveEventResult: { screen: LiveEventResult },
-    SetupIndividualEvent: { screen: SetupIndividualEvent },
-    SetupTeamEvent: { screen: SetupTeamEvent },
     NewPlayer: { screen: NewPlayer }
   },
   {
@@ -60,7 +56,6 @@ const MainStack = StackNavigator(
     headerMode: 'none',
     initialRouteName: 'Main'
   }
-
 )
 
 export default MainStack

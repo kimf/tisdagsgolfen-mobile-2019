@@ -15,7 +15,7 @@ export const colors = {
   red: '#E30050'
 }
 
-export const NAVBAR_HEIGHT = 100
+export const NAVBAR_HEIGHT = 80
 export const STATUS_BAR_HEIGHT = Platform.select({ ios: 20, android: 24 })
 export const deviceWidth = Dimensions.get('window').width
 export const deviceHeight = Dimensions.get('window').height
@@ -42,8 +42,8 @@ export default StyleSheet.create({
 
   formColumn: {
     flex: 1,
-    paddingTop: 10,
-    paddingBottom: 20,
+    paddingTop: 5,
+    paddingBottom: 10,
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderColor: colors.lightGray
   },
@@ -58,7 +58,7 @@ export default StyleSheet.create({
   points: {
     color: 'black',
     fontFamily: 'System',
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: '900',
     textAlign: 'right',
     flex: 3
@@ -189,7 +189,7 @@ export default StyleSheet.create({
   navbarTitle: {
     color: colors.dark,
     fontWeight: '800',
-    fontSize: 34,
+    fontSize: 28,
     textAlign: 'left',
     justifyContent: 'flex-start'
   },
@@ -200,7 +200,7 @@ export default StyleSheet.create({
     backgroundColor: colors.white,
     borderBottomColor: colors.lightGray,
     borderBottomWidth: 1,
-    paddingTop: STATUS_BAR_HEIGHT * 2,
+    paddingTop: STATUS_BAR_HEIGHT,
     paddingRight: STATUS_BAR_HEIGHT,
     flexDirection: 'row',
     alignItems: 'center'
@@ -234,9 +234,8 @@ export default StyleSheet.create({
 
   tabs: {
     flexDirection: 'row',
-    width: '100%',
-    maxHeight: 60,
-    minHeight: 40,
+    width: '96%',
+    margin: '2%',
     backgroundColor: colors.white
   },
 
@@ -248,7 +247,7 @@ export default StyleSheet.create({
   },
 
   tabText: {
-    fontSize: 14
+    fontSize: 12
   },
 
   backdrop: {

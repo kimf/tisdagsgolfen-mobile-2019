@@ -9,10 +9,7 @@ import styles, { colors } from 'styles'
 class Header extends Component {
   static propTypes = {
     title: string.isRequired,
-    children: oneOfType([
-      arrayOf(node),
-      node
-    ]),
+    children: oneOfType([arrayOf(node), node]),
     color: string,
     backgroundColor: string,
     goBack: func
@@ -35,20 +32,15 @@ class Header extends Component {
       }}
       onPress={this.props.goBack}
     >
-      <Image
-        style={{ tintColor: colors.muted }}
-        source={require('../../images/close.png')}
-      />
-    </TouchableView >
+      <Image style={{ tintColor: colors.muted }} source={require('../../images/close.png')} />
+    </TouchableView>
   )
 
   render() {
     const { title, children, backgroundColor, color, goBack } = this.props
 
     return (
-      <View
-        style={[styles.navbar, { backgroundColor }]}
-      >
+      <View style={[styles.navbar, { backgroundColor }]}>
         <View style={[styles.navbarInner, { backgroundColor }]}>
           <TGText adjustsFontSizeToFitHeight style={[styles.navbarTitle, { color }]}>
             {title}
@@ -56,7 +48,7 @@ class Header extends Component {
           {goBack ? this.renderGoBack() : null}
           {children}
         </View>
-      </View >
+      </View>
     )
   }
 }

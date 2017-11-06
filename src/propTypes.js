@@ -4,32 +4,30 @@ export const seasonShape = shape({
   id: string.isRequired,
   closed: bool.isRequired,
   name: string.isRequired,
-  photo: shape({
-    url: string
-  })
+  photo: string
 })
 
 export const userShape = shape({
   id: string.isRequired,
+  email: string,
   firstName: string.isRequired,
   lastName: string.isRequired,
-  photo: shape({
-    url: string.isRequired
-  })
+  photo: string
 })
 
 export const leaderboardPlayerShape = shape({
-  averagePoints: number.isRequired,
+  id: string.isRequired,
+  name: string.isRequired,
+  photo: string,
+  average: number.isRequired,
   beerPos: number,
   eventCount: number.isRequired,
-  id: string.isRequired,
   krPos: number,
   position: number.isRequired,
-  previousPosition: number.isRequired,
-  totalBeers: number,
+  prevPosition: number.isRequired,
+  beers: number,
   totalKr: number,
-  totalPoints: number.isRequired,
-  user: userShape.isRequired
+  totalPoints: number.isRequired
 })
 
 export const eventShape = shape({
@@ -38,11 +36,6 @@ export const eventShape = shape({
   status: string.isRequired,
   teamEvent: bool.isRequired,
   oldCourseName: string,
-  course: shape({
-    club: string,
-    course: string
-  }),
-  liveSessions: shape({
-    count: number.isRequired
-  })
+  course: string,
+  club: string
 })

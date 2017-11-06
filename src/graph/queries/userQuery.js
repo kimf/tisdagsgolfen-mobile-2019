@@ -3,16 +3,12 @@ import gql from 'graphql-tag'
 
 const userQuery = gql`
   query getAllUsers {
-    players: allUsers (
-      orderBy: firstName_ASC
-    ) {
+    players: users {
       id
       email
       firstName
       lastName
-      photo {
-        url
-      }
+      photo
     }
   }
 `

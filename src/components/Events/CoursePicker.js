@@ -11,16 +11,23 @@ import styles, { colors } from 'styles'
 import { cacheable } from 'utils'
 import { withCoursesQuery } from 'queries/coursesQuery'
 
-const fixString = string => string.trim().replace(/-/g, '').replace(/ /g, '').toLowerCase()
+const fixString = stringToFix =>
+  stringToFix
+    .trim()
+    .replace(/-/g, '')
+    .replace(/ /g, '')
+    .toLowerCase()
 
-const filterCourses = cacheable((courses, query) => courses.filter((c) => {
-  const searchString = fixString(`${c.club}${c.name}`)
-  const trimmedQuery = fixString(query)
-  return searchString.indexOf(trimmedQuery) !== -1
-}))
+const filterCourses = cacheable((courses, query) =>
+  courses.filter((c) => {
+    const searchString = fixString(`${c.club}${c.name}`)
+    const trimmedQuery = fixString(query)
+    return searchString.indexOf(trimmedQuery) !== -1
+  })
+)
 
-const getPreviouslyPlayedCourses = cacheable(
-  courses => courses.filter(c => c.events.count > 0).sort((a, b) => a.events.count - b.events.count)
+const getPreviouslyPlayedCourses = cacheable(courses =>
+  courses.filter(c => c.eventCount > 0).sort((a, b) => a.eventCount - b.eventCount)
 )
 
 class CoursePicker extends Component {
@@ -57,7 +64,7 @@ class CoursePicker extends Component {
 
     let courses = []
     let previously = false
-    if (query !== '') {
+    if (query !== '' && query.length > 1) {
       previously = false
       courses = filterCourses(data.courses, query)
     } else {
@@ -79,8 +86,8 @@ class CoursePicker extends Component {
           />
         </View>
 
-        {previously
-          ? <View
+        {previously ? (
+          <View
             style={{
               paddingVertical: 20,
               marginHorizontal: 20,
@@ -90,16 +97,13 @@ class CoursePicker extends Component {
           >
             <SubHeader title="Vanliga banor" />
           </View>
-          : null
-        }
+        ) : null}
 
         <FlatList
           removeClippedSubviews={false}
           style={{ paddingHorizontal: 20 }}
           data={courses}
-          renderItem={({ item }) => (
-            <CourseRow course={item} selectCourse={selectCourse} />
-          )}
+          renderItem={({ item }) => <CourseRow course={item} selectCourse={selectCourse} />}
           keyExtractor={item => `course_${item.id}}`}
           keyboardShouldPersistTaps="always"
         />

@@ -25,13 +25,12 @@ class App extends Component {
 
   render() {
     const { data, loggedIn } = this.props
-
     if (!loggedIn) {
       return <Login />
     }
 
     if (data.loading) {
-      return <Loading />
+      return <Loading text="loading" />
     }
 
     return <RootStack />
@@ -40,8 +39,4 @@ class App extends Component {
 
 const mapStateToProps = state => ({ loggedIn: state.app.loggedIn })
 
-export default compose(
-  connect(mapStateToProps),
-  withMainQuery
-)(App)
-
+export default compose(connect(mapStateToProps), withMainQuery)(App)

@@ -1,30 +1,24 @@
-import { arrayOf, shape, string, bool, number } from 'prop-types'
+import { arrayOf, shape, bool } from 'prop-types'
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
+import { leaderboardPlayerShape } from 'propTypes'
 
 const leaderboardQuery = gql`
-  query leaderboardQuery($seasonId: ID!) {
-    players: allSeasonLeaderboards (
-      orderBy: position_DESC,
-      filter: { season: { id: $seasonId } }
-    ) {
+  query seasonLeaderboard($seasonId: ID!) {
+    players: seasonLeaderboard(seasonId: $seasonId) {
       id
-      averagePoints
-      position
-      previousPosition
-      totalPoints
-      totalBeers
-      totalKr
-      top5Points
+      photo
+      name
+      average
       eventCount
-      user {
-        id
-        firstName
-        lastName
-        photo {
-          url
-        }
-      }
+      topPoints
+      position
+      oldAverage
+      oldTotalPoints
+      prevPosition
+      totalPoints
+      totalKr
+      beers
     }
   }
 `
@@ -32,29 +26,14 @@ const leaderboardQuery = gql`
 export default leaderboardQuery
 
 export const withLeaderboardQuery = graphql(leaderboardQuery, {
-  options: ({ seasonId }) => ({ variables: { seasonId } })
+  options: ({ seasonId }) => ({
+    variables: { seasonId }
+  })
 })
 
 export const leaderboardQueryProps = shape({
   data: shape({
-    players: arrayOf(
-      shape({
-        user: shape({
-          id: string.isRequired,
-          firstName: string.isRequired,
-          lastname: string.isRequired
-        }),
-        id: string.isRequired,
-        averagePoints: number.isRequired,
-        position: number.isRequired,
-        previousPosition: number.isRequired,
-        totalPoints: number.isRequired,
-        totalBeers: number,
-        totalKr: number,
-        top5Points: number.isRequired,
-        eventCount: number.isRequired
-      })
-    ),
+    players: arrayOf(leaderboardPlayerShape),
     loading: bool
   })
 })

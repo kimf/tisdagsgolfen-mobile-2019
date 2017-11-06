@@ -7,14 +7,17 @@
     "clean": "watchman watch-del-all && rm -rf $TMPDIR/react-*",
     "test": "jest",
     "lint": "eslint src",
-    "graphql:schema": "get-graphql-schema -j https://api.graph.cool/simple/v1/ciyqax2o04t37012092ntrd7e > schema.json",
+    "graphql:schema":
+      "rm schema.json && get-graphql-schema http://localhost:3000/api/graphql -j > schema.json",
     "storybook": "storybook start -p 7007",
     "android:build:dev": "cd android && ./gradlew assembleRelease",
-    "android:build:prod": "cd android && ENVFILE=.env.production ./gradlew assembleRelease",
+    "android:build:prod":
+      "cd android && ENVFILE=.env.production ./gradlew assembleRelease",
     "android:emulator": "emulator -avd Nexus6-android7.1.1-apiLevel25",
     "android": "react-native run-android",
-    "ios": "react-native run-ios --simulator \"iPhone 7\"",
-    "ios:storybook": "react-native run-ios --simulator \"iPhone 7\" --scheme TGStorybook"
+    "ios": "react-native run-ios --simulator \"iPhone 8\"",
+    "ios:storybook":
+      "react-native run-ios --simulator \"iPhone 8\" --scheme TGStorybook"
   },
   "dependencies": {
     "apollo-client": "^1.9.0-0",
@@ -60,7 +63,7 @@
     "eslint-plugin-react": "^7.1.0",
     "eslint-plugin-react-native": "^2.3.2",
     "eslint-plugin-react-perf": "^2.0.5",
-    "graphcool": "^1.1.1",
+    "get-graphql-schema": "^2.1.1",
     "jest": "^20.0.4",
     "react-dom": "^16.0.0-alpha.12",
     "react-test-renderer": "^15.6.1"

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { View } from 'react-native'
-import { shape, string, func } from 'prop-types'
+import { string, shape, func } from 'prop-types'
 import { connect } from 'react-redux'
 
 import CoursePicker from 'Events/CoursePicker'
@@ -16,7 +16,8 @@ class NewEvent extends Component {
   static propTypes = {
     seasonId: string.isRequired,
     navigation: shape({
-      goBack: func.isRequired
+      goBack: func.isRequired,
+      navigate: func.isRequired
     }).isRequired
   }
 
@@ -26,24 +27,21 @@ class NewEvent extends Component {
     this.setState({ course })
   }
 
-  done = () => {
-    this.props.navigation.goBack()
-  }
-
   render() {
-    const seasonId = this.props.seasonId
+    const { seasonId, navigation } = this.props
     const course = this.state.course
     return (
       <View style={styles.container}>
-        {course
-          ? <NewEventSetup
+        {course ? (
+          <NewEventSetup
+            navigation={navigation}
             seasonId={seasonId}
             changeCourse={this.setCourse}
             course={course}
-            done={this.done}
           />
-          : <CoursePicker selectCourse={this.setCourse} />
-        }
+        ) : (
+          <CoursePicker selectCourse={this.setCourse} />
+        )}
       </View>
     )
   }

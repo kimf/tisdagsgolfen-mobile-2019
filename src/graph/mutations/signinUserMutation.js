@@ -2,8 +2,8 @@ import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 
 const signinUser = gql`
-  mutation ($email: String!, $password: String!) {
-    signinUser(email: {email: $email, password: $password}) {
+  mutation($email: String!, $password: String!) {
+    authenticateUser(email: $email, password: $password) {
       token
     }
   }

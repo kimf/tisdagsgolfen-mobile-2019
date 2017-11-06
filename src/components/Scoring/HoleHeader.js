@@ -10,14 +10,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     paddingTop: 40,
     padding: 20,
-    backgroundColor: colors.green
+    backgroundColor: colors.blue
   },
 
   par: {
     textAlign: 'left',
     fontSize: 20,
     lineHeight: 40,
-    color: colors.yellow
+    color: colors.lightGray
   },
 
   number: {
@@ -33,34 +33,26 @@ const styles = StyleSheet.create({
     textAlign: 'right',
     fontSize: 20,
     lineHeight: 40,
-    color: colors.yellow
+    color: colors.lightGray
   }
 })
 
-const startingPos = num => (deviceWidth * num) - (deviceWidth + 100)
-const middlePoint = num => (deviceWidth * num) - deviceWidth
-const stoppingPoint = num => (deviceWidth * num) - (deviceWidth - 100)
+const startingPos = num => deviceWidth * num - (deviceWidth + 100)
+const middlePoint = num => deviceWidth * num - deviceWidth
+const stoppingPoint = num => deviceWidth * num - (deviceWidth - 100)
 
-const headerOpacity = (scrollX, num) => (
+const headerOpacity = (scrollX, num) =>
   scrollX.interpolate({
     inputRange: [startingPos(num), middlePoint(num), stoppingPoint(num)],
     outputRange: [0.25, 1, 0.25],
     extrapolate: 'clamp'
   })
-)
-
 
 const HoleHeader = ({ par, number, index, scrollX }) => (
   <Animated.View style={[styles.holeHeader, { opacity: headerOpacity(scrollX, number) }]}>
-    <TGText style={styles.par}>
-      Par {par}
-    </TGText>
-    <TGText style={styles.number}>
-      {number}
-    </TGText>
-    <TGText style={styles.index}>
-      Hcp {index}
-    </TGText>
+    <TGText style={styles.par}>Par {par}</TGText>
+    <TGText style={styles.number}>{number}</TGText>
+    <TGText style={styles.index}>Hcp {index}</TGText>
   </Animated.View>
 )
 

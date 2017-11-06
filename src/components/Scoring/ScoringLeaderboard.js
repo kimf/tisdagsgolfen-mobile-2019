@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { View, FlatList, StyleSheet } from 'react-native'
-import { arrayOf, bool, func, string, shape } from 'prop-types'
+import { arrayOf, bool, func, string, shape, number } from 'prop-types'
 import { connect } from 'react-redux'
 import { compose } from 'react-apollo'
 
@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
 class ScoringLeaderboard extends Component {
   static propTypes = {
     currentUserId: string.isRequired,
-    eventId: string.isRequired,
+    scoringSessionId: string.isRequired,
     onClose: func,
     scoringType: string.isRequired,
     showHeader: bool,
@@ -63,7 +63,7 @@ class ScoringLeaderboard extends Component {
   render() {
     const {
       data,
-      eventId,
+      scoringSessionId,
       currentUserId,
       onClose,
       showClose,
@@ -82,41 +82,34 @@ class ScoringLeaderboard extends Component {
     // TODO: Show tabs for teamEvents when you figured out how to solve the beers part
     return (
       <View style={{ flex: 1 }}>
-        {showHeader
-          ? <Header title="Ledartavla" />
-          : null
-        }
+        {showHeader ? <Header title="Ledartavla" /> : null}
         <View style={[styles.inner, { marginTop: showHeader ? NAVBAR_HEIGHT : 0 }]}>
-          {teamEvent
-            ? null
-            : <Tabs
+          {teamEvent ? null : (
+            <Tabs
               teamEvent={teamEvent}
               currentRoute={sorting}
               onChange={sort => this.changeSort(sort)}
               scoringType={scoringType}
             />
-          }
+          )}
 
-          {sorting === 'totalPoints'
-            ? <ScorecardHeaderRow
-              scoring={false}
-              scoringType={scoringType}
-              teamEvent={teamEvent}
-            />
-            : null
-          }
+          {sorting === 'totalPoints' ? (
+            <ScorecardHeaderRow scoring={false} scoringType={scoringType} teamEvent={teamEvent} />
+          ) : null}
 
           <FlatList
             removeClippedSubviews={false}
             data={sortedPlayers}
-            ref={(ref) => { this.listView = ref }}
+            ref={(ref) => {
+              this.listView = ref
+            }}
             renderItem={({ item }) => (
               <ScoringLeaderboardCard
                 key={`l_${currentUserId}`}
                 scoringType={scoringType}
                 currentUserId={currentUserId}
                 player={item}
-                eventId={eventId}
+                scoringSessionId={scoringSessionId}
                 sorting={sorting}
                 teamEvent={teamEvent}
               />
@@ -124,14 +117,9 @@ class ScoringLeaderboard extends Component {
             keyExtractor={item => `leaderboardPlayer_${item.id}}`}
           />
         </View>
-        {showClose
-          ? <TopButton
-            backgroundColor={colors.red}
-            title="STÄNG"
-            onPress={() => onClose()}
-          />
-          : null
-        }
+        {showClose ? (
+          <TopButton backgroundColor={colors.red} title="STÄNG" onPress={() => onClose()} />
+        ) : null}
       </View>
     )
   }
@@ -139,7 +127,4 @@ class ScoringLeaderboard extends Component {
 
 const mapStateToProps = state => ({ currentUserId: state.app.currentUser.id })
 
-export default compose(
-  connect(mapStateToProps),
-  withLiveLeaderboardQuery
-)(ScoringLeaderboard)
+export default compose(connect(mapStateToProps), withLiveLeaderboardQuery)(ScoringLeaderboard)

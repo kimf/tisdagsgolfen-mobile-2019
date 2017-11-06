@@ -11,8 +11,7 @@ import { colors } from 'styles'
 
 class ScoreInput extends Component {
   static propTypes = {
-    holeId: string.isRequired,
-    eventId: string.isRequired,
+    holeNr: number.isRequired,
     playerId: string.isRequired,
     scoringSessionId: string.isRequired,
     par: number.isRequired,
@@ -44,14 +43,33 @@ class ScoreInput extends Component {
 
   onCloseScoreForm = () => {
     const {
-      holeId, par, teamEvent, eventId, playerId, scoringSessionId, createLiveScore, updateLiveScore
+      par,
+      teamEvent,
+      playerId,
+      scoringSessionId,
+      createLiveScore,
+      updateLiveScore,
+      holeNr,
+      scoreItem
     } = this.props
-    const { extraStrokes } = this.props.scoreItem
-    const { beers, strokes, putts } = this.state
-    const newScoreItem = { ...this.props.scoreItem, beers, strokes, putts }
 
-    const playingId = teamEvent ? { scoringTeamId: playerId } : { scoringPlayerId: playerId }
-    const ids = { eventId, holeId, scoringSessionId, ...playingId }
+    const { extraStrokes } = scoreItem
+    const { beers, strokes, putts } = this.state
+    const newScoreItem = {
+      points: scoreItem.points,
+      extraStrokes,
+      hole: holeNr,
+      beers,
+      strokes,
+      putts,
+      par
+    }
+
+    const ids = {
+      scoringSessionId,
+      userId: teamEvent ? null : playerId,
+      teamIndex: teamEvent ? playerId : null
+    }
 
     if (putts > strokes) {
       Alert.alert('Du verkar ha angett fler puttar än slag!')
@@ -59,12 +77,11 @@ class ScoreInput extends Component {
       const strokeSum = strokes - extraStrokes
       const testSum = strokeSum - par
       newScoreItem.points = parseInt(pointsArray[testSum], 10)
-      newScoreItem.inFlight = true
 
       const save = async () => {
         try {
-          if (newScoreItem.id) {
-            await updateLiveScore(newScoreItem)
+          if (scoreItem.id) {
+            await updateLiveScore(scoreItem.id, newScoreItem)
           } else {
             await createLiveScore(ids, newScoreItem)
           }
@@ -89,13 +106,7 @@ class ScoreInput extends Component {
         selectedValue={this.state.putts}
         onValueChange={putts => this.setState({ putts })}
       >
-        {PUTT_VALUES.map(val => (
-          <Picker.Item
-            key={val}
-            value={val}
-            label={`${val} puttar`}
-          />
-        ))}
+        {PUTT_VALUES.map(val => <Picker.Item key={val} value={val} label={`${val} puttar`} />)}
       </Picker>
     )
 
@@ -105,13 +116,7 @@ class ScoreInput extends Component {
         selectedValue={this.state.beers}
         onValueChange={beers => this.setState({ beers })}
       >
-        {BEER_VALUES.map(val => (
-          <Picker.Item
-            key={val}
-            value={val}
-            label={`${val} öl`}
-          />
-        ))}
+        {BEER_VALUES.map(val => <Picker.Item key={val} value={val} label={`${val} öl`} />)}
       </Picker>
     )
 
@@ -124,13 +129,7 @@ class ScoreInput extends Component {
             selectedValue={this.state.strokes}
             onValueChange={strokes => this.setState({ strokes })}
           >
-            {STROKE_VALUES.map(val => (
-              <Picker.Item
-                key={val}
-                value={val}
-                label={`${val} slag`}
-              />
-            ))}
+            {STROKE_VALUES.map(val => <Picker.Item key={val} value={val} label={`${val} slag`} />)}
           </Picker>
           {putsPicker}
         </View>
@@ -140,7 +139,4 @@ class ScoreInput extends Component {
   }
 }
 
-export default compose(
-  withCreateLiveScoreMutation,
-  withUpdateLiveScoreMutation
-)(ScoreInput)
+export default compose(withCreateLiveScoreMutation, withUpdateLiveScoreMutation)(ScoreInput)

@@ -21,9 +21,7 @@ const LEADERBOARD_HEIGHT = deviceHeight
 
 const resetAction = NavigationActions.reset({
   index: 0,
-  actions: [
-    NavigationActions.navigate({ routeName: 'Main' })
-  ]
+  actions: [NavigationActions.navigate({ routeName: 'Main' })]
 })
 
 // TODO: Break this big ass component apart!
@@ -73,7 +71,7 @@ export class ScoreEvent extends Component {
     this.setState((state) => {
       // eslint-disable-next-line no-underscore-dangle
       this.scrollView._component.scrollTo({
-        x: (nextHole * deviceWidth) - deviceWidth,
+        x: nextHole * deviceWidth - deviceWidth,
         animated: false
       })
       this.closeModal('menu')
@@ -82,13 +80,10 @@ export class ScoreEvent extends Component {
   }
 
   animateBackdrop = (open) => {
-    Animated.timing(
-      this.modal,
-      {
-        toValue: open ? 1 : 0,
-        easing: Easing.inOut(Easing.quad)
-      },
-    ).start()
+    Animated.timing(this.modal, {
+      toValue: open ? 1 : 0,
+      easing: Easing.inOut(Easing.quad)
+    }).start()
   }
 
   animateModal = (modal, open) => {
@@ -104,29 +99,20 @@ export class ScoreEvent extends Component {
       animVal = this.menu
     }
 
-    Animated.timing(
-      animVal,
-      {
-        toValue,
-        easing: Easing.inOut(Easing.quad),
-        duration: 250
-      }
-    ).start()
+    Animated.timing(animVal, {
+      toValue,
+      easing: Easing.inOut(Easing.quad),
+      duration: 250
+    }).start()
   }
 
   showModal = (modal) => {
     this.openModal = modal
-    Animated.stagger(150, [
-      this.animateBackdrop(true),
-      this.animateModal(modal, true)
-    ])
+    Animated.stagger(150, [this.animateBackdrop(true), this.animateModal(modal, true)])
   }
 
   closeModal = (modal) => {
-    Animated.stagger(150, [
-      this.animateModal(modal, false),
-      this.animateBackdrop(false)
-    ])
+    Animated.stagger(150, [this.animateModal(modal, false), this.animateBackdrop(false)])
   }
 
   cancelRound = () => {
@@ -159,7 +145,6 @@ export class ScoreEvent extends Component {
     save()
   }
 
-
   handlePageChange = (e) => {
     const offset = e.nativeEvent.contentOffset
     if (offset) {
@@ -178,9 +163,6 @@ export class ScoreEvent extends Component {
     }
 
     const scoringSession = data.scoringSession
-    const teamEvent = scoringSession.event.teamEvent
-
-    const playing = teamEvent ? scoringSession.scoringTeams : scoringSession.scoringPlayers
 
     const transformScale = this.modal.interpolate({
       inputRange: [0, 1],
@@ -214,7 +196,7 @@ export class ScoreEvent extends Component {
           flex: 1,
           height: '100%',
           alignItems: 'stretch',
-          backgroundColor: colors.green
+          backgroundColor: colors.blue
         }}
       >
         <Animated.View
@@ -222,7 +204,9 @@ export class ScoreEvent extends Component {
         >
           <Animated.ScrollView
             style={{ width: '100%', height: '100%' }}
-            ref={(sv) => { this.scrollView = sv }}
+            ref={(sv) => {
+              this.scrollView = sv
+            }}
             showsHorizontalScrollIndicator={false}
             scrollEnabled={scrollEnabled}
             onMomentumScrollEnd={this.handlePageChange}
@@ -242,15 +226,14 @@ export class ScoreEvent extends Component {
                 key={`hole_view_${h.id}`}
                 hole={h}
                 isActive={h.number === currentHole}
-                playing={playing}
+                playing={scoringSession.scoringItems}
                 holesCount={holesCount}
-                event={scoringSession.event}
                 scrollX={scrollX}
-                scoringSessionId={scoringSession.id}
+                scoringSession={scoringSession}
               />
             ))}
             <FinishScoringSession
-              playing={playing}
+              playing={scoringSession.scoringItems}
               scoringSession={scoringSession}
               scrollX={scrollX}
               finishRound={this.finishRound}
@@ -265,17 +248,16 @@ export class ScoreEvent extends Component {
           showLeaderboard={() => this.showModal('leaderboard')}
         />
 
-        <Animated.View
-          pointerEvents="none"
-          style={[
-            styles.backdrop,
-            { opacity: this.modal }
-          ]}
-        />
+        <Animated.View pointerEvents="none" style={[styles.backdrop, { opacity: this.modal }]} />
 
         <Animated.View
           onStartShouldSetResponder={() => this.closeModal()}
-          style={{ backgroundColor: 'transparent', height: deviceHeight, width: '100%', transform: [{ translateY: tapSuprresorPosition }] }}
+          style={{
+            backgroundColor: 'transparent',
+            height: deviceHeight,
+            width: '100%',
+            transform: [{ translateY: tapSuprresorPosition }]
+          }}
         />
 
         <AnimatedModal height={MENU_HEIGHT} position={menuPosition}>
@@ -293,9 +275,9 @@ export class ScoreEvent extends Component {
           <ScoringLeaderboard
             showHeader
             onClose={() => this.closeModal('leaderboard')}
-            scoringType={scoringSession.event.scoringType}
-            eventId={scoringSession.event.id}
-            teamEvent={scoringSession.event.teamEvent}
+            scoringType={scoringSession.scoringType}
+            scoringSessionId={scoringSession.id}
+            teamEvent={scoringSession.teamEvent}
           />
         </AnimatedModal>
       </Animated.View>
@@ -303,8 +285,6 @@ export class ScoreEvent extends Component {
   }
 }
 
-export default compose(
-  withScoringSessionQuery,
-  withCancelRoundMutation,
-  withFinishRoundMutation
-)(ScoreEvent)
+export default compose(withScoringSessionQuery, withCancelRoundMutation, withFinishRoundMutation)(
+  ScoreEvent
+)

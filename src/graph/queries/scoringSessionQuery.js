@@ -2,73 +2,53 @@ import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 
 const scoringSessionQuery = gql`
-  query scoringSession ($scoringSessionId: ID!) {
-    scoringSession: ScoringSession(id: $scoringSessionId) {
+  query scoringSession($scoringSessionId: ID!) {
+    scoringSession(id: $scoringSessionId) {
       id
       currentHole
+      scoringType
+      teamEvent
       course {
         id
         club
         name
         par
-        holes (orderBy: number_ASC) {
+        holes {
           id
           number
           par
           index
-          liveScores (
-            filter: { scoringSession: { id: $scoringSessionId } }
-          ) {
-            id
-            beers
-            extraStrokes
-            points
-            putts
-            strokes
-            hole {
-              id
-            }
-            scoringPlayer {
-              id
-            }
-            scoringTeam {
-              id
-            }
-          }
         }
       }
-      scoringPlayers {
-        id
-        extraStrokes
-        user {
-          id
-          firstName
-          lastName
-          photo {
-            url
-          }
-        }
-      }
-      scoringTeams {
-        id
+      scoringItems {
         extraStrokes
         users {
           id
           firstName
           lastName
-          photo {
-            url
-          }
+          photo
         }
       }
-      event {
+      liveScores {
         id
-        scoringType
-        teamEvent
+        user {
+          id
+        }
+        teamIndex
+        beers
+        extraStrokes
+        hole
+        index
+        par
+        playerIds
+        points
+        putts
+        strokes
       }
     }
   }
 `
+
 export default scoringSessionQuery
 
 export const withScoringSessionQuery = graphql(scoringSessionQuery, {
