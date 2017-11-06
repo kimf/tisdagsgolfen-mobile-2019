@@ -38,7 +38,6 @@ const LeaderboardCard = ({ player, currentUserId, sorting }) => {
     return null
   }
 
-  const photoSrc = player.photo ? { uri: player.photo.url } : defaultAvatar
   return (
     <View key={player.id} style={[styles.listrow, currentUserStyle]}>
       <View style={styles.position}>
@@ -47,7 +46,11 @@ const LeaderboardCard = ({ player, currentUserId, sorting }) => {
         </TGText>
         <UpOrDown prev={player.prevPosition} current={player.position} />
       </View>
-      <Image style={styles.cardImage} source={photoSrc} resizeMode="cover" />
+      <Image
+        style={styles.cardImage}
+        source={player.photo ? { uri: player.photo } : defaultAvatar}
+        resizeMode="cover"
+      />
       <View style={styles.cardTitle}>
         <TGText style={styles.name}>{player.name}</TGText>
         {sorting === 'totalPoints' ? (
