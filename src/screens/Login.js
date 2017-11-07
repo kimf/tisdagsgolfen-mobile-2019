@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { func, string } from 'prop-types'
+import { func, string, shape } from 'prop-types'
 
 import Logo from 'Login/Logo'
 import Form from 'Login/LoginForm'
@@ -10,19 +10,24 @@ import { withSigninUserMutation } from 'mutations/signinUserMutation'
 
 class Login extends Component {
   static propTypes = {
-    email: string,
-    signinUser: func.isRequired
+    signinUser: func.isRequired,
+    onLogin: func.isRequired,
+    currentUser: shape({
+      email: string
+    })
   }
 
   static defaultProps = {
-    email: ''
+    currentUser: null
   }
 
   constructor(props) {
     super(props)
 
+    const { currentUser } = this.props
+
     this.state = {
-      email: props.email || '',
+      email: (currentUser && currentUser.email) || '',
       password: '',
       loggingIn: false,
       error: null
@@ -36,12 +41,8 @@ class Login extends Component {
     this.props
       .signinUser({ variables: { email, password } })
       .then((response) => {
-        setCache('currentUser', {
-          user: response.data.authenticateUser.user,
-          token: response.data.authenticateUser.token
-        }).then(() => {
-          this.setState({ loggingIn: false, error: false })
-        })
+        this.props.onLogin(response.data.authenticateUser)
+        this.setState({ loggingIn: false, error: false })
       })
       .catch((e) => {
         // eslint-disable-next-line no-console

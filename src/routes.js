@@ -47,7 +47,7 @@ const TabStack = TabNavigator(
   }
 )
 
-const MainStack = StackNavigator(
+const RootStack = StackNavigator(
   {
     Main: { screen: TabStack },
     ScoreEvent: { screen: ScoreEventScreen }
@@ -58,4 +58,4 @@ const MainStack = StackNavigator(
   }
 )
 
-export default MainStack
+export default RootStack

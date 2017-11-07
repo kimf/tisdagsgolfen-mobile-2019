@@ -1,14 +1,11 @@
 import React, { Component } from 'react'
-import { AsyncStorage } from 'react-native'
 import { ApolloProvider } from 'react-apollo'
-import { shape } from 'prop-types'
-// import deviceLog from 'react-native-device-log'
 
-import { getCache /* , removeCache */ } from 'utils'
+// import deviceLog from 'react-native-device-log'
+import { getCache, setCache, removeCache } from 'utils'
 import client from 'apolloClient'
 
-import Login from 'screens/Login'
-import RootStack from 'routes'
+import Root from 'Root'
 
 // deviceLog
 //   .init(AsyncStorage, {
@@ -22,31 +19,49 @@ import RootStack from 'routes'
 //   })
 
 class App extends Component {
-  state = { checking: true, loggedIn: false }
+  state = {
+    checking: true,
+    isLoggedin: false,
+    currentUser: null
+  }
 
   componentWillMount = async () => {
     // await removeCache('currentUser')
     const currentUser = await getCache('currentUser')
-    this.setState({ checking: false, loggedIn: currentUser && currentUser.token })
+    this.setState({
+      currentUser,
+      checking: false,
+      isLoggedin: !!(currentUser && currentUser.token)
+    })
+  }
+
+  onLogin = (response) => {
+    setCache('currentUser', {
+      ...response.user,
+      token: response.token
+    }).then(() => {
+      this.setState(state => ({ ...state, isLoggedin: true, currentUser: { ...response.user } }))
+    })
+  }
+
+  onLogout = () => {
+    const user = { email: this.state.currentUser.email }
+    setCache('currentUser', {
+      ...user,
+      token: null
+    }).then(() => {
+      this.setState(state => ({ ...state, isLoggedin: false, currentUser: { ...user } }))
+    })
   }
 
   render() {
-    const { checking, loggedIn } = this.state
-    if (checking) {
+    if (this.state.checking) {
       return null
-    }
-
-    if (!loggedIn) {
-      return (
-        <ApolloProvider client={client}>
-          <Login />
-        </ApolloProvider>
-      )
     }
 
     return (
       <ApolloProvider client={client}>
-        <RootStack />
+        <Root {...this.state} onLogin={this.onLogin} onLogout={this.onLogout} />
       </ApolloProvider>
     )
   }

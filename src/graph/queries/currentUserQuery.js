@@ -24,12 +24,6 @@ const currentUserQuery = gql`
         }
       }
     }
-    seasons {
-      id
-      name
-      closed
-      photo
-    }
   }
 `
 

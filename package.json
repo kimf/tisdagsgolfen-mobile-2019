@@ -7,14 +7,17 @@
     "clean": "watchman watch-del-all && rm -rf $TMPDIR/react-*",
     "test": "jest",
     "lint": "eslint src",
-    "graphql:schema": "rm schema.json && get-graphql-schema http://localhost:3000/api/graphql -j > schema.json",
+    "graphql:schema":
+      "rm schema.json && get-graphql-schema http://localhost:3000/api/graphql -j > schema.json",
     "storybook": "storybook start -p 7007",
     "android:build:dev": "cd android && ./gradlew assembleRelease",
-    "android:build:prod": "cd android && ENVFILE=.env.production ./gradlew assembleRelease",
+    "android:build:prod":
+      "cd android && ENVFILE=.env.production ./gradlew assembleRelease",
     "android:emulator": "emulator -avd Nexus6-android7.1.1-apiLevel25",
     "android": "react-native run-android",
     "ios": "react-native run-ios --simulator \"iPhone X\"",
-    "ios:storybook": "react-native run-ios --simulator \"iPhone X\" --scheme TGStorybook"
+    "ios:storybook":
+      "react-native run-ios --simulator \"iPhone X\" --scheme TGStorybook"
   },
   "dependencies": {
     "apollo-cache-inmemory": "^1.1.0",
@@ -40,7 +43,7 @@
     "react-native-onesignal": "^3.0.4",
     "react-native-segmented-view": "^2.0.0",
     "react-native-slowlog": "^1.0.2",
-    "react-navigation": "^1.0.0-beta.11",
+    "react-navigation": "^1.0.0-beta.19",
     "react-required-if": "^1.0.1",
     "subscriptions-transport-ws": "^0.9.1"
   },

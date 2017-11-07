@@ -10,6 +10,17 @@ const signinUser = gql`
         firstName
         lastName
         photo
+        admin
+        scoringSessions {
+          id
+          scoringType
+          teamEvent
+          course {
+            id
+            club
+            name
+          }
+        }
       }
       token
     }
