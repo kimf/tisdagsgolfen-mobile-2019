@@ -5,6 +5,7 @@ import { LogView } from 'react-native-device-log'
 
 import { seasonsQueryProps, withSeasonsQuery } from 'queries/seasonsQuery'
 import { colors } from 'styles'
+import { screenPropsShape } from 'propTypes'
 
 import LeaderboardContent from 'Leaderboard/LeaderboardContent'
 import SeasonPicker from 'Leaderboard/SeasonPicker'
@@ -23,7 +24,7 @@ class Leaderboard extends Component {
   }
 
   static propTypes = {
-    activeScoringSession: shape(),
+    screenProps: screenPropsShape.isRequired,
     data: seasonsQueryProps,
     navigation: shape({
       navigate: func.isRequired
@@ -34,8 +35,7 @@ class Leaderboard extends Component {
     data: {
       loading: true,
       seasons: []
-    },
-    activeScoringSession: null
+    }
   }
 
   state = {
@@ -57,12 +57,12 @@ class Leaderboard extends Component {
   }
 
   showActiveScoringSession = () => {
-    const scoringSessionId = this.props.activeScoringSession.id
+    const scoringSessionId = this.props.screenProps.activeScoringSession.id
     this.props.navigation.navigate('ScoreEvent', { scoringSessionId })
   }
 
   render() {
-    const { data, activeScoringSession, navigation } = this.props
+    const { data, navigation, screenProps: { currentUser, activeScoringSession } } = this.props
     const { showLog, showSeasonPicker, seasonId } = this.state
     if (data.loading) {
       return null
@@ -87,6 +87,7 @@ class Leaderboard extends Component {
         ) : null}
 
         <LeaderboardContent
+          currentUserId={currentUser.id}
           season={currentSeason}
           navigation={navigation}
           toggleSeasonpicker={this.toggleSeasonpicker}

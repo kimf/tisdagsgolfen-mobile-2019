@@ -11,6 +11,7 @@ import TouchableView from 'shared/TouchableView'
 import { sortedByParsedDate } from 'utils'
 import { withEventsQuery, eventsQueryProps } from 'queries/eventsQuery'
 import { NAVBAR_HEIGHT, colors } from 'styles'
+import { screenPropsShape } from 'propTypes'
 
 export class Events extends Component {
   static navigationOptions = {
@@ -26,6 +27,7 @@ export class Events extends Component {
   }
 
   static propTypes = {
+    screenProps: screenPropsShape.isRequired,
     data: eventsQueryProps,
     navigation: shape().isRequired
   }
@@ -43,7 +45,7 @@ export class Events extends Component {
   }
 
   render() {
-    const { data } = this.props
+    const { data, screenProps: { activeScoringSession } } = this.props
 
     if (data.loading) {
       return null
@@ -54,21 +56,23 @@ export class Events extends Component {
     return (
       <View style={{ flex: 1 }}>
         <Header title="Rundor" backgroundColor={colors.white}>
-          <TouchableView
-            style={{
-              marginRight: -10,
-              padding: 10,
-              flex: 1,
-              justifyContent: 'flex-end',
-              alignItems: 'center',
-              flexDirection: 'row'
-            }}
-            onPress={() => {
-              this.props.navigation.navigate('NewEvent')
-            }}
-          >
-            <Image style={{ tintColor: colors.muted }} source={require('../images/plus.png')} />
-          </TouchableView>
+          {!activeScoringSession && (
+            <TouchableView
+              style={{
+                marginRight: -10,
+                padding: 10,
+                flex: 1,
+                justifyContent: 'flex-end',
+                alignItems: 'center',
+                flexDirection: 'row'
+              }}
+              onPress={() => {
+                this.props.navigation.navigate('NewEvent')
+              }}
+            >
+              <Image style={{ tintColor: colors.muted }} source={require('../images/plus.png')} />
+            </TouchableView>
+          )}
         </Header>
         {sortedEvents.length === 0 ? (
           <EmptyState style={{ paddingTop: NAVBAR_HEIGHT + 20 }} text="Inga rundor :(" />

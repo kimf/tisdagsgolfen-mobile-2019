@@ -89,14 +89,14 @@ export default StyleSheet.create({
   cardImage: {
     height: 30,
     width: 30,
-    borderRadius: 20,
+    borderRadius: 5,
     marginRight: 16
   },
 
   smallCardImage: {
     height: 25,
     width: 25,
-    borderRadius: 15,
+    borderRadius: 5,
     marginRight: -5
   },
 

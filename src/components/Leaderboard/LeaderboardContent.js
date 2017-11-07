@@ -17,8 +17,9 @@ import { colors, NAVBAR_HEIGHT } from 'styles'
 class LeaderboardContent extends Component {
   static propTypes = {
     season: seasonShape.isRequired,
-    data: leaderboardQueryProps,
-    toggleSeasonpicker: func.isRequired
+    data: leaderboardQueryProps.isRequired,
+    toggleSeasonpicker: func.isRequired,
+    currentUserId: string.isRequired
   }
 
   constructor(props) {
@@ -38,8 +39,10 @@ class LeaderboardContent extends Component {
 
   render() {
     const { sorting } = this.state
-    const { data, season, toggleSeasonpicker } = this.props
-    const { loading, players } = data
+    const {
+      data: { loading, players }, season, toggleSeasonpicker, currentUserId
+    } = this.props
+
     if (loading) {
       return null
     }
@@ -99,7 +102,7 @@ class LeaderboardContent extends Component {
 
           {showPhoto ? (
             <Image
-              style={{ width: '100%', height: 180 }}
+              style={{ width: '100%', height: 120 }}
               source={{ uri: season.photo, cache: 'force-cache' }}
               resizeMode="cover"
             />
@@ -116,7 +119,9 @@ class LeaderboardContent extends Component {
               }}
               style={{ paddingHorizontal: 10, paddingBottom: 20 }}
               data={sortedPlayers}
-              renderItem={({ item }) => <LeaderboardCard player={item} sorting={sorting} />}
+              renderItem={({ item }) => (
+                <LeaderboardCard currentUserId={currentUserId} player={item} sorting={sorting} />
+              )}
               extraData={this.state}
               keyExtractor={player => `l_${player.id}`}
             />

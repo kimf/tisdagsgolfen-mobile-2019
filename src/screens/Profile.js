@@ -5,7 +5,7 @@ import { shape, string } from 'prop-types'
 import Header from 'shared/Header'
 import TGText from 'shared/TGText'
 import BottomButton from 'shared/BottomButton'
-
+import { screenPropsShape } from 'propTypes'
 import styles, { colors, NAVBAR_HEIGHT } from 'styles'
 
 class Profile extends Component {
@@ -22,31 +22,34 @@ class Profile extends Component {
   }
 
   static propTypes = {
-    screenProps: shape({
-      currentUser: shape({
-        user: shape({
-          firstName: string.isRequired
-        })
-      })
-    }).isRequired
+    screenProps: screenPropsShape.isRequired
   }
 
   render() {
-    const { screenProps } = this.props
+    const { screenProps: { currentUser, onLogout } } = this.props
 
     return (
       <View style={styles.container}>
-        <Header title="Profil" />
+        <Header title="Profil">
+          <Image
+            style={{
+              height: 35,
+              width: 35,
+              borderRadius: 5,
+              marginLeft: 20
+            }}
+            source={
+              currentUser.photo
+                ? { uri: currentUser.photo }
+                : require('../images/defaultavatar.png')
+            }
+            resizeMode="cover"
+          />
+        </Header>
         <View style={{ flex: 1, padding: 20, paddingTop: NAVBAR_HEIGHT + 20 }}>
-          <TGText>
-            Hej {screenProps.currentUser.firstName}, Här ska det vara lite statistik och grejor
-          </TGText>
+          <TGText>Hej {currentUser.firstName}, Här ska det vara lite statistik och grejor</TGText>
         </View>
-        <BottomButton
-          backgroundColor={colors.red}
-          title="LOGGA UT"
-          onPress={screenProps.onLogout}
-        />
+        <BottomButton backgroundColor={colors.red} title="LOGGA UT" onPress={onLogout} />
       </View>
     )
   }

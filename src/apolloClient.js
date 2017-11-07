@@ -4,11 +4,11 @@ import { HttpLink } from 'apollo-link-http'
 import { setContext } from 'apollo-link-context'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import { print } from 'graphql/language/printer'
-import { withClientState } from 'apollo-link-state'
+// import { withClientState } from 'apollo-link-state'
 
 // import Config from 'react-native-config'
 import { getCache } from 'utils'
-import { localSchema } from 'localSchema'
+// import { localSchema } from 'localSchema'
 
 // const AuthLink = async (operation, forward) => {
 //   const currentUser = await getCache('currentUser')
@@ -86,7 +86,7 @@ const link = ApolloLink.from([
   withToken,
   Logger,
   new HttpLink({
-    uri: 'http://localhost:3001/api/graphql'
+    uri: 'http://192.168.0.19:3001/api/graphql'
   })
 ])
 

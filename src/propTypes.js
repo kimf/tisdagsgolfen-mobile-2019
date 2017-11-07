@@ -1,4 +1,4 @@
-import { shape, string, bool, number } from 'prop-types'
+import { func, shape, string, bool, number } from 'prop-types'
 
 export const seasonShape = shape({
   id: string.isRequired,
@@ -13,6 +13,12 @@ export const userShape = shape({
   firstName: string.isRequired,
   lastName: string.isRequired,
   photo: string
+})
+
+export const screenPropsShape = shape({
+  currentUser: userShape.isRequired,
+  activeScoringSession: shape(),
+  onLogout: func.isRequired
 })
 
 export const leaderboardPlayerShape = shape({

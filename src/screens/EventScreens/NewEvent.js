@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import { View } from 'react-native'
-import { string, shape, func } from 'prop-types'
+import { shape, func } from 'prop-types'
 
 import CoursePicker from 'Events/CoursePicker'
 import NewEventSetup from 'Events/NewEventSetup'
 import styles from 'styles'
+import { screenPropsShape } from 'propTypes'
 
 class NewEvent extends Component {
   static navigationOptions = {
@@ -13,7 +14,7 @@ class NewEvent extends Component {
   }
 
   static propTypes = {
-    seasonId: string.isRequired,
+    screenProps: screenPropsShape.isRequired,
     navigation: shape({
       goBack: func.isRequired,
       navigate: func.isRequired
@@ -27,14 +28,14 @@ class NewEvent extends Component {
   }
 
   render() {
-    const { seasonId, navigation } = this.props
-    const course = this.state.course
+    const { navigation, screenProps: { currentUser } } = this.props
+    const { course } = this.state
     return (
       <View style={styles.container}>
         {course ? (
           <NewEventSetup
+            currentUser={currentUser}
             navigation={navigation}
-            seasonId={seasonId}
             changeCourse={this.setCourse}
             course={course}
           />

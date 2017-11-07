@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { View, FlatList, StyleSheet } from 'react-native'
 import { arrayOf, bool, func, string, shape } from 'prop-types'
-import { compose } from 'react-apollo'
 
 import ScoringLeaderboardCard from 'Scoring/ScoringLeaderboardCard'
 import ScorecardHeaderRow from 'Scoring/ScorecardHeaderRow'

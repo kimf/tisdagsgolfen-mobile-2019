@@ -15,6 +15,7 @@ import styles, { colors, deviceHeight, deviceWidth } from 'styles'
 import { withScoringSessionQuery } from 'queries/scoringSessionQuery'
 import { withCancelRoundMutation } from 'mutations/cancelRoundMutation'
 import { withFinishRoundMutation } from 'mutations/finishRoundMutation'
+import { screenPropsShape } from 'propTypes'
 
 const MENU_HEIGHT = 300
 const LEADERBOARD_HEIGHT = deviceHeight
@@ -32,6 +33,7 @@ export class ScoreEvent extends Component {
   }
 
   static propTypes = {
+    screenProps: screenPropsShape.isRequired,
     cancelRound: func.isRequired,
     finishRound: func.isRequired,
     data: shape({
@@ -39,13 +41,6 @@ export class ScoreEvent extends Component {
       scoringSession: shape() // TODO: Make into re-usable propType
     }).isRequired,
     navigation: shape().isRequired
-  }
-
-  static defaultProps = {
-    data: {
-      loading: true,
-      scoringSession: null
-    }
   }
 
   static scrollView = null
@@ -156,13 +151,11 @@ export class ScoreEvent extends Component {
   }
 
   render() {
-    const { data } = this.props
+    const { data: { loading, scoringSession }, screenProps: { currentUser } } = this.props
     const { currentHole, scrollEnabled, scrollX } = this.state
-    if (data.loading) {
+    if (loading) {
       return <Loading text="Laddar hål och sånt..." />
     }
-
-    const scoringSession = data.scoringSession
 
     const transformScale = this.modal.interpolate({
       inputRange: [0, 1],
@@ -277,6 +270,7 @@ export class ScoreEvent extends Component {
             onClose={() => this.closeModal('leaderboard')}
             scoringType={scoringSession.scoringType}
             scoringSessionId={scoringSession.id}
+            currentUserId={currentUser.id}
             teamEvent={scoringSession.teamEvent}
           />
         </AnimatedModal>
@@ -285,6 +279,4 @@ export class ScoreEvent extends Component {
   }
 }
 
-export default compose(withScoringSessionQuery, withCancelRoundMutation, withFinishRoundMutation)(
-  ScoreEvent
-)
+export default compose(withScoringSessionQuery, withCancelRoundMutation, withFinishRoundMutation)(ScoreEvent)
