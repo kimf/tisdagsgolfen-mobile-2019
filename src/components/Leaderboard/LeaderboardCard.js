@@ -11,7 +11,7 @@ const mutedYellow = { backgroundColor: colors.mutedYellow }
 
 const defaultAvatar = require('../../images/defaultavatar.png')
 
-const LeaderboardCard = ({ player, currentUserId, sorting }) => {
+const LeaderboardCard = ({ player, sorting }) => {
   let pointText
   let pointValue = ''
   let position
@@ -32,16 +32,23 @@ const LeaderboardCard = ({ player, currentUserId, sorting }) => {
 
   const averagePoints = (player.average * 2).toFixed() / 2
 
-  const currentUserStyle = player.id === currentUserId ? mutedYellow : null
+  // const currentUserStyle = player.id === currentUserId ? mutedYellow : null
 
   if (player.eventCount < 1) {
     return null
   }
 
   return (
-    <View key={player.id} style={[styles.listrow, currentUserStyle]}>
+    <View key={player.id} style={styles.listrow}>
       <View style={styles.position}>
-        <TGText style={{ flex: 1, fontWeight: '800', color: colors.dark, fontSize: 16 }}>
+        <TGText
+          style={{
+            flex: 1,
+            fontWeight: '800',
+            color: colors.dark,
+            fontSize: 16
+          }}
+        >
           {position}
         </TGText>
         <UpOrDown prev={player.prevPosition} current={player.position} />
@@ -66,7 +73,6 @@ const LeaderboardCard = ({ player, currentUserId, sorting }) => {
 
 LeaderboardCard.propTypes = {
   player: leaderboardPlayerShape,
-  currentUserId: string.isRequired,
   sorting: string.isRequired
 }
 

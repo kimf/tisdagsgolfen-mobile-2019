@@ -3,10 +3,7 @@ import { any, arrayOf, node, oneOfType, shape } from 'prop-types'
 
 const propTypes = {
   context: shape().isRequired,
-  children: oneOfType([
-    arrayOf(node),
-    node
-  ]).isRequired
+  children: oneOfType([arrayOf(node), node]).isRequired
 }
 
 const WithContext = ({ context, children }) => {
@@ -22,15 +19,9 @@ const WithContext = ({ context, children }) => {
   }
 
   DynamicWithContext.childContextTypes = {}
-  Object.keys(context).forEach(propertyName => (
-    DynamicWithContext.childContextTypes[propertyName] = any
-  ))
+  Object.keys(context).forEach(propertyName => (DynamicWithContext.childContextTypes[propertyName] = any))
 
-  return (
-    <DynamicWithContext context={context}>
-      {children}
-    </DynamicWithContext>
-  )
+  return <DynamicWithContext context={context}>{children}</DynamicWithContext>
 }
 
 WithContext.propTypes = propTypes

@@ -3,6 +3,9 @@ import gql from 'graphql-tag'
 
 const liveLeaderboardQuery = gql`
   query liveLeaderboardQuery($scoringSessionId: ID!) {
+    user {
+      id
+    }
     liveLeaderboard(scoringSessionId: $scoringSessionId) {
       id
       position

@@ -1,7 +1,71 @@
-import ApolloClient, { createNetworkInterface } from 'apollo-client'
-// import { SubscriptionClient, addGraphQLSubscriptions } from 'subscriptions-transport-ws'
-import Config from 'react-native-config'
+import ApolloClient from 'apollo-client'
+import { ApolloLink } from 'apollo-link'
+import { HttpLink } from 'apollo-link-http'
+import { setContext } from 'apollo-link-context'
+import { InMemoryCache } from 'apollo-cache-inmemory'
+import { print } from 'graphql/language/printer'
+import { withClientState } from 'apollo-link-state'
+
+// import Config from 'react-native-config'
 import { getCache } from 'utils'
+import { localSchema } from 'localSchema'
+
+// const AuthLink = async (operation, forward) => {
+//   const currentUser = await getCache('currentUser')
+//   operation.setContext(context => ({
+//     ...context,
+//     headers: {
+//       ...context.headers,
+//       authorization: currentUser && currentUser.token ? `Token token=${currentUser.token}` : null
+//     }
+//   }))
+//   return forward(operation)
+// }
+let token
+const withToken = setContext((context) => {
+  // if you have a cached value, return it immediately
+  if (token) {
+    return {
+      ...context,
+      headers: {
+        ...context.headers,
+        authorization: `Token token=${token}`
+      }
+    }
+  }
+
+  return getCache('currentUser').then(currentUser => ({
+    ...context,
+    headers: {
+      ...context.headers,
+      authorization: currentUser && currentUser.token ? `Token token=${currentUser.token}` : null
+    }
+  }))
+})
+
+const Logger = (operation, forward) => {
+  const {
+    operationName, query, variables, context
+  } = operation
+
+  // eslint-disable-next-line no-console
+  console.group(operationName)
+  // eslint-disable-next-line no-console
+  console.log({
+    operationName,
+    variables,
+    context,
+    query: print(query)
+  })
+
+  return forward(operation).map(({ data, errors }) => {
+    // eslint-disable-next-line no-console
+    console.log({ data, errors })
+    // eslint-disable-next-line no-console
+    console.groupEnd()
+    return { data, errors }
+  })
+}
 
 const dataIdFromObject = (result) => {
   // eslint-disable-next-line no-underscore-dangle
@@ -13,46 +77,20 @@ const dataIdFromObject = (result) => {
   return null
 }
 
-// const wsClient = new SubscriptionClient(Config.SUBSCRIPTION_URL, {
-//   reconnect: true,
-//   connectionParams: {
-//     // Pass any arguments you want for initialization
-//   }
-// })
-
-const networkInterface = createNetworkInterface({
-  uri: Config.API_URL,
-  batchInterval: 10,
-  queryDeduplication: true
+const cache = new InMemoryCache({
+  dataIdFromObject,
+  addTypename: true
 })
 
-/* eslint-disable no-param-reassign */
-networkInterface.use([
-  {
-    applyMiddleware(req, next) {
-      if (!req.options.headers) {
-        req.options.headers = {}
-      }
-
-      getCache('currentUser').then((currentUser) => {
-        if (currentUser === null) {
-          next()
-        } else {
-          req.options.headers.authorization = `Token token=${currentUser.token}`
-          next()
-        }
-      })
-    }
-  }
+const link = ApolloLink.from([
+  withToken,
+  Logger,
+  new HttpLink({
+    uri: 'http://localhost:3001/api/graphql'
+  })
 ])
-/* eslint-enable no-param-reassign */
-
-// const networkInterfaceWithSubscriptions = addGraphQLSubscriptions(
-//   networkInterface,
-//   wsClient
-// )
 
 export default new ApolloClient({
-  networkInterface,
-  dataIdFromObject
+  link,
+  cache
 })

@@ -15,11 +15,15 @@ import { ScoreEvent } from 'screens/ScoringScreens/ScoreEvent'
 import { Events } from 'screens/Events'
 
 import CenterView from './CenterView'
-import WithContext from '../WithContext'
+// import WithContext from '../WithContext'
 
 const fakeNavigator = {
-  setOnNavigatorEvent: () => { action('navigator.setOnNavigatorEvent') },
-  dismissAllModals: () => { action('navigator.dismissAllModals') }
+  setOnNavigatorEvent: () => {
+    action('navigator.setOnNavigatorEvent')
+  },
+  dismissAllModals: () => {
+    action('navigator.dismissAllModals')
+  }
 }
 
 const currentUser = {
@@ -34,27 +38,13 @@ const currentSeason = {
   closed: true
 }
 
-const reduxContext = {
-  store: {
-    getState: () => ({}),
-    subscribe: () => { },
-    dispatch: () => { }
-  }
-}
-
 const navigation = {
-  navigate: () => { }
+  navigate: () => {}
 }
 
 const events = require('../eventsProps.json').data.events.reverse()
 
-
 storiesOf('EventsScreen', module)
-  .addDecorator(getStory => (
-    <WithContext context={{ ...reduxContext }}>
-      {getStory()}
-    </WithContext>
-  ))
   .add('Closed Season', () => (
     <Events
       seasonClosed
@@ -64,7 +54,6 @@ storiesOf('EventsScreen', module)
       data={{ loading: false, events }}
     />
   ))
-
   .add('Open Season', () => (
     <Events
       seasonClosed={false}
@@ -76,16 +65,10 @@ storiesOf('EventsScreen', module)
   ))
 
 storiesOf('HoleView', module)
-  .addDecorator(getStory => (
-    <View style={{ flex: 1 }}>
-      <WithContext context={{ ...reduxContext }}>
-        {getStory()}
-      </WithContext>
-    </View>
-  ))
+  .addDecorator(getStory => <View style={{ flex: 1 }}>{getStory()}</View>)
   .add('Default', () => (
     <HoleView
-      key={'hole_view_stringid'}
+      key="hole_view_stringid"
       {...require('../holeViewProps.json')}
       toggleScroll={action('call on prop toggleScroll')}
       onChangeHole={action('changeHole')}
@@ -93,35 +76,22 @@ storiesOf('HoleView', module)
   ))
 
 storiesOf('ScoreEvent', module)
-  .addDecorator(getStory => (
-    <View style={{ flex: 1 }}>
-      <WithContext context={{ ...reduxContext }}>
-        {getStory()}
-      </WithContext>
-    </View>
-  ))
+  .addDecorator(getStory => <View style={{ flex: 1 }}>{getStory()}</View>)
   .add('Individual Event...', () => (
     <ScoreEvent
-      data={{ loading: false, scoringSession: require('../scoringSession.json').data.scoringSession }}
+      data={{
+        loading: false,
+        scoringSession: require('../scoringSession.json').data.scoringSession
+      }}
       navigation={fakeNavigator}
     />
   ))
-  .add('Loading...', () => (
-    <ScoreEvent navigator={fakeNavigator} />
-  ))
+  .add('Loading...', () => <ScoreEvent navigator={fakeNavigator} />)
 
 storiesOf('TGText', module)
-  .addDecorator(getStory => (
-    <CenterView>{getStory()}</CenterView>
-  ))
-  .add('with text', () => (
-    <TGText>Hello TGText</TGText>
-  ))
-  .add('with onPress', () => (
-    <TGText onPress={action('clicked-TGText')}>
-      😀 Hello button
-    </TGText>
-  ))
+  .addDecorator(getStory => <CenterView>{getStory()}</CenterView>)
+  .add('with text', () => <TGText>Hello TGText</TGText>)
+  .add('with onPress', () => <TGText onPress={action('clicked-TGText')}>😀 Hello button</TGText>)
   .add('with onPress + viewStyle + style', () => (
     <TGText
       onPress={action('clicked-TGText')}
@@ -132,9 +102,4 @@ storiesOf('TGText', module)
     </TGText>
   ))
 
-storiesOf('Login', module)
-  .add('Default', () => (
-    <WithContext context={{ ...reduxContext }}>
-      <Login />
-    </WithContext>
-  ))
+storiesOf('Login', module).add('Default', () => <Login />)

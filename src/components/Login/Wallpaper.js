@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Image } from 'react-native'
+import { StyleSheet, ImageBackground } from 'react-native'
 import { oneOfType, arrayOf, node } from 'prop-types'
 
 import bgSrc from 'images/wrapper.png'
@@ -8,22 +8,18 @@ const styles = StyleSheet.create({
   picture: {
     flex: 1,
     width: '100%',
-    height: '100%',
-    resizeMode: 'cover'
+    height: '100%'
   }
 })
 
 const Wallpaper = ({ children }) => (
-  <Image style={styles.picture} source={bgSrc}>
+  <ImageBackground style={styles.picture} source={bgSrc}>
     {children}
-  </Image>
+  </ImageBackground>
 )
 
 Wallpaper.propTypes = {
-  children: oneOfType([
-    arrayOf(node),
-    node
-  ]).isRequired
+  children: oneOfType([arrayOf(node), node]).isRequired
 }
 
 export default Wallpaper

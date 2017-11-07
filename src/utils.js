@@ -5,15 +5,16 @@ export const average = arr => arr.reduce((p, c) => p + c, 0) / arr.length
 
 export const sorted = (array, attribute) => array.sort((a, b) => b[attribute] - a[attribute])
 
-export const sortedByParsedDate = (array, attribute) => sorted(
-  array.map((item) => {
-    const date = new Date(item[attribute])
-    const newItem = Object.assign({}, item)
-    newItem[attribute] = date
-    return newItem
-  }),
-  attribute
-)
+export const sortedByParsedDate = (array, attribute) =>
+  sorted(
+    array.map((item) => {
+      const date = new Date(item[attribute])
+      const newItem = Object.assign({}, item)
+      newItem[attribute] = date
+      return newItem
+    }),
+    attribute
+  )
 
 // ranked :: Array -> String -> Array
 export const ranked = (array, attribute, rankingAttribute, reversed) => {
@@ -62,7 +63,7 @@ export const calculateExtraStrokes = (holeIndex, playerStrokes, holesCount) => {
   if (holeIndex <= playerStrokes) {
     extra = 1
     if (playerStrokes > holesCount) {
-      if (holeIndex <= (playerStrokes - holesCount)) {
+      if (holeIndex <= playerStrokes - holesCount) {
         extra = 2
       }
     }
@@ -74,7 +75,9 @@ export const setCache = async (key, val) => {
   try {
     const item = JSON.stringify(val)
     const value = await AsyncStorage.setItem(key, item)
-    if (value === null) { return false }
+    if (value === null) {
+      return false
+    }
     return value
   } catch (e) {
     // eslint-disable-next-line no-console
@@ -105,7 +108,6 @@ export const removeCache = async (key) => {
   }
 }
 
-
 export const cacheable = (fn) => {
   /* May store args and result on fn like this:
    * fn.lastArgs = ...
@@ -133,14 +135,12 @@ export const cacheable = (fn) => {
   }
 }
 
-
 export const STROKES_MONEY = {
   [-4]: 500,
   [-3]: 300,
   [-2]: 100,
   [-1]: 10
 }
-
 
 export const PUTT_MONEY = {
   3: -10,
@@ -247,7 +247,6 @@ export const massageIntoLeaderboard = (scoringSessions, teamEvent) => {
   return items
 }
 
-
 const addCalculatedStrokes = p => ({ ...p, calculatedStrokes: p.strokes - p.extraStrokes })
 
 const breakOutTeamPlayers = teams => teams // TODO: Break out and read beers
@@ -268,6 +267,5 @@ export const rankBySorting = (players, sorting, teamEvent, scoringType) => {
   const sortKey = isStrokePlay ? 'calculatedStrokes' : 'points'
   return ranked(sortedPlayers, 'position', sortKey, !isStrokePlay)
 }
-
 
 export const capitalize = string => string[0].toUpperCase() + string.slice(1)

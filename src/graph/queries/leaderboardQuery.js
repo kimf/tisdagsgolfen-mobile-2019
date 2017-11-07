@@ -26,8 +26,8 @@ const leaderboardQuery = gql`
 export default leaderboardQuery
 
 export const withLeaderboardQuery = graphql(leaderboardQuery, {
-  options: ({ seasonId }) => ({
-    variables: { seasonId }
+  options: ({ season }) => ({
+    variables: { seasonId: season.id }
   })
 })
 

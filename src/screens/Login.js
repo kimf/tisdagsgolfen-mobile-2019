@@ -1,21 +1,17 @@
 import React, { Component } from 'react'
-import { compose } from 'react-apollo'
-import { connect } from 'react-redux'
 import { func, string } from 'prop-types'
 
 import Logo from 'Login/Logo'
 import Form from 'Login/LoginForm'
 import Wallpaper from 'Login/Wallpaper'
 
-import { login } from 'actions/app'
-
+import { setCache } from 'utils'
 import { withSigninUserMutation } from 'mutations/signinUserMutation'
 
 class Login extends Component {
   static propTypes = {
     email: string,
-    signinUser: func.isRequired,
-    onLogin: func.isRequired
+    signinUser: func.isRequired
   }
 
   static defaultProps = {
@@ -36,10 +32,16 @@ class Login extends Component {
   onSubmit = () => {
     this.setState({ loggingIn: true })
     const { email, password } = this.state
-    this.props.signinUser({ variables: { email, password } })
+
+    this.props
+      .signinUser({ variables: { email, password } })
       .then((response) => {
-        this.props.onLogin(email, response.data.authenticateUser.token)
-        this.setState({ loggingIn: false, error: false })
+        setCache('currentUser', {
+          user: response.data.authenticateUser.user,
+          token: response.data.authenticateUser.token
+        }).then(() => {
+          this.setState({ loggingIn: false, error: false })
+        })
       })
       .catch((e) => {
         // eslint-disable-next-line no-console
@@ -56,23 +58,10 @@ class Login extends Component {
     return (
       <Wallpaper>
         <Logo />
-        <Form
-          {...this.state}
-          changeValue={this.changeValue}
-          onSubmit={this.onSubmit}
-        />
+        <Form {...this.state} changeValue={this.changeValue} onSubmit={this.onSubmit} />
       </Wallpaper>
     )
   }
 }
 
-const mapStateToProps = state => ({ email: state.app.email })
-
-const mapDispatchToProps = dispatch => ({
-  onLogin: (email, token) => dispatch(login(email, token))
-})
-
-export default compose(
-  connect(mapStateToProps, mapDispatchToProps),
-  withSigninUserMutation
-)(Login)
+export default withSigninUserMutation(Login)

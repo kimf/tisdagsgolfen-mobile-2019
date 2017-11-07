@@ -5,8 +5,8 @@ import gql from 'graphql-tag'
 import { eventShape } from 'propTypes'
 
 const eventsQuery = gql`
-  query events($seasonId: ID!) {
-    events(seasonId: $seasonId) {
+  query events {
+    events {
       id
       status
       startsAt
@@ -19,11 +19,7 @@ const eventsQuery = gql`
 
 export default eventsQuery
 
-export const withEventsQuery = graphql(eventsQuery, {
-  options: ({ seasonId }) => ({
-    variables: { seasonId }
-  })
-})
+export const withEventsQuery = graphql(eventsQuery)
 
 export const eventsQueryProps = shape({
   events: arrayOf(eventShape),

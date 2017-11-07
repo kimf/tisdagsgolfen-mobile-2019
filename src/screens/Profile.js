@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
-import { func } from 'prop-types'
 import { View, Image } from 'react-native'
-import { connect } from 'react-redux'
+import { shape, bool } from 'prop-types'
 
 import Header from 'shared/Header'
 import TGText from 'shared/TGText'
 import BottomButton from 'shared/BottomButton'
 
-import { logout } from 'actions/app'
+import { withCurrentUserQuery } from 'queries/currentUserQuery'
 import { userShape } from 'propTypes'
+import { setCache } from 'utils'
 import styles, { colors, NAVBAR_HEIGHT } from 'styles'
 
 class Profile extends Component {
@@ -25,31 +25,36 @@ class Profile extends Component {
   }
 
   static propTypes = {
-    user: userShape.isRequired,
-    onLogout: func.isRequired
+    data: shape({
+      loading: bool,
+      user: userShape
+    })
+  }
+
+  static defaultProps = {
+    data: {
+      loading: true,
+      user: null
+    }
+  }
+
+  logout = async () => {
+    const { email } = this.props.data.user
+    await setCache('currentUser', { email })
   }
 
   render() {
-    const { user, onLogout } = this.props
-
+    console.log(this.props)
     return (
       <View style={styles.container}>
         <Header title="Profil" />
         <View style={{ flex: 1, padding: 20, paddingTop: NAVBAR_HEIGHT + 20 }}>
           <TGText>Här ska det vara lite statistik och grejor</TGText>
         </View>
-        <BottomButton backgroundColor={colors.red} title="LOGGA UT" onPress={() => { onLogout(user.email) }} />
+        <BottomButton backgroundColor={colors.red} title="LOGGA UT" onPress={this.logout} />
       </View>
     )
   }
 }
 
-const mapStateToProps = state => ({
-  user: state.app.currentUser
-})
-
-const mapDispatchToProps = dispatch => ({
-  onLogout: () => dispatch(logout())
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(Profile)
+export default withCurrentUserQuery(Profile)

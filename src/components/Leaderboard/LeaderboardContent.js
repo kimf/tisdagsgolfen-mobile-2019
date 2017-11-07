@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { View, Image, FlatList } from 'react-native'
-import { arrayOf, string, func, shape } from 'prop-types'
+import { string, func } from 'prop-types'
+
+import { withLeaderboardQuery, leaderboardQueryProps } from 'queries/leaderboardQuery'
 
 import LeaderboardCard from 'Leaderboard/LeaderboardCard'
 import Header from 'shared/Header'
@@ -15,8 +17,7 @@ import { colors, NAVBAR_HEIGHT } from 'styles'
 class LeaderboardContent extends Component {
   static propTypes = {
     season: seasonShape.isRequired,
-    players: arrayOf(shape()).isRequired,
-    currentUserId: string.isRequired,
+    data: leaderboardQueryProps,
     toggleSeasonpicker: func.isRequired
   }
 
@@ -37,7 +38,11 @@ class LeaderboardContent extends Component {
 
   render() {
     const { sorting } = this.state
-    const { players, season, currentUserId, toggleSeasonpicker } = this.props
+    const { data, season, toggleSeasonpicker } = this.props
+    const { loading, players } = data
+    if (loading) {
+      return null
+    }
 
     let sortedPlayers = null
     if (sorting === 'beers') {
@@ -111,9 +116,7 @@ class LeaderboardContent extends Component {
               }}
               style={{ paddingHorizontal: 10, paddingBottom: 20 }}
               data={sortedPlayers}
-              renderItem={({ item }) => (
-                <LeaderboardCard currentUserId={currentUserId} player={item} sorting={sorting} />
-              )}
+              renderItem={({ item }) => <LeaderboardCard player={item} sorting={sorting} />}
               extraData={this.state}
               keyExtractor={player => `l_${player.id}`}
             />
@@ -124,4 +127,4 @@ class LeaderboardContent extends Component {
   }
 }
 
-export default LeaderboardContent
+export default withLeaderboardQuery(LeaderboardContent)

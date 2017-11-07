@@ -1,42 +1,55 @@
 import React, { Component } from 'react'
-import { bool } from 'prop-types'
+import { AsyncStorage } from 'react-native'
+import { ApolloProvider } from 'react-apollo'
+import { shape } from 'prop-types'
+// import deviceLog from 'react-native-device-log'
 
-import { connect } from 'react-redux'
-import { compose } from 'react-apollo'
-import { withMainQuery, mainQueryProps } from 'queries/mainQuery'
+import { getCache /* , removeCache */ } from 'utils'
+import client from 'apolloClient'
 
-import RootStack from 'routes'
 import Login from 'screens/Login'
-import Loading from 'shared/Loading'
+import RootStack from 'routes'
+
+// deviceLog
+//   .init(AsyncStorage, {
+//     logToConsole: false,
+//     logRNErrors: true,
+//     maxNumberToRender: 0,
+//     maxNumberToPersist: 100
+//   })
+//   .then(() => {
+//     deviceLog.success('logger initialized')
+//   })
 
 class App extends Component {
-  static propTypes = {
-    data: mainQueryProps,
-    loggedIn: bool.isRequired
-  }
+  state = { checking: true, loggedIn: false }
 
-  static defaultProps = {
-    data: {
-      loading: true,
-      user: null,
-      seasons: null
-    }
+  componentWillMount = async () => {
+    // await removeCache('currentUser')
+    const currentUser = await getCache('currentUser')
+    this.setState({ checking: false, loggedIn: currentUser && currentUser.token })
   }
 
   render() {
-    const { data, loggedIn } = this.props
+    const { checking, loggedIn } = this.state
+    if (checking) {
+      return null
+    }
+
     if (!loggedIn) {
-      return <Login />
+      return (
+        <ApolloProvider client={client}>
+          <Login />
+        </ApolloProvider>
+      )
     }
 
-    if (data.loading) {
-      return <Loading text="loading" />
-    }
-
-    return <RootStack />
+    return (
+      <ApolloProvider client={client}>
+        <RootStack />
+      </ApolloProvider>
+    )
   }
 }
 
-const mapStateToProps = state => ({ loggedIn: state.app.loggedIn })
-
-export default compose(connect(mapStateToProps), withMainQuery)(App)
+export default App

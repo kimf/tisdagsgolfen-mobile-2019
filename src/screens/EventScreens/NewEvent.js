@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { View } from 'react-native'
 import { string, shape, func } from 'prop-types'
-import { connect } from 'react-redux'
 
 import CoursePicker from 'Events/CoursePicker'
 import NewEventSetup from 'Events/NewEventSetup'
@@ -47,8 +46,4 @@ class NewEvent extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  seasonId: state.app.currentSeason.id
-})
-
-export default connect(mapStateToProps)(NewEvent)
+export default NewEvent

@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { View, FlatList, StyleSheet } from 'react-native'
-import { arrayOf, bool, func, string, shape, number } from 'prop-types'
-import { connect } from 'react-redux'
+import { arrayOf, bool, func, string, shape } from 'prop-types'
 import { compose } from 'react-apollo'
 
 import ScoringLeaderboardCard from 'Scoring/ScoringLeaderboardCard'
@@ -125,6 +124,4 @@ class ScoringLeaderboard extends Component {
   }
 }
 
-const mapStateToProps = state => ({ currentUserId: state.app.currentUser.id })
-
-export default compose(connect(mapStateToProps), withLiveLeaderboardQuery)(ScoringLeaderboard)
+export default withLiveLeaderboardQuery(ScoringLeaderboard)

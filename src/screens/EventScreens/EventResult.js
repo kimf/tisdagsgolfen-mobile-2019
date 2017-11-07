@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import { View, ListView } from 'react-native'
 import { arrayOf, shape, string, bool } from 'prop-types'
-import { connect } from 'react-redux'
-import { compose } from 'react-apollo'
 
 import EventHeader from 'Events/EventHeader'
 import EventLeaderboardCard from 'Events/EventLeaderboardCard'
@@ -101,7 +99,9 @@ class EventResult extends Component {
           removeClippedSubviews={false}
           initialListSize={20}
           dataSource={ds.cloneWithRows(sortedPlayers)}
-          ref={(ref) => { this.listView = ref }}
+          ref={(ref) => {
+            this.listView = ref
+          }}
           renderRow={rowData => (
             <EventLeaderboardCard
               key={`l_${currentUserId}`}
@@ -118,9 +118,4 @@ class EventResult extends Component {
   }
 }
 
-const mapStateToProps = state => ({ currentUserId: state.app.currentUser.id })
-
-export default compose(
-  connect(mapStateToProps),
-  withEventQuery
-)(EventResult)
+export default withEventQuery(EventResult)

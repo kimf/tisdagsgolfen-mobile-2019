@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import { Switch, View, StyleSheet } from 'react-native'
 import { string, shape, func } from 'prop-types'
-import { connect } from 'react-redux'
-import { compose } from 'react-apollo'
 import update from 'immutability-helper'
 // import moment from 'moment'
 // import 'moment/locale/sv'
@@ -101,7 +99,9 @@ class NewEventSetup extends Component {
 
   startPlay = async () => {
     try {
-      const { currentUser, course, createScoringSession, navigation } = this.props
+      const {
+        currentUser, course, createScoringSession, navigation
+      } = this.props
       const { teamEvent, isStrokes } = this.state
       const scoringItems = this.state.playing.map(playing => ({
         extraStrokes: parseInt(playing.strokes, 10),
@@ -144,7 +144,9 @@ class NewEventSetup extends Component {
 
   render() {
     const { changeCourse, course } = this.props
-    const { teamEvent, isStrokes, playing, error } = this.state
+    const {
+      teamEvent, isStrokes, playing, error
+    } = this.state
     let showError
     if (error) {
       showError = (
@@ -215,6 +217,4 @@ class NewEventSetup extends Component {
   }
 }
 
-const mapStateToProps = state => ({ currentUser: state.app.currentUser })
-
-export default compose(connect(mapStateToProps), withCreateScoringSessionMutation)(NewEventSetup)
+export default withCreateScoringSessionMutation(NewEventSetup)

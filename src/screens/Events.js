@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 import { View, Image, FlatList } from 'react-native'
-import { connect } from 'react-redux'
-import { compose } from 'react-apollo'
 import { bool, shape } from 'prop-types'
 
 // import OpenSeasonEventList from 'Events/OpenSeasonEventList'
@@ -12,7 +10,6 @@ import TouchableView from 'shared/TouchableView'
 
 import { sortedByParsedDate } from 'utils'
 import { withEventsQuery, eventsQueryProps } from 'queries/eventsQuery'
-import { userShape } from 'propTypes'
 import { NAVBAR_HEIGHT, colors } from 'styles'
 
 export class Events extends Component {
@@ -30,8 +27,6 @@ export class Events extends Component {
 
   static propTypes = {
     data: eventsQueryProps,
-    currentUser: userShape.isRequired,
-    seasonClosed: bool.isRequired,
     navigation: shape().isRequired
   }
 
@@ -43,12 +38,12 @@ export class Events extends Component {
   }
 
   navigateToEvent = (screen, params) => {
-    const navigation = this.props.navigation
-    navigation.navigate(screen, { ...this.props.navigation.state.params, ...params })
+    const { navigation } = this.props
+    navigation.navigate(screen, { ...navigation.state.params, ...params })
   }
 
   render() {
-    const { data, currentUser, seasonClosed } = this.props
+    const { data } = this.props
 
     if (data.loading) {
       return null
@@ -58,54 +53,37 @@ export class Events extends Component {
 
     return (
       <View style={{ flex: 1 }}>
-        <Header
-          title="Rundor"
-          backgroundColor={colors.white}
-        >
-          {seasonClosed
-            ? null
-            : <TouchableView
-              style={{
-                marginRight: -10,
-                padding: 10,
-                flex: 1,
-                justifyContent: 'flex-end',
-                alignItems: 'center',
-                flexDirection: 'row'
-              }}
-              onPress={() => { this.props.navigation.navigate('NewEvent') }}
-            >
-              <Image
-                style={{ tintColor: colors.muted }}
-                source={require('../images/plus.png')}
-              />
-            </TouchableView>
-          }
+        <Header title="Rundor" backgroundColor={colors.white}>
+          <TouchableView
+            style={{
+              marginRight: -10,
+              padding: 10,
+              flex: 1,
+              justifyContent: 'flex-end',
+              alignItems: 'center',
+              flexDirection: 'row'
+            }}
+            onPress={() => {
+              this.props.navigation.navigate('NewEvent')
+            }}
+          >
+            <Image style={{ tintColor: colors.muted }} source={require('../images/plus.png')} />
+          </TouchableView>
         </Header>
-        {sortedEvents.length === 0
-          ? <EmptyState style={{ paddingTop: NAVBAR_HEIGHT + 20 }} text="Inga rundor :(" />
-          : <FlatList
+        {sortedEvents.length === 0 ? (
+          <EmptyState style={{ paddingTop: NAVBAR_HEIGHT + 20 }} text="Inga rundor :(" />
+        ) : (
+          <FlatList
             removeClippedSubviews={false}
             style={{ backgroundColor: colors.white, marginTop: NAVBAR_HEIGHT, padding: 10 }}
             data={sortedEvents}
-            renderItem={({ item }) => (
-              <EventCard userId={currentUser.id} event={item} onNavigate={this.navigateToEvent} />
-            )}
+            renderItem={({ item }) => <EventCard event={item} onNavigate={this.navigateToEvent} />}
             keyExtractor={item => `event_${item.id}}`}
           />
-        }
+        )}
       </View>
     )
   }
 }
 
-const mapStateToProps = state => ({
-  seasonId: state.app.currentSeason.id,
-  seasonClosed: state.app.currentSeason.closed,
-  currentUser: state.app.currentUser
-})
-
-export default compose(
-  connect(mapStateToProps),
-  withEventsQuery
-)(Events)
+export default withEventsQuery(Events)

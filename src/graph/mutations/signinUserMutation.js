@@ -4,6 +4,13 @@ import gql from 'graphql-tag'
 const signinUser = gql`
   mutation($email: String!, $password: String!) {
     authenticateUser(email: $email, password: $password) {
+      user {
+        id
+        email
+        firstName
+        lastName
+        photo
+      }
       token
     }
   }

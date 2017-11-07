@@ -1,13 +1,9 @@
 import React, { Component } from 'react'
 import { View, Image } from 'react-native'
-import { arrayOf, func, shape } from 'prop-types'
+import { func, shape } from 'prop-types'
 import { LogView } from 'react-native-device-log'
-import { connect } from 'react-redux'
-import { compose } from 'react-apollo'
 
-import { seasonShape, userShape } from 'propTypes'
-import { withLeaderboardQuery, leaderboardQueryProps } from 'queries/leaderboardQuery'
-import { changeSeason } from 'actions/app'
+import { seasonsQueryProps, withSeasonsQuery } from 'queries/seasonsQuery'
 import { colors } from 'styles'
 
 import LeaderboardContent from 'Leaderboard/LeaderboardContent'
@@ -27,12 +23,8 @@ class Leaderboard extends Component {
   }
 
   static propTypes = {
-    currentSeason: seasonShape.isRequired,
-    currentUser: userShape.isRequired,
-    seasons: arrayOf(seasonShape).isRequired,
     activeScoringSession: shape(),
-    data: leaderboardQueryProps,
-    onChangeSeason: func.isRequired,
+    data: seasonsQueryProps,
     navigation: shape({
       navigate: func.isRequired
     }).isRequired
@@ -40,7 +32,6 @@ class Leaderboard extends Component {
 
   static defaultProps = {
     data: {
-      user: null,
       loading: true,
       seasons: []
     },
@@ -53,13 +44,13 @@ class Leaderboard extends Component {
   }
 
   onChangeSeason = (seasonId) => {
-    this.props.onChangeSeason(seasonId)
+    this.setState(state => ({ ...state, seasonId }))
     this.toggleSeasonpicker()
   }
 
-  toggleLog = () => {
-    this.setState(state => ({ ...state, showLog: !this.state.showLog }))
-  }
+  // toggleLog = () => {
+  //   this.setState(state => ({ ...state, showLog: !this.state.showLog }))
+  // }
 
   toggleSeasonpicker = () => {
     this.setState(state => ({ ...state, showSeasonPicker: !state.showSeasonPicker }))
@@ -71,18 +62,13 @@ class Leaderboard extends Component {
   }
 
   render() {
-    if (this.props.data.loading) {
+    const { data, activeScoringSession, navigation } = this.props
+    const { showLog, showSeasonPicker, seasonId } = this.state
+    if (data.loading) {
       return null
     }
-    const {
-      data,
-      currentSeason,
-      currentUser,
-      seasons,
-      activeScoringSession,
-      navigation
-    } = this.props
-    const { showLog, showSeasonPicker } = this.state
+
+    const currentSeason = seasonId ? data.seasons.find(s => s.id === seasonId) : data.seasons[0]
 
     if (showLog) {
       return (
@@ -94,17 +80,14 @@ class Leaderboard extends Component {
       <View style={{ flex: 1, alignItems: 'stretch', backgroundColor: colors.lightGray }}>
         {showSeasonPicker ? (
           <SeasonPicker
-            seasons={seasons}
+            seasons={data.seasons}
             currentSeasonId={currentSeason.id}
             onChangeSeason={this.onChangeSeason}
           />
         ) : null}
 
         <LeaderboardContent
-          key={`season_${currentSeason.id}`}
           season={currentSeason}
-          players={data.players}
-          currentUserId={currentUser.id}
           navigation={navigation}
           toggleSeasonpicker={this.toggleSeasonpicker}
         />
@@ -120,18 +103,4 @@ class Leaderboard extends Component {
   }
 }
 
-const mapDispatchToProps = dp => ({
-  onChangeSeason: seasonId => dp(changeSeason(seasonId))
-})
-
-const mapStateToProps = state => ({
-  currentSeason: state.app.currentSeason,
-  currentUser: state.app.currentUser,
-  seasons: state.app.seasons,
-  activeScoringSession: state.app.activeScoringSession,
-  seasonId: state.app.currentSeason.id
-})
-
-export default compose(connect(mapStateToProps, mapDispatchToProps), withLeaderboardQuery)(
-  Leaderboard
-)
+export default withSeasonsQuery(Leaderboard)
