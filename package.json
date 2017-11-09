@@ -7,17 +7,15 @@
     "clean": "watchman watch-del-all && rm -rf $TMPDIR/react-*",
     "test": "jest",
     "lint": "eslint src",
-    "graphql:schema":
-      "rm schema.json && get-graphql-schema http://localhost:3000/api/graphql -j > schema.json",
+    "graphql:schema": "apollo-codegen introspect-schema https://www.tisdagsgolfen.se/api/graphql --output schema.json",
+    "graphql:gentypes": "apollo-codegen generate src/graph/**/*.js --schema schema.json --target typescript --output operation-result-types.ts",
     "storybook": "storybook start -p 7007",
     "android:build:dev": "cd android && ./gradlew assembleRelease",
-    "android:build:prod":
-      "cd android && ENVFILE=.env.production ./gradlew assembleRelease",
+    "android:build:prod": "cd android && ENVFILE=.env.production ./gradlew assembleRelease",
     "android:emulator": "emulator -avd Nexus6-android7.1.1-apiLevel25",
     "android": "react-native run-android",
     "ios": "react-native run-ios --simulator \"iPhone X\"",
-    "ios:storybook":
-      "react-native run-ios --simulator \"iPhone X\" --scheme TGStorybook"
+    "ios:storybook": "react-native run-ios --simulator \"iPhone X\" --scheme TGStorybook"
   },
   "dependencies": {
     "apollo-cache-inmemory": "^1.1.0",
@@ -51,6 +49,7 @@
     "@storybook/addon-actions": "^3.1.8",
     "@storybook/addon-links": "^3.1.6",
     "@storybook/react-native": "^3.1.8",
+    "apollo-codegen": "^0.17.2",
     "babel-eslint": "^8.0.2",
     "babel-jest": "^21.2.0",
     "babel-plugin-module-resolver": "^3.0.0",
@@ -65,7 +64,6 @@
     "eslint-plugin-react": "^7.1.0",
     "eslint-plugin-react-native": "^3.1.0",
     "eslint-plugin-react-perf": "^2.0.5",
-    "get-graphql-schema": "^2.1.1",
     "jest": "^21.2.1",
     "react-dom": "^16.0.0",
     "react-test-renderer": "^16.0.0"
