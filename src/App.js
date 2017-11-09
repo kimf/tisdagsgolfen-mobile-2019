@@ -2,10 +2,10 @@ import React, { Component } from 'react'
 import { ApolloProvider } from 'react-apollo'
 
 // import deviceLog from 'react-native-device-log'
-import { getCache, setCache, removeCache } from 'utils'
-import client from 'apolloClient'
+import { getCache, setCache } from './utils'
+import client from './apolloClient'
 
-import Root from 'Root'
+import Root from './Root'
 
 // deviceLog
 //   .init(AsyncStorage, {

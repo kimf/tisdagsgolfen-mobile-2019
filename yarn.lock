@@ -212,8 +212,8 @@
     "@types/node" "*"
 
 "@types/node@*":
-  version "8.0.49"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-8.0.49.tgz#417f86ab4829c629fe561779ee48751e0fe2a11b"
+  version "8.0.50"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-8.0.50.tgz#dc545448e128c88c4eec7cd64025fcc3b7604541"
 
 "@types/node@^7.0.4":
   version "7.0.46"
@@ -932,9 +932,9 @@ babel-plugin-minify-type-constructors@^0.2.0:
   dependencies:
     babel-helper-is-void-0 "^0.2.0"
 
-babel-plugin-module-resolver@^3.0.0-beta.5:
-  version "3.0.0-beta.5"
-  resolved "https://registry.yarnpkg.com/babel-plugin-module-resolver/-/babel-plugin-module-resolver-3.0.0-beta.5.tgz#8e2873d841e4c800994a19e54ca5e2d08db9dd42"
+babel-plugin-module-resolver@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/babel-plugin-module-resolver/-/babel-plugin-module-resolver-3.0.0.tgz#a2fe5b97f7b809a8bbac18beada0a94d45987c63"
   dependencies:
     find-babel-config "^1.1.0"
     glob "^7.1.2"
@@ -5008,9 +5008,9 @@ methods@~1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/methods/-/methods-1.1.2.tgz#5529a4d67654134edcc5266656835b0f851afcee"
 
-metro-bundler@^0.20.0:
-  version "0.20.0"
-  resolved "https://registry.yarnpkg.com/metro-bundler/-/metro-bundler-0.20.0.tgz#a2faef20ba7f566484a6c5bd585f590f8640c183"
+metro-bundler@^0.20.1:
+  version "0.20.2"
+  resolved "https://registry.yarnpkg.com/metro-bundler/-/metro-bundler-0.20.2.tgz#6c4dc9ea24314d876c466103eff5d78d15646bb5"
   dependencies:
     absolute-path "^0.0.0"
     async "^2.4.0"
@@ -5044,7 +5044,8 @@ metro-bundler@^0.20.0:
     source-map "^0.5.6"
     temp "0.8.3"
     throat "^4.1.0"
-    uglify-es "^3.1.0"
+    uglify-es "^3.1.8"
+    wordwrap "^1.0.0"
     write-file-atomic "^1.2.0"
     xpipe "^1.0.5"
 
@@ -6276,9 +6277,9 @@ react-native-tab-view@^0.0.70:
   dependencies:
     prop-types "^15.5.10"
 
-react-native@0.50.1:
-  version "0.50.1"
-  resolved "https://registry.yarnpkg.com/react-native/-/react-native-0.50.1.tgz#3d8bb7c96dd3151788e795a22155d305f15abfd1"
+react-native@0.50.3:
+  version "0.50.3"
+  resolved "https://registry.yarnpkg.com/react-native/-/react-native-0.50.3.tgz#91282bd5356cc7d794969cdc443cc764389b9af4"
   dependencies:
     absolute-path "^0.0.0"
     art "^0.10.0"
@@ -6306,7 +6307,7 @@ react-native@0.50.1:
     graceful-fs "^4.1.3"
     inquirer "^3.0.6"
     lodash "^4.16.6"
-    metro-bundler "^0.20.0"
+    metro-bundler "^0.20.1"
     mime "^1.3.4"
     minimist "^1.2.0"
     mkdirp "^0.5.1"
@@ -7389,7 +7390,7 @@ ua-parser-js@^0.7.9:
   version "0.7.17"
   resolved "https://registry.yarnpkg.com/ua-parser-js/-/ua-parser-js-0.7.17.tgz#e9ec5f9498b9ec910e7ae3ac626a805c4d09ecac"
 
-uglify-es@^3.1.0:
+uglify-es@^3.1.8:
   version "3.1.8"
   resolved "https://registry.yarnpkg.com/uglify-es/-/uglify-es-3.1.8.tgz#2f21a56871d6354dcc21469cc034c3967f14c5b1"
   dependencies:
@@ -7708,13 +7709,13 @@ wordwrap@0.0.2:
   version "0.0.2"
   resolved "https://registry.yarnpkg.com/wordwrap/-/wordwrap-0.0.2.tgz#b79669bb42ecb409f83d583cad52ca17eaa1643f"
 
+wordwrap@^1.0.0, wordwrap@~1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/wordwrap/-/wordwrap-1.0.0.tgz#27584810891456a4171c8d0226441ade90cbcaeb"
+
 wordwrap@~0.0.2:
   version "0.0.3"
   resolved "https://registry.yarnpkg.com/wordwrap/-/wordwrap-0.0.3.tgz#a3d5da6cd5c0bc0008d37234bbaf1bed63059107"
-
-wordwrap@~1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/wordwrap/-/wordwrap-1.0.0.tgz#27584810891456a4171c8d0226441ade90cbcaeb"
 
 worker-farm@^1.3.1:
   version "1.5.1"

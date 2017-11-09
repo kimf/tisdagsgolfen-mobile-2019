@@ -21,14 +21,11 @@ class SeasonPicker extends Component {
   }
 
   componentDidMount() {
-    Animated.timing(
-      this.state.fadeAnim,
-      {
-        toValue: 1,
-        duration: 150,
-        useNativeDriver: true
-      }
-    ).start()
+    Animated.timing(this.state.fadeAnim, {
+      toValue: 1,
+      duration: 150,
+      useNativeDriver: true
+    }).start()
   }
 
   render() {
@@ -51,15 +48,24 @@ class SeasonPicker extends Component {
           shadowRadius: 200,
           shadowOpacity: 1,
           elevation: 5,
-          transform: [{
-            translateY: this.state.fadeAnim.interpolate({
-              inputRange: [0, 1],
-              outputRange: [-200, 0]  // 0 : 150, 0.5 : 75, 1 : 0
-            })
-          }]
+          transform: [
+            {
+              translateY: this.state.fadeAnim.interpolate({
+                inputRange: [0, 1],
+                outputRange: [-200, 0] // 0 : 150, 0.5 : 75, 1 : 0
+              })
+            }
+          ]
         }}
       >
-        <TGText style={{ fontSize: 24, fontWeight: '900', textAlign: 'center', marginBottom: 20 }}>
+        <TGText
+          style={{
+            fontSize: 24,
+            fontWeight: '900',
+            textAlign: 'center',
+            marginBottom: 20
+          }}
+        >
           Byt säsong
         </TGText>
         {seasons.map((season) => {
@@ -70,9 +76,18 @@ class SeasonPicker extends Component {
             <TGText
               onPress={() => onChangeSeason(season.id)}
               key={`SeasonPicker_${season.id}`}
-              viewStyle={{ flex: 1, flexDirection: 'row', justifyContent: 'center', paddingVertical: 5 }}
+              viewStyle={{
+                flex: 1,
+                flexDirection: 'row',
+                justifyContent: 'center',
+                paddingVertical: 5
+              }}
               style={{
-                paddingTop: 40, textAlign: 'center', color, fontSize: 20, fontWeight
+                paddingTop: 40,
+                textAlign: 'center',
+                color,
+                fontSize: 20,
+                fontWeight
               }}
             >
               {season.name}

@@ -24,7 +24,7 @@ Notification object received example:
     "ios-dev": "react-native run-ios --simulator='iPhone 5'",
     "ios-codepush-staging": "code-push release-react drumkit ios",
     "ios-codepush-production": "code-push release-react drumkit ios -d Production",
-    "ios-bundle": "react-native bundle --dev false --entry-file index.ios.js --bundle-output ios/main.jsbundle --platform ios",
+    "ios-bundle": "react-native bundle --dev false --entry-file index.js --bundle-output ios/main.jsbundle --platform ios",
     "ios-build": "react-native run-ios --configuration Release",
     "android-codepush-staging": "code-push release-react drumkit android",
     "android-codepush-production": "code-push release-react drumkit android -d Production",
@@ -34,5 +34,5 @@ Notification object received example:
     "android-release": "cd android && ./gradlew assembleRelease",
     "android-signer": "cd android/app/build/outputs/apk/ && jarsigner -verbose -keystore ~/.android/debug.keystore -storepass android -keypass android app-release-unsigned.apk androiddebugkey",
     "android-dev": "adb uninstall com.dwicao.loginAnimation && react-native run-android && adb reverse tcp:8081 tcp:8081 && react-native start",
-    "android-bundle": "react-native bundle --platform android --dev false --entry-file ./index.android.js --bundle-output ./android/app/src/main/assets/index.android.bundle --sourcemap-output ./android/app/src/main/assets/index.android.map --assets-dest ./android/app/src/main/res/"
+    "android-bundle": "react-native bundle --platform android --dev false --entry-file ./index.js --bundle-output ./android/app/src/main/assets/index.android.bundle --sourcemap-output ./android/app/src/main/assets/index.android.map --assets-dest ./android/app/src/main/res/"
   },

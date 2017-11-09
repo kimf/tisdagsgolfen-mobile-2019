@@ -51,7 +51,8 @@ export class Events extends Component {
       return null
     }
 
-    const sortedEvents = data.events.length > 0 ? sortedByParsedDate(data.events, 'startsAt') : []
+    const sortedEvents =
+      data.events && data.events.length > 0 ? sortedByParsedDate(data.events, 'startsAt') : []
 
     return (
       <View style={{ flex: 1 }}>

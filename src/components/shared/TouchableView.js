@@ -3,7 +3,9 @@ import { View, TouchableNativeFeedback, TouchableOpacity, Platform } from 'react
 import { bool, string, oneOfType, arrayOf, node } from 'prop-types'
 import { colors } from 'styles'
 
-const TouchableView = ({ isRippleDisabled, rippleColor, children, style, ...rest }) => {
+const TouchableView = ({
+  isRippleDisabled, rippleColor, children, style, ...rest
+}) => {
   if (Platform.OS === 'android') {
     const background = TouchableNativeFeedback.Ripple(rippleColor, false)
     return (
@@ -24,7 +26,7 @@ TouchableView.propTypes = {
   isRippleDisabled: bool,
   rippleColor: string,
   children: oneOfType([arrayOf(node), node]).isRequired,
-  style: View.propTypes.style
+  style: TouchableOpacity.propTypes.style
 }
 
 TouchableView.defaultProps = {

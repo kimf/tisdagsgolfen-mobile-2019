@@ -1,48 +1,37 @@
 module.exports = {
-  parser: "babel-eslint",
-  plugins: [
-    "react",
-    "react-native",
-    "graphql"
-  ],
-  extends: [
-    "airbnb"
-  ],
+  parser: 'babel-eslint',
+  plugins: ['react', 'react-native', 'graphql'],
+  extends: ['airbnb'],
   globals: {
-    "__DEV__": true,
-    "window": true,
-    "fetch": true,
-    "requestAnimationFrame": true
+    __DEV__: true,
+    window: false,
+    fetch: false,
+    requestAnimationFrame: false
   },
   rules: {
-    "valid-jsdoc": 2,
-    "no-var": 2,
-    "react/jsx-uses-react": 2,
-    "react/jsx-uses-vars": 2,
-    "react/jsx-no-undef": 2,
-    "react/jsx-wrap-multilines": 2,
-    "react/jsx-filename-extension": 0,
-    "comma-dangle": [
-      2,
-      "never"
-    ],
-    semi: [
-      2,
-      "never"
-    ],
-    "no-undef": 2,
-    "no-unused-vars": 2,
-    "global-require": 0,
-    "graphql/template-strings": ["error",
+    'valid-jsdoc': 2,
+    'no-var': 2,
+    'react/jsx-uses-react': 2,
+    'react/jsx-uses-vars': 2,
+    'react/jsx-no-undef': 2,
+    'react/jsx-wrap-multilines': 2,
+    'react/jsx-filename-extension': 0,
+    'comma-dangle': [2, 'never'],
+    semi: [2, 'never'],
+    'no-undef': 2,
+    'no-unused-vars': 2,
+    'global-require': 0,
+    'graphql/template-strings': [
+      'error',
       {
-        env: "apollo",
-        schemaJson: require("./schema.json")
+        env: 'apollo',
+        schemaJson: require('./schema.json')
       }
     ]
   },
   settings: {
-    "import/resolver": {
-      "babel-module": {}
+    'import/resolver': {
+      'babel-module': {}
     }
   }
 }

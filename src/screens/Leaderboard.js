@@ -10,6 +10,7 @@ import { screenPropsShape } from 'propTypes'
 import LeaderboardContent from 'Leaderboard/LeaderboardContent'
 import SeasonPicker from 'Leaderboard/SeasonPicker'
 import BottomButton from 'shared/BottomButton'
+import Loading from 'shared/Loading'
 
 class Leaderboard extends Component {
   static navigationOptions = {
@@ -65,7 +66,11 @@ class Leaderboard extends Component {
     const { data, navigation, screenProps: { currentUser, activeScoringSession } } = this.props
     const { showLog, showSeasonPicker, seasonId } = this.state
     if (data.loading) {
-      return null
+      return <Loading text="Laddar..." />
+    }
+
+    if (!data.seasons || data.seasons.length === 0) {
+      return <Loading text="Inga säsonger..." />
     }
 
     const currentSeason = seasonId ? data.seasons.find(s => s.id === seasonId) : data.seasons[0]
