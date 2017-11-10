@@ -1,20 +1,17 @@
 import React, { Component } from 'react'
-import { bool, shape, string, func } from 'prop-types'
+import { Image } from 'react-native'
+import { bool, shape, string } from 'prop-types'
 
-import Login from 'screens/Login'
+import { setCache } from 'utils'
+import EmptyState from 'shared/EmptyState'
 import RootStack from 'routes'
 
-import {
-  withActiveScoringSessionQuery,
-  activeScoringSessionQueryShape
-} from 'queries/activeScoringSessionQuery'
+import { withInitialQuery, initialQueryShape } from 'queries/initialQuery'
 
 class Root extends Component {
   static propTypes = {
     isLoggedin: bool.isRequired,
-    onLogin: func.isRequired,
-    onLogout: func.isRequired,
-    data: activeScoringSessionQueryShape,
+    data: initialQueryShape,
     currentUser: shape({
       id: string,
       email: string
@@ -25,25 +22,51 @@ class Root extends Component {
     currentUser: null,
     data: {
       loading: true,
-      activeScoringSession: null
+      activeScoringSession: null,
+      seasons: []
     }
+  }
+
+  onLogin = (response) => {
+    setCache('currentUser', {
+      ...response.user,
+      token: response.token
+    }).then(() => {
+      this.setState(state => ({ ...state, isLoggedin: true, currentUser: { ...response.user } }))
+    })
+  }
+
+  onLogout = () => {
+    const user = { email: this.state.currentUser.email }
+    setCache('currentUser', {
+      ...user,
+      token: null
+    }).then(() => {
+      this.setState(state => ({ ...state, isLoggedin: false, currentUser: { ...user } }))
+    })
   }
 
   render() {
-    const {
-      isLoggedin,
-      currentUser,
-      onLogin,
-      onLogout,
-      data: { activeScoringSession }
-    } = this.props
+    const { isLoggedin, currentUser, data: { activeScoringSession, seasons, loading } } = this.props
 
-    if (!isLoggedin) {
-      return <Login currentUser={currentUser} onLogin={onLogin} />
-    }
+    if (loading) return null
 
-    return <RootStack screenProps={{ ...{ currentUser, onLogout, activeScoringSession } }} />
+    if (seasons.length === 0) return <EmptyState text="Inga säsonger..." />
+
+    seasons.filter(s => s.photo).map(season => Image.prefetch(season.photo))
+    return (
+      <RootStack
+        screenProps={{
+          ...{
+            currentUser,
+            isLoggedin,
+            activeScoringSession,
+            seasons
+          }
+        }}
+      />
+    )
   }
 }
 
-export default withActiveScoringSessionQuery(Root)
+export default withInitialQuery(Root)

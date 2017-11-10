@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { ApolloProvider } from 'react-apollo'
 
 // import deviceLog from 'react-native-device-log'
-import { getCache, setCache } from './utils'
+import { getCache } from './utils'
 import client from './apolloClient'
 
 import Root from './Root'
@@ -17,6 +17,12 @@ import Root from './Root'
 //   .then(() => {
 //     deviceLog.success('logger initialized')
 //   })
+
+// import { LogView } from 'react-native-device-log'
+
+// if (showLog) {
+//   return <LogView style={{ flex: 1 }} inverted={false} timeStampFormat="HH:mm:ss" multiExpanded />
+// }
 
 class App extends Component {
   state = {
@@ -35,25 +41,6 @@ class App extends Component {
     })
   }
 
-  onLogin = (response) => {
-    setCache('currentUser', {
-      ...response.user,
-      token: response.token
-    }).then(() => {
-      this.setState(state => ({ ...state, isLoggedin: true, currentUser: { ...response.user } }))
-    })
-  }
-
-  onLogout = () => {
-    const user = { email: this.state.currentUser.email }
-    setCache('currentUser', {
-      ...user,
-      token: null
-    }).then(() => {
-      this.setState(state => ({ ...state, isLoggedin: false, currentUser: { ...user } }))
-    })
-  }
-
   render() {
     if (this.state.checking) {
       return null
@@ -61,7 +48,7 @@ class App extends Component {
 
     return (
       <ApolloProvider client={client}>
-        <Root {...this.state} onLogin={this.onLogin} onLogout={this.onLogout} />
+        <Root {...this.state} />
       </ApolloProvider>
     )
   }

@@ -26,13 +26,13 @@ TouchableView.propTypes = {
   isRippleDisabled: bool,
   rippleColor: string,
   children: oneOfType([arrayOf(node), node]).isRequired,
-  style: TouchableOpacity.propTypes.style
+  style: View.propTypes.style
 }
 
 TouchableView.defaultProps = {
   isRippleDisabled: true,
   rippleColor: colors.darkGreen,
-  style: {}
+  style: null
 }
 
 export default TouchableView

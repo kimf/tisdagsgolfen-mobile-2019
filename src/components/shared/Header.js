@@ -37,7 +37,9 @@ class Header extends Component {
   )
 
   render() {
-    const { title, children, backgroundColor, color, goBack } = this.props
+    const {
+      title, children, backgroundColor, color, goBack
+    } = this.props
 
     return (
       <View style={[styles.navbar, { backgroundColor }]}>

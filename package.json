@@ -14,8 +14,8 @@
     "android:build:prod": "cd android && ENVFILE=.env.production ./gradlew assembleRelease",
     "android:emulator": "emulator -avd Nexus6-android7.1.1-apiLevel25",
     "android": "react-native run-android",
-    "ios": "react-native run-ios --simulator \"iPhone X\"",
-    "ios:storybook": "react-native run-ios --simulator \"iPhone X\" --scheme TGStorybook"
+    "ios": "react-native run-ios --simulator \"iPhone 8\"",
+    "ios:storybook": "react-native run-ios --simulator \"iPhone 8\" --scheme TGStorybook"
   },
   "dependencies": {
     "apollo-cache-inmemory": "^1.1.0",

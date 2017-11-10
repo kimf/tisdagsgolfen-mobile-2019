@@ -32,7 +32,8 @@ const LeaderboardCard = ({ player, sorting, currentUserId }) => {
 
   const averagePoints = (player.average * 2).toFixed() / 2
 
-  const currentUserStyle = player.id.split('_')[0] === currentUserId ? mutedYellow : null
+  const currentUserStyle =
+    currentUserId && player.id.split('_')[0] === currentUserId ? mutedYellow : null
 
   if (player.eventCount < 1) {
     return null
@@ -72,9 +73,11 @@ const LeaderboardCard = ({ player, sorting, currentUserId }) => {
 }
 
 LeaderboardCard.propTypes = {
-  currentUserId: string.isRequired,
+  currentUserId: string,
   player: leaderboardPlayerShape.isRequired,
   sorting: string.isRequired
 }
+
+LeaderboardCard.defaultProps = { currentUserId: null }
 
 export default LeaderboardCard
