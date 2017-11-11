@@ -1,17 +1,10 @@
 {
-  "presets": [
-    "react-native",
-    "react-native-stage-0/decorator-support"
-  ],
+  "presets": ["react-native", "react-native-stage-0/decorator-support"],
   "plugins": [
     [
       "module-resolver",
       {
-        "root": [
-          "./src",
-          "./src/components",
-          "./src/graph"
-        ],
+        "root": ["./src", "./src/components", "./src/graph"],
         "alias": {
           "shared": "./src/components/shared",
           "screens": "./src/screens"

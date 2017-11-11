@@ -43,6 +43,7 @@
     "react-native-slowlog": "^1.0.2",
     "react-navigation": "^1.0.0-beta.19",
     "react-required-if": "^1.0.1",
+    "react-style-proptype": "^3.1.0",
     "subscriptions-transport-ws": "^0.9.1"
   },
   "devDependencies": {
