@@ -6,11 +6,10 @@ import { StackNavigator } from 'react-navigation'
 
 // import NewEvent from 'screens/EventScreens/NewEvent'
 // import EventResult from 'screens/EventScreens/EventResult'
-// import LiveEventResult from 'screens/EventScreens/LiveEventResult' // TODO: Should this be a screen
+// import LiveEventResult from 'screens/EventScreens/LiveEventResult'
 // import NewPlayer from 'screens/NewPlayer'
 
 import Season from 'screens/Season'
-
 import ScoreEventScreen from 'screens/ScoringScreens/ScoreEvent'
 
 // const EventStack = StackNavigator(

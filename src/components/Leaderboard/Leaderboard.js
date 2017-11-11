@@ -1,48 +1,29 @@
 import React, { Component } from 'react'
-import { View, Image, FlatList } from 'react-native'
-import { string } from 'prop-types'
-
-import { withLeaderboardQuery, leaderboardQueryProps } from 'queries/leaderboardQuery'
+import { View, FlatList } from 'react-native'
+import { arrayOf, string } from 'prop-types'
 
 import LeaderboardCard from 'Leaderboard/LeaderboardCard'
-import Tabs from 'shared/Tabs'
+
 import EmptyState from 'shared/EmptyState'
-import Loading from 'shared/Loading'
-import { seasonShape } from 'propTypes'
 import { ranked } from 'utils'
-import { colors, NAVBAR_HEIGHT } from 'styles'
+import { colors } from 'styles'
+import { leaderboardPlayerShape } from 'propTypes'
 
 class Leaderboard extends Component {
   static propTypes = {
-    season: seasonShape.isRequired,
-    data: leaderboardQueryProps.isRequired,
-    currentUserId: string
+    seasonId: string.isRequired,
+    eventId: string.isRequired,
+    players: arrayOf(leaderboardPlayerShape).isRequired,
+    currentUserId: string,
+    sorting: string
   }
 
-  static defaultProps = { currentUserId: null }
-
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      sorting: 'totalPoints'
-    }
-  }
-
-  listView = null
-
-  changeSort = (sorting) => {
-    this.listView.scrollToIndex({ index: 0 })
-    this.setState(state => ({ ...state, sorting }))
-  }
+  static defaultProps = { currentUserId: null, sorting: 'totalPoints' }
 
   render() {
-    const { sorting } = this.state
-    const { data: { loading, players }, season, currentUserId } = this.props
-
-    if (loading) {
-      return <Loading text="Laddar ledartavla" />
-    }
+    const {
+      sorting, players, currentUserId, seasonId, eventId
+    } = this.props
 
     let sortedPlayers = null
     if (sorting === 'beers') {
@@ -56,42 +37,29 @@ class Leaderboard extends Component {
     }
 
     const emptyLeaderboard = sortedPlayers.filter(sl => sl.eventCount !== 0).length === 0
-    const showPhoto = !emptyLeaderboard && season.closed && season.photo
 
     return (
       <View style={{ flex: 1, backgroundColor: colors.white }}>
-        <View style={{ flex: 1, marginTop: NAVBAR_HEIGHT }}>
-          {showPhoto ? (
-            <Image
-              style={{ width: '100%', height: 180 }}
-              source={{ uri: season.photo, cache: 'force-cache' }}
-              resizeMode="cover"
-            />
-          ) : null}
-
+        <View style={{ flex: 1 }}>
           {emptyLeaderboard ? (
             <EmptyState text="Inga rundor spelade ännu" />
           ) : (
             <FlatList
               removeClippedSubviews={false}
               initialNumToRender={10}
-              ref={(ref) => {
-                this.listView = ref
-              }}
               style={{ paddingHorizontal: 10, paddingBottom: 20 }}
               data={sortedPlayers}
               renderItem={({ item }) => (
                 <LeaderboardCard currentUserId={currentUserId} player={item} sorting={sorting} />
               )}
               extraData={this.state}
-              keyExtractor={player => `l_${player.id}`}
+              keyExtractor={player => `l_${seasonId}_${eventId}_${player.id}`}
             />
           )}
-          <Tabs currentRoute={sorting} onChange={sort => this.changeSort(sort)} />
         </View>
       </View>
     )
   }
 }
 
-export default withLeaderboardQuery(Leaderboard)
+export default Leaderboard

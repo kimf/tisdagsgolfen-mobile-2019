@@ -9,11 +9,11 @@ const Tab = ({ tab, isCurrent, onChange }) => {
   return (
     <TGText
       key={tab.title}
-      viewStyle={[styles.tab, { backgroundColor: isCurrent ? colors.lightGray : colors.white }]}
+      viewStyle={[styles.tab, { backgroundColor: isCurrent ? colors.gray : colors.lightGray }]}
       style={[
         styles.tabText,
         {
-          color: isCurrent ? colors.green : colors.dark,
+          color: isCurrent ? colors.white : colors.dark,
           fontWeight: isCurrent ? 'bold' : 'normal'
         }
       ]}

@@ -3,57 +3,59 @@ import { View, Image } from 'react-native'
 import { shape, string, number } from 'prop-types'
 
 import TGText from 'shared/TGText'
-import UpOrDown from 'shared/UpOrDown'
 import styles, { colors } from 'styles'
 
 const mutedYellow = { backgroundColor: colors.mutedYellow }
 const defaultPhoto = require('../../images/defaultavatar.png')
 
 // TODO: Refactor and re-use LeaderboardCard as much as possible + avatar
-const EventLeaderboardCard = ({ data, currentUserId, sorting, scoringType }) => {
+const EventLeaderboardCard = ({
+  data, currentUserId, sorting, scoringType
+}) => {
   let pointText
   let pointValue = ''
   let position
 
   if (sorting === 'beers') {
-    pointValue = data.score.beers
+    pointValue = data.beers
     pointText = '🍺'
     position = data.beerPos
   } else if (sorting === 'kr') {
-    pointValue = data.score.kr
+    pointValue = data.kr
     pointText = 'kr'
     position = data.krPos
   } else {
-    pointValue = data.score.eventPoints
+    pointValue = data.eventPoints
     pointText = 'p'
     position = data.position
   }
 
-  const player = data.score.user
-
-  const currentUserStyle = player.id === currentUserId ? mutedYellow : null
-  const photoUrl = player.photo ? player.photo.url : null
+  const currentUserStyle = data.id === currentUserId ? mutedYellow : null
   return (
     <View key={data.id} style={[styles.listrow, currentUserStyle]}>
       <View style={styles.position}>
-        <TGText style={{ flex: 1, fontWeight: '800', color: colors.dark, fontSize: 16 }}>
+        <TGText
+          style={{
+            flex: 1,
+            fontWeight: '800',
+            color: colors.dark,
+            fontSize: 16
+          }}
+        >
           {position}
         </TGText>
-        <UpOrDown prev={data.previousTotalPosition} current={data.totalPosition} />
       </View>
       <Image
         style={styles.cardImage}
-        source={photoUrl ? { uri: photoUrl } : defaultPhoto}
+        source={data.photo ? { uri: data.photo } : defaultPhoto}
         resizeMode="cover"
       />
       <View style={styles.cardTitle}>
-        <TGText style={styles.name}>
-          {player.firstName} {player.lastName}
-        </TGText>
+        <TGText style={styles.name}>{data.name}</TGText>
       </View>
       {sorting === 'totalPoints' ? (
         <TGText style={styles.dimmerPoints}>
-          {data.score.value} {scoringType === 'points' ? 'p' : 'slag'}
+          {data.value} {scoringType === 'points' ? 'p' : 'slag'}
         </TGText>
       ) : null}
 
@@ -68,26 +70,20 @@ EventLeaderboardCard.propTypes = {
     id: string.isRequired,
     krPos: number,
     position: number.isRequired,
-    previousTotalPosition: number.isRequired,
-    score: shape({
-      beers: number,
-      kr: number,
-      eventPoints: number.isRequired,
-      user: shape({
-        id: string.isRequired,
-        firstName: string.isRequired,
-        lastName: string.isRequired
-      }),
-      value: number.isRequired
-    }),
-    totalAveragePoints: number.isRequired,
-    totalEventCount: number.isRequired,
-    totalEventPoints: number.isRequired,
-    totalPosition: number.isRequired
-  }).isRequired,
-  currentUserId: string.isRequired,
+    beers: number,
+    kr: number.isRequired,
+    eventPoints: number.isRequired,
+    photo: string,
+    name: string.isRequired,
+    value: number.isRequired
+  }).isRequired, // TODO: Move to propTypes?
+  currentUserId: string,
   sorting: string.isRequired,
   scoringType: string.isRequired
+}
+
+EventLeaderboardCard.defaultProps = {
+  currentUserId: null
 }
 
 export default EventLeaderboardCard

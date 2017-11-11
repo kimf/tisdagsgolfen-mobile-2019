@@ -1,34 +1,42 @@
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
+import { arrayOf, bool, shape } from 'prop-types'
 
+import { leaderboardPlayerShape, eventWithLeaderboardshape } from 'propTypes'
 
 const eventQuery = gql`
-  query eventQuery($eventId: ID!) {
-    players: allEventLeaderboards(
-      orderBy: position_ASC,
-      filter: { event: { id: $eventId } }
-    ) {
+  query eventQuery($eventId: ID!, $seasonId: ID!) {
+    players: seasonLeaderboard(seasonId: $seasonId, eventId: $eventId) {
       id
+      photo
+      name
+      average
+      eventCount
+      topPoints
       position
-      previousTotalPosition
-      totalAveragePoints
-      totalEventCount
-      totalEventPoints
-      totalPosition
-      score {
+      oldAverage
+      oldTotalPoints
+      prevPosition
+      totalPoints
+      totalKr
+      beers
+    }
+    event(id: $eventId) {
+      id
+      status
+      startsAt
+      scoringType
+      teamEvent
+      course
+      leaderboard {
         id
-        beers
+        photo
+        name
+        position
         eventPoints
+        beers
         kr
         value
-        user {
-          id
-          firstName
-          lastName
-          photo {
-            url
-          }
-        }
       }
     }
   }
@@ -37,7 +45,15 @@ const eventQuery = gql`
 export default eventQuery
 
 export const withEventQuery = graphql(eventQuery, {
-  options: ({ navigation }) => ({
-    variables: { eventId: navigation.state.params.event.id }
+  options: ({ eventId, seasonId }) => ({
+    variables: { eventId, seasonId }
+  })
+})
+
+export const eventQueryProps = shape({
+  data: shape({
+    players: arrayOf(leaderboardPlayerShape),
+    event: eventWithLeaderboardshape.isRequired,
+    loading: bool
   })
 })

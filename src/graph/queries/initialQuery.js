@@ -21,6 +21,7 @@ const initialQuery = gql`
       name
       closed
       photo
+      eventIds
     }
   }
 `

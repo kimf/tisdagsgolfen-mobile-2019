@@ -3,12 +3,12 @@ import { View } from 'react-native'
 import { func, shape } from 'prop-types'
 
 import BottomButton from 'shared/BottomButton'
-import Leaderboard from 'Leaderboard/Leaderboard'
 import SeasonHeader from 'Season/SeasonHeader'
 import SeasonPicker from 'Season/SeasonPicker'
+import WeekView from 'Season/WeekView'
 
 import { screenPropsShape } from 'propTypes'
-import { colors } from 'styles'
+import styles from 'styles'
 
 class Season extends Component {
   static navigationOptions = {
@@ -48,7 +48,7 @@ class Season extends Component {
     const season = seasonId ? seasons.find(s => s.id === seasonId) : seasons[0]
 
     return (
-      <View style={{ flex: 1, alignItems: 'stretch', backgroundColor: colors.lightGray }}>
+      <View style={styles.container}>
         {showSeasonPicker && (
           <SeasonPicker
             seasons={seasons}
@@ -58,7 +58,7 @@ class Season extends Component {
         )}
         <SeasonHeader season={season} togglePicker={this.toggleSeasonpicker} />
 
-        <Leaderboard currentUserId={currentUser ? currentUser.id : null} season={season} />
+        <WeekView season={season} currentUser={currentUser} />
 
         {activeScoringSession && (
           <BottomButton

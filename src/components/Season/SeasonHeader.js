@@ -26,20 +26,19 @@ const SeasonHeader = ({ season, togglePicker }) => (
       >
         <Image
           style={{
-            tintColor: colors.muted,
+            tintColor: colors.green,
             resizeMode: 'contain',
-            height: 12,
-            width: 12,
-            marginRight: 8
+            height: 16,
+            width: 16
           }}
-          source={require('../../images/left.png')}
+          source={require('../../images/menu.png')}
         />
       </TouchableView>
       <TGText
         adjustsFontSizeToFitHeight
-        style={[styles.navbarTitle, { color: colors.dark, fontSize: 20 }]}
+        style={[styles.navbarTitle, { color: colors.dark, fontSize: 18 }]}
       >
-        Tisdagsgolfen {season.name}
+        TISDAGSGOLFEN {season.name}
       </TGText>
     </View>
   </View>

@@ -15,7 +15,7 @@ export const colors = {
   red: '#E30050'
 }
 
-export const NAVBAR_HEIGHT = 60
+export const NAVBAR_HEIGHT = 80
 export const STATUS_BAR_HEIGHT = Platform.select({ ios: 20, android: 24 })
 export const deviceWidth = Dimensions.get('window').width
 export const deviceHeight = Dimensions.get('window').height
@@ -176,13 +176,8 @@ export default StyleSheet.create({
   },
 
   navbar: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    zIndex: 1000,
     width: '100%',
     backgroundColor: colors.white,
-    marginBottom: 10,
     height: NAVBAR_HEIGHT
   },
 
@@ -235,9 +230,11 @@ export default StyleSheet.create({
 
   tabs: {
     flexDirection: 'row',
-    width: '96%',
-    margin: '2%',
-    backgroundColor: colors.white
+    width: '100%',
+    padding: '2%',
+    backgroundColor: colors.lightGray,
+    height: 40,
+    alignItems: 'center'
   },
 
   tab: {
