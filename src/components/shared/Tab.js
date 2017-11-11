@@ -2,21 +2,25 @@ import React from 'react'
 import { shape, string, bool, func } from 'prop-types'
 
 import TGText from 'shared/TGText'
-import styles, { colors } from 'styles'
+import { colors } from 'styles'
 
 const Tab = ({ tab, isCurrent, onChange }) => {
   const text = `${tab.icon} ${tab.title}`
   return (
     <TGText
       key={tab.title}
-      viewStyle={[styles.tab, { backgroundColor: isCurrent ? colors.gray : colors.lightGray }]}
-      style={[
-        styles.tabText,
-        {
-          color: isCurrent ? colors.white : colors.dark,
-          fontWeight: isCurrent ? 'bold' : 'normal'
-        }
-      ]}
+      viewStyle={{
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center'
+      }}
+      style={{
+        paddingVertical: 5,
+        paddingHorizontal: 10,
+        fontSize: 12,
+        color: isCurrent ? colors.blue : colors.dark,
+        fontWeight: isCurrent ? 'bold' : 'normal'
+      }}
       onPress={() => onChange(tab.value)}
     >
       {text}

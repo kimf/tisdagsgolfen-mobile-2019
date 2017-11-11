@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Image } from 'react-native'
 import { bool, shape, string } from 'prop-types'
 
 import { setCache } from 'utils'
@@ -53,7 +52,6 @@ class Root extends Component {
 
     if (seasons.length === 0) return <EmptyState text="Inga säsonger..." />
 
-    seasons.filter(s => s.photo).map(season => Image.prefetch(season.photo))
     return (
       <RootStack
         screenProps={{

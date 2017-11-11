@@ -228,27 +228,6 @@ export default StyleSheet.create({
     borderTopColor: colors.blue
   },
 
-  tabs: {
-    flexDirection: 'row',
-    width: '100%',
-    padding: '2%',
-    backgroundColor: colors.lightGray,
-    height: 40,
-    alignItems: 'center'
-  },
-
-  tab: {
-    flex: 1,
-    paddingVertical: 8,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-
-  tabText: {
-    fontSize: 12
-  },
-
   backdrop: {
     position: 'absolute',
     top: 0,

@@ -46,58 +46,51 @@ class EventView extends Component {
       return <Loading text="Laddar massa data..." />
     }
 
-    return (
+    return [
+      <EventHeader
+        key={`eventHeader_${eventId}`}
+        course={event.course}
+        teamEvent={event.teamEvent}
+        scoringType={event.scoringType}
+      />,
+
+      <Tabs
+        key={`leaderboardTabs_${eventId}`}
+        leaderboard
+        currentRoute={leaderboardType}
+        onChange={sort => this.changeLeaderboardType(sort)}
+      />,
       <View
-        style={[
-          styles.container,
-          {
-            backgroundColor: colors.blue,
-            padding: 10
-          }
-        ]}
+        key={`eventContent_${eventId}`}
+        style={{
+          flex: 1,
+          alignItems: 'stretch',
+          paddingBottom: 5,
+          borderBottomRightRadius: 5,
+          borderBottomLeftRadius: 5,
+          backgroundColor: 'white'
+        }}
       >
-        <EventHeader
-          course={event.course}
-          teamEvent={event.teamEvent}
-          scoringType={event.scoringType}
-        />
-
-        <Tabs
-          leaderboard
-          currentRoute={leaderboardType}
-          onChange={sort => this.changeLeaderboardType(sort)}
-        />
-
-        <View
-          style={{
-            flex: 1,
-            alignItems: 'stretch',
-            paddingBottom: 5,
-            borderRadius: 5,
-            backgroundColor: 'white'
-          }}
-        >
-          {leaderboardType === 'season' ? (
-            <Leaderboard
-              sorting={sorting}
-              currentUserId={currentUserId}
-              players={players}
-              seasonId={seasonId}
-              eventId={eventId}
-            />
-          ) : (
-            <EventResult
-              eventId={eventId}
-              seasonId={seasonId}
-              sorting={sorting}
-              currentUserId={currentUserId}
-              players={event.leaderboard}
-              scoringType={event.scoringType}
-            />
-          )}
-        </View>
+        {leaderboardType === 'season' ? (
+          <Leaderboard
+            sorting={sorting}
+            currentUserId={currentUserId}
+            players={players}
+            seasonId={seasonId}
+            eventId={eventId}
+          />
+        ) : (
+          <EventResult
+            eventId={eventId}
+            seasonId={seasonId}
+            sorting={sorting}
+            currentUserId={currentUserId}
+            players={event.leaderboard}
+            scoringType={event.scoringType}
+          />
+        )}
       </View>
-    )
+    ]
   }
 }
 

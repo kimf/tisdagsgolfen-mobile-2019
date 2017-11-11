@@ -4,7 +4,7 @@ import { bool, string, func } from 'prop-types'
 
 import Tab from 'shared/Tab'
 import TGText from 'shared/TGText'
-import styles from 'styles'
+import { colors } from 'styles'
 
 const Tabs = ({
   currentRoute, onChange, scoringType, teamEvent, leaderboard
@@ -25,9 +25,19 @@ const Tabs = ({
   }
 
   return (
-    <View style={styles.tabs} key={`tabs_${leaderboard ? 'leaderbard' : 'sorting'}`}>
+    <View
+      style={{
+        flexDirection: 'row',
+        width: '100%',
+        padding: '2%',
+        backgroundColor: colors.lightGray,
+        alignItems: 'center',
+        justifyContent: 'flex-start'
+      }}
+      key={`tabs_${leaderboard ? 'leaderbard' : 'sorting'}`}
+    >
       {!leaderboard && (
-        <TGText style={{ paddingHorizontal: 10, fontSize: 10 }}>Sortera efter: </TGText>
+        <TGText style={{ paddingHorizontal: 5, fontSize: 12 }}>Sortera efter: </TGText>
       )}
       {tabs.map(t => (
         <Tab

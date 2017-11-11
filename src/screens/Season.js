@@ -9,7 +9,6 @@ import WeekView from 'Season/WeekView'
 import BottomButton from 'shared/BottomButton'
 import SeasonHeader from 'Season/SeasonHeader'
 import SeasonPicker from 'Season/SeasonPicker'
-import { createNavigator } from 'routes'
 import { screenPropsShape } from 'propTypes'
 import styles from 'styles'
 
@@ -41,17 +40,21 @@ class Season extends Component {
   }
 
   render() {
-    const { screenProps: { currentUser, activeScoringSession, seasons }, navigation } = this.props
+    const { screenProps: { currentUser, activeScoringSession, seasons } } = this.props
     const { showSeasonPicker, seasonId } = this.state
 
     const season = seasonId ? seasons.find(s => s.id === seasonId) : seasons[0]
 
     const SeasonNavigator = season.closed
-      ? StackNavigator({
-        Final: { screen: FinalWeek },
-        Week: { screen: WeekView }
-      })
-      : StackNavigator({ Week: { screen: WeekView } })
+      ? StackNavigator(
+        {
+          Final: { screen: FinalWeek },
+          Week: { screen: WeekView }
+        },
+        { headerMode: 'none' }
+      )
+      : StackNavigator({ Week: { screen: WeekView } }, { headerMode: 'none' })
+    // TODO: Should be able to just render WeekView here!
 
     this.router = SeasonNavigator.router
     return (

@@ -1,54 +1,26 @@
 import React, { Component } from 'react'
-import { shape, func, number } from 'prop-types'
+import { View } from 'react-native'
+import { shape } from 'prop-types'
 
 import EventView from 'Season/EventView'
+import WeekPicker from 'Season/WeekPicker'
 import Tabs from 'shared/Tabs'
-import TGText from 'shared/TGText'
 import { userShape, seasonShape } from 'propTypes'
-
-const getRightButton = (weekIndex, eventCount, navigate) => {
-  if (weekIndex < eventCount - 1) {
-    return (
-      <TGText onPress={() => navigate('Week', { weekIndex: weekIndex + 1 })}>
-        {eventCount - (weekIndex + 1)}
-      </TGText>
-    )
-  }
-  return null
-}
+import styles, { colors } from 'styles'
 
 class WeekView extends Component {
-  static navigationOptions = ({ navigation, screenProps }) => {
-    const weekIndex =
-      navigation.state.params && navigation.state.params.weekIndex
-        ? navigation.state.params.weekIndex
-        : 0
-    const eventCount = screenProps.season.eventIds.length
-    return {
-      title: `Vecka ${eventCount - weekIndex}`,
-      headerRight: getRightButton(weekIndex, eventCount, navigation.navigate)
-    }
-  }
-
   static propTypes = {
-    navigation: shape({
-      navigate: func.isRequired,
-      state: shape({
-        params: shape({
-          weekIndex: number
-        })
-      })
-    }).isRequired,
     screenProps: shape({
       currentUser: userShape,
       season: seasonShape.isRequired
     }).isRequired
   }
 
-  state = { sorting: 'totalPoints' }
+  state = { sorting: 'totalPoints', weekIndex: 0 }
 
   changeWeek = (weekIndex) => {
-    this.props.navigation.navigate('Week', { weekIndex })
+    console.log(weekIndex)
+    this.setState(state => ({ ...state, weekIndex }))
   }
 
   changeSort = (sorting) => {
@@ -57,25 +29,31 @@ class WeekView extends Component {
 
   render() {
     const { season, currentUser } = this.props.screenProps
-    const { state } = this.props.navigation
-    const { sorting } = this.state
+    const { sorting, weekIndex } = this.state
 
-    const weekIndex = (state.params && state.params.weekIndex) || 0
-    const reversedEventIds = season.eventIds.slice().sort((a, b) => b - a)
-    const eventId = `${reversedEventIds[weekIndex]}`
+    const reversedEventIds = season.eventIds.slice().reverse()
+    const reversedIndexArray = [...Array(reversedEventIds.length)].map((a, i) => i).reverse()
+    const eventId = `${reversedEventIds[weekIndex || 0]}`
     const currentUserId = currentUser ? currentUser.id : null
 
     return [
-      <EventView
-        key={`eventView_${eventId}`}
-        eventId={eventId}
-        seasonId={season.id}
-        currentUserId={currentUserId}
-        sorting={sorting}
-      />,
       parseInt(season.name, 10) > 2015 && (
         <Tabs key="weekSortTabs" currentRoute={sorting} onChange={sort => this.changeSort(sort)} />
-      )
+      ),
+      <WeekPicker
+        key={`weekPicker_${eventId}`}
+        weeks={reversedIndexArray}
+        currentIndex={reversedIndexArray[weekIndex]}
+        onChangeWeek={this.changeWeek}
+      />,
+      <View key={`eventView_${eventId}`} style={[styles.container]}>
+        <EventView
+          eventId={eventId}
+          seasonId={season.id}
+          currentUserId={currentUserId}
+          sorting={sorting}
+        />
+      </View>
     ]
   }
 }

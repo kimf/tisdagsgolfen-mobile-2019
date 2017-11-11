@@ -8,21 +8,20 @@ import { colors } from 'styles'
 const gametypeName = (scoringType) => {
   switch (scoringType) {
     case 'modified_points':
-      return 'Modifierad Poäng'
+      return 'Modifierad Poäng | '
     case 'points':
-      return 'Poäng'
+      return 'Poäng | '
     default:
-      return 'Slag'
+      return 'Slag | '
   }
 }
 
 const styles = StyleSheet.create({
   view: {
-    paddingHorizontal: 8,
-    paddingVertical: 10,
+    paddingHorizontal: 20,
+    paddingTop: 10,
     backgroundColor: colors.lightGray,
     flexDirection: 'row',
-    height: 40,
     alignItems: 'center',
     borderTopLeftRadius: 8,
     borderTopRightRadius: 8
@@ -32,16 +31,17 @@ const styles = StyleSheet.create({
     textAlign: 'left',
     flex: 1,
     color: colors.dark,
+    fontWeight: 'bold',
     fontSize: 14
   }
 })
 
 const EventHeader = ({ course, teamEvent, scoringType }) => (
   <View style={styles.view}>
-    <TGText style={styles.text}>{course}</TGText>
-    <TGText style={[styles.text, { textAlign: 'right' }]}>
+    <TGText style={styles.text}>
       {gametypeName(scoringType)}
-      {teamEvent ? ' (Lag)' : null}
+      {teamEvent ? ' (Lag) ' : null}
+      {course}
     </TGText>
   </View>
 )

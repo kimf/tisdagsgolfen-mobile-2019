@@ -8,10 +8,6 @@ import { colors } from 'styles'
 import { seasonShape } from 'propTypes'
 
 class FinalWeek extends Component {
-  static navigationOptions = ({ screenProps }) => ({
-    title: `Final ${screenProps.season.name}`
-  })
-
   static propTypes = {
     screenProps: shape({
       season: seasonShape.isRequired
@@ -22,7 +18,7 @@ class FinalWeek extends Component {
   }
 
   gotoEvent = () => {
-    this.props.navigation.navigate('Week', { weekIndex: 0 })
+    this.props.navigation.navigate('Week')
   }
 
   render() {
