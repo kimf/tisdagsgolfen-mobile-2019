@@ -57,12 +57,10 @@ class Root extends Component {
     return (
       <RootStack
         screenProps={{
-          ...{
-            currentUser,
-            isLoggedin,
-            activeScoringSession,
-            seasons
-          }
+          currentUser,
+          isLoggedin,
+          activeScoringSession,
+          seasons
         }}
       />
     )

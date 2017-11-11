@@ -12,6 +12,9 @@ Notification object received example:
 }
 
 
+# Test out:
+babel-plugin-transform-react-remove-prop-types
+
 
 # smart stuff to put in npm scripts
 
