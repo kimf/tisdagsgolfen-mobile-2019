@@ -1,20 +1,19 @@
 import React, { Component } from 'react'
 import { View } from 'react-native'
 import { func, shape } from 'prop-types'
+import { StackNavigator } from 'react-navigation'
+
+import FinalWeek from 'Season/FinalWeek'
+import WeekView from 'Season/WeekView'
 
 import BottomButton from 'shared/BottomButton'
 import SeasonHeader from 'Season/SeasonHeader'
 import SeasonPicker from 'Season/SeasonPicker'
-import WeekView from 'Season/WeekView'
-
+import { createNavigator } from 'routes'
 import { screenPropsShape } from 'propTypes'
 import styles from 'styles'
 
 class Season extends Component {
-  static navigationOptions = {
-    header: null
-  }
-
   static propTypes = {
     screenProps: screenPropsShape.isRequired,
     navigation: shape({
@@ -42,11 +41,19 @@ class Season extends Component {
   }
 
   render() {
-    const { screenProps: { currentUser, activeScoringSession, seasons } } = this.props
+    const { screenProps: { currentUser, activeScoringSession, seasons }, navigation } = this.props
     const { showSeasonPicker, seasonId } = this.state
 
     const season = seasonId ? seasons.find(s => s.id === seasonId) : seasons[0]
 
+    const SeasonNavigator = season.closed
+      ? StackNavigator({
+        Final: { screen: FinalWeek },
+        Week: { screen: WeekView }
+      })
+      : StackNavigator({ Week: { screen: WeekView } })
+
+    this.router = SeasonNavigator.router
     return (
       <View style={styles.container}>
         {showSeasonPicker && (
@@ -58,7 +65,7 @@ class Season extends Component {
         )}
         <SeasonHeader season={season} togglePicker={this.toggleSeasonpicker} />
 
-        <WeekView season={season} currentUser={currentUser} />
+        <SeasonNavigator screenProps={{ season, currentUser }} />
 
         {activeScoringSession && (
           <BottomButton
