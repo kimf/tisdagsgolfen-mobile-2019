@@ -3,7 +3,7 @@ import { StyleSheet, Platform, Dimensions } from 'react-native'
 export const colors = {
   lightGray: '#ECEBEB',
   green: '#04B742',
-  darkGreen: '#058D35',
+  darkGreen: 'rgba(6,83,60,1)',
   mutedGreen: '#D4F4E0',
   dark: '#35383E',
   muted: '#7D8986',
@@ -15,7 +15,7 @@ export const colors = {
   red: '#E30050'
 }
 
-export const NAVBAR_HEIGHT = 80
+export const NAVBAR_HEIGHT = 40
 export const STATUS_BAR_HEIGHT = Platform.select({ ios: 20, android: 24 })
 export const deviceWidth = Dimensions.get('window').width
 export const deviceHeight = Dimensions.get('window').height
@@ -173,33 +173,6 @@ export default StyleSheet.create({
     borderColor: colors.lightGray,
     flexDirection: 'row',
     padding: 20
-  },
-
-  navbar: {
-    width: '100%',
-    backgroundColor: colors.white,
-    height: NAVBAR_HEIGHT
-  },
-
-  navbarTitle: {
-    color: colors.dark,
-    fontWeight: '800',
-    fontSize: 28,
-    textAlign: 'left',
-    justifyContent: 'flex-start'
-  },
-
-  navbarInner: {
-    height: '100%',
-    marginLeft: 15,
-    backgroundColor: colors.white,
-    borderBottomColor: colors.lightGray,
-    borderBottomWidth: 1,
-    paddingTop: STATUS_BAR_HEIGHT,
-    paddingRight: STATUS_BAR_HEIGHT,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'flex-start'
   },
 
   subHeader: {

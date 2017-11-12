@@ -6,41 +6,45 @@ import TGText from 'shared/TGText'
 import TouchableView from 'shared/TouchableView'
 
 import { seasonShape } from 'propTypes'
-import styles, { colors } from 'styles'
+import { colors, NAVBAR_HEIGHT, STATUS_BAR_HEIGHT } from 'styles'
 
 const SeasonHeader = ({ season, togglePicker }) => (
-  <View style={[styles.navbar, { backgroundColor: colors.lightGray }]}>
-    <View style={[styles.navbarInner, { backgroundColor: colors.lightGray }]}>
-      <TouchableView
-        style={{
-          paddingTop: 10,
-          paddingBottom: 10,
-          paddingRight: 20,
-          paddingLeft: 0,
-          flex: 0,
-          justifyContent: 'flex-start',
-          alignItems: 'flex-start',
-          flexDirection: 'row'
-        }}
-        onPress={togglePicker}
-      >
-        <Image
-          style={{
-            tintColor: colors.green,
-            resizeMode: 'contain',
-            height: 16,
-            width: 16
-          }}
-          source={require('../../images/menu.png')}
-        />
-      </TouchableView>
+  <View
+    style={{
+      backgroundColor: colors.lightGray,
+      height: NAVBAR_HEIGHT + STATUS_BAR_HEIGHT,
+      padding: 5
+    }}
+  >
+    <TouchableView
+      style={{
+        padding: 10,
+        paddingTop: STATUS_BAR_HEIGHT,
+        flexDirection: 'row',
+        alignItems: 'center'
+      }}
+      onPress={togglePicker}
+    >
       <TGText
-        adjustsFontSizeToFitHeight
-        style={[styles.navbarTitle, { color: colors.dark, fontSize: 18 }]}
+        style={{
+          color: colors.dark,
+          fontWeight: 'bold',
+          fontSize: 20
+        }}
       >
-        TISDAGSGOLFEN {season.name}
+        {season.name}
       </TGText>
-    </View>
+      <Image
+        style={{
+          tintColor: colors.dark,
+          resizeMode: 'contain',
+          height: 18,
+          width: 18,
+          marginLeft: 5
+        }}
+        source={require('../../images/slide-up.png')}
+      />
+    </TouchableView>
   </View>
 )
 

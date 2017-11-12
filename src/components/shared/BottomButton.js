@@ -8,9 +8,8 @@ import { colors } from 'styles'
 const styles = StyleSheet.create({
   button: {
     padding: 18,
-    width: '96%',
-    alignSelf: 'flex-end',
-    margin: '2%'
+    width: '100%%',
+    alignSelf: 'flex-end'
   },
 
   text: {

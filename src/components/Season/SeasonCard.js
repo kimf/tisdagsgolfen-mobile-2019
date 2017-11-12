@@ -1,6 +1,6 @@
 import React from 'react'
-import { Image } from 'react-native'
-import { bool, func } from 'prop-types'
+import { ImageBackground } from 'react-native'
+import { func } from 'prop-types'
 
 import TouchableView from 'shared/TouchableView'
 import TGText from 'shared/TGText'
@@ -12,25 +12,35 @@ const SeasonCard = ({ onPress, season }) => (
     onPress={onPress}
     style={{
       flex: 1,
-      flexDirection: 'row',
-      justifyContent: 'center',
-      paddingVertical: 5
+      marginBottom: 10
     }}
   >
-    {season.photo && (
-      <Image style={{ flex: 1 }} source={{ uri: season.photo }} resizeMode="cover" />
-    )}
-    <TGText
+    <ImageBackground
       onPress={onPress}
       style={{
-        paddingTop: 40,
-        textAlign: 'center',
-        color: colors.dark,
-        fontSize: 22
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+        alignItems: 'flex-end',
+        width: '100%',
+        height: '100%'
       }}
+      source={{ uri: season.photo }}
+      resizeMode="cover"
     >
-      {season.name}
-    </TGText>
+      <TGText
+        style={{
+          padding: 10,
+          textShadowColor: colors.dark,
+          textShadowOffset: { width: 2, height: 2 },
+          backgroundColor: 'transparent',
+          color: colors.white,
+          fontSize: 24
+        }}
+      >
+        {season.name}
+      </TGText>
+    </ImageBackground>
   </TouchableView>
 )
 

@@ -1,14 +1,18 @@
 import React, { Component } from 'react'
-import { View } from 'react-native'
+import { View, Animated, Easing } from 'react-native'
 import { string } from 'prop-types'
 
 import Leaderboard from 'Leaderboard/Leaderboard'
 import EventResult from 'Season/EventResult'
 import EventHeader from 'Events/EventHeader'
-import Tabs from 'shared/Tabs'
+import AnimatedModal from 'shared/AnimatedModal'
 import Loading from 'shared/Loading'
 
+import { deviceHeight } from 'styles'
 import { eventQueryProps, withEventQuery } from 'queries/eventQuery'
+
+const TOP = 180
+const BOTTOM = deviceHeight - 60
 
 class EventView extends Component {
   static propTypes = {
@@ -23,13 +27,31 @@ class EventView extends Component {
     currentUserId: null
   }
 
-  state = {
-    leaderboardType: 'season'
+  eventResult = new Animated.Value(0)
+  iconPos = new Animated.Value(0)
+  open = false
+
+  animateEventResult = (open) => {
+    this.open = open
+    const duration = 450
+    const useNativeDriver = true
+    Animated.parallel([
+      Animated.timing(this.eventResult, {
+        toValue: open ? BOTTOM : TOP,
+        easing: Easing.ease,
+        duration,
+        useNativeDriver
+      }),
+      Animated.timing(this.iconPos, {
+        toValue: open ? 1 : 0,
+        easing: Easing.ease,
+        duration,
+        useNativeDriver
+      })
+    ]).start()
   }
 
-  changeLeaderboardType = (leaderboardType) => {
-    this.setState(state => ({ ...state, leaderboardType }))
-  }
+  toggleEventResult = () => this.animateEventResult(!this.open)
 
   render() {
     const {
@@ -39,46 +61,40 @@ class EventView extends Component {
       sorting,
       data: { loading, event, players }
     } = this.props
-    const { leaderboardType } = this.state
-
     if (loading) {
       return <Loading text="Laddar massa data..." />
     }
 
-    return [
-      <EventHeader
-        key={`eventHeader_${eventId}`}
-        course={event.course}
-        teamEvent={event.teamEvent}
-        scoringType={event.scoringType}
-      />,
+    const eventResultPos = this.eventResult.interpolate({
+      inputRange: [TOP, BOTTOM],
+      outputRange: [BOTTOM, TOP],
+      extrapolate: 'clamp'
+    })
 
-      <Tabs
-        key={`leaderboardTabs_${eventId}`}
-        leaderboard
-        currentRoute={leaderboardType}
-        onChange={sort => this.changeLeaderboardType(sort)}
-      />,
-      <View
-        key={`eventContent_${eventId}`}
-        style={{
-          flex: 1,
-          alignItems: 'stretch',
-          paddingBottom: 5,
-          borderBottomRightRadius: 5,
-          borderBottomLeftRadius: 5,
-          backgroundColor: 'white'
-        }}
-      >
-        {leaderboardType === 'season' ? (
-          <Leaderboard
-            sorting={sorting}
-            currentUserId={currentUserId}
-            players={players}
-            seasonId={seasonId}
-            eventId={eventId}
+    const iconPos = this.iconPos.interpolate({
+      inputRange: [0, 1],
+      outputRange: ['0deg', '-180deg']
+    })
+
+    return (
+      <View style={{ flex: 1 }}>
+        <Leaderboard
+          sorting={sorting}
+          currentUserId={currentUserId}
+          players={players}
+          seasonId={seasonId}
+          eventId={eventId}
+        />
+        <AnimatedModal height={deviceHeight} position={eventResultPos}>
+          <EventHeader
+            key={`eventHeader_${eventId}`}
+            course={event.course}
+            teamEvent={event.teamEvent}
+            scoringType={event.scoringType}
+            toggle={this.toggleEventResult}
+            position={eventResultPos}
+            imageSpin={iconPos}
           />
-        ) : (
           <EventResult
             eventId={eventId}
             seasonId={seasonId}
@@ -87,9 +103,9 @@ class EventView extends Component {
             players={event.leaderboard}
             scoringType={event.scoringType}
           />
-        )}
+        </AnimatedModal>
       </View>
-    ]
+    )
   }
 }
 

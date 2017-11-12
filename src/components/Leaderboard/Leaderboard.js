@@ -44,17 +44,19 @@ class Leaderboard extends Component {
           {emptyLeaderboard ? (
             <EmptyState text="Inga rundor spelade ännu" />
           ) : (
-            <FlatList
-              removeClippedSubviews={false}
-              initialNumToRender={10}
-              style={{ paddingHorizontal: 10, paddingBottom: 20 }}
-              data={sortedPlayers}
-              renderItem={({ item }) => (
-                <LeaderboardCard currentUserId={currentUserId} player={item} sorting={sorting} />
-              )}
-              extraData={this.state}
-              keyExtractor={player => `l_${seasonId}_${eventId}_${player.id}`}
-            />
+            <View style={{ marginBottom: 60 }}>
+              <FlatList
+                removeClippedSubviews={false}
+                initialNumToRender={10}
+                style={{ paddingHorizontal: 10, paddingBottom: 20 }}
+                data={sortedPlayers}
+                renderItem={({ item }) => (
+                  <LeaderboardCard currentUserId={currentUserId} player={item} sorting={sorting} />
+                )}
+                extraData={this.state}
+                keyExtractor={player => `l_${seasonId}_${eventId}_${player.id}`}
+              />
+            </View>
           )}
         </View>
       </View>

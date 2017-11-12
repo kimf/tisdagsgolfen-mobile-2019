@@ -1,9 +1,10 @@
 import React from 'react'
-import { ScrollView, View } from 'react-native'
-import { arrayOf, bool, number, func } from 'prop-types'
+import { Image, ScrollView, View } from 'react-native'
+import { arrayOf, shape, number, bool, string, func } from 'prop-types'
 
 import TGText from 'shared/TGText'
 import { colors } from 'styles'
+import trophyImg from 'images/trophy-filled.png'
 
 const WeekPickerItem = ({ week, isCurrent, onSelectWeek }) => (
   <TGText
@@ -14,41 +15,45 @@ const WeekPickerItem = ({ week, isCurrent, onSelectWeek }) => (
       fontWeight: isCurrent ? 'bold' : 'normal'
     }}
     viewStyle={{
-      borderRadius: 30,
+      borderRadius: 35,
       padding: 5,
-      height: 30,
-      width: 30,
-      backgroundColor: isCurrent ? colors.blue : colors.gray,
+      height: 35,
+      width: 35,
+      backgroundColor: isCurrent ? colors.darkGreen : colors.gray,
       marginRight: 10,
       alignItems: 'center',
       justifyContent: 'center'
     }}
     onPress={onSelectWeek}
   >
-    {`${week + 1}`}
+    {week === 'final' ? (
+      <Image source={trophyImg} style={{ height: 15, width: 15, tintColor: 'white' }} />
+    ) : (
+      `${week}`
+    )}
   </TGText>
 )
 
 WeekPickerItem.propTypes = {
-  week: number.isRequired,
+  week: string.isRequired,
   isCurrent: bool.isRequired,
   onSelectWeek: func.isRequired
 }
 
-const WeekPicker = ({ weeks, currentIndex, onChangeWeek }) => (
-  <View style={{ height: 50 }}>
+const WeekPicker = ({ weeks, currentId, onChangeWeek }) => (
+  <View style={{ height: 60 }}>
     <ScrollView
       horizontal
       showsHorizontalScrollIndicator={false}
-      style={{ backgroundColor: colors.dark, padding: 10 }}
+      style={{ backgroundColor: 'rgba(218,218,218,1)', padding: 10, paddingLeft: 20 }}
       containerStyle={{ justifyContent: 'center' }}
     >
-      {weeks.map((week, index) => (
+      {weeks.map(week => (
         <WeekPickerItem
-          key={`weekPickerItem_${week}`}
-          week={week}
-          isCurrent={currentIndex === week}
-          onSelectWeek={() => onChangeWeek(index)}
+          key={`weekPickerItem_${week.id}`}
+          week={week.id === 'final' ? week.id : week.index}
+          isCurrent={currentId === week.id}
+          onSelectWeek={() => onChangeWeek(week.id)}
         />
       ))}
     </ScrollView>
@@ -57,8 +62,11 @@ const WeekPicker = ({ weeks, currentIndex, onChangeWeek }) => (
 // [...Array(reversedEventIds.length)]
 
 WeekPicker.propTypes = {
-  weeks: arrayOf(number).isRequired,
-  currentIndex: number.isRequired,
+  weeks: arrayOf(shape({
+    id: string.isRequired,
+    index: string.isRequired
+  }).isRequired).isRequired,
+  currentId: string.isRequired,
   onChangeWeek: func.isRequired
 }
 

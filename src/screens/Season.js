@@ -1,17 +1,22 @@
 import React, { Component } from 'react'
-import { View } from 'react-native'
+import { View, Animated, Easing } from 'react-native'
 import { func, shape } from 'prop-types'
-import { StackNavigator } from 'react-navigation'
-
-import FinalWeek from 'Season/FinalWeek'
-import WeekView from 'Season/WeekView'
 
 import BottomButton from 'shared/BottomButton'
 import SeasonHeader from 'Season/SeasonHeader'
 import SeasonPicker from 'Season/SeasonPicker'
+import WeekPicker from 'Season/WeekPicker'
+import EventView from 'Season/EventView'
+import FinalWeek from 'Season/FinalWeek'
+import Sorter from 'Season/Sorter'
+import TGText from 'shared/TGText'
 import { screenPropsShape } from 'propTypes'
-import styles from 'styles'
+import styles, { colors, deviceHeight } from 'styles'
 
+const TOP = -deviceHeight
+const BOTTOM = 0
+
+// TODO, break out this into smaller pieces
 class Season extends Component {
   static propTypes = {
     screenProps: screenPropsShape.isRequired,
@@ -22,16 +27,25 @@ class Season extends Component {
 
   state = {
     seasonId: null,
-    showSeasonPicker: false
+    sorting: 'totalPoints'
   }
 
   onChangeSeason = (seasonId) => {
     this.setState(state => ({ ...state, seasonId }))
-    this.toggleSeasonpicker()
+    this.toggleSeasonpicker(!this.open)
   }
 
-  toggleSeasonpicker = () => {
-    this.setState(state => ({ ...state, showSeasonPicker: !state.showSeasonPicker }))
+  seasonPickerPos = new Animated.Value(0)
+  open = false
+
+  toggleSeasonpicker = (open) => {
+    this.open = open
+    Animated.timing(this.seasonPickerPos, {
+      toValue: open ? TOP : BOTTOM,
+      easing: Easing.ease,
+      duration: 450,
+      useNativeDriver: true
+    }).start()
   }
 
   showActiveScoringSession = () => {
@@ -39,43 +53,88 @@ class Season extends Component {
     this.props.navigation.navigate('ScoreEvent', { scoringSessionId })
   }
 
+  changeWeek = (eventId) => {
+    this.setState(state => ({ ...state, eventId }))
+  }
+
+  changeSort = (sorting) => {
+    this.setState(state => ({ ...state, sorting }))
+  }
+
   render() {
     const { screenProps: { currentUser, activeScoringSession, seasons } } = this.props
-    const { showSeasonPicker, seasonId } = this.state
+    const { seasonId, sorting } = this.state
 
     const season = seasonId ? seasons.find(s => s.id === seasonId) : seasons[0]
+    const currentUserId = currentUser ? currentUser.id : null
+    const reversedEventIds = [...season.eventIds, season.closed ? 'final' : null]
+      .map((id, index) => ({ id: `${id}`, index: `${index + 1}` }))
+      .reverse()
 
-    const SeasonNavigator = season.closed
-      ? StackNavigator(
-        {
-          Final: { screen: FinalWeek },
-          Week: { screen: WeekView }
-        },
-        { headerMode: 'none' }
-      )
-      : StackNavigator({ Week: { screen: WeekView } }, { headerMode: 'none' })
-    // TODO: Should be able to just render WeekView here!
+    const eventId = this.state.eventId || reversedEventIds[1].id
+    const eventIndex = reversedEventIds.find(id => id.id === eventId).index
 
-    this.router = SeasonNavigator.router
+    const seasonPickerPos = this.seasonPickerPos.interpolate({
+      inputRange: [TOP, BOTTOM],
+      outputRange: [BOTTOM, TOP],
+      extrapolate: 'clamp'
+    })
+
     return (
       <View style={styles.container}>
-        {showSeasonPicker && (
-          <SeasonPicker
-            seasons={seasons}
-            onChangeSeason={this.onChangeSeason}
-            onClose={this.toggleSeasonpicker}
-          />
-        )}
-        <SeasonHeader season={season} togglePicker={this.toggleSeasonpicker} />
-
-        <SeasonNavigator screenProps={{ season, currentUser }} />
-
+        <SeasonPicker
+          seasons={seasons}
+          onChangeSeason={this.onChangeSeason}
+          position={seasonPickerPos}
+        />
         {activeScoringSession && (
           <BottomButton
             title={`FORTSÄTT AKTIV RUNDA PÅ ${activeScoringSession.course.name.toUpperCase()}`}
             onPress={this.showActiveScoringSession}
           />
         )}
+
+        <SeasonHeader season={season} togglePicker={() => this.toggleSeasonpicker(!this.open)} />
+
+        {eventId !== 'final' && (
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              padding: 10,
+              backgroundColor: colors.darkGreen
+            }}
+          >
+            <TGText style={{ flex: 1, color: 'white', fontWeight: 'bold' }}>
+              Efter {eventIndex} omgångar
+            </TGText>
+            {parseInt(season.name, 10) > 2015 && (
+              <Sorter
+                key="weekSortTabs"
+                current={sorting}
+                onChange={sort => this.changeSort(sort)}
+              />
+            )}
+          </View>
+        )}
+
+        {eventId === 'final' ? (
+          <FinalWeek season={season} />
+        ) : (
+          <EventView
+            seasonId={season.id}
+            currentUserId={currentUserId}
+            sorting={sorting}
+            eventId={eventId}
+          />
+        )}
+
+        <WeekPicker
+          key={`weekPicker_${eventId}`}
+          weeks={reversedEventIds}
+          currentId={eventId}
+          onChangeWeek={this.changeWeek}
+        />
       </View>
     )
   }
