@@ -22,7 +22,9 @@ const confirmFinish = (finishFunc) => {
   )
 }
 
-const FinishScoringSession = ({ scrollX, scoringSession, playing, finishRound }) => (
+const FinishScoringSession = ({
+  scrollX, scoringSession, playing, finishRound
+}) => (
   <View style={{ flex: 1, backgroundColor: colors.green }}>
     <HoleHeader scrollX={scrollX} par={scoringSession.course.par} index={0} number={19} />
     <View
@@ -70,8 +72,6 @@ const FinishScoringSession = ({ scrollX, scoringSession, playing, finishRound })
               beers,
               extraStrokes: item.extraStrokes
             }
-
-            console.log(scoreItem)
 
             return (
               <View

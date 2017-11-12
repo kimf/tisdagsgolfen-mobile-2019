@@ -6,7 +6,7 @@ import EventView from 'Season/EventView'
 import WeekPicker from 'Season/WeekPicker'
 import Tabs from 'shared/Tabs'
 import { userShape, seasonShape } from 'propTypes'
-import styles, { colors } from 'styles'
+import styles from 'styles'
 
 class WeekView extends Component {
   static propTypes = {
@@ -19,7 +19,6 @@ class WeekView extends Component {
   state = { sorting: 'totalPoints', weekIndex: 0 }
 
   changeWeek = (weekIndex) => {
-    console.log(weekIndex)
     this.setState(state => ({ ...state, weekIndex }))
   }
 

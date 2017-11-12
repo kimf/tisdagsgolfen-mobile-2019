@@ -47,7 +47,9 @@ const confirmCancel = (cancelFunc) => {
 }
 
 
-const ScoringMenu = ({ onClose, onPreview, cancelRound, currentHole, holes, changeHole }) => (
+const ScoringMenu = ({
+  onClose, onPreview, cancelRound, currentHole, holes, changeHole
+}) => (
   <View style={{ flex: 1 }}>
     <View style={styles.inner}>
       <TGText style={styles.text}>
@@ -97,11 +99,9 @@ ScoringMenu.propTypes = {
   onPreview: func.isRequired,
   cancelRound: func.isRequired,
   currentHole: number.isRequired,
-  holes: arrayOf(
-    shape({
-      number: number.isRequired
-    }).isRequired
-  ).isRequired,
+  holes: arrayOf(shape({
+    number: number.isRequired
+  }).isRequired).isRequired,
   changeHole: func.isRequired
 }
 

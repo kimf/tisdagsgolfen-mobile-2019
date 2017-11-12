@@ -32,7 +32,9 @@ class HoleView extends Component {
   }
 
   render() {
-    const { hole, playing, holesCount, scoringSession, scrollX } = this.props
+    const {
+      hole, playing, holesCount, scoringSession, scrollX
+    } = this.props
     const { teamEvent, scoringType, liveScores } = scoringSession
     const { scoringId } = this.state
 
@@ -62,9 +64,7 @@ class HoleView extends Component {
           {playing.map((item, index) => {
             const userId = teamEvent ? index : item.users[0].id
 
-            const liveScore = liveScores.find(
-              ls => ls.user.id === userId && ls.hole === hole.number
-            )
+            const liveScore = liveScores.find(ls => ls.user.id === userId && ls.hole === hole.number)
             const scoreItem = liveScore || {
               strokes: hole.par,
               putts: 2,

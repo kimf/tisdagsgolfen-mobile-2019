@@ -4,8 +4,8 @@ import gql from 'graphql-tag'
 import { leaderboardPlayerShape } from 'propTypes'
 
 const leaderboardQuery = gql`
-  query seasonLeaderboard($seasonId: ID!) {
-    players: seasonLeaderboard(seasonId: $seasonId) {
+  query seasonLeaderboard($seasonId: ID!, $eventId: ID!) {
+    players: seasonLeaderboard(seasonId: $seasonId, eventId: $eventId) {
       id
       photo
       name
@@ -26,8 +26,8 @@ const leaderboardQuery = gql`
 export default leaderboardQuery
 
 export const withLeaderboardQuery = graphql(leaderboardQuery, {
-  options: ({ seasonId }) => ({
-    variables: { seasonId }
+  options: ({ seasonId, eventId }) => ({
+    variables: { seasonId, eventId }
   })
 })
 

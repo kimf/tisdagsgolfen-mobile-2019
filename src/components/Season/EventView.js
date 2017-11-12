@@ -7,7 +7,6 @@ import EventResult from 'Season/EventResult'
 import EventHeader from 'Events/EventHeader'
 import Tabs from 'shared/Tabs'
 import Loading from 'shared/Loading'
-import styles, { colors } from 'styles'
 
 import { eventQueryProps, withEventQuery } from 'queries/eventQuery'
 

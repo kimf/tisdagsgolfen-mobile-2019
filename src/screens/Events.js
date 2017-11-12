@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { View, Image, FlatList } from 'react-native'
-import { bool, shape } from 'prop-types'
+import { shape } from 'prop-types'
 
 // import OpenSeasonEventList from 'Events/OpenSeasonEventList'
 import Header from 'shared/Header'

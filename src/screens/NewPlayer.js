@@ -36,13 +36,11 @@ class NewPlayer extends Component {
   }
 
   static defaultProps = {
-    team: null,
     data: {
       loading: true,
       players: []
     }
   }
-
 
   addPlayer = (player, team = null) => {
     this.props.navigation.state.params.onAdd(player, team)
@@ -52,13 +50,17 @@ class NewPlayer extends Component {
   render() {
     const { data } = this.props
     const { team, addedIds } = this.props.navigation.state.params
-    if (data.loading) { return null }
+    if (data.loading) {
+      return null
+    }
 
     return (
       <View style={styles.container}>
         <ListView
           removeClippedSubviews={false}
-          ref={(c) => { this.listView = c }}
+          ref={(c) => {
+            this.listView = c
+          }}
           initialListSize={100}
           dataSource={ds.cloneWithRows(data.players)}
           renderRow={(player) => {
@@ -77,11 +79,7 @@ class NewPlayer extends Component {
                 }}
                 style={{ fontSize: 18, fontWeight: 'bold' }}
               >
-                <Image
-                  style={styles.cardImage}
-                  source={photoSrc}
-                  resizeMode="cover"
-                />
+                <Image style={styles.cardImage} source={photoSrc} resizeMode="cover" />
                 {player.firstName} {player.lastName}
               </TGText>
             ) : null

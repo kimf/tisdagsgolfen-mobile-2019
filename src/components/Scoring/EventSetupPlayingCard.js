@@ -74,7 +74,10 @@ class EventSetupPlayingCard extends Component {
             Ta bort {teamEvent ? 'lag' : 'spelare'}
           </TGText>
         </View>
-        <View style={{ alignItems: 'center', flex: 1, flexDirection: 'row', paddingVertical: 10 }}>
+        <View style={{
+ alignItems: 'center', flex: 1, flexDirection: 'row', paddingVertical: 10
+}}
+        >
           <TGText style={{ flex: 0, textAlign: 'left' }}>Extraslag</TGText>
           <Slider
             style={{ flex: 1, marginHorizontal: 20 }}
@@ -84,7 +87,10 @@ class EventSetupPlayingCard extends Component {
             onSlidingComplete={val => onChangeStrokes(item, val)}
             onValueChange={strokes => this.setState({ strokes })}
           />
-          <TGText style={{ flex: 0, textAlign: 'right', fontSize: 20, fontWeight: 'bold', color: colors.green }}>
+          <TGText style={{
+ flex: 0, textAlign: 'right', fontSize: 20, fontWeight: 'bold', color: colors.green
+}}
+          >
             {this.state.strokes}
           </TGText>
         </View>
@@ -116,7 +122,9 @@ class EventSetupPlayingCard extends Component {
                 padding: 10,
                 backgroundColor: colors.muted
               }}
-              style={{ textAlign: 'center', color: colors.white, fontSize: 12, fontWeight: 'bold' }}
+              style={{
+ textAlign: 'center', color: colors.white, fontSize: 12, fontWeight: 'bold'
+}}
               onPress={() => onAddPlayerToTeam(item)}
             >
               + Lägg till spelare i {name}

@@ -23,7 +23,9 @@ const isCurrentUser = (teamEvent, player, currentUserId) => {
   return player.id === currentUserId
 }
 
-const ScoringLeaderboardCard = ({ player, currentUserId, sorting, scoringType, teamEvent }) => {
+const ScoringLeaderboardCard = ({
+  player, currentUserId, sorting, scoringType, teamEvent
+}) => {
   let pointText
   let pointValue = ''
   let position
@@ -35,7 +37,7 @@ const ScoringLeaderboardCard = ({ player, currentUserId, sorting, scoringType, t
     pointText = '🍺'
     position = player.beerPos
   } else if (sorting === 'kr') {
-    pointValue = player.kr - (player.kr * 2)
+    pointValue = player.kr - player.kr * 2
     pointText = 'kr'
     position = player.krPos
   } else {
@@ -51,39 +53,33 @@ const ScoringLeaderboardCard = ({ player, currentUserId, sorting, scoringType, t
   const itemName = getItemName(teamEvent, player)
 
   return (
-    <View
-      key={player.id}
-      style={[
-        styles.listrow,
-        currentUserStyle,
-        { paddingHorizontal: 20 }
-      ]}
-    >
+    <View key={player.id} style={[styles.listrow, currentUserStyle, { paddingHorizontal: 20 }]}>
       <View style={styles.position}>
-        <TGText style={{ flex: 1, fontWeight: '800', color: colors.dark, fontSize: 16 }}>
+        <TGText
+          style={{
+            flex: 1,
+            fontWeight: '800',
+            color: colors.dark,
+            fontSize: 16
+          }}
+        >
           {position}
         </TGText>
       </View>
-      {!teamEvent
-        ? <Image
+      {!teamEvent ? (
+        <Image
           style={styles.cardImage}
           source={photoUrl ? { uri: photoUrl } : defaultPhoto}
           resizeMode="cover"
         />
-        : null
-      }
+      ) : null}
       <View style={styles.cardTitle}>
         <TGText style={styles.name}>{itemName}</TGText>
       </View>
-      {sorting === 'totalPoints'
-        ? <TGText style={[styles.points, { color: colors.gray }]}>
-          {player.strokes}
-        </TGText>
-        : null
-      }
-      <TGText style={[styles.points, { paddingRight: 10 }]}>
-        {`${pointValue} ${pointText}`}
-      </TGText>
+      {sorting === 'totalPoints' ? (
+        <TGText style={[styles.points, { color: colors.gray }]}>{player.strokes}</TGText>
+      ) : null}
+      <TGText style={[styles.points, { paddingRight: 10 }]}>{`${pointValue} ${pointText}`}</TGText>
     </View>
   )
 }
@@ -102,12 +98,10 @@ ScoringLeaderboardCard.propTypes = {
     }),
     firstName: string,
     lastName: string,
-    users: arrayOf(
-      shape({
-        firstName: string.isRequired,
-        lastName: string.isRequired
-      }).isRequired
-    )
+    users: arrayOf(shape({
+      firstName: string.isRequired,
+      lastName: string.isRequired
+    }).isRequired)
   }).isRequired,
   currentUserId: string.isRequired,
   sorting: string.isRequired,

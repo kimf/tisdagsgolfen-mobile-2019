@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { View, Image } from 'react-native'
-import { shape, string } from 'prop-types'
 
 import Header from 'shared/Header'
 import TGText from 'shared/TGText'

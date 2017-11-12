@@ -5,7 +5,6 @@ import Logo from 'Login/Logo'
 import Form from 'Login/LoginForm'
 import Wallpaper from 'Login/Wallpaper'
 
-import { setCache } from 'utils'
 import { withSigninUserMutation } from 'mutations/signinUserMutation'
 
 class Login extends Component {
@@ -23,9 +22,7 @@ class Login extends Component {
 
   constructor(props) {
     super(props)
-
     const { currentUser } = this.props
-
     this.state = {
       email: (currentUser && currentUser.email) || '',
       password: '',

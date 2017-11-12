@@ -110,8 +110,6 @@ class NewEventSetup extends Component {
 
       const scoringType = isStrokes ? 'strokes' : 'points'
 
-      console.log(course.id, currentUser.id, teamEvent, scoringType, scoringItems)
-
       const res = await createScoringSession(
         course.id,
         currentUser.id,

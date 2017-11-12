@@ -66,7 +66,7 @@ export class ScoreEvent extends Component {
     this.setState((state) => {
       // eslint-disable-next-line no-underscore-dangle
       this.scrollView._component.scrollTo({
-        x: nextHole * deviceWidth - deviceWidth,
+        x: nextHole * (deviceWidth - deviceWidth),
         animated: false
       })
       this.closeModal('menu')

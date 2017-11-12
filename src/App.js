@@ -21,7 +21,12 @@ import Root from './Root'
 // import { LogView } from 'react-native-device-log'
 
 // if (showLog) {
-//   return <LogView style={{ flex: 1 }} inverted={false} timeStampFormat="HH:mm:ss" multiExpanded />
+// return <LogView
+// style={{ flex: 1 }}
+// inverted={false}
+// timeStampFormat="HH:mm:ss"
+// multiExpanded
+// />
 // }
 
 class App extends Component {

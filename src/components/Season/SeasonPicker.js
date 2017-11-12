@@ -4,14 +4,12 @@ import { arrayOf, func } from 'prop-types'
 
 import { seasonShape } from 'propTypes'
 import { colors } from 'styles'
-import TouchableView from 'shared/TouchableView'
 import SeasonCard from './SeasonCard'
 
 class SeasonPicker extends Component {
   static propTypes = {
     seasons: arrayOf(seasonShape).isRequired,
-    onChangeSeason: func.isRequired,
-    onClose: func.isRequired
+    onChangeSeason: func.isRequired
   }
 
   constructor(props) {
@@ -30,7 +28,7 @@ class SeasonPicker extends Component {
   }
 
   render() {
-    const { seasons, onChangeSeason, onClose } = this.props
+    const { seasons, onChangeSeason } = this.props
     return (
       <Animated.View
         style={{

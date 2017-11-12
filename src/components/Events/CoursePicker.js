@@ -23,12 +23,10 @@ const filterCourses = cacheable((courses, query) =>
     const searchString = fixString(`${c.club}${c.name}`)
     const trimmedQuery = fixString(query)
     return searchString.indexOf(trimmedQuery) !== -1
-  })
-)
+  }))
 
 const getPreviouslyPlayedCourses = cacheable(courses =>
-  courses.filter(c => c.eventCount > 0).sort((a, b) => a.eventCount - b.eventCount)
-)
+  courses.filter(c => c.eventCount > 0).sort((a, b) => a.eventCount - b.eventCount))
 
 class CoursePicker extends Component {
   static propTypes = {

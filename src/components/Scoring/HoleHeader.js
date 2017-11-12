@@ -48,7 +48,9 @@ const headerOpacity = (scrollX, num) =>
     extrapolate: 'clamp'
   })
 
-const HoleHeader = ({ par, number, index, scrollX }) => (
+const HoleHeader = ({
+  par, number, index, scrollX
+}) => (
   <Animated.View style={[styles.holeHeader, { opacity: headerOpacity(scrollX, number) }]}>
     <TGText style={styles.par}>Par {par}</TGText>
     <TGText style={styles.number}>{number}</TGText>
