@@ -5,7 +5,8 @@ export const colors = {
   green: '#04B742',
   darkGreen: 'rgba(6,83,60,1)',
   mutedGreen: '#D4F4E0',
-  dark: '#35383E',
+  dark: '#000',
+  semiDark: 'rgb(94, 98, 105)',
   muted: '#7D8986',
   gray: '#A3A4A6',
   yellow: '#EDD21B',
@@ -34,10 +35,10 @@ export default StyleSheet.create({
   },
 
   listrow: {
-    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderBottomWidth: 1,
     borderColor: colors.lightGray,
     flexDirection: 'row',
-    padding: 10
+    padding: 8
   },
 
   formColumn: {
@@ -56,11 +57,8 @@ export default StyleSheet.create({
   },
 
   points: {
-    color: 'black',
-    fontFamily: 'System',
-    fontSize: 18,
-    fontWeight: '900',
-    textAlign: 'right',
+    minHeight: 40,
+    flexDirection: 'column',
     flex: 3
   },
 
@@ -75,14 +73,17 @@ export default StyleSheet.create({
   },
 
   position: {
-    width: 30,
-    marginRight: 5,
-    flexDirection: 'column'
+    minHeight: 40,
+    width: 20,
+    marginRight: 20,
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center'
   },
 
   cardTitle: {
     minHeight: 40,
-    flex: 6,
+    flex: 5,
     flexDirection: 'column'
   },
 
@@ -90,7 +91,8 @@ export default StyleSheet.create({
     height: 30,
     width: 30,
     borderRadius: 5,
-    marginRight: 16
+    marginRight: 16,
+    marginTop: 2
   },
 
   smallCardImage: {
@@ -105,15 +107,14 @@ export default StyleSheet.create({
     color: colors.semiDark,
     flex: 1,
     fontSize: 12,
-    marginTop: 3
+    lineHeight: 16
   },
 
   metaLarger: {
     fontFamily: 'System',
     color: colors.semiDark,
     flex: 1,
-    fontSize: 14,
-    marginTop: 5
+    fontSize: 14
   },
 
   name: {
@@ -121,7 +122,8 @@ export default StyleSheet.create({
     fontFamily: 'System',
     fontWeight: '800',
     flex: 1,
-    fontSize: 16
+    fontSize: 14,
+    lineHeight: 16
   },
 
   label: {

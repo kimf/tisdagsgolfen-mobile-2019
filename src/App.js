@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Platform, UIManager } from 'react-native'
 import { ApolloProvider } from 'react-apollo'
 
 // import deviceLog from 'react-native-device-log'
@@ -30,6 +31,16 @@ import Root from './Root'
 // }
 
 class App extends Component {
+  constructor(props) {
+    super(props)
+    // TODO: This is the "withOneSignal" HoC
+    if (Platform.OS === 'android') {
+      // eslint-disable-next-line no-unused-expressions
+      UIManager.setLayoutAnimationEnabledExperimental &&
+        UIManager.setLayoutAnimationEnabledExperimental(true)
+    }
+  }
+
   state = {
     checking: true,
     isLoggedin: false,

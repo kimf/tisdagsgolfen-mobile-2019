@@ -4,9 +4,9 @@ import { string } from 'prop-types'
 
 import Leaderboard from 'Leaderboard/Leaderboard'
 import EventResult from 'Season/EventResult'
+import EventViewLoader from 'Season/EventViewLoader'
 import EventHeader from 'Events/EventHeader'
 import AnimatedModal from 'shared/AnimatedModal'
-import Loading from 'shared/Loading'
 
 import { deviceHeight } from 'styles'
 import { eventQueryProps, withEventQuery } from 'queries/eventQuery'
@@ -61,8 +61,9 @@ class EventView extends Component {
       sorting,
       data: { loading, event, players }
     } = this.props
+
     if (loading) {
-      return <Loading text="Laddar massa data..." />
+      return <EventViewLoader />
     }
 
     const eventResultPos = this.eventResult.interpolate({

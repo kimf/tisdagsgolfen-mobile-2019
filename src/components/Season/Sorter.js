@@ -5,7 +5,7 @@ import { shape, string, func, bool } from 'prop-types'
 import TGText from 'shared/TGText'
 
 const tabs = [
-  { value: 'totalPoints', icon: '🤷' },
+  { value: 'totalPoints', icon: '🥇' },
   { value: 'beers', icon: '🍻' },
   { value: 'kr', icon: '💸' }
 ]
@@ -16,7 +16,7 @@ const SorterItem = ({ tab, isCurrent, onChange }) => (
     style={{
       padding: 10,
       fontSize: 20,
-      color: isCurrent ? 'black' : 'white'
+      opacity: isCurrent ? 1 : 0.5
     }}
   >
     {tab.icon}
@@ -35,7 +35,7 @@ SorterItem.propTypes = {
 const Sorter = ({ current, onChange }) => (
   <View style={{ flexDirection: 'row' }}>
     {tabs.map(tab => (
-      <SorterItem key={tab.value} tab={tab} isCurrent={tab === current} onChange={onChange} />
+      <SorterItem key={tab.value} tab={tab} isCurrent={tab.value === current} onChange={onChange} />
     ))}
   </View>
 )

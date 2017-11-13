@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, Image } from 'react-native'
-import { string } from 'prop-types'
+import { string, bool, func } from 'prop-types'
 
 import TGText from 'shared/TGText'
 import UpOrDown from 'shared/UpOrDown'
@@ -11,7 +11,9 @@ const mutedYellow = { backgroundColor: colors.mutedYellow }
 
 const defaultAvatar = require('../../images/defaultavatar.png')
 
-const LeaderboardCard = ({ player, sorting, currentUserId }) => {
+const LeaderboardCard = ({
+  player, sorting, currentUserId, showSummary, toggleSummary
+}) => {
   let pointText
   let pointValue = ''
   let position
@@ -40,7 +42,7 @@ const LeaderboardCard = ({ player, sorting, currentUserId }) => {
   }
 
   return (
-    <View key={player.id} style={[styles.listrow, currentUserStyle]}>
+    <View key={player.id} style={[styles.listrow, currentUserStyle]} onPress={toggleSummary}>
       <View style={styles.position}>
         <TGText
           style={{
@@ -52,7 +54,9 @@ const LeaderboardCard = ({ player, sorting, currentUserId }) => {
         >
           {position}
         </TGText>
-        <UpOrDown prev={player.prevPosition} current={player.position} />
+        {sorting === 'totalPoints' && (
+          <UpOrDown prev={player.prevPosition} current={player.position} />
+        )}
       </View>
       <Image
         style={styles.cardImage}
@@ -61,13 +65,30 @@ const LeaderboardCard = ({ player, sorting, currentUserId }) => {
       />
       <View style={styles.cardTitle}>
         <TGText style={styles.name}>{player.name}</TGText>
-        {sorting === 'totalPoints' ? (
-          <TGText style={styles.metaLarger}>
-            {player.eventCount} Rundor. Snitt: {averagePoints}p
-          </TGText>
-        ) : null}
+        <TGText style={styles.meta}>
+          {player.eventCount} {player.eventCount > 1 ? 'Rundor' : 'Runda'}.
+          {sorting === 'totalPoints' && (
+            <TGText style={styles.meta}> Snitt: {averagePoints}p</TGText>
+          )}
+        </TGText>
       </View>
-      <TGText style={styles.points}>{`${pointValue} ${pointText}`}</TGText>
+      <View style={styles.points}>
+        <TGText
+          style={{
+            flex: 1,
+            fontWeight: '800',
+            fontSize: 18,
+            textAlign: 'right'
+          }}
+        >
+          {`${pointValue} ${pointText}`}
+        </TGText>
+        {sorting === 'totalPoints' && (
+          <TGText style={[styles.meta, { flex: 1, textAlign: 'right', fontSize: 10 }]}>
+            25, 25, 20, 20, 15
+          </TGText>
+        )}
+      </View>
     </View>
   )
 }
@@ -75,7 +96,14 @@ const LeaderboardCard = ({ player, sorting, currentUserId }) => {
 LeaderboardCard.propTypes = {
   currentUserId: string,
   player: leaderboardPlayerShape.isRequired,
-  sorting: string.isRequired
+  sorting: string.isRequired,
+  showSummary: bool,
+  toggleSummary: func
+}
+
+LeaderboardCard.defaultProps = {
+  showSummary: false,
+  toggleSummary: () => {}
 }
 
 LeaderboardCard.defaultProps = { currentUserId: null }

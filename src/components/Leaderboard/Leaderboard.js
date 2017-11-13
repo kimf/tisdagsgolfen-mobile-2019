@@ -53,7 +53,6 @@ class Leaderboard extends Component {
                 renderItem={({ item }) => (
                   <LeaderboardCard currentUserId={currentUserId} player={item} sorting={sorting} />
                 )}
-                extraData={this.state}
                 keyExtractor={player => `l_${seasonId}_${eventId}_${player.id}`}
               />
             </View>

@@ -9,11 +9,11 @@ import { colors } from 'styles'
 const gametypeName = (scoringType) => {
   switch (scoringType) {
     case 'modified_points':
-      return ' - Modifierad Poäng'
+      return 'Modifierad Poäng'
     case 'points':
-      return ' - Poäng'
+      return 'Poäng'
     default:
-      return ' - Slag'
+      return 'Slaggolf'
   }
 }
 
@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
   text: {
     textAlign: 'left',
     flex: 1,
-    color: colors.dark,
+    color: colors.semiDark,
     fontWeight: 'bold',
     fontSize: 12,
     height: 20
@@ -40,36 +40,37 @@ const styles = StyleSheet.create({
 const EventHeader = ({
   course, teamEvent, scoringType, toggle, imageSpin
 }) => (
-  <View style={styles.view}>
+  <TouchableView style={styles.view} onPress={toggle}>
     <View style={{ flex: 1 }}>
       <TGText style={[styles.text, { color: colors.darkGreen, fontSize: 16 }]}>{course}</TGText>
       <TGText style={styles.text}>
         {gametypeName(scoringType)}
-        {teamEvent ? ', Lagtävling ' : null}
+        {teamEvent ? ', Lagtävling ' : ', Individuellt'}
       </TGText>
     </View>
-    <TouchableView
-      style={{
-        padding: 10,
-        justifyContent: 'center',
-        alignItems: 'center',
-        alignSelf: 'flex-end'
-      }}
-      onPress={toggle}
-    >
-      <Animated.Image
+    {imageSpin && (
+      <View
         style={{
-          tintColor: colors.dark,
-          resizeMode: 'contain',
-          height: 18,
-          width: 18,
-          marginLeft: 5,
-          transform: [{ rotate: imageSpin }]
+          padding: 10,
+          justifyContent: 'center',
+          alignItems: 'center',
+          alignSelf: 'flex-end'
         }}
-        source={require('../../images/slide-up.png')}
-      />
-    </TouchableView>
-  </View>
+      >
+        <Animated.Image
+          style={{
+            tintColor: colors.dark,
+            resizeMode: 'contain',
+            height: 18,
+            width: 18,
+            marginLeft: 5,
+            transform: [{ rotate: imageSpin }]
+          }}
+          source={require('../../images/slide-up.png')}
+        />
+      </View>
+    )}
+  </TouchableView>
 )
 
 EventHeader.propTypes = {
@@ -77,7 +78,11 @@ EventHeader.propTypes = {
   teamEvent: bool.isRequired,
   scoringType: string.isRequired,
   toggle: func.isRequired,
-  imageSpin: shape().isRequired
+  imageSpin: shape()
+}
+
+EventHeader.defaultProps = {
+  imageSpin: null
 }
 
 export default EventHeader

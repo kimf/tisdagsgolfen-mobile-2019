@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, ListView, Image } from 'react-native'
+import { View, FlatList, Image } from 'react-native'
 import { shape, bool, arrayOf, func, string, number } from 'prop-types'
 
 import TGText from 'shared/TGText'
@@ -8,8 +8,6 @@ import { withUserQuery } from 'queries/userQuery'
 import { userShape } from 'propTypes'
 
 const defaultAvatar = require('../images/defaultavatar.png')
-
-const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 })
 
 class NewPlayer extends Component {
   static navigationOptions = {
@@ -56,14 +54,14 @@ class NewPlayer extends Component {
 
     return (
       <View style={styles.container}>
-        <ListView
+        <FlatList
           removeClippedSubviews={false}
           ref={(c) => {
             this.listView = c
           }}
           initialListSize={100}
-          dataSource={ds.cloneWithRows(data.players)}
-          renderRow={(player) => {
+          data={data.players}
+          renderItem={({ player }) => {
             const isPlaying = addedIds.includes(player.id)
             const photoSrc = player.photo ? { uri: player.photo.url } : defaultAvatar
             return !isPlaying ? (
@@ -84,6 +82,7 @@ class NewPlayer extends Component {
               </TGText>
             ) : null
           }}
+          keyExtractor={player => `setup_player_row_${player.id}`}
           enableEmptySections
         />
       </View>

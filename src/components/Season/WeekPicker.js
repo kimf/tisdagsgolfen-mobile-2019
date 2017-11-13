@@ -1,6 +1,6 @@
 import React from 'react'
-import { Image, ScrollView, View } from 'react-native'
-import { arrayOf, shape, number, bool, string, func } from 'prop-types'
+import { Image, FlatList, View } from 'react-native'
+import { arrayOf, shape, bool, string, func } from 'prop-types'
 
 import TGText from 'shared/TGText'
 import { colors } from 'styles'
@@ -27,7 +27,15 @@ const WeekPickerItem = ({ week, isCurrent, onSelectWeek }) => (
     onPress={onSelectWeek}
   >
     {week === 'final' ? (
-      <Image source={trophyImg} style={{ height: 15, width: 15, tintColor: 'white' }} />
+      <Image
+        source={trophyImg}
+        style={{
+          height: 16,
+          width: 16,
+          tintColor: 'yellow',
+          marginTop: 3
+        }}
+      />
     ) : (
       `${week}`
     )}
@@ -42,21 +50,25 @@ WeekPickerItem.propTypes = {
 
 const WeekPicker = ({ weeks, currentId, onChangeWeek }) => (
   <View style={{ height: 60 }}>
-    <ScrollView
+    <FlatList
+      removeClippedSubviews={false}
       horizontal
-      showsHorizontalScrollIndicator={false}
-      style={{ backgroundColor: 'rgba(218,218,218,1)', padding: 10, paddingLeft: 20 }}
+      data={weeks}
+      style={{
+        backgroundColor: 'rgba(218,218,218,1)',
+        padding: 10
+      }}
       containerStyle={{ justifyContent: 'center' }}
-    >
-      {weeks.map(week => (
+      showsHorizontalScrollIndicator={false}
+      renderItem={({ item }) => (
         <WeekPickerItem
-          key={`weekPickerItem_${week.id}`}
-          week={week.id === 'final' ? week.id : week.index}
-          isCurrent={currentId === week.id}
-          onSelectWeek={() => onChangeWeek(week.id)}
+          week={item.id === 'final' ? item.id : item.index}
+          isCurrent={currentId === item.id}
+          onSelectWeek={() => onChangeWeek(item.id)}
         />
-      ))}
-    </ScrollView>
+      )}
+      keyExtractor={item => `weekPickerItem_${item.id}`}
+    />
   </View>
 )
 // [...Array(reversedEventIds.length)]

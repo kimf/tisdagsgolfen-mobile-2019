@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Animated, Easing } from 'react-native'
+import { View, Animated, Easing, LayoutAnimation } from 'react-native'
 import { func, shape } from 'prop-types'
 
 import BottomButton from 'shared/BottomButton'
@@ -12,6 +12,7 @@ import Sorter from 'Season/Sorter'
 import TGText from 'shared/TGText'
 import { screenPropsShape } from 'propTypes'
 import styles, { colors, deviceHeight } from 'styles'
+import { linear } from 'animations'
 
 const TOP = -deviceHeight
 const BOTTOM = 0
@@ -27,12 +28,18 @@ class Season extends Component {
 
   state = {
     seasonId: null,
+    eventId: null,
     sorting: 'totalPoints'
   }
 
   onChangeSeason = (seasonId) => {
-    this.setState(state => ({ ...state, seasonId }))
-    this.toggleSeasonpicker(!this.open)
+    this.setState(state => ({
+      ...state,
+      seasonId,
+      eventId: null,
+      sorting: 'totalPoints'
+    }))
+    this.toggleSeasonpicker(false)
   }
 
   seasonPickerPos = new Animated.Value(0)
@@ -54,10 +61,12 @@ class Season extends Component {
   }
 
   changeWeek = (eventId) => {
+    LayoutAnimation.configureNext(linear)
     this.setState(state => ({ ...state, eventId }))
   }
 
   changeSort = (sorting) => {
+    LayoutAnimation.configureNext(linear)
     this.setState(state => ({ ...state, sorting }))
   }
 
@@ -67,6 +76,7 @@ class Season extends Component {
 
     const season = seasonId ? seasons.find(s => s.id === seasonId) : seasons[0]
     const currentUserId = currentUser ? currentUser.id : null
+    const eventCount = season.eventIds.length
     const reversedEventIds = [...season.eventIds, season.closed ? 'final' : null]
       .map((id, index) => ({ id: `${id}`, index: `${index + 1}` }))
       .reverse()
@@ -106,7 +116,7 @@ class Season extends Component {
             }}
           >
             <TGText style={{ flex: 1, color: 'white', fontWeight: 'bold' }}>
-              Efter {eventIndex} omgångar
+              Efter {eventIndex} {eventIndex > 1 ? 'omgångar' : 'omgång'}
             </TGText>
             {parseInt(season.name, 10) > 2015 && (
               <Sorter
@@ -130,7 +140,7 @@ class Season extends Component {
         )}
 
         <WeekPicker
-          key={`weekPicker_${eventId}`}
+          key={`weekPicker_${seasonId}`}
           weeks={reversedEventIds}
           currentId={eventId}
           onChangeWeek={this.changeWeek}

@@ -10,7 +10,7 @@ const Tabs = ({
 }) => {
   const strokes = scoringType === 'strokes'
   const tabs = [
-    { value: 'totalPoints', icon: '🤷', title: strokes ? 'Slag' : 'Poäng' },
+    { value: 'totalPoints', icon: '🥇', title: strokes ? 'Slag' : 'Poäng' },
     { value: 'beers', icon: '🍻', title: 'Öl' }
   ]
 

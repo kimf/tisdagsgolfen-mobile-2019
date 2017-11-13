@@ -59,7 +59,19 @@ const EventLeaderboardCard = ({
         </TGText>
       ) : null}
 
-      <TGText style={styles.points}>{`${pointValue} ${pointText}`}</TGText>
+      <TGText
+        style={[
+          styles.points,
+          {
+            flex: 3,
+            fontWeight: '800',
+            fontSize: 18,
+            textAlign: 'right'
+          }
+        ]}
+      >
+        {`${pointValue} ${pointText}`}
+      </TGText>
     </View>
   )
 }

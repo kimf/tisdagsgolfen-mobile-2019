@@ -1,12 +1,10 @@
 import React, { Component } from 'react'
-import { ListView } from 'react-native'
+import { FlatList } from 'react-native'
 import { arrayOf, string } from 'prop-types'
 
 import EventLeaderboardCard from 'Events/EventLeaderboardCard'
 
 import { ranked } from 'utils'
-
-const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 })
 
 class EventResult extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -46,20 +44,20 @@ class EventResult extends Component {
     }
 
     return (
-      <ListView
+      <FlatList
         removeClippedSubviews={false}
-        initialListSize={20}
-        dataSource={ds.cloneWithRows(sortedPlayers)}
-        renderRow={rowData => (
+        initialListSize={10}
+        data={sortedPlayers}
+        renderItem={({ item }) => (
           <EventLeaderboardCard
-            key={`l_${currentUserId}_${eventId}_${seasonId}`}
+            key={`l_${currentUserId}_${seasonId}`}
             scoringType={scoringType}
             currentUserId={currentUserId}
-            data={rowData}
+            data={item}
             sorting={sorting}
           />
         )}
-        enableEmptySections
+        keyExtractor={player => `l_${seasonId}_${eventId}_${player.id}`}
       />
     )
   }
