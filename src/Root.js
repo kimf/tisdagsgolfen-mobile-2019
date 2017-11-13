@@ -9,7 +9,7 @@ import { withInitialQuery, initialQueryShape } from 'queries/initialQuery'
 
 class Root extends Component {
   static propTypes = {
-    isLoggedin: bool.isRequired,
+    isLoggedIn: bool.isRequired,
     data: initialQueryShape,
     currentUser: shape({
       id: string,
@@ -26,12 +26,18 @@ class Root extends Component {
     }
   }
 
+  constructor(props) {
+    super(props)
+    const { currentUser, isLoggedIn } = props
+    this.state = { currentUser, isLoggedIn }
+  }
+
   onLogin = (response) => {
     setCache('currentUser', {
       ...response.user,
       token: response.token
     }).then(() => {
-      this.setState(state => ({ ...state, isLoggedin: true, currentUser: { ...response.user } }))
+      this.setState(state => ({ ...state, isLoggedIn: true, currentUser: { ...response.user } }))
     })
   }
 
@@ -41,12 +47,13 @@ class Root extends Component {
       ...user,
       token: null
     }).then(() => {
-      this.setState(state => ({ ...state, isLoggedin: false, currentUser: { ...user } }))
+      this.setState(state => ({ ...state, isLoggedIn: false, currentUser: { ...user } }))
     })
   }
 
   render() {
-    const { isLoggedin, currentUser, data: { activeScoringSession, seasons, loading } } = this.props
+    const { data: { activeScoringSession, seasons, loading } } = this.props
+    const { currentUser, isLoggedIn } = this.state
 
     if (loading) return null
 
@@ -56,9 +63,11 @@ class Root extends Component {
       <RootStack
         screenProps={{
           currentUser,
-          isLoggedin,
+          isLoggedIn,
           activeScoringSession,
-          seasons
+          seasons,
+          onLogin: this.onLogin,
+          onLogout: this.onLogout
         }}
       />
     )

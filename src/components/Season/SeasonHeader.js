@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, Image } from 'react-native'
-import { func } from 'prop-types'
+import { func, shape } from 'prop-types'
 
 import TGText from 'shared/TGText'
 import TouchableView from 'shared/TouchableView'
@@ -8,12 +8,15 @@ import TouchableView from 'shared/TouchableView'
 import { seasonShape } from 'propTypes'
 import { colors, NAVBAR_HEIGHT, STATUS_BAR_HEIGHT } from 'styles'
 
-const SeasonHeader = ({ season, togglePicker }) => (
+const SeasonHeader = ({
+  season, togglePicker, goPlay, activeScoringSession
+}) => (
   <View
     style={{
       backgroundColor: colors.lightGray,
       height: NAVBAR_HEIGHT + STATUS_BAR_HEIGHT,
-      padding: 5
+      padding: 5,
+      flexDirection: 'row'
     }}
   >
     <TouchableView
@@ -21,7 +24,8 @@ const SeasonHeader = ({ season, togglePicker }) => (
         padding: 10,
         paddingTop: STATUS_BAR_HEIGHT,
         flexDirection: 'row',
-        alignItems: 'center'
+        alignItems: 'center',
+        flex: 1
       }}
       onPress={togglePicker}
     >
@@ -45,12 +49,37 @@ const SeasonHeader = ({ season, togglePicker }) => (
         source={require('../../images/slide-up.png')}
       />
     </TouchableView>
+    <TGText
+      style={{
+        fontSize: 14,
+        color: activeScoringSession ? colors.white : colors.dark,
+        borderColor: activeScoringSession ? 'transparent' : colors.semiDark
+      }}
+      viewStyle={{
+        backgroundColor: activeScoringSession ? colors.blue : 'transparent',
+        borderWidth: 1,
+        borderRadius: 5,
+        alignSelf: 'flex-end',
+        padding: 4,
+        marginRight: 10,
+        marginBottom: 5
+      }}
+      onPress={goPlay}
+    >
+      {activeScoringSession ? 'FORTSÄTT AKTIV RUNDA' : 'SPELA GOLF'}
+    </TGText>
   </View>
 )
 
 SeasonHeader.propTypes = {
   season: seasonShape.isRequired,
-  togglePicker: func.isRequired
+  togglePicker: func.isRequired,
+  goPlay: func.isRequired,
+  activeScoringSession: shape()
+}
+
+SeasonHeader.defaultProps = {
+  activeScoringSession: null
 }
 
 export default SeasonHeader

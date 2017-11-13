@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, ScrollView } from 'react-native'
+import { View, FlatList } from 'react-native'
 import { arrayOf, shape, func } from 'prop-types'
 
 import EventSetupPlayingCard from 'Scoring/EventSetupPlayingCard'
@@ -11,16 +11,20 @@ const SetupIndividualEvent = ({
 }) => (
   <View style={styles.container}>
     <TopButton title="+ LÄGG TILL SPELARE" onPress={() => openAddPlayer()} />
-    <ScrollView>
-      {playing.map((pl) => {
-        const props = {
-          onRemove,
-          onChangeStrokes,
-          teamEvent: false
-        }
-        return <EventSetupPlayingCard key={`setup_pl_${pl.id}`} item={pl} {...props} />
-      })}
-    </ScrollView>
+    <FlatList
+      data={playing}
+      renderItem={({ item }) => (
+        <EventSetupPlayingCard
+          item={item}
+          {...{
+            onRemove,
+            onChangeStrokes,
+            teamEvent: false
+          }}
+        />
+      )}
+      keyExtractor={item => `setup_pl_${item.id}`}
+    />
   </View>
 )
 

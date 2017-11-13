@@ -7,7 +7,7 @@ import styles, { colors } from 'styles'
 import { withUserQuery } from 'queries/userQuery'
 import { userShape } from 'propTypes'
 
-const defaultAvatar = require('../images/defaultavatar.png')
+const defaultAvatar = require('../../images/defaultavatar.png')
 
 class NewPlayer extends Component {
   static navigationOptions = {
@@ -48,6 +48,7 @@ class NewPlayer extends Component {
   render() {
     const { data } = this.props
     const { team, addedIds } = this.props.navigation.state.params
+
     if (data.loading) {
       return null
     }
@@ -56,33 +57,29 @@ class NewPlayer extends Component {
       <View style={styles.container}>
         <FlatList
           removeClippedSubviews={false}
-          ref={(c) => {
-            this.listView = c
-          }}
-          initialListSize={100}
+          initialListSize={10}
           data={data.players}
-          renderItem={({ player }) => {
-            const isPlaying = addedIds.includes(player.id)
-            const photoSrc = player.photo ? { uri: player.photo.url } : defaultAvatar
+          renderItem={({ item }) => {
+            const isPlaying = addedIds.includes(item.id)
+            const photoSrc = item.photo ? { uri: item.photo } : defaultAvatar
             return !isPlaying ? (
               <TGText
-                key={`setup_player_row_${player.id}`}
-                onPress={() => this.addPlayer(player, team)}
+                key={`setup_player_row_${item.id}`}
+                onPress={() => this.addPlayer(item, team)}
                 viewStyle={{
                   borderBottomWidth: 1,
                   borderColor: colors.lightGray,
                   flexDirection: 'row',
-                  paddingHorizontal: 20,
-                  paddingVertical: 15
+                  padding: 15
                 }}
                 style={{ fontSize: 18, fontWeight: 'bold' }}
               >
                 <Image style={styles.cardImage} source={photoSrc} resizeMode="cover" />
-                {player.firstName} {player.lastName}
+                {item.firstName} {item.lastName}
               </TGText>
             ) : null
           }}
-          keyExtractor={player => `setup_player_row_${player.id}`}
+          keyExtractor={item => `setup_player_row_${item.id}`}
           enableEmptySections
         />
       </View>

@@ -5,7 +5,7 @@ export const seasonShape = shape({
   closed: bool.isRequired,
   name: string.isRequired,
   photo: string,
-  eventIds: arrayOf(number).isRequired
+  eventIds: arrayOf(number)
 })
 
 export const userShape = shape({
@@ -17,9 +17,16 @@ export const userShape = shape({
 })
 
 export const screenPropsShape = shape({
-  currentUser: userShape,
+  currentUser: shape({
+    id: string,
+    email: string,
+    firstName: string,
+    lastName: string,
+    photo: string
+  }),
   activeScoringSession: shape(),
-  seasons: arrayOf(seasonShape)
+  seasons: arrayOf(seasonShape),
+  isLoggedIn: bool.isRequired
 })
 
 export const leaderboardPlayerShape = shape({

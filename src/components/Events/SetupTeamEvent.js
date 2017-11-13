@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, ScrollView } from 'react-native'
+import { View, FlatList } from 'react-native'
 import { arrayOf, shape, func } from 'prop-types'
 
 import EventSetupPlayingCard from 'Scoring/EventSetupPlayingCard'
@@ -16,18 +16,22 @@ const SetupTeamEvent = ({
 }) => (
   <View style={styles.container}>
     <TopButton title="+ LÄGG TILL LAG" onPress={onAddTeam} />
-    <ScrollView>
-      {playing.map((team) => {
-        const props = {
-          onRemove,
-          onChangeStrokes,
-          onRemovePlayerFromTeam,
-          onAddPlayerToTeam: () => openAddPlayer(team),
-          teamEvent: true
-        }
-        return <EventSetupPlayingCard key={`setup_team_${team.id}`} item={team} {...props} />
-      })}
-    </ScrollView>
+    <FlatList
+      data={playing}
+      renderItem={({ item }) => (
+        <EventSetupPlayingCard
+          item={item}
+          {...{
+            onRemove,
+            onChangeStrokes,
+            onRemovePlayerFromTeam,
+            onAddPlayerToTeam: () => openAddPlayer(item),
+            teamEvent: true
+          }}
+        />
+      )}
+      keyExtractor={item => `setup_team_${item.id}`}
+    />
   </View>
 )
 

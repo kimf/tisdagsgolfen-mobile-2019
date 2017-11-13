@@ -43,7 +43,7 @@ class App extends Component {
 
   state = {
     checking: true,
-    isLoggedin: false,
+    isLoggedIn: false,
     currentUser: null
   }
 
@@ -53,7 +53,7 @@ class App extends Component {
     this.setState({
       currentUser,
       checking: false,
-      isLoggedin: !!(currentUser && currentUser.token)
+      isLoggedIn: !!(currentUser && currentUser.token)
     })
   }
 

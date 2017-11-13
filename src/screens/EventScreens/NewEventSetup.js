@@ -10,23 +10,29 @@ import TGText from 'shared/TGText'
 import BottomButton from 'shared/BottomButton'
 import styles, { colors } from 'styles'
 import { withCreateScoringSessionMutation } from 'mutations/scoringSessionMutation'
-import { userShape } from 'propTypes'
+import { screenPropsShape } from 'propTypes'
 
 class NewEventSetup extends Component {
   static propTypes = {
-    course: shape({
-      id: string.isRequired,
-      club: string.isRequired,
-      name: string.isRequired
-    }).isRequired,
-    changeCourse: func.isRequired,
-    navigation: shape().isRequired,
-    currentUser: userShape.isRequired
+    screenProps: screenPropsShape.isRequired,
+    navigation: shape({
+      state: shape({
+        params: shape({
+          course: shape({
+            id: string.isRequired,
+            club: string.isRequired,
+            name: string.isRequired
+          }).isRequired
+        })
+      }).isRequired,
+      navigate: func.isRequired,
+      goBack: func.isRequired
+    }).isRequired
   }
 
   constructor(props) {
     super(props)
-    const user = props.currentUser
+    const user = props.screenProps.currentUser
     this.state = {
       playing: [{ ...user, strokes: 0 }],
       isStrokes: false,
@@ -83,7 +89,7 @@ class NewEventSetup extends Component {
   }
 
   changeEventType = (teamEvent) => {
-    const user = this.props.currentUser
+    const user = this.props.screenProps.currentUser
     let playing = [{ ...user, strokes: 0 }]
     if (teamEvent) {
       playing = [
@@ -99,9 +105,8 @@ class NewEventSetup extends Component {
 
   startPlay = async () => {
     try {
-      const {
-        currentUser, course, createScoringSession, navigation
-      } = this.props
+      const { screenProps: { currentUser }, createScoringSession, navigation } = this.props
+      const { state: { params: { course } } } = navigation
       const { teamEvent, isStrokes } = this.state
       const scoringItems = this.state.playing.map(playing => ({
         extraStrokes: parseInt(playing.strokes, 10),
@@ -141,7 +146,8 @@ class NewEventSetup extends Component {
   }
 
   render() {
-    const { changeCourse, course } = this.props
+    const { navigation } = this.props
+    const { goBack, state: { params: { course } } } = navigation
     const {
       teamEvent, isStrokes, playing, error
     } = this.state
@@ -179,10 +185,7 @@ class NewEventSetup extends Component {
             <TGText style={{ flex: 1, padding: 10, color: colors.white }}>
               {course.club}: {course.name}
             </TGText>
-            <TGText
-              style={{ flex: 1, padding: 10, textAlign: 'right' }}
-              onPress={() => changeCourse(null)}
-            >
+            <TGText style={{ flex: 1, padding: 10, textAlign: 'right' }} onPress={() => goBack()}>
               Byt
             </TGText>
           </View>

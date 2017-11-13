@@ -28,7 +28,8 @@ const SeasonPicker = ({ seasons, onChangeSeason, position }) => (
       <SeasonCard
         key={`SeasonCard_${season.id}`}
         onPress={() => onChangeSeason(season.id)}
-        season={season}
+        photo={season.photo}
+        name={season.name}
       />
     ))}
   </Animated.View>

@@ -1,38 +1,35 @@
 import { StackNavigator } from 'react-navigation'
 
-// import Leaderboard from 'screens/Leaderboard'
-// import EventsScreen from 'screens/Events'
-// import Profile from 'screens/Profile'
-
-// import NewEvent from 'screens/EventScreens/NewEvent'
-// import EventResult from 'screens/EventScreens/EventResult'
-// import LiveEventResult from 'screens/EventScreens/LiveEventResult'
-// import NewPlayer from 'screens/NewPlayer'
-
 import Season from 'screens/Season'
-import ScoreEventScreen from 'screens/ScoringScreens/ScoreEvent'
+import ScoreEventScreen from 'screens/ScoreEvent'
 
-// const EventStack = StackNavigator(
-//   {
-//     EventsIndex: { screen: EventsScreen },
-//     NewEvent: { screen: NewEvent },
-//     EventResult: { screen: EventResult },
-//     LiveEventResult: { screen: LiveEventResult },
-//     NewPlayer: { screen: NewPlayer }
-//   },
-//   {
-//     initialRouteName: 'EventsIndex'
-//   }
-// )
+import CoursePickerScreen from 'screens/EventScreens/CoursePickerScreen'
+import NewEventSetup from 'screens/EventScreens/NewEventSetup'
+import LiveEventResult from 'screens/EventScreens/LiveEventResult'
+import NewPlayer from 'screens/EventScreens/NewPlayer'
+
+const SeasonStack = StackNavigator(
+  {
+    Season: { screen: Season }
+  },
+  {
+    mode: 'modal',
+    headerMode: 'float'
+  }
+)
 
 const RootStack = StackNavigator(
   {
-    Season: { screen: Season },
-    ScoreEvent: { screen: ScoreEventScreen }
+    Season: { screen: SeasonStack },
+    ScoreEvent: { screen: ScoreEventScreen },
+    CoursePickerScreen: { screen: CoursePickerScreen },
+    NewEventSetup: { screen: NewEventSetup },
+    NewPlayer: { screen: NewPlayer },
+    LiveEventResult: { screen: LiveEventResult }
   },
   {
-    headerMode: 'none',
-    initialRouteName: 'Season'
+    initialRouteName: 'Season',
+    headerMode: 'float'
   }
 )
 

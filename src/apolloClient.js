@@ -7,27 +7,14 @@ import { print } from 'graphql/language/printer'
 
 import { getCache } from 'utils'
 
-let token
-const withToken = setContext((context) => {
-  // if you have a cached value, return it immediately
-  if (token) {
-    return {
-      ...context,
-      headers: {
-        ...context.headers,
-        authorization: `Token token=${token}`
-      }
-    }
-  }
-
-  return getCache('currentUser').then(currentUser => ({
+const withToken = setContext(context =>
+  getCache('currentUser').then(currentUser => ({
     ...context,
     headers: {
       ...context.headers,
       authorization: currentUser && currentUser.token ? `Token token=${currentUser.token}` : null
     }
-  }))
-})
+  })))
 
 const Logger = (operation, forward) => {
   const {
@@ -35,7 +22,7 @@ const Logger = (operation, forward) => {
   } = operation
 
   // eslint-disable-next-line no-console
-  // console.group(operationName)
+  console.group(operationName)
 
   // eslint-disable-next-line no-console
   console.log({
@@ -49,7 +36,7 @@ const Logger = (operation, forward) => {
     // eslint-disable-next-line no-console
     console.log({ data, errors })
     // eslint-disable-next-line no-console
-    // console.groupEnd()
+    console.groupEnd()
     return { data, errors }
   })
 }
@@ -58,7 +45,7 @@ const httpLink = createHttpLink({
   uri: 'https://www.tisdagsgolfen.se/api/graphql'
 })
 
-const link = ApolloLink.from([withToken, Logger, httpLink])
+const link = ApolloLink.from([Logger, withToken, httpLink])
 
 const dataIdFromObject = (result) => {
   // eslint-disable-next-line no-underscore-dangle

@@ -1,11 +1,14 @@
 import React, { Component } from 'react'
+import { View } from 'react-native'
 import { func, string, shape } from 'prop-types'
 
-import Logo from 'Login/Logo'
 import Form from 'Login/LoginForm'
-import Wallpaper from 'Login/Wallpaper'
+import TGText from 'shared/TGText'
+import { colors } from 'styles'
 
 import { withSigninUserMutation } from 'mutations/signinUserMutation'
+
+const icon = '☠️'
 
 class Login extends Component {
   static propTypes = {
@@ -54,10 +57,26 @@ class Login extends Component {
 
   render() {
     return (
-      <Wallpaper>
-        <Logo />
+      <View
+        style={{
+          height: '100%',
+          justifyContent: 'flex-start',
+          alignItems: 'stretch',
+          backgroundColor: colors.dark
+        }}
+      >
+        <TGText
+          style={{
+            padding: 20,
+            fontSize: 60,
+            color: colors.red,
+            textAlign: 'center'
+          }}
+        >
+          {icon}
+        </TGText>
         <Form {...this.state} changeValue={this.changeValue} onSubmit={this.onSubmit} />
-      </Wallpaper>
+      </View>
     )
   }
 }
