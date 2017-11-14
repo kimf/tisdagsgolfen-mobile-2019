@@ -78,7 +78,7 @@ class Season extends Component {
     const { screenProps: { currentUser, activeScoringSession, seasons } } = this.props
     const { seasonId } = this.state
 
-    const season = seasonId ? seasons.find(s => s.id === seasonId) : seasons[1]
+    const season = seasonId ? seasons.find(s => s.id === seasonId) : seasons[0]
     const currentUserId = currentUser ? currentUser.id : null
     const hasEvents = season.eventIds.length > 0
 
@@ -88,7 +88,7 @@ class Season extends Component {
         .map((id, index) => ({ id: `${id}`, index: `${index + 1}` }))
         .reverse()
 
-      const eventId = this.state.eventId || reversedEventIds[1].id
+      const eventId = this.state.eventId || reversedEventIds[0].id
       const eventIndex = reversedEventIds.find(id => id.id === eventId).index
 
       weekProps = {
