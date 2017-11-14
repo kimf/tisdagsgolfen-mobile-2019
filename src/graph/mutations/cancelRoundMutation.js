@@ -1,9 +1,10 @@
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
+import update from 'immutability-helper'
 
 const cancelRoundMutation = gql`
   mutation cancelRoundMutation($scoringSessionId: ID!) {
-    deleteScoringSession(id: $scoringSessionId) {
+    deleteScoringSession(scoringSessionId: $scoringSessionId) {
       id
     }
   }
@@ -13,6 +14,15 @@ export default cancelRoundMutation
 
 export const withCancelRoundMutation = graphql(cancelRoundMutation, {
   props: ({ mutate }) => ({
-    cancelRound: scoringSessionId => mutate({ variables: { scoringSessionId } })
+    cancelRound: scoringSessionId =>
+      mutate({
+        variables: { scoringSessionId },
+        updateQueries: {
+          activeScoringSessionQuery: prev =>
+            update(prev, {
+              activeScoringSession: { $set: null }
+            })
+        }
+      })
   })
 })
