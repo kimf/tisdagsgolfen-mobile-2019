@@ -24,21 +24,6 @@ const swipeCardStyle = {
   borderRadius: 10
 }
 
-const SwipeHeader = ({ text }) => (
-  <TGText
-    style={{
-      color: colors.gray,
-      textAlign: 'center',
-      paddingBottom: 6,
-      paddingTop: 2,
-      fontSize: 12
-    }}
-  >
-    {text}
-  </TGText>
-)
-SwipeHeader.propTypes = { text: string.isRequired }
-
 class EventView extends Component {
   static propTypes = {
     currentUserId: string,
@@ -91,14 +76,12 @@ class EventView extends Component {
           showsHorizontalScrollIndicator={false}
           style={{
             flex: 1,
-            paddingBottom: 10,
+            paddingBottom: 20,
+            paddingTop: 5,
             backgroundColor: colors.lightGray
           }}
         >
-          <View style={[swipeCardStyle, { marginLeft: 5, marginRight: 10 }]}>
-            <SwipeHeader
-              text={`Ställning efter ${eventIndex} ${eventIndex > 1 ? 'rundor' : 'runda'}`}
-            />
+          <View style={[swipeCardStyle, { marginLeft: 5, marginRight: 5 }]}>
             <Leaderboard
               sorting={sorting}
               currentUserId={currentUserId}
@@ -107,8 +90,7 @@ class EventView extends Component {
               eventId={eventId}
             />
           </View>
-          <View style={[swipeCardStyle, { marginRight: 5 }]}>
-            <SwipeHeader text={`Resultat för vecka ${eventIndex}`} />
+          <View style={[swipeCardStyle, { marginRight: 10 }]}>
             <EventResult
               eventId={eventId}
               seasonId={seasonId}
