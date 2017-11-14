@@ -154,7 +154,13 @@ export class ScoreEvent extends Component {
     const { data: { loading, scoringSession }, screenProps: { currentUser } } = this.props
     const { currentHole, scrollEnabled, scrollX } = this.state
     if (loading) {
-      return <Loading text="Laddar hål och sånt..." />
+      return (
+        <Loading
+          text="Laddar hål och sånt..."
+          backgroundColor={colors.blue}
+          color={colors.lightGray}
+        />
+      )
     }
 
     const transformScale = this.modal.interpolate({

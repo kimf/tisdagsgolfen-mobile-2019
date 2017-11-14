@@ -5,6 +5,7 @@ import ScoreEventScreen from 'screens/ScoreEvent'
 
 import CoursePickerScreen from 'screens/EventScreens/CoursePickerScreen'
 import NewEventSetup from 'screens/EventScreens/NewEventSetup'
+import NewEventScoringItems from 'screens/EventScreens/NewEventScoringItems'
 import LiveEventResult from 'screens/EventScreens/LiveEventResult'
 import NewPlayer from 'screens/EventScreens/NewPlayer'
 
@@ -24,7 +25,8 @@ const RootStack = StackNavigator(
     ScoreEvent: { screen: ScoreEventScreen },
     CoursePickerScreen: { screen: CoursePickerScreen },
     NewEventSetup: { screen: NewEventSetup },
-    NewPlayer: { screen: NewPlayer },
+    NewEventScoringItems: { screen: NewEventScoringItems },
+    NewPlayer: { screen: NewPlayer, modal: true, mode: 'modal' },
     LiveEventResult: { screen: LiveEventResult }
   },
   {

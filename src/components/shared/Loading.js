@@ -6,7 +6,6 @@ import TGText from 'shared/TGText'
 import { colors } from 'styles'
 
 const containerStyle = {
-  backgroundColor: colors.lightGray,
   alignItems: 'center',
   justifyContent: 'center',
   flex: 1
@@ -14,23 +13,25 @@ const containerStyle = {
 
 const textStyle = {
   fontWeight: 'bold',
-  fontSize: 24,
-  color: colors.muted
+  fontSize: 24
 }
 
-const Loading = ({ text }) => (
-  <View style={containerStyle}>
-    <TGText style={textStyle}>{text}</TGText>
+const Loading = ({ text, backgroundColor, color }) => (
+  <View style={[containerStyle, { backgroundColor }]}>
+    <TGText style={[textStyle, { color }]}>{text}</TGText>
   </View>
 )
 
-
 Loading.propTypes = {
-  text: string
+  text: string,
+  backgroundColor: string,
+  color: string
 }
 
 Loading.defaultProps = {
-  text: 'Startar upp...'
+  text: 'Startar upp...',
+  backgroundColor: colors.lightGray,
+  color: colors.muted
 }
 
 export default Loading
