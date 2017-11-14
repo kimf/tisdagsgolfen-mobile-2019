@@ -5,7 +5,9 @@ export const seasonShape = shape({
   closed: bool.isRequired,
   name: string.isRequired,
   photo: string,
-  eventIds: arrayOf(number)
+  eventIds: arrayOf(number),
+  winner: string,
+  finalInfo: string
 })
 
 export const userShape = shape({

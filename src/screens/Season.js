@@ -61,12 +61,7 @@ class Season extends Component {
   }
 
   gotoPlay = () => {
-    const { screenProps: { isLoggedIn } } = this.props
-    if (isLoggedIn) {
-      this.props.navigation.navigate('CoursePickerScreen')
-    } else {
-      this.props.navigation.navigate('Login')
-    }
+    this.props.navigation.navigate('CoursePickerScreen')
   }
 
   changeWeek = (eventId) => {

@@ -23,6 +23,8 @@ const initialQuery = gql`
       photo
       eventCount
       eventIds
+      winner
+      finalInfo
     }
   }
 `

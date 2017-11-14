@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { View, Image } from 'react-native'
 
 import TGText from 'shared/TGText'
@@ -22,7 +22,7 @@ const FinalWeek = ({ season }) => (
         style={{ tintColor: colors.yellow, height: 25, width: 25 }}
       />
       <TGText style={{ marginLeft: 10, color: colors.white, fontWeight: 'bold' }}>
-        Grattis Tobbelito!
+        Grattis {season.winner}
       </TGText>
     </View>
     <Image
@@ -32,7 +32,7 @@ const FinalWeek = ({ season }) => (
       resizeMode="cover"
     />
     <TGText key="finaleInfo" style={{ padding: 20, fontSize: 20 }}>
-      Denna säsong är avslutad, här ska det vara lite info om finalen, kanske rundornas resultat...
+      {season.finalInfo}
     </TGText>
   </View>
 )

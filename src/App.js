@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import { Platform, UIManager } from 'react-native'
 import { ApolloProvider } from 'react-apollo'
+// import deviceLog, { LogView } from 'react-native-device-log'
 
-// import deviceLog from 'react-native-device-log'
 import { getCache } from './utils'
 import client from './apolloClient'
+import withOneSignal from './withOneSignal'
 
 import Root from './Root'
 
@@ -19,15 +20,10 @@ import Root from './Root'
 //     deviceLog.success('logger initialized')
 //   })
 
-// import { LogView } from 'react-native-device-log'
-
-// if (showLog) {
-// return <LogView
-// style={{ flex: 1 }}
-// inverted={false}
-// timeStampFormat="HH:mm:ss"
-// multiExpanded
-// />
+// if (this.state.showLog) {
+//   return (
+//     <LogView style={{ flex: 1 }} inverted={false} timeStampFormat="HH:mm:ss" multiExpanded />
+//   )
 // }
 
 class App extends Component {
@@ -70,4 +66,4 @@ class App extends Component {
   }
 }
 
-export default App
+export default withOneSignal(App)
