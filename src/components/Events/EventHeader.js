@@ -1,10 +1,10 @@
 import React from 'react'
-import { View, StyleSheet, Animated, Image } from 'react-native'
-import { string, bool, shape, func } from 'prop-types'
+import { View, StyleSheet } from 'react-native'
+import { string, bool } from 'prop-types'
 
 import TGText from 'shared/TGText'
-import TouchableView from 'shared/TouchableView'
 import { colors } from 'styles'
+import { courseShape } from 'propTypes'
 
 const gametypeName = (scoringType) => {
   switch (scoringType) {
@@ -19,10 +19,11 @@ const gametypeName = (scoringType) => {
 
 const styles = StyleSheet.create({
   view: {
+    flex: 2,
     padding: 10,
-    height: 60,
+    height: 70,
     backgroundColor: colors.lightGray,
-    flexDirection: 'row',
+    flexDirection: 'column',
     alignItems: 'flex-start',
     justifyContent: 'flex-start'
   },
@@ -33,56 +34,24 @@ const styles = StyleSheet.create({
     color: colors.semiDark,
     fontWeight: 'bold',
     fontSize: 12,
-    height: 20
+    lineHeight: 18
   }
 })
 
-const EventHeader = ({
-  course, teamEvent, scoringType, toggle, imageSpin
-}) => (
-  <TouchableView style={styles.view} onPress={toggle}>
-    <View style={{ flex: 1 }}>
-      <TGText style={[styles.text, { color: colors.darkGreen, fontSize: 16 }]}>{course}</TGText>
-      <TGText style={styles.text}>
-        {gametypeName(scoringType)}
-        {teamEvent ? ', Lagtävling ' : ', Individuellt'}
-      </TGText>
-    </View>
-    {imageSpin && (
-      <View
-        style={{
-          padding: 10,
-          justifyContent: 'center',
-          alignItems: 'center',
-          alignSelf: 'flex-end'
-        }}
-      >
-        <Animated.Image
-          style={{
-            tintColor: colors.dark,
-            resizeMode: 'contain',
-            height: 18,
-            width: 18,
-            marginLeft: 5,
-            transform: [{ rotate: imageSpin }]
-          }}
-          source={require('../../images/slide-up.png')}
-        />
-      </View>
-    )}
-  </TouchableView>
+const EventHeader = ({ course, teamEvent, scoringType }) => (
+  <View style={styles.view}>
+    <TGText style={styles.text}>
+      {gametypeName(scoringType)}
+      {teamEvent ? ', Lagtävling ' : ', Individuellt'}
+    </TGText>
+    <TGText style={[styles.text, { color: colors.gray, fontSize: 14 }]}>{course.club}</TGText>
+    <TGText style={[styles.text, { color: colors.darkGreen, fontSize: 14 }]}>{course.name}</TGText>
+  </View>
 )
 
 EventHeader.propTypes = {
-  course: string.isRequired,
+  course: courseShape.isRequired,
   teamEvent: bool.isRequired,
-  scoringType: string.isRequired,
-  toggle: func.isRequired,
-  imageSpin: shape()
+  scoringType: string.isRequired
 }
-
-EventHeader.defaultProps = {
-  imageSpin: null
-}
-
 export default EventHeader

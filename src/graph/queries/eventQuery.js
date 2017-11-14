@@ -27,7 +27,11 @@ const eventQuery = gql`
       startsAt
       scoringType
       teamEvent
-      course
+      course {
+        id
+        club
+        name
+      }
       leaderboard {
         id
         photo

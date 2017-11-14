@@ -22,7 +22,7 @@ const LEADERBOARD_HEIGHT = deviceHeight
 
 const resetAction = NavigationActions.reset({
   index: 0,
-  actions: [NavigationActions.navigate({ routeName: 'Main' })]
+  actions: [NavigationActions.navigate({ routeName: 'Season' })]
 })
 
 // TODO: Break this big ass component apart!

@@ -38,27 +38,21 @@ class Leaderboard extends Component {
 
     const emptyLeaderboard = sortedPlayers.filter(sl => sl.eventCount !== 0).length === 0
 
+    if (emptyLeaderboard) {
+      return <EmptyState text="Inga rundor spelade ännu" />
+    }
+
     return (
-      <View style={{ flex: 1, backgroundColor: colors.white }}>
-        <View style={{ flex: 1 }}>
-          {emptyLeaderboard ? (
-            <EmptyState text="Inga rundor spelade ännu" />
-          ) : (
-            <View style={{ marginBottom: 60 }}>
-              <FlatList
-                removeClippedSubviews={false}
-                initialNumToRender={10}
-                style={{ paddingHorizontal: 10, paddingBottom: 20 }}
-                data={sortedPlayers}
-                renderItem={({ item }) => (
-                  <LeaderboardCard currentUserId={currentUserId} player={item} sorting={sorting} />
-                )}
-                keyExtractor={player => `l_${seasonId}_${eventId}_${player.id}`}
-              />
-            </View>
-          )}
-        </View>
-      </View>
+      <FlatList
+        showsVerticalScrollIndicator={false}
+        removeClippedSubviews={false}
+        initialNumToRender={10}
+        data={sortedPlayers}
+        renderItem={({ item }) => (
+          <LeaderboardCard currentUserId={currentUserId} player={item} sorting={sorting} />
+        )}
+        keyExtractor={player => `l_${seasonId}_${eventId}_${player.id}`}
+      />
     )
   }
 }

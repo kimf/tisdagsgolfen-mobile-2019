@@ -19,14 +19,17 @@ const fixString = stringToFix =>
     .toLowerCase()
 
 const filterCourses = cacheable((courses, query) =>
-  courses.filter((c) => {
-    const searchString = fixString(`${c.club}${c.name}`)
-    const trimmedQuery = fixString(query)
-    return searchString.indexOf(trimmedQuery) !== -1
-  }))
+  courses
+    .filter((c) => {
+      const searchString = fixString(`${c.club}${c.name}`)
+      const trimmedQuery = fixString(query)
+      return searchString.indexOf(trimmedQuery) !== -1
+    })
+    .sort((a, b) => b.eventCount - a.eventCount)
+    .sort((a, b) => a.club - b.club))
 
 const getPreviouslyPlayedCourses = cacheable(courses =>
-  courses.filter(c => c.eventCount > 0).sort((a, b) => a.eventCount - b.eventCount))
+  courses.filter(c => c.eventCount > 3).sort((a, b) => b.eventCount - a.eventCount))
 
 class CoursePicker extends Component {
   static propTypes = {

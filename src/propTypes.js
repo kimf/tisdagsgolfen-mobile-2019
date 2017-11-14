@@ -44,12 +44,18 @@ export const leaderboardPlayerShape = shape({
   totalPoints: number.isRequired
 })
 
+export const courseShape = shape({
+  id: string.isRequired,
+  club: string.isRequired,
+  name: string.isRequired
+})
+
 const eventShapeHash = {
   id: string.isRequired,
   scoringType: string.isRequired,
   status: string.isRequired,
   teamEvent: bool.isRequired,
-  course: string
+  course: courseShape.isRequired
 }
 export const eventShape = shape(eventShapeHash)
 

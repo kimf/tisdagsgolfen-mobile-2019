@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { View, Animated, Easing, LayoutAnimation } from 'react-native'
 import { func, shape } from 'prop-types'
 
-import BottomButton from 'shared/BottomButton'
 import SeasonHeader from 'Season/SeasonHeader'
 import SeasonPicker from 'Season/SeasonPicker'
 import WeekView from 'Season/WeekView'
@@ -31,16 +30,14 @@ class Season extends Component {
 
   state = {
     seasonId: null,
-    eventId: null,
-    sorting: 'totalPoints'
+    eventId: null
   }
 
   onChangeSeason = (seasonId) => {
     this.setState(state => ({
       ...state,
       seasonId,
-      eventId: null,
-      sorting: 'totalPoints'
+      eventId: null
     }))
     this.toggleSeasonpicker(false)
   }
@@ -77,16 +74,11 @@ class Season extends Component {
     this.setState(state => ({ ...state, eventId }))
   }
 
-  changeSort = (sorting) => {
-    LayoutAnimation.configureNext(linear)
-    this.setState(state => ({ ...state, sorting }))
-  }
-
   render() {
     const { screenProps: { currentUser, activeScoringSession, seasons } } = this.props
-    const { seasonId, sorting } = this.state
+    const { seasonId } = this.state
 
-    const season = seasonId ? seasons.find(s => s.id === seasonId) : seasons[0]
+    const season = seasonId ? seasons.find(s => s.id === seasonId) : seasons[1]
     const currentUserId = currentUser ? currentUser.id : null
     const hasEvents = season.eventIds.length > 0
 
@@ -96,14 +88,13 @@ class Season extends Component {
         .map((id, index) => ({ id: `${id}`, index: `${index + 1}` }))
         .reverse()
 
-      const eventId = this.state.eventId || reversedEventIds[0].id
+      const eventId = this.state.eventId || reversedEventIds[1].id
       const eventIndex = reversedEventIds.find(id => id.id === eventId).index
 
       weekProps = {
         currentUserId,
         eventId,
         eventIndex,
-        sorting,
         season,
         reversedEventIds
       }

@@ -46,6 +46,7 @@ class EventResult extends Component {
     return (
       <FlatList
         removeClippedSubviews={false}
+        showsVerticalScrollIndicator={false}
         initialListSize={10}
         data={sortedPlayers}
         renderItem={({ item }) => (

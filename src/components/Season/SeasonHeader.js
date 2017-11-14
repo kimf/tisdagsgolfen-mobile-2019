@@ -16,7 +16,8 @@ const SeasonHeader = ({
       backgroundColor: colors.lightGray,
       height: NAVBAR_HEIGHT + STATUS_BAR_HEIGHT,
       padding: 5,
-      flexDirection: 'row'
+      flexDirection: 'row',
+      alignContent: 'center'
     }}
   >
     <TouchableView
@@ -49,25 +50,29 @@ const SeasonHeader = ({
         source={require('../../images/slide-up.png')}
       />
     </TouchableView>
-    <TGText
+    <TouchableView
       style={{
-        fontSize: 14,
-        color: activeScoringSession ? colors.white : colors.dark,
-        borderColor: activeScoringSession ? 'transparent' : colors.semiDark
-      }}
-      viewStyle={{
-        backgroundColor: activeScoringSession ? colors.blue : 'transparent',
-        borderWidth: 1,
-        borderRadius: 5,
-        alignSelf: 'flex-end',
-        padding: 4,
-        marginRight: 10,
-        marginBottom: 5
+        padding: 10,
+        paddingTop: STATUS_BAR_HEIGHT,
+        justifyContent: 'center'
       }}
       onPress={goPlay}
     >
-      {activeScoringSession ? 'FORTSÄTT AKTIV RUNDA' : 'SPELA GOLF'}
-    </TGText>
+      <TGText
+        style={{
+          color: activeScoringSession ? colors.white : colors.darkGreen,
+          fontWeight: 'bold',
+          fontSize: 14,
+          paddingHorizontal: 10,
+          paddingVertical: 5,
+          backgroundColor: activeScoringSession ? colors.darkGreen : colors.white,
+          borderRadius: 10
+        }}
+        onPress={goPlay}
+      >
+        {activeScoringSession ? 'FORTSÄTT RUNDA' : 'SPELA GOLF'}
+      </TGText>
+    </TouchableView>
   </View>
 )
 

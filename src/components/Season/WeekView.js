@@ -1,14 +1,27 @@
-import React from 'react'
-import { View } from 'react-native'
+import React, { Component } from 'react'
+import { LayoutAnimation } from 'react-native'
 import { arrayOf, string, shape, func } from 'prop-types'
 
 import WeekPicker from 'Season/WeekPicker'
 import EventView from 'Season/EventView'
 import FinalWeek from 'Season/FinalWeek'
-import Sorter from 'Season/Sorter'
-import TGText from 'shared/TGText'
 import { seasonShape } from 'propTypes'
-import { colors } from 'styles'
+import { linear } from 'animations'
+
+const withChangeSort = WrappedWeek =>
+  class WrappedWithChangeSort extends Component {
+    state = { sorting: 'totalPoints' }
+
+    changeSort = (sorting) => {
+      LayoutAnimation.configureNext(linear)
+      this.setState(state => ({ ...state, sorting }))
+    }
+
+    render() {
+      const { sorting } = this.state
+      return <WrappedWeek sorting={sorting} changeSort={this.changeSort} {...this.props} />
+    }
+  }
 
 const WeekView = ({
   currentUserId,
@@ -17,27 +30,15 @@ const WeekView = ({
   sorting,
   season,
   reversedEventIds,
-  changeWeek
+  changeWeek,
+  changeSort
 }) => [
-  eventId !== 'final' && (
-    <View
-      key={`weekView_${eventId}`}
-      style={{
-        flexDirection: 'row',
-        alignItems: 'center',
-        padding: 10,
-        backgroundColor: colors.darkGreen
-      }}
-    >
-      <TGText style={{ flex: 1, color: 'white', fontWeight: 'bold' }}>
-        Efter {eventIndex} {eventIndex > 1 ? 'omgångar' : 'omgång'}
-      </TGText>
-      {parseInt(season.name, 10) > 2015 && (
-        <Sorter key="weekSortTabs" current={sorting} onChange={sort => this.changeSort(sort)} />
-      )}
-    </View>
-  ),
-
+  <WeekPicker
+    key={`weekPicker_${season.id}`}
+    weeks={reversedEventIds}
+    currentId={eventId}
+    onChangeWeek={changeWeek}
+  />,
   eventId === 'final' ? (
     <FinalWeek key={`finalWeek_${eventId}`} season={season} />
   ) : (
@@ -47,15 +48,11 @@ const WeekView = ({
       currentUserId={currentUserId}
       sorting={sorting}
       eventId={eventId}
+      eventIndex={eventIndex}
+      showSorter={eventId !== 'final' && parseInt(season.name, 10) > 2015}
+      changeSort={changeSort}
     />
-  ),
-
-  <WeekPicker
-    key={`weekPicker_${season.id}`}
-    weeks={reversedEventIds}
-    currentId={eventId}
-    onChangeWeek={changeWeek}
-  />
+  )
 ]
 
 WeekView.propTypes = {
@@ -68,7 +65,8 @@ WeekView.propTypes = {
     id: string.isRequired,
     index: string.isRequired
   }).isRequired).isRequired,
-  changeWeek: func.isRequired
+  changeWeek: func.isRequired,
+  changeSort: func.isRequired
 }
 
-export default WeekView
+export default withChangeSort(WeekView)

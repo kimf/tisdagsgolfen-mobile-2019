@@ -12,7 +12,11 @@ const eventsQuery = gql`
       startsAt
       scoringType
       teamEvent
-      course
+      course {
+        id
+        club
+        name
+      }
     }
   }
 `

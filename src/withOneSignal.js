@@ -27,7 +27,7 @@ const onOpened = (openResult) => {
   // openResult.notification.payload.additionalData
 }
 
-const withOneSignal = WrappedComponent => (
+const withOneSignal = WrappedComponent =>
   class WO extends Component {
     constructor(props) {
       super(props)
@@ -36,8 +36,8 @@ const withOneSignal = WrappedComponent => (
 
       if (Platform.OS === 'android') {
         // eslint-disable-next-line no-unused-expressions
-        UIManager.setLayoutAnimationEnabledExperimental
-          && UIManager.setLayoutAnimationEnabledExperimental(true)
+        UIManager.setLayoutAnimationEnabledExperimental &&
+          UIManager.setLayoutAnimationEnabledExperimental(true)
       }
     }
 
@@ -66,6 +66,5 @@ const withOneSignal = WrappedComponent => (
       return <WrappedComponent {...this.props} />
     }
   }
-)
 
 export default withOneSignal

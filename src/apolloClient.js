@@ -21,8 +21,10 @@ const Logger = (operation, forward) => {
     operationName, query, variables, context
   } = operation
 
-  // eslint-disable-next-line no-console
-  console.group(operationName)
+  if (__DEV__) {
+    // eslint-disable-next-line no-console
+    console.group(operationName)
+  }
 
   // eslint-disable-next-line no-console
   console.log({
@@ -35,8 +37,10 @@ const Logger = (operation, forward) => {
   return forward(operation).map(({ data, errors }) => {
     // eslint-disable-next-line no-console
     console.log({ data, errors })
-    // eslint-disable-next-line no-console
-    console.groupEnd()
+    if (__DEV__) {
+      // eslint-disable-next-line no-console
+      console.groupEnd()
+    }
     return { data, errors }
   })
 }

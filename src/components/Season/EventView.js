@@ -1,57 +1,59 @@
 import React, { Component } from 'react'
-import { View, Animated, Easing } from 'react-native'
-import { string } from 'prop-types'
+import { ScrollView, View } from 'react-native'
+import { bool, func, string } from 'prop-types'
 
 import Leaderboard from 'Leaderboard/Leaderboard'
 import EventResult from 'Season/EventResult'
 import EventViewLoader from 'Season/EventViewLoader'
+import Sorter from 'Season/Sorter'
 import EventHeader from 'Events/EventHeader'
-import AnimatedModal from 'shared/AnimatedModal'
+import TGText from 'shared/TGText'
 
-import { deviceHeight } from 'styles'
+import { colors, deviceWidth } from 'styles'
 import { eventQueryProps, withEventQuery } from 'queries/eventQuery'
 
-const TOP = 180
-const BOTTOM = deviceHeight - 60
+const swipeCardStyle = {
+  width: deviceWidth - 20,
+  padding: 5,
+  backgroundColor: '#fff',
+  shadowColor: colors.gray,
+  shadowOffset: { width: 1, height: 1 },
+  shadowRadius: 2,
+  shadowOpacity: 0.5,
+  elevation: 5,
+  borderRadius: 10
+}
+
+const SwipeHeader = ({ text }) => (
+  <TGText
+    style={{
+      color: colors.gray,
+      textAlign: 'center',
+      paddingBottom: 6,
+      paddingTop: 2,
+      fontSize: 12
+    }}
+  >
+    {text}
+  </TGText>
+)
+SwipeHeader.propTypes = { text: string.isRequired }
 
 class EventView extends Component {
   static propTypes = {
     currentUserId: string,
-    sorting: string.isRequired,
     eventId: string.isRequired,
+    eventIndex: string.isRequired,
     seasonId: string.isRequired,
-    data: eventQueryProps.isRequired
+    data: eventQueryProps.isRequired,
+    sorting: string.isRequired,
+    showSorter: bool.isRequired,
+    changeSort: func.isRequired
   }
 
   static defaultProps = {
     currentUserId: null
   }
-
-  eventResult = new Animated.Value(0)
-  iconPos = new Animated.Value(0)
-  open = false
-
-  animateEventResult = (open) => {
-    this.open = open
-    const duration = 450
-    const useNativeDriver = true
-    Animated.parallel([
-      Animated.timing(this.eventResult, {
-        toValue: open ? BOTTOM : TOP,
-        easing: Easing.ease,
-        duration,
-        useNativeDriver
-      }),
-      Animated.timing(this.iconPos, {
-        toValue: open ? 1 : 0,
-        easing: Easing.ease,
-        duration,
-        useNativeDriver
-      })
-    ]).start()
-  }
-
-  toggleEventResult = () => this.animateEventResult(!this.open)
 
   render() {
     const {
@@ -59,6 +61,9 @@ class EventView extends Component {
       seasonId,
       currentUserId,
       sorting,
+      showSorter,
+      changeSort,
+      eventIndex,
       data: { loading, event, players }
     } = this.props
 
@@ -66,45 +71,54 @@ class EventView extends Component {
       return <EventViewLoader />
     }
 
-    const eventResultPos = this.eventResult.interpolate({
-      inputRange: [TOP, BOTTOM],
-      outputRange: [BOTTOM, TOP],
-      extrapolate: 'clamp'
-    })
-
-    const iconPos = this.iconPos.interpolate({
-      inputRange: [0, 1],
-      outputRange: ['0deg', '-180deg']
-    })
-
     return (
       <View style={{ flex: 1 }}>
-        <Leaderboard
-          sorting={sorting}
-          currentUserId={currentUserId}
-          players={players}
-          seasonId={seasonId}
-          eventId={eventId}
-        />
-        <AnimatedModal height={deviceHeight} position={eventResultPos}>
+        <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
           <EventHeader
             key={`eventHeader_${eventId}`}
             course={event.course}
             teamEvent={event.teamEvent}
             scoringType={event.scoringType}
-            toggle={this.toggleEventResult}
-            position={eventResultPos}
-            imageSpin={iconPos}
           />
-          <EventResult
-            eventId={eventId}
-            seasonId={seasonId}
-            sorting={sorting}
-            currentUserId={currentUserId}
-            players={event.leaderboard}
-            scoringType={event.scoringType}
-          />
-        </AnimatedModal>
+
+          {showSorter && (
+            <Sorter key="weekSortTabs" current={sorting} onChange={sort => changeSort(sort)} />
+          )}
+        </View>
+        <ScrollView
+          horizontal
+          pagingEnabled
+          showsHorizontalScrollIndicator={false}
+          style={{
+            flex: 1,
+            paddingBottom: 10,
+            backgroundColor: colors.lightGray
+          }}
+        >
+          <View style={[swipeCardStyle, { marginLeft: 5, marginRight: 10 }]}>
+            <SwipeHeader
+              text={`Ställning efter ${eventIndex} ${eventIndex > 1 ? 'rundor' : 'runda'}`}
+            />
+            <Leaderboard
+              sorting={sorting}
+              currentUserId={currentUserId}
+              players={players}
+              seasonId={seasonId}
+              eventId={eventId}
+            />
+          </View>
+          <View style={[swipeCardStyle, { marginRight: 5 }]}>
+            <SwipeHeader text={`Resultat för vecka ${eventIndex}`} />
+            <EventResult
+              eventId={eventId}
+              seasonId={seasonId}
+              sorting={sorting}
+              currentUserId={currentUserId}
+              players={event.leaderboard}
+              scoringType={event.scoringType}
+            />
+          </View>
+        </ScrollView>
       </View>
     )
   }
