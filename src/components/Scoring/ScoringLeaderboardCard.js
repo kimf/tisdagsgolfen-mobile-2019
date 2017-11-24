@@ -1,7 +1,6 @@
 import React from 'react'
 import { View, Image } from 'react-native'
 import { arrayOf, bool, shape, string, number } from 'prop-types'
-// import requiredIf from 'react-required-if'
 
 import TGText from 'shared/TGText'
 import styles, { colors } from 'styles'
