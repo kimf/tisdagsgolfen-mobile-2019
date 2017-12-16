@@ -5,7 +5,6 @@ import update from 'immutability-helper'
 
 import SetupIndividualEvent from 'Events/SetupIndividualEvent'
 import SetupTeamEvent from 'Events/SetupTeamEvent'
-import SetupCourseRow from 'Events/SetupCourseRow'
 import TGText from 'shared/TGText'
 import BottomButton from 'shared/BottomButton'
 import styles, { colors } from 'styles'
@@ -74,14 +73,18 @@ class NewEventScoringItems extends Component {
 
   onAddPlayerToTeam = (player, team) => {
     const teamIndex = this.state.playing.findIndex(p => p.id === team.id)
-    const playing = update(this.state.playing, { [teamIndex]: { players: { $push: [player] } } })
+    const playing = update(this.state.playing, {
+      [teamIndex]: { players: { $push: [player] } }
+    })
 
     this.setState({ playing })
   }
 
   onRemovePlayerFromTeam = (team, player) => {
     const teamIndex = this.state.playing.findIndex(p => p.id === team.id)
-    const playerIndex = this.state.playing[teamIndex].players.findIndex(p => p.id === player.id)
+    const playerIndex = this.state.playing[teamIndex].players.findIndex(
+      p => p.id === player.id
+    )
     const playing = update(this.state.playing, {
       [teamIndex]: {
         players: { $splice: [[playerIndex, 1]] }
@@ -91,12 +94,12 @@ class NewEventScoringItems extends Component {
     this.updatePlaying(playing)
   }
 
-  onAddPlayer = (player) => {
+  onAddPlayer = player => {
     const playing = [...this.state.playing, { ...player, strokes: 0 }]
     this.setState({ playing })
   }
 
-  onRemove = (player) => {
+  onRemove = player => {
     const playingIndex = this.state.playing.findIndex(p => p.id === player.id)
     const playing = update(this.state.playing, { $splice: [[playingIndex, 1]] })
     this.setState({ playing })
@@ -104,13 +107,19 @@ class NewEventScoringItems extends Component {
 
   onChangeStrokes = (player, strokes) => {
     const playingIndex = this.state.playing.findIndex(p => p.id === player.id)
-    const playing = update(this.state.playing, { [playingIndex]: { strokes: { $set: strokes } } })
+    const playing = update(this.state.playing, {
+      [playingIndex]: { strokes: { $set: strokes } }
+    })
     this.setState({ playing })
   }
 
   startPlay = async () => {
     try {
-      const { screenProps: { currentUser }, createScoringSession, navigation } = this.props
+      const {
+        screenProps: { currentUser },
+        createScoringSession,
+        navigation
+      } = this.props
       const { state: { params: { course } } } = navigation
       const { teamEvent, isStrokes } = this.state
       const scoringItems = this.state.playing.map(playing => ({
@@ -127,7 +136,9 @@ class NewEventScoringItems extends Component {
         scoringType,
         scoringItems
       )
-      navigation.navigate('ScoreEvent', { scoringSessionId: res.data.createScoringSession.id })
+      navigation.navigate('ScoreEvent', {
+        scoringSessionId: res.data.createScoringSession.id
+      })
     } catch (err) {
       // eslint-disable-next-line no-console
       console.log(err)
@@ -139,7 +150,9 @@ class NewEventScoringItems extends Component {
       this.props.navigation.navigate('NewPlayer', {
         team,
         onAdd: this.onAddPlayerToTeam,
-        addedIds: [].concat(...this.state.playing.map(t => t.players)).map(p => p.id),
+        addedIds: []
+          .concat(...this.state.playing.map(t => t.players))
+          .map(p => p.id),
         title: `Lägg till i Lag ${team.id + 1}`
       })
     } else {
@@ -152,7 +165,7 @@ class NewEventScoringItems extends Component {
 
   render() {
     const { navigation } = this.props
-    const { state: { params: { course, isStrokes, teamEvent } } } = navigation
+    const { state: { params: { teamEvent } } } = navigation
     const { playing, error } = this.state
 
     let showError
@@ -166,8 +179,7 @@ class NewEventScoringItems extends Component {
             color: colors.white,
             fontWeight: 'bold',
             textAlign: 'center'
-          }}
-        >
+          }}>
           Något gick fel med att spara, se över infon
         </TGText>
       )
@@ -186,7 +198,11 @@ class NewEventScoringItems extends Component {
       <View style={styles.container}>
         <View style={{ flex: 1 }}>
           {showError}
-          {teamEvent ? <SetupTeamEvent {...passProps} /> : <SetupIndividualEvent {...passProps} />}
+          {teamEvent ? (
+            <SetupTeamEvent {...passProps} />
+          ) : (
+            <SetupIndividualEvent {...passProps} />
+          )}
         </View>
         <View style={{ padding: 10, backgroundColor: colors.lightGray }}>
           <BottomButton title="STARTA RUNDA" onPress={this.startPlay} />

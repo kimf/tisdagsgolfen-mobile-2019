@@ -13,13 +13,13 @@
       "apollo-codegen generate src/graph/**/*.js --schema schema.json --target typescript --output operation-result-types.ts",
     "storybook": "storybook start -p 7007",
     "android:build:dev": "cd android && ./gradlew assembleRelease",
-    "android:build:prod":
-      "cd android && ENVFILE=.env.production ./gradlew assembleRelease",
+    "android:build:prod": "cd android && ENVFILE=.env.production ./gradlew assembleRelease",
     "android:emulator": "emulator -avd Nexus6-android7.1.1-apiLevel25",
     "android": "react-native run-android",
     "ios": "react-native run-ios --simulator \"iPhone 8\"",
-    "ios:storybook":
-      "react-native run-ios --simulator \"iPhone 8\" --scheme TGStorybook"
+    "ios:storybook": "react-native run-ios --simulator \"iPhone 8\" --scheme TGStorybook",
+    "prettier": "prettier --write 'src/**/*.js'",
+    "eslint-check": "eslint --print-config .eslintrc.js | eslint-config-prettier-check"
   },
   "dependencies": {
     "apollo-cache-inmemory": "^1.1.1",
@@ -61,14 +61,21 @@
     "babylon": "^6.17.4",
     "eslint": "^4.11.0",
     "eslint-config-airbnb": "^16.1.0",
+    "eslint-config-prettier": "^2.8.0",
+    "eslint-config-standard": "^11.0.0-beta.0",
     "eslint-import-resolver-babel-module": "^4.0.0-beta.5",
     "eslint-plugin-graphql": "^1.4.1",
     "eslint-plugin-import": "^2.7.0",
     "eslint-plugin-jsx-a11y": "^6.0.2",
+    "eslint-plugin-node": "^5.2.1",
+    "eslint-plugin-prettier": "^2.3.1",
+    "eslint-plugin-promise": "^3.6.0",
     "eslint-plugin-react": "^7.5.1",
     "eslint-plugin-react-native": "^3.1.0",
     "eslint-plugin-react-perf": "^2.0.5",
+    "eslint-plugin-standard": "^3.0.1",
     "jest": "^21.2.1",
+    "prettier": "^1.8.2",
     "react-dom": "^16.1.1",
     "react-test-renderer": "^16.1.1"
   },

@@ -1,12 +1,11 @@
 import React, { Component } from 'react'
-import { View, FlatList } from 'react-native'
+import { FlatList } from 'react-native'
 import { arrayOf, string } from 'prop-types'
 
 import LeaderboardCard from 'Leaderboard/LeaderboardCard'
 
 import EmptyState from 'shared/EmptyState'
 import { ranked } from 'utils'
-import { colors } from 'styles'
 import { leaderboardPlayerShape } from 'propTypes'
 
 class Leaderboard extends Component {
@@ -21,9 +20,7 @@ class Leaderboard extends Component {
   static defaultProps = { currentUserId: null, sorting: 'totalPoints' }
 
   render() {
-    const {
-      sorting, players, currentUserId, seasonId, eventId
-    } = this.props
+    const { sorting, players, currentUserId, seasonId, eventId } = this.props
 
     let sortedPlayers = null
     if (sorting === 'beers') {
@@ -36,7 +33,8 @@ class Leaderboard extends Component {
       sortedPlayers = players.slice().sort((a, b) => a.position - b.position)
     }
 
-    const emptyLeaderboard = sortedPlayers.filter(sl => sl.eventCount !== 0).length === 0
+    const emptyLeaderboard =
+      sortedPlayers.filter(sl => sl.eventCount !== 0).length === 0
 
     if (emptyLeaderboard) {
       return <EmptyState text="Inga rundor spelade ännu" />
@@ -49,7 +47,11 @@ class Leaderboard extends Component {
         initialNumToRender={10}
         data={sortedPlayers}
         renderItem={({ item }) => (
-          <LeaderboardCard currentUserId={currentUserId} player={item} sorting={sorting} />
+          <LeaderboardCard
+            currentUserId={currentUserId}
+            player={item}
+            sorting={sorting}
+          />
         )}
         keyExtractor={player => `l_${seasonId}_${eventId}_${player.id}`}
       />

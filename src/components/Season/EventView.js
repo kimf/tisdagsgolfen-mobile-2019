@@ -7,7 +7,6 @@ import EventResult from 'Season/EventResult'
 import EventViewLoader from 'Season/EventViewLoader'
 import Sorter from 'Season/Sorter'
 import EventHeader from 'Events/EventHeader'
-import TGText from 'shared/TGText'
 
 import { colors, deviceWidth } from 'styles'
 import { eventQueryProps, withEventQuery } from 'queries/eventQuery'
@@ -48,7 +47,6 @@ class EventView extends Component {
       sorting,
       showSorter,
       changeSort,
-      eventIndex,
       data: { loading, event, players }
     } = this.props
 
@@ -67,7 +65,11 @@ class EventView extends Component {
           />
 
           {showSorter && (
-            <Sorter key="weekSortTabs" current={sorting} onChange={sort => changeSort(sort)} />
+            <Sorter
+              key="weekSortTabs"
+              current={sorting}
+              onChange={sort => changeSort(sort)}
+            />
           )}
         </View>
         <ScrollView
@@ -79,8 +81,7 @@ class EventView extends Component {
             paddingBottom: 20,
             paddingTop: 5,
             backgroundColor: colors.lightGray
-          }}
-        >
+          }}>
           <View style={[swipeCardStyle, { marginLeft: 5, marginRight: 5 }]}>
             <Leaderboard
               sorting={sorting}

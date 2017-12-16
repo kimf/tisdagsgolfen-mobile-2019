@@ -1,11 +1,9 @@
 import React from 'react'
-import { Image, StyleSheet, TextInput, View, KeyboardAvoidingView } from 'react-native'
+import { StyleSheet, TextInput, View } from 'react-native'
 import { bool, string, func } from 'prop-types'
 
 import LoginError from 'Login/LoginError'
 import TGText from 'shared/TGText'
-import usernameImg from 'images/username.png'
-import passwordImg from 'images/password.png'
 
 import { colors } from 'styles'
 
@@ -50,7 +48,12 @@ const styles = StyleSheet.create({
 })
 
 const LoginForm = ({
-  email, password, changeValue, onSubmit, loggingIn, error
+  email,
+  password,
+  changeValue,
+  onSubmit,
+  loggingIn,
+  error
 }) => (
   <View behavior="position" style={styles.container}>
     {error && <LoginError />}
@@ -75,7 +78,7 @@ const LoginForm = ({
       autoCapitalize="none"
       returnKeyType="go"
       autoCorrect={false}
-      ref={(c) => {
+      ref={c => {
         this.password = c
       }}
       onChangeText={passwordValue => changeValue({ password: passwordValue })}
@@ -88,8 +91,7 @@ const LoginForm = ({
     <TGText
       viewStyle={styles.loginButton}
       style={styles.loginButtonText}
-      onPress={() => !loggingIn && onSubmit()}
-    >
+      onPress={() => !loggingIn && onSubmit()}>
       {loggingIn ? '...LOGGAR IN...' : 'LOGGA IN'}
     </TGText>
   </View>

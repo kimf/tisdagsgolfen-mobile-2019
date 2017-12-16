@@ -1,7 +1,7 @@
 module.exports = {
   parser: 'babel-eslint',
-  plugins: ['react', 'react-native', 'graphql'],
-  extends: ['airbnb'],
+  plugins: ['react', 'react-native', 'graphql', 'prettier', 'standard'],
+  extends: ['standard', 'prettier', 'prettier/react', 'prettier/standard'],
   globals: {
     __DEV__: true,
     window: false,
