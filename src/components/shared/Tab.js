@@ -21,8 +21,7 @@ const Tab = ({ tab, isCurrent, onChange }) => {
         color: isCurrent ? colors.blue : colors.dark,
         fontWeight: isCurrent ? 'bold' : 'normal'
       }}
-      onPress={() => onChange(tab.value)}
-    >
+      onPress={() => onChange(tab.value)}>
       {text}
     </TGText>
   )

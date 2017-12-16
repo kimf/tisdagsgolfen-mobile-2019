@@ -5,9 +5,7 @@ import stylePropTypes from 'react-style-proptype'
 
 import { colors } from 'styles'
 
-const TouchableView = ({
-  isRippleDisabled, rippleColor, children, style, ...rest
-}) => {
+const TouchableView = ({ isRippleDisabled, rippleColor, children, style, ...rest }) => {
   if (Platform.OS === 'android') {
     const background = TouchableNativeFeedback.Ripple(rippleColor, false)
     return (

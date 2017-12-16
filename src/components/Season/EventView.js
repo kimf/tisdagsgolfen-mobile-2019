@@ -65,11 +65,7 @@ class EventView extends Component {
           />
 
           {showSorter && (
-            <Sorter
-              key="weekSortTabs"
-              current={sorting}
-              onChange={sort => changeSort(sort)}
-            />
+            <Sorter key="weekSortTabs" current={sorting} onChange={sort => changeSort(sort)} />
           )}
         </View>
         <ScrollView

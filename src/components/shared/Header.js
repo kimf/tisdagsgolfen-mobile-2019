@@ -30,16 +30,13 @@ class Header extends Component {
         right: 10,
         padding: 20
       }}
-      onPress={this.props.goBack}
-    >
+      onPress={this.props.goBack}>
       <Image style={{ tintColor: colors.muted }} source={require('../../images/close.png')} />
     </TouchableView>
   )
 
   render() {
-    const {
-      title, children, backgroundColor, color, goBack
-    } = this.props
+    const { title, children, backgroundColor, color, goBack } = this.props
 
     return (
       <View style={[styles.navbar, { backgroundColor }]}>

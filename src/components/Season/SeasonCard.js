@@ -26,8 +26,7 @@ const Name = ({ name }) => (
       backgroundColor: 'transparent',
       color: colors.white,
       fontSize: 24
-    }}
-  >
+    }}>
     {name}
   </TGText>
 )
@@ -42,15 +41,13 @@ const SeasonCard = ({ onPress, photo, name }) => (
     style={{
       flex: 1,
       marginBottom: 10
-    }}
-  >
+    }}>
     {photo && (
       <ImageBackground
         onPress={onPress}
         style={cardStyle}
         source={photo ? { uri: photo } : trophyImg}
-        resizeMode="cover"
-      >
+        resizeMode="cover">
         <Name name={name} />
       </ImageBackground>
     )}

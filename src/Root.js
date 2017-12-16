@@ -32,7 +32,7 @@ class Root extends Component {
     this.state = { currentUser, isLoggedIn }
   }
 
-  onLogin = (response) => {
+  onLogin = response => {
     setCache('currentUser', {
       ...response.user,
       token: response.token

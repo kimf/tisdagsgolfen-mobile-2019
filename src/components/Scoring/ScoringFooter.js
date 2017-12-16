@@ -37,8 +37,7 @@ const ScoringFooter = ({ showMenu, showLeaderboard }) => (
     <TGText
       onPress={() => showLeaderboard()}
       viewStyle={styles.button}
-      style={[styles.text, styles.leaderboard]}
-    >
+      style={[styles.text, styles.leaderboard]}>
       LEDARTAVLA
     </TGText>
   </View>

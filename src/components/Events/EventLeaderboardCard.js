@@ -9,9 +9,7 @@ const mutedYellow = { backgroundColor: colors.mutedYellow }
 const defaultPhoto = require('../../images/defaultavatar.png')
 
 // TODO: Refactor and re-use LeaderboardCard as much as possible + avatar
-const EventLeaderboardCard = ({
-  data, currentUserId, sorting, scoringType
-}) => {
+const EventLeaderboardCard = ({ data, currentUserId, sorting, scoringType }) => {
   let pointText
   let pointValue = ''
   let position
@@ -40,8 +38,7 @@ const EventLeaderboardCard = ({
             fontWeight: '800',
             color: colors.dark,
             fontSize: 16
-          }}
-        >
+          }}>
           {position}
         </TGText>
       </View>
@@ -68,8 +65,7 @@ const EventLeaderboardCard = ({
             fontSize: 18,
             textAlign: 'right'
           }
-        ]}
-      >
+        ]}>
         {`${pointValue} ${pointText}`}
       </TGText>
     </View>

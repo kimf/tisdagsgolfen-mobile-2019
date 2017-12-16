@@ -4,10 +4,7 @@ import gql from 'graphql-tag'
 const liveLeaderboardSubscription = gql`
   subscription liveLeaderboardSubscription($eventId: ID!) {
     LiveScore(
-      filter: {
-        mutation_in: [UPDATED, CREATED, DELETED],
-        node: {event: {id: $eventId}}
-      }
+      filter: { mutation_in: [UPDATED, CREATED, DELETED], node: { event: { id: $eventId } } }
     ) {
       node {
         event {

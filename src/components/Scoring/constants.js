@@ -23,9 +23,4 @@ pointsArray[8] = 0
 pointsArray[9] = 0
 pointsArray[10] = 0
 
-export {
-  pointsArray,
-  STROKE_VALUES,
-  PUTT_VALUES,
-  BEER_VALUES
-}
+export { pointsArray, STROKE_VALUES, PUTT_VALUES, BEER_VALUES }

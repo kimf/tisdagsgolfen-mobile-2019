@@ -26,8 +26,7 @@ const EventCard = ({ event, onNavigate }) => {
   return (
     <TouchableView
       style={styles.eventCard}
-      onPress={() => onNavigate('EventResult', { event, title: 'Resultat' })}
-    >
+      onPress={() => onNavigate('EventResult', { event, title: 'Resultat' })}>
       <View style={styles.dateBox}>
         <TGText style={styles.date}>{date}</TGText>
         <TGText style={styles.month}>{month}</TGText>

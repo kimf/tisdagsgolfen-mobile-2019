@@ -15,8 +15,7 @@ const FinalWeek = ({ season }) => (
         backgroundColor: colors.darkGreen,
         alignItems: 'center',
         justifyContent: 'center'
-      }}
-    >
+      }}>
       <Image
         source={require('../../images/trophy-filled.png')}
         style={{ tintColor: colors.yellow, height: 25, width: 25 }}

@@ -27,9 +27,7 @@ class EventResult extends Component {
   }
 
   render() {
-    const {
-      sorting, currentUserId, scoringType, players, seasonId, eventId
-    } = this.props
+    const { sorting, currentUserId, scoringType, players, seasonId, eventId } = this.props
 
     let sortedPlayers = null
     let sorted = null

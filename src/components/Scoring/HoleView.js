@@ -22,8 +22,8 @@ class HoleView extends Component {
 
   state = { scoringId: null }
 
-  toggleScoring = (scoringId) => {
-    this.setState((state) => {
+  toggleScoring = scoringId => {
+    this.setState(state => {
       if (state.scoringId) {
         return { scoringId: null }
       }
@@ -32,9 +32,7 @@ class HoleView extends Component {
   }
 
   render() {
-    const {
-      hole, playing, holesCount, scoringSession, scrollX
-    } = this.props
+    const { hole, playing, holesCount, scoringSession, scrollX } = this.props
     const { teamEvent, scoringType, liveScores } = scoringSession
     const { scoringId } = this.state
 
@@ -53,8 +51,7 @@ class HoleView extends Component {
             shadowRadius: 1,
             shadowOpacity: 0.5,
             elevation: 5
-          }}
-        >
+          }}>
           <ScorecardHeaderRow
             teamEvent={teamEvent}
             scoringType={scoringType}
@@ -64,7 +61,9 @@ class HoleView extends Component {
           {playing.map((item, index) => {
             const userId = teamEvent ? index : item.users[0].id
 
-            const liveScore = liveScores.find(ls => ls.user.id === userId && ls.hole === hole.number)
+            const liveScore = liveScores.find(
+              ls => ls.user.id === userId && ls.hole === hole.number
+            )
             const scoreItem = liveScore || {
               strokes: hole.par,
               putts: 2,
@@ -83,8 +82,7 @@ class HoleView extends Component {
                   borderBottomWidth: index < playing.length - 1 ? 1 : 0,
                   borderBottomColor: colors.lightGray,
                   backgroundColor: isScoring ? colors.lightGray : colors.white
-                }}
-              >
+                }}>
                 {scoringId && scoringId !== userId ? null : (
                   <UserColumn item={item} scoreItem={scoreItem} />
                 )}
@@ -92,8 +90,7 @@ class HoleView extends Component {
                 {scoringId ? null : (
                   <TouchableView
                     style={{ flexGrow: 2, padding: 20 }}
-                    onPress={() => this.toggleScoring(userId)}
-                  >
+                    onPress={() => this.toggleScoring(userId)}>
                     <ScoreRow
                       scoringType={scoringType}
                       teamEvent={teamEvent}

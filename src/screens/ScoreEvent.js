@@ -62,8 +62,8 @@ export class ScoreEvent extends Component {
   leaderboard = new Animated.Value(0)
   openModal = null
 
-  changeHole = (nextHole) => {
-    this.setState((state) => {
+  changeHole = nextHole => {
+    this.setState(state => {
       // eslint-disable-next-line no-underscore-dangle
       this.scrollView._component.scrollTo({
         x: nextHole * (deviceWidth - deviceWidth),
@@ -74,7 +74,7 @@ export class ScoreEvent extends Component {
     })
   }
 
-  animateBackdrop = (open) => {
+  animateBackdrop = open => {
     Animated.timing(this.modal, {
       toValue: open ? 1 : 0,
       easing: Easing.inOut(Easing.quad)
@@ -101,12 +101,12 @@ export class ScoreEvent extends Component {
     }).start()
   }
 
-  showModal = (modal) => {
+  showModal = modal => {
     this.openModal = modal
     Animated.stagger(150, [this.animateBackdrop(true), this.animateModal(modal, true)])
   }
 
-  closeModal = (modal) => {
+  closeModal = modal => {
     Animated.stagger(150, [this.animateModal(modal, false), this.animateBackdrop(false)])
   }
 
@@ -140,7 +140,7 @@ export class ScoreEvent extends Component {
     save()
   }
 
-  handlePageChange = (e) => {
+  handlePageChange = e => {
     const offset = e.nativeEvent.contentOffset
     if (offset) {
       const page = Math.round(offset.x / deviceWidth) + 1
@@ -196,14 +196,12 @@ export class ScoreEvent extends Component {
           height: '100%',
           alignItems: 'stretch',
           backgroundColor: colors.blue
-        }}
-      >
+        }}>
         <Animated.View
-          style={{ height: deviceHeight - 48, transform: [{ scale: transformScale }] }}
-        >
+          style={{ height: deviceHeight - 48, transform: [{ scale: transformScale }] }}>
           <Animated.ScrollView
             style={{ width: '100%', height: '100%' }}
-            ref={(sv) => {
+            ref={sv => {
               this.scrollView = sv
             }}
             showsHorizontalScrollIndicator={false}
@@ -218,8 +216,7 @@ export class ScoreEvent extends Component {
             paging
             bounces
             pagingEnabled
-            removeClippedSubviews
-          >
+            removeClippedSubviews>
             {scoringSession.course.holes.map(h => (
               <HoleView
                 key={`hole_view_${h.id}`}
@@ -285,4 +282,6 @@ export class ScoreEvent extends Component {
   }
 }
 
-export default compose(withScoringSessionQuery, withCancelRoundMutation, withFinishRoundMutation)(ScoreEvent)
+export default compose(withScoringSessionQuery, withCancelRoundMutation, withFinishRoundMutation)(
+  ScoreEvent
+)

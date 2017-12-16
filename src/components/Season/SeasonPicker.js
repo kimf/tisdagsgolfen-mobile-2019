@@ -22,8 +22,7 @@ const SeasonPicker = ({ seasons, onChangeSeason, position }) => (
           translateY: position
         }
       ]
-    }}
-  >
+    }}>
     {seasons.map(season => (
       <SeasonCard
         key={`SeasonCard_${season.id}`}

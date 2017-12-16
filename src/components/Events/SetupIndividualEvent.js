@@ -6,9 +6,7 @@ import EventSetupPlayingCard from 'Scoring/EventSetupPlayingCard'
 import TopButton from 'shared/TopButton'
 import styles from 'styles'
 
-const SetupIndividualEvent = ({
-  openAddPlayer, playing, onRemove, onChangeStrokes
-}) => (
+const SetupIndividualEvent = ({ openAddPlayer, playing, onRemove, onChangeStrokes }) => (
   <View style={styles.container}>
     <TopButton title="+ LÄGG TILL SPELARE" onPress={() => openAddPlayer()} />
     <FlatList

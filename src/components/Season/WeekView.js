@@ -12,7 +12,7 @@ const withChangeSort = WrappedWeek =>
   class WrappedWithChangeSort extends Component {
     state = { sorting: 'totalPoints' }
 
-    changeSort = (sorting) => {
+    changeSort = sorting => {
       LayoutAnimation.configureNext(linear)
       this.setState(state => ({ ...state, sorting }))
     }
@@ -61,10 +61,12 @@ WeekView.propTypes = {
   eventIndex: string.isRequired,
   sorting: string.isRequired,
   season: seasonShape.isRequired,
-  reversedEventIds: arrayOf(shape({
-    id: string.isRequired,
-    index: string.isRequired
-  }).isRequired).isRequired,
+  reversedEventIds: arrayOf(
+    shape({
+      id: string.isRequired,
+      index: string.isRequired
+    }).isRequired
+  ).isRequired,
   changeWeek: func.isRequired,
   changeSort: func.isRequired
 }

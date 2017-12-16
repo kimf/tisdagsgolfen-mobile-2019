@@ -33,7 +33,7 @@ class Season extends Component {
     eventId: null
   }
 
-  onChangeSeason = (seasonId) => {
+  onChangeSeason = seasonId => {
     this.setState(state => ({
       ...state,
       seasonId,
@@ -45,7 +45,7 @@ class Season extends Component {
   seasonPickerPos = new Animated.Value(0)
   open = false
 
-  toggleSeasonpicker = (open) => {
+  toggleSeasonpicker = open => {
     this.open = open
     Animated.timing(this.seasonPickerPos, {
       toValue: open ? TOP : BOTTOM,
@@ -64,7 +64,7 @@ class Season extends Component {
     this.props.navigation.navigate('CoursePickerScreen')
   }
 
-  changeWeek = (eventId) => {
+  changeWeek = eventId => {
     LayoutAnimation.configureNext(linear)
     this.setState(state => ({ ...state, eventId }))
   }

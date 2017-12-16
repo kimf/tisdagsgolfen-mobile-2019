@@ -14,12 +14,11 @@ const withToken = setContext(context =>
       ...context.headers,
       authorization: currentUser && currentUser.token ? `Token token=${currentUser.token}` : null
     }
-  })))
+  }))
+)
 
 const Logger = (operation, forward) => {
-  const {
-    operationName, query, variables, context
-  } = operation
+  const { operationName, query, variables, context } = operation
 
   if (__DEV__) {
     // eslint-disable-next-line no-console
@@ -51,7 +50,7 @@ const httpLink = createHttpLink({
 
 const link = ApolloLink.from([Logger, withToken, httpLink])
 
-const dataIdFromObject = (result) => {
+const dataIdFromObject = result => {
   // eslint-disable-next-line no-underscore-dangle
   if (result.id && result.__typename) {
     // eslint-disable-next-line no-underscore-dangle

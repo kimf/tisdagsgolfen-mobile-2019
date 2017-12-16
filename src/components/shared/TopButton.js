@@ -22,11 +22,7 @@ const styles = StyleSheet.create({
 })
 
 const TopButton = ({ title, onPress }) => (
-  <TGText
-    viewStyle={styles.button}
-    style={styles.text}
-    onPress={onPress}
-  >
+  <TGText viewStyle={styles.button} style={styles.text} onPress={onPress}>
     {title}
   </TGText>
 )

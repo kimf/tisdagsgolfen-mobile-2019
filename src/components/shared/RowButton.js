@@ -20,14 +20,11 @@ const styles = StyleSheet.create({
   }
 })
 
-const RowButton = ({
-  title, onPress, backgroundColor, color
-}) => (
+const RowButton = ({ title, onPress, backgroundColor, color }) => (
   <TGText
     viewStyle={[styles.button, { backgroundColor }]}
     style={[styles.text, { color }]}
-    onPress={onPress}
-  >
+    onPress={onPress}>
     {title}
   </TGText>
 )

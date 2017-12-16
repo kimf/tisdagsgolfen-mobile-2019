@@ -8,9 +8,7 @@ import TouchableView from 'shared/TouchableView'
 import { seasonShape } from 'propTypes'
 import { colors, NAVBAR_HEIGHT, STATUS_BAR_HEIGHT } from 'styles'
 
-const SeasonHeader = ({
-  season, togglePicker, goPlay, activeScoringSession
-}) => (
+const SeasonHeader = ({ season, togglePicker, goPlay, activeScoringSession }) => (
   <View
     style={{
       backgroundColor: colors.lightGray,
@@ -18,8 +16,7 @@ const SeasonHeader = ({
       padding: 5,
       flexDirection: 'row',
       alignContent: 'center'
-    }}
-  >
+    }}>
     <TouchableView
       style={{
         padding: 10,
@@ -28,15 +25,13 @@ const SeasonHeader = ({
         alignItems: 'center',
         flex: 1
       }}
-      onPress={togglePicker}
-    >
+      onPress={togglePicker}>
       <TGText
         style={{
           color: colors.dark,
           fontWeight: 'bold',
           fontSize: 20
-        }}
-      >
+        }}>
         {season.name}
       </TGText>
       <Image
@@ -56,8 +51,7 @@ const SeasonHeader = ({
         paddingTop: STATUS_BAR_HEIGHT,
         justifyContent: 'center'
       }}
-      onPress={goPlay}
-    >
+      onPress={goPlay}>
       <TGText
         style={{
           color: activeScoringSession ? colors.white : colors.darkGreen,
@@ -68,8 +62,7 @@ const SeasonHeader = ({
           backgroundColor: activeScoringSession ? colors.darkGreen : colors.white,
           borderRadius: 10
         }}
-        onPress={goPlay}
-      >
+        onPress={goPlay}>
         {activeScoringSession ? 'FORTSÄTT RUNDA' : 'SPELA GOLF'}
       </TGText>
     </TouchableView>

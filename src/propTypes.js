@@ -63,14 +63,16 @@ export const eventShape = shape(eventShapeHash)
 
 export const eventWithLeaderboardshape = shape({
   ...eventShapeHash,
-  leaderboard: arrayOf(shape({
-    id: string.isRequired,
-    photo: string,
-    name: string.isRequired,
-    position: number.isRequired,
-    eventPoints: number.isRequired,
-    beers: number.isRequired,
-    kr: number.isRequired,
-    value: number.isRequired
-  }).isRequired)
+  leaderboard: arrayOf(
+    shape({
+      id: string.isRequired,
+      photo: string,
+      name: string.isRequired,
+      position: number.isRequired,
+      eventPoints: number.isRequired,
+      beers: number.isRequired,
+      kr: number.isRequired,
+      value: number.isRequired
+    }).isRequired
+  )
 })

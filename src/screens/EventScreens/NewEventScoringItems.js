@@ -82,9 +82,7 @@ class NewEventScoringItems extends Component {
 
   onRemovePlayerFromTeam = (team, player) => {
     const teamIndex = this.state.playing.findIndex(p => p.id === team.id)
-    const playerIndex = this.state.playing[teamIndex].players.findIndex(
-      p => p.id === player.id
-    )
+    const playerIndex = this.state.playing[teamIndex].players.findIndex(p => p.id === player.id)
     const playing = update(this.state.playing, {
       [teamIndex]: {
         players: { $splice: [[playerIndex, 1]] }
@@ -115,11 +113,7 @@ class NewEventScoringItems extends Component {
 
   startPlay = async () => {
     try {
-      const {
-        screenProps: { currentUser },
-        createScoringSession,
-        navigation
-      } = this.props
+      const { screenProps: { currentUser }, createScoringSession, navigation } = this.props
       const { state: { params: { course } } } = navigation
       const { teamEvent, isStrokes } = this.state
       const scoringItems = this.state.playing.map(playing => ({
@@ -150,9 +144,7 @@ class NewEventScoringItems extends Component {
       this.props.navigation.navigate('NewPlayer', {
         team,
         onAdd: this.onAddPlayerToTeam,
-        addedIds: []
-          .concat(...this.state.playing.map(t => t.players))
-          .map(p => p.id),
+        addedIds: [].concat(...this.state.playing.map(t => t.players)).map(p => p.id),
         title: `Lägg till i Lag ${team.id + 1}`
       })
     } else {
@@ -198,11 +190,7 @@ class NewEventScoringItems extends Component {
       <View style={styles.container}>
         <View style={{ flex: 1 }}>
           {showError}
-          {teamEvent ? (
-            <SetupTeamEvent {...passProps} />
-          ) : (
-            <SetupIndividualEvent {...passProps} />
-          )}
+          {teamEvent ? <SetupTeamEvent {...passProps} /> : <SetupIndividualEvent {...passProps} />}
         </View>
         <View style={{ padding: 10, backgroundColor: colors.lightGray }}>
           <BottomButton title="STARTA RUNDA" onPress={this.startPlay} />

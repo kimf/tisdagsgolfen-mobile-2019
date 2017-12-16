@@ -53,7 +53,7 @@ class ScoringLeaderboard extends Component {
 
   state = { sorting: 'totalPoints' }
 
-  changeSort = (sorting) => {
+  changeSort = sorting => {
     this.listView.scrollToIndex({ index: 0 })
     this.setState({ sorting })
   }
@@ -98,7 +98,7 @@ class ScoringLeaderboard extends Component {
           <FlatList
             removeClippedSubviews={false}
             data={sortedPlayers}
-            ref={(ref) => {
+            ref={ref => {
               this.listView = ref
             }}
             renderItem={({ item }) => (

@@ -52,8 +52,7 @@ class EventSetupPlayingCard extends Component {
           marginTop: 8,
           padding: 8,
           backgroundColor: colors.lightGray
-        }}
-      >
+        }}>
         <View style={{ flex: 1, flexDirection: 'row' }}>
           {teamEvent ? (
             <View style={{ flex: 0, marginRight: 20, flexDirection: 'row' }}>
@@ -78,8 +77,7 @@ class EventSetupPlayingCard extends Component {
               paddingRight: 10,
               paddingBottom: 10
             }}
-            onPress={() => onRemove(item)}
-          >
+            onPress={() => onRemove(item)}>
             Ta bort
           </TGText>
         </View>
@@ -89,8 +87,7 @@ class EventSetupPlayingCard extends Component {
             flex: 1,
             flexDirection: 'row',
             paddingVertical: 10
-          }}
-        >
+          }}>
           <TGText style={{ flex: 0, textAlign: 'left', fontSize: 12 }}>Extraslag</TGText>
           <Slider
             style={{ flex: 1, marginHorizontal: 20 }}
@@ -107,8 +104,7 @@ class EventSetupPlayingCard extends Component {
               fontSize: 18,
               fontWeight: 'bold',
               color: colors.green
-            }}
-          >
+            }}>
             {this.state.strokes}
           </TGText>
         </View>
@@ -119,8 +115,7 @@ class EventSetupPlayingCard extends Component {
               borderTopWidth: 1,
               borderColor: colors.white,
               flexDirection: 'column'
-            }}
-          >
+            }}>
             {item.players.map(player => (
               <View
                 key={`pl_team_player_${player.id}`}
@@ -130,8 +125,7 @@ class EventSetupPlayingCard extends Component {
                   flexDirection: 'row',
                   borderBottomColor: '#ecc',
                   borderBottomWidth: StyleSheet.hairlineWidth
-                }}
-              >
+                }}>
                 <TGText
                   style={{
                     flex: 1,
@@ -141,8 +135,7 @@ class EventSetupPlayingCard extends Component {
                     paddingBottom: 0,
                     marginRight: 10
                   }}
-                  onPress={() => onRemovePlayerFromTeam(item, player)}
-                >
+                  onPress={() => onRemovePlayerFromTeam(item, player)}>
                   X
                 </TGText>
                 <TGText
@@ -151,8 +144,7 @@ class EventSetupPlayingCard extends Component {
                     fontWeight: 'bold',
                     fontSize: 14,
                     paddingTop: 5
-                  }}
-                >
+                  }}>
                   {player.firstName} {player.lastName}
                 </TGText>
               </View>
@@ -169,8 +161,7 @@ class EventSetupPlayingCard extends Component {
                 fontSize: 12,
                 fontWeight: 'bold'
               }}
-              onPress={() => onAddPlayerToTeam(item)}
-            >
+              onPress={() => onAddPlayerToTeam(item)}>
               + Lägg till spelare i {name}
             </TGText>
           </View>

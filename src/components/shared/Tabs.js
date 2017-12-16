@@ -5,9 +5,7 @@ import { bool, string, func } from 'prop-types'
 import Tab from 'shared/Tab'
 import { colors } from 'styles'
 
-const Tabs = ({
-  currentRoute, onChange, scoringType, teamEvent
-}) => {
+const Tabs = ({ currentRoute, onChange, scoringType, teamEvent }) => {
   const strokes = scoringType === 'strokes'
   const tabs = [
     { value: 'totalPoints', icon: '🥇', title: strokes ? 'Slag' : 'Poäng' },
@@ -28,8 +26,7 @@ const Tabs = ({
         alignItems: 'center',
         justifyContent: 'flex-start'
       }}
-      key="tabs_sorting"
-    >
+      key="tabs_sorting">
       {tabs.map(t => (
         <Tab
           key={`tab_${t.value}`}

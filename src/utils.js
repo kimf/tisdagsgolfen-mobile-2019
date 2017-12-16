@@ -7,7 +7,7 @@ export const sorted = (array, attribute) => array.sort((a, b) => b[attribute] - 
 
 export const sortedByParsedDate = (array, attribute) =>
   sorted(
-    array.map((item) => {
+    array.map(item => {
       const date = new Date(item[attribute])
       const newItem = Object.assign({}, item)
       newItem[attribute] = date
@@ -19,7 +19,7 @@ export const sortedByParsedDate = (array, attribute) =>
 // ranked :: Array -> String -> Array
 export const ranked = (array, attribute, rankingAttribute, reversed) => {
   const scores = array.map(x => x[rankingAttribute])
-  const rankedArr = array.map((item) => {
+  const rankedArr = array.map(item => {
     const newItem = Object.assign({}, item)
     newItem[attribute] = scores.indexOf(newItem[rankingAttribute]) + 1
     return newItem
@@ -34,7 +34,7 @@ const cmp = (a, b) => {
   return 0
 }
 
-export const rankedUsers = (realUsers) => {
+export const rankedUsers = realUsers => {
   const rankings = []
   const users = realUsers.slice()
   users.sort((a, b) => cmp(a.totalPoints, b.totalPoints) || cmp(a.average, b.average))
@@ -86,7 +86,7 @@ export const setCache = async (key, val) => {
   }
 }
 
-export const getCache = async (key) => {
+export const getCache = async key => {
   try {
     const value = await AsyncStorage.getItem(key)
     return JSON.parse(value)
@@ -97,7 +97,7 @@ export const getCache = async (key) => {
   }
 }
 
-export const removeCache = async (key) => {
+export const removeCache = async key => {
   try {
     await AsyncStorage.removeItem(key)
     return null
@@ -108,7 +108,7 @@ export const removeCache = async (key) => {
   }
 }
 
-export const cacheable = (fn) => {
+export const cacheable = fn => {
   /* May store args and result on fn like this:
    * fn.lastArgs = ...
    * fn.lastResult = ...
@@ -173,15 +173,15 @@ export const calculateEarnings = (putts, strokes, par) => {
   return earnings
 }
 
-const massageTeams = (scoringSessions) => {
+const massageTeams = scoringSessions => {
   const teams = []
-  scoringSessions.forEach((scoringSession) => {
-    scoringSession.scoringTeams.forEach((team) => {
+  scoringSessions.forEach(scoringSession => {
+    scoringSession.scoringTeams.forEach(team => {
       const holes = team.liveScores.length
       let strokes = 0
       let points = 0
 
-      team.liveScores.forEach((ls) => {
+      team.liveScores.forEach(ls => {
         strokes += ls.strokes
         points += ls.points
       })
@@ -199,10 +199,10 @@ const massageTeams = (scoringSessions) => {
   return teams
 }
 
-const massagePlayers = (scoringSessions) => {
+const massagePlayers = scoringSessions => {
   const players = []
-  scoringSessions.forEach((scoringSession) => {
-    scoringSession.scoringPlayers.forEach((player) => {
+  scoringSessions.forEach(scoringSession => {
+    scoringSession.scoringPlayers.forEach(player => {
       const holes = player.liveScores.length
       let beers = 0
       let kr = 0
@@ -210,7 +210,7 @@ const massagePlayers = (scoringSessions) => {
       let putts = 0
       let strokes = 0
 
-      player.liveScores.forEach((ls) => {
+      player.liveScores.forEach(ls => {
         beers += ls.beers
         kr += calculateEarnings(ls.putts, ls.strokes, ls.hole.par)
         points += ls.points

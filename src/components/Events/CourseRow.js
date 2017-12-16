@@ -10,8 +10,7 @@ const CourseRow = ({ course, selectCourse }) => (
   <TouchableView
     key={`course_row_${course.id}`}
     style={styles.courserow}
-    onPress={() => selectCourse(course)}
-  >
+    onPress={() => selectCourse(course)}>
     <View style={{ flex: 1 }}>
       <View style={{ flex: 1, flexDirection: 'row' }}>
         <TGText style={{ flex: 4, fontWeight: 'bold' }}>{course.name}</TGText>

@@ -24,8 +24,7 @@ const WeekPickerItem = ({ week, isCurrent, onSelectWeek }) => (
       alignItems: 'center',
       justifyContent: 'center'
     }}
-    onPress={onSelectWeek}
-  >
+    onPress={onSelectWeek}>
     {week === 'final' ? (
       <Image
         source={trophyImg}
@@ -74,10 +73,12 @@ const WeekPicker = ({ weeks, currentId, onChangeWeek }) => (
 // [...Array(reversedEventIds.length)]
 
 WeekPicker.propTypes = {
-  weeks: arrayOf(shape({
-    id: string.isRequired,
-    index: string.isRequired
-  }).isRequired).isRequired,
+  weeks: arrayOf(
+    shape({
+      id: string.isRequired,
+      index: string.isRequired
+    }).isRequired
+  ).isRequired,
   currentId: string.isRequired,
   onChangeWeek: func.isRequired
 }

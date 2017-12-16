@@ -10,10 +10,7 @@ class AnimatedHeader extends Component {
   static propTypes = {
     scrollY: shape(),
     title: string.isRequired,
-    children: oneOfType([
-      arrayOf(node),
-      node
-    ])
+    children: oneOfType([arrayOf(node), node])
   }
 
   static defaultProps = {
@@ -23,7 +20,6 @@ class AnimatedHeader extends Component {
 
   render() {
     const { scrollY, title, children } = this.props
-
 
     const navbarTranslate = scrollY.interpolate({
       inputRange: [0, HEADER_SCROLL_DISTANCE],
@@ -43,29 +39,22 @@ class AnimatedHeader extends Component {
       extrapolate: 'clamp'
     })
 
-
     return (
-      <Animated.View
-        style={[styles.navbar, { transform: [{ translateY: navbarTranslate }] }]}
-      >
+      <Animated.View style={[styles.navbar, { transform: [{ translateY: navbarTranslate }] }]}>
         <View style={styles.navbarInner}>
           <Animated.Text
             adjustsFontSizeToFitHeight
             style={[
               styles.navbarTitle,
               {
-                transform: [
-                  { scale: titleScale },
-                  { translateX: titleX }
-                ]
+                transform: [{ scale: titleScale }, { translateX: titleX }]
               }
-            ]}
-          >
+            ]}>
             {title}
           </Animated.Text>
           {children}
         </View>
-      </Animated.View >
+      </Animated.View>
     )
   }
 }

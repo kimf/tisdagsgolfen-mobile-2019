@@ -22,9 +22,7 @@ const isCurrentUser = (teamEvent, player, currentUserId) => {
   return player.id === currentUserId
 }
 
-const ScoringLeaderboardCard = ({
-  player, currentUserId, sorting, scoringType, teamEvent
-}) => {
+const ScoringLeaderboardCard = ({ player, currentUserId, sorting, scoringType, teamEvent }) => {
   let pointText
   let pointValue = ''
   let position
@@ -60,8 +58,7 @@ const ScoringLeaderboardCard = ({
             fontWeight: '800',
             color: colors.dark,
             fontSize: 16
-          }}
-        >
+          }}>
           {position}
         </TGText>
       </View>
@@ -97,10 +94,12 @@ ScoringLeaderboardCard.propTypes = {
     }),
     firstName: string,
     lastName: string,
-    users: arrayOf(shape({
-      firstName: string.isRequired,
-      lastName: string.isRequired
-    }).isRequired)
+    users: arrayOf(
+      shape({
+        firstName: string.isRequired,
+        lastName: string.isRequired
+      }).isRequired
+    )
   }).isRequired,
   currentUserId: string.isRequired,
   sorting: string.isRequired,

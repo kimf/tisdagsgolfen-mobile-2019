@@ -47,14 +47,7 @@ const styles = StyleSheet.create({
   }
 })
 
-const LoginForm = ({
-  email,
-  password,
-  changeValue,
-  onSubmit,
-  loggingIn,
-  error
-}) => (
+const LoginForm = ({ email, password, changeValue, onSubmit, loggingIn, error }) => (
   <View behavior="position" style={styles.container}>
     {error && <LoginError />}
 

@@ -104,8 +104,7 @@ class ScoreInput extends Component {
       <Picker
         style={{ flex: 1 }}
         selectedValue={this.state.putts}
-        onValueChange={putts => this.setState({ putts })}
-      >
+        onValueChange={putts => this.setState({ putts })}>
         {PUTT_VALUES.map(val => <Picker.Item key={val} value={val} label={`${val} puttar`} />)}
       </Picker>
     )
@@ -114,8 +113,7 @@ class ScoreInput extends Component {
       <Picker
         style={{ flex: 1 }}
         selectedValue={this.state.beers}
-        onValueChange={beers => this.setState({ beers })}
-      >
+        onValueChange={beers => this.setState({ beers })}>
         {BEER_VALUES.map(val => <Picker.Item key={val} value={val} label={`${val} öl`} />)}
       </Picker>
     )
@@ -127,8 +125,7 @@ class ScoreInput extends Component {
           <Picker
             style={{ flex: 1 }}
             selectedValue={this.state.strokes}
-            onValueChange={strokes => this.setState({ strokes })}
-          >
+            onValueChange={strokes => this.setState({ strokes })}>
             {STROKE_VALUES.map(val => <Picker.Item key={val} value={val} label={`${val} slag`} />)}
           </Picker>
           {putsPicker}

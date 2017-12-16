@@ -3,9 +3,7 @@ import { View } from 'react-native'
 
 import styles, { colors } from 'styles'
 
-const EventViewLoaderRow = () => (
-  <View style={[styles.listrow, { height: 60 }]} />
-)
+const EventViewLoaderRow = () => <View style={[styles.listrow, { height: 60 }]} />
 
 const items = [...new Array(10)].map((i, index) => index)
 

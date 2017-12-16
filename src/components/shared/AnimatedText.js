@@ -17,27 +17,20 @@ class AnimatedText extends Component {
     this.animate(1)
   }
 
-  animate = (toValue) => {
-    Animated.timing(
-      this.state.fadeAnim,
-      {
-        toValue,
-        duration: 1500,
-        easing: Easing.in(Easing.ease),
-        useNativeDriver: true
-      }
-    ).start(() => {
+  animate = toValue => {
+    Animated.timing(this.state.fadeAnim, {
+      toValue,
+      duration: 1500,
+      easing: Easing.in(Easing.ease),
+      useNativeDriver: true
+    }).start(() => {
       this.animate(toValue !== 1 ? 1 : LOW_VAL)
     })
   }
 
   render() {
     return (
-      <Animated.View
-        style={[
-          { opacity: this.state.fadeAnim }
-        ]}
-      >
+      <Animated.View style={[{ opacity: this.state.fadeAnim }]}>
         <TGText {...this.props} />
       </Animated.View>
     )

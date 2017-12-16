@@ -16,8 +16,7 @@ const SetupCourseRow = ({ course }) => (
         paddingLeft: 10,
         color: colors.semiDark,
         fontWeight: 'bold'
-      }}
-    >
+      }}>
       {course.name}
     </TGText>
   </View>

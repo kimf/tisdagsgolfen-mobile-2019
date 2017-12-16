@@ -72,8 +72,7 @@ class NewPlayer extends Component {
                   flexDirection: 'row',
                   padding: 15
                 }}
-                style={{ fontSize: 18, fontWeight: 'bold' }}
-              >
+                style={{ fontSize: 18, fontWeight: 'bold' }}>
                 <Image style={styles.cardImage} source={photoSrc} resizeMode="cover" />
                 {item.firstName} {item.lastName}
               </TGText>

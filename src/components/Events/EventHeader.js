@@ -6,7 +6,7 @@ import TGText from 'shared/TGText'
 import { colors } from 'styles'
 import { courseShape } from 'propTypes'
 
-const gametypeName = (scoringType) => {
+const gametypeName = scoringType => {
   switch (scoringType) {
     case 'modified_points':
       return 'Modifierad Poäng'

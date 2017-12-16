@@ -20,16 +20,18 @@ const fixString = stringToFix =>
 
 const filterCourses = cacheable((courses, query) =>
   courses
-    .filter((c) => {
+    .filter(c => {
       const searchString = fixString(`${c.club}${c.name}`)
       const trimmedQuery = fixString(query)
       return searchString.indexOf(trimmedQuery) !== -1
     })
     .sort((a, b) => b.eventCount - a.eventCount)
-    .sort((a, b) => a.club - b.club))
+    .sort((a, b) => a.club - b.club)
+)
 
 const getPreviouslyPlayedCourses = cacheable(courses =>
-  courses.filter(c => c.eventCount > 3).sort((a, b) => b.eventCount - a.eventCount))
+  courses.filter(c => c.eventCount > 3).sort((a, b) => b.eventCount - a.eventCount)
+)
 
 class CoursePicker extends Component {
   static propTypes = {
@@ -94,8 +96,7 @@ class CoursePicker extends Component {
               marginHorizontal: 20,
               borderBottomWidth: 2,
               borderBottomColor: colors.lightGray
-            }}
-          >
+            }}>
             <SubHeader title="Vanliga banor" />
           </View>
         ) : null}

@@ -11,9 +11,7 @@ const mutedYellow = { backgroundColor: colors.mutedYellow }
 
 const defaultAvatar = require('../../images/defaultavatar.png')
 
-const LeaderboardCard = ({
-  player, sorting, currentUserId, showSummary, toggleSummary
-}) => {
+const LeaderboardCard = ({ player, sorting, currentUserId, showSummary, toggleSummary }) => {
   let pointText
   let pointValue = ''
   let position
@@ -50,8 +48,7 @@ const LeaderboardCard = ({
             fontWeight: '800',
             color: colors.dark,
             fontSize: 16
-          }}
-        >
+          }}>
           {position}
         </TGText>
         {sorting === 'totalPoints' && (
@@ -79,8 +76,7 @@ const LeaderboardCard = ({
             fontWeight: '800',
             fontSize: 18,
             textAlign: 'right'
-          }}
-        >
+          }}>
           {`${pointValue} ${pointText}`}
         </TGText>
         {sorting === 'totalPoints' && (

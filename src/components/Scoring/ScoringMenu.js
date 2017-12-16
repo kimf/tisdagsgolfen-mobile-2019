@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
   }
 })
 
-const confirmCancel = (cancelFunc) => {
+const confirmCancel = cancelFunc => {
   Alert.alert(
     'Vill du verkligen avsluta rundan?',
     'Allt du matat in kommer raderas!',
@@ -46,15 +46,10 @@ const confirmCancel = (cancelFunc) => {
   )
 }
 
-
-const ScoringMenu = ({
-  onClose, onPreview, cancelRound, currentHole, holes, changeHole
-}) => (
+const ScoringMenu = ({ onClose, onPreview, cancelRound, currentHole, holes, changeHole }) => (
   <View style={{ flex: 1 }}>
     <View style={styles.inner}>
-      <TGText style={styles.text}>
-        MENY
-      </TGText>
+      <TGText style={styles.text}>MENY</TGText>
       <View style={styles.buttonRow}>
         {holes.map(hole => (
           <TGText
@@ -67,8 +62,7 @@ const ScoringMenu = ({
             viewStyle={[
               styles.holeButton,
               { backgroundColor: currentHole === hole.number ? colors.green : colors.lightGray }
-            ]}
-          >
+            ]}>
             {hole.number}
           </TGText>
         ))}
@@ -79,18 +73,10 @@ const ScoringMenu = ({
           onPress={() => confirmCancel(cancelRound)}
           title="AVBRYT RUNDA"
         />
-        <RowButton
-          backgroundColor={colors.green}
-          onPress={onPreview}
-          title="SPARA RUNDA"
-        />
+        <RowButton backgroundColor={colors.green} onPress={onPreview} title="SPARA RUNDA" />
       </View>
     </View>
-    <TopButton
-      backgroundColor={colors.blue}
-      title="STÄNG"
-      onPress={() => onClose()}
-    />
+    <TopButton backgroundColor={colors.blue} title="STÄNG" onPress={() => onClose()} />
   </View>
 )
 
@@ -99,9 +85,11 @@ ScoringMenu.propTypes = {
   onPreview: func.isRequired,
   cancelRound: func.isRequired,
   currentHole: number.isRequired,
-  holes: arrayOf(shape({
-    number: number.isRequired
-  }).isRequired).isRequired,
+  holes: arrayOf(
+    shape({
+      number: number.isRequired
+    }).isRequired
+  ).isRequired,
   changeHole: func.isRequired
 }
 

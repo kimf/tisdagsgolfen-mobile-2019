@@ -33,8 +33,7 @@ class Leaderboard extends Component {
       sortedPlayers = players.slice().sort((a, b) => a.position - b.position)
     }
 
-    const emptyLeaderboard =
-      sortedPlayers.filter(sl => sl.eventCount !== 0).length === 0
+    const emptyLeaderboard = sortedPlayers.filter(sl => sl.eventCount !== 0).length === 0
 
     if (emptyLeaderboard) {
       return <EmptyState text="Inga rundor spelade ännu" />
@@ -47,11 +46,7 @@ class Leaderboard extends Component {
         initialNumToRender={10}
         data={sortedPlayers}
         renderItem={({ item }) => (
-          <LeaderboardCard
-            currentUserId={currentUserId}
-            player={item}
-            sorting={sorting}
-          />
+          <LeaderboardCard currentUserId={currentUserId} player={item} sorting={sorting} />
         )}
         keyExtractor={player => `l_${seasonId}_${eventId}_${player.id}`}
       />

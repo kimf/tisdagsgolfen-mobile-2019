@@ -40,18 +40,18 @@ class Login extends Component {
 
     this.props
       .signinUser({ variables: { email, password } })
-      .then((response) => {
+      .then(response => {
         this.props.onLogin(response.data.authenticateUser)
         this.setState({ loggingIn: false, error: false })
       })
-      .catch((e) => {
+      .catch(e => {
         // eslint-disable-next-line no-console
         console.warn(e)
         this.setState({ error: true, loggingIn: false })
       })
   }
 
-  changeValue = (valueObject) => {
+  changeValue = valueObject => {
     this.setState(valueObject)
   }
 
@@ -63,16 +63,14 @@ class Login extends Component {
           justifyContent: 'flex-start',
           alignItems: 'stretch',
           backgroundColor: colors.dark
-        }}
-      >
+        }}>
         <TGText
           style={{
             padding: 20,
             fontSize: 60,
             color: colors.red,
             textAlign: 'center'
-          }}
-        >
+          }}>
           {icon}
         </TGText>
         <Form {...this.state} changeValue={this.changeValue} onSubmit={this.onSubmit} />

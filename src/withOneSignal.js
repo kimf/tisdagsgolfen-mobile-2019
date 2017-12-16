@@ -4,23 +4,23 @@ import deviceLog from 'react-native-device-log'
 import slowlog from 'react-native-slowlog'
 import OneSignal from 'react-native-onesignal'
 
-const onReceived = (notification) => {
+const onReceived = notification => {
   deviceLog.debug('Notification received:', notification)
 }
 
-const onRegistered = (notifData) => {
+const onRegistered = notifData => {
   deviceLog.debug('Device has been registered for push notifications!', notifData)
 }
 
-const onIds = (device) => {
+const onIds = device => {
   deviceLog.debug('Device info: ', device)
 }
 
-const handleAppStateChange = (currentAppState) => {
+const handleAppStateChange = currentAppState => {
   deviceLog.debug('currentAppState', currentAppState)
 }
 
-const onOpened = (openResult) => {
+const onOpened = openResult => {
   deviceLog.debug('Message: ', openResult.notification.payload.body)
   deviceLog.debug('Data: ', openResult.notification.payload.additionalData)
   deviceLog.debug('isActive: ', openResult.notification.isAppInFocus)

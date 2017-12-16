@@ -10,7 +10,7 @@ import UserColumn from 'Scoring/UserColumn'
 import ScorecardHeaderRow from 'Scoring/ScorecardHeaderRow'
 import { colors, deviceHeight, deviceWidth } from 'styles'
 
-const confirmFinish = (finishFunc) => {
+const confirmFinish = finishFunc => {
   Alert.alert(
     'Vill du verkligen spara och stänga??',
     'Har du verkligen dubbelkollat?',
@@ -22,9 +22,7 @@ const confirmFinish = (finishFunc) => {
   )
 }
 
-const FinishScoringSession = ({
-  scrollX, scoringSession, playing, finishRound
-}) => (
+const FinishScoringSession = ({ scrollX, scoringSession, playing, finishRound }) => (
   <View style={{ flex: 1, backgroundColor: colors.green }}>
     <HoleHeader scrollX={scrollX} par={scoringSession.course.par} index={0} number={19} />
     <View
@@ -39,8 +37,7 @@ const FinishScoringSession = ({
         shadowRadius: 1,
         shadowOpacity: 0.5,
         elevation: 5
-      }}
-    >
+      }}>
       <View style={{ flex: 1 }}>
         <View style={{ flex: 1 }}>
           <ScorecardHeaderRow
@@ -55,7 +52,7 @@ const FinishScoringSession = ({
             let beers = 0
             const userId = scoringSession.teamEvent ? index : item.users[0].id
 
-            scoringSession.liveScores.forEach((ls) => {
+            scoringSession.liveScores.forEach(ls => {
               if (ls.user.id === userId) {
                 strokes += ls.strokes
                 putts += ls.putts
@@ -81,8 +78,7 @@ const FinishScoringSession = ({
                   borderBottomWidth: index < playing.length - 1 ? 1 : 0,
                   borderBottomColor: colors.lightGray,
                   backgroundColor: colors.white
-                }}
-              >
+                }}>
                 <UserColumn
                   teamEvent={scoringSession.teamEvent}
                   item={item}

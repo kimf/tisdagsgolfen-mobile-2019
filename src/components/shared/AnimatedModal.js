@@ -33,8 +33,7 @@ const AnimatedModal = ({ position, children, height }) => (
         height,
         transform: [{ translateY: position }]
       }
-    ]}
-  >
+    ]}>
     {children}
   </Animated.View>
 )
