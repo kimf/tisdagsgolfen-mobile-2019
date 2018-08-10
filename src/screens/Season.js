@@ -79,7 +79,10 @@ class Season extends Component {
 
     let weekProps
     if (hasEvents) {
-      const reversedEventIds = [...season.eventIds, season.closed ? 'final' : null]
+      const reversedEventIds = (season.closed
+        ? [...season.eventIds, 'final']
+        : [...season.eventIds]
+      )
         .map((id, index) => ({ id: `${id}`, index: `${index + 1}` }))
         .reverse()
 

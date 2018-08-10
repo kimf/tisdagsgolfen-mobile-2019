@@ -2,281 +2,379 @@
 //  This file was automatically generated and should not be edited.
 
 export type LiveScoreDataInput = {
-  beers?: number | null
-  extraStrokes?: number | null
-  hole?: number | null
-  index?: number | null
-  par?: number | null
-  playerIds?: Array<number> | null
-  points?: number | null
-  putts?: number | null
-  strokes?: number | null
-}
+  beers?: number | null,
+  extraStrokes?: number | null,
+  hole?: number | null,
+  index?: number | null,
+  par?: number | null,
+  playerIds?: Array< number > | null,
+  points?: number | null,
+  putts?: number | null,
+  strokes?: number | null,
+};
 
 export type ScoringItemInput = {
-  extraStrokes: number
-  userIds: Array<string>
-}
+  extraStrokes: number,
+  userIds: Array< string >,
+};
+
+export type cancelRoundMutationMutationVariables = {
+  scoringSessionId: string,
+};
+
+export type cancelRoundMutationMutation = {
+  deleteScoringSession:  {
+    // id of the season
+    id: string,
+  } | null,
+};
 
 export type createLiveScoreMutationVariables = {
-  scoringSessionId: string
-  userId?: string | null
-  teamIndex?: number | null
-  data: LiveScoreDataInput
-}
+  scoringSessionId: string,
+  userId?: string | null,
+  teamIndex?: number | null,
+  data: LiveScoreDataInput,
+};
 
 export type createLiveScoreMutation = {
-  createLiveScore: {
+  createLiveScore:  {
     // id of the score
-    id: string
-    beers: number | null
-    extraStrokes: number | null
-    hole: number | null
-    index: number | null
-    par: number | null
-    playerIds: Array<number> | null
-    points: number | null
-    putts: number | null
-    strokes: number | null
-    user: {
+    id: string,
+    beers: number | null,
+    extraStrokes: number | null,
+    hole: number | null,
+    index: number | null,
+    par: number | null,
+    playerIds: Array< number > | null,
+    points: number | null,
+    putts: number | null,
+    strokes: number | null,
+    user:  {
       // ID
-      id: string
-    } | null
-    teamIndex: number | null
-  } | null
-}
+      id: string,
+    } | null,
+    teamIndex: number | null,
+  } | null,
+};
 
 export type createScoringSessionMutationVariables = {
-  courseId: string
-  scorerId: string
-  teamEvent: boolean
-  scoringType: string
-  scoringItems?: Array<ScoringItemInput> | null
-  startsAt: string
-}
+  courseId: string,
+  scorerId: string,
+  teamEvent: boolean,
+  scoringType: string,
+  scoringItems?: Array< ScoringItemInput > | null,
+  startsAt: string,
+};
 
 export type createScoringSessionMutation = {
-  createScoringSession: {
+  createScoringSession:  {
     // id of the season
-    id: string
-    course: {
-      id: string
-      club: string
-      name: string
-    }
-    scoringType: string
-    teamEvent: boolean
-  } | null
-}
+    id: string,
+    course:  {
+      id: string,
+      club: string,
+      name: string,
+    },
+    scoringType: string,
+    teamEvent: boolean,
+  } | null,
+};
 
 export type authenticateUserMutationVariables = {
-  email: string
-  password: string
-}
+  email: string,
+  password: string,
+};
 
 export type authenticateUserMutation = {
-  authenticateUser: {
-    user: {
+  authenticateUser:  {
+    user:  {
       // ID
-      id: string
+      id: string,
       // The email of this user
-      email: string
-      firstName: string
-      lastName: string
+      email: string,
+      firstName: string,
+      lastName: string,
       // The url to the photo of this user
-      photo: string | null
-      admin: boolean
-    } | null
-    token: string | null
-  } | null
-}
+      photo: string | null,
+      admin: boolean,
+    } | null,
+    token: string | null,
+  } | null,
+};
 
 export type updateLiveScoreMutationVariables = {
-  id: string
-  data: LiveScoreDataInput
-}
+  id: string,
+  data: LiveScoreDataInput,
+};
 
 export type updateLiveScoreMutation = {
-  updateLiveScore: {
+  updateLiveScore:  {
     // id of the score
-    id: string
-    extraStrokes: number | null
-    strokes: number | null
-    putts: number | null
-    points: number | null
-    beers: number | null
-  } | null
-}
+    id: string,
+    extraStrokes: number | null,
+    strokes: number | null,
+    putts: number | null,
+    points: number | null,
+    beers: number | null,
+  } | null,
+};
 
-export type activeScoringSessionQueryQuery = {
-  activeScoringSession: {
+export type asQueryQuery = {
+  activeScoringSession:  {
     // id of the season
-    id: string
-    scoringType: string
-    teamEvent: boolean
-    course: {
-      id: string
-      club: string
-      name: string
-    }
-  } | null
-}
+    id: string,
+    scoringType: string,
+    teamEvent: boolean,
+    course:  {
+      id: string,
+      club: string,
+      name: string,
+    },
+  } | null,
+};
 
 export type coursesQueryQuery = {
   // A lot of courses and their data
-  courses: Array<{
-    id: string
-    club: string
-    name: string
-    par: number
-    holeCount: number
-    eventCount: number
-  } | null>
-}
+  courses:  Array< {
+    id: string,
+    club: string,
+    name: string,
+    par: number,
+    holeCount: number,
+    eventCount: number,
+  } | null >,
+};
+
+export type eventQueryQueryVariables = {
+  eventId: string,
+  seasonId: string,
+};
+
+export type eventQueryQuery = {
+  // Leaderboard for a season by seasonID
+  players:  Array< {
+    id: string,
+    photo: string | null,
+    // The name of this user
+    name: string,
+    average: number,
+    eventCount: number,
+    topPoints: Array< number >,
+    // position
+    position: number,
+    oldAverage: number | null,
+    oldTotalPoints: number | null,
+    prevPosition: number | null,
+    totalPoints: number | null,
+    totalKr: number,
+    beers: number,
+  } >,
+  event:  {
+    // id of the event
+    id: string,
+    // Status of the event
+    status: string,
+    startsAt: string,
+    scoringType: string,
+    teamEvent: boolean,
+    // Course
+    course:  {
+      id: string,
+      club: string,
+      name: string,
+    },
+    // Leaderboard
+    leaderboard:  Array< {
+      id: string,
+      photo: string | null,
+      name: string,
+      position: number,
+      eventPoints: number,
+      beers: number,
+      kr: number,
+      value: number,
+    } >,
+  },
+};
 
 export type eventsQuery = {
   // Events by seasonId
-  events: Array<{
+  events:  Array< {
     // id of the event
-    id: string
+    id: string,
     // Status of the event
-    status: string
-    startsAt: string
-    scoringType: string
-    teamEvent: boolean
-    course: string
-  }>
-}
+    status: string,
+    startsAt: string,
+    scoringType: string,
+    teamEvent: boolean,
+    // Course
+    course:  {
+      id: string,
+      club: string,
+      name: string,
+    },
+  } >,
+};
+
+export type activeScoringSessionQueryQuery = {
+  activeScoringSession:  {
+    // id of the season
+    id: string,
+    scoringType: string,
+    teamEvent: boolean,
+    course:  {
+      id: string,
+      club: string,
+      name: string,
+    },
+  } | null,
+  // Seasons (Only Tisdagsgolfen in this case)
+  seasons:  Array< {
+    // id of the season
+    id: string,
+    // Name of the season
+    name: string,
+    // Is it closed?
+    closed: boolean,
+    // Url to season cover photo
+    photo: string | null,
+    eventCount: number,
+    eventIds: Array< number > | null,
+    winner: string | null,
+    finalInfo: string | null,
+  } >,
+};
 
 export type seasonLeaderboardQueryVariables = {
-  seasonId: string
-}
+  seasonId: string,
+  eventId: string,
+};
 
 export type seasonLeaderboardQuery = {
   // Leaderboard for a season by seasonID
-  players: Array<{
-    id: string
-    photo: string | null
+  players:  Array< {
+    id: string,
+    photo: string | null,
     // The name of this user
-    name: string
-    average: number
-    eventCount: number
-    topPoints: Array<number>
+    name: string,
+    average: number,
+    eventCount: number,
+    topPoints: Array< number >,
     // position
-    position: number
-    oldAverage: number | null
-    oldTotalPoints: number | null
-    prevPosition: number | null
-    totalPoints: number | null
-    totalKr: number
-    beers: number
-  }>
-}
+    position: number,
+    oldAverage: number | null,
+    oldTotalPoints: number | null,
+    prevPosition: number | null,
+    totalPoints: number | null,
+    totalKr: number,
+    beers: number,
+  } >,
+};
 
 export type liveLeaderboardQueryQueryVariables = {
-  scoringSessionId: string
-}
+  scoringSessionId: string,
+};
 
 export type liveLeaderboardQueryQuery = {
   // Get the logged in user and related data
-  user: {
+  user:  {
     // ID
-    id: string
-  }
+    id: string,
+  },
   // Live Leaderboard by scoringSessionId
-  liveLeaderboard: Array<{
-    id: string
-    position: number
-    photo: string | null
+  liveLeaderboard:  Array< {
+    id: string,
+    position: number,
+    photo: string | null,
     // The name of this user
-    name: string
-    beers: number
-    kr: number
-    points: number
-    strokes: number
-  }>
-}
+    name: string,
+    beers: number,
+    kr: number,
+    points: number,
+    strokes: number,
+  } >,
+};
 
 export type scoringSessionQueryVariables = {
-  scoringSessionId: string
-}
+  scoringSessionId: string,
+};
 
 export type scoringSessionQuery = {
-  scoringSession: {
+  scoringSession:  {
     // id of the season
-    id: string
-    currentHole: number
-    scoringType: string
-    teamEvent: boolean
-    course: {
-      id: string
-      club: string
-      name: string
-      par: number
+    id: string,
+    currentHole: number,
+    scoringType: string,
+    teamEvent: boolean,
+    course:  {
+      id: string,
+      club: string,
+      name: string,
+      par: number,
       // Holes
-      holes: Array<{
-        id: string
-        number: number
-        par: number
-        index: number
-      }>
-    }
-    scoringItems: Array<{
-      extraStrokes: number
-      users: Array<{
+      holes:  Array< {
+        id: string,
+        number: number,
+        par: number,
+        index: number,
+      } >,
+    },
+    scoringItems:  Array< {
+      extraStrokes: number,
+      users:  Array< {
         // ID
-        id: string
-        firstName: string
-        lastName: string
+        id: string,
+        firstName: string,
+        lastName: string,
         // The url to the photo of this user
-        photo: string | null
-      }>
-    }>
-    liveScores: Array<{
+        photo: string | null,
+      } >,
+    } >,
+    liveScores:  Array< {
       // id of the score
-      id: string
-      user: {
+      id: string,
+      user:  {
         // ID
-        id: string
-      } | null
-      teamIndex: number | null
-      beers: number | null
-      extraStrokes: number | null
-      hole: number | null
-      index: number | null
-      par: number | null
-      playerIds: Array<number> | null
-      points: number | null
-      putts: number | null
-      strokes: number | null
-    }> | null
-  }
-}
+        id: string,
+      } | null,
+      teamIndex: number | null,
+      beers: number | null,
+      extraStrokes: number | null,
+      hole: number | null,
+      index: number | null,
+      par: number | null,
+      playerIds: Array< number > | null,
+      points: number | null,
+      putts: number | null,
+      strokes: number | null,
+    } > | null,
+  },
+};
 
 export type seasonsQueryQuery = {
   // Seasons (Only Tisdagsgolfen in this case)
-  seasons: Array<{
+  seasons:  Array< {
     // id of the season
-    id: string
+    id: string,
     // Name of the season
-    name: string
+    name: string,
     // Is it closed?
-    closed: boolean
+    closed: boolean,
     // Url to season cover photo
-    photo: string | null
-  }>
-}
+    photo: string | null,
+  } >,
+};
 
 export type getAllUsersQuery = {
   // List of users
-  players: Array<{
+  players:  Array< {
     // ID
-    id: string
+    id: string,
     // The email of this user
-    email: string
-    firstName: string
-    lastName: string
+    email: string,
+    firstName: string,
+    lastName: string,
     // The url to the photo of this user
-    photo: string | null
-  }>
-}
+    photo: string | null,
+  } >,
+};

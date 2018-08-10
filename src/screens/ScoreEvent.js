@@ -63,6 +63,7 @@ export class ScoreEvent extends Component {
   openModal = null
 
   changeHole = nextHole => {
+    console.log(nextHole)
     this.setState(state => {
       // eslint-disable-next-line no-underscore-dangle
       this.scrollView._component.scrollTo({

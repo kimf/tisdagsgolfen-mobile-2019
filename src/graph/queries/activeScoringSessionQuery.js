@@ -2,8 +2,8 @@ import { shape, string, bool } from 'prop-types'
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 
-const activeScoringSessionQuery = gql`
-  query activeScoringSessionQuery {
+const asQuery = gql`
+  query asQuery {
     activeScoringSession {
       id
       scoringType
@@ -17,9 +17,9 @@ const activeScoringSessionQuery = gql`
   }
 `
 
-export default activeScoringSessionQuery
+export default asQuery
 
-export const withActiveScoringSessionQuery = graphql(activeScoringSessionQuery, {
+export const withActiveScoringSessionQuery = graphql(asQuery, {
   skip: ({ isLoggedin }) => !isLoggedin
 })
 

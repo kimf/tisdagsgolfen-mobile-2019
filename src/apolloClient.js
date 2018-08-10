@@ -5,7 +5,7 @@ import { setContext } from 'apollo-link-context'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import { print } from 'graphql/language/printer'
 
-import { getCache } from 'utils'
+import { getCache } from './utils'
 
 const withToken = setContext(context =>
   getCache('currentUser').then(currentUser => ({
@@ -47,6 +47,7 @@ const Logger = (operation, forward) => {
 const httpLink = createHttpLink({
   uri: 'https://www.tisdagsgolfen.se/api/graphql'
 })
+// __DEV__ ? 'https://www.tisdagsgolfen.se/api/graphql'
 
 const link = ApolloLink.from([Logger, withToken, httpLink])
 

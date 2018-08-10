@@ -18,7 +18,7 @@ export const withCancelRoundMutation = graphql(cancelRoundMutation, {
       mutate({
         variables: { scoringSessionId },
         updateQueries: {
-          activeScoringSessionQuery: prev =>
+          asQuery: prev =>
             update(prev, {
               activeScoringSession: { $set: null }
             })
