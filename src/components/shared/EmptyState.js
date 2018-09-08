@@ -2,8 +2,8 @@ import React from 'react'
 import { View, Image } from 'react-native'
 import { string } from 'prop-types'
 
-import TGText from 'shared/TGText'
-import { colors } from 'styles'
+import TGText from './TGText'
+import { colors } from '../../styles'
 
 const containerStyle = {
   backgroundColor: colors.white,
@@ -23,7 +23,7 @@ const textStyle = {
   color: colors.muted
 }
 
-const emptyImage = require('images/emptystate.png')
+const emptyImage = require('../../images/emptystate.png')
 
 const EmptyState = ({ text }) => (
   <View style={containerStyle}>

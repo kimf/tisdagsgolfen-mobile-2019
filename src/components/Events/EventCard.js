@@ -4,9 +4,9 @@ import moment from 'moment'
 import 'moment/locale/sv'
 import { func } from 'prop-types'
 
-import TGText from 'shared/TGText'
-import TouchableView from 'shared/TouchableView'
-import { eventShape } from 'propTypes'
+import TGText from '../shared/TGText'
+import TouchableView from '../shared/TouchableView'
+import { eventShape } from '../../propTypes'
 import styles from './eventCardStyles'
 
 const EventCard = ({ event, onNavigate }) => {

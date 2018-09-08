@@ -2,11 +2,11 @@ import React, { Component } from 'react'
 import { FlatList } from 'react-native'
 import { arrayOf, string } from 'prop-types'
 
-import LeaderboardCard from 'Leaderboard/LeaderboardCard'
+import LeaderboardCard from './LeaderboardCard'
 
-import EmptyState from 'shared/EmptyState'
-import { ranked } from 'utils'
-import { leaderboardPlayerShape } from 'propTypes'
+import EmptyState from '../shared/EmptyState'
+import { ranked } from '../../utils'
+import { leaderboardPlayerShape } from '../../propTypes'
 
 class Leaderboard extends Component {
   static propTypes = {

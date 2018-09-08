@@ -2,13 +2,13 @@ import React from 'react'
 import { Alert, View } from 'react-native'
 import { arrayOf, func, shape, number } from 'prop-types'
 
-import BottomButton from 'shared/BottomButton'
-import TGText from 'shared/TGText'
-import HoleHeader from 'Scoring/HoleHeader'
-import ScoreRow from 'Scoring/ScoreRow'
-import UserColumn from 'Scoring/UserColumn'
-import ScorecardHeaderRow from 'Scoring/ScorecardHeaderRow'
-import { colors, deviceHeight, deviceWidth } from 'styles'
+import BottomButton from '../shared/BottomButton'
+import TGText from '../shared/TGText'
+import HoleHeader from './HoleHeader'
+import ScoreRow from './ScoreRow'
+import UserColumn from './UserColumn'
+import ScorecardHeaderRow from './ScorecardHeaderRow'
+import { colors, deviceHeight, deviceWidth } from '../../styles'
 
 const confirmFinish = finishFunc => {
   Alert.alert(

@@ -2,8 +2,8 @@ import React from 'react'
 import { View } from 'react-native'
 import { number, shape } from 'prop-types'
 
-import TGText from 'shared/TGText'
-import { colors } from 'styles'
+import TGText from '../shared/TGText'
+import { colors } from '../../styles'
 
 const UserColumn = ({ item, scoreItem, flex }) => {
   const name = item.users.map(p => p.firstName).join(', ')

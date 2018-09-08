@@ -2,14 +2,14 @@ import React, { Component } from 'react'
 import { View } from 'react-native'
 import { shape, number, arrayOf } from 'prop-types'
 
-import TouchableView from 'shared/TouchableView'
-import ScoreRow from 'Scoring/ScoreRow'
-import ScorecardHeaderRow from 'Scoring/ScorecardHeaderRow'
-import ScoreInput from 'Scoring/ScoreInput'
-import HoleHeader from 'Scoring/HoleHeader'
-import UserColumn from 'Scoring/UserColumn'
-import { colors, deviceHeight, deviceWidth } from 'styles'
-import { calculateExtraStrokes } from 'utils'
+import TouchableView from '../shared/TouchableView'
+import ScoreRow from './ScoreRow'
+import ScorecardHeaderRow from './ScorecardHeaderRow'
+import ScoreInput from './ScoreInput'
+import HoleHeader from './HoleHeader'
+import UserColumn from './UserColumn'
+import { colors, deviceHeight, deviceWidth } from '../../styles'
+import { calculateExtraStrokes } from '../../utils'
 
 class HoleView extends Component {
   static propTypes = {

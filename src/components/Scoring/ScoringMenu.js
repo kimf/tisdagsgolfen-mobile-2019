@@ -2,10 +2,10 @@ import React from 'react'
 import { Alert, View, StyleSheet } from 'react-native'
 import { arrayOf, shape, number, func } from 'prop-types'
 
-import TGText from 'shared/TGText'
-import TopButton from 'shared/TopButton'
-import RowButton from 'shared/RowButton'
-import { colors } from 'styles'
+import TGText from '../shared/TGText'
+import TopButton from '../shared/TopButton'
+import RowButton from '../shared/RowButton'
+import { colors } from '../../styles'
 
 const styles = StyleSheet.create({
   inner: {

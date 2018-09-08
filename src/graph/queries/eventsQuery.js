@@ -2,7 +2,7 @@ import { arrayOf, bool, shape } from 'prop-types'
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 
-import { eventShape } from 'propTypes'
+import { eventShape } from '../../propTypes'
 
 const eventsQuery = gql`
   query events {

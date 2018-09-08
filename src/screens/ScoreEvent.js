@@ -2,25 +2,25 @@ import React, { Component } from 'react'
 import { Animated, Easing } from 'react-native'
 import { func, shape, bool } from 'prop-types'
 import { compose } from 'react-apollo'
-import { NavigationActions } from 'react-navigation'
+import { NavigationActions, StackActions } from 'react-navigation'
 
-import HoleView from 'Scoring/HoleView'
-import ScoringFooter from 'Scoring/ScoringFooter'
-import ScoringMenu from 'Scoring/ScoringMenu'
-import ScoringLeaderboard from 'Scoring/ScoringLeaderboard'
-import FinishScoringSession from 'Scoring/FinishScoringSession'
-import AnimatedModal from 'shared/AnimatedModal'
-import Loading from 'shared/Loading'
-import styles, { colors, deviceHeight, deviceWidth } from 'styles'
-import { withScoringSessionQuery } from 'queries/scoringSessionQuery'
-import { withCancelRoundMutation } from 'mutations/cancelRoundMutation'
-import { withFinishRoundMutation } from 'mutations/finishRoundMutation'
-import { screenPropsShape } from 'propTypes'
+import HoleView from '../components/Scoring/HoleView'
+import ScoringFooter from '../components/Scoring/ScoringFooter'
+import ScoringMenu from '../components/Scoring/ScoringMenu'
+import ScoringLeaderboard from '../components/Scoring/ScoringLeaderboard'
+import FinishScoringSession from '../components/Scoring/FinishScoringSession'
+import AnimatedModal from '../components/shared/AnimatedModal'
+import Loading from '../components/shared/Loading'
+import styles, { colors, deviceHeight, deviceWidth } from '../styles'
+import { withScoringSessionQuery } from '../graph/queries/scoringSessionQuery'
+import { withCancelRoundMutation } from '../graph/mutations/cancelRoundMutation'
+import { withFinishRoundMutation } from '../graph/mutations/finishRoundMutation'
+import { screenPropsShape } from '../propTypes'
 
 const MENU_HEIGHT = 300
 const LEADERBOARD_HEIGHT = deviceHeight
 
-const resetAction = NavigationActions.reset({
+const resetAction = StackActions.reset({
   index: 0,
   actions: [NavigationActions.navigate({ routeName: 'Season' })]
 })
@@ -152,7 +152,10 @@ export class ScoreEvent extends Component {
   }
 
   render() {
-    const { data: { loading, scoringSession }, screenProps: { currentUser } } = this.props
+    const {
+      data: { loading, scoringSession },
+      screenProps: { currentUser }
+    } = this.props
     const { currentHole, scrollEnabled, scrollX } = this.state
     if (loading) {
       return (
@@ -283,6 +286,8 @@ export class ScoreEvent extends Component {
   }
 }
 
-export default compose(withScoringSessionQuery, withCancelRoundMutation, withFinishRoundMutation)(
-  ScoreEvent
-)
+export default compose(
+  withScoringSessionQuery,
+  withCancelRoundMutation,
+  withFinishRoundMutation
+)(ScoreEvent)

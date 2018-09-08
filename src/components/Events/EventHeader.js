@@ -2,9 +2,9 @@ import React from 'react'
 import { View, StyleSheet } from 'react-native'
 import { string, bool } from 'prop-types'
 
-import TGText from 'shared/TGText'
-import { colors } from 'styles'
-import { courseShape } from 'propTypes'
+import TGText from '../shared/TGText'
+import { colors } from '../../styles'
+import { courseShape } from '../../propTypes'
 
 const gametypeName = scoringType => {
   switch (scoringType) {

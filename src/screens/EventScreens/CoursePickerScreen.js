@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { shape, func } from 'prop-types'
 
-import Login from 'Login/Login'
-import CoursePicker from 'Events/CoursePicker'
-import { screenPropsShape } from 'propTypes'
+import Login from '../../components/Login/Login'
+import CoursePicker from '../../components/Events/CoursePicker'
+import { screenPropsShape } from '../../propTypes'
 
 class CoursePickerScreen extends Component {
   static navigationOptions = {
@@ -19,7 +19,10 @@ class CoursePickerScreen extends Component {
   }
 
   render() {
-    const { navigation, screenProps: { currentUser, isLoggedIn, onLogin } } = this.props
+    const {
+      navigation,
+      screenProps: { currentUser, isLoggedIn, onLogin }
+    } = this.props
 
     if (!isLoggedIn) {
       return <Login onLogin={onLogin} currentUser={currentUser} />

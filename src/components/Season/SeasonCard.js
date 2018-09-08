@@ -2,10 +2,10 @@ import React from 'react'
 import { View, ImageBackground } from 'react-native'
 import { func, string } from 'prop-types'
 
-import TouchableView from 'shared/TouchableView'
-import TGText from 'shared/TGText'
-import { colors } from 'styles'
-import trophyImg from 'images/trophy-filled.png'
+import TouchableView from '../shared/TouchableView'
+import TGText from '../shared/TGText'
+import { colors } from '../../styles'
+import trophyImg from '../../images/trophy-filled.png'
 
 const cardStyle = {
   flex: 1,

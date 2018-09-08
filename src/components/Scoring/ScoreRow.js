@@ -3,9 +3,9 @@ import React from 'react'
 import { View } from 'react-native'
 import { bool, shape, string } from 'prop-types'
 
-import TGText from 'shared/TGText'
-import ScoreItemText from 'Scoring/ScoreItemText'
-import { colors } from 'styles'
+import TGText from '../shared/TGText'
+import ScoreItemText from './ScoreItemText'
+import { colors } from '../../styles'
 
 const ScoreRow = ({ teamEvent, scoreItem, scoringType }) => {
   const strokes = scoringType === 'strokes'

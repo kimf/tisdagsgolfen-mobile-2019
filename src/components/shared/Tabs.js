@@ -2,8 +2,8 @@ import React from 'react'
 import { View } from 'react-native'
 import { bool, string, func } from 'prop-types'
 
-import Tab from 'shared/Tab'
-import { colors } from 'styles'
+import Tab from './Tab'
+import { colors } from '../../styles'
 
 const Tabs = ({ currentRoute, onChange, scoringType, teamEvent }) => {
   const strokes = scoringType === 'strokes'

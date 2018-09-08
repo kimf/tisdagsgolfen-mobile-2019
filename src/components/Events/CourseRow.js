@@ -2,9 +2,9 @@ import React from 'react'
 import { View } from 'react-native'
 import { string, number, shape, func } from 'prop-types'
 
-import TGText from 'shared/TGText'
-import TouchableView from 'shared/TouchableView'
-import styles, { colors } from 'styles'
+import TGText from '../shared/TGText'
+import TouchableView from '../shared/TouchableView'
+import styles, { colors } from '../../styles'
 
 const CourseRow = ({ course, selectCourse }) => (
   <TouchableView

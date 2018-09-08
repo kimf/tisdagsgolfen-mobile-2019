@@ -1,8 +1,8 @@
 import React from 'react'
 import { shape, string, bool, func } from 'prop-types'
 
-import TGText from 'shared/TGText'
-import { colors } from 'styles'
+import TGText from './TGText'
+import { colors } from '../../styles'
 
 const Tab = ({ tab, isCurrent, onChange }) => {
   const text = `${tab.icon} ${tab.title}`

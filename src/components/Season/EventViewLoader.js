@@ -1,7 +1,7 @@
 import React from 'react'
 import { View } from 'react-native'
 
-import styles, { colors } from 'styles'
+import styles, { colors } from '../../styles'
 
 const EventViewLoaderRow = () => <View style={[styles.listrow, { height: 60 }]} />
 
@@ -15,7 +15,9 @@ const EventViewLoader = () => (
         backgroundColor: colors.lighterGray,
         flexDirection: 'column'
       }}>
-      {items.map(item => <EventViewLoaderRow key={item} />)}
+      {items.map(item => (
+        <EventViewLoaderRow key={item} />
+      ))}
     </View>
     <View
       style={{

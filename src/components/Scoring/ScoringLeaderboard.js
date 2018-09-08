@@ -2,17 +2,17 @@ import React, { Component } from 'react'
 import { View, FlatList, StyleSheet } from 'react-native'
 import { arrayOf, bool, func, string, shape } from 'prop-types'
 
-import ScoringLeaderboardCard from 'Scoring/ScoringLeaderboardCard'
-import ScorecardHeaderRow from 'Scoring/ScorecardHeaderRow'
-import Header from 'shared/Header'
-import TopButton from 'shared/TopButton'
-import Tabs from 'shared/Tabs'
+import ScoringLeaderboardCard from './ScoringLeaderboardCard'
+import ScorecardHeaderRow from './ScorecardHeaderRow'
+import Header from '../shared/Header'
+import TopButton from '../shared/TopButton'
+import Tabs from '../shared/Tabs'
 // import Header from 'shared/Header'
 // import EventHeader from 'Events/EventHeader'
 
-import { colors, NAVBAR_HEIGHT } from 'styles'
-import { withLiveLeaderboardQuery } from 'queries/liveLeaderboardQuery'
-import { rankBySorting, massageIntoLeaderboard } from 'utils'
+import { colors, NAVBAR_HEIGHT } from '../../styles'
+import { withLiveLeaderboardQuery } from '../../graph/queries/liveLeaderboardQuery'
+import { rankBySorting, massageIntoLeaderboard } from '../../utils'
 
 const styles = StyleSheet.create({
   inner: {

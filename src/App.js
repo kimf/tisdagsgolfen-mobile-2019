@@ -5,7 +5,7 @@ import { ApolloProvider } from 'react-apollo'
 
 import { getCache } from './utils'
 import client from './apolloClient'
-import withOneSignal from './withOneSignal'
+// import withOneSignal from './withOneSignal'
 
 import Root from './Root'
 
@@ -66,4 +66,4 @@ class App extends Component {
   }
 }
 
-export default withOneSignal(App)
+export default App

@@ -2,10 +2,10 @@ import React, { Component } from 'react'
 import { View, FlatList, Image } from 'react-native'
 import { shape, bool, arrayOf, func, string, number } from 'prop-types'
 
-import TGText from 'shared/TGText'
-import styles, { colors } from 'styles'
-import { withUserQuery } from 'queries/userQuery'
-import { userShape } from 'propTypes'
+import TGText from '../../components/shared/TGText'
+import styles, { colors } from '../../styles'
+import { withUserQuery } from '../../graph/queries/userQuery'
+import { userShape } from '../../propTypes'
 
 const defaultAvatar = require('../../images/defaultavatar.png')
 

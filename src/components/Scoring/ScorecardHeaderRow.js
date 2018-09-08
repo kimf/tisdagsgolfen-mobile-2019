@@ -2,8 +2,8 @@ import React from 'react'
 import { View, StyleSheet } from 'react-native'
 import { bool, string } from 'prop-types'
 
-import TGText from 'shared/TGText'
-import { colors } from 'styles'
+import TGText from '../shared/TGText'
+import { colors } from '../../styles'
 
 const style = StyleSheet.create({
   view: {

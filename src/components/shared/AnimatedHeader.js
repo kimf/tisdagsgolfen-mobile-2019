@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { View, Animated } from 'react-native'
 import { shape, string, oneOfType, arrayOf, node } from 'prop-types'
 
-import styles, { NAVBAR_HEIGHT } from 'styles'
+import styles, { NAVBAR_HEIGHT } from '../../styles'
 
 const HEADER_SCROLL_DISTANCE = NAVBAR_HEIGHT - 60
 

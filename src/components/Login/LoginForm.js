@@ -2,10 +2,10 @@ import React from 'react'
 import { StyleSheet, TextInput, View } from 'react-native'
 import { bool, string, func } from 'prop-types'
 
-import LoginError from 'Login/LoginError'
-import TGText from 'shared/TGText'
+import LoginError from './LoginError'
+import TGText from '../shared/TGText'
 
-import { colors } from 'styles'
+import { colors } from '../../styles'
 
 const styles = StyleSheet.create({
   container: {

@@ -1,8 +1,8 @@
 import React from 'react'
 import { oneOfType, string, number, bool } from 'prop-types'
 
-import TGText from 'shared/TGText'
-import { colors } from 'styles'
+import TGText from '../shared/TGText'
+import { colors } from '../../styles'
 
 const ScoreItemText = ({ title, textAlign, fontWeight, fontSize, dimmed }) => {
   const regularColor = fontWeight === 'bold' ? colors.dark : colors.gray

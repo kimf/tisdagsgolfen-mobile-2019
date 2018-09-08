@@ -2,10 +2,10 @@ import React from 'react'
 import { View, Image } from 'react-native'
 import { string, bool, func } from 'prop-types'
 
-import TGText from 'shared/TGText'
-import UpOrDown from 'shared/UpOrDown'
-import styles, { colors } from 'styles'
-import { leaderboardPlayerShape } from 'propTypes'
+import TGText from '../shared/TGText'
+import UpOrDown from '../shared/UpOrDown'
+import styles, { colors } from '../../styles'
+import { leaderboardPlayerShape } from '../../propTypes'
 
 const mutedYellow = { backgroundColor: colors.mutedYellow }
 

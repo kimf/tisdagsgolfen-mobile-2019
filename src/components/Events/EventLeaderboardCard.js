@@ -2,8 +2,8 @@ import React from 'react'
 import { View, Image } from 'react-native'
 import { shape, string, number } from 'prop-types'
 
-import TGText from 'shared/TGText'
-import styles, { colors } from 'styles'
+import TGText from '../shared/TGText'
+import styles, { colors } from '../../styles'
 
 const mutedYellow = { backgroundColor: colors.mutedYellow }
 const defaultPhoto = require('../../images/defaultavatar.png')

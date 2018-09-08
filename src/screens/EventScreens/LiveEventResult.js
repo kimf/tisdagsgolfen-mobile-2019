@@ -2,11 +2,11 @@ import React, { Component } from 'react'
 import { View } from 'react-native'
 import { shape } from 'prop-types'
 
-import EventHeader from 'Events/EventHeader'
-import ScoringLeaderboard from 'Scoring/ScoringLeaderboard'
+import EventHeader from '../../components/Events/EventHeader'
+import ScoringLeaderboard from '../../components/Scoring/ScoringLeaderboard'
 
-import styles from 'styles'
-import { eventShape } from 'propTypes'
+import styles from '../../styles'
+import { eventShape } from '../../propTypes'
 
 class LiveEventResult extends Component {
   static navigationOptions = ({ navigation }) => ({

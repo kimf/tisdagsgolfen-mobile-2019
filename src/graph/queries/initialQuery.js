@@ -2,7 +2,7 @@ import { arrayOf, shape, string, bool } from 'prop-types'
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 
-import { seasonShape } from 'propTypes'
+import { seasonShape } from '../../propTypes'
 
 const initialQuery = gql`
   query activeScoringSessionQuery {

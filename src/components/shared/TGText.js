@@ -2,9 +2,9 @@
 import React from 'react'
 import { StyleSheet, Text } from 'react-native'
 
-import { colors, deviceWidth, deviceHeight } from 'styles'
+import { colors, deviceWidth, deviceHeight } from '../../styles'
 
-import TouchableView from 'shared/TouchableView'
+import TouchableView from './TouchableView'
 
 const realWidth = deviceHeight > deviceWidth ? deviceWidth : deviceHeight
 const FONT_SIZE = 16
@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
 
 const TGText = ({ onPress, style, viewStyle, children, ...rest }) => {
   const fontSize = style ? StyleSheet.flatten(style).fontSize || FONT_SIZE : FONT_SIZE
-  const scaledFontSize = Math.round(fontSize * realWidth / 375)
+  const scaledFontSize = Math.round((fontSize * realWidth) / 375)
 
   const text = (
     <Text

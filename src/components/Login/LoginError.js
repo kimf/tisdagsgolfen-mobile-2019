@@ -1,8 +1,8 @@
 import React from 'react'
 import { StyleSheet } from 'react-native'
 
-import TGText from 'shared/TGText'
-import { colors } from 'styles'
+import TGText from '../shared/TGText'
+import { colors } from '../../styles'
 
 const styles = StyleSheet.create({
   errorText: {

@@ -1,8 +1,8 @@
 import React from 'react'
 import { number } from 'prop-types'
 
-import TGText from 'shared/TGText'
-import { colors } from 'styles'
+import TGText from './TGText'
+import { colors } from '../../styles'
 
 const UpOrDown = ({ prev, current }) => {
   if (current < prev) {

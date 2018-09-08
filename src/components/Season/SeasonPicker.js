@@ -2,8 +2,8 @@ import React from 'react'
 import { Animated } from 'react-native'
 import { arrayOf, func, shape } from 'prop-types'
 
-import { seasonShape } from 'propTypes'
-import { colors } from 'styles'
+import { seasonShape } from '../../propTypes'
+import { colors } from '../../styles'
 import SeasonCard from './SeasonCard'
 
 const SeasonPicker = ({ seasons, onChangeSeason, position }) => (

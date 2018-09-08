@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Animated, Easing } from 'react-native'
 
-import TGText from 'shared/TGText'
+import TGText from './TGText'
 
 const LOW_VAL = 0.25
 

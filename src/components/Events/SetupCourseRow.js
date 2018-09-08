@@ -2,8 +2,8 @@ import React from 'react'
 import { View } from 'react-native'
 import { shape, string } from 'prop-types'
 
-import styles, { colors } from 'styles'
-import TGText from 'shared/TGText'
+import styles, { colors } from '../../styles'
+import TGText from '../shared/TGText'
 
 const SetupCourseRow = ({ course }) => (
   <View style={[styles.formRow, { backgroundColor: colors.lightGray, padding: 10 }]}>

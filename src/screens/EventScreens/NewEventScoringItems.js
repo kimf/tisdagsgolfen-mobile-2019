@@ -3,13 +3,13 @@ import { View } from 'react-native'
 import { bool, string, shape, func } from 'prop-types'
 import update from 'immutability-helper'
 
-import SetupIndividualEvent from 'Events/SetupIndividualEvent'
-import SetupTeamEvent from 'Events/SetupTeamEvent'
-import TGText from 'shared/TGText'
-import BottomButton from 'shared/BottomButton'
-import styles, { colors } from 'styles'
-import { withCreateScoringSessionMutation } from 'mutations/scoringSessionMutation'
-import { screenPropsShape } from 'propTypes'
+import SetupIndividualEvent from '../../components/Events/SetupIndividualEvent'
+import SetupTeamEvent from '../../components/Events/SetupTeamEvent'
+import TGText from '../../components/shared/TGText'
+import BottomButton from '../../components/shared/BottomButton'
+import styles, { colors } from '../../styles'
+import { withCreateScoringSessionMutation } from '../../graph/mutations/scoringSessionMutation'
+import { screenPropsShape } from '../../propTypes'
 
 class NewEventScoringItems extends Component {
   static navigationOptions = {
@@ -113,8 +113,16 @@ class NewEventScoringItems extends Component {
 
   startPlay = async () => {
     try {
-      const { screenProps: { currentUser }, createScoringSession, navigation } = this.props
-      const { state: { params: { course } } } = navigation
+      const {
+        screenProps: { currentUser },
+        createScoringSession,
+        navigation
+      } = this.props
+      const {
+        state: {
+          params: { course }
+        }
+      } = navigation
       const { teamEvent, isStrokes } = this.state
       const scoringItems = this.state.playing.map(playing => ({
         extraStrokes: parseInt(playing.strokes, 10),
@@ -157,7 +165,11 @@ class NewEventScoringItems extends Component {
 
   render() {
     const { navigation } = this.props
-    const { state: { params: { teamEvent } } } = navigation
+    const {
+      state: {
+        params: { teamEvent }
+      }
+    } = navigation
     const { playing, error } = this.state
 
     let showError

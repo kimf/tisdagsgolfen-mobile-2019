@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import { View } from 'react-native'
 import { string } from 'prop-types'
 
-import TGText from 'shared/TGText'
-import styles, { colors } from 'styles'
+import TGText from './TGText'
+import styles, { colors } from '../../styles'
 
 class SubHeader extends Component {
   static propTypes = {

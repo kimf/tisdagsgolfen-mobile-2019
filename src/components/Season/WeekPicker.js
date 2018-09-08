@@ -2,9 +2,9 @@ import React from 'react'
 import { Image, FlatList, View } from 'react-native'
 import { arrayOf, shape, bool, string, func } from 'prop-types'
 
-import TGText from 'shared/TGText'
-import { colors } from 'styles'
-import trophyImg from 'images/trophy-filled.png'
+import TGText from '../shared/TGText'
+import { colors } from '../../styles'
+import trophyImg from '../../images/trophy-filled.png'
 
 const WeekPickerItem = ({ week, isCurrent, onSelectWeek }) => (
   <TGText

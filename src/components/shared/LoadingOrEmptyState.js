@@ -1,8 +1,8 @@
 import React from 'react'
 import { bool, arrayOf, any, string } from 'prop-types'
 
-import Loading from 'shared/Loading'
-import EmptyState from 'shared/EmptyState'
+import Loading from './Loading'
+import EmptyState from './EmptyState'
 
 const LoadingOrEmptyState = ({ loading, items, name }) => {
   if (loading) {

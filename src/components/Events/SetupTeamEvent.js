@@ -2,9 +2,9 @@ import React from 'react'
 import { View, FlatList } from 'react-native'
 import { arrayOf, shape, func } from 'prop-types'
 
-import EventSetupPlayingCard from 'Scoring/EventSetupPlayingCard'
-import TopButton from 'shared/TopButton'
-import styles from 'styles'
+import EventSetupPlayingCard from '../Scoring/EventSetupPlayingCard'
+import TopButton from '../shared/TopButton'
+import styles from '../../styles'
 
 const SetupTeamEvent = ({
   playing,

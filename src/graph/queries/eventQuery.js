@@ -2,7 +2,7 @@ import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 import { arrayOf, bool, shape } from 'prop-types'
 
-import { leaderboardPlayerShape, eventWithLeaderboardshape } from 'propTypes'
+import { leaderboardPlayerShape, eventWithLeaderboardshape } from '../../propTypes'
 
 const eventQuery = gql`
   query eventQuery($eventId: ID!, $seasonId: ID!) {

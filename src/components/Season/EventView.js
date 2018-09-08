@@ -2,14 +2,14 @@ import React, { Component } from 'react'
 import { ScrollView, View } from 'react-native'
 import { bool, func, string } from 'prop-types'
 
-import Leaderboard from 'Leaderboard/Leaderboard'
-import EventResult from 'Season/EventResult'
-import EventViewLoader from 'Season/EventViewLoader'
-import Sorter from 'Season/Sorter'
-import EventHeader from 'Events/EventHeader'
+import Leaderboard from '../Leaderboard/Leaderboard'
+import EventResult from './EventResult'
+import EventViewLoader from './EventViewLoader'
+import Sorter from './Sorter'
+import EventHeader from '../Events/EventHeader'
 
-import { colors, deviceWidth } from 'styles'
-import { eventQueryProps, withEventQuery } from 'queries/eventQuery'
+import { colors, deviceWidth } from '../../styles'
+import { eventQueryProps, withEventQuery } from '../../graph/queries/eventQuery'
 
 const swipeCardStyle = {
   width: deviceWidth - 20,

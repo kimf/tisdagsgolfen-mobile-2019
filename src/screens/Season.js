@@ -2,14 +2,14 @@ import React, { Component } from 'react'
 import { View, Animated, Easing, LayoutAnimation } from 'react-native'
 import { func, shape } from 'prop-types'
 
-import SeasonHeader from 'Season/SeasonHeader'
-import SeasonPicker from 'Season/SeasonPicker'
-import WeekView from 'Season/WeekView'
+import SeasonHeader from '../components/Season/SeasonHeader'
+import SeasonPicker from '../components/Season/SeasonPicker'
+import WeekView from '../components/Season/WeekView'
 
-import EmptyState from 'shared/EmptyState'
-import { screenPropsShape } from 'propTypes'
-import styles, { deviceHeight } from 'styles'
-import { linear } from 'animations'
+import EmptyState from '../components/shared/EmptyState'
+import { screenPropsShape } from '../propTypes'
+import styles, { deviceHeight } from '../styles'
+import { linear } from '../animations'
 
 const TOP = -deviceHeight
 const BOTTOM = 0
@@ -70,7 +70,9 @@ class Season extends Component {
   }
 
   render() {
-    const { screenProps: { currentUser, activeScoringSession, seasons } } = this.props
+    const {
+      screenProps: { currentUser, activeScoringSession, seasons }
+    } = this.props
     const { seasonId } = this.state
 
     const season = seasonId ? seasons.find(s => s.id === seasonId) : seasons[0]

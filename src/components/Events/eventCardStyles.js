@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native'
-import { deviceWidth, colors } from 'styles'
+import { deviceWidth, colors } from '../../styles'
 
 const styles = StyleSheet.create({
   /* EVENT CARDS */

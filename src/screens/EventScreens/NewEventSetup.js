@@ -2,10 +2,10 @@ import React, { Component } from 'react'
 import { Switch, View } from 'react-native'
 import { string, shape, func } from 'prop-types'
 
-import SetupCourseRow from 'Events/SetupCourseRow'
-import TGText from 'shared/TGText'
-import BottomButton from 'shared/BottomButton'
-import styles, { colors } from 'styles'
+import SetupCourseRow from '../../components/Events/SetupCourseRow'
+import TGText from '../../components/shared/TGText'
+import BottomButton from '../../components/shared/BottomButton'
+import styles, { colors } from '../../styles'
 
 class NewEventSetup extends Component {
   static navigationOptions = {
@@ -34,14 +34,20 @@ class NewEventSetup extends Component {
 
   gotoScoringItems = () => {
     const { navigation } = this.props
-    const { state: { params } } = navigation
+    const {
+      state: { params }
+    } = navigation
     const { isStrokes, teamEvent } = this.state
     navigation.navigate('NewEventScoringItems', { ...params, isStrokes, teamEvent })
   }
 
   render() {
     const { navigation } = this.props
-    const { state: { params: { course } } } = navigation
+    const {
+      state: {
+        params: { course }
+      }
+    } = navigation
     const { teamEvent, isStrokes } = this.state
 
     return (

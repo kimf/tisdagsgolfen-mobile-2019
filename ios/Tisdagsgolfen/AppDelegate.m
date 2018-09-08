@@ -13,15 +13,15 @@
 #import "ReactNativeConfig.h"
 
 @implementation AppDelegate
-@synthesize oneSignal = _oneSignal;
+// @synthesize oneSignal = _oneSignal;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
 
-  NSString *oneSignalAppId = [ReactNativeConfig envFor:@"ONESIGNAL_APP_ID"];
-  self.oneSignal = [[RCTOneSignal alloc] initWithLaunchOptions:launchOptions
-                      appId:oneSignalAppId
-                      settings:@{kOSSettingsKeyInFocusDisplayOption : @(OSNotificationDisplayTypeNone), kOSSettingsKeyAutoPrompt : @YES}];
+  // NSString *oneSignalAppId = [ReactNativeConfig envFor:@"ONESIGNAL_APP_ID"];
+//  self.oneSignal = [[RCTOneSignal alloc] initWithLaunchOptions:launchOptions
+//                      appId:oneSignalAppId
+//                      settings:@{kOSSettingsKeyInFocusDisplayOption : @(OSNotificationDisplayTypeNone), kOSSettingsKeyAutoPrompt : @YES}];
 
   NSURL *jsCodeLocation;
 
@@ -46,12 +46,12 @@
   return YES;
 }
 
-// fetch notifications in the background and foreground
--(void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)notification
-fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
-  [RCTOneSignal didReceiveRemoteNotification:notification];
-  completionHandler(UIBackgroundFetchResultNewData);
-  // NSLog(@"Notification Body %@", notification);
-}
+//// fetch notifications in the background and foreground
+//-(void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)notification
+//fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))completionHandler {
+//  [RCTOneSignal didReceiveRemoteNotification:notification];
+//  completionHandler(UIBackgroundFetchResultNewData);
+//  // NSLog(@"Notification Body %@", notification);
+//}
 
 @end

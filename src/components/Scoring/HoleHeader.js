@@ -2,8 +2,8 @@ import React from 'react'
 import { Animated, StyleSheet } from 'react-native'
 import { number as numPropType, shape } from 'prop-types'
 
-import TGText from 'shared/TGText'
-import { colors, deviceWidth } from 'styles'
+import TGText from '../shared/TGText'
+import { colors, deviceWidth } from '../../styles'
 
 const styles = StyleSheet.create({
   holeHeader: {

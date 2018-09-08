@@ -267,6 +267,20 @@
 			remoteGlobalIDString = 3D383D621EBD27B9005632C8;
 			remoteInfo = "double-conversion-tvOS";
 		};
+		B952D8E1213B43A400E4651F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 146833FF1AC3E56700842450 /* React.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EBF21BDC1FC498900052F4D5;
+			remoteInfo = jsinspector;
+		};
+		B952D8E3213B43A400E4651F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 146833FF1AC3E56700842450 /* React.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EBF21BFA1FC4989A0052F4D5;
+			remoteInfo = "jsinspector-tvOS";
+		};
 		B9676D741ED573C10006D606 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = AE0C0AA2B3CB46EC86D07DF8 /* ReactNativeConfig.xcodeproj */;
@@ -500,6 +514,8 @@
 				978A591D1E82CE7000CCDF96 /* libcxxreact.a */,
 				3DAD3EAD1DF850E9000B6D8A /* libjschelpers.a */,
 				978A591F1E82CE7000CCDF96 /* libjschelpers.a */,
+				B952D8E2213B43A400E4651F /* libjsinspector.a */,
+				B952D8E4213B43A400E4651F /* libjsinspector-tvOS.a */,
 				B943E90D1F18C80600313BE8 /* libthird-party.a */,
 				B943E95E1F18CA5C00313BE8 /* libthird-party.a */,
 				B943E90F1F18C80600313BE8 /* libdouble-conversion.a */,
@@ -984,6 +1000,20 @@
 			remoteRef = B943E95F1F18CA5C00313BE8 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		B952D8E2213B43A400E4651F /* libjsinspector.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libjsinspector.a;
+			remoteRef = B952D8E1213B43A400E4651F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		B952D8E4213B43A400E4651F /* libjsinspector-tvOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libjsinspector-tvOS.a";
+			remoteRef = B952D8E3213B43A400E4651F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		B9676D751ED573C10006D606 /* libReactNativeConfig.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1184,7 +1214,7 @@
 				CODE_SIGN_ENTITLEMENTS = Tisdagsgolfen/Tisdagsgolfen.entitlements;
 				CURRENT_PROJECT_VERSION = 9;
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = 3ZCFLELL43;
+				DEVELOPMENT_TEAM = NPQ6MXAM7N;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1206,7 +1236,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = se.calces.Tisdagsgolfen;
+				PRODUCT_BUNDLE_IDENTIFIER = se.kimfransman.Tisdagsgolfen;
 				PRODUCT_NAME = Tisdagsgolfen;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -1220,7 +1250,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = Tisdagsgolfen/Tisdagsgolfen.entitlements;
 				CURRENT_PROJECT_VERSION = 9;
-				DEVELOPMENT_TEAM = 3ZCFLELL43;
+				DEVELOPMENT_TEAM = NPQ6MXAM7N;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1242,7 +1272,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = se.calces.Tisdagsgolfen;
+				PRODUCT_BUNDLE_IDENTIFIER = se.kimfransman.Tisdagsgolfen;
 				PRODUCT_NAME = Tisdagsgolfen;
 				VERSIONING_SYSTEM = "apple-generic";
 			};

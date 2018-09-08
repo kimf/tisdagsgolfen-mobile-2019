@@ -2,11 +2,11 @@ import React, { Component } from 'react'
 import { View } from 'react-native'
 import { func, string, shape } from 'prop-types'
 
-import Form from 'Login/LoginForm'
-import TGText from 'shared/TGText'
-import { colors } from 'styles'
+import Form from './LoginForm'
+import TGText from '../shared/TGText'
+import { colors } from '../../styles'
 
-import { withSigninUserMutation } from 'mutations/signinUserMutation'
+import { withSigninUserMutation } from '../../graph/mutations/signinUserMutation'
 
 const icon = '☠️'
 

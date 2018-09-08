@@ -3,11 +3,11 @@ import { Alert, View, Picker } from 'react-native'
 import { bool, shape, number, string, func, oneOfType } from 'prop-types'
 import { compose } from 'react-apollo'
 
-import TopButton from 'shared/TopButton'
-import { pointsArray, STROKE_VALUES, PUTT_VALUES, BEER_VALUES } from 'Scoring/constants'
-import { withCreateLiveScoreMutation } from 'mutations/createLiveScoreMutation'
-import { withUpdateLiveScoreMutation } from 'mutations/updateLiveScoreMutation'
-import { colors } from 'styles'
+import TopButton from '../shared/TopButton'
+import { pointsArray, STROKE_VALUES, PUTT_VALUES, BEER_VALUES } from './constants'
+import { withCreateLiveScoreMutation } from '../../graph/mutations/createLiveScoreMutation'
+import { withUpdateLiveScoreMutation } from '../../graph/mutations/updateLiveScoreMutation'
+import { colors } from '../../styles'
 
 class ScoreInput extends Component {
   static propTypes = {
@@ -105,7 +105,9 @@ class ScoreInput extends Component {
         style={{ flex: 1 }}
         selectedValue={this.state.putts}
         onValueChange={putts => this.setState({ putts })}>
-        {PUTT_VALUES.map(val => <Picker.Item key={val} value={val} label={`${val} puttar`} />)}
+        {PUTT_VALUES.map(val => (
+          <Picker.Item key={val} value={val} label={`${val} puttar`} />
+        ))}
       </Picker>
     )
 
@@ -114,7 +116,9 @@ class ScoreInput extends Component {
         style={{ flex: 1 }}
         selectedValue={this.state.beers}
         onValueChange={beers => this.setState({ beers })}>
-        {BEER_VALUES.map(val => <Picker.Item key={val} value={val} label={`${val} öl`} />)}
+        {BEER_VALUES.map(val => (
+          <Picker.Item key={val} value={val} label={`${val} öl`} />
+        ))}
       </Picker>
     )
 
@@ -126,7 +130,9 @@ class ScoreInput extends Component {
             style={{ flex: 1 }}
             selectedValue={this.state.strokes}
             onValueChange={strokes => this.setState({ strokes })}>
-            {STROKE_VALUES.map(val => <Picker.Item key={val} value={val} label={`${val} slag`} />)}
+            {STROKE_VALUES.map(val => (
+              <Picker.Item key={val} value={val} label={`${val} slag`} />
+            ))}
           </Picker>
           {putsPicker}
         </View>
@@ -136,4 +142,7 @@ class ScoreInput extends Component {
   }
 }
 
-export default compose(withCreateLiveScoreMutation, withUpdateLiveScoreMutation)(ScoreInput)
+export default compose(
+  withCreateLiveScoreMutation,
+  withUpdateLiveScoreMutation
+)(ScoreInput)

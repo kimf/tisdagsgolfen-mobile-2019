@@ -3,7 +3,7 @@ import { View, TouchableNativeFeedback, TouchableOpacity, Platform } from 'react
 import { bool, string, oneOfType, arrayOf, node } from 'prop-types'
 import stylePropTypes from 'react-style-proptype'
 
-import { colors } from 'styles'
+import { colors } from '../../styles'
 
 const TouchableView = ({ isRippleDisabled, rippleColor, children, style, ...rest }) => {
   if (Platform.OS === 'android') {

@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import { FlatList } from 'react-native'
 import { arrayOf, string } from 'prop-types'
 
-import EventLeaderboardCard from 'Events/EventLeaderboardCard'
+import EventLeaderboardCard from '../Events/EventLeaderboardCard'
 
-import { ranked } from 'utils'
+import { ranked } from '../../utils'
 
 class EventResult extends Component {
   static navigationOptions = ({ navigation }) => ({

@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import { bool, shape, string } from 'prop-types'
 
-import { setCache } from 'utils'
-import EmptyState from 'shared/EmptyState'
-import RootStack from 'routes'
+import { setCache } from './utils'
+import EmptyState from './components/shared/EmptyState'
+import RootStack from './routes'
 
-import { withInitialQuery, initialQueryShape } from 'queries/initialQuery'
+import { withInitialQuery, initialQueryShape } from './graph/queries/initialQuery'
 
 class Root extends Component {
   static propTypes = {
@@ -52,7 +52,9 @@ class Root extends Component {
   }
 
   render() {
-    const { data: { activeScoringSession, seasons, loading } } = this.props
+    const {
+      data: { activeScoringSession, seasons, loading }
+    } = this.props
     const { currentUser, isLoggedIn } = this.state
 
     if (loading) return null

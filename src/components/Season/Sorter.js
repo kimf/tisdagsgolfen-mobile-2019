@@ -2,8 +2,8 @@ import React from 'react'
 import { View } from 'react-native'
 import { shape, string, func, bool } from 'prop-types'
 
-import TGText from 'shared/TGText'
-import { colors } from 'styles'
+import TGText from '../shared/TGText'
+import { colors } from '../../styles'
 
 const tabs = [
   { value: 'totalPoints', icon: '🥇' },

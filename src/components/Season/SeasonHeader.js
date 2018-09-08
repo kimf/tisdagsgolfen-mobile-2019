@@ -2,11 +2,11 @@ import React from 'react'
 import { View, Image } from 'react-native'
 import { func, shape } from 'prop-types'
 
-import TGText from 'shared/TGText'
-import TouchableView from 'shared/TouchableView'
+import TGText from '../shared/TGText'
+import TouchableView from '../shared/TouchableView'
 
-import { seasonShape } from 'propTypes'
-import { colors, NAVBAR_HEIGHT, STATUS_BAR_HEIGHT } from 'styles'
+import { seasonShape } from '../../propTypes'
+import { colors, NAVBAR_HEIGHT, STATUS_BAR_HEIGHT } from '../../styles'
 
 const SeasonHeader = ({ season, togglePicker, goPlay, activeScoringSession }) => (
   <View

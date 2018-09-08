@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import { View, Slider, Image, StyleSheet } from 'react-native'
 import { shape, func, bool } from 'prop-types'
 
-import TGText from 'shared/TGText'
-import styles, { colors } from 'styles'
+import TGText from '../shared/TGText'
+import styles, { colors } from '../../styles'
 
 const defaultAvatar = require('../../images/defaultavatar.png')
 

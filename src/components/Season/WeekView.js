@@ -2,11 +2,11 @@ import React, { Component } from 'react'
 import { LayoutAnimation } from 'react-native'
 import { arrayOf, string, shape, func } from 'prop-types'
 
-import WeekPicker from 'Season/WeekPicker'
-import EventView from 'Season/EventView'
-import FinalWeek from 'Season/FinalWeek'
-import { seasonShape } from 'propTypes'
-import { linear } from 'animations'
+import WeekPicker from './WeekPicker'
+import EventView from './EventView'
+import FinalWeek from './FinalWeek'
+import { seasonShape } from '../../propTypes'
+import { linear } from '../../animations'
 
 const withChangeSort = WrappedWeek =>
   class WrappedWithChangeSort extends Component {

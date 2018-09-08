@@ -2,14 +2,14 @@ import React, { Component } from 'react'
 import { TextInput, View, FlatList } from 'react-native'
 import { arrayOf, bool, shape, func } from 'prop-types'
 
-import CourseRow from 'Events/CourseRow'
-import Loading from 'shared/Loading'
-import EmptyState from 'shared/EmptyState'
-import SubHeader from 'shared/SubHeader'
+import CourseRow from './CourseRow'
+import Loading from '../shared/Loading'
+import EmptyState from '../shared/EmptyState'
+import SubHeader from '../shared/SubHeader'
 
-import styles, { colors } from 'styles'
-import { cacheable } from 'utils'
-import { withCoursesQuery } from 'queries/coursesQuery'
+import styles, { colors } from '../../styles'
+import { cacheable } from '../../utils'
+import { withCoursesQuery } from '../../graph/queries/coursesQuery'
 
 const fixString = stringToFix =>
   stringToFix

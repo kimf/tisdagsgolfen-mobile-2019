@@ -1,7 +1,7 @@
 import { arrayOf, shape, bool } from 'prop-types'
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
-import { seasonShape } from 'propTypes'
+import { seasonShape } from '../../propTypes'
 
 const seasonsQuery = gql`
   query seasonsQuery {

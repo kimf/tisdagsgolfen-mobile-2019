@@ -2,8 +2,8 @@ import React from 'react'
 import { StyleSheet } from 'react-native'
 import { string, func } from 'prop-types'
 
-import TGText from 'shared/TGText'
-import { colors } from 'styles'
+import TGText from './TGText'
+import { colors } from '../../styles'
 
 const styles = StyleSheet.create({
   button: {

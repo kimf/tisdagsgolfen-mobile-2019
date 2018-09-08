@@ -1,9 +1,9 @@
 import React from 'react'
 import { View, Image } from 'react-native'
 
-import TGText from 'shared/TGText'
-import { colors } from 'styles'
-import { seasonShape } from 'propTypes'
+import TGText from '../shared/TGText'
+import { colors } from '../../styles'
+import { seasonShape } from '../../propTypes'
 
 const FinalWeek = ({ season }) => (
   <View style={{ flex: 1 }}>
