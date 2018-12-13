@@ -1,9 +1,9 @@
 import React from "react";
-import { Alert, View, StyleSheet } from "react-native";
+import { Alert, StyleSheet, View } from "react-native";
+import { colors } from "../../styles";
+import RowButton from "../shared/RowButton";
 import TGText from "../shared/TGText";
 import TopButton from "../shared/TopButton";
-import RowButton from "../shared/RowButton";
-import { colors } from "../../styles";
 const styles = StyleSheet.create({
   inner: {
     flex: 1,
@@ -41,14 +41,14 @@ const confirmCancel = cancelFunc => {
     { cancelable: false }
   );
 };
-type ScoringMenuProps = {
+interface ScoringMenuProps {
   onClose: any,
   onPreview: any,
   cancelRound: any,
   currentHole: any,
   holes: number[],
   changeHole: any
-};
+}
 const ScoringMenu: React.SFC<ScoringMenuProps> = ({
   onClose,
   onPreview,

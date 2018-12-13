@@ -1,6 +1,6 @@
-import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 import update from 'immutability-helper'
+import { graphql } from 'react-apollo'
 
 const createLiveScoreMutation = gql`
   mutation createLiveScore(

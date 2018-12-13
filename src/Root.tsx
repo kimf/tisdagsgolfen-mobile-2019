@@ -1,39 +1,28 @@
-import React, { Component } from "react";
-import { setCache } from "./utils";
-import EmptyState from "./components/shared/EmptyState";
-import RootStack from "./routes";
-import {
-  withInitialQuery,
-  initialQueryShape
-} from "./graph/queries/initialQuery";
-type RootProps = {
-  isLoggedIn: any,
-  data?: any,
+import React, { Component } from 'react'
+import EmptyState from './components/shared/EmptyState'
+import { withInitialQuery } from './graph/queries/initialQuery'
+import RootStack from './routes'
+import { setCache } from './utils'
+interface RootProps {
+  isLoggedIn: any
+  data?: any
   currentUser?: {
-    id?: any,
+    id?: any
     email?: any
   }
-};
-type RootState = {
-  currentUser: any,
+}
+interface RootState {
+  currentUser: any
   isLoggedIn: any
-};
+}
 class Root extends Component<RootProps, RootState> {
-  static defaultProps = {
-    currentUser: null,
-    data: {
-      loading: true,
-      activeScoringSession: null,
-      seasons: []
-    }
-  };
   constructor(props) {
-    super(props);
-    const { currentUser, isLoggedIn } = props;
-    this.state = { currentUser, isLoggedIn };
+    super(props)
+    const { currentUser, isLoggedIn } = props
+    this.state = { currentUser, isLoggedIn }
   }
-  onLogin = response => {
-    setCache("currentUser", {
+  public onLogin = response => {
+    setCache('currentUser', {
       ...response.user,
       token: response.token
     }).then(() => {
@@ -41,12 +30,12 @@ class Root extends Component<RootProps, RootState> {
         ...state,
         isLoggedIn: true,
         currentUser: { ...response.user }
-      }));
-    });
-  };
-  onLogout = () => {
-    const user = { email: this.state.currentUser.email };
-    setCache("currentUser", {
+      }))
+    })
+  }
+  public onLogout = () => {
+    const user = { email: this.state.currentUser.email }
+    setCache('currentUser', {
       ...user,
       token: null
     }).then(() => {
@@ -54,16 +43,20 @@ class Root extends Component<RootProps, RootState> {
         ...state,
         isLoggedIn: false,
         currentUser: { ...user }
-      }));
-    });
-  };
-  render() {
+      }))
+    })
+  }
+  public render() {
     const {
       data: { activeScoringSession, seasons, loading }
-    } = this.props;
-    const { currentUser, isLoggedIn } = this.state;
-    if (loading) return null;
-    if (seasons.length === 0) return <EmptyState text="Inga säsonger..." />;
+    } = this.props
+    const { currentUser, isLoggedIn } = this.state
+    if (loading) {
+      return null
+    }
+    if (seasons.length === 0) {
+      return <EmptyState text="Inga säsonger..." />
+    }
     return (
       <RootStack
         screenProps={{
@@ -75,7 +68,7 @@ class Root extends Component<RootProps, RootState> {
           onLogout: this.onLogout
         }}
       />
-    );
+    )
   }
 }
-export default withInitialQuery(Root);
+export default withInitialQuery(Root)

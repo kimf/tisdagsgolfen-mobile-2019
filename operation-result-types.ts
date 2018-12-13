@@ -1,7 +1,7 @@
 /* tslint:disable */
 //  This file was automatically generated and should not be edited.
 
-export type LiveScoreDataInput = {
+export interface LiveScoreDataInput {
   beers?: number | null,
   extraStrokes?: number | null,
   hole?: number | null,
@@ -13,31 +13,33 @@ export type LiveScoreDataInput = {
   strokes?: number | null,
 };
 
-export type ScoringItemInput = {
+export interface ScoringItemInput {
   extraStrokes: number,
   userIds: Array< string >,
 };
 
-export type cancelRoundMutationMutationVariables = {
+export interface cancelRoundMutationMutationVariables {
   scoringSessionId: string,
 };
 
-export type cancelRoundMutationMutation = {
+export interface cancelRoundMutationMutation {
   deleteScoringSession:  {
+    __typename: "ScoringSession",
     // id of the season
     id: string,
   } | null,
 };
 
-export type createLiveScoreMutationVariables = {
+export interface createLiveScoreMutationVariables {
   scoringSessionId: string,
   userId?: string | null,
   teamIndex?: number | null,
   data: LiveScoreDataInput,
 };
 
-export type createLiveScoreMutation = {
+export interface createLiveScoreMutation {
   createLiveScore:  {
+    __typename: "LiveScore",
     // id of the score
     id: string,
     beers: number | null,
@@ -50,6 +52,7 @@ export type createLiveScoreMutation = {
     putts: number | null,
     strokes: number | null,
     user:  {
+      __typename: "User",
       // ID
       id: string,
     } | null,
@@ -57,7 +60,19 @@ export type createLiveScoreMutation = {
   } | null,
 };
 
-export type createScoringSessionMutationVariables = {
+export interface finishRoundMutationMutationVariables {
+  scoringSessionId: string,
+};
+
+export interface finishRoundMutationMutation {
+  updateScoringSession:  {
+    __typename: "ScoringSession",
+    // id of the season
+    id: string,
+  } | null,
+};
+
+export interface createScoringSessionMutationVariables {
   courseId: string,
   scorerId: string,
   teamEvent: boolean,
@@ -66,11 +81,13 @@ export type createScoringSessionMutationVariables = {
   startsAt: string,
 };
 
-export type createScoringSessionMutation = {
+export interface createScoringSessionMutation {
   createScoringSession:  {
+    __typename: "ScoringSession",
     // id of the season
     id: string,
     course:  {
+      __typename: "Course",
       id: string,
       club: string,
       name: string,
@@ -80,14 +97,16 @@ export type createScoringSessionMutation = {
   } | null,
 };
 
-export type authenticateUserMutationVariables = {
+export interface authenticateUserMutationVariables {
   email: string,
   password: string,
 };
 
-export type authenticateUserMutation = {
+export interface authenticateUserMutation {
   authenticateUser:  {
+    __typename: "SigninPayload",
     user:  {
+      __typename: "User",
       // ID
       id: string,
       // The email of this user
@@ -102,13 +121,14 @@ export type authenticateUserMutation = {
   } | null,
 };
 
-export type updateLiveScoreMutationVariables = {
+export interface updateLiveScoreMutationVariables {
   id: string,
   data: LiveScoreDataInput,
 };
 
-export type updateLiveScoreMutation = {
+export interface updateLiveScoreMutation {
   updateLiveScore:  {
+    __typename: "LiveScore",
     // id of the score
     id: string,
     extraStrokes: number | null,
@@ -119,13 +139,15 @@ export type updateLiveScoreMutation = {
   } | null,
 };
 
-export type asQueryQuery = {
+export interface asQueryQuery {
   activeScoringSession:  {
+    __typename: "ScoringSession",
     // id of the season
     id: string,
     scoringType: string,
     teamEvent: boolean,
     course:  {
+      __typename: "Course",
       id: string,
       club: string,
       name: string,
@@ -133,9 +155,10 @@ export type asQueryQuery = {
   } | null,
 };
 
-export type coursesQueryQuery = {
+export interface coursesQueryQuery {
   // A lot of courses and their data
   courses:  Array< {
+    __typename: "Course",
     id: string,
     club: string,
     name: string,
@@ -145,14 +168,15 @@ export type coursesQueryQuery = {
   } | null >,
 };
 
-export type eventQueryQueryVariables = {
+export interface eventQueryQueryVariables {
   eventId: string,
   seasonId: string,
 };
 
-export type eventQueryQuery = {
+export interface eventQueryQuery {
   // Leaderboard for a season by seasonID
   players:  Array< {
+    __typename: "LeaderboardUserType",
     id: string,
     photo: string | null,
     // The name of this user
@@ -170,6 +194,7 @@ export type eventQueryQuery = {
     beers: number,
   } >,
   event:  {
+    __typename: "Event",
     // id of the event
     id: string,
     // Status of the event
@@ -179,12 +204,14 @@ export type eventQueryQuery = {
     teamEvent: boolean,
     // Course
     course:  {
+      __typename: "Course",
       id: string,
       club: string,
       name: string,
     },
     // Leaderboard
     leaderboard:  Array< {
+      __typename: "EventLeaderboardUserType",
       id: string,
       photo: string | null,
       name: string,
@@ -197,9 +224,10 @@ export type eventQueryQuery = {
   },
 };
 
-export type eventsQuery = {
+export interface eventsQuery {
   // Events by seasonId
   events:  Array< {
+    __typename: "Event",
     // id of the event
     id: string,
     // Status of the event
@@ -209,6 +237,7 @@ export type eventsQuery = {
     teamEvent: boolean,
     // Course
     course:  {
+      __typename: "Course",
       id: string,
       club: string,
       name: string,
@@ -216,13 +245,15 @@ export type eventsQuery = {
   } >,
 };
 
-export type activeScoringSessionQueryQuery = {
+export interface activeScoringSessionQueryQuery {
   activeScoringSession:  {
+    __typename: "ScoringSession",
     // id of the season
     id: string,
     scoringType: string,
     teamEvent: boolean,
     course:  {
+      __typename: "Course",
       id: string,
       club: string,
       name: string,
@@ -230,6 +261,7 @@ export type activeScoringSessionQueryQuery = {
   } | null,
   // Seasons (Only Tisdagsgolfen in this case)
   seasons:  Array< {
+    __typename: "Season",
     // id of the season
     id: string,
     // Name of the season
@@ -245,14 +277,15 @@ export type activeScoringSessionQueryQuery = {
   } >,
 };
 
-export type seasonLeaderboardQueryVariables = {
+export interface seasonLeaderboardQueryVariables {
   seasonId: string,
   eventId: string,
 };
 
-export type seasonLeaderboardQuery = {
+export interface seasonLeaderboardQuery {
   // Leaderboard for a season by seasonID
   players:  Array< {
+    __typename: "LeaderboardUserType",
     id: string,
     photo: string | null,
     // The name of this user
@@ -271,18 +304,20 @@ export type seasonLeaderboardQuery = {
   } >,
 };
 
-export type liveLeaderboardQueryQueryVariables = {
+export interface liveLeaderboardQueryQueryVariables {
   scoringSessionId: string,
 };
 
-export type liveLeaderboardQueryQuery = {
+export interface liveLeaderboardQueryQuery {
   // Get the logged in user and related data
   user:  {
+    __typename: "User",
     // ID
     id: string,
   },
   // Live Leaderboard by scoringSessionId
   liveLeaderboard:  Array< {
+    __typename: "LiveLeaderboardUserType",
     id: string,
     position: number,
     photo: string | null,
@@ -295,24 +330,27 @@ export type liveLeaderboardQueryQuery = {
   } >,
 };
 
-export type scoringSessionQueryVariables = {
+export interface scoringSessionQueryVariables {
   scoringSessionId: string,
 };
 
-export type scoringSessionQuery = {
+export interface scoringSessionQuery {
   scoringSession:  {
+    __typename: "ScoringSession",
     // id of the season
     id: string,
     currentHole: number,
     scoringType: string,
     teamEvent: boolean,
     course:  {
+      __typename: "Course",
       id: string,
       club: string,
       name: string,
       par: number,
       // Holes
       holes:  Array< {
+        __typename: "Hole",
         id: string,
         number: number,
         par: number,
@@ -320,8 +358,10 @@ export type scoringSessionQuery = {
       } >,
     },
     scoringItems:  Array< {
+      __typename: "ScoringItemType",
       extraStrokes: number,
       users:  Array< {
+        __typename: "User",
         // ID
         id: string,
         firstName: string,
@@ -331,9 +371,11 @@ export type scoringSessionQuery = {
       } >,
     } >,
     liveScores:  Array< {
+      __typename: "LiveScore",
       // id of the score
       id: string,
       user:  {
+        __typename: "User",
         // ID
         id: string,
       } | null,
@@ -351,9 +393,10 @@ export type scoringSessionQuery = {
   },
 };
 
-export type seasonsQueryQuery = {
+export interface seasonsQueryQuery {
   // Seasons (Only Tisdagsgolfen in this case)
   seasons:  Array< {
+    __typename: "Season",
     // id of the season
     id: string,
     // Name of the season
@@ -365,9 +408,10 @@ export type seasonsQueryQuery = {
   } >,
 };
 
-export type getAllUsersQuery = {
+export interface getAllUsersQuery {
   // List of users
   players:  Array< {
+    __typename: "User",
     // ID
     id: string,
     // The email of this user

@@ -1,7 +1,7 @@
 import React from "react";
-import { View, StyleSheet } from "react-native";
-import TGText from "../shared/TGText";
+import { StyleSheet, View } from "react-native";
 import { colors } from "../../styles";
+import TGText from "../shared/TGText";
 const styles = StyleSheet.create({
   view: {
     height: 44,
@@ -25,10 +25,10 @@ const styles = StyleSheet.create({
     textAlign: "right"
   }
 });
-type ScoringFooterProps = {
+interface ScoringFooterProps {
   showMenu: any,
   showLeaderboard: any
-};
+}
 const ScoringFooter: React.SFC<ScoringFooterProps> = ({
   showMenu,
   showLeaderboard

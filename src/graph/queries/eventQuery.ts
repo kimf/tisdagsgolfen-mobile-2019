@@ -1,5 +1,6 @@
 import gql from 'graphql-tag'
 import { graphql } from 'react-apollo'
+import { eventQueryQuery, eventQueryQueryVariables } from '../../../operation-result-types'
 
 const eventQuery = gql`
   query eventQuery($eventId: ID!, $seasonId: ID!) {
@@ -45,16 +46,12 @@ const eventQuery = gql`
 
 export default eventQuery
 
-export const withEventQuery = graphql(eventQuery, {
+export const withEventQuery = graphql<
+  eventQueryQueryVariables,
+  eventQueryQuery,
+  eventQueryQueryVariables
+>(eventQuery, {
   options: ({ eventId, seasonId }) => ({
     variables: { eventId, seasonId }
-  })
-})
-
-export const eventQueryProps = shape({
-  data: shape({
-    players: arrayOf(leaderboardPlayerShape),
-    event: eventWithLeaderboardshape.isRequired,
-    loading: bool
   })
 })

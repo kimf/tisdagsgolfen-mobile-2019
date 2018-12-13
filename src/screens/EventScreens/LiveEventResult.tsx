@@ -1,10 +1,10 @@
-import React, { Component } from "react";
-import { View } from "react-native";
-import EventHeader from "../../components/Events/EventHeader";
-import ScoringLeaderboard from "../../components/Scoring/ScoringLeaderboard";
-import styles from "../../styles";
-import { eventShape } from "../../_propTypes";
-type LiveEventResultProps = {
+import React, { Component } from 'react'
+import { View } from 'react-native'
+import EventHeader from '../../components/Events/EventHeader'
+import ScoringLeaderboard from '../../components/Scoring/ScoringLeaderboard'
+import styles from '../../styles'
+
+interface LiveEventResultProps {
   navigation: {
     state?: {
       params?: {
@@ -12,16 +12,16 @@ type LiveEventResultProps = {
       }
     }
   }
-};
+}
 class LiveEventResult extends Component<LiveEventResultProps, {}> {
-  static navigationOptions = ({ navigation }) => ({
+  public static navigationOptions = ({ navigation }) => ({
     title: navigation.state.params.title,
     headerVisible: true,
     tabBarVisible: false
-  });
-  render() {
-    const { navigation } = this.props;
-    const { event } = navigation.state.params;
+  })
+  public render() {
+    const { navigation } = this.props
+    const { event } = navigation.state.params
     const eventHeader = (
       <EventHeader
         course={event.course}
@@ -29,7 +29,7 @@ class LiveEventResult extends Component<LiveEventResultProps, {}> {
         teamEvent={event.teamEvent}
         scoringType={event.scoringType}
       />
-    );
+    )
     return (
       <View style={styles.container}>
         {eventHeader}
@@ -40,8 +40,8 @@ class LiveEventResult extends Component<LiveEventResultProps, {}> {
           teamEvent={event.teamEvent}
         />
       </View>
-    );
+    )
   }
 }
 // const mapStateToProps = state => ({ currentUserId: state.app.currentUser.id })
-export default LiveEventResult;
+export default LiveEventResult

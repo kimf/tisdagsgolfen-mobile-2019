@@ -1,5 +1,6 @@
 import gql from 'graphql-tag'
 import { graphql } from 'react-apollo'
+import { activeScoringSessionQueryQuery } from '../../../operation-result-types'
 
 const initialQuery = gql`
   query activeScoringSessionQuery {
@@ -28,4 +29,4 @@ const initialQuery = gql`
 
 export default initialQuery
 
-export const withInitialQuery = graphql(initialQuery)
+export const withInitialQuery = graphql<{}, activeScoringSessionQueryQuery>(initialQuery)

@@ -1,5 +1,6 @@
 import gql from 'graphql-tag'
 import { graphql } from 'react-apollo'
+import { eventsQuery } from '../../../operation-result-types'
 
 const eventsQuery = gql`
   query events {
@@ -20,9 +21,4 @@ const eventsQuery = gql`
 
 export default eventsQuery
 
-export const withEventsQuery = graphql(eventsQuery)
-
-export const eventsQueryProps = shape({
-  events: arrayOf(eventShape),
-  loading: bool
-})
+export const withEventsQuery = graphql<{}, eventsQuery>(eventsQuery)

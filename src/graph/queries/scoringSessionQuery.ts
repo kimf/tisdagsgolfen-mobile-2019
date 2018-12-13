@@ -1,5 +1,7 @@
-import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
+import { graphql } from 'react-apollo'
+import { NavigationScreenProp } from 'react-navigation'
+import { scoringSessionQuery, scoringSessionQueryVariables } from '../../../operation-result-types'
 
 const scoringSessionQuery = gql`
   query scoringSession($scoringSessionId: ID!) {
@@ -51,7 +53,11 @@ const scoringSessionQuery = gql`
 
 export default scoringSessionQuery
 
-export const withScoringSessionQuery = graphql(scoringSessionQuery, {
+export const withScoringSessionQuery = graphql<
+  { navigation: NavigationScreenProp<{ scoringSessionId: string }> },
+  scoringSessionQuery,
+  scoringSessionQueryVariables
+>(scoringSessionQuery, {
   options: ({ navigation }) => ({
     variables: { scoringSessionId: navigation.state.params.scoringSessionId }
   })

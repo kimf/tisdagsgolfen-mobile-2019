@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet } from "react-native";
-import TGText from "./TGText";
 import { colors } from "../../styles";
+import TGText from "./TGText";
 const styles = StyleSheet.create({
   button: {
     backgroundColor: colors.yellow,
@@ -16,10 +16,10 @@ const styles = StyleSheet.create({
     fontSize: 12
   }
 });
-type TopButtonProps = {
+interface TopButtonProps {
   title: any,
   onPress: any
-};
+}
 const TopButton: React.SFC<TopButtonProps> = ({ title, onPress }) => (
   <TGText viewStyle={styles.button} style={styles.text} onPress={onPress}>
     {title}

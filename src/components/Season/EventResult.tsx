@@ -1,25 +1,25 @@
 import React, { Component } from "react";
 import { FlatList } from "react-native";
-import EventLeaderboardCard from "../Events/EventLeaderboardCard";
 import { ranked } from "../../utils";
-type EventResultProps = {
+import EventLeaderboardCard from "../Events/EventLeaderboardCard";
+interface EventResultProps {
   currentUserId?: any,
   scoringType: any,
   sorting: any,
   players: any[],
   seasonId: any,
   eventId: any
-};
+}
 class EventResult extends Component<EventResultProps, {}> {
-  static navigationOptions = ({ navigation }) => ({
+  public static defaultProps = {
+    currentUserId: null
+  };
+  public static navigationOptions = ({ navigation }) => ({
     title: navigation.state.params.title,
     headerVisible: true,
     tabBarVisible: false
   });
-  static defaultProps = {
-    currentUserId: null
-  };
-  render() {
+  public render() {
     const {
       sorting,
       currentUserId,

@@ -1,7 +1,7 @@
 import React from "react";
-import { View, StyleSheet } from "react-native";
-import TGText from "../shared/TGText";
+import { StyleSheet, View } from "react-native";
 import { colors } from "../../styles";
+import TGText from "../shared/TGText";
 const style = StyleSheet.create({
   view: {
     flexDirection: "row",
@@ -16,11 +16,11 @@ const style = StyleSheet.create({
     fontSize: 14
   }
 });
-type ScorecardHeaderRowProps = {
+interface ScorecardHeaderRowProps {
   teamEvent: any,
   scoring: any,
   scoringType: any
-};
+}
 const ScorecardHeaderRow: React.SFC<ScorecardHeaderRowProps> = ({
   teamEvent,
   scoring,

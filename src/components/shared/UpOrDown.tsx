@@ -1,10 +1,10 @@
 import React from "react";
-import TGText from "./TGText";
 import { colors } from "../../styles";
-type UpOrDownProps = {
+import TGText from "./TGText";
+interface UpOrDownProps {
   prev: any,
   current: any
-};
+}
 const UpOrDown: React.SFC<UpOrDownProps> = ({ prev, current }) => {
   if (current < prev) {
     return (

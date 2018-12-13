@@ -1,6 +1,5 @@
 import React from 'react'
 import { Image, View } from 'react-native'
-import { leaderboardPlayerShape } from '../../_propTypes'
 import styles, { colors } from '../../styles'
 import TGText from '../shared/TGText'
 import UpOrDown from '../shared/UpOrDown'

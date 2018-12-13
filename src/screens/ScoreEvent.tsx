@@ -1,20 +1,19 @@
 import React, { Component } from 'react'
-import { Animated, Easing } from 'react-native'
 import { compose } from 'react-apollo'
+import { Animated, Easing } from 'react-native'
 import { NavigationActions, StackActions } from 'react-navigation'
 
+import FinishScoringSession from '../components/Scoring/FinishScoringSession'
 import HoleView from '../components/Scoring/HoleView'
 import ScoringFooter from '../components/Scoring/ScoringFooter'
-import ScoringMenu from '../components/Scoring/ScoringMenu'
 import ScoringLeaderboard from '../components/Scoring/ScoringLeaderboard'
-import FinishScoringSession from '../components/Scoring/FinishScoringSession'
+import ScoringMenu from '../components/Scoring/ScoringMenu'
 import AnimatedModal from '../components/shared/AnimatedModal'
 import Loading from '../components/shared/Loading'
-import styles, { colors, deviceHeight, deviceWidth } from '../styles'
-import { withScoringSessionQuery } from '../graph/queries/scoringSessionQuery'
 import { withCancelRoundMutation } from '../graph/mutations/cancelRoundMutation'
 import { withFinishRoundMutation } from '../graph/mutations/finishRoundMutation'
-import { screenPropsShape } from '../_propTypes'
+import { withScoringSessionQuery } from '../graph/queries/scoringSessionQuery'
+import styles, { colors, deviceHeight, deviceWidth } from '../styles'
 
 const MENU_HEIGHT = 300
 const LEADERBOARD_HEIGHT = deviceHeight

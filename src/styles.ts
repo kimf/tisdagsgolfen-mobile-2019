@@ -1,4 +1,4 @@
-import { StyleSheet, Platform, Dimensions } from 'react-native'
+import { Dimensions, Platform, StyleSheet } from 'react-native'
 
 export const colors = {
   lightGray: '#ECEBEB',

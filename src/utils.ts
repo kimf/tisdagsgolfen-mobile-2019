@@ -1,3 +1,4 @@
+// tslint:disable:no-commented-code
 import { AsyncStorage } from 'react-native'
 
 export const average = arr => arr.reduce((p, c) => p + c, 0) / arr.length
@@ -17,7 +18,12 @@ export const sortedByParsedDate = (array, attribute) =>
   )
 
 // ranked :: Array -> String -> Array
-export const ranked = (array, attribute, rankingAttribute, reversed) => {
+export const ranked = (
+  array: any[],
+  attribute: string,
+  rankingAttribute: string,
+  reversed?: boolean
+) => {
   const scores = array.map(x => x[rankingAttribute])
   const rankedArr = array.map(item => {
     const newItem = Object.assign({}, item)
@@ -29,43 +35,45 @@ export const ranked = (array, attribute, rankingAttribute, reversed) => {
 }
 
 const cmp = (a, b) => {
-  if (a > b) return +1
-  if (a < b) return -1
+  if (a > b) {
+    return +1
+  }
+  if (a < b) {
+    return -1
+  }
   return 0
 }
 
-export const rankedUsers = realUsers => {
-  const rankings = []
-  const users = realUsers.slice()
-  users.sort((a, b) => cmp(a.totalPoints, b.totalPoints) || cmp(a.average, b.average))
+// export const rankedUsers = realUsers => {
+//   const rankings = []
+//   const users = realUsers.slice()
+//   users.sort((a, b) => cmp(a.totalPoints, b.totalPoints) || cmp(a.average, b.average))
 
-  users.reverse().forEach((user, i) => {
-    const rankedUser = Object.assign({}, user)
-    if (i === 0) {
-      rankedUser.position = 1
-    } else if (rankedUser.totalPoints === users[i - 1].totalPoints) {
-      if (rankedUser.average === users[i - 1].average) {
-        rankedUser.position = rankings[i - 1].position
-      } else {
-        rankedUser.position = i + 1
-        rankings[i] = rankedUser
-      }
-    } else {
-      rankedUser.position = i + 1
-    }
-    rankings[i] = rankedUser
-  })
-  return rankings
-}
+//   users.reverse().forEach((user, i) => {
+//     const rankedUser = Object.assign({}, user)
+//     if (i === 0) {
+//       rankedUser.position = 1
+//     } else if (rankedUser.totalPoints === users[i - 1].totalPoints) {
+//       if (rankedUser.average === users[i - 1].average) {
+//         rankedUser.position = rankings[i - 1].position
+//       } else {
+//         rankedUser.position = i + 1
+//         rankings[i] = rankedUser
+//       }
+//     } else {
+//       rankedUser.position = i + 1
+//     }
+//     rankings[i] = rankedUser
+//   })
+//   return rankings
+// }
 
 export const calculateExtraStrokes = (holeIndex, playerStrokes, holesCount) => {
   let extra = 0
   if (holeIndex <= playerStrokes) {
     extra = 1
-    if (playerStrokes > holesCount) {
-      if (holeIndex <= playerStrokes - holesCount) {
-        extra = 2
-      }
+    if (playerStrokes > holesCount && holeIndex <= playerStrokes - holesCount) {
+      extra = 2
     }
   }
   return extra
@@ -80,7 +88,7 @@ export const setCache = async (key, val) => {
     }
     return value
   } catch (e) {
-    // eslint-disable-next-line no-console
+    // tslint:disable:next-line no-console
     console.warn('caught error in setCache', e)
     return false
   }
@@ -89,9 +97,9 @@ export const setCache = async (key, val) => {
 export const getCache = async key => {
   try {
     const value = await AsyncStorage.getItem(key)
-    return JSON.parse(value)
+    return JSON.parse(`${value}`)
   } catch (e) {
-    // eslint-disable-next-line no-console
+    // tslint:disable:next-line no-console
     console.warn('caught error in getCache', e)
     return null
   }
@@ -102,7 +110,7 @@ export const removeCache = async key => {
     await AsyncStorage.removeItem(key)
     return null
   } catch (e) {
-    // eslint-disable-next-line no-console
+    // tslint:disable:next-line no-console
     console.warn('caught error in getCache', e)
     return null
   }
@@ -113,17 +121,19 @@ export const cacheable = fn => {
    * fn.lastArgs = ...
    * fn.lastResult = ...
    */
-  let lastArgs = []
+  let lastArgs: any[] = []
   let lastResult = null
 
   const eq = (args1, args2) => {
-    if (!args1 || !args2 || args1.length !== args2.length) return false
+    if (!args1 || !args2 || args1.length !== args2.length) {
+      return false
+    }
     return args1.every((arg, index) => arg === args2[index])
   }
 
   return (...args) => {
     if (eq(args, lastArgs)) {
-      // eslint-disable-next-line no-console
+      // tslint:disable:next-line no-console
       console.log(`> from cache - ${fn.name}`)
       return lastResult
     }
@@ -173,8 +183,14 @@ export const calculateEarnings = (putts, strokes, par) => {
   return earnings
 }
 
+interface Team {
+  holes: number
+  strokes: number
+  points: number
+}
+
 const massageTeams = scoringSessions => {
-  const teams = []
+  const teams: Team[] = []
   scoringSessions.forEach(scoringSession => {
     scoringSession.scoringTeams.forEach(team => {
       const holes = team.liveScores.length
@@ -199,8 +215,12 @@ const massageTeams = scoringSessions => {
   return teams
 }
 
+interface Player {
+  position: number
+}
+
 const massagePlayers = scoringSessions => {
-  const players = []
+  const players: Player[] = []
   scoringSessions.forEach(scoringSession => {
     scoringSession.scoringPlayers.forEach(player => {
       const holes = player.liveScores.length
@@ -238,7 +258,7 @@ const massagePlayers = scoringSessions => {
 }
 
 export const massageIntoLeaderboard = (scoringSessions, teamEvent) => {
-  let items = []
+  let items: Team[] | Player[] = []
   if (teamEvent) {
     items = massageTeams(scoringSessions)
   } else {
@@ -268,4 +288,4 @@ export const rankBySorting = (players, sorting, teamEvent, scoringType) => {
   return ranked(sortedPlayers, 'position', sortKey, !isStrokePlay)
 }
 
-export const capitalize = string => string[0].toUpperCase() + string.slice(1)
+export const capitalize = (text: string) => text[0].toUpperCase() + text.slice(1)

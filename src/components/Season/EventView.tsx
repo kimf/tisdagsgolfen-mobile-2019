@@ -1,15 +1,15 @@
 import React, { Component } from "react";
 import { ScrollView, View } from "react-native";
-import Leaderboard from "../Leaderboard/Leaderboard";
-import EventResult from "./EventResult";
-import EventViewLoader from "./EventViewLoader";
-import Sorter from "./Sorter";
-import EventHeader from "../Events/EventHeader";
-import { colors, deviceWidth } from "../../styles";
 import {
   eventQueryProps,
   withEventQuery
 } from "../../graph/queries/eventQuery";
+import { colors, deviceWidth } from "../../styles";
+import EventHeader from "../Events/EventHeader";
+import Leaderboard from "../Leaderboard/Leaderboard";
+import EventResult from "./EventResult";
+import EventViewLoader from "./EventViewLoader";
+import Sorter from "./Sorter";
 const swipeCardStyle = {
   width: deviceWidth - 20,
   padding: 5,
@@ -21,7 +21,7 @@ const swipeCardStyle = {
   elevation: 5,
   borderRadius: 10
 };
-type EventViewProps = {
+interface EventViewProps {
   currentUserId?: any,
   eventId: any,
   eventIndex: any,
@@ -30,12 +30,12 @@ type EventViewProps = {
   sorting: any,
   showSorter: any,
   changeSort: any
-};
+}
 class EventView extends Component<EventViewProps, {}> {
-  static defaultProps = {
+  public static defaultProps = {
     currentUserId: null
   };
-  render() {
+  public render() {
     const {
       eventId,
       seasonId,
@@ -67,8 +67,8 @@ class EventView extends Component<EventViewProps, {}> {
           )}
         </View>
         <ScrollView
-          horizontal
-          pagingEnabled
+          horizontal={true}
+          pagingEnabled={true}
           showsHorizontalScrollIndicator={false}
           style={{
             flex: 1,

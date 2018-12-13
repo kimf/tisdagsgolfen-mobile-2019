@@ -1,16 +1,17 @@
-import React, { Component } from "react";
-import { Platform, UIManager } from "react-native";
-import { ApolloProvider } from "react-apollo";
-// import deviceLog, { LogView } from 'react-native-device-log'
-import { getCache } from "./utils";
-import client from "./apolloClient";
+import React, { Component } from 'react'
+import { ApolloProvider } from 'react-apollo'
+import { Platform, UIManager } from 'react-native'
+import client from './apolloClient'
+import Root from './Root'
+/* tslint:disable-next-line:no-commented-code */
 // import withOneSignal from './withOneSignal'
-import Root from "./Root";
-type AppState = {
-  checking: boolean,
-  isLoggedIn: boolean,
+// import deviceLog, { LogView } from 'react-native-device-log'
+import { getCache } from './utils'
+interface AppState {
+  checking: boolean
+  isLoggedIn: boolean
   currentUser: null
-};
+}
 // deviceLog
 //   .init(AsyncStorage, {
 //     logToConsole: false,
@@ -27,38 +28,38 @@ type AppState = {
 //   )
 // }
 class App extends Component<{}, AppState> {
-  constructor(props) {
-    super(props);
-    // TODO: This is the "withOneSignal" HoC
-    if (Platform.OS === "android") {
-      // eslint-disable-next-line no-unused-expressions
-      UIManager.setLayoutAnimationEnabledExperimental &&
-        UIManager.setLayoutAnimationEnabledExperimental(true);
-    }
-  }
-  state = {
+  public state = {
     checking: true,
     isLoggedIn: false,
     currentUser: null
-  };
-  componentWillMount = async () => {
+  }
+  constructor(props) {
+    super(props)
+    // TODO: This is the "withOneSignal" HoC
+    if (Platform.OS === 'android') {
+      /* tslint:disable-next-line:no-unused-expression */
+      UIManager.setLayoutAnimationEnabledExperimental &&
+        UIManager.setLayoutAnimationEnabledExperimental(true)
+    }
+  }
+  public componentWillMount = async () => {
     // await removeCache('currentUser')
-    const currentUser = await getCache("currentUser");
+    const currentUser = await getCache('currentUser')
     this.setState({
       currentUser,
       checking: false,
       isLoggedIn: !!(currentUser && currentUser.token)
-    });
-  };
-  render() {
+    })
+  }
+  public render() {
     if (this.state.checking) {
-      return null;
+      return null
     }
     return (
       <ApolloProvider client={client}>
         <Root {...this.state} />
       </ApolloProvider>
-    );
+    )
   }
 }
-export default App;
+export default App

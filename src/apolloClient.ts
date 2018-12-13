@@ -1,8 +1,8 @@
+import { InMemoryCache } from "apollo-cache-inmemory";
 import ApolloClient from "apollo-client";
 import { ApolloLink } from "apollo-link";
-import { createHttpLink } from "apollo-link-http";
 import { setContext } from "apollo-link-context";
-import { InMemoryCache } from "apollo-cache-inmemory";
+import { createHttpLink } from "apollo-link-http";
 import { print } from "graphql/language/printer";
 import { getCache } from "./utils";
 const withToken = setContext(context =>

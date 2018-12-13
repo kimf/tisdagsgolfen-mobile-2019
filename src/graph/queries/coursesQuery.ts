@@ -1,5 +1,6 @@
-import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
+import { graphql } from 'react-apollo'
+import { coursesQueryQuery } from '../../../operation-result-types'
 
 const coursesQuery = gql`
   query coursesQuery {
@@ -16,4 +17,4 @@ const coursesQuery = gql`
 
 export default coursesQuery
 
-export const withCoursesQuery = graphql(coursesQuery)
+export const withCoursesQuery = graphql<{}, coursesQueryQuery>(coursesQuery)

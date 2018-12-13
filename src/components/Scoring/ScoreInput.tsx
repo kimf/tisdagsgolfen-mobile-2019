@@ -1,17 +1,17 @@
 import React, { Component } from "react";
-import { Alert, View, Picker } from "react-native";
 import { compose } from "react-apollo";
-import TopButton from "../shared/TopButton";
-import {
-  pointsArray,
-  STROKE_VALUES,
-  PUTT_VALUES,
-  BEER_VALUES
-} from "./constants";
+import { Alert, Picker, View } from "react-native";
 import { withCreateLiveScoreMutation } from "../../graph/mutations/createLiveScoreMutation";
 import { withUpdateLiveScoreMutation } from "../../graph/mutations/updateLiveScoreMutation";
 import { colors } from "../../styles";
-type ScoreInputProps = {
+import TopButton from "../shared/TopButton";
+import {
+  BEER_VALUES,
+  pointsArray,
+  PUTT_VALUES,
+  STROKE_VALUES
+} from "./constants";
+interface ScoreInputProps {
   holeNr: any,
   playerId: any,
   scoringSessionId: any,
@@ -28,13 +28,14 @@ type ScoreInputProps = {
   createLiveScore: any,
   updateLiveScore: any,
   onClose: any
-};
-type ScoreInputState = {
+}
+interface ScoreInputState {
   beers: null,
   strokes: null,
   putts: null
-};
+}
 class ScoreInput extends Component<ScoreInputProps, ScoreInputState> {
+  public state = { beers: null, strokes: null, putts: null };
   constructor(props) {
     super(props);
     this.state = {
@@ -43,8 +44,7 @@ class ScoreInput extends Component<ScoreInputProps, ScoreInputState> {
       putts: props.scoreItem.putts || 2
     };
   }
-  state = { beers: null, strokes: null, putts: null };
-  onCloseScoreForm = () => {
+  public onCloseScoreForm = () => {
     const {
       par,
       teamEvent,
@@ -93,7 +93,7 @@ class ScoreInput extends Component<ScoreInputProps, ScoreInputState> {
       save();
     }
   };
-  render() {
+  public render() {
     const { teamEvent } = this.props;
     const putsPicker = teamEvent ? null : (
       <Picker

@@ -1,5 +1,9 @@
-import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
+import { graphql } from 'react-apollo'
+import {
+  liveLeaderboardQueryQuery,
+  liveLeaderboardQueryQueryVariables
+} from '../../../operation-result-types'
 
 const liveLeaderboardQuery = gql`
   query liveLeaderboardQuery($scoringSessionId: ID!) {
@@ -21,7 +25,11 @@ const liveLeaderboardQuery = gql`
 
 export default liveLeaderboardQuery
 
-export const withLiveLeaderboardQuery = graphql(liveLeaderboardQuery, {
+export const withLiveLeaderboardQuery = graphql<
+  liveLeaderboardQueryQueryVariables,
+  liveLeaderboardQueryQuery,
+  liveLeaderboardQueryQueryVariables
+>(liveLeaderboardQuery, {
   options: ({ scoringSessionId }) => ({
     variables: { scoringSessionId },
     fetchPolicy: 'network-only',
