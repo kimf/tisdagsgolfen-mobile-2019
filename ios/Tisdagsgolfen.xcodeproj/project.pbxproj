@@ -1408,7 +1408,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = se.calces.Tisdagsgolfen;
+				PRODUCT_BUNDLE_IDENTIFIER = se.fransman.Tisdagsgolfen;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -1443,7 +1443,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = se.calces.Tisdagsgolfen;
+				PRODUCT_BUNDLE_IDENTIFIER = se.fransman.Tisdagsgolfen;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VERSIONING_SYSTEM = "apple-generic";
 			};

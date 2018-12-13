@@ -1,4 +1,4 @@
-package se.calces.tisdagsgolfen;
+package se.fransman.tisdagsgolfen;
 
 import android.app.Application;
 

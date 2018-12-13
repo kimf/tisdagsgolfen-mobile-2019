@@ -1,5 +1,5 @@
-app_identifier "se.calces.Tisdagsgolfen" # The bundle identifier of your app
-apple_id "it@calces.se" # Your Apple email address
+app_identifier "se.fransman.Tisdagsgolfen" # The bundle identifier of your app
+apple_id "kim.fransman@gmail.com" # Your Apple email address
 
 team_id "3ZCFLELL43" # Developer Portal Team ID
 
