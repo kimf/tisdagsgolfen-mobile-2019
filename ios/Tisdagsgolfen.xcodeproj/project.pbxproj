@@ -3,50 +3,30 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 48;
+	objectVersion = 51;
 	objects = {
+
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
 		00C302E81ABCBA2D00DB3ED1 /* libRCTImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302C01ABCB91800DB3ED1 /* libRCTImage.a */; };
 		00C302E91ABCBA2D00DB3ED1 /* libRCTNetwork.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302DC1ABCB9D200DB3ED1 /* libRCTNetwork.a */; };
 		00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302E41ABCB9EE00DB3ED1 /* libRCTVibration.a */; };
-		00E356F31AD99517003FC87E /* TisdagsgolfenTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* TisdagsgolfenTests.m */; };
 		133E29F31AD74F7200F7D852 /* libRCTLinking.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 78C398B91ACF4ADC00677621 /* libRCTLinking.a */; };
 		139105C61AF99C1200B5F7CC /* libRCTSettings.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 139105C11AF99BAD00B5F7CC /* libRCTSettings.a */; };
 		139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 139FDEF41B06529B00C62182 /* libRCTWebSocket.a */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		140ED2AC1D01E1AD002B40FF /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		22C292D7F2B645F0A257EA0D /* libRCTOneSignal.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BDB82B1D08FE4660A5618E9F /* libRCTOneSignal.a */; };
 		286F8ADCFA8942019175D0D9 /* libReactNativeConfig.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BE397B954BE40CCA36705AF /* libReactNativeConfig.a */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		65AA25EA2AA1475F831FE48D /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CF9BD34B4154C41A027FC4F /* libz.tbd */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
-		972881FF1E80094F009E79AC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
-		972882001E80094F009E79AC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		972882021E80094F009E79AC /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
-		972882031E80094F009E79AC /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
-		972882061E80094F009E79AC /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
-		972882071E80094F009E79AC /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
-		972882081E80094F009E79AC /* libRCTImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302C01ABCB91800DB3ED1 /* libRCTImage.a */; };
-		972882091E80094F009E79AC /* libRCTLinking.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 78C398B91ACF4ADC00677621 /* libRCTLinking.a */; };
-		9728820A1E80094F009E79AC /* libRCTNetwork.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302DC1ABCB9D200DB3ED1 /* libRCTNetwork.a */; };
-		9728820B1E80094F009E79AC /* libRCTSettings.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 139105C11AF99BAD00B5F7CC /* libRCTSettings.a */; };
-		9728820C1E80094F009E79AC /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
-		9728820D1E80094F009E79AC /* libRCTVibration.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302E41ABCB9EE00DB3ED1 /* libRCTVibration.a */; };
-		9728820E1E80094F009E79AC /* libRCTWebSocket.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 139FDEF41B06529B00C62182 /* libRCTWebSocket.a */; };
-		972882101E80094F009E79AC /* libRCTOneSignal.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BDB82B1D08FE4660A5618E9F /* libRCTOneSignal.a */; };
-		972882131E80094F009E79AC /* libRNAnalytics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E8AEFB193BA4343B00CAF2F /* libRNAnalytics.a */; };
-		972882141E80094F009E79AC /* libRNCrashes.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 24F6C0896BA443B2AA360D4F /* libRNCrashes.a */; };
-		972882161E80094F009E79AC /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
-		972882171E80094F009E79AC /* glf_swng.caf in Resources */ = {isa = PBXBuildFile; fileRef = 976885851E61B98E007FCF99 /* glf_swng.caf */; };
-		972882181E80094F009E79AC /* golfball.caf in Resources */ = {isa = PBXBuildFile; fileRef = 976885861E61B98E007FCF99 /* golfball.caf */; };
+		84C38952734C4A6A83BCA796 /* libRNGestureHandler.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C1A56D8A29F4C7A99C4A9BC /* libRNGestureHandler.a */; };
 		976885871E61B98E007FCF99 /* glf_swng.caf in Resources */ = {isa = PBXBuildFile; fileRef = 976885851E61B98E007FCF99 /* glf_swng.caf */; };
 		976885881E61B98E007FCF99 /* golfball.caf in Resources */ = {isa = PBXBuildFile; fileRef = 976885861E61B98E007FCF99 /* golfball.caf */; };
-		84C38952734C4A6A83BCA796 /* libRNGestureHandler.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2C1A56D8A29F4C7A99C4A9BC /* libRNGestureHandler.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,13 +64,6 @@
 			proxyType = 2;
 			remoteGlobalIDString = 832C81801AAF6DEF007FA2F7;
 			remoteInfo = RCTVibration;
-		};
-		00E356F41AD99517003FC87E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 13B07F861A680F5B00A75B9A;
-			remoteInfo = Tisdagsgolfen;
 		};
 		139105C01AF99BAD00B5F7CC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -239,6 +212,13 @@
 			remoteGlobalIDString = 3D3CD9181DE5FBD800167DC4;
 			remoteInfo = "jschelpers-tvOS";
 		};
+		B939605621C27FB20075DC72 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D7A1F4AFB77A4FDCA9F88DC5 /* RNGestureHandler.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RNGestureHandler;
+		};
 		B943E90C1F18C80600313BE8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 146833FF1AC3E56700842450 /* React.xcodeproj */;
@@ -325,7 +305,6 @@
 		00C302BB1ABCB91800DB3ED1 /* RCTImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTImage.xcodeproj; path = "../node_modules/react-native/Libraries/Image/RCTImage.xcodeproj"; sourceTree = "<group>"; };
 		00C302D31ABCB9D200DB3ED1 /* RCTNetwork.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTNetwork.xcodeproj; path = "../node_modules/react-native/Libraries/Network/RCTNetwork.xcodeproj"; sourceTree = "<group>"; };
 		00C302DF1ABCB9EE00DB3ED1 /* RCTVibration.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTVibration.xcodeproj; path = "../node_modules/react-native/Libraries/Vibration/RCTVibration.xcodeproj"; sourceTree = "<group>"; };
-		00E356EE1AD99517003FC87E /* TisdagsgolfenTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TisdagsgolfenTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* TisdagsgolfenTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TisdagsgolfenTests.m; sourceTree = "<group>"; };
 		0BE397B954BE40CCA36705AF /* libReactNativeConfig.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libReactNativeConfig.a; sourceTree = "<group>"; };
@@ -339,6 +318,7 @@
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Tisdagsgolfen/main.m; sourceTree = "<group>"; };
 		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
 		24F6C0896BA443B2AA360D4F /* libRNCrashes.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNCrashes.a; sourceTree = "<group>"; };
+		2C1A56D8A29F4C7A99C4A9BC /* libRNGestureHandler.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNGestureHandler.a; sourceTree = "<group>"; };
 		4CF9BD34B4154C41A027FC4F /* libz.tbd */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		4E8AEFB193BA4343B00CAF2F /* libRNAnalytics.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNAnalytics.a; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
@@ -346,25 +326,14 @@
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
 		96DEE0B0E82E4948B20B7DF9 /* RCTOneSignal.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTOneSignal.xcodeproj; path = "../node_modules/react-native-onesignal/ios/RCTOneSignal.xcodeproj"; sourceTree = "<group>"; };
 		9715AA101E5FA23F003CFE40 /* Tisdagsgolfen.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = Tisdagsgolfen.entitlements; path = Tisdagsgolfen/Tisdagsgolfen.entitlements; sourceTree = "<group>"; };
-		972882261E80094F009E79AC /* TGStorybook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TGStorybook.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		972882281E8009A0009E79AC /* TGStorybookInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = TGStorybookInfo.plist; sourceTree = "<group>"; };
 		976885851E61B98E007FCF99 /* glf_swng.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = glf_swng.caf; sourceTree = "<group>"; };
 		976885861E61B98E007FCF99 /* golfball.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = golfball.caf; sourceTree = "<group>"; };
 		AE0C0AA2B3CB46EC86D07DF8 /* ReactNativeConfig.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeConfig.xcodeproj; path = "../node_modules/react-native-config/ios/ReactNativeConfig.xcodeproj"; sourceTree = "<group>"; };
 		BDB82B1D08FE4660A5618E9F /* libRCTOneSignal.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTOneSignal.a; sourceTree = "<group>"; };
-		D7A1F4AFB77A4FDCA9F88DC5 /* RNGestureHandler.xcodeproj */ = {isa = PBXFileReference; name = "RNGestureHandler.xcodeproj"; path = "../node_modules/react-native-gesture-handler/ios/RNGestureHandler.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
-		2C1A56D8A29F4C7A99C4A9BC /* libRNGestureHandler.a */ = {isa = PBXFileReference; name = "libRNGestureHandler.a"; path = "libRNGestureHandler.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		D7A1F4AFB77A4FDCA9F88DC5 /* RNGestureHandler.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNGestureHandler.xcodeproj; path = "../node_modules/react-native-gesture-handler/ios/RNGestureHandler.xcodeproj"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		00E356EB1AD99517003FC87E /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				140ED2AC1D01E1AD002B40FF /* libReact.a in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		13B07F8C1A680F5B00A75B9A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -384,27 +353,6 @@
 				286F8ADCFA8942019175D0D9 /* libReactNativeConfig.a in Frameworks */,
 				65AA25EA2AA1475F831FE48D /* libz.tbd in Frameworks */,
 				84C38952734C4A6A83BCA796 /* libRNGestureHandler.a in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		972882011E80094F009E79AC /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				972882021E80094F009E79AC /* libReact.a in Frameworks */,
-				972882031E80094F009E79AC /* libRCTAnimation.a in Frameworks */,
-				972882061E80094F009E79AC /* libRCTActionSheet.a in Frameworks */,
-				972882071E80094F009E79AC /* libRCTGeolocation.a in Frameworks */,
-				972882081E80094F009E79AC /* libRCTImage.a in Frameworks */,
-				972882091E80094F009E79AC /* libRCTLinking.a in Frameworks */,
-				9728820A1E80094F009E79AC /* libRCTNetwork.a in Frameworks */,
-				9728820B1E80094F009E79AC /* libRCTSettings.a in Frameworks */,
-				9728820C1E80094F009E79AC /* libRCTText.a in Frameworks */,
-				9728820D1E80094F009E79AC /* libRCTVibration.a in Frameworks */,
-				9728820E1E80094F009E79AC /* libRCTWebSocket.a in Frameworks */,
-				972882101E80094F009E79AC /* libRCTOneSignal.a in Frameworks */,
-				972882131E80094F009E79AC /* libRNAnalytics.a in Frameworks */,
-				972882141E80094F009E79AC /* libRNCrashes.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -538,14 +486,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		64CB119AE5FE4C5892723F0F /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				972882281E8009A0009E79AC /* TGStorybookInfo.plist */,
-			);
-			name = Resources;
-			sourceTree = "<group>";
-		};
 		78C398B11ACF4ADC00677621 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -592,7 +532,6 @@
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* TisdagsgolfenTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
-				64CB119AE5FE4C5892723F0F /* Resources */,
 				B943E8EF1F18C80400313BE8 /* Recovered References */,
 			);
 			indentWidth = 2;
@@ -603,8 +542,6 @@
 			isa = PBXGroup;
 			children = (
 				13B07F961A680F5B00A75B9A /* Tisdagsgolfen.app */,
-				00E356EE1AD99517003FC87E /* TisdagsgolfenTests.xctest */,
-				972882261E80094F009E79AC /* TGStorybook.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -617,6 +554,14 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		B939605321C27FB20075DC72 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B939605721C27FB20075DC72 /* libRNGestureHandler.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		B943E8EF1F18C80400313BE8 /* Recovered References */ = {
 			isa = PBXGroup;
 			children = (
@@ -625,6 +570,7 @@
 				4E8AEFB193BA4343B00CAF2F /* libRNAnalytics.a */,
 				24F6C0896BA443B2AA360D4F /* libRNCrashes.a */,
 				4CF9BD34B4154C41A027FC4F /* libz.tbd */,
+				2C1A56D8A29F4C7A99C4A9BC /* libRNGestureHandler.a */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -640,24 +586,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		00E356ED1AD99517003FC87E /* TisdagsgolfenTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "TisdagsgolfenTests" */;
-			buildPhases = (
-				00E356EA1AD99517003FC87E /* Sources */,
-				00E356EB1AD99517003FC87E /* Frameworks */,
-				00E356EC1AD99517003FC87E /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				00E356F51AD99517003FC87E /* PBXTargetDependency */,
-			);
-			name = TisdagsgolfenTests;
-			productName = TisdagsgolfenTests;
-			productReference = 00E356EE1AD99517003FC87E /* TisdagsgolfenTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 		13B07F861A680F5B00A75B9A /* Tisdagsgolfen */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "Tisdagsgolfen" */;
@@ -676,37 +604,15 @@
 			productReference = 13B07F961A680F5B00A75B9A /* Tisdagsgolfen.app */;
 			productType = "com.apple.product-type.application";
 		};
-		972881FD1E80094F009E79AC /* TGStorybook */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 972882231E80094F009E79AC /* Build configuration list for PBXNativeTarget "TGStorybook" */;
-			buildPhases = (
-				972881FE1E80094F009E79AC /* Sources */,
-				972882011E80094F009E79AC /* Frameworks */,
-				972882151E80094F009E79AC /* Resources */,
-				972882221E80094F009E79AC /* Bundle React Native code and images */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = TGStorybook;
-			productName = "Hello World";
-			productReference = 972882261E80094F009E79AC /* TGStorybook.app */;
-			productType = "com.apple.product-type.application";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		83CBB9F71A601CBA00E9B192 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 900;
-				ORGANIZATIONNAME = "Calces Sweden AB";
+				LastUpgradeCheck = 1010;
+				ORGANIZATIONNAME = "Kim Fransman - Daresay ";
 				TargetAttributes = {
-					00E356ED1AD99517003FC87E = {
-						CreatedOnToolsVersion = 6.2;
-						TestTargetID = 13B07F861A680F5B00A75B9A;
-					};
 					13B07F861A680F5B00A75B9A = {
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
@@ -720,7 +626,7 @@
 				};
 			};
 			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "Tisdagsgolfen" */;
-			compatibilityVersion = "Xcode 8.0";
+			compatibilityVersion = "Xcode 10.0";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -783,12 +689,14 @@
 					ProductGroup = B9676D571ED573C10006D606 /* Products */;
 					ProjectRef = AE0C0AA2B3CB46EC86D07DF8 /* ReactNativeConfig.xcodeproj */;
 				},
+				{
+					ProductGroup = B939605321C27FB20075DC72 /* Products */;
+					ProjectRef = D7A1F4AFB77A4FDCA9F88DC5 /* RNGestureHandler.xcodeproj */;
+				},
 			);
 			projectRoot = "";
 			targets = (
 				13B07F861A680F5B00A75B9A /* Tisdagsgolfen */,
-				00E356ED1AD99517003FC87E /* TisdagsgolfenTests */,
-				972881FD1E80094F009E79AC /* TGStorybook */,
 			);
 		};
 /* End PBXProject section */
@@ -976,6 +884,13 @@
 			remoteRef = 978A591E1E82CE7000CCDF96 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		B939605721C27FB20075DC72 /* libRNGestureHandler.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNGestureHandler.a;
+			remoteRef = B939605621C27FB20075DC72 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		B943E90D1F18C80600313BE8 /* libthird-party.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1056,13 +971,6 @@
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
-		00E356EC1AD99517003FC87E /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		13B07F8E1A680F5B00A75B9A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1070,16 +978,6 @@
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				976885871E61B98E007FCF99 /* glf_swng.caf in Resources */,
 				976885881E61B98E007FCF99 /* golfball.caf in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		972882151E80094F009E79AC /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				972882161E80094F009E79AC /* Images.xcassets in Resources */,
-				972882171E80094F009E79AC /* glf_swng.caf in Resources */,
-				972882181E80094F009E79AC /* golfball.caf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1098,33 +996,11 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
-		};
-		972882221E80094F009E79AC /* Bundle React Native code and images */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Bundle React Native code and images";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/packager/react-native-xcode.sh";
+			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		00E356EA1AD99517003FC87E /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				00E356F31AD99517003FC87E /* TisdagsgolfenTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		13B07F871A680F5B00A75B9A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1134,89 +1010,9 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		972881FE1E80094F009E79AC /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				972881FF1E80094F009E79AC /* AppDelegate.m in Sources */,
-				972882001E80094F009E79AC /* main.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXTargetDependency section */
-		00E356F51AD99517003FC87E /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 13B07F861A680F5B00A75B9A /* Tisdagsgolfen */;
-			targetProxy = 00E356F41AD99517003FC87E /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
 /* Begin XCBuildConfiguration section */
-		00E356F61AD99517003FC87E /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = 3ZCFLELL43;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(SRCROOT)/../node_modules/mobile-center-analytics/ios/RNAnalytics",
-					"$(SRCROOT)/../node_modules/mobile-center-crashes/ios/RNCrashes",
-					"$(SRCROOT)/../node_modules/react-native-config/ios/ReactNativeConfig",
-					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
-				);
-				INFOPLIST_FILE = TisdagsgolfenTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-				);
-				OTHER_LDFLAGS = (
-					"-ObjC",
-					"-lc++",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Tisdagsgolfen.app/Tisdagsgolfen";
-			};
-			name = Debug;
-		};
-		00E356F71AD99517003FC87E /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				COPY_PHASE_STRIP = NO;
-				DEVELOPMENT_TEAM = 3ZCFLELL43;
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(SRCROOT)/../node_modules/mobile-center-analytics/ios/RNAnalytics",
-					"$(SRCROOT)/../node_modules/mobile-center-crashes/ios/RNCrashes",
-					"$(SRCROOT)/../node_modules/react-native-config/ios/ReactNativeConfig",
-					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
-				);
-				INFOPLIST_FILE = TisdagsgolfenTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-				);
-				OTHER_LDFLAGS = (
-					"-ObjC",
-					"-lc++",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Tisdagsgolfen.app/Tisdagsgolfen";
-			};
-			name = Release;
-		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1226,7 +1022,7 @@
 				CODE_SIGN_ENTITLEMENTS = Tisdagsgolfen/Tisdagsgolfen.entitlements;
 				CURRENT_PROJECT_VERSION = 9;
 				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = NPQ6MXAM7N;
+				DEVELOPMENT_TEAM = GA9P9633N5;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1243,13 +1039,16 @@
 				INFOPLIST_PREFIX_HEADER = "${BUILD_DIR}/GeneratedInfoPlistDotEnv.h";
 				INFOPLIST_PREPROCESS = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = se.kimfransman.Tisdagsgolfen;
+				PRODUCT_BUNDLE_IDENTIFIER = co.daresay.Tisdagsgolfen;
 				PRODUCT_NAME = Tisdagsgolfen;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -1263,7 +1062,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = Tisdagsgolfen/Tisdagsgolfen.entitlements;
 				CURRENT_PROJECT_VERSION = 9;
-				DEVELOPMENT_TEAM = NPQ6MXAM7N;
+				DEVELOPMENT_TEAM = GA9P9633N5;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1280,13 +1079,16 @@
 				INFOPLIST_PREFIX_HEADER = "${BUILD_DIR}/GeneratedInfoPlistDotEnv.h";
 				INFOPLIST_PREPROCESS = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = se.kimfransman.Tisdagsgolfen;
+				PRODUCT_BUNDLE_IDENTIFIER = co.daresay.Tisdagsgolfen;
 				PRODUCT_NAME = Tisdagsgolfen;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -1304,12 +1106,14 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -1336,7 +1140,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -1355,12 +1159,14 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -1381,108 +1187,16 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
-		972882241E80094F009E79AC /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_ENTITLEMENTS = Tisdagsgolfen/Tisdagsgolfen.entitlements;
-				CURRENT_PROJECT_VERSION = 9;
-				DEAD_CODE_STRIPPING = YES;
-				DEVELOPMENT_TEAM = 3ZCFLELL43;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)",
-				);
-				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = (
-					"DEBUG=1",
-					"$(inherited)",
-					"STORYBOOK=1",
-				);
-				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/../node_modules/react-native-onesignal/ios/**",
-					"$(SRCROOT)/../node_modules/mobile-center-analytics/ios/RNAnalytics",
-					"$(SRCROOT)/../node_modules/mobile-center-crashes/ios/RNCrashes",
-					"$(SRCROOT)/../node_modules/react-native-config/ios/ReactNativeConfig",
-					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
-				);
-				INFOPLIST_FILE = TGStorybookInfo.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-				);
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-ObjC",
-					"-lc++",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = se.fransman.Tisdagsgolfen;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				VERSIONING_SYSTEM = "apple-generic";
-			};
-			name = Debug;
-		};
-		972882251E80094F009E79AC /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_ENTITLEMENTS = Tisdagsgolfen/Tisdagsgolfen.entitlements;
-				CURRENT_PROJECT_VERSION = 9;
-				DEVELOPMENT_TEAM = 3ZCFLELL43;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = "STORYBOOK=1";
-				HEADER_SEARCH_PATHS = (
-					"$(SRCROOT)/../node_modules/react-native-onesignal/ios/**",
-					"$(SRCROOT)/../node_modules/mobile-center-analytics/ios/RNAnalytics",
-					"$(SRCROOT)/../node_modules/mobile-center-crashes/ios/RNCrashes",
-					"$(SRCROOT)/../node_modules/react-native-config/ios/ReactNativeConfig",
-					"$(SRCROOT)/../node_modules/react-native-gesture-handler/ios/**",
-				);
-				INFOPLIST_FILE = TGStorybookInfo.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-				);
-				OTHER_LDFLAGS = (
-					"$(inherited)",
-					"-ObjC",
-					"-lc++",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = se.fransman.Tisdagsgolfen;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				VERSIONING_SYSTEM = "apple-generic";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "TisdagsgolfenTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				00E356F61AD99517003FC87E /* Debug */,
-				00E356F71AD99517003FC87E /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "Tisdagsgolfen" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1497,15 +1211,6 @@
 			buildConfigurations = (
 				83CBBA201A601CBA00E9B192 /* Debug */,
 				83CBBA211A601CBA00E9B192 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		972882231E80094F009E79AC /* Build configuration list for PBXNativeTarget "TGStorybook" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				972882241E80094F009E79AC /* Debug */,
-				972882251E80094F009E79AC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
