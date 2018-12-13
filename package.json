@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "start": "react-native start",
-    "lint": "npm run lint:compile && npm run lint:ts",
+    "lint": "yarn run lint:compile && yarn run lint:ts",
     "lint:compile": "tsc --skipLibCheck",
     "lint:ts": "tslint -p .",
     "graphql:schema": "apollo-codegen introspect-schema https://www.tisdagsgolfen.se/api/graphql --output schema.json",
@@ -33,7 +33,6 @@
     "lodash.keys": "^4.2.0",
     "lodash.pick": "^4.4.0",
     "moment": "^2.22.2",
-    "prop-types": "^15.6.2",
     "react": "16.6.3",
     "react-apollo": "^2.1.11",
     "react-native": "0.57.7",

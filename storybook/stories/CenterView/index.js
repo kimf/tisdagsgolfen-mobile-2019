@@ -1,25 +1,13 @@
 import React from 'react'
 import { View } from 'react-native'
-import { oneOfType, arrayOf, node } from 'prop-types'
 
 const style = {
-  flex: 1,
-  justifyContent: 'center',
   alignItems: 'center',
-  backgroundColor: '#F5FCFF'
+  backgroundColor: '#F5FCFF',
+  flex: 1,
+  justifyContent: 'center'
 }
 
-const CenterView = props => (
-  <View style={style}>
-    {props.children}
-  </View>
-)
-
-CenterView.propTypes = {
-  children: oneOfType([
-    arrayOf(node),
-    node
-  ]).isRequired
-}
+const CenterView = props => <View style={style}>{props.children}</View>
 
 export default CenterView
