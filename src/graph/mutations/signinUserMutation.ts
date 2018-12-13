@@ -1,5 +1,5 @@
-import gql from 'graphql-tag'
-import { graphql } from 'react-apollo'
+import gql from "graphql-tag";
+import { graphql } from "react-apollo";
 
 const signinUser = gql`
   mutation authenticateUser($email: String!, $password: String!) {
@@ -15,10 +15,10 @@ const signinUser = gql`
       token
     }
   }
-`
+`;
 
-export default signinUser
+export default signinUser;
 
 export const withSigninUserMutation = graphql(signinUser, {
-  name: 'signinUser'
-})
+  name: "signinUser",
+});

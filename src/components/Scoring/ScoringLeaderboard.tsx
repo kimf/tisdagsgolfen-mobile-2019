@@ -1,79 +1,75 @@
-import React, { Component } from 'react'
-import { FlatList, StyleSheet, View } from 'react-native'
+import React, { Component } from "react";
+import { FlatList, StyleSheet, View } from "react-native";
 
-import Header from '../shared/Header'
-import Tabs from '../shared/Tabs'
-import TopButton from '../shared/TopButton'
-import ScorecardHeaderRow from './ScorecardHeaderRow'
-import ScoringLeaderboardCard from './ScoringLeaderboardCard'
-// import Header from 'shared/Header'
-// import EventHeader from 'Events/EventHeader'
+import Header from "../shared/Header";
+import Tabs from "../shared/Tabs";
+import TopButton from "../shared/TopButton";
+import ScorecardHeaderRow from "./ScorecardHeaderRow";
+import ScoringLeaderboardCard from "./ScoringLeaderboardCard";
 
-import { withLiveLeaderboardQuery } from '../../graph/queries/liveLeaderboardQuery'
-import { colors, NAVBAR_HEIGHT } from '../../styles'
-import { massageIntoLeaderboard, rankBySorting } from '../../utils'
+import { withLiveLeaderboardQuery } from "../../graph/queries/liveLeaderboardQuery";
+import { colors, NAVBAR_HEIGHT } from "../../styles";
+import { massageIntoLeaderboard, rankBySorting } from "../../utils";
 
 const styles = StyleSheet.create({
   inner: {
-    flex: 1
+    flex: 1,
   },
   text: {
     fontSize: 20,
-    fontWeight: '900',
-    textAlign: 'center',
-    marginBottom: 20
-  }
-})
+    fontWeight: "900",
+    textAlign: "center",
+    marginBottom: 20,
+  },
+});
 
-class ScoringLeaderboard extends Component {
-  public static propTypes = {
-    currentUserId: string.isRequired,
-    scoringSessionId: string.isRequired,
-    onClose: func,
-    scoringType: string.isRequired,
-    showHeader: bool,
-    showClose: bool,
-    teamEvent: bool.isRequired,
-    data: shape({
-      loading: bool,
-      scoringSessions: arrayOf(shape()) // TODO: How do we want the data to look?
-    })
-  }
+interface Props {
+  currentUserId: string;
+  scoringSessionId: string;
+  onClose: () => void;
+  scoringType: string;
+  showHeader?: boolean;
+  showClose?: boolean;
+  teamEvent: boolean;
+  data: {
+    loading: boolean;
+    scoringSessions: any[];
+  };
+}
 
-  public static defaultProps = {
-    data: {
-      loading: true,
-      scoringSessions: []
-    },
-    showClose: true,
-    showHeader: false,
-    onClose: null
-  }
+interface State {
+  sorting: string;
+}
 
-  public state = { sorting: 'totalPoints' }
+class ScoringLeaderboard extends Component<Props, State> {
+  public state = { sorting: "totalPoints" };
+  public listView: FlatList<any> | null = null;
 
   public changeSort = sorting => {
-    this.listView.scrollToIndex({ index: 0 })
-    this.setState({ sorting })
-  }
+    if (this.listView) {
+      this.listView.scrollToIndex({ index: 0 });
+    }
+
+    this.setState({ sorting });
+  };
 
   public render() {
     const {
       data,
       scoringSessionId,
       currentUserId,
-      onClose,
-      showClose,
-      showHeader,
+      onClose = null,
+      showClose = true,
+      showHeader = false,
       scoringType,
-      teamEvent
-    } = this.props
-    const { sorting } = this.state
+      teamEvent,
+    } = this.props;
+    const { sorting } = this.state;
 
-    let sortedPlayers = []
+    let sortedPlayers: any[] = [];
     if (data.scoringSessions && data.scoringSessions.length > 0) {
-      const players = massageIntoLeaderboard(data.scoringSessions, teamEvent)
-      sortedPlayers = rankBySorting(players, sorting, teamEvent, scoringType)
+      const players = massageIntoLeaderboard(data.scoringSessions, teamEvent);
+      sortedPlayers = rankBySorting(players, sorting, teamEvent, scoringType);
     }
 
     // TODO: Show tabs for teamEvents when you figured out how to solve the beers part
@@ -90,7 +86,7 @@ class ScoringLeaderboard extends Component {
             />
           )}
 
-          {sorting === 'totalPoints' ? (
+          {sorting === "totalPoints" ? (
             <ScorecardHeaderRow scoring={false} scoringType={scoringType} teamEvent={teamEvent} />
           ) : null}
 
@@ -98,7 +94,7 @@ class ScoringLeaderboard extends Component {
             removeClippedSubviews={false}
             data={sortedPlayers}
             ref={ref => {
-              this.listView = ref
+              this.listView = ref;
             }}
             renderItem={({ item }) => (
               <ScoringLeaderboardCard
@@ -106,7 +102,6 @@ class ScoringLeaderboard extends Component {
                 scoringType={scoringType}
                 currentUserId={currentUserId}
                 player={item}
-                scoringSessionId={scoringSessionId}
                 sorting={sorting}
                 teamEvent={teamEvent}
               />
@@ -118,8 +113,8 @@ class ScoringLeaderboard extends Component {
           <TopButton backgroundColor={colors.red} title="STÄNG" onPress={() => onClose()} />
         ) : null}
       </View>
-    )
+    );
   }
 }
 
-export default withLiveLeaderboardQuery(ScoringLeaderboard)
+export default withLiveLeaderboardQuery(ScoringLeaderboard);

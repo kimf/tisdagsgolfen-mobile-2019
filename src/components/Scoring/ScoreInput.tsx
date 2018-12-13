@@ -5,34 +5,29 @@ import { withCreateLiveScoreMutation } from "../../graph/mutations/createLiveSco
 import { withUpdateLiveScoreMutation } from "../../graph/mutations/updateLiveScoreMutation";
 import { colors } from "../../styles";
 import TopButton from "../shared/TopButton";
-import {
-  BEER_VALUES,
-  pointsArray,
-  PUTT_VALUES,
-  STROKE_VALUES
-} from "./constants";
+import { BEER_VALUES, pointsArray, PUTT_VALUES, STROKE_VALUES } from "./constants";
 interface ScoreInputProps {
-  holeNr: any,
-  playerId: any,
-  scoringSessionId: any,
-  par: any,
-  teamEvent: any,
+  holeNr: any;
+  playerId: any;
+  scoringSessionId: any;
+  par: any;
+  teamEvent: any;
   scoreItem:
     | any
     | {
-        beers: any,
-        strokes: any,
-        putts: any,
-        extraStrokes: any
-      },
-  createLiveScore: any,
-  updateLiveScore: any,
-  onClose: any
+        beers: any;
+        strokes: any;
+        putts: any;
+        extraStrokes: any;
+      };
+  createLiveScore: any;
+  updateLiveScore: any;
+  onClose: any;
 }
 interface ScoreInputState {
-  beers: null,
-  strokes: null,
-  putts: null
+  beers: null;
+  strokes: null;
+  putts: null;
 }
 class ScoreInput extends Component<ScoreInputProps, ScoreInputState> {
   public state = { beers: null, strokes: null, putts: null };
@@ -41,7 +36,7 @@ class ScoreInput extends Component<ScoreInputProps, ScoreInputState> {
     this.state = {
       beers: props.scoreItem.beers || 0,
       strokes: props.scoreItem.strokes || props.par,
-      putts: props.scoreItem.putts || 2
+      putts: props.scoreItem.putts || 2,
     };
   }
   public onCloseScoreForm = () => {
@@ -53,7 +48,7 @@ class ScoreInput extends Component<ScoreInputProps, ScoreInputState> {
       createLiveScore,
       updateLiveScore,
       holeNr,
-      scoreItem
+      scoreItem,
     } = this.props;
     const { extraStrokes } = scoreItem;
     const { beers, strokes, putts } = this.state;
@@ -64,12 +59,12 @@ class ScoreInput extends Component<ScoreInputProps, ScoreInputState> {
       beers,
       strokes,
       putts,
-      par
+      par,
     };
     const ids = {
       scoringSessionId,
       userId: teamEvent ? null : playerId,
-      teamIndex: teamEvent ? playerId : null
+      teamIndex: teamEvent ? playerId : null,
     };
     if (putts > strokes) {
       Alert.alert("Du verkar ha angett fler puttar än slag!");
@@ -99,8 +94,7 @@ class ScoreInput extends Component<ScoreInputProps, ScoreInputState> {
       <Picker
         style={{ flex: 1 }}
         selectedValue={this.state.putts}
-        onValueChange={putts => this.setState({ putts })}
-      >
+        onValueChange={putts => this.setState({ putts })}>
         {PUTT_VALUES.map(val => (
           <Picker.Item key={val} value={val} label={`${val} puttar`} />
         ))}
@@ -110,8 +104,7 @@ class ScoreInput extends Component<ScoreInputProps, ScoreInputState> {
       <Picker
         style={{ flex: 1 }}
         selectedValue={this.state.beers}
-        onValueChange={beers => this.setState({ beers })}
-      >
+        onValueChange={beers => this.setState({ beers })}>
         {BEER_VALUES.map(val => (
           <Picker.Item key={val} value={val} label={`${val} öl`} />
         ))}
@@ -124,8 +117,7 @@ class ScoreInput extends Component<ScoreInputProps, ScoreInputState> {
           <Picker
             style={{ flex: 1 }}
             selectedValue={this.state.strokes}
-            onValueChange={strokes => this.setState({ strokes })}
-          >
+            onValueChange={strokes => this.setState({ strokes })}>
             {STROKE_VALUES.map(val => (
               <Picker.Item key={val} value={val} label={`${val} slag`} />
             ))}
@@ -139,5 +131,5 @@ class ScoreInput extends Component<ScoreInputProps, ScoreInputState> {
 }
 export default compose(
   withCreateLiveScoreMutation,
-  withUpdateLiveScoreMutation
+  withUpdateLiveScoreMutation,
 )(ScoreInput);

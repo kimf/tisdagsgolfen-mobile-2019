@@ -6,21 +6,21 @@ import { colors } from "../../styles";
 import { withSigninUserMutation } from "../../graph/mutations/signinUserMutation";
 const icon = "☠️";
 type LoginProps = {
-  signinUser: any,
-  onLogin: any,
+  signinUser: any;
+  onLogin: any;
   currentUser?: {
-    email?: any
-  }
+    email?: any;
+  };
 };
 type LoginState = {
-  email: any,
-  password: string,
-  loggingIn: boolean,
-  error: null
+  email: any;
+  password: string;
+  loggingIn: boolean;
+  error: null;
 };
 class Login extends Component<LoginProps, LoginState> {
   static defaultProps = {
-    currentUser: null
+    currentUser: null,
   };
   constructor(props) {
     super(props);
@@ -29,7 +29,7 @@ class Login extends Component<LoginProps, LoginState> {
       email: (currentUser && currentUser.email) || "",
       password: "",
       loggingIn: false,
-      error: null
+      error: null,
     };
   }
   onSubmit = () => {
@@ -57,24 +57,18 @@ class Login extends Component<LoginProps, LoginState> {
           height: "100%",
           justifyContent: "flex-start",
           alignItems: "stretch",
-          backgroundColor: colors.dark
-        }}
-      >
+          backgroundColor: colors.dark,
+        }}>
         <TGText
           style={{
             padding: 20,
             fontSize: 60,
             color: colors.red,
-            textAlign: "center"
-          }}
-        >
+            textAlign: "center",
+          }}>
           {icon}
         </TGText>
-        <Form
-          {...this.state}
-          changeValue={this.changeValue}
-          onSubmit={this.onSubmit}
-        />
+        <Form {...this.state} changeValue={this.changeValue} onSubmit={this.onSubmit} />
       </View>
     );
   }

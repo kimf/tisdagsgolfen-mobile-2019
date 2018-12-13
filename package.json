@@ -24,6 +24,7 @@
     "apollo-link": "^1.2.4",
     "apollo-link-context": "^1.0.10",
     "apollo-link-http": "^1.5.7",
+    "apollo-link-logger": "^1.2.3",
     "apollo-link-state": "^0.4.2",
     "graphql": "14.0.2",
     "graphql-tag": "^2.10.0",
@@ -60,8 +61,8 @@
     "schedule": "0.5.0",
     "tslint": "^5.11.0",
     "tslint-config-prettier": "^1.15.0",
-    "tslint-react": "^3.6.0",
     "tslint-plugin-graphql": "^0.0.6",
+    "tslint-react": "^3.6.0",
     "tslint-sonarts": "^1.8.0",
     "typescript": "^3.1.1"
   }

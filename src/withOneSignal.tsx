@@ -7,10 +7,7 @@ const onReceived = notification => {
   deviceLog.debug("Notification received:", notification);
 };
 const onRegistered = notifData => {
-  deviceLog.debug(
-    "Device has been registered for push notifications!",
-    notifData
-  );
+  deviceLog.debug("Device has been registered for push notifications!", notifData);
 };
 const onIds = device => {
   deviceLog.debug("Device info: ", device);

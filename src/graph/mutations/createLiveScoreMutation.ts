@@ -1,6 +1,6 @@
-import gql from 'graphql-tag'
-import update from 'immutability-helper'
-import { graphql } from 'react-apollo'
+import gql from "graphql-tag";
+import update from "immutability-helper";
+import { graphql } from "react-apollo";
 
 const createLiveScoreMutation = gql`
   mutation createLiveScore(
@@ -31,9 +31,9 @@ const createLiveScoreMutation = gql`
       teamIndex
     }
   }
-`
+`;
 
-export default createLiveScoreMutation
+export default createLiveScoreMutation;
 
 // ids = { scoringSessionId, userId, teamIndex }
 export const withCreateLiveScoreMutation = graphql(createLiveScoreMutation, {
@@ -44,14 +44,14 @@ export const withCreateLiveScoreMutation = graphql(createLiveScoreMutation, {
         updateQueries: {
           scoringSession: (prev, { mutationResult }) => {
             // eslint-disable-next-line no-console
-            const newLs = mutationResult.data.createLiveScore
+            const newLs = mutationResult.data.createLiveScore;
             return update(prev, {
               scoringSession: {
-                liveScores: { $push: [newLs] }
-              }
-            })
-          }
-        }
-      })
-  })
-})
+                liveScores: { $push: [newLs] },
+              },
+            });
+          },
+        },
+      }),
+  }),
+});

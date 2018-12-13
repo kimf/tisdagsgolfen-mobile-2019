@@ -1,9 +1,6 @@
 import React, { Component } from "react";
 import { ScrollView, View } from "react-native";
-import {
-  eventQueryProps,
-  withEventQuery
-} from "../../graph/queries/eventQuery";
+import { eventQueryProps, withEventQuery } from "../../graph/queries/eventQuery";
 import { colors, deviceWidth } from "../../styles";
 import EventHeader from "../Events/EventHeader";
 import Leaderboard from "../Leaderboard/Leaderboard";
@@ -19,21 +16,21 @@ const swipeCardStyle = {
   shadowRadius: 2,
   shadowOpacity: 0.5,
   elevation: 5,
-  borderRadius: 10
+  borderRadius: 10,
 };
 interface EventViewProps {
-  currentUserId?: any,
-  eventId: any,
-  eventIndex: any,
-  seasonId: any,
-  data: any,
-  sorting: any,
-  showSorter: any,
-  changeSort: any
+  currentUserId?: any;
+  eventId: any;
+  eventIndex: any;
+  seasonId: any;
+  data: any;
+  sorting: any;
+  showSorter: any;
+  changeSort: any;
 }
 class EventView extends Component<EventViewProps, {}> {
   public static defaultProps = {
-    currentUserId: null
+    currentUserId: null,
   };
   public render() {
     const {
@@ -43,7 +40,7 @@ class EventView extends Component<EventViewProps, {}> {
       sorting,
       showSorter,
       changeSort,
-      data: { loading, event, players }
+      data: { loading, event, players },
     } = this.props;
     if (loading) {
       return <EventViewLoader />;
@@ -59,11 +56,7 @@ class EventView extends Component<EventViewProps, {}> {
           />
 
           {showSorter && (
-            <Sorter
-              key="weekSortTabs"
-              current={sorting}
-              onChange={sort => changeSort(sort)}
-            />
+            <Sorter key="weekSortTabs" current={sorting} onChange={sort => changeSort(sort)} />
           )}
         </View>
         <ScrollView
@@ -74,9 +67,8 @@ class EventView extends Component<EventViewProps, {}> {
             flex: 1,
             paddingBottom: 20,
             paddingTop: 5,
-            backgroundColor: colors.lightGray
-          }}
-        >
+            backgroundColor: colors.lightGray,
+          }}>
           <View style={[swipeCardStyle, { marginLeft: 5, marginRight: 5 }]}>
             <Leaderboard
               sorting={sorting}

@@ -9,45 +9,45 @@ type NewEventSetupProps = {
     state: {
       params?: {
         course: {
-          id: any,
-          club: any,
-          name: any
-        }
-      }
-    },
-    navigate: any
-  }
+          id: any;
+          club: any;
+          name: any;
+        };
+      };
+    };
+    navigate: any;
+  };
 };
 type NewEventSetupState = {
-  isStrokes: boolean,
-  teamEvent: boolean
+  isStrokes: boolean;
+  teamEvent: boolean;
 };
 class NewEventSetup extends Component<NewEventSetupProps, NewEventSetupState> {
   static navigationOptions = {
-    title: "Inställningar"
+    title: "Inställningar",
   };
   state = {
     isStrokes: false,
-    teamEvent: false
+    teamEvent: false,
   };
   gotoScoringItems = () => {
     const { navigation } = this.props;
     const {
-      state: { params }
+      state: { params },
     } = navigation;
     const { isStrokes, teamEvent } = this.state;
     navigation.navigate("NewEventScoringItems", {
       ...params,
       isStrokes,
-      teamEvent
+      teamEvent,
     });
   };
   render() {
     const { navigation } = this.props;
     const {
       state: {
-        params: { course }
-      }
+        params: { course },
+      },
     } = navigation;
     const { teamEvent, isStrokes } = this.state;
     return (

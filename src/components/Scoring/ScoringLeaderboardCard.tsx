@@ -1,7 +1,7 @@
 import React from "react";
-import { View, Image } from "react-native";
-import TGText from "../shared/TGText";
+import { Image, View } from "react-native";
 import styles, { colors } from "../../styles";
+import TGText from "../shared/TGText";
 const mutedYellow = { backgroundColor: colors.mutedYellow };
 const defaultPhoto = require("../../images/defaultavatar.png");
 const getItemName = (teamEvent, player) => {
@@ -16,33 +16,33 @@ const isCurrentUser = (teamEvent, player, currentUserId) => {
   }
   return player.id === currentUserId;
 };
-type ScoringLeaderboardCardProps = {
+interface ScoringLeaderboardCardProps {
   player: {
-    holes: any,
-    strokes: any,
-    points: any,
-    beerPos?: any,
-    id: any,
-    krPos?: any,
-    position: any,
+    holes: any;
+    strokes: any;
+    points: any;
+    beerPos?: any;
+    id: any;
+    krPos?: any;
+    position: any;
     photo?: {
-      url: any
-    },
-    firstName?: any,
-    lastName?: any,
-    users?: string[]
-  },
-  currentUserId: any,
-  sorting: any,
-  scoringType: any,
-  teamEvent: any
-};
+      url: any;
+    };
+    firstName?: any;
+    lastName?: any;
+    users?: string[];
+  };
+  currentUserId: any;
+  sorting: any;
+  scoringType: any;
+  teamEvent: any;
+}
 const ScoringLeaderboardCard: React.SFC<ScoringLeaderboardCardProps> = ({
   player,
   currentUserId,
   sorting,
   scoringType,
-  teamEvent
+  teamEvent,
 }) => {
   let pointText;
   let pointValue = "";
@@ -61,25 +61,19 @@ const ScoringLeaderboardCard: React.SFC<ScoringLeaderboardCardProps> = ({
     pointText = strokePlay ? "" : "p";
     position = player.position;
   }
-  const currentUserStyle = isCurrentUser(teamEvent, player, currentUserId)
-    ? mutedYellow
-    : null;
+  const currentUserStyle = isCurrentUser(teamEvent, player, currentUserId) ? mutedYellow : null;
   const photoUrl = player.photo ? player.photo.url : null;
   const itemName = getItemName(teamEvent, player);
   return (
-    <View
-      key={player.id}
-      style={[styles.listrow, currentUserStyle, { paddingHorizontal: 20 }]}
-    >
+    <View key={player.id} style={[styles.listrow, currentUserStyle, { paddingHorizontal: 20 }]}>
       <View style={styles.position}>
         <TGText
           style={{
             flex: 1,
             fontWeight: "800",
             color: colors.dark,
-            fontSize: 16
-          }}
-        >
+            fontSize: 16,
+          }}>
           {position}
         </TGText>
       </View>
@@ -94,13 +88,9 @@ const ScoringLeaderboardCard: React.SFC<ScoringLeaderboardCardProps> = ({
         <TGText style={styles.name}>{itemName}</TGText>
       </View>
       {sorting === "totalPoints" ? (
-        <TGText style={[styles.points, { color: colors.gray }]}>
-          {player.strokes}
-        </TGText>
+        <TGText style={[styles.points, { color: colors.gray }]}>{player.strokes}</TGText>
       ) : null}
-      <TGText
-        style={[styles.points, { paddingRight: 10 }]}
-      >{`${pointValue} ${pointText}`}</TGText>
+      <TGText style={[styles.points, { paddingRight: 10 }]}>{`${pointValue} ${pointText}`}</TGText>
     </View>
   );
 };

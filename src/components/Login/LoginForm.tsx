@@ -1,54 +1,54 @@
-import React from 'react'
-import { StyleSheet, TextInput, View } from 'react-native'
-import { colors } from '../../styles'
-import TGText from '../shared/TGText'
-import LoginError from './LoginError'
+import React from "react";
+import { StyleSheet, TextInput, View } from "react-native";
+import { colors } from "../../styles";
+import TGText from "../shared/TGText";
+import LoginError from "./LoginError";
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    width: '100%'
+    width: "100%",
   },
   label: {
     color: colors.yellow,
-    width: '90%',
+    width: "90%",
     paddingHorizontal: 20,
     marginTop: 10,
-    marginBottom: 5
+    marginBottom: 5,
   },
   input: {
     backgroundColor: colors.lightGray,
     borderColor: colors.semiDark,
     borderWidth: 1,
-    width: '90%',
+    width: "90%",
     height: 40,
     marginHorizontal: 20,
     paddingHorizontal: 10,
     color: colors.dark,
-    fontFamily: 'System'
+    fontFamily: "System",
   },
   inputWrapper: {
-    marginBottom: 5
+    marginBottom: 5,
   },
   loginButton: {
     paddingVertical: 16,
     backgroundColor: colors.blue,
-    width: '90%',
-    margin: 20
+    width: "90%",
+    margin: 20,
   },
   loginButtonText: {
-    textAlign: 'center',
-    fontWeight: 'bold',
+    textAlign: "center",
+    fontWeight: "bold",
     fontSize: 14,
-    color: colors.white
-  }
-})
+    color: colors.white,
+  },
+});
 interface LoginFormProps {
-  email?: any
-  password?: any
-  changeValue: any
-  onSubmit: any
-  loggingIn: any
-  error?: any
+  email?: any;
+  password?: any;
+  changeValue: any;
+  onSubmit: any;
+  loggingIn: any;
+  error?: any;
 }
 const LoginForm: React.SFC<LoginFormProps> = ({
   email,
@@ -56,7 +56,7 @@ const LoginForm: React.SFC<LoginFormProps> = ({
   changeValue,
   onSubmit,
   loggingIn,
-  error
+  error,
 }) => (
   <View behavior="position" style={styles.container}>
     {error && <LoginError />}
@@ -82,7 +82,7 @@ const LoginForm: React.SFC<LoginFormProps> = ({
       returnKeyType="go"
       autoCorrect={false}
       ref={c => {
-        this.password = c
+        this.password = c;
       }}
       onChangeText={passwordValue => changeValue({ password: passwordValue })}
       onSubmitEditing={onSubmit}
@@ -95,9 +95,9 @@ const LoginForm: React.SFC<LoginFormProps> = ({
       viewStyle={styles.loginButton}
       style={styles.loginButtonText}
       onPress={() => !loggingIn && onSubmit()}>
-      {loggingIn ? '...LOGGAR IN...' : 'LOGGA IN'}
+      {loggingIn ? "...LOGGAR IN..." : "LOGGA IN"}
     </TGText>
   </View>
-)
+);
 
-export default LoginForm
+export default LoginForm;

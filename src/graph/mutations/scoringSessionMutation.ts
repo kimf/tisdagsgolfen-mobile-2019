@@ -1,5 +1,5 @@
-import gql from 'graphql-tag'
-import { graphql } from 'react-apollo'
+import gql from "graphql-tag";
+import { graphql } from "react-apollo";
 
 const scoringSessionMutation = gql`
   mutation createScoringSession(
@@ -29,9 +29,9 @@ const scoringSessionMutation = gql`
       teamEvent
     }
   }
-`
+`;
 
-export default scoringSessionMutation
+export default scoringSessionMutation;
 
 export const withCreateScoringSessionMutation = graphql(scoringSessionMutation, {
   props: ({ mutate }) => ({
@@ -43,8 +43,8 @@ export const withCreateScoringSessionMutation = graphql(scoringSessionMutation, 
           teamEvent,
           scoringType,
           scoringItems,
-          startsAt: new Date()
-        }
-      })
-  })
-})
+          startsAt: new Date(),
+        },
+      }),
+  }),
+});

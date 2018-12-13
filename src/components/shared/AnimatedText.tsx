@@ -3,13 +3,13 @@ import { Animated, Easing } from "react-native";
 import TGText from "./TGText";
 const LOW_VAL = 0.25;
 type AnimatedTextState = {
-  fadeAnim: Value
+  fadeAnim: Value;
 };
 class AnimatedText extends Component<{}, AnimatedTextState> {
   constructor(props) {
     super(props);
     this.state = {
-      fadeAnim: new Animated.Value(LOW_VAL)
+      fadeAnim: new Animated.Value(LOW_VAL),
     };
   }
   componentDidMount() {
@@ -20,7 +20,7 @@ class AnimatedText extends Component<{}, AnimatedTextState> {
       toValue,
       duration: 1500,
       easing: Easing.in(Easing.ease),
-      useNativeDriver: true
+      useNativeDriver: true,
     }).start(() => {
       this.animate(toValue !== 1 ? 1 : LOW_VAL);
     });

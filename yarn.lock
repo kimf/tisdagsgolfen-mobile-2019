@@ -2459,6 +2459,11 @@ apollo-link-http@^1.5.5, apollo-link-http@^1.5.7:
     apollo-link "^1.2.4"
     apollo-link-http-common "^0.2.6"
 
+apollo-link-logger@^1.2.3:
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/apollo-link-logger/-/apollo-link-logger-1.2.3.tgz#1f3e6f7849ce7a7e3aa822141fe062cfa278b1e1"
+  integrity sha512-GaVwdHyXmawfvBlHfZkFkBHH3+YH7wibzSCc4/YpIbPVtbtZqi0Qop18w++jgpw385W083DMOdYe2eJsKkZdag==
+
 apollo-link-state@^0.4.2:
   version "0.4.2"
   resolved "https://registry.yarnpkg.com/apollo-link-state/-/apollo-link-state-0.4.2.tgz#ac00e9be9b0ca89eae0be6ba31fe904b80bbe2e8"

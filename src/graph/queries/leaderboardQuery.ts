@@ -1,9 +1,9 @@
-import gql from 'graphql-tag'
-import { graphql } from 'react-apollo'
+import gql from "graphql-tag";
+import { graphql } from "react-apollo";
 import {
   seasonLeaderboardQuery,
-  seasonLeaderboardQueryVariables
-} from '../../../operation-result-types'
+  seasonLeaderboardQueryVariables,
+} from "../../../operation-result-types";
 
 const leaderboardQuery = gql`
   query seasonLeaderboard($seasonId: ID!, $eventId: ID!) {
@@ -23,9 +23,9 @@ const leaderboardQuery = gql`
       beers
     }
   }
-`
+`;
 
-export default leaderboardQuery
+export default leaderboardQuery;
 
 export const withLeaderboardQuery = graphql<
   seasonLeaderboardQueryVariables,
@@ -33,6 +33,6 @@ export const withLeaderboardQuery = graphql<
   seasonLeaderboardQueryVariables
 >(leaderboardQuery, {
   options: ({ seasonId, eventId }) => ({
-    variables: { seasonId, eventId }
-  })
-})
+    variables: { seasonId, eventId },
+  }),
+});

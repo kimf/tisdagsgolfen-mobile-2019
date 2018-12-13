@@ -1,58 +1,58 @@
-import React from 'react'
-import { Image, View } from 'react-native'
-import styles, { colors } from '../../styles'
-import TGText from '../shared/TGText'
-const mutedYellow = { backgroundColor: colors.mutedYellow }
-const defaultPhoto = require('../../images/defaultavatar.png')
+import React from "react";
+import { Image, View } from "react-native";
+import styles, { colors } from "../../styles";
+import TGText from "../shared/TGText";
+const mutedYellow = { backgroundColor: colors.mutedYellow };
+const defaultPhoto = require("../../images/defaultavatar.png");
 interface EventLeaderboardCardProps {
   data: {
-    beerPos?: any
-    id: any
-    krPos?: any
-    position: any
-    beers?: any
-    kr: any
-    eventPoints: any
-    photo?: any
-    name: any
-    value: any
-  }
-  currentUserId?: any
-  sorting: any
-  scoringType: any
+    beerPos?: any;
+    id: any;
+    krPos?: any;
+    position: any;
+    beers?: any;
+    kr: any;
+    eventPoints: any;
+    photo?: any;
+    name: any;
+    value: any;
+  };
+  currentUserId?: any;
+  sorting: any;
+  scoringType: any;
 }
 const EventLeaderboardCard: React.SFC<EventLeaderboardCardProps> = ({
   data,
   currentUserId,
   sorting,
-  scoringType
+  scoringType,
 }) => {
-  let pointText
-  let pointValue = ''
-  let position
-  if (sorting === 'beers') {
-    pointValue = data.beers
-    pointText = '🍺'
-    position = data.beerPos
-  } else if (sorting === 'kr') {
-    pointValue = data.kr
-    pointText = 'kr'
-    position = data.krPos
+  let pointText;
+  let pointValue = "";
+  let position;
+  if (sorting === "beers") {
+    pointValue = data.beers;
+    pointText = "🍺";
+    position = data.beerPos;
+  } else if (sorting === "kr") {
+    pointValue = data.kr;
+    pointText = "kr";
+    position = data.krPos;
   } else {
-    pointValue = data.eventPoints
-    pointText = 'p'
-    position = data.position
+    pointValue = data.eventPoints;
+    pointText = "p";
+    position = data.position;
   }
-  const currentUserStyle = data.id === currentUserId ? mutedYellow : null
+  const currentUserStyle = data.id === currentUserId ? mutedYellow : null;
   return (
     <View key={data.id} style={[styles.listrow, currentUserStyle]}>
       <View style={styles.position}>
         <TGText
           style={{
             flex: 1,
-            fontWeight: '800',
+            fontWeight: "800",
             color: colors.dark,
-            fontSize: 16
+            fontSize: 16,
           }}>
           {position}
         </TGText>
@@ -65,9 +65,9 @@ const EventLeaderboardCard: React.SFC<EventLeaderboardCardProps> = ({
       <View style={styles.cardTitle}>
         <TGText style={styles.name}>{data.name}</TGText>
       </View>
-      {sorting === 'totalPoints' ? (
+      {sorting === "totalPoints" ? (
         <TGText style={styles.dimmerPoints}>
-          {data.value} {scoringType === 'points' ? 'p' : 'slag'}
+          {data.value} {scoringType === "points" ? "p" : "slag"}
         </TGText>
       ) : null}
 
@@ -76,15 +76,15 @@ const EventLeaderboardCard: React.SFC<EventLeaderboardCardProps> = ({
           styles.points,
           {
             flex: 3,
-            fontWeight: '800',
+            fontWeight: "800",
             fontSize: 18,
-            textAlign: 'right'
-          }
+            textAlign: "right",
+          },
         ]}>
         {`${pointValue} ${pointText}`}
       </TGText>
     </View>
-  )
-}
+  );
+};
 
-export default EventLeaderboardCard
+export default EventLeaderboardCard;

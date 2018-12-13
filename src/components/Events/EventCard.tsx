@@ -1,15 +1,15 @@
-import React from "react";
-import { View } from "react-native";
 import moment from "moment";
 import "moment/locale/sv";
+import React from "react";
+import { View } from "react-native";
 import TGText from "../shared/TGText";
 import TouchableView from "../shared/TouchableView";
-import { eventShape } from "../../propTypes";
+
 import styles from "./eventCardStyles";
-type EventCardProps = {
-  event: any,
-  onNavigate: any
-};
+interface EventCardProps {
+  event: any;
+  onNavigate: any;
+}
 const EventCard: React.SFC<EventCardProps> = ({ event, onNavigate }) => {
   let gametypeName = "";
   if (event.scoringType === "modified_points") {
@@ -26,8 +26,7 @@ const EventCard: React.SFC<EventCardProps> = ({ event, onNavigate }) => {
   return (
     <TouchableView
       style={styles.eventCard}
-      onPress={() => onNavigate("EventResult", { event, title: "Resultat" })}
-    >
+      onPress={() => onNavigate("EventResult", { event, title: "Resultat" })}>
       <View style={styles.dateBox}>
         <TGText style={styles.date}>{date}</TGText>
         <TGText style={styles.month}>{month}</TGText>

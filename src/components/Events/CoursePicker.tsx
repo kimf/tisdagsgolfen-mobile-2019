@@ -1,77 +1,71 @@
-import React, { Component } from 'react'
-import { FlatList, TextInput, View } from 'react-native'
+import React, { Component } from "react";
+import { FlatList, TextInput, View } from "react-native";
 
-import EmptyState from '../shared/EmptyState'
-import Loading from '../shared/Loading'
-import SubHeader from '../shared/SubHeader'
-import CourseRow from './CourseRow'
+import EmptyState from "../shared/EmptyState";
+import Loading from "../shared/Loading";
+import SubHeader from "../shared/SubHeader";
+import CourseRow from "./CourseRow";
 
-import { withCoursesQuery } from '../../graph/queries/coursesQuery'
-import styles, { colors } from '../../styles'
-import { cacheable } from '../../utils'
+import { withCoursesQuery } from "../../graph/queries/coursesQuery";
+import styles, { colors } from "../../styles";
+import { cacheable } from "../../utils";
 
 const fixString = stringToFix =>
   stringToFix
     .trim()
-    .replace(/-/g, '')
-    .replace(/ /g, '')
-    .toLowerCase()
+    .replace(/-/g, "")
+    .replace(/ /g, "")
+    .toLowerCase();
 
 const filterCourses = cacheable((courses, query) =>
   courses
     .filter(c => {
-      const searchString = fixString(`${c.club}${c.name}`)
-      const trimmedQuery = fixString(query)
-      return searchString.indexOf(trimmedQuery) !== -1
+      const searchString = fixString(`${c.club}${c.name}`);
+      const trimmedQuery = fixString(query);
+      return searchString.indexOf(trimmedQuery) !== -1;
     })
     .sort((a, b) => b.eventCount - a.eventCount)
-    .sort((a, b) => a.club - b.club)
-)
+    .sort((a, b) => a.club - b.club),
+);
 
 const getPreviouslyPlayedCourses = cacheable(courses =>
-  courses.filter(c => c.eventCount > 3).sort((a, b) => b.eventCount - a.eventCount)
-)
+  courses.filter(c => c.eventCount > 3).sort((a, b) => b.eventCount - a.eventCount),
+);
 
-class CoursePicker extends Component {
-  public static propTypes = {
-    selectCourse: func.isRequired,
-    data: shape({
-      loading: bool,
-      courses: arrayOf(shape())
-    })
-  }
+interface Props {
+  data: { loading: boolean; courses: any[] };
+  selectCourse: () => void;
+}
 
-  public static defaultProps = {
-    data: {
-      loading: true,
-      courses: []
-    }
-  }
+interface State {
+  query: string;
+}
 
-  public state = { query: '' }
+class CoursePicker extends Component<Props, State> {
+  public state = { query: "" };
 
-  public setSearchQuery = query => this.setState(state => ({ ...state, query }))
+  public setSearchQuery = query => this.setState(state => ({ ...state, query }));
 
   public render() {
-    const { data, selectCourse } = this.props
-    const { query } = this.state
+    const { data, selectCourse } = this.props;
+    const { query } = this.state;
 
     if (data.loading) {
-      return <Loading text="Laddar banor..." />
+      return <Loading text="Laddar banor..." />;
     }
 
     if (data.courses.length === 0) {
-      return <EmptyState text="Inga banor :(" />
+      return <EmptyState text="Inga banor :(" />;
     }
 
-    let courses = []
-    let previously = false
-    if (query !== '' && query.length > 1) {
-      previously = false
-      courses = filterCourses(data.courses, query)
+    let courses = [];
+    let previously = false;
+    if (query !== "" && query.length > 1) {
+      previously = false;
+      courses = filterCourses(data.courses, query);
     } else {
-      previously = true
-      courses = getPreviouslyPlayedCourses(data.courses)
+      previously = true;
+      courses = getPreviouslyPlayedCourses(data.courses);
     }
 
     return (
@@ -94,7 +88,7 @@ class CoursePicker extends Component {
               paddingVertical: 20,
               marginHorizontal: 20,
               borderBottomWidth: 2,
-              borderBottomColor: colors.lightGray
+              borderBottomColor: colors.lightGray,
             }}>
             <SubHeader title="Vanliga banor" />
           </View>
@@ -109,8 +103,8 @@ class CoursePicker extends Component {
           keyboardShouldPersistTaps="always"
         />
       </View>
-    )
+    );
   }
 }
 
-export default withCoursesQuery(CoursePicker)
+export default withCoursesQuery(CoursePicker);

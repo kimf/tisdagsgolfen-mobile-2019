@@ -1,13 +1,13 @@
-import React from 'react'
-import { View } from 'react-native'
+import React from "react";
+import { View } from "react-native";
 
 const style = {
-  alignItems: 'center',
-  backgroundColor: '#F5FCFF',
+  alignItems: "center",
+  backgroundColor: "#F5FCFF",
   flex: 1,
-  justifyContent: 'center'
-}
+  justifyContent: "center",
+};
 
-const CenterView = props => <View style={style}>{props.children}</View>
+const CenterView = props => <View style={style}>{props.children}</View>;
 
-export default CenterView
+export default CenterView;

@@ -1,9 +1,7 @@
 import React from "react";
 import { View } from "react-native";
 import styles, { colors } from "../../styles";
-const EventViewLoaderRow = () => (
-  <View style={[styles.listrow, { height: 60 }]} />
-);
+const EventViewLoaderRow = () => <View style={[styles.listrow, { height: 60 }]} />;
 const items = [...new Array(10)].map((i, index) => index);
 const EventViewLoader = () => (
   <View style={{ flex: 1 }}>
@@ -11,9 +9,8 @@ const EventViewLoader = () => (
       style={{
         flex: 1,
         backgroundColor: colors.lighterGray,
-        flexDirection: "column"
-      }}
-    >
+        flexDirection: "column",
+      }}>
       {items.map(item => (
         <EventViewLoaderRow key={item} />
       ))}
@@ -25,7 +22,7 @@ const EventViewLoader = () => (
         backgroundColor: colors.lightGray,
         flexDirection: "row",
         alignItems: "center",
-        justifyContent: "center"
+        justifyContent: "center",
       }}
     />
   </View>

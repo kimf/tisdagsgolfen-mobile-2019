@@ -1,48 +1,48 @@
 // tslint:disable:no-commented-code
-import { AsyncStorage } from 'react-native'
+import { AsyncStorage } from "react-native";
 
-export const average = arr => arr.reduce((p, c) => p + c, 0) / arr.length
+export const average = arr => arr.reduce((p, c) => p + c, 0) / arr.length;
 // avg.toLocaleString('sv', {maximumFractionDigits: 1, useGrouping:false})
 
-export const sorted = (array, attribute) => array.sort((a, b) => b[attribute] - a[attribute])
+export const sorted = (array, attribute) => array.sort((a, b) => b[attribute] - a[attribute]);
 
 export const sortedByParsedDate = (array, attribute) =>
   sorted(
     array.map(item => {
-      const date = new Date(item[attribute])
-      const newItem = Object.assign({}, item)
-      newItem[attribute] = date
-      return newItem
+      const date = new Date(item[attribute]);
+      const newItem = Object.assign({}, item);
+      newItem[attribute] = date;
+      return newItem;
     }),
-    attribute
-  )
+    attribute,
+  );
 
 // ranked :: Array -> String -> Array
 export const ranked = (
   array: any[],
   attribute: string,
   rankingAttribute: string,
-  reversed?: boolean
+  reversed?: boolean,
 ) => {
-  const scores = array.map(x => x[rankingAttribute])
+  const scores = array.map(x => x[rankingAttribute]);
   const rankedArr = array.map(item => {
-    const newItem = Object.assign({}, item)
-    newItem[attribute] = scores.indexOf(newItem[rankingAttribute]) + 1
-    return newItem
-  })
+    const newItem = Object.assign({}, item);
+    newItem[attribute] = scores.indexOf(newItem[rankingAttribute]) + 1;
+    return newItem;
+  });
 
-  return reversed ? rankedArr.reverse() : rankedArr
-}
+  return reversed ? rankedArr.reverse() : rankedArr;
+};
 
 const cmp = (a, b) => {
   if (a > b) {
-    return +1
+    return +1;
   }
   if (a < b) {
-    return -1
+    return -1;
   }
-  return 0
-}
+  return 0;
+};
 
 // export const rankedUsers = realUsers => {
 //   const rankings = []
@@ -69,88 +69,88 @@ const cmp = (a, b) => {
 // }
 
 export const calculateExtraStrokes = (holeIndex, playerStrokes, holesCount) => {
-  let extra = 0
+  let extra = 0;
   if (holeIndex <= playerStrokes) {
-    extra = 1
+    extra = 1;
     if (playerStrokes > holesCount && holeIndex <= playerStrokes - holesCount) {
-      extra = 2
+      extra = 2;
     }
   }
-  return extra
-}
+  return extra;
+};
 
 export const setCache = async (key, val) => {
   try {
-    const item = JSON.stringify(val)
-    const value = await AsyncStorage.setItem(key, item)
+    const item = JSON.stringify(val);
+    const value = await AsyncStorage.setItem(key, item);
     if (value === null) {
-      return false
+      return false;
     }
-    return value
+    return value;
   } catch (e) {
     // tslint:disable:next-line no-console
-    console.warn('caught error in setCache', e)
-    return false
+    console.warn("caught error in setCache", e);
+    return false;
   }
-}
+};
 
 export const getCache = async key => {
   try {
-    const value = await AsyncStorage.getItem(key)
-    return JSON.parse(`${value}`)
+    const value = await AsyncStorage.getItem(key);
+    return JSON.parse(`${value}`);
   } catch (e) {
     // tslint:disable:next-line no-console
-    console.warn('caught error in getCache', e)
-    return null
+    console.warn("caught error in getCache", e);
+    return null;
   }
-}
+};
 
 export const removeCache = async key => {
   try {
-    await AsyncStorage.removeItem(key)
-    return null
+    await AsyncStorage.removeItem(key);
+    return null;
   } catch (e) {
     // tslint:disable:next-line no-console
-    console.warn('caught error in getCache', e)
-    return null
+    console.warn("caught error in getCache", e);
+    return null;
   }
-}
+};
 
 export const cacheable = fn => {
   /* May store args and result on fn like this:
    * fn.lastArgs = ...
    * fn.lastResult = ...
    */
-  let lastArgs: any[] = []
-  let lastResult = null
+  let lastArgs: any[] = [];
+  let lastResult = null;
 
   const eq = (args1, args2) => {
     if (!args1 || !args2 || args1.length !== args2.length) {
-      return false
+      return false;
     }
-    return args1.every((arg, index) => arg === args2[index])
-  }
+    return args1.every((arg, index) => arg === args2[index]);
+  };
 
   return (...args) => {
     if (eq(args, lastArgs)) {
       // tslint:disable:next-line no-console
-      console.log(`> from cache - ${fn.name}`)
-      return lastResult
+      console.log(`> from cache - ${fn.name}`);
+      return lastResult;
     }
 
-    const result = fn(...args)
-    lastArgs = args
-    lastResult = result
-    return result
-  }
-}
+    const result = fn(...args);
+    lastArgs = args;
+    lastResult = result;
+    return result;
+  };
+};
 
 export const STROKES_MONEY = {
   [-4]: 500,
   [-3]: 300,
   [-2]: 100,
-  [-1]: 10
-}
+  [-1]: 10,
+};
 
 export const PUTT_MONEY = {
   3: -10,
@@ -161,82 +161,82 @@ export const PUTT_MONEY = {
   8: -100,
   9: -125,
   10: -150,
-  11: -175
-}
+  11: -175,
+};
 
 export const calculateEarnings = (putts, strokes, par) => {
-  let earnings = 0
+  let earnings = 0;
 
   if (putts > 2) {
-    earnings += PUTT_MONEY[putts]
+    earnings += PUTT_MONEY[putts];
   }
 
   if (strokes === 1) {
-    earnings += 500
+    earnings += 500;
   }
 
-  const strokesOverPar = strokes - par
+  const strokesOverPar = strokes - par;
   if (strokesOverPar < 0) {
-    earnings += STROKES_MONEY[strokesOverPar]
+    earnings += STROKES_MONEY[strokesOverPar];
   }
 
-  return earnings
-}
+  return earnings;
+};
 
 interface Team {
-  holes: number
-  strokes: number
-  points: number
+  holes: number;
+  strokes: number;
+  points: number;
 }
 
 const massageTeams = scoringSessions => {
-  const teams: Team[] = []
+  const teams: Team[] = [];
   scoringSessions.forEach(scoringSession => {
     scoringSession.scoringTeams.forEach(team => {
-      const holes = team.liveScores.length
-      let strokes = 0
-      let points = 0
+      const holes = team.liveScores.length;
+      let strokes = 0;
+      let points = 0;
 
       team.liveScores.forEach(ls => {
-        strokes += ls.strokes
-        points += ls.points
-      })
+        strokes += ls.strokes;
+        points += ls.points;
+      });
 
       const teamItem = {
         ...team,
         holes,
         strokes,
-        points
-      }
-      teams.push(teamItem)
-    })
-  })
+        points,
+      };
+      teams.push(teamItem);
+    });
+  });
 
-  return teams
-}
+  return teams;
+};
 
 interface Player {
-  position: number
+  position: number;
 }
 
 const massagePlayers = scoringSessions => {
-  const players: Player[] = []
+  const players: Player[] = [];
   scoringSessions.forEach(scoringSession => {
     scoringSession.scoringPlayers.forEach(player => {
-      const holes = player.liveScores.length
-      let beers = 0
-      let kr = 0
-      let points = 0
-      let putts = 0
-      let strokes = 0
+      const holes = player.liveScores.length;
+      let beers = 0;
+      let kr = 0;
+      let points = 0;
+      let putts = 0;
+      let strokes = 0;
 
       player.liveScores.forEach(ls => {
-        beers += ls.beers
-        kr += calculateEarnings(ls.putts, ls.strokes, ls.hole.par)
-        points += ls.points
-        putts += ls.putts
-        strokes += ls.strokes
-      })
+        beers += ls.beers;
+        kr += calculateEarnings(ls.putts, ls.strokes, ls.hole.par);
+        points += ls.points;
+        putts += ls.putts;
+        strokes += ls.strokes;
+      });
 
       const playerItem = {
         ...player.user,
@@ -248,44 +248,44 @@ const massagePlayers = scoringSessions => {
         holes,
         beerPos: 0,
         krPos: 0,
-        position: 0
-      }
-      players.push(playerItem)
-    })
-  })
+        position: 0,
+      };
+      players.push(playerItem);
+    });
+  });
 
-  return players
-}
+  return players;
+};
 
 export const massageIntoLeaderboard = (scoringSessions, teamEvent) => {
-  let items: Team[] | Player[] = []
+  let items: Team[] | Player[] = [];
   if (teamEvent) {
-    items = massageTeams(scoringSessions)
+    items = massageTeams(scoringSessions);
   } else {
-    items = massagePlayers(scoringSessions)
+    items = massagePlayers(scoringSessions);
   }
-  return items
-}
+  return items;
+};
 
-const addCalculatedStrokes = p => ({ ...p, calculatedStrokes: p.strokes - p.extraStrokes })
+const addCalculatedStrokes = p => ({ ...p, calculatedStrokes: p.strokes - p.extraStrokes });
 
-const breakOutTeamPlayers = teams => teams // TODO: Break out and read beers
+const breakOutTeamPlayers = teams => teams; // TODO: Break out and read beers
 
 export const rankBySorting = (players, sorting, teamEvent, scoringType) => {
-  if (sorting === 'beers' || sorting === 'kr') {
-    const items = teamEvent ? breakOutTeamPlayers(players) : players
-    const sortedBySorting = items.slice().sort((a, b) => b[sorting] - a[sorting])
-    return ranked(sortedBySorting, sorting === 'beers' ? 'beerPos' : 'krPos', sorting)
+  if (sorting === "beers" || sorting === "kr") {
+    const items = teamEvent ? breakOutTeamPlayers(players) : players;
+    const sortedBySorting = items.slice().sort((a, b) => b[sorting] - a[sorting]);
+    return ranked(sortedBySorting, sorting === "beers" ? "beerPos" : "krPos", sorting);
   }
 
-  const isStrokePlay = scoringType === 'strokes'
+  const isStrokePlay = scoringType === "strokes";
 
   const sortedPlayers = isStrokePlay
     ? players.map(addCalculatedStrokes).sort((a, b) => a.calculatedStrokes - b.calculatedStrokes)
-    : players.slice().sort((a, b) => b.points - a.points)
+    : players.slice().sort((a, b) => b.points - a.points);
 
-  const sortKey = isStrokePlay ? 'calculatedStrokes' : 'points'
-  return ranked(sortedPlayers, 'position', sortKey, !isStrokePlay)
-}
+  const sortKey = isStrokePlay ? "calculatedStrokes" : "points";
+  return ranked(sortedPlayers, "position", sortKey, !isStrokePlay);
+};
 
-export const capitalize = (text: string) => text[0].toUpperCase() + text.slice(1)
+export const capitalize = (text: string) => text[0].toUpperCase() + text.slice(1);

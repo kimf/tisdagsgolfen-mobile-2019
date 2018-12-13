@@ -12,10 +12,8 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 16,
     color: colors.red,
-    marginBottom: 10
-  }
+    marginBottom: 10,
+  },
 });
-const LoginError = () => (
-  <TGText style={styles.errorText}>Något gick fel, se över infon</TGText>
-);
+const LoginError = () => <TGText style={styles.errorText}>Något gick fel, se över infon</TGText>;
 export default LoginError;

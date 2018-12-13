@@ -4,17 +4,17 @@ import TouchableView from "./TouchableView";
 import TGText from "./TGText";
 import styles, { colors } from "../../styles";
 type HeaderProps = {
-  title: any,
-  color?: any,
-  backgroundColor?: any,
-  goBack?: any
+  title: any;
+  color?: any;
+  backgroundColor?: any;
+  goBack?: any;
 };
 class Header extends Component<HeaderProps, {}> {
   static defaultProps = {
     children: null,
     color: colors.dark,
     backgroundColor: colors.lightGray,
-    goBack: null
+    goBack: null,
   };
   renderGoBack = () => (
     <TouchableView
@@ -22,14 +22,10 @@ class Header extends Component<HeaderProps, {}> {
         position: "absolute",
         top: 20,
         right: 10,
-        padding: 20
+        padding: 20,
       }}
-      onPress={this.props.goBack}
-    >
-      <Image
-        style={{ tintColor: colors.muted }}
-        source={require("../../images/close.png")}
-      />
+      onPress={this.props.goBack}>
+      <Image style={{ tintColor: colors.muted }} source={require("../../images/close.png")} />
     </TouchableView>
   );
   render() {
@@ -37,10 +33,7 @@ class Header extends Component<HeaderProps, {}> {
     return (
       <View style={[styles.navbar, { backgroundColor }]}>
         <View style={[styles.navbarInner, { backgroundColor }]}>
-          <TGText
-            adjustsFontSizeToFitHeight
-            style={[styles.navbarTitle, { color }]}
-          >
+          <TGText adjustsFontSizeToFitHeight style={[styles.navbarTitle, { color }]}>
             {title}
           </TGText>
           {goBack ? this.renderGoBack() : null}

@@ -1,39 +1,40 @@
-import React, { Component } from 'react'
-import { View } from 'react-native'
+import React, { Component } from "react";
+import { View } from "react-native";
 
-import { colors, deviceHeight, deviceWidth } from '../../styles'
-import { calculateExtraStrokes } from '../../utils'
-import TouchableView from '../shared/TouchableView'
-import HoleHeader from './HoleHeader'
-import ScorecardHeaderRow from './ScorecardHeaderRow'
-import ScoreInput from './ScoreInput'
-import ScoreRow from './ScoreRow'
-import UserColumn from './UserColumn'
+import { colors, deviceHeight, deviceWidth } from "../../styles";
+import { calculateExtraStrokes } from "../../utils";
+import TouchableView from "../shared/TouchableView";
+import HoleHeader from "./HoleHeader";
+import ScorecardHeaderRow from "./ScorecardHeaderRow";
+import ScoreInput from "./ScoreInput";
+import ScoreRow from "./ScoreRow";
+import UserColumn from "./UserColumn";
 
-class HoleView extends Component {
-  public static propTypes = {
-    hole: shape().isRequired,
-    holesCount: number.isRequired,
-    playing: arrayOf(shape()).isRequired,
-    scoringSession: shape().isRequired,
-    scrollX: shape().isRequired
-  }
+interface Props {
+  hole: any;
+  holesCount: number;
+  playing: any[];
+  scoringSession: any;
+  scrollX: any;
+}
+interface State {
+  scoringId: string | null;
+}
 
-  public state = { scoringId: null }
-
+class HoleView extends Component<Props, State> {
   public toggleScoring = scoringId => {
     this.setState(state => {
       if (state.scoringId) {
-        return { scoringId: null }
+        return { scoringId: null };
       }
-      return { scoringId }
-    })
-  }
+      return { scoringId };
+    });
+  };
 
   public render() {
-    const { hole, playing, holesCount, scoringSession, scrollX } = this.props
-    const { teamEvent, scoringType, liveScores } = scoringSession
-    const { scoringId } = this.state
+    const { hole, playing, holesCount, scoringSession, scrollX } = this.props;
+    const { teamEvent, scoringType, liveScores } = scoringSession;
+    const { scoringId } = this.state;
 
     return (
       <View style={{ flex: 1, backgroundColor: colors.blue }}>
@@ -49,7 +50,7 @@ class HoleView extends Component {
             shadowOffset: { width: 5, height: 5 },
             shadowRadius: 1,
             shadowOpacity: 0.5,
-            elevation: 5
+            elevation: 5,
           }}>
           <ScorecardHeaderRow
             teamEvent={teamEvent}
@@ -58,29 +59,29 @@ class HoleView extends Component {
           />
 
           {playing.map((item, index) => {
-            const userId = teamEvent ? index : item.users[0].id
+            const userId = teamEvent ? index : item.users[0].id;
 
             const liveScore = liveScores.find(
-              ls => ls.user.id === userId && ls.hole === hole.number
-            )
+              ls => ls.user.id === userId && ls.hole === hole.number,
+            );
             const scoreItem = liveScore || {
               strokes: hole.par,
               putts: 2,
               points: 0,
               beers: 0,
-              extraStrokes: calculateExtraStrokes(hole.index, item.extraStrokes, holesCount)
-            }
+              extraStrokes: calculateExtraStrokes(hole.index, item.extraStrokes, holesCount),
+            };
 
-            const isScoring = scoringId && scoringId === userId
+            const isScoring = scoringId && scoringId === userId;
             return (
               <View
                 key={`player_score_row_${userId}`}
                 style={{
-                  flexDirection: 'row',
+                  flexDirection: "row",
                   paddingRight: 10,
                   borderBottomWidth: index < playing.length - 1 ? 1 : 0,
                   borderBottomColor: colors.lightGray,
-                  backgroundColor: isScoring ? colors.lightGray : colors.white
+                  backgroundColor: isScoring ? colors.lightGray : colors.white,
                 }}>
                 {scoringId && scoringId !== userId ? null : (
                   <UserColumn item={item} scoreItem={scoreItem} />
@@ -112,12 +113,12 @@ class HoleView extends Component {
                   </View>
                 )}
               </View>
-            )
+            );
           })}
         </View>
       </View>
-    )
+    );
   }
 }
 
-export default HoleView
+export default HoleView;

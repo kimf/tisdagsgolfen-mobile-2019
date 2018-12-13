@@ -1,45 +1,45 @@
-import React from 'react'
-import { Image, View } from 'react-native'
-import styles, { colors } from '../../styles'
-import TGText from '../shared/TGText'
-import UpOrDown from '../shared/UpOrDown'
-const mutedYellow = { backgroundColor: colors.mutedYellow }
-const defaultAvatar = require('../../images/defaultavatar.png')
+import React from "react";
+import { Image, View } from "react-native";
+import styles, { colors } from "../../styles";
+import TGText from "../shared/TGText";
+import UpOrDown from "../shared/UpOrDown";
+const mutedYellow = { backgroundColor: colors.mutedYellow };
+const defaultAvatar = require("../../images/defaultavatar.png");
 interface LeaderboardCardProps {
-  currentUserId?: any
-  player: any
-  sorting: any
-  showSummary?: any
-  toggleSummary?: any
+  currentUserId?: any;
+  player: any;
+  sorting: any;
+  showSummary?: any;
+  toggleSummary?: any;
 }
 const LeaderboardCard: React.SFC<LeaderboardCardProps> = ({
   player,
   sorting,
   currentUserId,
   showSummary,
-  toggleSummary
+  toggleSummary,
 }) => {
-  let pointText
-  let pointValue = ''
-  let position
-  if (sorting === 'beers') {
-    pointValue = player.beers
-    pointText = '🍺'
-    position = player.beerPos
-  } else if (sorting === 'kr') {
-    pointValue = player.totalKr - player.totalKr * 2
-    pointText = 'kr'
-    position = player.krPos
+  let pointText;
+  let pointValue = "";
+  let position;
+  if (sorting === "beers") {
+    pointValue = player.beers;
+    pointText = "🍺";
+    position = player.beerPos;
+  } else if (sorting === "kr") {
+    pointValue = player.totalKr - player.totalKr * 2;
+    pointText = "kr";
+    position = player.krPos;
   } else {
-    pointValue = player.totalPoints
-    pointText = 'p'
-    position = player.position
+    pointValue = player.totalPoints;
+    pointText = "p";
+    position = player.position;
   }
-  const averagePoints = (player.average * 2).toFixed() / 2
+  const averagePoints = (player.average * 2).toFixed() / 2;
   const currentUserStyle =
-    currentUserId && player.id.split('_')[0] === currentUserId ? mutedYellow : null
+    currentUserId && player.id.split("_")[0] === currentUserId ? mutedYellow : null;
   if (player.eventCount < 1) {
-    return null
+    return null;
   }
   return (
     <View key={player.id} style={[styles.listrow, currentUserStyle]} onPress={toggleSummary}>
@@ -47,13 +47,13 @@ const LeaderboardCard: React.SFC<LeaderboardCardProps> = ({
         <TGText
           style={{
             flex: 1,
-            fontWeight: '800',
+            fontWeight: "800",
             color: colors.dark,
-            fontSize: 16
+            fontSize: 16,
           }}>
           {position}
         </TGText>
-        {sorting === 'totalPoints' && (
+        {sorting === "totalPoints" && (
           <UpOrDown prev={player.prevPosition} current={player.position} />
         )}
       </View>
@@ -65,8 +65,8 @@ const LeaderboardCard: React.SFC<LeaderboardCardProps> = ({
       <View style={styles.cardTitle}>
         <TGText style={styles.name}>{player.name}</TGText>
         <TGText style={styles.meta}>
-          {player.eventCount} {player.eventCount > 1 ? 'Rundor' : 'Runda'}.
-          {sorting === 'totalPoints' && (
+          {player.eventCount} {player.eventCount > 1 ? "Rundor" : "Runda"}.
+          {sorting === "totalPoints" && (
             <TGText style={styles.meta}> Snitt: {averagePoints}p</TGText>
           )}
         </TGText>
@@ -75,20 +75,20 @@ const LeaderboardCard: React.SFC<LeaderboardCardProps> = ({
         <TGText
           style={{
             flex: 1,
-            fontWeight: '800',
+            fontWeight: "800",
             fontSize: 18,
-            textAlign: 'right'
+            textAlign: "right",
           }}>
           {`${pointValue} ${pointText}`}
         </TGText>
-        {sorting === 'totalPoints' && (
-          <TGText style={[styles.meta, { flex: 1, textAlign: 'right', fontSize: 10 }]}>
+        {sorting === "totalPoints" && (
+          <TGText style={[styles.meta, { flex: 1, textAlign: "right", fontSize: 10 }]}>
             25, 25, 20, 20, 15
           </TGText>
         )}
       </View>
     </View>
-  )
-}
+  );
+};
 
-export default LeaderboardCard
+export default LeaderboardCard;

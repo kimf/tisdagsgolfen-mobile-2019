@@ -1,25 +1,25 @@
-import React from 'react'
-import { Alert, View } from 'react-native'
+import React from "react";
+import { Alert, View } from "react-native";
 
-import { colors, deviceHeight, deviceWidth } from '../../styles'
-import BottomButton from '../shared/BottomButton'
-import TGText from '../shared/TGText'
-import HoleHeader from './HoleHeader'
-import ScorecardHeaderRow from './ScorecardHeaderRow'
-import ScoreRow from './ScoreRow'
-import UserColumn from './UserColumn'
+import { colors, deviceHeight, deviceWidth } from "../../styles";
+import BottomButton from "../shared/BottomButton";
+import TGText from "../shared/TGText";
+import HoleHeader from "./HoleHeader";
+import ScorecardHeaderRow from "./ScorecardHeaderRow";
+import ScoreRow from "./ScoreRow";
+import UserColumn from "./UserColumn";
 
 const confirmFinish = finishFunc => {
   Alert.alert(
-    'Vill du verkligen spara och stänga??',
-    'Har du verkligen dubbelkollat?',
+    "Vill du verkligen spara och stänga??",
+    "Har du verkligen dubbelkollat?",
     [
-      { text: 'Cancel', onPress: () => null, style: 'cancel' },
-      { text: 'OK', onPress: () => finishFunc() }
+      { text: "Cancel", onPress: () => null, style: "cancel" },
+      { text: "OK", onPress: () => finishFunc() },
     ],
-    { cancelable: false }
-  )
-}
+    { cancelable: false },
+  );
+};
 
 const FinishScoringSession = ({ scrollX, scoringSession, playing, finishRound }) => (
   <View style={{ flex: 1, backgroundColor: colors.green }}>
@@ -35,7 +35,7 @@ const FinishScoringSession = ({ scrollX, scoringSession, playing, finishRound })
         shadowOffset: { width: 5, height: 5 },
         shadowRadius: 1,
         shadowOpacity: 0.5,
-        elevation: 5
+        elevation: 5,
       }}>
       <View style={{ flex: 1 }}>
         <View style={{ flex: 1 }}>
@@ -45,20 +45,20 @@ const FinishScoringSession = ({ scrollX, scoringSession, playing, finishRound })
             scoring={false}
           />
           {playing.map((item, index) => {
-            let strokes = 0
-            let putts = 0
-            let points = 0
-            let beers = 0
-            const userId = scoringSession.teamEvent ? index : item.users[0].id
+            let strokes = 0;
+            let putts = 0;
+            let points = 0;
+            let beers = 0;
+            const userId = scoringSession.teamEvent ? index : item.users[0].id;
 
             scoringSession.liveScores.forEach(ls => {
               if (ls.user.id === userId) {
-                strokes += ls.strokes
-                putts += ls.putts
-                points += ls.points
-                beers += ls.beers
+                strokes += ls.strokes;
+                putts += ls.putts;
+                points += ls.points;
+                beers += ls.beers;
               }
-            })
+            });
 
             const scoreItem = {
               id: item.id,
@@ -66,17 +66,17 @@ const FinishScoringSession = ({ scrollX, scoringSession, playing, finishRound })
               putts,
               points,
               beers,
-              extraStrokes: item.extraStrokes
-            }
+              extraStrokes: item.extraStrokes,
+            };
 
             return (
               <View
                 key={`player_score_row_${userId}`}
                 style={{
-                  flexDirection: 'row',
+                  flexDirection: "row",
                   borderBottomWidth: index < playing.length - 1 ? 1 : 0,
                   borderBottomColor: colors.lightGray,
-                  backgroundColor: colors.white
+                  backgroundColor: colors.white,
                 }}>
                 <UserColumn
                   teamEvent={scoringSession.teamEvent}
@@ -92,10 +92,10 @@ const FinishScoringSession = ({ scrollX, scoringSession, playing, finishRound })
                   />
                 </View>
               </View>
-            )
+            );
           })}
         </View>
-        <TGText style={{ textAlign: 'center', padding: 20, color: colors.red }}>
+        <TGText style={{ textAlign: "center", padding: 20, color: colors.red }}>
           Dubbelkolla så att allt ser rätt ut!
         </TGText>
         <BottomButton
@@ -106,6 +106,6 @@ const FinishScoringSession = ({ scrollX, scoringSession, playing, finishRound })
       </View>
     </View>
   </View>
-)
+);
 
-export default FinishScoringSession
+export default FinishScoringSession;

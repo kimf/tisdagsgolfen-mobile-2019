@@ -1,28 +1,28 @@
-import React from 'react'
-import { Animated, StyleSheet } from 'react-native'
+import React from "react";
+import { Animated, StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'white',
+    backgroundColor: "white",
     flex: 1,
-    width: '100%',
-    position: 'absolute',
+    width: "100%",
+    position: "absolute",
     bottom: 0,
-    left: 0
+    left: 0,
   },
 
   inner: {
     flex: 1,
-    paddingTop: 40
+    paddingTop: 40,
   },
 
   text: {
     fontSize: 20,
-    fontWeight: '900',
-    textAlign: 'center',
-    marginBottom: 20
-  }
-})
+    fontWeight: "900",
+    textAlign: "center",
+    marginBottom: 20,
+  },
+});
 
 const AnimatedModal = ({ position, children, height }) => (
   <Animated.View
@@ -30,11 +30,11 @@ const AnimatedModal = ({ position, children, height }) => (
       styles.container,
       {
         height,
-        transform: [{ translateY: position }]
-      }
+        transform: [{ translateY: position }],
+      },
     ]}>
     {children}
   </Animated.View>
-)
+);
 
-export default AnimatedModal
+export default AnimatedModal;

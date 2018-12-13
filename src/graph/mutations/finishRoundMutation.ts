@@ -1,5 +1,5 @@
-import gql from 'graphql-tag'
-import { graphql } from 'react-apollo'
+import gql from "graphql-tag";
+import { graphql } from "react-apollo";
 
 const finishRoundMutation = gql`
   mutation finishRoundMutation($scoringSessionId: ID!) {
@@ -7,16 +7,16 @@ const finishRoundMutation = gql`
       id
     }
   }
-`
+`;
 
-export default finishRoundMutation
+export default finishRoundMutation;
 
 export const withFinishRoundMutation = graphql(finishRoundMutation, {
   props: ({ mutate }) => ({
     finishRound: scoringSessionId =>
       mutate({
         variables: { scoringSessionId },
-        refetchQueries: ['seasonEventsQuery']
-      })
-  })
-})
+        refetchQueries: ["seasonEventsQuery"],
+      }),
+  }),
+});

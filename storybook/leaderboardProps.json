@@ -10,9 +10,7 @@
         "previousPosition": 0,
         "position": 13,
         "averagePoints": 25,
-        "top5Points": [
-          25
-        ],
+        "top5Points": [25],
         "user": {
           "id": "ciyruvmpb8nu20171zwer1sgm",
           "firstName": "Johan",
@@ -28,13 +26,7 @@
         "previousPosition": 7,
         "position": 12,
         "averagePoints": 6.833333333333333,
-        "top5Points": [
-          20,
-          12,
-          3,
-          2,
-          2
-        ],
+        "top5Points": [20, 12, 3, 2, 2],
         "user": {
           "id": "ciyruvnuz4kok0170ik9oc9ey",
           "firstName": "Christian",
@@ -50,13 +42,7 @@
         "previousPosition": 10,
         "position": 11,
         "averagePoints": 9.222222222222221,
-        "top5Points": [
-          20,
-          20,
-          10,
-          10,
-          8
-        ],
+        "top5Points": [20, 20, 10, 10, 8],
         "user": {
           "id": "ciyruvms38nwh0171hov333vz",
           "firstName": "Fredrik",
@@ -72,13 +58,7 @@
         "previousPosition": 11,
         "position": 10,
         "averagePoints": 10,
-        "top5Points": [
-          25,
-          15,
-          10,
-          10,
-          8
-        ],
+        "top5Points": [25, 15, 10, 10, 8],
         "user": {
           "id": "ciyruvmwu8nwt01711giqa76c",
           "firstName": "Göran",
@@ -94,13 +74,7 @@
         "previousPosition": 9,
         "position": 9,
         "averagePoints": 10.214285714285714,
-        "top5Points": [
-          20,
-          17,
-          15,
-          15,
-          12
-        ],
+        "top5Points": [20, 17, 15, 15, 12],
         "user": {
           "id": "ciyruvmrm8nwf0171qu1l2j6d",
           "firstName": "Håkan",
@@ -116,13 +90,7 @@
         "previousPosition": 8,
         "position": 8,
         "averagePoints": 13.88888888888889,
-        "top5Points": [
-          25,
-          17,
-          17,
-          15,
-          15
-        ],
+        "top5Points": [25, 17, 17, 15, 15],
         "user": {
           "id": "ciyruvnnw4klw0170cn2xbbmw",
           "firstName": "Urban",
@@ -138,13 +106,7 @@
         "previousPosition": 7,
         "position": 7,
         "averagePoints": 12,
-        "top5Points": [
-          25,
-          20,
-          17,
-          15,
-          15
-        ],
+        "top5Points": [25, 20, 17, 15, 15],
         "user": {
           "id": "ciyruvnr34koe01701suknsna",
           "firstName": "Tobias",
@@ -160,13 +122,7 @@
         "previousPosition": 5,
         "position": 6,
         "averagePoints": 13.454545454545455,
-        "top5Points": [
-          25,
-          25,
-          25,
-          20,
-          10
-        ],
+        "top5Points": [25, 25, 25, 20, 10],
         "user": {
           "id": "ciyruvmu08nwp0171x3i4fpbh",
           "firstName": "Marcus",
@@ -182,13 +138,7 @@
         "previousPosition": 6,
         "position": 5,
         "averagePoints": 18.857142857142858,
-        "top5Points": [
-          25,
-          22,
-          20,
-          20,
-          20
-        ],
+        "top5Points": [25, 22, 20, 20, 20],
         "user": {
           "id": "ciyruvnv94kom0170sqwozg6j",
           "firstName": "Göran",
@@ -204,13 +154,7 @@
         "previousPosition": 3,
         "position": 4,
         "averagePoints": 17.142857142857142,
-        "top5Points": [
-          25,
-          25,
-          25,
-          20,
-          20
-        ],
+        "top5Points": [25, 25, 25, 20, 20],
         "user": {
           "id": "ciyruvmwd8nwr0171iyxdx57b",
           "firstName": "Patrik",
@@ -226,13 +170,7 @@
         "previousPosition": 4,
         "position": 3,
         "averagePoints": 14.933333333333334,
-        "top5Points": [
-          25,
-          25,
-          25,
-          22,
-          20
-        ],
+        "top5Points": [25, 25, 25, 22, 20],
         "user": {
           "id": "ciyruvmtf8nwl01710gr1zi2j",
           "firstName": "Kim",
@@ -248,13 +186,7 @@
         "previousPosition": 2,
         "position": 2,
         "averagePoints": 17.1,
-        "top5Points": [
-          25,
-          25,
-          25,
-          25,
-          17
-        ],
+        "top5Points": [25, 25, 25, 25, 17],
         "user": {
           "id": "ciyruvnsv4kog0170ydwgjguw",
           "firstName": "Daniel",
@@ -270,13 +202,7 @@
         "previousPosition": 1,
         "position": 1,
         "averagePoints": 19.142857142857142,
-        "top5Points": [
-          25,
-          25,
-          25,
-          25,
-          25
-        ],
+        "top5Points": [25, 25, 25, 25, 25],
         "user": {
           "id": "ciyruvnq14koc0170pkxaov6q",
           "firstName": "Niklas",
@@ -292,13 +218,7 @@
         "previousPosition": 0,
         "position": 0,
         "averagePoints": 0,
-        "top5Points": [
-          0,
-          0,
-          0,
-          0,
-          0
-        ],
+        "top5Points": [0, 0, 0, 0, 0],
         "user": {
           "id": "ciyruvmpd8nu401713tjujg0m",
           "firstName": "David",
@@ -314,13 +234,7 @@
         "previousPosition": 0,
         "position": 0,
         "averagePoints": 0,
-        "top5Points": [
-          0,
-          0,
-          0,
-          0,
-          0
-        ],
+        "top5Points": [0, 0, 0, 0, 0],
         "user": {
           "id": "ciyruvms58nwj0171frq1tp58",
           "firstName": "Andreas",
@@ -336,13 +250,7 @@
         "previousPosition": 0,
         "position": 0,
         "averagePoints": 0,
-        "top5Points": [
-          0,
-          0,
-          0,
-          0,
-          0
-        ],
+        "top5Points": [0, 0, 0, 0, 0],
         "user": {
           "id": "ciyruvmtx8nwn017167tw3lwx",
           "firstName": "Börje",
@@ -358,13 +266,7 @@
         "previousPosition": 0,
         "position": 0,
         "averagePoints": 0,
-        "top5Points": [
-          0,
-          0,
-          0,
-          0,
-          0
-        ],
+        "top5Points": [0, 0, 0, 0, 0],
         "user": {
           "id": "ciyruvnnb4klu0170rdae03ev",
           "firstName": "Per",
@@ -380,13 +282,7 @@
         "previousPosition": 0,
         "position": 0,
         "averagePoints": 0,
-        "top5Points": [
-          0,
-          0,
-          0,
-          0,
-          0
-        ],
+        "top5Points": [0, 0, 0, 0, 0],
         "user": {
           "id": "ciyruvnov4kn401700syysk64",
           "firstName": "Niklas",
@@ -402,13 +298,7 @@
         "previousPosition": 0,
         "position": 0,
         "averagePoints": 0,
-        "top5Points": [
-          0,
-          0,
-          0,
-          0,
-          0
-        ],
+        "top5Points": [0, 0, 0, 0, 0],
         "user": {
           "id": "ciyruvnpu4koa0170etthu4hg",
           "firstName": "Jan",
@@ -424,13 +314,7 @@
         "previousPosition": 0,
         "position": 0,
         "averagePoints": 0,
-        "top5Points": [
-          0,
-          0,
-          0,
-          0,
-          0
-        ],
+        "top5Points": [0, 0, 0, 0, 0],
         "user": {
           "id": "ciyruvntr4koi0170pm5wrcdu",
           "firstName": "Hampus",

@@ -1,21 +1,21 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
 
 const WithContext = ({ context, children }) => {
   class DynamicWithContext extends Component {
     getChildContext() {
-      return this.props.context
+      return this.props.context;
     }
     render() {
-      return this.props.children
+      return this.props.children;
     }
   }
 
-  DynamicWithContext.childContextTypes = {}
+  DynamicWithContext.childContextTypes = {};
   Object.keys(context).forEach(
-    propertyName => (DynamicWithContext.childContextTypes[propertyName] = any)
-  )
+    propertyName => (DynamicWithContext.childContextTypes[propertyName] = any),
+  );
 
-  return <DynamicWithContext context={context}>{children}</DynamicWithContext>
-}
+  return <DynamicWithContext context={context}>{children}</DynamicWithContext>;
+};
 
-export default WithContext
+export default WithContext;

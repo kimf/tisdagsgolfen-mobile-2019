@@ -1,9 +1,9 @@
-import React from 'react'
-import { FlatList, View } from 'react-native'
+import React from "react";
+import { FlatList, View } from "react-native";
 
-import styles from '../../styles'
-import EventSetupPlayingCard from '../Scoring/EventSetupPlayingCard'
-import TopButton from '../shared/TopButton'
+import styles from "../../styles";
+import EventSetupPlayingCard from "../Scoring/EventSetupPlayingCard";
+import TopButton from "../shared/TopButton";
 
 const SetupTeamEvent = ({
   playing,
@@ -11,7 +11,7 @@ const SetupTeamEvent = ({
   onAddTeam,
   onChangeStrokes,
   onRemovePlayerFromTeam,
-  openAddPlayer
+  openAddPlayer,
 }) => (
   <View style={styles.container}>
     <TopButton title="+ LÄGG TILL LAG" onPress={onAddTeam} />
@@ -25,13 +25,13 @@ const SetupTeamEvent = ({
             onChangeStrokes,
             onRemovePlayerFromTeam,
             onAddPlayerToTeam: () => openAddPlayer(item),
-            teamEvent: true
+            teamEvent: true,
           }}
         />
       )}
       keyExtractor={item => `setup_team_${item.id}`}
     />
   </View>
-)
+);
 
-export default SetupTeamEvent
+export default SetupTeamEvent;

@@ -3,31 +3,24 @@ import { FlatList } from "react-native";
 import { ranked } from "../../utils";
 import EventLeaderboardCard from "../Events/EventLeaderboardCard";
 interface EventResultProps {
-  currentUserId?: any,
-  scoringType: any,
-  sorting: any,
-  players: any[],
-  seasonId: any,
-  eventId: any
+  currentUserId?: any;
+  scoringType: any;
+  sorting: any;
+  players: any[];
+  seasonId: any;
+  eventId: any;
 }
 class EventResult extends Component<EventResultProps, {}> {
   public static defaultProps = {
-    currentUserId: null
+    currentUserId: null,
   };
   public static navigationOptions = ({ navigation }) => ({
     title: navigation.state.params.title,
     headerVisible: true,
-    tabBarVisible: false
+    tabBarVisible: false,
   });
   public render() {
-    const {
-      sorting,
-      currentUserId,
-      scoringType,
-      players,
-      seasonId,
-      eventId
-    } = this.props;
+    const { sorting, currentUserId, scoringType, players, seasonId, eventId } = this.props;
     let sortedPlayers = null;
     let sorted = null;
     if (sorting === "beers") {

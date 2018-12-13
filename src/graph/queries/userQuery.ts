@@ -1,6 +1,6 @@
-import gql from 'graphql-tag'
-import { graphql } from 'react-apollo'
-import { getAllUsersQuery } from '../../../operation-result-types'
+import gql from "graphql-tag";
+import { graphql } from "react-apollo";
+import { getAllUsersQuery } from "../../../operation-result-types";
 
 const userQuery = gql`
   query getAllUsers {
@@ -12,7 +12,7 @@ const userQuery = gql`
       photo
     }
   }
-`
-export default userQuery
+`;
+export default userQuery;
 
-export const withUserQuery = graphql<{}, getAllUsersQuery>(userQuery)
+export const withUserQuery = graphql<{}, getAllUsersQuery>(userQuery);

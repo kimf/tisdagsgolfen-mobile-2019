@@ -1,30 +1,30 @@
-import React, { Component } from 'react'
-import { LayoutAnimation } from 'react-native'
-import { linear } from '../../animations'
-import EventView from './EventView'
-import FinalWeek from './FinalWeek'
-import WeekPicker from './WeekPicker'
+import React, { Component } from "react";
+import { LayoutAnimation } from "react-native";
+import { linear } from "../../animations";
+import EventView from "./EventView";
+import FinalWeek from "./FinalWeek";
+import WeekPicker from "./WeekPicker";
 const withChangeSort = WrappedWeek =>
   class WrappedWithChangeSort extends Component {
-    public state = { sorting: 'totalPoints' }
+    public state = { sorting: "totalPoints" };
     public changeSort = sorting => {
-      LayoutAnimation.configureNext(linear)
-      this.setState(state => ({ ...state, sorting }))
-    }
+      LayoutAnimation.configureNext(linear);
+      this.setState(state => ({ ...state, sorting }));
+    };
     public render() {
-      const { sorting } = this.state
-      return <WrappedWeek sorting={sorting} changeSort={this.changeSort} {...this.props} />
+      const { sorting } = this.state;
+      return <WrappedWeek sorting={sorting} changeSort={this.changeSort} {...this.props} />;
     }
-  }
+  };
 interface WeekViewProps {
-  currentUserId?: any
-  eventId: any
-  eventIndex: any
-  sorting: any
-  season: any
-  reversedEventIds: string[]
-  changeWeek: any
-  changeSort: any
+  currentUserId?: any;
+  eventId: any;
+  eventIndex: any;
+  sorting: any;
+  season: any;
+  reversedEventIds: string[];
+  changeWeek: any;
+  changeSort: any;
 }
 const WeekView: React.SFC<WeekViewProps> = ({
   currentUserId,
@@ -34,7 +34,7 @@ const WeekView: React.SFC<WeekViewProps> = ({
   season,
   reversedEventIds,
   changeWeek,
-  changeSort
+  changeSort,
 }) => [
   <WeekPicker
     key={`weekPicker_${season.id}`}
@@ -42,7 +42,7 @@ const WeekView: React.SFC<WeekViewProps> = ({
     currentId={eventId}
     onChangeWeek={changeWeek}
   />,
-  eventId === 'final' ? (
+  eventId === "final" ? (
     <FinalWeek key={`finalWeek_${eventId}`} season={season} />
   ) : (
     <EventView
@@ -52,9 +52,9 @@ const WeekView: React.SFC<WeekViewProps> = ({
       sorting={sorting}
       eventId={eventId}
       eventIndex={eventIndex}
-      showSorter={eventId !== 'final' && parseInt(season.name, 10) > 2015}
+      showSorter={eventId !== "final" && parseInt(season.name, 10) > 2015}
       changeSort={changeSort}
     />
-  )
-]
-export default withChangeSort(WeekView)
+  ),
+];
+export default withChangeSort(WeekView);

@@ -1,42 +1,37 @@
-import React, { Component } from 'react'
-import { Animated, View } from 'react-native'
+import React, { Component, ReactChildren } from "react";
+import { Animated, View } from "react-native";
 
-import styles, { NAVBAR_HEIGHT } from '../../styles'
+import styles, { NAVBAR_HEIGHT } from "../../styles";
 
-const HEADER_SCROLL_DISTANCE = NAVBAR_HEIGHT - 60
+const HEADER_SCROLL_DISTANCE = NAVBAR_HEIGHT - 60;
 
-class AnimatedHeader extends Component {
-  public static propTypes = {
-    scrollY: shape(),
-    title: string.isRequired,
-    children: oneOfType([arrayOf(node), node])
-  }
+interface Props {
+  scrollY: Animated.Value;
+  title: string;
+  children: ReactChildren;
+}
 
-  public static defaultProps = {
-    scrollY: null,
-    children: null
-  }
-
+class AnimatedHeader extends Component<Props> {
   public render() {
-    const { scrollY, title, children } = this.props
+    const { scrollY, title, children } = this.props;
 
     const navbarTranslate = scrollY.interpolate({
       inputRange: [0, HEADER_SCROLL_DISTANCE],
       outputRange: [0, -30],
-      extrapolate: 'clamp'
-    })
+      extrapolate: "clamp",
+    });
 
     const titleScale = scrollY.interpolate({
       inputRange: [0, HEADER_SCROLL_DISTANCE],
       outputRange: [1, 0.7],
-      extrapolate: 'clamp'
-    })
+      extrapolate: "clamp",
+    });
 
     const titleX = scrollY.interpolate({
       inputRange: [0, HEADER_SCROLL_DISTANCE],
       outputRange: [0, -40],
-      extrapolate: 'clamp'
-    })
+      extrapolate: "clamp",
+    });
 
     return (
       <Animated.View style={[styles.navbar, { transform: [{ translateY: navbarTranslate }] }]}>
@@ -46,16 +41,16 @@ class AnimatedHeader extends Component {
             style={[
               styles.navbarTitle,
               {
-                transform: [{ scale: titleScale }, { translateX: titleX }]
-              }
+                transform: [{ scale: titleScale }, { translateX: titleX }],
+              },
             ]}>
             {title}
           </Animated.Text>
           {children}
         </View>
       </Animated.View>
-    )
+    );
   }
 }
 
-export default AnimatedHeader
+export default AnimatedHeader;

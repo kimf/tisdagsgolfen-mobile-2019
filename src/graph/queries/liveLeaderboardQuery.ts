@@ -1,9 +1,9 @@
-import gql from 'graphql-tag'
-import { graphql } from 'react-apollo'
+import gql from "graphql-tag";
+import { graphql } from "react-apollo";
 import {
   liveLeaderboardQueryQuery,
-  liveLeaderboardQueryQueryVariables
-} from '../../../operation-result-types'
+  liveLeaderboardQueryQueryVariables,
+} from "../../../operation-result-types";
 
 const liveLeaderboardQuery = gql`
   query liveLeaderboardQuery($scoringSessionId: ID!) {
@@ -21,9 +21,9 @@ const liveLeaderboardQuery = gql`
       strokes
     }
   }
-`
+`;
 
-export default liveLeaderboardQuery
+export default liveLeaderboardQuery;
 
 export const withLiveLeaderboardQuery = graphql<
   liveLeaderboardQueryQueryVariables,
@@ -32,7 +32,7 @@ export const withLiveLeaderboardQuery = graphql<
 >(liveLeaderboardQuery, {
   options: ({ scoringSessionId }) => ({
     variables: { scoringSessionId },
-    fetchPolicy: 'network-only',
-    pollInterval: 30000
-  })
-})
+    fetchPolicy: "network-only",
+    pollInterval: 30000,
+  }),
+});

@@ -1,9 +1,9 @@
-import React from 'react'
-import { FlatList, View } from 'react-native'
+import React from "react";
+import { FlatList, View } from "react-native";
 
-import styles from '../../styles'
-import EventSetupPlayingCard from '../Scoring/EventSetupPlayingCard'
-import TopButton from '../shared/TopButton'
+import styles from "../../styles";
+import EventSetupPlayingCard from "../Scoring/EventSetupPlayingCard";
+import TopButton from "../shared/TopButton";
 
 const SetupIndividualEvent = ({ openAddPlayer, playing, onRemove, onChangeStrokes }) => (
   <View style={styles.container}>
@@ -16,13 +16,13 @@ const SetupIndividualEvent = ({ openAddPlayer, playing, onRemove, onChangeStroke
           {...{
             onRemove,
             onChangeStrokes,
-            teamEvent: false
+            teamEvent: false,
           }}
         />
       )}
       keyExtractor={item => `setup_pl_${item.id}`}
     />
   </View>
-)
+);
 
-export default SetupIndividualEvent
+export default SetupIndividualEvent;

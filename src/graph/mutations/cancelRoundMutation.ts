@@ -1,10 +1,10 @@
-import gql from 'graphql-tag'
-import { graphql, MutationFn } from 'react-apollo'
+import gql from "graphql-tag";
+import { graphql, MutationFn } from "react-apollo";
 import {
   cancelRoundMutationMutation,
-  cancelRoundMutationMutationVariables
-} from '../../../operation-result-types'
-import asQuery from '../queries/activeScoringSessionQuery'
+  cancelRoundMutationMutationVariables,
+} from "../../../operation-result-types";
+import asQuery from "../queries/activeScoringSessionQuery";
 
 const cancelRoundMutation = gql`
   mutation cancelRoundMutation($scoringSessionId: ID!) {
@@ -12,9 +12,9 @@ const cancelRoundMutation = gql`
       id
     }
   }
-`
+`;
 
-export default cancelRoundMutation
+export default cancelRoundMutation;
 
 export const withCancelRoundMutation = graphql<
   cancelRoundMutationMutationVariables,
@@ -24,7 +24,7 @@ export const withCancelRoundMutation = graphql<
 >(cancelRoundMutation, {
   options: {
     update: proxy => {
-      proxy.writeQuery({ query: asQuery, data: null })
-    }
-  }
-})
+      proxy.writeQuery({ query: asQuery, data: null });
+    },
+  },
+});

@@ -8,44 +8,36 @@ const styles = StyleSheet.create({
     backgroundColor: colors.blue,
     flexDirection: "row",
     width: "100%",
-    alignItems: "center"
+    alignItems: "center",
   },
   button: {
     flex: 1,
-    padding: 20
+    padding: 20,
   },
   text: {
     color: colors.lightGray,
-    fontWeight: "bold"
+    fontWeight: "bold",
   },
   menu: {
-    textAlign: "left"
+    textAlign: "left",
   },
   leaderboard: {
-    textAlign: "right"
-  }
+    textAlign: "right",
+  },
 });
 interface ScoringFooterProps {
-  showMenu: any,
-  showLeaderboard: any
+  showMenu: any;
+  showLeaderboard: any;
 }
-const ScoringFooter: React.SFC<ScoringFooterProps> = ({
-  showMenu,
-  showLeaderboard
-}) => (
+const ScoringFooter: React.SFC<ScoringFooterProps> = ({ showMenu, showLeaderboard }) => (
   <View style={styles.view}>
-    <TGText
-      onPress={() => showMenu()}
-      viewStyle={styles.button}
-      style={[styles.text, styles.menu]}
-    >
+    <TGText onPress={() => showMenu()} viewStyle={styles.button} style={[styles.text, styles.menu]}>
       MENY
     </TGText>
     <TGText
       onPress={() => showLeaderboard()}
       viewStyle={styles.button}
-      style={[styles.text, styles.leaderboard]}
-    >
+      style={[styles.text, styles.leaderboard]}>
       LEDARTAVLA
     </TGText>
   </View>

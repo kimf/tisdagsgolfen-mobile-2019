@@ -7,18 +7,18 @@ const styles = StyleSheet.create({
     backgroundColor: colors.yellow,
     padding: 16,
     width: "100%",
-    alignSelf: "flex-end"
+    alignSelf: "flex-end",
   },
   text: {
     color: colors.dark,
     textAlign: "center",
     fontWeight: "bold",
-    fontSize: 12
-  }
+    fontSize: 12,
+  },
 });
 interface TopButtonProps {
-  title: any,
-  onPress: any
+  title: any;
+  onPress: any;
 }
 const TopButton: React.SFC<TopButtonProps> = ({ title, onPress }) => (
   <TGText viewStyle={styles.button} style={styles.text} onPress={onPress}>

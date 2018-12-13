@@ -1,24 +1,24 @@
-import React from 'react'
-import { StyleSheet } from 'react-native'
-import { colors } from '../../styles'
-import TGText from './TGText'
+import React from "react";
+import { StyleSheet } from "react-native";
+import { colors } from "../../styles";
+import TGText from "./TGText";
 const styles = StyleSheet.create({
   button: {
     padding: 18,
-    width: '100%%',
-    alignSelf: 'flex-end'
+    width: "100%%",
+    alignSelf: "flex-end",
   },
   text: {
-    textAlign: 'center',
-    fontWeight: 'bold',
-    fontSize: 14
-  }
-})
+    textAlign: "center",
+    fontWeight: "bold",
+    fontSize: 14,
+  },
+});
 interface BottomButtonProps {
-  title: any
-  onPress: any
-  backgroundColor?: any
-  color?: any
+  title: any;
+  onPress: any;
+  backgroundColor?: any;
+  color?: any;
 }
 const BottomButton: React.SFC<BottomButtonProps> = ({ title, onPress, backgroundColor, color }) => (
   <TGText
@@ -27,6 +27,6 @@ const BottomButton: React.SFC<BottomButtonProps> = ({ title, onPress, background
     onPress={onPress}>
     {title}
   </TGText>
-)
+);
 
-export default BottomButton
+export default BottomButton;

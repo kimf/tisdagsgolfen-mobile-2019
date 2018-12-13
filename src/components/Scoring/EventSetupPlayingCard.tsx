@@ -1,34 +1,33 @@
-import React, { Component } from 'react'
-import { Image, Slider, StyleSheet, View } from 'react-native'
+import React, { Component } from "react";
+import { Image, Slider, StyleSheet, View } from "react-native";
 
-import styles, { colors } from '../../styles'
-import TGText from '../shared/TGText'
+import styles, { colors } from "../../styles";
+import TGText from "../shared/TGText";
 
-const defaultAvatar = require('../../images/defaultavatar.png')
+const defaultAvatar = require("../../images/defaultavatar.png");
 
-class EventSetupPlayingCard extends Component {
-  public static propTypes = {
-    item: shape().isRequired,
-    onRemove: func.isRequired,
-    onChangeStrokes: func.isRequired,
-    onRemovePlayerFromTeam: func,
-    onAddPlayerToTeam: func,
-    teamEvent: bool.isRequired
-  }
+interface Props {
+  item: any;
+  onRemove: () => void;
+  onChangeStrokes: () => void;
+  onRemovePlayerFromTeam?: () => void;
+  onAddPlayerToTeam?: () => void;
+  teamEvent: boolean;
+}
 
-  public static defaultProps = {
-    onRemovePlayerFromTeam: () => {},
-    onAddPlayerToTeam: () => {}
-  }
+interface State {
+  strokes: number;
+}
 
-  public state = { strokes: 0 }
+class EventSetupPlayingCard extends Component<Props, State> {
+  public state = { strokes: 0 };
 
   constructor(props) {
-    super(props)
-    this.state = { strokes: props.item.strokes }
+    super(props);
+    this.state = { strokes: props.item.strokes };
   }
 
-  public getPhotoUrl = item => (item.photo ? { uri: item.photo } : defaultAvatar)
+  public getPhotoUrl = item => (item.photo ? { uri: item.photo } : defaultAvatar);
 
   public render() {
     const {
@@ -37,24 +36,24 @@ class EventSetupPlayingCard extends Component {
       onChangeStrokes,
       onRemovePlayerFromTeam,
       onAddPlayerToTeam,
-      teamEvent
-    } = this.props
+      teamEvent,
+    } = this.props;
 
-    const name = teamEvent ? `Lag ${item.id + 1}` : `${item.firstName} ${item.lastName}`
-    const photoSrc = this.getPhotoUrl(item)
+    const name = teamEvent ? `Lag ${item.id + 1}` : `${item.firstName} ${item.lastName}`;
+    const photoSrc = this.getPhotoUrl(item);
 
     return (
       <View
         style={{
-          flexDirection: 'column',
+          flexDirection: "column",
           marginHorizontal: 8,
           marginTop: 8,
           padding: 8,
-          backgroundColor: colors.lightGray
+          backgroundColor: colors.lightGray,
         }}>
-        <View style={{ flex: 1, flexDirection: 'row' }}>
+        <View style={{ flex: 1, flexDirection: "row" }}>
           {teamEvent ? (
-            <View style={{ flex: 0, marginRight: 20, flexDirection: 'row' }}>
+            <View style={{ flex: 0, marginRight: 20, flexDirection: "row" }}>
               {item.players.map(player => (
                 <Image
                   key={`team_player_photo_${player.id}`}
@@ -67,14 +66,14 @@ class EventSetupPlayingCard extends Component {
           ) : (
             <Image style={styles.cardImage} source={photoSrc} resizeMode="cover" />
           )}
-          <TGText style={{ flex: 1, fontWeight: 'bold', fontSize: 18 }}>{name}</TGText>
+          <TGText style={{ flex: 1, fontWeight: "bold", fontSize: 18 }}>{name}</TGText>
           <TGText
             style={{
               flex: 1,
               color: colors.red,
               paddingLeft: 20,
               paddingRight: 10,
-              paddingBottom: 10
+              paddingBottom: 10,
             }}
             onPress={() => onRemove(item)}>
             Ta bort
@@ -82,12 +81,12 @@ class EventSetupPlayingCard extends Component {
         </View>
         <View
           style={{
-            alignItems: 'center',
+            alignItems: "center",
             flex: 1,
-            flexDirection: 'row',
-            paddingVertical: 10
+            flexDirection: "row",
+            paddingVertical: 10,
           }}>
-          <TGText style={{ flex: 0, textAlign: 'left', fontSize: 12 }}>Extraslag</TGText>
+          <TGText style={{ flex: 0, textAlign: "left", fontSize: 12 }}>Extraslag</TGText>
           <Slider
             style={{ flex: 1, marginHorizontal: 20 }}
             maximumValue={36}
@@ -99,10 +98,10 @@ class EventSetupPlayingCard extends Component {
           <TGText
             style={{
               flex: 0,
-              textAlign: 'right',
+              textAlign: "right",
               fontSize: 18,
-              fontWeight: 'bold',
-              color: colors.green
+              fontWeight: "bold",
+              color: colors.green,
             }}>
             {this.state.strokes}
           </TGText>
@@ -113,17 +112,17 @@ class EventSetupPlayingCard extends Component {
               paddingVertical: 10,
               borderTopWidth: 1,
               borderColor: colors.white,
-              flexDirection: 'column'
+              flexDirection: "column",
             }}>
             {item.players.map(player => (
               <View
                 key={`pl_team_player_${player.id}`}
                 style={{
-                  width: '100%',
+                  width: "100%",
                   paddingVertical: 5,
-                  flexDirection: 'row',
-                  borderBottomColor: '#ecc',
-                  borderBottomWidth: StyleSheet.hairlineWidth
+                  flexDirection: "row",
+                  borderBottomColor: "#ecc",
+                  borderBottomWidth: StyleSheet.hairlineWidth,
                 }}>
                 <TGText
                   style={{
@@ -132,7 +131,7 @@ class EventSetupPlayingCard extends Component {
                     padding: 10,
                     paddingTop: 5,
                     paddingBottom: 0,
-                    marginRight: 10
+                    marginRight: 10,
                   }}
                   onPress={() => onRemovePlayerFromTeam(item, player)}>
                   X
@@ -140,9 +139,9 @@ class EventSetupPlayingCard extends Component {
                 <TGText
                   style={{
                     flex: 1,
-                    fontWeight: 'bold',
+                    fontWeight: "bold",
                     fontSize: 14,
-                    paddingTop: 5
+                    paddingTop: 5,
                   }}>
                   {player.firstName} {player.lastName}
                 </TGText>
@@ -152,13 +151,13 @@ class EventSetupPlayingCard extends Component {
               viewStyle={{
                 marginTop: 10,
                 padding: 10,
-                backgroundColor: colors.muted
+                backgroundColor: colors.muted,
               }}
               style={{
-                textAlign: 'center',
+                textAlign: "center",
                 color: colors.white,
                 fontSize: 12,
-                fontWeight: 'bold'
+                fontWeight: "bold",
               }}
               onPress={() => onAddPlayerToTeam(item)}>
               + Lägg till spelare i {name}
@@ -166,8 +165,8 @@ class EventSetupPlayingCard extends Component {
           </View>
         )}
       </View>
-    )
+    );
   }
 }
 
-export default EventSetupPlayingCard
+export default EventSetupPlayingCard;
