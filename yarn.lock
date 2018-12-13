@@ -1909,6 +1909,14 @@
   resolved "https://registry.yarnpkg.com/@types/prop-types/-/prop-types-15.5.8.tgz#8ae4e0ea205fe95c3901a5a1df7f66495e3a56ce"
   integrity sha512-3AQoUxQcQtLHsK25wtTWIoIpgYjH3vSDroZOUr7PpCHw/jLY1RB9z9E8dBT/OSmwStVgkRNvdh+ZHNiomRieaw==
 
+"@types/react-native@*":
+  version "0.57.18"
+  resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.57.18.tgz#f9c18fc59a3d038ed1f9414b84a8d9ba7078fc45"
+  integrity sha512-QWLCJIzNmJNAl4n3mjjdBFGyhnQKWbZD9sKNDlfI0XmZroBo5+Muf9sn+y5uRuhWkkYUwIiEyYPe3lRmq4ZBSg==
+  dependencies:
+    "@types/prop-types" "*"
+    "@types/react" "*"
+
 "@types/react-native@^0.56.24":
   version "0.56.24"
   resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.56.24.tgz#e91880738be3e82d39f46d3e0f4af0d6da4e6fa3"
@@ -1916,6 +1924,14 @@
   dependencies:
     "@types/prop-types" "*"
     "@types/react" "*"
+
+"@types/react-navigation@^2.13.8":
+  version "2.13.8"
+  resolved "https://registry.yarnpkg.com/@types/react-navigation/-/react-navigation-2.13.8.tgz#fee0a225dcb4b43e0ccc9eb23b2ef88de83fef5e"
+  integrity sha512-QhJ+hVb9i8+2DheLbanJBLM6gkOpkMihns0O+JLRmZgYCAM9Fu7I95zz0NXn4vH9tChXGyTm0wpaHgMCWzFhLA==
+  dependencies:
+    "@types/react" "*"
+    "@types/react-native" "*"
 
 "@types/react@*", "@types/react@^16.4.16":
   version "16.7.17"

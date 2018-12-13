@@ -1,20 +1,20 @@
 import React, { Component } from "react";
 import { FlatList } from "react-native";
+import { LeaderboardPlayer } from "../../types/userTypes";
 import { ranked } from "../../utils";
 import EmptyState from "../shared/EmptyState";
 import LeaderboardCard from "./LeaderboardCard";
 interface LeaderboardProps {
-  seasonId: any;
-  eventId: any;
-  players: any[];
-  currentUserId?: any;
-  sorting?: any;
+  seasonId: string;
+  eventId: string;
+  players: LeaderboardPlayer[];
+  currentUserId?: string;
+  sorting: string;
 }
 class Leaderboard extends Component<LeaderboardProps, {}> {
-  public static defaultProps = { currentUserId: null, sorting: "totalPoints" };
   public render() {
-    const { sorting, players, currentUserId, seasonId, eventId } = this.props;
-    let sortedPlayers = null;
+    const { sorting = "totalPoints", players, currentUserId, seasonId, eventId } = this.props;
+    let sortedPlayers: LeaderboardPlayer[] | null = null;
     if (sorting === "beers") {
       const sorted = players.slice().sort((a, b) => b.beers - a.beers);
       sortedPlayers = ranked(sorted, "beerPos", "beers");

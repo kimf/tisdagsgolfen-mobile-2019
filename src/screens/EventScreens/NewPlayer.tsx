@@ -3,23 +3,27 @@ import { FlatList, Image, View } from "react-native";
 import TGText from "../../components/shared/TGText";
 import { withUserQuery } from "../../graph/queries/userQuery";
 import styles, { colors } from "../../styles";
+import { Player, Team } from "../../types/userTypes";
 
+// @ts-ignore
 const defaultAvatar = require("../../images/defaultavatar.png");
+
 interface NewPlayerProps {
-  data?: {
-    loading?: any;
-    players?: any[];
+  data: {
+    loading: boolean;
+    players: Player[];
   };
   navigation: {
     state: {
-      params?: {
-        team?: {
-          id: any;
+      params: {
+        team: {
+          id: string;
         };
-        addedIds: any[];
-        onAdd: any;
+        addedIds: string[];
+        onAdd: (player: Player, team: Team | null) => void;
       };
     };
+    goBack: () => void;
   };
 }
 class NewPlayer extends Component<NewPlayerProps, {}> {
@@ -27,13 +31,7 @@ class NewPlayer extends Component<NewPlayerProps, {}> {
     title: "Lägg till spelare",
     tabBarVisible: false,
   };
-  public static defaultProps = {
-    data: {
-      loading: true,
-      players: [],
-    },
-  };
-  public addPlayer = (player, team = null) => {
+  public addPlayer = (player: Player, team: Team | null = null) => {
     this.props.navigation.state.params.onAdd(player, team);
     this.props.navigation.goBack();
   };
@@ -47,7 +45,6 @@ class NewPlayer extends Component<NewPlayerProps, {}> {
       <View style={styles.container}>
         <FlatList
           removeClippedSubviews={false}
-          initialListSize={10}
           data={data.players}
           renderItem={({ item }) => {
             const isPlaying = addedIds.includes(item.id);
@@ -69,7 +66,6 @@ class NewPlayer extends Component<NewPlayerProps, {}> {
             ) : null;
           }}
           keyExtractor={item => `setup_player_row_${item.id}`}
-          enableEmptySections={true}
         />
       </View>
     );

@@ -1,10 +1,18 @@
-import React from "react";
-import { Platform, TouchableNativeFeedback, TouchableOpacity, View } from "react-native";
+import React, { ReactElement } from "react";
+import {
+  Platform,
+  RegisteredStyle,
+  TouchableNativeFeedback,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { colors } from "../../styles";
 interface TouchableViewProps {
-  isRippleDisabled?: any;
-  rippleColor?: any;
-  style?: any;
+  isRippleDisabled?: boolean;
+  rippleColor?: string;
+  style: RegisteredStyle<ViewStyle>;
+  onPress: () => void;
+  children: ReactElement;
 }
 const TouchableView: React.SFC<TouchableViewProps> = ({
   isRippleDisabled = true,

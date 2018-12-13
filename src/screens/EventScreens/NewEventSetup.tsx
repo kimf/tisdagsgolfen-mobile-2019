@@ -1,48 +1,38 @@
 import React, { Component } from "react";
 import { Switch, View } from "react-native";
+import { NavigationNavigateAction } from "react-navigation";
+
 import SetupCourseRow from "../../components/Events/SetupCourseRow";
-import TGText from "../../components/shared/TGText";
 import BottomButton from "../../components/shared/BottomButton";
+import TGText from "../../components/shared/TGText";
 import styles, { colors } from "../../styles";
-type NewEventSetupProps = {
+import { Course } from "../../types/userTypes";
+
+interface NewEventSetupProps {
   navigation: {
     state: {
-      params?: {
-        course: {
-          id: any;
-          club: any;
-          name: any;
-        };
+      params: {
+        course: Course;
       };
     };
     navigate: any;
   };
-};
-type NewEventSetupState = {
+}
+
+interface NewEventSetupState {
   isStrokes: boolean;
   teamEvent: boolean;
-};
+}
+
 class NewEventSetup extends Component<NewEventSetupProps, NewEventSetupState> {
-  static navigationOptions = {
+  public static navigationOptions = {
     title: "Inställningar",
   };
-  state = {
+  public state = {
     isStrokes: false,
     teamEvent: false,
   };
-  gotoScoringItems = () => {
-    const { navigation } = this.props;
-    const {
-      state: { params },
-    } = navigation;
-    const { isStrokes, teamEvent } = this.state;
-    navigation.navigate("NewEventScoringItems", {
-      ...params,
-      isStrokes,
-      teamEvent,
-    });
-  };
-  render() {
+  public render() {
     const { navigation } = this.props;
     const {
       state: {
@@ -55,7 +45,7 @@ class NewEventSetup extends Component<NewEventSetupProps, NewEventSetupState> {
         <View style={{ flex: 1 }}>
           <SetupCourseRow course={course} />
 
-          <View style={[styles.formRow, { flexDirection: "row", padding: 20 }]}>
+          <View style={[styles.listrow, { flexDirection: "row", padding: 20 }]}>
             <TGText style={styles.label}>Lagtävling?</TGText>
             <Switch
               onValueChange={te => this.setState({ teamEvent: te })}
@@ -63,7 +53,7 @@ class NewEventSetup extends Component<NewEventSetupProps, NewEventSetupState> {
               value={teamEvent}
             />
           </View>
-          <View style={[styles.formRow, { flexDirection: "row", padding: 20 }]}>
+          <View style={[styles.listrow, { flexDirection: "row", padding: 20 }]}>
             <TGText style={styles.label}>Slaggolf?</TGText>
             <Switch
               onValueChange={isS => this.setState({ isStrokes: isS })}
@@ -78,5 +68,18 @@ class NewEventSetup extends Component<NewEventSetupProps, NewEventSetupState> {
       </View>
     );
   }
+
+  private gotoScoringItems = () => {
+    const { navigation } = this.props;
+    const {
+      state: { params },
+    } = navigation;
+    const { isStrokes, teamEvent } = this.state;
+    navigation.navigate("NewEventScoringItems", {
+      ...params,
+      isStrokes,
+      teamEvent,
+    });
+  };
 }
 export default NewEventSetup;

@@ -31,11 +31,11 @@ interface ScoringFooterProps {
 }
 const ScoringFooter: React.SFC<ScoringFooterProps> = ({ showMenu, showLeaderboard }) => (
   <View style={styles.view}>
-    <TGText onPress={() => showMenu()} viewStyle={styles.button} style={[styles.text, styles.menu]}>
+    <TGText onPress={showMenu} viewStyle={styles.button} style={[styles.text, styles.menu]}>
       MENY
     </TGText>
     <TGText
-      onPress={() => showLeaderboard()}
+      onPress={showLeaderboard}
       viewStyle={styles.button}
       style={[styles.text, styles.leaderboard]}>
       LEDARTAVLA

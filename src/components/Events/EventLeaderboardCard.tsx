@@ -6,20 +6,20 @@ const mutedYellow = { backgroundColor: colors.mutedYellow };
 const defaultPhoto = require("../../images/defaultavatar.png");
 interface EventLeaderboardCardProps {
   data: {
-    beerPos?: any;
-    id: any;
-    krPos?: any;
-    position: any;
-    beers?: any;
-    kr: any;
-    eventPoints: any;
-    photo?: any;
-    name: any;
-    value: any;
+    beerPos: number;
+    id: string;
+    krPos: number;
+    position: number;
+    beers: number;
+    kr: number;
+    eventPoints: number;
+    photo?: string;
+    name: string;
+    value: string;
   };
-  currentUserId?: any;
-  sorting: any;
-  scoringType: any;
+  currentUserId?: string;
+  sorting: string;
+  scoringType: string;
 }
 const EventLeaderboardCard: React.SFC<EventLeaderboardCardProps> = ({
   data,
@@ -31,15 +31,15 @@ const EventLeaderboardCard: React.SFC<EventLeaderboardCardProps> = ({
   let pointValue = "";
   let position;
   if (sorting === "beers") {
-    pointValue = data.beers;
+    pointValue = `${data.beers}`;
     pointText = "🍺";
     position = data.beerPos;
   } else if (sorting === "kr") {
-    pointValue = data.kr;
+    pointValue = `${data.kr}`;
     pointText = "kr";
     position = data.krPos;
   } else {
-    pointValue = data.eventPoints;
+    pointValue = `${data.eventPoints}`;
     pointText = "p";
     position = data.position;
   }

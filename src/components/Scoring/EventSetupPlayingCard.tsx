@@ -2,14 +2,15 @@ import React, { Component } from "react";
 import { Image, Slider, StyleSheet, View } from "react-native";
 
 import styles, { colors } from "../../styles";
+import { Player, Team } from "../../types/userTypes";
 import TGText from "../shared/TGText";
 
 const defaultAvatar = require("../../images/defaultavatar.png");
 
 interface Props {
-  item: any;
-  onRemove: () => void;
-  onChangeStrokes: () => void;
+  item: Player | Team;
+  onRemove: (item: Player | Team) => void;
+  onChangeStrokes: (item: Player | Team, val: number) => void;
   onRemovePlayerFromTeam?: () => void;
   onAddPlayerToTeam?: () => void;
   teamEvent: boolean;
@@ -18,6 +19,8 @@ interface Props {
 interface State {
   strokes: number;
 }
+
+// TODO: Separate into two different components for Team and Player
 
 class EventSetupPlayingCard extends Component<Props, State> {
   public state = { strokes: 0 };

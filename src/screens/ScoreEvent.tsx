@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { compose } from "react-apollo";
-import { Animated, Easing } from "react-native";
+import { Animated, Easing, ScrollViewComponent } from "react-native";
 import { NavigationActions, StackActions } from "react-navigation";
 
 import FinishScoringSession from "../components/Scoring/FinishScoringSession";
@@ -27,8 +27,8 @@ const resetAction = StackActions.reset({
 // data: { loading, scoringSession }
 interface Props {
   screenProps: { currentUser: CurrentUser };
-  cancelRound: () => void;
-  finishRound: () => void;
+  cancelRound: (id: string) => void;
+  finishRound: (id: string) => void;
   data: any;
   navigation: any;
 }
@@ -43,17 +43,17 @@ interface State {
 export class ScoreEvent extends Component<Props, State> {
   public static navigationOptions = {
     header: null,
-    tabBarVisible: false,
+    tabBarVisible: true,
   };
 
-  public static scrollView = null;
-  public static inSwipeArea = false;
-  public static closingState = null;
+  public scrollView: any | null = null;
+  public inSwipeArea = false;
+  public closingState = null;
 
   public modal = new Animated.Value(0);
   public menu = new Animated.Value(0);
   public leaderboard = new Animated.Value(0);
-  public openModal = null;
+  public openModal: string | null = null;
 
   constructor(props) {
     super(props);
@@ -67,7 +67,6 @@ export class ScoreEvent extends Component<Props, State> {
 
   public changeHole = (nextHole: number) => {
     this.setState(state => {
-      // eslint-disable-next-line no-underscore-dangle
       this.scrollView._component.scrollTo({
         x: nextHole,
         animated: false,
@@ -77,14 +76,14 @@ export class ScoreEvent extends Component<Props, State> {
     });
   };
 
-  public animateBackdrop = open => {
-    Animated.timing(this.modal, {
+  public animateBackdrop = (open: boolean) => {
+    return Animated.timing(this.modal, {
       toValue: open ? 1 : 0,
       easing: Easing.inOut(Easing.quad),
-    }).start();
+    });
   };
 
-  public animateModal = (modal, open) => {
+  public animateModal = (modal: string, open: boolean) => {
     let toValue = 0;
     let animVal: Animated.Value | null = null;
     const openModal = modal || this.openModal;
@@ -97,19 +96,19 @@ export class ScoreEvent extends Component<Props, State> {
       animVal = this.menu;
     }
 
-    Animated.timing(animVal, {
+    return Animated.timing(animVal, {
       toValue,
       easing: Easing.inOut(Easing.quad),
       duration: 250,
-    }).start();
+    });
   };
 
-  public showModal = modal => {
+  public showModal = (modal: string) => {
     this.openModal = modal;
     Animated.stagger(150, [this.animateBackdrop(true), this.animateModal(modal, true)]);
   };
 
-  public closeModal = modal => {
+  public closeModal = (modal: string) => {
     Animated.stagger(150, [this.animateModal(modal, false), this.animateBackdrop(false)]);
   };
 
@@ -120,8 +119,8 @@ export class ScoreEvent extends Component<Props, State> {
       try {
         await cancelRound(data.scoringSession.id);
       } catch (err) {
-        // eslint-disable-next-line no-console
-        console.log(err);
+        // tslint:disable-next-line:no-console
+        console.warn(err);
       }
       navigation.dispatch(resetAction);
     };
@@ -135,7 +134,7 @@ export class ScoreEvent extends Component<Props, State> {
       try {
         await finishRound(data.scoringSession.id);
       } catch (err) {
-        // eslint-disable-next-line no-console
+        // tslint:disable-next-line:no-console
         console.log(err);
       }
       navigation.dispatch(resetAction);
@@ -227,7 +226,6 @@ export class ScoreEvent extends Component<Props, State> {
               <HoleView
                 key={`hole_view_${h.id}`}
                 hole={h}
-                isActive={h.number === currentHole}
                 playing={scoringSession.scoringItems}
                 holesCount={holesCount}
                 scrollX={scrollX}
@@ -244,8 +242,6 @@ export class ScoreEvent extends Component<Props, State> {
         </Animated.View>
 
         <ScoringFooter
-          number={currentHole}
-          maxNumber={holesCount}
           showMenu={() => this.showModal("menu")}
           showLeaderboard={() => this.showModal("leaderboard")}
         />
@@ -253,7 +249,7 @@ export class ScoreEvent extends Component<Props, State> {
         <Animated.View pointerEvents="none" style={[styles.backdrop, { opacity: this.modal }]} />
 
         <Animated.View
-          onStartShouldSetResponder={() => this.closeModal()}
+          onStartShouldSetResponder={this.closeModal}
           style={{
             backgroundColor: "transparent",
             height: deviceHeight,

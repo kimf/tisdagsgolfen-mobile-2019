@@ -1,5 +1,5 @@
-import React from "react";
-import { StyleSheet, Text } from "react-native";
+import React, { ReactChild, ReactChildren, ReactElement } from "react";
+import { RegisteredStyle, StyleSheet, Text, TextStyle, ViewStyle } from "react-native";
 import { colors, deviceHeight, deviceWidth } from "../../styles";
 import TouchableView from "./TouchableView";
 const realWidth = deviceHeight > deviceWidth ? deviceWidth : deviceHeight;
@@ -12,7 +12,17 @@ const styles = StyleSheet.create({
     fontWeight: "300",
   },
 });
-const TGText = ({ onPress, style, viewStyle, children, ...rest }) => {
+
+interface Props {
+  onPress?: () => void;
+  style?: any;
+  viewStyle?: any;
+  children?: any;
+  key?: string;
+}
+
+const TGText = ({ onPress, style, viewStyle, children, ...rest }: Props) => {
+  // @ts-ignore
   const fontSize = style ? StyleSheet.flatten(style).fontSize || FONT_SIZE : FONT_SIZE;
   const scaledFontSize = Math.round((fontSize * realWidth) / 375);
   const text = (

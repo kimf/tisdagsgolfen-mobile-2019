@@ -87,6 +87,7 @@ class Season extends Component<SeasonProps, SeasonState> {
         .map((id, index) => ({ id: `${id}`, index: `${index + 1}` }))
         .reverse();
       const eventId = this.state.eventId || reversedEventIds[0].id;
+      // @ts-ignore
       const eventIndex = reversedEventIds.find(id => id.id === eventId).index;
       weekProps = {
         currentUserId,

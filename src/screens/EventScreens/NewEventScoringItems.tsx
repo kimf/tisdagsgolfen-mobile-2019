@@ -7,24 +7,28 @@ import BottomButton from "../../components/shared/BottomButton";
 import TGText from "../../components/shared/TGText";
 import { withCreateScoringSessionMutation } from "../../graph/mutations/scoringSessionMutation";
 import styles, { colors } from "../../styles";
+import { Course, CurrentUser, Player, Team } from "../../types/userTypes";
 
 interface NewEventScoringItemsProps {
-  screenProps: any;
+  screenProps: { currentUser: CurrentUser };
   navigation: {
     state: {
-      params?: {
-        course: {
-          id: any;
-          club: any;
-          name: any;
-        };
-        isStrokes: any;
-        teamEvent: any;
+      params: {
+        course: Course;
+        isStrokes: boolean;
+        teamEvent: boolean;
       };
     };
     navigate: any;
     goBack: any;
   };
+  createScoringSession: (
+    courseId: string,
+    currentUserId: string,
+    teamEvent: boolean,
+    scoringType: string,
+    scoringItems: any[],
+  ) => Promise<any>;
 }
 interface NewEventScoringItemsState {
   error: boolean;
@@ -74,7 +78,7 @@ class NewEventScoringItems extends Component<NewEventScoringItemsProps, NewEvent
     });
     this.setState({ playing });
   };
-  public onRemovePlayerFromTeam = (team, player) => {
+  public onRemovePlayerFromTeam = (team: Team, player: Player) => {
     const teamIndex = this.state.playing.findIndex(p => p.id === team.id);
     const playerIndex = this.state.playing[teamIndex].players.findIndex(p => p.id === player.id);
     const playing = update(this.state.playing, {
@@ -83,7 +87,6 @@ class NewEventScoringItems extends Component<NewEventScoringItemsProps, NewEvent
       },
     });
     this.setState({ playing });
-    this.updatePlaying(playing);
   };
   public onAddPlayer = player => {
     const playing = [...this.state.playing, { ...player, strokes: 0 }];
@@ -132,11 +135,11 @@ class NewEventScoringItems extends Component<NewEventScoringItemsProps, NewEvent
         scoringSessionId: res.data.createScoringSession.id,
       });
     } catch (err) {
-      // eslint-disable-next-line no-console
+      // tslint:disable-next-line:no-console
       console.log(err);
     }
   };
-  public openAddPlayer = (team = null) => {
+  public openAddPlayer = (team: Team | null = null) => {
     if (team) {
       this.props.navigation.navigate("NewPlayer", {
         team,

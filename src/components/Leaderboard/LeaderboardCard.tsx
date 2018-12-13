@@ -1,48 +1,45 @@
 import React from "react";
 import { Image, View } from "react-native";
 import styles, { colors } from "../../styles";
+import { LeaderboardPlayer } from "../../types/userTypes";
 import TGText from "../shared/TGText";
 import UpOrDown from "../shared/UpOrDown";
+
 const mutedYellow = { backgroundColor: colors.mutedYellow };
+
+// @ts-ignore
 const defaultAvatar = require("../../images/defaultavatar.png");
+
 interface LeaderboardCardProps {
-  currentUserId?: any;
-  player: any;
-  sorting: any;
-  showSummary?: any;
-  toggleSummary?: any;
+  currentUserId?: string;
+  player: LeaderboardPlayer;
+  sorting: string;
 }
-const LeaderboardCard: React.SFC<LeaderboardCardProps> = ({
-  player,
-  sorting,
-  currentUserId,
-  showSummary,
-  toggleSummary,
-}) => {
+const LeaderboardCard: React.SFC<LeaderboardCardProps> = ({ player, sorting, currentUserId }) => {
   let pointText;
   let pointValue = "";
   let position;
   if (sorting === "beers") {
-    pointValue = player.beers;
+    pointValue = `${player.beers}`;
     pointText = "🍺";
-    position = player.beerPos;
+    position = `${player.beerPos}`;
   } else if (sorting === "kr") {
-    pointValue = player.totalKr - player.totalKr * 2;
+    pointValue = `${player.totalKr - player.totalKr * 2}`;
     pointText = "kr";
     position = player.krPos;
   } else {
-    pointValue = player.totalPoints;
+    pointValue = `${player.totalPoints}`;
     pointText = "p";
     position = player.position;
   }
-  const averagePoints = (player.average * 2).toFixed() / 2;
+  const averagePoints = Number((player.average * 2).toFixed()) / 2;
   const currentUserStyle =
     currentUserId && player.id.split("_")[0] === currentUserId ? mutedYellow : null;
   if (player.eventCount < 1) {
     return null;
   }
   return (
-    <View key={player.id} style={[styles.listrow, currentUserStyle]} onPress={toggleSummary}>
+    <View key={player.id} style={[styles.listrow, currentUserStyle]}>
       <View style={styles.position}>
         <TGText
           style={{
