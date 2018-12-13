@@ -8,6 +8,7 @@ import CourseRow from "./CourseRow";
 
 import { withCoursesQuery } from "../../graph/queries/coursesQuery";
 import styles, { colors } from "../../styles";
+import { Course } from "../../types/userTypes";
 import { cacheable } from "../../utils";
 
 const fixString = stringToFix =>
@@ -33,7 +34,7 @@ const getPreviouslyPlayedCourses = cacheable(courses =>
 );
 
 interface Props {
-  data: { loading: boolean; courses: any[] };
+  data: { loading: boolean; courses: Course[] };
   selectCourse: () => void;
 }
 
@@ -58,7 +59,7 @@ class CoursePicker extends Component<Props, State> {
       return <EmptyState text="Inga banor :(" />;
     }
 
-    let courses = [];
+    let courses: Course[] = [];
     let previously = false;
     if (query !== "" && query.length > 1) {
       previously = false;

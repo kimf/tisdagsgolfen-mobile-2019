@@ -1,18 +1,14 @@
 import React from "react";
 import { View } from "react-native";
+import styles, { colors } from "../../styles";
+import { Course } from "../../types/userTypes";
 import TGText from "../shared/TGText";
 import TouchableView from "../shared/TouchableView";
-import styles, { colors } from "../../styles";
-type CourseRowProps = {
-  course: {
-    id: any;
-    club: any;
-    name: any;
-    par: any;
-    holeCount: any;
-  };
+
+interface CourseRowProps {
+  course: Course;
   selectCourse: any;
-};
+}
 const CourseRow: React.SFC<CourseRowProps> = ({ course, selectCourse }) => (
   <TouchableView
     key={`course_row_${course.id}`}

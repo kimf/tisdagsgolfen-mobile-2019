@@ -6,21 +6,29 @@ import SeasonPicker from "../components/Season/SeasonPicker";
 import WeekView from "../components/Season/WeekView";
 import EmptyState from "../components/shared/EmptyState";
 import styles, { deviceHeight } from "../styles";
+import { CurrentUser, ScoringSession, Season as SeasonType } from "../types/userTypes";
+
 const TOP = -deviceHeight;
 const BOTTOM = 0;
+
 interface SeasonProps {
-  screenProps: any;
+  screenProps: {
+    currentUser: CurrentUser;
+    activeScoringSession: ScoringSession;
+    seasons: SeasonType[];
+  };
   navigation: {
     navigate: any;
   };
 }
 interface SeasonState {
-  seasonId: null;
-  eventId: null;
+  seasonId: string | null;
+  eventId: string | null;
 }
 // TODO, break out this into smaller pieces
 class Season extends Component<SeasonProps, SeasonState> {
   public static navigationOptions = {
+    header: null,
     headerBackTitle: "Tisdagsgolfen",
   };
   public state = {
@@ -63,14 +71,19 @@ class Season extends Component<SeasonProps, SeasonState> {
     } = this.props;
     const { seasonId } = this.state;
     const season = seasonId ? seasons.find(s => s.id === seasonId) : seasons[0];
+
+    if (!season) {
+      return null;
+    }
+
+    const { eventIds } = season;
+
     const currentUserId = currentUser ? currentUser.id : null;
-    const hasEvents = season.eventIds.length > 0;
     let weekProps;
-    if (hasEvents) {
-      const reversedEventIds = (season.closed
-        ? [...season.eventIds, "final"]
-        : [...season.eventIds]
-      )
+    let hasEvents = false;
+    if (eventIds && eventIds.length > 0) {
+      hasEvents = true;
+      const reversedEventIds = (season.closed ? [...eventIds, "final"] : [...eventIds])
         .map((id, index) => ({ id: `${id}`, index: `${index + 1}` }))
         .reverse();
       const eventId = this.state.eventId || reversedEventIds[0].id;

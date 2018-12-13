@@ -40,6 +40,7 @@
     "react-native-config": "^0.11.5",
     "react-native-device-log": "^1.0.2",
     "react-native-dom": "0.2.0",
+    "react-native-gesture-handler": "^1.0.10",
     "react-native-onesignal": "^3.2.6",
     "react-native-segmented-view": "^2.0.0",
     "react-native-slowlog": "^1.0.2",
