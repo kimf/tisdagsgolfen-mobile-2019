@@ -36,7 +36,7 @@
     "prop-types": "^15.6.2",
     "react": "16.4.1",
     "react-apollo": "^2.1.11",
-    "react-native": "0.56.0",
+    "react-native": "0.57.7",
     "react-native-config": "^0.11.5",
     "react-native-device-log": "^1.0.2",
     "react-native-dom": "0.2.0",
@@ -44,8 +44,7 @@
     "react-native-segmented-view": "^2.0.0",
     "react-native-slowlog": "^1.0.2",
     "react-navigation": "^2.11.2",
-    "react-style-proptype": "^3.2.1",
-    "subscriptions-transport-ws": "^0.9.14"
+    "react-style-proptype": "^3.2.1"
   },
   "devDependencies": {
     "@storybook/addon-actions": "^3.4.10",
@@ -73,10 +72,11 @@
     "eslint-plugin-react-perf": "^2.0.9",
     "eslint-plugin-standard": "^3.1.0",
     "jest": "^23.5.0",
+    "metro-react-native-babel-preset": "^0.48.5",
     "prettier": "^1.14.2",
     "react-dom": "^16.4.2",
     "react-test-renderer": "^16.4.2",
-    "rnpm-plugin-dom": "^0.1.1"
+    "schedule": "0.4.0"
   },
   "jest": {
     "preset": "react-native"
