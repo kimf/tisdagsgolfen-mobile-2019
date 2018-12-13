@@ -1,0 +1,6 @@
+.vscode
+build
+coverage
+package-lock.json
+node_modules
+ios/Pods

@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import React from 'react'
 import { StyleSheet, Text } from 'react-native'
 
@@ -10,10 +9,10 @@ const realWidth = deviceHeight > deviceWidth ? deviceWidth : deviceHeight
 const FONT_SIZE = 16
 const styles = StyleSheet.create({
   text: {
-    fontSize: FONT_SIZE,
+    color: colors.dark,
     fontFamily: 'System',
+    fontSize: FONT_SIZE,
     fontWeight: '300',
-    color: colors.dark
   }
 })
 

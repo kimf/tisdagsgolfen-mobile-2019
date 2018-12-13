@@ -45,7 +45,7 @@ const Logger = (operation, forward) => {
 }
 
 const httpLink = createHttpLink({
-  uri: 'https://www.tisdagsgolfen.se/api/graphql'
+  uri: 'http://192.168.1.246:3000/api/graphql'
 })
 // __DEV__ ? 'https://www.tisdagsgolfen.se/api/graphql'
 

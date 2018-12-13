@@ -1,11 +1,9 @@
 import React from 'react'
-import { View, ImageBackground } from 'react-native'
+import { View, Text } from 'react-native'
 import { func, string } from 'prop-types'
 
 import TouchableView from '../shared/TouchableView'
-import TGText from '../shared/TGText'
 import { colors } from '../../styles'
-import trophyImg from '../../images/trophy-filled.png'
 
 const cardStyle = {
   flex: 1,
@@ -18,7 +16,7 @@ const cardStyle = {
 }
 
 const Name = ({ name }) => (
-  <TGText
+  <Text
     style={{
       padding: 10,
       textShadowColor: colors.dark,
@@ -28,7 +26,7 @@ const Name = ({ name }) => (
       fontSize: 24
     }}>
     {name}
-  </TGText>
+  </Text>
 )
 
 Name.propTypes = {
@@ -42,20 +40,9 @@ const SeasonCard = ({ onPress, photo, name }) => (
       flex: 1,
       marginBottom: 10
     }}>
-    {photo && (
-      <ImageBackground
-        onPress={onPress}
-        style={cardStyle}
-        source={photo ? { uri: photo } : trophyImg}
-        resizeMode="cover">
-        <Name name={name} />
-      </ImageBackground>
-    )}
-    {!photo && (
-      <View style={cardStyle}>
-        <Name name={name} />
-      </View>
-    )}
+    <View style={cardStyle}>
+      <Name name={name} />
+    </View>
   </TouchableView>
 )
 

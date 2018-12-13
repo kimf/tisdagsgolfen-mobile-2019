@@ -1,0 +1,30 @@
+{
+  "extends": [
+    "tslint:recommended",
+    "tslint-react",
+    "tslint-config-prettier",
+    "tslint-sonarts",
+    "tslint-plugin-graphql"
+  ],
+  "rules": {
+    "object-literal-sort-keys": false,
+    "interface-name": [true, "never-prefix"],
+    "no-string-literal": false,
+    "no-var-requires": false,
+    "jsx-no-lambda": false,
+    "no-duplicate-string": false,
+    "no-identical-functions": {
+      "severity": "warn"
+    },
+    "graphql": [
+      true,
+      {
+        "env": "apollo",
+        "schemaJsonFilepath": "./schema.json"
+      }
+    ]
+  },
+  "linterOptions": {
+    "exclude": ["config/**/*.js", "node_modules/**/*.ts", "node_modules/**/*.tsx"]
+  }
+}
