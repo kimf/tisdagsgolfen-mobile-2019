@@ -29,7 +29,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(new MainReactPackage(),
           new RNInstabugReactnativePackage.Builder("2610c5febca442457463f2b18fb57ce1", MainApplication.this)
-              .setInvocationEvent("shake").setPrimaryColor("#1D82DC").setFloatingEdge("left")
+              .setInvocationEvent("shake").setPrimaryColor("#3290FC").setFloatingEdge("left")
               .setFloatingButtonOffsetFromTop(250).build(),
           new RNScreensPackage(), new RNGestureHandlerPackage(), new ReactNativeConfigPackage(),
           new ReactNativeOneSignalPackage());

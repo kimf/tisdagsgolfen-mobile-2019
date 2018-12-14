@@ -53,11 +53,14 @@ class Root extends Component<RootProps, RootState> {
 
   public render() {
     const {
-      data: { activeScoringSession, seasons, loading },
+      data: { activeScoringSession, seasons, loading, error },
     } = this.props;
     const { currentUser, isLoggedIn } = this.state;
     if (loading) {
       return null;
+    }
+    if (error) {
+      return <EmptyState text="Nätverks ERROR..." />;
     }
     if (seasons.length === 0) {
       return <EmptyState text="Inga säsonger..." />;
