@@ -1,12 +1,15 @@
 import React, { Component } from "react";
 import { ApolloProvider } from "react-apollo";
 import { Platform, UIManager } from "react-native";
+import { useScreens } from "react-native-screens";
 
 import client from "./apolloClient";
 import Root from "./Root";
 import { getCache } from "./utils";
 /* tslint:disable-next-line:no-commented-code */
 // import withOneSignal from './withOneSignal'
+
+useScreens();
 
 interface AppState {
   checking: boolean;

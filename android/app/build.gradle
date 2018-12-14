@@ -147,6 +147,8 @@ configurations.all {
 }
 
 dependencies {
+    compile project(':instabug-reactnative')
+    compile project(':react-native-screens')
     compile project(':react-native-gesture-handler')
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "com.android.support:appcompat-v7:${rootProject.ext.supportLibVersion}"

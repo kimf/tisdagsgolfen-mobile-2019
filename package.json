@@ -27,6 +27,7 @@
     "graphql": "14.0.2",
     "graphql-tag": "^2.10.0",
     "immutability-helper": "^2.9.0",
+    "instabug-reactnative": "^8.0.20",
     "jsc-android": "^236355.x.x",
     "lodash.groupby": "^4.6.0",
     "lodash.keys": "^4.2.0",
@@ -36,14 +37,15 @@
     "react-apollo": "^2.3.2",
     "react-native": "0.57.8",
     "react-native-config": "^0.11.7",
-    "react-native-dom": "0.4.1",
     "react-native-gesture-handler": "^1.0.10",
     "react-native-onesignal": "3.2.11",
+    "react-native-screens": "^1.0.0-alpha.17",
     "react-native-segmented-view": "^2.0.0",
     "react-native-slowlog": "^1.0.2",
     "react-navigation": "^3.0.8"
   },
   "devDependencies": {
+    "@babel/core": "^7.0.0-beta.47",
     "@babel/runtime": "^7.1.2",
     "@types/react": "^16.4.16",
     "@types/react-native": "0.57.18",
@@ -61,5 +63,9 @@
     "tslint-react": "^3.6.0",
     "tslint-sonarts": "^1.8.0",
     "typescript": "^3.1.1"
+  },
+  "resolutions": {
+    "merge": "^1.2.1",
+    "morgan": "^1.9.1"
   }
 }

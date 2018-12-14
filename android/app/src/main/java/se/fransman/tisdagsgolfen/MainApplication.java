@@ -3,6 +3,8 @@ package se.fransman.tisdagsgolfen;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.instabug.reactlibrary.RNInstabugReactnativePackage;
+import com.swmansion.rnscreens.RNScreensPackage;
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
 import com.lugg.ReactNativeConfig.ReactNativeConfigPackage;
 import com.facebook.react.ReactNativeHost;
@@ -25,12 +27,12 @@ public class MainApplication extends Application implements ReactApplication {
 
     @Override
     protected List<ReactPackage> getPackages() {
-      return Arrays.<ReactPackage>asList(
-          new MainReactPackage(),
-            new RNGestureHandlerPackage(),
-            new ReactNativeConfigPackage(),
-          new ReactNativeOneSignalPackage()
-      );
+      return Arrays.<ReactPackage>asList(new MainReactPackage(),
+          new RNInstabugReactnativePackage.Builder("2610c5febca442457463f2b18fb57ce1", MainApplication.this)
+              .setInvocationEvent("shake").setPrimaryColor("#1D82DC").setFloatingEdge("left")
+              .setFloatingButtonOffsetFromTop(250).build(),
+          new RNScreensPackage(), new RNGestureHandlerPackage(), new ReactNativeConfigPackage(),
+          new ReactNativeOneSignalPackage());
     }
 
     @Override
