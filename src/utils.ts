@@ -1,12 +1,13 @@
 // tslint:disable:no-commented-code
 import { AsyncStorage } from "react-native";
 
-export const average = arr => arr.reduce((p, c) => p + c, 0) / arr.length;
+export const average = (arr: number[]) => arr.reduce((p, c) => p + c, 0) / arr.length;
 // avg.toLocaleString('sv', {maximumFractionDigits: 1, useGrouping:false})
 
-export const sorted = (array, attribute) => array.sort((a, b) => b[attribute] - a[attribute]);
+export const sorted = (array: any[], attribute: string) =>
+  array.sort((a, b) => b[attribute] - a[attribute]);
 
-export const sortedByParsedDate = (array, attribute) =>
+export const sortedByParsedDate = (array: any[], attribute: string) =>
   sorted(
     array.map(item => {
       const date = new Date(item[attribute]);
@@ -34,15 +35,15 @@ export const ranked = (
   return reversed ? rankedArr.reverse() : rankedArr;
 };
 
-const cmp = (a, b) => {
-  if (a > b) {
-    return +1;
-  }
-  if (a < b) {
-    return -1;
-  }
-  return 0;
-};
+// const cmp = (a, b) => {
+//   if (a > b) {
+//     return +1;
+//   }
+//   if (a < b) {
+//     return -1;
+//   }
+//   return 0;
+// };
 
 // export const rankedUsers = realUsers => {
 //   const rankings = []
@@ -68,7 +69,11 @@ const cmp = (a, b) => {
 //   return rankings
 // }
 
-export const calculateExtraStrokes = (holeIndex, playerStrokes, holesCount) => {
+export const calculateExtraStrokes = (
+  holeIndex: number,
+  playerStrokes: number,
+  holesCount: number,
+): number => {
   let extra = 0;
   if (holeIndex <= playerStrokes) {
     extra = 1;
@@ -79,7 +84,7 @@ export const calculateExtraStrokes = (holeIndex, playerStrokes, holesCount) => {
   return extra;
 };
 
-export const setCache = async (key, val) => {
+export const setCache = async (key: string, val: any) => {
   try {
     const item = JSON.stringify(val);
     const value = await AsyncStorage.setItem(key, item);
@@ -94,7 +99,7 @@ export const setCache = async (key, val) => {
   }
 };
 
-export const getCache = async key => {
+export const getCache = async (key: string) => {
   try {
     const value = await AsyncStorage.getItem(key);
     return JSON.parse(`${value}`);
@@ -105,7 +110,7 @@ export const getCache = async key => {
   }
 };
 
-export const removeCache = async key => {
+export const removeCache = async (key: string) => {
   try {
     await AsyncStorage.removeItem(key);
     return null;
@@ -164,7 +169,7 @@ export const PUTT_MONEY = {
   11: -175,
 };
 
-export const calculateEarnings = (putts, strokes, par) => {
+export const calculateEarnings = (putts: number, strokes: number, par: number): number => {
   let earnings = 0;
 
   if (putts > 2) {

@@ -12,12 +12,12 @@ let token: string | null = null;
 
 const withToken = setContext(() => {
   if (token) {
-    return { token };
+    return { headers: { authorization: token } };
   }
 
   return getCache("currentUser").then((currentUser?: CurrentUser) => {
     token = currentUser && currentUser.token ? `Token token=${currentUser.token}` : null;
-    return { authorization: token };
+    return { headers: { authorization: token } };
   });
 });
 
@@ -41,5 +41,5 @@ export default new ApolloClient({
     dataIdFromObject,
     addTypename: true,
   }),
-  link: ApolloLink.from([apolloLogger, withToken, httpLink]),
+  link: ApolloLink.from([withToken, apolloLogger, httpLink]),
 });

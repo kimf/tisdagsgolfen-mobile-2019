@@ -39,6 +39,7 @@ interface EventHeaderProps {
 const EventHeader: React.SFC<EventHeaderProps> = ({ course, teamEvent, scoringType }) => (
   <View style={styles.view}>
     <TGText style={styles.text}>
+      Senaste:
       {gametypeName(scoringType)}
       {teamEvent ? ", Lagtävling " : ", Individuellt"}
     </TGText>

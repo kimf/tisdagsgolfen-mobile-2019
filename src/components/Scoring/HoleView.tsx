@@ -22,6 +22,8 @@ interface State {
 }
 
 class HoleView extends Component<Props, State> {
+
+  public state = { scoringId: null };
   public toggleScoring = scoringId => {
     this.setState(state => {
       if (state.scoringId) {

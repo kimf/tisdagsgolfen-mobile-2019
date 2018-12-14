@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { AppState, Platform, UIManager } from "react-native";
 import deviceLog from "react-native-device-log";
-import slowlog from "react-native-slowlog";
 import OneSignal from "react-native-onesignal";
+import slowlog from "react-native-slowlog";
 const onReceived = notification => {
   deviceLog.debug("Notification received:", notification);
 };
@@ -32,25 +32,25 @@ const withOneSignal = WrappedComponent =>
           UIManager.setLayoutAnimationEnabledExperimental(true);
       }
     }
-    componentWillMount() {
+    public componentWillMount() {
       deviceLog.debug("componentWillMount");
       OneSignal.addEventListener("received", onReceived);
       OneSignal.addEventListener("opened", onOpened);
       OneSignal.addEventListener("registered", onRegistered);
       OneSignal.addEventListener("ids", onIds);
     }
-    componentDidMount() {
+    public componentDidMount() {
       deviceLog.debug("componentDidMount");
       AppState.addEventListener("change", handleAppStateChange);
     }
-    componentWillUnmount() {
+    public componentWillUnmount() {
       deviceLog.debug("componentWillUnmount");
       OneSignal.removeEventListener("received", onReceived);
       OneSignal.removeEventListener("opened", onOpened);
       OneSignal.removeEventListener("registered", onRegistered);
       OneSignal.removeEventListener("ids", onIds);
     }
-    render() {
+    public render() {
       return <WrappedComponent {...this.props} />;
     }
   };

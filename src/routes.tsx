@@ -7,24 +7,14 @@ import NewPlayer from "./screens/EventScreens/NewPlayer";
 import ScoreEventScreen from "./screens/ScoreEvent";
 import Season from "./screens/Season";
 
-const SeasonStack = createStackNavigator(
-  {
-    Season: { screen: Season },
-  },
-  {
-    mode: "modal",
-    headerMode: "none",
-  },
-);
-
 const RootStack = createStackNavigator(
   {
-    Season: { screen: SeasonStack },
+    Season: { screen: Season },
     ScoreEvent: { screen: ScoreEventScreen },
     CoursePickerScreen: { screen: CoursePickerScreen },
     NewEventSetup: { screen: NewEventSetup },
     NewEventScoringItems: { screen: NewEventScoringItems },
-    NewPlayer: { screen: NewPlayer, modal: true, mode: "modal" },
+    NewPlayer: { screen: NewPlayer },
     LiveEventResult: { screen: LiveEventResult },
   },
   {

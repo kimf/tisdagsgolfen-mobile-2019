@@ -1,8 +1,10 @@
 import React, { Component } from "react";
+
 import EmptyState from "./components/shared/EmptyState";
 import { withInitialQuery } from "./graph/queries/initialQuery";
 import RootStack from "./routes";
 import { setCache } from "./utils";
+
 interface RootProps {
   isLoggedIn: any;
   data?: any;
@@ -21,6 +23,7 @@ class Root extends Component<RootProps, RootState> {
     const { currentUser, isLoggedIn } = props;
     this.state = { currentUser, isLoggedIn };
   }
+
   public onLogin = response => {
     setCache("currentUser", {
       ...response.user,
@@ -33,6 +36,7 @@ class Root extends Component<RootProps, RootState> {
       }));
     });
   };
+
   public onLogout = () => {
     const user = { email: this.state.currentUser.email };
     setCache("currentUser", {
@@ -46,6 +50,7 @@ class Root extends Component<RootProps, RootState> {
       }));
     });
   };
+
   public render() {
     const {
       data: { activeScoringSession, seasons, loading },
@@ -71,4 +76,5 @@ class Root extends Component<RootProps, RootState> {
     );
   }
 }
+
 export default withInitialQuery(Root);

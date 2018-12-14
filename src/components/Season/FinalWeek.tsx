@@ -3,9 +3,11 @@ import { Image, View } from "react-native";
 import { colors } from "../../styles";
 import TGText from "../shared/TGText";
 interface FinalWeekProps {
-  season: any;
+  winner: string;
+  photo: string;
+  finalInfo: string;
 }
-const FinalWeek: React.SFC<FinalWeekProps> = ({ season }) => (
+const FinalWeek: React.SFC<FinalWeekProps> = ({ winner, photo, finalInfo }) => (
   <View style={{ flex: 1 }}>
     <View
       key="finalWeekHeader"
@@ -21,17 +23,17 @@ const FinalWeek: React.SFC<FinalWeekProps> = ({ season }) => (
         style={{ tintColor: colors.yellow, height: 25, width: 25 }}
       />
       <TGText style={{ marginLeft: 10, color: colors.white, fontWeight: "bold" }}>
-        Grattis {season.winner}
+        Grattis {winner}
       </TGText>
     </View>
     <Image
       key="winnerPhoto"
       style={{ width: "100%", height: 200 }}
-      source={{ uri: season.photo, cache: "force-cache" }}
+      source={{ uri: photo, cache: "force-cache" }}
       resizeMode="cover"
     />
     <TGText key="finaleInfo" style={{ padding: 20, fontSize: 20 }}>
-      {season.finalInfo}
+      {finalInfo}
     </TGText>
   </View>
 );

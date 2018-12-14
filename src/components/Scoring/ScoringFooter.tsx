@@ -4,7 +4,6 @@ import { colors } from "../../styles";
 import TGText from "../shared/TGText";
 const styles = StyleSheet.create({
   view: {
-    height: 44,
     backgroundColor: colors.blue,
     flexDirection: "row",
     width: "100%",
@@ -26,16 +25,18 @@ const styles = StyleSheet.create({
   },
 });
 interface ScoringFooterProps {
-  showMenu: any;
-  showLeaderboard: any;
+  show: (modal: string) => void;
 }
-const ScoringFooter: React.SFC<ScoringFooterProps> = ({ showMenu, showLeaderboard }) => (
+const ScoringFooter: React.SFC<ScoringFooterProps> = ({ show }) => (
   <View style={styles.view}>
-    <TGText onPress={showMenu} viewStyle={styles.button} style={[styles.text, styles.menu]}>
+    <TGText
+      onPress={() => show("menu")}
+      viewStyle={styles.button}
+      style={[styles.text, styles.menu]}>
       MENY
     </TGText>
     <TGText
-      onPress={showLeaderboard}
+      onPress={() => show("leaderboard")}
       viewStyle={styles.button}
       style={[styles.text, styles.leaderboard]}>
       LEDARTAVLA

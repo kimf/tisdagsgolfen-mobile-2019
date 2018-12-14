@@ -71,16 +71,16 @@ export class ScoreEvent extends Component<Props, State> {
         x: nextHole,
         animated: false,
       });
-      this.closeModal("menu");
+      this.closeModal();
       return { ...state, currentHole: nextHole };
     });
   };
 
   public animateBackdrop = (open: boolean) => {
-    return Animated.timing(this.modal, {
+    Animated.timing(this.modal, {
       toValue: open ? 1 : 0,
       easing: Easing.inOut(Easing.quad),
-    });
+    }).start();
   };
 
   public animateModal = (modal: string, open: boolean) => {
@@ -96,11 +96,11 @@ export class ScoreEvent extends Component<Props, State> {
       animVal = this.menu;
     }
 
-    return Animated.timing(animVal, {
+    Animated.timing(animVal, {
       toValue,
       easing: Easing.inOut(Easing.quad),
       duration: 250,
-    });
+    }).start();
   };
 
   public showModal = (modal: string) => {
@@ -108,8 +108,8 @@ export class ScoreEvent extends Component<Props, State> {
     Animated.stagger(150, [this.animateBackdrop(true), this.animateModal(modal, true)]);
   };
 
-  public closeModal = (modal: string) => {
-    Animated.stagger(150, [this.animateModal(modal, false), this.animateBackdrop(false)]);
+  public closeModal = () => {
+    Animated.stagger(150, [this.animateModal(this.openModal, false), this.animateBackdrop(false)]);
   };
 
   public cancelRound = () => {
@@ -194,6 +194,8 @@ export class ScoreEvent extends Component<Props, State> {
 
     const holesCount = scoringSession.course.holes.length;
 
+    console.log(this.state, this.props);
+
     return (
       <Animated.View
         style={{
@@ -241,10 +243,7 @@ export class ScoreEvent extends Component<Props, State> {
           </Animated.ScrollView>
         </Animated.View>
 
-        <ScoringFooter
-          showMenu={() => this.showModal("menu")}
-          showLeaderboard={() => this.showModal("leaderboard")}
-        />
+        <ScoringFooter show={this.showModal} />
 
         <Animated.View pointerEvents="none" style={[styles.backdrop, { opacity: this.modal }]} />
 
@@ -260,7 +259,7 @@ export class ScoreEvent extends Component<Props, State> {
 
         <AnimatedModal height={MENU_HEIGHT} position={menuPosition}>
           <ScoringMenu
-            onClose={() => this.closeModal("menu")}
+            onClose={this.closeModal}
             onPreview={() => this.changeHole(holesCount + 1)}
             cancelRound={this.cancelRound}
             holes={scoringSession.course.holes}
@@ -272,7 +271,7 @@ export class ScoreEvent extends Component<Props, State> {
         <AnimatedModal height={LEADERBOARD_HEIGHT} position={leaderboardPosition}>
           <ScoringLeaderboard
             showHeader={true}
-            onClose={() => this.closeModal("leaderboard")}
+            onClose={this.closeModal}
             scoringType={scoringSession.scoringType}
             scoringSessionId={scoringSession.id}
             currentUserId={currentUser.id}

@@ -47,48 +47,35 @@ class EventView extends Component<EventViewProps, {}> {
     }
     return (
       <View style={{ flex: 1 }}>
-        <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+        <View style={{ flexDirection: "row", justifyContent: "space-around" }}>
           <EventHeader
             key={`eventHeader_${eventId}`}
             course={event.course}
             teamEvent={event.teamEvent}
             scoringType={event.scoringType}
           />
-
           {showSorter && (
             <Sorter key="weekSortTabs" current={sorting} onChange={sort => changeSort(sort)} />
           )}
         </View>
-        <ScrollView
-          horizontal={true}
-          pagingEnabled={true}
-          showsHorizontalScrollIndicator={false}
-          style={{
-            flex: 1,
-            paddingBottom: 20,
-            paddingTop: 5,
-            backgroundColor: colors.lightGray,
-          }}>
-          <View style={[swipeCardStyle, { marginLeft: 5, marginRight: 5 }]}>
-            <Leaderboard
-              sorting={sorting}
-              currentUserId={currentUserId}
-              players={players}
-              seasonId={seasonId}
-              eventId={eventId}
-            />
-          </View>
-          <View style={[swipeCardStyle, { marginRight: 10 }]}>
-            <EventResult
-              eventId={eventId}
-              seasonId={seasonId}
-              sorting={sorting}
-              currentUserId={currentUserId}
-              players={event.leaderboard}
-              scoringType={event.scoringType}
-            />
-          </View>
-        </ScrollView>
+
+        <View style={{ padding: 10 }}>
+          <Leaderboard
+            sorting={sorting}
+            currentUserId={currentUserId}
+            players={players}
+            seasonId={seasonId}
+            eventId={eventId}
+          />
+        </View>
+        {/* <EventResult
+            eventId={eventId}
+            seasonId={seasonId}
+            sorting={sorting}
+            currentUserId={currentUserId}
+            players={event.leaderboard}
+            scoringType={event.scoringType}
+          /> */}
       </View>
     );
   }

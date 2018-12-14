@@ -52,13 +52,13 @@ const SeasonHeader = ({ season, togglePicker, goPlay, activeScoringSession }) =>
       onPress={goPlay}>
       <TGText
         style={{
-          color: activeScoringSession ? colors.white : colors.darkGreen,
           fontWeight: "bold",
           fontSize: 14,
           paddingHorizontal: 10,
           paddingVertical: 5,
-          backgroundColor: activeScoringSession ? colors.darkGreen : colors.white,
-          borderRadius: 10,
+          color: activeScoringSession ? colors.darkGreen : colors.blue,
+          borderWidth: 0.75,
+          borderColor: activeScoringSession ? colors.darkGreen : colors.blue,
         }}
         onPress={goPlay}>
         {activeScoringSession ? "FORTSÄTT RUNDA" : "SPELA GOLF"}
