@@ -1,6 +1,4 @@
 import gql from "graphql-tag";
-import { graphql } from "react-apollo";
-import { seasonsQueryQuery } from "../../../operation-result-types";
 
 const seasonsQuery = gql`
   query seasonsQuery {
@@ -13,4 +11,4 @@ const seasonsQuery = gql`
   }
 `;
 
-export const withSeasonsQuery = graphql<{}, seasonsQueryQuery>(seasonsQuery);
+export default seasonsQuery;

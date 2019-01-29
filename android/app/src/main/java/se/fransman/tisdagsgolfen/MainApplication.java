@@ -3,6 +3,7 @@ package se.fransman.tisdagsgolfen;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.oblador.vectoricons.VectorIconsPackage;
 import com.instabug.reactlibrary.RNInstabugReactnativePackage;
 import com.swmansion.rnscreens.RNScreensPackage;
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
@@ -28,6 +29,7 @@ public class MainApplication extends Application implements ReactApplication {
     @Override
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(new MainReactPackage(),
+            new VectorIconsPackage(),
           new RNInstabugReactnativePackage.Builder("2610c5febca442457463f2b18fb57ce1", MainApplication.this)
               .setInvocationEvent("shake").setPrimaryColor("#3290FC").setFloatingEdge("left")
               .setFloatingButtonOffsetFromTop(250).build(),

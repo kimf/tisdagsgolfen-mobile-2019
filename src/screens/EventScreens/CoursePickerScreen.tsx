@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import CoursePicker from "../../components/Events/CoursePicker";
-import Login from "../../components/Login/Login";
+import { Course } from "../../types/userTypes";
 
 interface CoursePickerScreenProps {
   screenProps: any;
@@ -14,15 +14,11 @@ class CoursePickerScreen extends Component<CoursePickerScreenProps, {}> {
     title: "Välj bana",
   };
   public render() {
-    const {
-      navigation,
-      screenProps: { currentUser, isLoggedIn, onLogin },
-    } = this.props;
-    if (!isLoggedIn) {
-      return <Login onLogin={onLogin} currentUser={currentUser} />;
-    }
+    const { navigation } = this.props;
     return (
-      <CoursePicker selectCourse={course => navigation.navigate("NewEventSetup", { course })} />
+      <CoursePicker
+        selectCourse={(course: Course) => navigation.navigate("NewEventSetup", { course })}
+      />
     );
   }
 }

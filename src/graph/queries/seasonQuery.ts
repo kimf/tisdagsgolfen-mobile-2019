@@ -1,18 +1,8 @@
 import gql from "graphql-tag";
 
-const initialQuery = gql`
-  query initialQuery {
-    activeScoringSession {
-      id
-      scoringType
-      teamEvent
-      course {
-        id
-        club
-        name
-      }
-    }
-    seasons {
+const seasonQuery = gql`
+  query seasonQuery($seasonId: ID) {
+    season(id: $seasonId) {
       id
       name
       closed
@@ -40,4 +30,4 @@ const initialQuery = gql`
   }
 `;
 
-export default initialQuery;
+export default seasonQuery;

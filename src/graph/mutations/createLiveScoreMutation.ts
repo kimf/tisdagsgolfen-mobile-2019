@@ -5,7 +5,7 @@ import { graphql } from "react-apollo";
 const createLiveScoreMutation = gql`
   mutation createLiveScore(
     $scoringSessionId: ID!
-    $userId: ID
+    $userId: ID!
     $teamIndex: Int
     $data: LiveScoreDataInput!
   ) {

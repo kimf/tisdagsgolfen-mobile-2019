@@ -1,7 +1,8 @@
 import React from "react";
 import { StyleSheet } from "react-native";
-import TGText from "../shared/TGText";
 import { colors } from "../../styles";
+import TGText from "../shared/TGText";
+
 const styles = StyleSheet.create({
   errorText: {
     backgroundColor: "rgba(255, 0, 0,0.1)",
@@ -15,5 +16,6 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
 });
+
 const LoginError = () => <TGText style={styles.errorText}>Något gick fel, se över infon</TGText>;
 export default LoginError;

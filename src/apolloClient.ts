@@ -1,9 +1,11 @@
 import { InMemoryCache } from "apollo-cache-inmemory";
+import { CachePersistor, persistCache } from "apollo-cache-persist";
 import ApolloClient from "apollo-client";
 import { ApolloLink } from "apollo-link";
 import { setContext } from "apollo-link-context";
 import { createHttpLink } from "apollo-link-http";
 import apolloLogger from "apollo-link-logger";
+import { AsyncStorage } from "react-native";
 
 import { CurrentUser } from "./types/userTypes";
 import { getCache } from "./utils";
@@ -22,7 +24,7 @@ const withToken = setContext(() => {
 });
 
 const httpLink = createHttpLink({
-  uri: "http://192.168.1.246:3000/api/graphql",
+  uri: "http://10.2.7.47:3001/api/graphql",
 });
 // __DEV__ ? 'https://www.tisdagsgolfen.se/api/graphql'
 
@@ -36,10 +38,15 @@ const dataIdFromObject = result => {
   return null;
 };
 
+const cache = new InMemoryCache({
+  dataIdFromObject,
+  addTypename: true,
+});
+
+// const persistor = new CachePersistor({ cache, storage: AsyncStorage, key: "tg", debug: __DEV__ });
+// persistor.purge();
+
 export default new ApolloClient({
-  cache: new InMemoryCache({
-    dataIdFromObject,
-    addTypename: true,
-  }),
+  cache,
   link: ApolloLink.from([withToken, apolloLogger, httpLink]),
 });

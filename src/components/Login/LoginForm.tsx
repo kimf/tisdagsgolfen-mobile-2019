@@ -58,7 +58,7 @@ const LoginForm: React.SFC<LoginFormProps> = ({
   loggingIn,
   error,
 }) => (
-  <View behavior="position" style={styles.container}>
+  <View style={styles.container}>
     {error && <LoginError />}
 
     <TGText style={styles.label}>E-post</TGText>

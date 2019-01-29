@@ -1,120 +1,95 @@
 import React, { Component } from "react";
-import { Animated, Easing, LayoutAnimation, View } from "react-native";
+import { Query } from "react-apollo";
+import { LayoutAnimation, ScrollView, View } from "react-native";
+import { Appbar } from "react-native-paper";
+import { NavigationScreenProp } from "react-navigation";
+
 import { linear } from "../animations";
-import FinalWeek from "../components/Season/FinalWeek";
-import SeasonHeader from "../components/Season/SeasonHeader";
-import SeasonPicker from "../components/Season/SeasonPicker";
-import WeekView from "../components/Season/WeekView";
+import Leaderboard from "../components/Leaderboard/Leaderboard";
 import EmptyState from "../components/shared/EmptyState";
-import styles, { deviceHeight } from "../styles";
-import { CurrentUser, ScoringSession, Season as SeasonType } from "../types/userTypes";
-const TOP = -deviceHeight;
-const BOTTOM = 0;
+
+import FinalWeek from "../components/Season/FinalWeek";
+import Sorter from "../components/Season/Sorter";
+import Loading from "../components/shared/Loading";
+import seasonQuery from "../graph/queries/seasonQuery";
+import styles from "../styles";
 
 interface SeasonProps {
-  screenProps: {
-    currentUser: CurrentUser;
-    activeScoringSession: ScoringSession;
-    seasons: SeasonType[];
-  };
-  navigation: {
-    navigate: any;
-  };
+  navigation: NavigationScreenProp<{ seasonId: string }>;
 }
 
 interface SeasonState {
-  seasonId: string | null;
+  sorting: string;
 }
 
 class Season extends Component<SeasonProps, SeasonState> {
-  public static navigationOptions = {
-    header: null,
-    headerBackTitle: "Tisdagsgolfen",
-  };
-  public state = { seasonId: null };
-  public seasonPickerPos = new Animated.Value(0);
-  public open = false;
-
-  public onChangeSeason = seasonId => {
-    this.setState(state => ({
-      ...state,
-      seasonId,
-      eventId: null,
-    }));
-    this.toggleSeasonpicker(false);
+  public static navigationOptions = (props: SeasonProps) => {
+    const name = props.navigation.getParam("seasonName", "");
+    return {
+      title: `TISDAGSGOLFEN ${name}`,
+      headerLeft: (
+        <Appbar.Action
+          icon="line-style"
+          onPress={() => props.navigation.navigate("SeasonPicker")}
+        />
+      ),
+    };
   };
 
-  public toggleSeasonpicker = open => {
-    this.open = open;
-    Animated.timing(this.seasonPickerPos, {
-      toValue: open ? TOP : BOTTOM,
-      easing: Easing.ease,
-      duration: 450,
-      useNativeDriver: true,
-    }).start();
-  };
-
-  public showActiveScoringSession = () => {
-    const scoringSessionId = this.props.screenProps.activeScoringSession.id;
-    this.props.navigation.navigate("ScoreEvent", { scoringSessionId });
-  };
-
-  public gotoPlay = () => {
-    this.props.navigation.navigate("CoursePickerScreen");
+  public state = { sorting: "totalPoints" };
+  public changeSort = (sorting: string) => {
+    LayoutAnimation.configureNext(linear);
+    this.setState(state => ({ ...state, sorting }));
   };
 
   public render() {
-    const {
-      screenProps: { currentUser, activeScoringSession, seasons },
-    } = this.props;
-    const { seasonId } = this.state;
-    const season = seasonId ? seasons.find(s => s.id === seasonId) : seasons[2];
+    const { navigation } = this.props;
+    const { sorting } = this.state;
 
-    if (!season) {
-      return null;
-    }
+    const currentUserId = navigation.getParam("currentUser.id", null);
 
-    const seasonPickerPos = this.seasonPickerPos.interpolate({
-      inputRange: [TOP, BOTTOM],
-      outputRange: [BOTTOM, TOP],
-      extrapolate: "clamp",
-    });
-
-    const currentUserId = currentUser ? currentUser.id : null;
-    const { eventIds } = season;
-    const eventId = eventIds && eventIds.length > 0 ? eventIds.reverse()[0] : null;
+    const seasonId = navigation.getParam("seasonId", null);
 
     return (
       <View style={styles.container}>
-        <SeasonPicker
-          seasons={seasons}
-          onChangeSeason={this.onChangeSeason}
-          position={seasonPickerPos}
-        />
-        <SeasonHeader
-          season={season}
-          togglePicker={() => this.toggleSeasonpicker(!this.open)}
-          goPlay={activeScoringSession ? this.showActiveScoringSession : this.gotoPlay}
-          activeScoringSession={activeScoringSession}
-        />
-        {/* {season.closed && (
-          <FinalWeek
-            key={`finalWeek_${season.id}`}
-            winner={season.winner || ""}
-            finalInfo={season.finalInfo || ""}
-            photo={season.photo || ""}
-          />
-        )} */}
-        {eventId && (
-          <WeekView
-            {...{
-              currentUserId,
-              eventId,
-              season,
-            }}
-          />
-        )}
-        {!eventId && <EmptyState text="Inga spelade rundor ännu" />}
+        <Query query={seasonQuery} variables={{ seasonId }}>
+          {({ loading, data }) => {
+            if (loading) {
+              return <Loading />;
+            }
+
+            const { season } = data;
+
+            if (season.leaderboard.length === 0) {
+              return <EmptyState text="Inga rundor spelade ännu" />;
+            }
+
+            const showSorter = Number(season.name) > 2015;
+
+            return (
+              <ScrollView>
+                {season.closed && season.winner && season.photo && (
+                  <FinalWeek
+                    key={`finalWeek_${season.id}`}
+                    winner={season.winner}
+                    photo={season.photo}
+                  />
+                )}
+
+                {showSorter && (
+                  <Sorter key="weekSortTabs" current={sorting} onChange={this.changeSort} />
+                )}
+
+                <Leaderboard
+                  seasonId={season.id}
+                  sorting={sorting}
+                  currentUserId={currentUserId}
+                  players={season.leaderboard}
+                />
+              </ScrollView>
+            );
+          }}
+        </Query>
       </View>
     );
   }

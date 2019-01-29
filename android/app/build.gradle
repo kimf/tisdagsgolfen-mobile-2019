@@ -147,6 +147,7 @@ configurations.all {
 }
 
 dependencies {
+    compile project(':react-native-vector-icons')
     compile project(':instabug-reactnative')
     compile project(':react-native-screens')
     compile project(':react-native-gesture-handler')

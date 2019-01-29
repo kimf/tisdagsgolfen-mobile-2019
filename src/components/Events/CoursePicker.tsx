@@ -18,7 +18,7 @@ const fixString = stringToFix =>
     .replace(/ /g, "")
     .toLowerCase();
 
-const filterCourses = cacheable((courses, query) =>
+const filterCourses = cacheable((courses: Course[], query: string) =>
   courses
     .filter(c => {
       const searchString = fixString(`${c.club}${c.name}`);
@@ -29,13 +29,13 @@ const filterCourses = cacheable((courses, query) =>
     .sort((a, b) => a.club - b.club),
 );
 
-const getPreviouslyPlayedCourses = cacheable(courses =>
+const getPreviouslyPlayedCourses = cacheable((courses: Course[]) =>
   courses.filter(c => c.eventCount > 3).sort((a, b) => b.eventCount - a.eventCount),
 );
 
 interface Props {
   data: { loading: boolean; courses: Course[] };
-  selectCourse: () => void;
+  selectCourse: (course: Course) => void;
 }
 
 interface State {

@@ -3,22 +3,7 @@ import { graphql } from "react-apollo";
 import { eventQueryQuery, eventQueryQueryVariables } from "../../../operation-result-types";
 
 const eventQuery = gql`
-  query eventQuery($eventId: ID!, $seasonId: ID!) {
-    players: seasonLeaderboard(seasonId: $seasonId, eventId: $eventId) {
-      id
-      photo
-      name
-      average
-      eventCount
-      topPoints
-      position
-      oldAverage
-      oldTotalPoints
-      prevPosition
-      totalPoints
-      totalKr
-      beers
-    }
+  query eventQuery($eventId: ID!) {
     event(id: $eventId) {
       id
       status
@@ -51,7 +36,7 @@ export const withEventQuery = graphql<
   eventQueryQuery,
   eventQueryQueryVariables
 >(eventQuery, {
-  options: ({ eventId, seasonId }) => ({
-    variables: { eventId, seasonId },
+  options: ({ eventId }) => ({
+    variables: { eventId },
   }),
 });

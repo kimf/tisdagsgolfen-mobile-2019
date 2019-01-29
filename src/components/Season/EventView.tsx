@@ -1,28 +1,15 @@
 import React, { Component } from "react";
-import { ScrollView, View } from "react-native";
-import { eventQueryProps, withEventQuery } from "../../graph/queries/eventQuery";
-import { colors, deviceWidth } from "../../styles";
+import { View } from "react-native";
+import { withEventQuery } from "../../graph/queries/eventQuery";
 import EventHeader from "../Events/EventHeader";
 import Leaderboard from "../Leaderboard/Leaderboard";
-import EventResult from "./EventResult";
+
 import EventViewLoader from "./EventViewLoader";
 import Sorter from "./Sorter";
-const swipeCardStyle = {
-  width: deviceWidth - 20,
-  padding: 5,
-  backgroundColor: "#fff",
-  shadowColor: colors.gray,
-  shadowOffset: { width: 1, height: 1 },
-  shadowRadius: 2,
-  shadowOpacity: 0.5,
-  elevation: 5,
-  borderRadius: 10,
-};
+
 interface EventViewProps {
-  currentUserId?: any;
   eventId: any;
   eventIndex: any;
-  seasonId: any;
   data: any;
   sorting: any;
   showSorter: any;
@@ -35,12 +22,10 @@ class EventView extends Component<EventViewProps, {}> {
   public render() {
     const {
       eventId,
-      seasonId,
-      currentUserId,
       sorting,
       showSorter,
       changeSort,
-      data: { loading, event, players },
+      data: { loading, event },
     } = this.props;
     if (loading) {
       return <EventViewLoader />;
@@ -58,24 +43,6 @@ class EventView extends Component<EventViewProps, {}> {
             <Sorter key="weekSortTabs" current={sorting} onChange={sort => changeSort(sort)} />
           )}
         </View>
-
-        <View style={{ padding: 10 }}>
-          <Leaderboard
-            sorting={sorting}
-            currentUserId={currentUserId}
-            players={players}
-            seasonId={seasonId}
-            eventId={eventId}
-          />
-        </View>
-        {/* <EventResult
-            eventId={eventId}
-            seasonId={seasonId}
-            sorting={sorting}
-            currentUserId={currentUserId}
-            players={event.leaderboard}
-            scoringType={event.scoringType}
-          /> */}
       </View>
     );
   }

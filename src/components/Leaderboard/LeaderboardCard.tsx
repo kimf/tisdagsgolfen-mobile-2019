@@ -11,7 +11,7 @@ const mutedYellow = { backgroundColor: colors.mutedYellow };
 const defaultAvatar = require("../../images/defaultavatar.png");
 
 interface LeaderboardCardProps {
-  currentUserId?: string;
+  currentUserId: string | null;
   player: LeaderboardPlayer;
   sorting: string;
 }

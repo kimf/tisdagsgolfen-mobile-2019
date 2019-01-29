@@ -5,9 +5,8 @@ import TGText from "../shared/TGText";
 interface FinalWeekProps {
   winner: string;
   photo: string;
-  finalInfo: string;
 }
-const FinalWeek: React.SFC<FinalWeekProps> = ({ winner, photo, finalInfo }) => (
+const FinalWeek: React.SFC<FinalWeekProps> = ({ winner, photo }) => (
   <View style={{ flex: 1 }}>
     <View
       key="finalWeekHeader"
@@ -32,9 +31,6 @@ const FinalWeek: React.SFC<FinalWeekProps> = ({ winner, photo, finalInfo }) => (
       source={{ uri: photo, cache: "force-cache" }}
       resizeMode="cover"
     />
-    <TGText key="finaleInfo" style={{ padding: 20, fontSize: 20 }}>
-      {finalInfo}
-    </TGText>
   </View>
 );
 export default FinalWeek;

@@ -1,5 +1,5 @@
 import React from "react";
-import { View } from "react-native";
+import { TextStyle, View, ViewStyle } from "react-native";
 import { colors } from "../../styles";
 import TGText from "./TGText";
 
@@ -7,11 +7,12 @@ const containerStyle = {
   alignItems: "center",
   justifyContent: "center",
   flex: 1,
-};
+} as ViewStyle;
+
 const textStyle = {
   fontWeight: "bold",
   fontSize: 24,
-};
+} as TextStyle;
 
 interface LoadingProps {
   text?: any;

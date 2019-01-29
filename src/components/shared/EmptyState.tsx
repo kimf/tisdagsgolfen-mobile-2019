@@ -1,5 +1,5 @@
 import React from "react";
-import { Image, View } from "react-native";
+import { Image, ImageStyle, TextStyle, View, ViewStyle } from "react-native";
 import { colors } from "../../styles";
 import TGText from "./TGText";
 const containerStyle = {
@@ -7,16 +7,19 @@ const containerStyle = {
   alignItems: "center",
   justifyContent: "center",
   flex: 1,
-};
+} as ViewStyle;
+
 const imageStyle = {
   width: "90%",
   height: "60%",
-};
+} as ImageStyle;
+
 const textStyle = {
   fontWeight: "bold",
   fontSize: 24,
   color: colors.muted,
-};
+} as TextStyle;
+
 const emptyImage = require("../../images/emptystate.png");
 interface EmptyStateProps {
   text?: any;

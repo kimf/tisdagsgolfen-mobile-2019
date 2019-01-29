@@ -1,5 +1,6 @@
 export interface CurrentUser {
   id: string;
+  email: string;
   token: string;
 }
 
@@ -28,6 +29,7 @@ export interface Season {
   eventIds: [number] | null;
   winner: string | null;
   finalInfo: string | null;
+  leaderboard: LeaderboardPlayer[];
 }
 
 export interface Player {

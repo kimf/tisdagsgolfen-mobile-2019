@@ -3,18 +3,6 @@ import { LayoutAnimation } from "react-native";
 import { linear } from "../../animations";
 import EventView from "./EventView";
 
-const withChangeSort = (WrappedWeek: WeekView) =>
-  class WrappedWithChangeSort extends Component {
-    public state = { sorting: "totalPoints" };
-    public changeSort = sorting => {
-      LayoutAnimation.configureNext(linear);
-      this.setState(state => ({ ...state, sorting }));
-    };
-    public render() {
-      const { sorting } = this.state;
-      return <WrappedWeek sorting={sorting} changeSort={this.changeSort} {...this.props} />;
-    }
-  };
 interface WeekViewProps {
   currentUserId?: any;
   eventId: any;
@@ -23,6 +11,7 @@ interface WeekViewProps {
   season: any;
   changeSort: any;
 }
+
 const WeekView: React.SFC<WeekViewProps> = ({
   currentUserId,
   eventId,
@@ -42,4 +31,18 @@ const WeekView: React.SFC<WeekViewProps> = ({
     changeSort={changeSort}
   />
 );
+
+const withChangeSort = (WrappedWeek: any) =>
+  class WrappedWithChangeSort extends Component {
+    public state = { sorting: "totalPoints" };
+    public changeSort = sorting => {
+      LayoutAnimation.configureNext(linear);
+      this.setState(state => ({ ...state, sorting }));
+    };
+    public render() {
+      const { sorting } = this.state;
+      return <WrappedWeek sorting={sorting} changeSort={this.changeSort} {...this.props} />;
+    }
+  };
+
 export default withChangeSort(WeekView);

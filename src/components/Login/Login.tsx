@@ -1,25 +1,25 @@
 import React, { Component } from "react";
 import { View } from "react-native";
-import Form from "./LoginForm";
-import TGText from "../shared/TGText";
-import { colors } from "../../styles";
 import { withSigninUserMutation } from "../../graph/mutations/signinUserMutation";
+import { colors } from "../../styles";
+import TGText from "../shared/TGText";
+import Form from "./LoginForm";
 const icon = "☠️";
-type LoginProps = {
+interface LoginProps {
   signinUser: any;
   onLogin: any;
   currentUser?: {
     email?: any;
   };
-};
-type LoginState = {
+}
+interface LoginState {
   email: any;
   password: string;
   loggingIn: boolean;
   error: null;
-};
+}
 class Login extends Component<LoginProps, LoginState> {
-  static defaultProps = {
+  public static defaultProps = {
     currentUser: null,
   };
   constructor(props) {
@@ -32,7 +32,7 @@ class Login extends Component<LoginProps, LoginState> {
       error: null,
     };
   }
-  onSubmit = () => {
+  public onSubmit = () => {
     this.setState({ loggingIn: true });
     const { email, password } = this.state;
     this.props
@@ -42,15 +42,15 @@ class Login extends Component<LoginProps, LoginState> {
         this.setState({ loggingIn: false, error: false });
       })
       .catch(e => {
-        // eslint-disable-next-line no-console
+        // tslint:disable-next-line:no-console
         console.warn(e);
         this.setState({ error: true, loggingIn: false });
       });
   };
-  changeValue = valueObject => {
+  public changeValue = valueObject => {
     this.setState(valueObject);
   };
-  render() {
+  public render() {
     return (
       <View
         style={{
