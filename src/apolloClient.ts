@@ -22,7 +22,7 @@ const withToken = setContext(() => {
 });
 
 const httpLink = createHttpLink({
-  uri: "http://192.168.1.246:3000/api/graphql",
+  uri: "http://10.2.7.47:3001/api/graphql",
 });
 // __DEV__ ? 'https://www.tisdagsgolfen.se/api/graphql'
 
